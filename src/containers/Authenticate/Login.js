@@ -10,8 +10,50 @@ import { FormattedMessage } from 'react-intl';
 class Login extends Component {
     constructor(props) {
         super(props);
+        //khai báo trang thái của form login
+        this.state = {
+            //giá trị của props có thể là int String hoặc Object nhưng đối với 
+            //state thì props luôn là object
+            //cần 2 biến để component quản lý là usename và pass được nhập vào 
+            username: '',
+            password: '',
+            passwordShown: false,
+
+        }
     }
 
+    //xử lý sự kiện
+    handleOnChangeUsernameInput = (event) => {
+        //khi thao tác thay đổi input username trên web ta thấy nó in ra console
+        //từng thay đổi (nhưng vì ko thể thay đổi chữ trong input nên nếu để lâu lại trở về ban đầu)
+        //vì vậy ta cần hàm react xử lí việc cho phép thay đổi nôij dung nhập vào
+        this.setState({
+            username: event.target.value,
+        })
+        console.log(event.target.value);
+    }
+
+    handleOnChangePasswordInput = (event) => {
+        this.setState({
+            password: event.target.value,
+        })
+        console.log(event.target.value);
+    }
+
+    handleLoginButtonClicked = (event) => {
+        //in ra thông báo xem nút input đã hoạt động chưa
+        // alert('Are you sure about that');
+        //in ra console những giá trị đã nhập ở 2 ô input
+        console.log('username: ', this.state.username, 'password: ', this.state.password);
+        //cách 2
+        console.log(this.state);
+    }
+
+    handleShowAndHidePassword = (event) => {
+        this.setState({
+            passwordShown: !this.state.passwordShown,
+        })
+    }
     render() {
         //JSX
         return (
@@ -21,8 +63,6 @@ class Login extends Component {
             //     <div>Hello i'm login page</div>
             //     <div>Please login here to continue</div>
             // </>
-
-
             //Bắt đầu code một trang login
             // khi code HTML thuần mà muốn cho chúng vào một lớp thì sử dụng thuộc tính class,
             // nhưng code react thì sử dụng thuộc tính className
@@ -32,17 +72,35 @@ class Login extends Component {
                         <div className="col-12 text-center login-text">Login</div>
                         <div className="col-12 form-group login-input">
                             <label>Username</label>
-                            <input type="text" className="form-control input-place" placeholder="Piscean" />
+                            <input type="text"
+                                className="form-control input-place"
+                                placeholder="Piscean"
+                                value={this.state.username}
+                                onChange={(event) => this.handleOnChangeUsernameInput(event)} />
+                            {/* value khiến cho ô input username luôn hiện gia trị của
+                            biến username của state và không thể bị thay đổi
+                            - onChange xử lý sự kiện */}
                         </div>
 
                         <div className="col-12 form-group login-input">
                             <label>Password</label>
-                            <input type="password" className="form-control input-place" placeholder="Enter your password" />
+                            <div className="password-input-and-eye">
+                                <input type={this.state.passwordShown ? 'text' : 'password'}
+                                    className="form-control input-place"
+                                    placeholder="Enter your password"
+                                    value={this.state.password}
+                                    onChange={(event) => this.handleOnChangePasswordInput(event)} />
+                                <span
+                                    onClick={(event) => { this.handleShowAndHidePassword() }}>
+                                    <i class={this.state.passwordShown ? "far fa-eye" : "far fa-eye-slash"}></i>
+                                </span>
+
+                            </div>
                         </div>
 
                         <div className="col-6">
                             <div class="wrapper">
-                                <a href="#"><span>Login</span></a>
+                                <a href="#" onClick={(event) => { this.handleLoginButtonClicked() }}><span>Login</span></a>
                             </div>
                         </div>
 

@@ -46,6 +46,33 @@
             .login-input {
                 margin: 10px 0;
 
+                .password-input-and-eye {
+                    position: relative;
+
+                    i {
+                        font-size: 20px;
+                        opacity: 0.7;
+                    }
+
+                    i.far.fa-eye {
+                        position: absolute;
+                        right: 15px;
+                        top: 15px;
+                        // để khi di chuột vào đối tượng eye thì con chuột sẽ chuyển thành
+                        //bàn tay có ngón tay trỏ chỉ tới đối tượng thì sử dụng câu lệnh dươis đây
+                        cursor: pointer;
+                    }
+
+                    i.far.fa-eye-slash {
+                        position: absolute;
+                        right: 15px;
+                        top: 15px;
+                        // để khi di chuột vào đối tượng eye thì con chuột sẽ chuyển thành
+                        //bàn tay có ngón tay trỏ chỉ tới đối tượng thì sử dụng câu lệnh dươis đây
+                        cursor: pointer;
+                    }
+                }
+
                 input {
                     height: 50px;
                 }
@@ -138,7 +165,7 @@
                     height: 60px;
                     border: 2px solid #60067b;
                     /* Thêm viền */
-                    border-radius: 2px;
+                    border-radius: 10px;
                     /* Bo góc */
                 }
 
