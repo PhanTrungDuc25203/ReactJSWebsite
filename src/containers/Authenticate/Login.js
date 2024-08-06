@@ -5,7 +5,7 @@ import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 import './Login.scss';
 import { FormattedMessage } from 'react-intl';
-
+import { handleLoginAPI } from '../../services/userService';
 
 class Login extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class Login extends Component {
             username: '',
             password: '',
             passwordShown: false,
-
+            errMessage: '',
         }
     }
 
@@ -40,13 +40,43 @@ class Login extends Component {
         console.log(event.target.value);
     }
 
-    handleLoginButtonClicked = (event) => {
+    handleLoginButtonClicked = async (event) => {
+        this.setState({
+            errMessage: '',
+        });
+
+
         //in ra thông báo xem nút input đã hoạt động chưa
         // alert('Are you sure about that');
         //in ra console những giá trị đã nhập ở 2 ô input
-        console.log('username: ', this.state.username, 'password: ', this.state.password);
-        //cách 2
-        console.log(this.state);
+        // console.log('username: ', this.state.username, 'password: ', this.state.password);
+        // //cách 2
+        // console.log(this.state);
+
+        try {
+            let data = await handleLoginAPI(this.state.username, this.state.password);
+            console.log("Medical website: ", data);
+            if (data && data.errCode !== 0) {
+                this.setState({
+                    errMessage: data.message,
+                });
+            }
+            if (data && data.errCode === 0) {
+                this.setState({
+                    //đăng nhập thành công thì cần làm gì đó ở đây
+                    //cần sử dụng tới redux
+                    
+                });
+            }
+        } catch (e) {
+            if (e.response) {
+                if (e.response.data) {
+                    this.setState({
+                        errMessage: e.response.data.message,
+                    })
+                }
+            }
+        }
     }
 
     handleShowAndHidePassword = (event) => {
@@ -92,14 +122,16 @@ class Login extends Component {
                                     onChange={(event) => this.handleOnChangePasswordInput(event)} />
                                 <span
                                     onClick={(event) => { this.handleShowAndHidePassword() }}>
-                                    <i class={this.state.passwordShown ? "far fa-eye" : "far fa-eye-slash"}></i>
+                                    <i className={this.state.passwordShown ? "far fa-eye" : "far fa-eye-slash"}></i>
                                 </span>
 
                             </div>
                         </div>
-
+                        <div className="col-12 error-message-while-login">
+                            {this.state.errMessage}
+                        </div>
                         <div className="col-6">
-                            <div class="wrapper">
+                            <div className="wrapper">
                                 <a href="#" onClick={(event) => { this.handleLoginButtonClicked() }}><span>Login</span></a>
                             </div>
                         </div>
@@ -112,14 +144,14 @@ class Login extends Component {
                             <span>Or login with:</span>
                         </div>
                         <div className="more-login-options">
-                            <div class="icon-container">
-                                <i class="fab fa-google-plus-g"></i>
+                            <div className="icon-container">
+                                <i className="fab fa-google-plus-g"></i>
                             </div>
-                            <div class="icon-container">
-                                <i class="fab fa-facebook-f"></i>
+                            <div className="icon-container">
+                                <i className="fab fa-facebook-f"></i>
                             </div>
-                            <div class="icon-container">
-                                <i class="fab fa-apple"></i>
+                            <div className="icon-container">
+                                <i className="fab fa-apple"></i>
                             </div>
                         </div>
                     </div>

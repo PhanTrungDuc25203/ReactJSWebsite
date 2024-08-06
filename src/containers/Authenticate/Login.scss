@@ -40,17 +40,18 @@
             .login-text {
                 color: #60067b;
                 font-weight: 700;
-                font-size: 40px;
+                font-size: 35px;
+                margin-top: -10px !important;
             }
 
             .login-input {
-                margin: 10px 0;
+                margin: 5px 0;
 
                 .password-input-and-eye {
                     position: relative;
 
                     i {
-                        font-size: 20px;
+                        font-size: 18px;
                         opacity: 0.7;
                     }
 
@@ -74,7 +75,7 @@
                 }
 
                 input {
-                    height: 50px;
+                    height: 45px;
                 }
 
                 label {
@@ -144,13 +145,13 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                margin-top: 10px;
+                margin-top: 5px;
                 color: #60067b;
                 font-weight: 700;
             }
 
             .more-login-options {
-                margin-top: 20px;
+                margin-top: 15px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -159,10 +160,10 @@
                     display: inline-flex;
                     justify-content: center;
                     align-items: center;
-                    width: 60px;
+                    width: 50px;
                     margin: 0 20px;
                     /* Đặt chiều rộng và chiều cao bằng nhau */
-                    height: 60px;
+                    height: 50px;
                     border: 2px solid #60067b;
                     /* Thêm viền */
                     border-radius: 10px;
@@ -170,22 +171,28 @@
                 }
 
                 .icon-container i.fab.fa-google-plus-g {
-                    font-size: 35px;
-                    color: #60067b;
-                    /* Đặt kích thước cho biểu tượng bên trong */
-                }
-
-                .icon-container i.fab.fa-facebook-f {
                     font-size: 30px;
                     color: #60067b;
                     /* Đặt kích thước cho biểu tượng bên trong */
                 }
 
-                .icon-container i.fab.fa-apple {
-                    font-size: 35px;
+                .icon-container i.fab.fa-facebook-f {
+                    font-size: 25px;
                     color: #60067b;
                     /* Đặt kích thước cho biểu tượng bên trong */
                 }
+
+                .icon-container i.fab.fa-apple {
+                    font-size: 30px;
+                    color: #60067b;
+                    /* Đặt kích thước cho biểu tượng bên trong */
+                }
+            }
+
+            .error-message-while-login {
+                color: red;
+                // margin-top: 20px;
+                margin-bottom: -18px;
             }
         }
     }
