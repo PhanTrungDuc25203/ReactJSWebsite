@@ -55,18 +55,16 @@ class Login extends Component {
 
         try {
             let data = await handleLoginAPI(this.state.username, this.state.password);
-            console.log("Medical website: ", data);
             if (data && data.errCode !== 0) {
                 this.setState({
                     errMessage: data.message,
                 });
             }
             if (data && data.errCode === 0) {
-                this.setState({
-                    //đăng nhập thành công thì cần làm gì đó ở đây
-                    //cần sử dụng tới redux
-                    
-                });
+                //đăng nhập thành công thì cần làm gì đó ở đây
+                //cần sử dụng tới redux
+                this.props.userLoginSuccess(data.user);
+                this.setState({});
             }
         } catch (e) {
             if (e.response) {
@@ -170,8 +168,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         navigate: (path) => dispatch(push(path)),
-        adminLoginSuccess: (adminInfo) => dispatch(actions.adminLoginSuccess(adminInfo)),
-        adminLoginFail: () => dispatch(actions.adminLoginFail()),
+        // userLoginFail: () => dispatch(actions.adminLoginFail()),
+        userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo)),
     };
 };
 
