@@ -30,4 +30,8 @@ const handleLoginAPI = (userEmail, userPassword) => {
     return axios.post('/api/login', { email: userEmail, password: userPassword });
 }
 
-export { handleLoginAPI };
+const getAllUsersToDisplayInReact = (userInputId) => {
+    //nếu truyền vào userInpiuId bằng ALL thì lấy hết không thì lấy một user có id = userInpiuId
+    return axios.get(`/api/get-all-users-for-react?id=${userInputId}`);
+}
+export { handleLoginAPI, getAllUsersToDisplayInReact };
