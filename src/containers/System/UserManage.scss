@@ -29,5 +29,47 @@
             background-color: #0071ba;
             color: white;
         }
+
+        .edit-button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            margin: 0 5px;
+            /* Đặt chiều rộng và chiều cao bằng nhau */
+            height: 40px;
+
+            border-radius: 5px;
+        }
+
+        .update-button {
+            font-size: 20px;
+            border: 2px solid #0071ba;
+            color: #0071ba;
+            transition: background-color 0.3s, color 0.3s;
+            /* Hiệu ứng chuyển đổi màu */
+        }
+
+        .edit-button.update-button:hover {
+            background-color: #0071ba;
+            /* Đổi nền thành màu xanh */
+            color: #fff;
+            /* Đổi chữ thành màu trắng */
+        }
+
+        .delete-button {
+            font-size: 20px;
+            border: 2px solid red;
+            color: red;
+            transition: background-color 0.3s, color 0.3s;
+            /* Hiệu ứng chuyển đổi màu */
+        }
+
+        .edit-button.delete-button:hover {
+            background-color: red;
+            /* Đổi nền thành màu xanh */
+            color: #fff;
+            /* Đổi chữ thành màu trắng */
+        }
     }
 }

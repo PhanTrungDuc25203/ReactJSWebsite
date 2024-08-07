@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import './UserManage.scss'
+import './UserManage.scss';
 import { getAllUsersToDisplayInReact } from '../../services/userService'
 
 class UserManage extends Component {
@@ -69,8 +69,8 @@ class UserManage extends Component {
                                     <td>{item.address}</td>
                                     <td>{item.phoneNumber}</td>
                                     <td>
-                                        <button>Edit</button>
-                                        <button>Delete</button>
+                                        <button className="edit-button update-button"><i className="fas fa-pencil-alt"></i></button>
+                                        <button className="edit-button delete-button"><i className="fas fa-trash"></i></button>
                                     </td>
                                 </tr>
                             )
