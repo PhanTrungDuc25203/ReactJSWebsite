@@ -60,6 +60,10 @@ class UserManage extends Component {
                 alert(response.message);
             } else {
                 await this.getAllUsersFromReact();
+                //khi tạo thành công xong thì tắt modal đi
+                this.setState({
+                    modalAddUserOpened: false,
+                })
             }
         } catch (e) {
             console.log(e);
