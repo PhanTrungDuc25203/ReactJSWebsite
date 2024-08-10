@@ -9,7 +9,14 @@ class ModalUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            address: '',
+            phoneNumber: '',
+            gender: true,
+            roleId: 'R3',
         }
     }
 
@@ -20,42 +27,90 @@ class ModalUser extends Component {
         this.props.toggleUserModal();
     }
 
-    closeBtn = () => {
-        return (
-            <button className="close" onClick={() => { this.toggle() }} type="button">
-                &times;
-            </button>
-        )
+    //cần truyền thêm tham số ID vì có 5 <input> mà chỉ muốn một hàm onChange nên cần thêm id, tối ưu hóa
+    handleOnChangeInputTag = (event, id) => {
+        //code lỏd:)))
+        /**
+         * this.state = {
+         * email
+         * password
+         * firstName
+         * ....
+         * }
+         * nên khi lấy this.state.email thì nó cũng như this.state['email']
+         * câu lệnh dưới đây lấy id là email ,password, firstName,.... 
+         * 
+         * là bad code bởi vì khi render những component phức tạp hơn thì bị ngắt quãng
+         */
+        // this.state[id] = event.target.value;
+        // this.setState({
+        //     // dấu 3 chấm copy hết state của class này vào đây   
+        //     ...this.state
+        // }, () => {
+        //     console.log('check code lỏd:)): ', this.state)
+        // })
+
+
+        //super ultra god code:))
+        let copiedState = { ...this.state };
+        copiedState[id] = event.target.value;
+
+        this.setState({
+            ...copiedState,
+        }, () => {
+            // console.log('Copied state: ', copiedState);
+        })
     }
 
-    Form = () => { };
+    validateInput = () => {
+        let isValid = true;
+        let arrInput = ['email',
+            'password',
+            'firstName',
+            'lastName',
+            'address',
+            'phoneNumber',
+            'gender',
+            'roleId'];
+        for (let i = 0; i < arrInput.length; i++) {
+            //dùng vòng lặp đơn thuần mới có thể break
+            if (!this.state[arrInput[i]]) {
+                isValid = false;
+                alert('MIssing parameters: ' + arrInput[i]);
+                break;
+            }
+        }
+        return isValid;
+    }
+
+    handleAddNewUser = () => {
+        let isValid = this.validateInput();
+        if (isValid === true) {
+            //gọi API phía node
+            this.props.createNewUser(this.state);
+        }
+    }
 
     render() {
-        console.log('check modal props: ', this.props);
-        console.log('check modal props: ', this.props.isOpen);;
+        // console.log('check modal props: ', this.props);
+        // console.log('check modal props: ', this.props.isOpen, this.props.className);
         return (
             //toggle là khi click ra ngoài modal thì modal tự đóng
             <Modal
                 isOpen={this.props.isOpen}
                 toggle={() => { this.toggle() }}
-                className={'add-new-user-modal'}
+                className={this.props.className}
                 //kích thước modal
                 size="lg"
                 //modal vào giữa theo chiều dọc
-                centered>
-                <ModalHeader toggle={() => { this.toggle() }} close={() => this.closeBtn()}
+                centered
+            >
+                <ModalHeader
+                    // toggle={() => { this.toggle() }}
                     className="modal-header-customize">
                     Add new User
                 </ModalHeader>
                 <ModalBody>
-                    {/* <div className="modal-contents-container">
-                        <div className="row">
-                            <div className="col-6 form-group">
-                                <label>Email</label>
-                                <input type="text" />
-                            </div>
-                        </div>
-                    </div> */}
                     <div className="modal-contents-container">
                         <Form>
                             <Row>
@@ -69,6 +124,8 @@ class ModalUser extends Component {
                                             name="email"
                                             placeholder="abc@gmail.com"
                                             type="email"
+                                            onChange={(event) => { this.handleOnChangeInputTag(event, "email") }}
+                                            value={this.state.email}
                                         />
                                     </FormGroup>
                                 </Col>
@@ -82,6 +139,8 @@ class ModalUser extends Component {
                                             name="password"
                                             placeholder="your password"
                                             type="password"
+                                            onChange={(event) => { this.handleOnChangeInputTag(event, "password") }}
+                                            value={this.state.password}
                                         />
                                     </FormGroup>
                                 </Col>
@@ -97,6 +156,8 @@ class ModalUser extends Component {
                                             name="firstName"
                                             placeholder="Jackman"
                                             type="text"
+                                            onChange={(event) => { this.handleOnChangeInputTag(event, "firstName") }}
+                                            value={this.state.firstName}
                                         />
                                     </FormGroup>
                                 </Col>
@@ -110,6 +171,8 @@ class ModalUser extends Component {
                                             name="lastName"
                                             placeholder="Hugh"
                                             type="text"
+                                            onChange={(event) => { this.handleOnChangeInputTag(event, "lastName") }}
+                                            value={this.state.lastName}
                                         />
                                     </FormGroup>
                                 </Col>
@@ -124,6 +187,8 @@ class ModalUser extends Component {
                                             id="exampleAddress"
                                             name="address"
                                             placeholder="khu 2 Hoàng Cương Thanh Ba Phú Thọ"
+                                            onChange={(event) => { this.handleOnChangeInputTag(event, "address") }}
+                                            value={this.state.address}
                                         />
                                     </FormGroup>
                                 </Col>
@@ -137,34 +202,39 @@ class ModalUser extends Component {
                                         <Input
                                             id="exampleCity"
                                             name="city"
+                                            onChange={(event) => { this.handleOnChangeInputTag(event, "phoneNumber") }}
+                                            value={this.state.phoneNumber}
                                         />
                                     </FormGroup>
                                 </Col>
                                 <Col md={3}>
                                     <FormGroup>
                                         <Label for="exampleState">
-                                            Sex
+                                            gender
                                         </Label>
-                                        <Col sm={maxBy}>
+                                        <Col sm={12}>
                                             <Input
                                                 id="exampleSelect"
                                                 name="select"
+                                                className="py-10 mt-10"
                                                 type="select"
+                                                onChange={(event) => { this.handleOnChangeInputTag(event, "gender") }}
+                                                value={this.state.gender}
                                             >
-                                                <option>
-                                                    1
+                                                <option value="1">
+                                                    Male
                                                 </option>
-                                                <option>
-                                                    2
+                                                <option value="0">
+                                                    Female
                                                 </option>
-                                                <option>
-                                                    3
+                                                <option value="1">
+                                                    Femboy
                                                 </option>
-                                                <option>
-                                                    4
+                                                <option value="0">
+                                                    Tomboy
                                                 </option>
-                                                <option>
-                                                    5
+                                                <option value="0">
+                                                    Futanari
                                                 </option>
                                             </Input>
                                         </Col>
@@ -173,40 +243,41 @@ class ModalUser extends Component {
                                 <Col md={3}>
                                     <FormGroup>
                                         <Label for="exampleZip">
-                                            Zip
+                                            Role
                                         </Label>
-                                        <Input
-                                            id="exampleZip"
-                                            name="zip"
-                                        />
+                                        <Col sm={12}>
+                                            <Input
+                                                id="exampleSelect"
+                                                name="select"
+                                                type="select"
+                                                onChange={(event) => { this.handleOnChangeInputTag(event, "roleId") }}
+                                                value={this.state.roleId}
+                                            >
+                                                <option value="R3">
+                                                    Patient
+                                                </option>
+                                                <option value="R1">
+                                                    Admin
+                                                </option>
+                                                <option value="R2">
+                                                    Doctor
+                                                </option>
+                                            </Input>
+                                        </Col>
                                     </FormGroup>
                                 </Col>
                             </Row>
-                            {/* <Row>
-                                <Col md={6}>
-                                    <Button>
-                                        Sign in
-                                    </Button>
-                                </Col>
-                            </Row> */}
-
                         </Form>
                     </div>
 
                 </ModalBody>
-                {/* <ModalFooter>
-                    <div className="buttons-container">
-                        <Button id="add-new-user-btn" className="px-5 mr-30" color="primary" onClick={() => { this.toggle() }}>
-                            Add
-                        </Button>{' '}
-                        <Button id="cancel-btn" className="cpx-3 mr-30" color="danger" onClick={() => { this.toggle() }}>
-                            Cancel
-                        </Button>
-                    </div>
-                </ModalFooter> */}
                 <div className="custom-modal-footer">
                     <div className="buttons-container">
-                        <button className="add-new-user-btn">Add</button>
+                        <button className="add-new-user-btn"
+                            onClick={() => { this.handleAddNewUser() }}
+                        >
+                            Add
+                        </button>
                         <button className="cancel-btn">Cancel</button>
                     </div>
                 </div>

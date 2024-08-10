@@ -133,6 +133,11 @@
 }
 
 .add-new-user-modal {
+
+    #exampleSelect {
+        cursor: pointer;
+    }
+
     .modal-header-customize {
         height: 50px !important;
         display: inline-flex;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss';
-import { getAllUsersToDisplayInReact } from '../../services/userService'
+import { getAllUsersToDisplayInReact, createNewUserService } from '../../services/userService'
 //import để mở đc modal
 import ModalUser from './ModalUser';
 
@@ -23,6 +23,10 @@ class UserManage extends Component {
     }
 
     async componentDidMount() {
+        await this.getAllUsersFromReact();
+    }
+
+    getAllUsersFromReact = async () => {
         let response = await getAllUsersToDisplayInReact('ALL');
         if (response && response.errCode === 0) {
             this.setState({
@@ -34,7 +38,7 @@ class UserManage extends Component {
         }
         //các làm in ra thông tin như thế này đôi khi bị bất đồng bộ dẫn đến
         //giá trị arrUsers là undefined, để không bị bất đồng bộ thì làm như code bên trên
-        console.log('All user from DB may be asynchronous: ', this.state.arrUsers);
+        // console.log('All user from DB may be asynchronous: ', this.state.arrUsers);
     }
 
     handleAddNewUserInReact = () => {
@@ -48,6 +52,20 @@ class UserManage extends Component {
             modalAddUserOpened: !this.state.modalAddUserOpened,
         })
     }
+
+    createNewUser = async (data) => {
+        try {
+            let response = await createNewUserService(data);
+            if (response && response.errCode !== 0) {
+                alert(response.message);
+            } else {
+                await this.getAllUsersFromReact();
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     //cần hiểu định nghĩa lifeCycle
     //khi chạy một component
     //thì việc đầu tiên sẽ chạy render, sau đó check constructor để init state
@@ -68,12 +86,14 @@ class UserManage extends Component {
                     //truyền trạng thái parent cho child, có thể truyền cả biến lẫn hàm
                     toggleUserModal={this.toggleUserModal}
                     isOpen={this.state.modalAddUserOpened}
+                    className={'add-new-user-modal'}
+                    createNewUser={this.createNewUser}
                 />
                 <div className="title table-title">
                     Manage users
-                    <div class="mx-1">
+                    <div className="mx-1">
                         <button className="btn btn-primary add-new-user-button"
-                            onClick={() => this.handleAddNewUserInReact()}>New user<i class="fas fa-user-plus"></i></button>
+                            onClick={() => this.handleAddNewUserInReact()}>New user<i className="fas fa-user-plus"></i></button>
                     </div>
                 </div>
                 {/* <div class="mx-1">
@@ -81,31 +101,33 @@ class UserManage extends Component {
                 </div> */}
                 <div className="users-display-table">
                     <table id="users">
-                        <tr>
-                            <th>Email</th>
-                            <th>First name</th>
-                            <th>Last name</th>
-                            <th>Address</th>
-                            <th>Phone number</th>
-                            <th>Update data</th>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <th>Email</th>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Address</th>
+                                <th>Phone number</th>
+                                <th>Update data</th>
+                            </tr>
 
-                        {arrUsers && arrUsers.map((item, index) => {
-                            return (
-                                <tr>
-                                    <td>{item.email}</td>
-                                    <td>{item.firstName}</td>
-                                    <td>{item.lastName}</td>
-                                    <td>{item.address}</td>
-                                    <td>{item.phoneNumber}</td>
-                                    <td className="action-column">
-                                        <button className="edit-button update-button"><i className="fas fa-pencil-alt"></i></button>
-                                        <button className="edit-button delete-button"><i className="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                            )
-                        })
-                        }
+                            {arrUsers && arrUsers.map((item, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>{item.email}</td>
+                                        <td>{item.firstName}</td>
+                                        <td>{item.lastName}</td>
+                                        <td>{item.address}</td>
+                                        <td>{item.phoneNumber}</td>
+                                        <td className="action-column">
+                                            <button className="edit-button update-button"><i className="fas fa-pencil-alt"></i></button>
+                                            <button className="edit-button delete-button"><i className="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                            }
+                        </tbody>
                     </table>
                 </div>
             </div>

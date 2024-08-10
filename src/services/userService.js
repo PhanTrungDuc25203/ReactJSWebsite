@@ -31,7 +31,12 @@ const handleLoginAPI = (userEmail, userPassword) => {
 }
 
 const getAllUsersToDisplayInReact = (userInputId) => {
-    //nếu truyền vào userInpiuId bằng ALL thì lấy hết không thì lấy một user có id = userInpiuId
+    //nếu truyền vào userInputId bằng ALL thì lấy hết không thì lấy một user có id = userInpiuId
     return axios.get(`/api/get-all-users-for-react?id=${userInputId}`);
 }
-export { handleLoginAPI, getAllUsersToDisplayInReact };
+
+const createNewUserService = (data) => {
+    return axios.post('/api/create-new-user-in-react', data)
+}
+
+export { handleLoginAPI, getAllUsersToDisplayInReact, createNewUserService };
