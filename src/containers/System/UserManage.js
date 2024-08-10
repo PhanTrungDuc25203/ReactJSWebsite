@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss';
-import { getAllUsersToDisplayInReact, createNewUserService } from '../../services/userService'
+import { getAllUsersToDisplayInReact, createNewUserService, deleteUserService } from '../../services/userService'
 //import để mở đc modal
 import ModalUser from './ModalUser';
+import { emitter } from "../../utils/emitter";
 
 class UserManage extends Component {
     constructor(props) {
@@ -64,6 +65,18 @@ class UserManage extends Component {
                 this.setState({
                     modalAddUserOpened: false,
                 })
+                emitter.emit('EVENT_CLEAR_MODAL_DATA');
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    deleteUser = async (user) => {
+        try {
+            let res = await deleteUserService(user.id);
+            if (res && res.errCode === 0) {
+                await this.getAllUsersFromReact();
             }
         } catch (e) {
             console.log(e);
@@ -125,7 +138,7 @@ class UserManage extends Component {
                                         <td>{item.phoneNumber}</td>
                                         <td className="action-column">
                                             <button className="edit-button update-button"><i className="fas fa-pencil-alt"></i></button>
-                                            <button className="edit-button delete-button"><i className="fas fa-trash"></i></button>
+                                            <button className="edit-button delete-button" onClick={() => this.deleteUser(item)}><i className="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 )
