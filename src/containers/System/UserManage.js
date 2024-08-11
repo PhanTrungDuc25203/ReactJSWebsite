@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss';
-import { getAllUsersToDisplayInReact, createNewUserService, deleteUserService } from '../../services/userService'
+import { getAllUsersToDisplayInReact, createNewUserService, deleteUserService, editUserService } from '../../services/userService'
 //import để mở đc modal
 import ModalUser from './ModalUser';
+import ModalEditUser from './ModalEditUser';
 import { emitter } from "../../utils/emitter";
 
 class UserManage extends Component {
@@ -16,6 +17,8 @@ class UserManage extends Component {
             //lưu giá trị để hiển thị
             arrUsers: [],
             modalAddUserOpened: false,
+            modalEditUserOpened: false,
+            needEdittingUserInfo: {},
         }
     }
 
@@ -32,10 +35,9 @@ class UserManage extends Component {
         if (response && response.errCode === 0) {
             this.setState({
                 arrUsers: response.users,
+            }, () => {
+                console.log('All user from DB no asynchorous: ', this.state.arrUsers);
             })
-            // }, () => {
-            //     console.log('All user from DB no asynchorous: ', this.state.arrUsers);
-            // })
         }
         //các làm in ra thông tin như thế này đôi khi bị bất đồng bộ dẫn đến
         //giá trị arrUsers là undefined, để không bị bất đồng bộ thì làm như code bên trên
@@ -51,6 +53,12 @@ class UserManage extends Component {
     toggleUserModal = () => {
         this.setState({
             modalAddUserOpened: !this.state.modalAddUserOpened,
+        })
+    }
+
+    toggleEditUserModal = () => {
+        this.setState({
+            modalEditUserOpened: !this.state.modalEditUserOpened,
         })
     }
 
@@ -83,6 +91,30 @@ class UserManage extends Component {
         }
     }
 
+    setStateForHandleEditUser = async (user) => {
+        this.setState({
+            modalEditUserOpened: true,
+            needEdittingUserInfo: user,
+        })
+    }
+
+    editUser = async (user) => {
+
+        try {
+            let res = await editUserService(user);
+            if (res && res.errCode === 0) {
+                this.setState({
+                    modalEditUserOpened: false,
+                })
+                await this.getAllUsersFromReact();
+            } else {
+                alert(res.errCode);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     //cần hiểu định nghĩa lifeCycle
     //khi chạy một component
     //thì việc đầu tiên sẽ chạy render, sau đó check constructor để init state
@@ -97,7 +129,6 @@ class UserManage extends Component {
         //chạy vào hàm setState thì web tự động render lại
         let arrUsers = this.state.arrUsers;
         return (
-
             <div className="user-display-container">
                 <ModalUser
                     //truyền trạng thái parent cho child, có thể truyền cả biến lẫn hàm
@@ -105,6 +136,13 @@ class UserManage extends Component {
                     isOpen={this.state.modalAddUserOpened}
                     className={'add-new-user-modal'}
                     createNewUser={this.createNewUser}
+                />
+                <ModalEditUser
+                    toggleUserModal={this.toggleEditUserModal}
+                    isOpen={this.state.modalEditUserOpened}
+                    className={'edit-user-modal'}
+                    needEdittingUserInfo={this.state.needEdittingUserInfo}
+                    editUser={this.editUser}
                 />
                 <div className="title table-title">
                     Manage users
@@ -137,8 +175,8 @@ class UserManage extends Component {
                                         <td>{item.address}</td>
                                         <td>{item.phoneNumber}</td>
                                         <td className="action-column">
-                                            <button className="edit-button update-button"><i className="fas fa-pencil-alt"></i></button>
-                                            <button className="edit-button delete-button" onClick={() => this.deleteUser(item)}><i className="fas fa-trash"></i></button>
+                                            <button className="modify-data-button edit-button" onClick={() => this.setStateForHandleEditUser(item)}><i className="fas fa-pencil-alt"></i></button>
+                                            <button className="modify-data-button delete-button" onClick={() => this.deleteUser(item)}><i className="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 )
