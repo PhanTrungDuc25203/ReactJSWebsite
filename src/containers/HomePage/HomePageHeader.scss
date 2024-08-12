@@ -1,3 +1,12 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+}
+
+
 .home-header-container {
 
     height: 70px;
@@ -53,7 +62,7 @@
         .center-contents {
             background-color: #dff3ff;
             border-bottom-left-radius: 30px;
-            width: 55%;
+            width: 60%;
             display: flex;
             justify-content: center;
             /* Căn giữa theo chiều ngang */
@@ -85,21 +94,19 @@
         }
 
         .right-contents {
-            border-left: 2px solid red;
             border-left-width: 60%;
             background-color: #dff3ff;
-            width: 25%;
+            width: 20%;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
 
             .header-right-section-title {
                 color: #49BCE2;
             }
 
             .header-booking-section {
-                padding-top: 5px;
+                padding-top: 13px;
                 width: 80px;
                 height: 100%;
                 display: flex;
@@ -116,7 +123,7 @@
 
                 .far.fa-clock {
                     color: #49BCE2;
-                    font-size: 30px;
+                    font-size: 20px;
                     transition: font-size 0.3s ease, transform 0.3s ease;
                 }
             }
@@ -127,7 +134,7 @@
 
                 .far.fa-clock {
                     color: #49BCE2;
-                    font-size: 50px;
+                    font-size: 30px;
                     transform: translateY(10px);
                 }
 
@@ -137,7 +144,7 @@
             }
 
             .header-support-section {
-                padding-top: 5px;
+                padding-top: 13px;
                 width: 80px;
                 height: 100%;
                 display: flex;
@@ -154,7 +161,7 @@
 
                 .far.fa-question-circle {
                     color: #49BCE2;
-                    font-size: 30px;
+                    font-size: 20px;
                     transition: font-size 0.3s ease, transform 0.3s ease;
                 }
             }
@@ -165,7 +172,7 @@
 
                 .far.fa-question-circle {
                     color: #49BCE2;
-                    font-size: 50px;
+                    font-size: 30px;
                     transform: translateY(10px);
                 }
 
@@ -175,7 +182,7 @@
             }
 
             .header-user-account-section {
-                padding-top: 5px;
+                padding-top: 13px;
                 width: 80px;
                 height: 100%;
                 display: flex;
@@ -187,23 +194,24 @@
                 transition: color 0.3s, border 0.3s;
 
                 .title-3 {
-                    transition: opacity 0.3s
+                    transition: opacity 0.3s;
+                    color: #1a5fdf;
                 }
 
                 .far.fa-user {
-                    font-size: 30px;
-                    color: #49BCE2;
+                    font-size: 20px;
+                    color: #1a5fdf;
                     transition: font-size 0.3s ease, transform 0.3s ease;
                 }
             }
 
             .header-user-account-section:hover {
                 // background-color: white;
-                border-bottom: 3px solid #49BCE2;
+                border-bottom: 3px solid #1a5fdf;
 
                 .far.fa-user {
-                    color: #49BCE2;
-                    font-size: 50px;
+                    color: #1a5fdf;
+                    font-size: 30px;
                     transform: translateY(10px);
                 }
 
@@ -212,5 +220,222 @@
                 }
             }
         }
+    }
+}
+
+.menu-between-header-and-banner {
+    margin-top: 60px;
+    height: 40px;
+    width: 100%;
+    display: inline-flex;
+    background-color: #50b8db;
+    height: 48.571px;
+
+    * {
+        box-sizing: border-box;
+    }
+
+    #home-top-navigator {
+        position: relative;
+        list-style: none;
+        background: #50b8db;
+        font-weight: 400;
+        font-size: 0;
+        /* text-transform: uppercase; */
+        display: flex;
+        padding: 0;
+
+    }
+
+    #home-top-navigator {
+        font-size: 16px;
+        display: flex;
+        position: relative;
+        padding: 15px 0px;
+        cursor: pointer;
+        z-index: 6;
+        min-width: 120px;
+    }
+
+    li {
+        margin: 0;
+        color: white;
+        width: 196px;
+        display: block;
+        padding: 0;
+        background: #50b8db !important;
+        text-align: center;
+    }
+
+    #marker {
+        height: 6px;
+        background: #4a82c2 !important;
+        position: absolute;
+        bottom: 0;
+        width: 196px;
+        z-index: 2;
+        -webkit-transition: all 0.35s;
+        -moz-transition: all 0.35s;
+        -ms-transition: all 0.35s;
+        transition: all 0.35s;
+    }
+
+
+    #home-top-navigator li:nth-child(1):hover ul div {
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    #home-top-navigator li:nth-child(1):hover~#marker {
+        -webkit-transform: translate(0px, 0);
+        -moz-transform: translate(0px, 0);
+        -ms-transform: translate(0px, 0);
+        transform: translate(0px, 0);
+    }
+
+    #home-top-navigator li:nth-child(2):hover ul div {
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    #home-top-navigator li:nth-child(2):hover~#marker {
+        -webkit-transform: translate(196px, 0);
+        -moz-transform: translate(196px, 0);
+        -ms-transform: translate(196px, 0);
+        transform: translate(196px, 0);
+    }
+
+    #home-top-navigator li:nth-child(3):hover ul div {
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    #home-top-navigator li:nth-child(3):hover~#marker {
+        -webkit-transform: translate(392px, 0);
+        -moz-transform: translate(392px, 0);
+        -ms-transform: translate(392px, 0);
+        transform: translate(392px, 0);
+    }
+
+    #home-top-navigator li:nth-child(4):hover ul div {
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    #home-top-navigator li:nth-child(4):hover~#marker {
+        -webkit-transform: translate(588px, 0);
+        -moz-transform: translate(588px, 0);
+        -ms-transform: translate(588px, 0);
+        transform: translate(588px, 0);
+    }
+
+    #home-top-navigator li:nth-child(5):hover ul div {
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    #home-top-navigator li:nth-child(5):hover~#marker {
+        -webkit-transform: translate(784px, 0);
+        -moz-transform: translate(784px, 0);
+        -ms-transform: translate(784px, 0);
+        transform: translate(784px, 0);
+    }
+
+    #home-top-navigator li:nth-child(6):hover ul div {
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    #home-top-navigator li:nth-child(6):hover~#marker {
+        -webkit-transform: translate(980px, 0);
+        -moz-transform: translate(980px, 0);
+        -ms-transform: translate(980px, 0);
+        transform: translate(980px, 0);
+    }
+
+    #home-top-navigator li:nth-child(7):hover ul div {
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    #home-top-navigator li:nth-child(7):hover~#marker {
+        -webkit-transform: translate(1176px, 0);
+        -moz-transform: translate(1176px, 0);
+        -ms-transform: translate(1176px, 0);
+        transform: translate(1176px, 0);
+    }
+
+    #home-top-navigator li:nth-child(8):hover ul div {
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    #home-top-navigator li:nth-child(8):hover~#marker {
+        -webkit-transform: translate(1372px, 0);
+        -moz-transform: translate(1372px, 0);
+        -ms-transform: translate(1372px, 0);
+        transform: translate(1372px, 0);
+    }
+
+    #home-top-navigator li:nth-child(9):hover ul div {
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    #home-top-navigator li:nth-child(9):hover~#marker {
+        -webkit-transform: translate(1568px, 0);
+        -moz-transform: translate(1568px, 0);
+        -ms-transform: translate(1568px, 0);
+        transform: translate(1568px, 0);
+    }
+
+
+
+
+
+
+
+
+
+
+
+}
+
+.home-header-banner-container {
+    height: 438px;
+    width: 100%;
+    background-color: #dff3ff;
+    display: flex;
+
+    .home-page-banners {
+        background: url('../../assets/family-doctor-composition-with-indoor-scenery-wall-passage-doctor-door-with-patients-family-vector-i/2306.q702.010.S.m005.c13.family\ doctor.jpg');
+        width: 70%;
+        height: 100%;
+        background-size: contain;
+        /* Or contain, or specific dimensions */
+        background-position: left;
+        background-repeat: no-repeat;
+    }
+
+    .search-area {
+        width: 39%;
     }
 }
