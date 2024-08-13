@@ -83,13 +83,14 @@ class HomePageHeader extends Component {
                             <li><i className="fas fa-child nav-icon"></i>Khám tổng quát</li>
                             <li><i className="fas fa-vial nav-icon"></i>Xét nghiệm y học</li>
                             <li><FontAwesomeIcon icon={faHeartPulse} className="nav-icon fontawesome-icon" />Sức khỏe tinh thần</li>
-                            {/* <li><i class="fas fa-tablets nav-icon"></i>Khám nha khoa</li> */}
+                            {/* <li><i className="fas fa-tablets nav-icon"></i>Khám nha khoa</li> */}
                             <li><FontAwesomeIcon icon={faTooth} className="nav-icon fontawesome-icon" />Khám nha khoa</li>
 
                             <div id="marker"></div>
                         </ul>
                     </nav>
                 </div>
+
                 <div className="home-header-banner-container">
                     <div className="search-area">
                         <div className="container">
@@ -110,11 +111,59 @@ class HomePageHeader extends Component {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div className="home-page-banners"></div>
-
                 </div>
+
+
+
+
+
+
+                {/* <div className="header-side-bar">
+                    <input type="checkbox" id="check" />
+                    <label htmlFor="check" className="side-bar-toggle">
+                        <i className="fas fa-bars" id="btn"></i>
+                        <i className="fas fa-times" id="cancel"></i>
+                    </label>
+                    <div className="sidebar">
+                        <header>My Menu</header>
+                        <a href="#" className="active">
+                            <i className="fas fa-qrcode"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="#">
+                            <i className="fas fa-link"></i>
+                            <span>Shortcuts</span>
+                        </a>
+                        <a href="#">
+                            <i className="fas fa-stream"></i>
+                            <span>Overview</span>
+                        </a>
+                        <a href="#">
+                            <i className="fas fa-calendar"></i>
+                            <span>Events</span>
+                        </a>
+                        <a href="#">
+                            <i className="far fa-question-circle"></i>
+                            <span>About</span>
+                        </a>
+                        <a href="#">
+                            <i className="fas fa-sliders-h"></i>
+                            <span>Services</span>
+                        </a>
+                        <a href="#">
+                            <i className="far fa-envelope"></i>
+                            <span>Contact</span>
+                        </a>
+                    </div>
+                </div> */}
+
+
+
+
+
+
             </React.Fragment>
         );
     }

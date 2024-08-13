@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import HomePageHeader from './HomePageHeader';
+import HomePageHeader from './HomePageHeader/HomePageHeader';
+import SideBar from './SideBar/SideBar';
 
 class HomePage extends Component {
 
     render() {
 
         return (
-            <HomePageHeader/>
+            <React.Fragment>
+                <SideBar />
+                <HomePageHeader />
+
+            </React.Fragment>
+
+
         );
     }
 
