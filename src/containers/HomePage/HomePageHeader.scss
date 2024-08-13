@@ -135,7 +135,7 @@ body {
                 .far.fa-clock {
                     color: #49BCE2;
                     font-size: 30px;
-                    transform: translateY(10px);
+                    transform: translateY(8px);
                 }
 
                 .title-1 {
@@ -173,7 +173,7 @@ body {
                 .far.fa-question-circle {
                     color: #49BCE2;
                     font-size: 30px;
-                    transform: translateY(10px);
+                    transform: translateY(8px);
                 }
 
                 .title-2 {
@@ -212,7 +212,7 @@ body {
                 .far.fa-user {
                     color: #1a5fdf;
                     font-size: 30px;
-                    transform: translateY(10px);
+                    transform: translateY(8px);
                 }
 
                 .title-3 {
@@ -251,10 +251,14 @@ body {
         font-size: 16px;
         display: flex;
         position: relative;
-        padding: 15px 0px;
-        cursor: pointer;
+        padding: 0px 0px;
         z-index: 6;
         min-width: 120px;
+
+        .nav-icon {
+            font-size: 20px;
+            margin-right: 8px;
+        }
     }
 
     li {
@@ -262,9 +266,10 @@ body {
         color: white;
         width: 196px;
         display: block;
-        padding: 0;
+        padding: 15px 0px;
         background: #50b8db !important;
         text-align: center;
+        cursor: pointer;
     }
 
     #marker {
@@ -425,17 +430,180 @@ body {
     background-color: #dff3ff;
     display: flex;
 
+    .search-area {
+        width: 39%;
+
+        // @import url('https://fonts.googleapis.com/css?family=Inconsolata:700');
+
+        // * {
+        //     margin: 0;
+        //     padding: 0;
+        //     box-sizing: border-box;
+        // }
+
+        // html,
+        // body {
+        //     width: 100%;
+        //     height: 100%;
+        // }
+
+        // body {
+        //     background: #252525;
+        // }
+
+        .container {
+            position: relative;
+            margin: auto;
+            // top: 0;
+            // left: 0;
+            // right: 0;
+            // bottom: 0;
+            width: 485px;
+            height: 438px;
+
+            .search-box-title {
+                font-size: 45px;
+                padding-left: 20px;
+                padding-right: 10px;
+                padding-top: 20px;
+                color: #3494b5;
+            }
+
+            .search-box-content {
+                font-size: 25px;
+                padding-left: 20px;
+                padding-right: 10px;
+                padding-top: 5px;
+                color: #50b8db;
+            }
+
+            .search {
+                position: absolute;
+                margin: auto;
+                top: 50px;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                width: 60px;
+                height: 60px;
+                background: #50b8db;
+                border-radius: 50%;
+                transition: all 1s;
+                z-index: 4;
+                box-shadow: 0 0 25px 0 rgba(148, 206, 252, 0.4);
+
+                // box-shadow: 0 0 25px 0 crimson;
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    margin: auto;
+                    top: 22px;
+                    right: 0;
+                    bottom: 0;
+                    left: 22px;
+                    width: 15px;
+                    height: 2px;
+                    background: white;
+                    transform: rotate(45deg);
+                    transition: all .3s;
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    margin: auto;
+                    top: -5px;
+                    right: 0;
+                    bottom: 0;
+                    left: -5px;
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 50%;
+                    border: 2px solid white;
+                    transition: all 0.3s;
+                }
+            }
+
+            input {
+                // font-family: 'Inconsolata', monospace;
+                position: absolute;
+                margin: auto;
+                top: 50px;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                width: 50px;
+                height: 50px;
+                outline: none;
+                border: none;
+                // border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                background: #50b8db;
+                color: white;
+                text-shadow: 0 0 10px #50b8db;
+                padding: 0 80px 0 20px;
+                border-radius: 30px;
+                box-shadow: 0 0 10px 0 #50b8db,
+                    0 5px 10px 0 rgba(0, 0, 0, 0.2);
+                // box-shadow: inset 0 0 25px 0 rgba(0, 0, 0, 0.5);
+                transition: all 1s;
+                opacity: 0;
+                z-index: 5;
+                font-weight: bolder;
+                letter-spacing: 0.1em;
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &:focus {
+                    width: 320px;
+                    opacity: 1;
+                    cursor: text;
+                }
+
+                &:focus~.search {
+                    right: -280px;
+                    background: #151515;
+                    z-index: 6;
+
+                    &::before {
+                        top: 0;
+                        left: 0;
+                        width: 25px;
+                    }
+
+                    &::after {
+                        top: 0;
+                        left: 0;
+                        width: 25px;
+                        height: 2px;
+                        border: none;
+                        background: white;
+                        border-radius: 0%;
+                        transform: rotate(-45deg);
+                    }
+                }
+
+                &::placeholder {
+                    color: white;
+                    opacity: 0.5;
+                    // font-weight: bolder;
+                }
+            }
+        }
+    }
+
     .home-page-banners {
         background: url('../../assets/family-doctor-composition-with-indoor-scenery-wall-passage-doctor-door-with-patients-family-vector-i/2306.q702.010.S.m005.c13.family\ doctor.jpg');
         width: 70%;
         height: 100%;
         background-size: contain;
         /* Or contain, or specific dimensions */
-        background-position: left;
+        background-position: right;
         background-repeat: no-repeat;
-    }
-
-    .search-area {
-        width: 39%;
     }
 }

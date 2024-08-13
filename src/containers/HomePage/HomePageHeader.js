@@ -69,21 +69,31 @@ class HomePageHeader extends Component {
                     <nav>
                         <ul id="home-top-navigator">
                             <li>Trang chủ</li>
-                            <li>Khám chuyên khoa</li>
-                            <li>Khám từ xa</li>
-                            <li>Khám tổng quát</li>
-                            <li>Xét nghiệm y học</li>
-                            <li>Sức khỏe tinh thần</li>
-                            <li>Khám nha khoa</li>
+                            <li><i class="far fa-hospital nav-icon"></i>Khám chuyên khoa</li>
+                            <li><i class="fas fa-phone-volume nav-icon"></i>Khám từ xa</li>
+                            <li><i class="fas fa-child nav-icon"></i>Khám tổng quát</li>
+                            <li><i class="fas fa-vial nav-icon"></i>Xét nghiệm y học</li>
+                            <li><i class="far fa-heart nav-icon"></i>Sức khỏe tinh thần</li>
+                            <li><i class="fas fa-tablets nav-icon"></i>Khám nha khoa</li>
+
+
                             <div id="marker"></div>
                         </ul>
                     </nav>
                 </div>
                 <div className="home-header-banner-container">
-                    <div className="home-page-banners"></div>
                     <div className="search-area">
-                        
+                        <div className="container">
+                            <input type="text" placeholder="Tìm kiếm..."></input>
+                            <div className="search"></div>
+                            <div className="search-box-title">Nền tảng chăm sóc sức khỏe toàn diện</div>
+                            <div className="search-box-content">Hãy để chúng tôi chăm sóc cho bạn</div>
+                            <marquee> A simple scrolling text.
+                            </marquee>
+                        </div>
                     </div>
+                    <div className="home-page-banners"></div>
+
                 </div>
             </React.Fragment>
         );
