@@ -9,7 +9,7 @@ class HomePage extends Component {
 
         return (
             <React.Fragment>
-                <SideBar />
+                {/* <SideBar /> */}
                 <HomePageHeader />
 
             </React.Fragment>

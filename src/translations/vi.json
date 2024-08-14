@@ -1,4 +1,36 @@
 {
+    "home-page-header": {
+        "specialty": "Chuyên khoa",
+        "find-doctor-by-their-specialty": "Tìm bác sĩ theo chuyên khoa",
+        "facilities": "Cơ sở y tế",
+        "find-hospital-or-clinic": "Chọn bệnh viện, phòng khám",
+        "doctor": "Bác sĩ",
+        "find-elite-doctor": "Chọn những bác sĩ ưu tú",
+        "examination-pack": "Gói khám",
+        "general-examination": "Khám sức khỏe tổng quát",
+        "appointment": "Đặt lịch",
+        "support": "Hỗ trợ",
+        "login": "Đăng nhập"
+    },
+    "home-top-navigator": {
+        "option-home": "Trang chủ",
+        "option-specialty-exam": "Khám chuyên khoa",
+        "option-remote-exam": "Khám từ xa",
+        "option-general-exam": "Khám tổng quát",
+        "option-medical-testing": "Xét nghiệm y học",
+        "option-mental-health": "Sức khỏe tinh thần",
+        "option-dental-exam": "Khám nha khoa"
+    },
+    "home-banner": {
+        "search-area-search-box-placeholder": "Tìm kiếm...",
+        "search-area-search-box-title": "Nền tảng chăm sóc sức khỏe toàn diện",
+        "search-area-search-box-content": "Hãy để chúng tôi chăm sóc cho bạn",
+        "search-area-quick-search-content-1": "Con tôi bị dị ứng lâu dài, làm thế nào để chữa trị dứt điểm?",
+        "search-area-quick-search-content-2": "Dạo này xảy ra rất nhiều những trường hợp mắc bệnh, bạch hầu, bác sĩ có lời khuyên gì cho mọi người để phòng tránh?"
+    },
+    "side-bar": {
+        "side-bar-menu": "Kính chào"
+    },
     "common": {
         "add": "Thêm",
         "edit": "Sửa",

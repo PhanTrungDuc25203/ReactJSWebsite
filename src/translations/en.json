@@ -1,4 +1,36 @@
 {
+    "home-page-header": {
+        "specialty": "Medical specialty",
+        "find-doctor-by-their-specialty": "Find doctor by their specialty",
+        "facilities": "Medical facilities",
+        "find-hospital-or-clinic": "Find hospital or clinic",
+        "doctor": "doctor",
+        "find-elite-doctor": "Find elite and good doctor",
+        "examination-pack": "Examination pack",
+        "general-examination": "General health examination",
+        "appointment": "Appointment",
+        "support": "Support",
+        "login": "Login"
+    },
+    "home-top-navigator": {
+        "option-home": "Home",
+        "option-specialty-exam": "Specialty exam",
+        "option-remote-exam": "Remote exam",
+        "option-general-exam": "General exam",
+        "option-medical-testing": "Medical testing",
+        "option-mental-health": "Mental health",
+        "option-dental-exam": "Dental exam"
+    },
+    "home-banner": {
+        "search-area-search-box-placeholder": "Search...",
+        "search-area-search-box-title": "Comprehensive healthcare platform",
+        "search-area-search-box-content": "Let us take care of you",
+        "search-area-quick-search-content-1": "My child has a long-term allergy. How can it be permanently cured?",
+        "search-area-quick-search-content-2": "Recently, there have been many cases of diseases, including diphtheria. Do you have any advice for people on how to prevent them?"
+    },
+    "side-bar": {
+        "side-bar-menu": "Sincerely"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",

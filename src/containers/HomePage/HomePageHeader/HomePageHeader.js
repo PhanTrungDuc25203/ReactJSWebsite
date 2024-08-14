@@ -9,7 +9,7 @@ import { } from '@fortawesome/free-regular-svg-icons';
 import { faTooth, faHeartPulse, faSuitcaseMedical, faStethoscope } from '@fortawesome/free-solid-svg-icons';
 import { } from '@fortawesome/free-solid-svg-icons';
 import { } from '@fortawesome/react-fontawesome';
-
+import { FormattedMessage } from 'react-intl';
 
 class HomePageHeader extends Component {
 
@@ -20,56 +20,63 @@ class HomePageHeader extends Component {
                 <div className="home-header-container">
                     <div className="home-header-contents">
                         <div className="left-contents">
-                            <i className="fas fa-bars"></i>
+                            {/* <i className="fas fa-bars"></i> */}
                             <div className="header-logo">
                             </div>
                         </div>
                         <div className="center-contents">
                             <div className="child-content">
                                 <div className="header-option-title">
-                                    <a href="#"><b>Chuyên khoa</b></a>
+                                    <a href="#"><b><FormattedMessage id="home-page-header.specialty" /></b></a>
+                                    {/* <a href="#"><b>Chuyên khoa</b></a> */}
                                 </div>
-                                <div className="header-option-detail">
+                                {/* <div className="header-option-detail">
                                     Tìm bác sĩ theo chuyên khoa
+                                </div> */}
+                                <div className="header-option-detail">
+                                    <FormattedMessage id="home-page-header.find-doctor-by-their-specialty" />
                                 </div>
                             </div>
                             <div className="child-content">
                                 <div className="header-option-title">
-                                    <a href="#"><b>Cơ sở y tế</b></a>
+                                    <a href="#"><b><FormattedMessage id="home-page-header.facilities" /></b></a>
                                 </div>
                                 <div className="header-option-detail">
-                                    Chọn bệnh viện, phòng khám
+                                    <FormattedMessage id="home-page-header.find-hospital-or-clinic" />
                                 </div>
                             </div>
                             <div className="child-content">
                                 <div className="header-option-title">
-                                    <a href="#"><b>Bác sĩ</b></a>
+                                    <a href="#"><b><FormattedMessage id="home-page-header.doctor" /></b></a>
                                 </div>
                                 <div className="header-option-detail">
-                                    Chọn những bác sĩ ưu tú
+                                    <FormattedMessage id="home-page-header.find-elite-doctor" />
                                 </div>
                             </div>
                             <div className="child-content">
                                 <div className="header-option-title">
-                                    <a href="#"><b>Gói khám</b></a>
+                                    <a href="#"><b><FormattedMessage id="home-page-header.examination-pack" /></b></a>
                                 </div>
                                 <div className="header-option-detail">
-                                    Khám sức khỏe tổng quát
+                                    <FormattedMessage id="home-page-header.general-examination" />
                                 </div>
                             </div>
                         </div>
                         <div className="right-contents">
                             <div className="header-booking-section">
                                 <i className="far fa-clock"></i>
-                                <div className="header-right-section-title title-1">Đặt lịch</div>
+                                <div className="header-right-section-title title-1"><FormattedMessage id="home-page-header.appointment" /></div>
                             </div>
                             <div className="header-support-section">
                                 <i className="far fa-question-circle"></i>
-                                <div className="header-right-section-title title-2">Hỗ trợ</div>
+                                <div className="header-right-section-title title-2"><FormattedMessage id="home-page-header.support" /></div>
                             </div>
                             <div className="header-user-account-section">
                                 <i className="far fa-user"></i>
-                                <div className="header-right-section-title title-3"><b>Đăng nhập</b></div>
+                                <div className="header-right-section-title title-3"><FormattedMessage id="home-page-header.login" /></div>
+                            </div>
+                            <div className="header-user-language-option">
+                                <div className='header-user-nation-icon'></div>
                             </div>
                         </div>
                     </div>
@@ -77,14 +84,14 @@ class HomePageHeader extends Component {
                 <div className="menu-between-header-and-banner">
                     <nav>
                         <ul id="home-top-navigator">
-                            <li>Trang chủ</li>
-                            <li><i className="far fa-hospital nav-icon"></i>Khám chuyên khoa</li>
-                            <li><i className="fas fa-phone-volume nav-icon"></i>Khám từ xa</li>
-                            <li><i className="fas fa-child nav-icon"></i>Khám tổng quát</li>
-                            <li><i className="fas fa-vial nav-icon"></i>Xét nghiệm y học</li>
-                            <li><FontAwesomeIcon icon={faHeartPulse} className="nav-icon fontawesome-icon" />Sức khỏe tinh thần</li>
+                            <li><FormattedMessage id="home-top-navigator.option-home" /></li>
+                            <li><i className="far fa-hospital nav-icon"></i><FormattedMessage id="home-top-navigator.option-specialty-exam" /></li>
+                            <li><i className="fas fa-phone-volume nav-icon"></i><FormattedMessage id="home-top-navigator.option-remote-exam" /></li>
+                            <li><i className="fas fa-child nav-icon"></i><FormattedMessage id="home-top-navigator.option-general-exam" /></li>
+                            <li><i className="fas fa-vial nav-icon"></i><FormattedMessage id="home-top-navigator.option-medical-testing" /></li>
+                            <li><FontAwesomeIcon icon={faHeartPulse} className="nav-icon fontawesome-icon" /><FormattedMessage id="home-top-navigator.option-mental-health" /></li>
                             {/* <li><i className="fas fa-tablets nav-icon"></i>Khám nha khoa</li> */}
-                            <li><FontAwesomeIcon icon={faTooth} className="nav-icon fontawesome-icon" />Khám nha khoa</li>
+                            <li><FontAwesomeIcon icon={faTooth} className="nav-icon fontawesome-icon" /><FormattedMessage id="home-top-navigator.option-dental-exam" /></li>
 
                             <div id="marker"></div>
                         </ul>
@@ -94,20 +101,30 @@ class HomePageHeader extends Component {
                 <div className="home-header-banner-container">
                     <div className="search-area">
                         <div className="container">
-                            <input type="text" placeholder="Tìm kiếm..."></input>
+
+                            <FormattedMessage id="home-banner.search-area-search-box-placeholder">
+                                {(placeholderText) => (
+                                    <input
+                                        type="text"
+                                        placeholder={placeholderText}
+                                    />
+                                )}
+                            </FormattedMessage>
+                            {/* câu lệnh bên dưới không thể cho <FormattedMessage vào được  */}
+                            {/* <input type="text" placeholder="Tìm kiếm..."></input> */}
                             <div className="search"></div>
-                            <div className="search-box-title">Nền tảng chăm sóc sức khỏe toàn diện</div>
-                            <div className="search-box-content">Hãy để chúng tôi chăm sóc cho bạn</div>
+                            <div className="search-box-title"><FormattedMessage id="home-banner.search-area-search-box-title" /></div>
+                            <div className="search-box-content"><FormattedMessage id="home-banner.search-area-search-box-content" /></div>
 
                             {/* <div className="spacing"></div> */}
                             <div className="quick-search-container">
                                 <div className="quick-search">
                                     <div className="quick-search-icon-1"><FontAwesomeIcon icon={faSuitcaseMedical} /></div>
-                                    <div className="quick-search-content-1"><marquee>Con tôi bị dị ứng lâu dài, làm thế nào để chữa trị dứt điểm?</marquee></div>
+                                    <div className="quick-search-content-1"><marquee><FormattedMessage id="home-banner.search-area-quick-search-content-1" /></marquee></div>
                                 </div>
                                 <div className="quick-search">
                                     <div className="quick-search-icon-2"><FontAwesomeIcon icon={faStethoscope} /></div>
-                                    <div className="quick-search-content-2"><marquee>Dạo này xảy ra rất nhiều những trường hợp mắc bệnh, bạch hầu, bác sĩ có lời khuyên gì cho mọi người để phòng tránh?</marquee></div>
+                                    <div className="quick-search-content-2"><marquee><FormattedMessage id="home-banner.search-area-quick-search-content-2" /></marquee></div>
                                 </div>
                             </div>
                         </div>
@@ -115,22 +132,29 @@ class HomePageHeader extends Component {
                     <div className="home-page-banners"></div>
                 </div>
 
-
-
-
-
-
-                {/* <div className="header-side-bar">
+                <div className="header-side-bar">
                     <input type="checkbox" id="check" />
                     <label htmlFor="check" className="side-bar-toggle">
                         <i className="fas fa-bars" id="btn"></i>
                         <i className="fas fa-times" id="cancel"></i>
                     </label>
                     <div className="sidebar">
-                        <header>My Menu</header>
-                        <a href="#" className="active">
+                        <header>Kính chào</header>
+                        <a href="#">
                             <i className="fas fa-qrcode"></i>
                             <span>Dashboard</span>
+                        </a>
+                        <a href="#">
+                            <i className="fas fa-link"></i>
+                            <span>Shortcuts</span>
+                        </a>
+                        <a href="#">
+                            <i className="fas fa-link"></i>
+                            <span>Shortcuts</span>
+                        </a>
+                        <a href="#">
+                            <i className="fas fa-link"></i>
+                            <span>Shortcuts</span>
                         </a>
                         <a href="#">
                             <i className="fas fa-link"></i>
@@ -149,6 +173,26 @@ class HomePageHeader extends Component {
                             <span>About</span>
                         </a>
                         <a href="#">
+                            <i className="far fa-question-circle"></i>
+                            <span>About</span>
+                        </a>
+                        <a href="#">
+                            <i className="far fa-question-circle"></i>
+                            <span>About</span>
+                        </a>
+                        <a href="#">
+                            <i className="far fa-question-circle"></i>
+                            <span>About</span>
+                        </a>
+                        <a href="#">
+                            <i className="far fa-question-circle"></i>
+                            <span>About</span>
+                        </a>
+                        <a href="#">
+                            <i className="far fa-question-circle"></i>
+                            <span>About</span>
+                        </a>
+                        <a href="#">
                             <i className="fas fa-sliders-h"></i>
                             <span>Services</span>
                         </a>
@@ -156,13 +200,12 @@ class HomePageHeader extends Component {
                             <i className="far fa-envelope"></i>
                             <span>Contact</span>
                         </a>
+                        <div className="home-page-side-bar-language-option">
+                            <div className="vietnamese-option"></div>
+                            <div className="english-option"></div>
+                        </div>
                     </div>
-                </div> */}
-
-
-
-
-
+                </div>
 
             </React.Fragment>
         );
@@ -171,8 +214,13 @@ class HomePageHeader extends Component {
 }
 
 const mapStateToProps = state => {
+    //redux giống như một bên ứng dụng thứ 3
+    // chạy song song với react và có nhiệm vụ là bộ nhớ của ứng dụng react
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        //ở đây, giá trị bộ nhớ là state.app.language và biến ngôn ngữ là language được lưu trong redux
+        // và khi muốn sử dụng chúng trong component thì ta cần sử dụng tới hàm mapStateToProps
+        language: state.app.language,
     };
 };
 

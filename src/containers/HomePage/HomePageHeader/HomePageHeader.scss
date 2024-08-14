@@ -6,6 +6,23 @@ body {
     overflow-y: auto;
 }
 
+body::-webkit-scrollbar {
+    width: 8px;
+    /* Độ rộng thanh cuộn */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Màu thanh cuộn */
+    border-radius: 10px;
+    /* Bo tròn các góc */
+}
+
+body::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.3);
+    /* Nền của thanh cuộn */
+}
+
 
 .home-header-container {
 
@@ -50,8 +67,9 @@ body {
             .header-logo {
                 background: url('../../../assets/header-logo (2).png');
                 width: 70%;
-                height: 80%;
+                height: 81%;
                 background-size: contain;
+                margin-left: 59px;
                 /* Or contain, or specific dimensions */
                 background-position: center;
                 background-repeat: no-repeat;
@@ -69,28 +87,30 @@ body {
             align-items: center;
             gap: 20px;
 
-            .header-option-title {
-                font-size: 17px;
+            .child-content {
+                .header-option-title {
 
+                    font-size: 17px;
 
-                a {
-                    text-decoration: none;
-                    padding-bottom: 2px;
-                    color: #49BCE2;
-                    transition: background-color 0.3s, color 0.3s, border 0.3s;
-                    border-bottom: 3px solid #dff3ff;
+                    a {
+                        text-decoration: none;
+                        padding-bottom: 2px;
+                        color: #49BCE2;
+                        transition: background-color 0.3s, color 0.3s, border 0.3s;
+                        border-bottom: 3px solid #dff3ff;
+                        border-left: none;
+                    }
+
+                    a:hover {
+                        border-bottom: 3px solid #49BCE2;
+                    }
                 }
 
-                a:hover {
-                    border-bottom: 3px solid #49BCE2;
+                .header-option-detail {
+                    margin-top: 2px;
+                    font-size: 13px;
                 }
             }
-
-            .header-option-detail {
-                margin-top: 2px;
-                font-size: 13px;
-            }
-
         }
 
         .right-contents {
@@ -107,7 +127,7 @@ body {
 
             .header-booking-section {
                 padding-top: 13px;
-                width: 80px;
+                width: 70px;
                 height: 100%;
                 display: flex;
                 flex-direction: column;
@@ -145,7 +165,7 @@ body {
 
             .header-support-section {
                 padding-top: 13px;
-                width: 80px;
+                width: 70px;
                 height: 100%;
                 display: flex;
                 flex-direction: column;
@@ -183,7 +203,7 @@ body {
 
             .header-user-account-section {
                 padding-top: 13px;
-                width: 80px;
+                width: 70px;
                 height: 100%;
                 display: flex;
                 flex-direction: column;
@@ -195,19 +215,19 @@ body {
 
                 .title-3 {
                     transition: opacity 0.3s;
-                    color: #1a5fdf;
+                    color: #50b8db;
                 }
 
                 .far.fa-user {
                     font-size: 20px;
-                    color: #1a5fdf;
+                    color: #50b8db;
                     transition: font-size 0.3s ease, transform 0.3s ease;
                 }
             }
 
             .header-user-account-section:hover {
                 // background-color: white;
-                border-bottom: 3px solid #1a5fdf;
+                border-bottom: 3px solid #50b8db;
 
                 .far.fa-user {
                     color: #1a5fdf;
@@ -217,6 +237,30 @@ body {
 
                 .title-3 {
                     opacity: 0;
+                }
+            }
+
+            .header-user-language-option {
+                // padding-top: 13px;
+                padding-left: 10px;
+                width: 50px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                border-bottom: 3px solid #dff3ff;
+                cursor: pointer;
+
+                .header-user-nation-icon {
+                    background: url('../../../assets/homePageIcon/vietnam.png');
+                    background-size: contain;
+                    height: 25px;
+                    width: 25px;
+                    /* Or contain, or specific dimensions */
+                    background-position: center;
+                    background-repeat: no-repeat;
                 }
             }
         }
@@ -230,7 +274,7 @@ body {
     width: 100%;
     display: inline-flex;
     background-color: #50b8db;
-    height: 48.571px;
+    height: 48.371px;
 
     * {
         box-sizing: border-box;
@@ -469,9 +513,9 @@ body {
                 height: 60px;
                 background: #50b8db;
                 border-radius: 50%;
-                transition: all 1s;
+                transition: all 0.5s;
                 z-index: 4;
-                box-shadow: 0 0 25px 0 rgba(148, 206, 252, 0.4);
+                box-shadow: 0 0 15px 0 rgba(148, 206, 252, 0.4);
 
                 // box-shadow: 0 0 25px 0 crimson;
                 &:hover {
@@ -529,8 +573,8 @@ body {
                 border-radius: 30px;
                 box-shadow: 0 0 10px 0 #50b8db,
                     0 5px 10px 0 rgba(0, 0, 0, 0.2);
-                // box-shadow: inset 0 0 25px 0 rgba(0, 0, 0, 0.5);
-                transition: all 1s;
+                // box-shadow: inset 0 0 25px 0 rgba(0, 0, 0, 0.3);
+                transition: all 0.5s;
                 opacity: 0;
                 z-index: 5;
                 font-weight: bolder;
@@ -629,7 +673,7 @@ body {
                         // height: 40px;
                         // width: 45px !important;
                         padding-left: 10px;
-                        padding-right: 7.5px;
+                        padding-right: 7.3px;
                         padding-top: 5px;
                         padding-bottom: 5px;
                         border-right: 2px solid #50b8db;
@@ -668,155 +712,236 @@ body {
 
 
 
-// .header-side-bar {
-//     @import url('https://fonts.googleapis.com/css?family=Montserrat:600|Open+Sans:600&display=swap');
+.header-side-bar {
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:600|Open+Sans:600&display=swap');
 
 
-//     * {
-//         margin: 0;
-//         padding: 0;
-//         text-decoration: none;
-//     }
+    * {
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+    }
 
-//     .side-bar-toggle {
-//         position: fixed;
-//         z-index: 7;
-//         width: 240px;
-//         top: 0;
-//         left: 0;
-//     }
+    .side-bar-toggle {
+        z-index: 8;
+    }
 
-//     .sidebar {
-//         position: fixed;
-//         z-index: 7;
-//         width: 240px;
-//         top: 0;
-//         left: -240px;
-//         height: 100%;
-//         background: #1e1e1e;
-//         transition: all .5s ease;
-//     }
+    // .side-bar-toggle:hover {
+    //     border: 2px solid #2b49a1;
+    // }
 
-//     .sidebar header {
-//         font-size: 28px;
-//         color: white;
-//         line-height: 70px;
-//         text-align: center;
-//         background: #1b1b1b;
-//         user-select: none;
-//         font-family: 'Montserrat', sans-serif;
-//     }
+    .sidebar {
+        position: fixed;
+        z-index: 7;
+        width: 240px;
+        top: 0;
+        left: -240px;
+        height: 100%;
+        background: #ffffff;
+        transition: all .3s ease;
+        overflow-y: scroll;
 
-//     .sidebar a {
-//         display: block;
-//         height: 65px;
-//         width: 100%;
-//         color: white;
-//         line-height: 65px;
-//         padding-left: 30px;
-//         box-sizing: border-box;
-//         border-bottom: 1px solid black;
-//         border-top: 1px solid rgba(255, 255, 255, .1);
-//         border-left: 5px solid transparent;
-//         font-family: 'Open Sans', sans-serif;
-//         transition: all .5s ease;
-//     }
 
-//     a.active,
-//     a:hover {
-//         border-left: 5px solid #b93632;
-//         color: #b93632;
-//     }
 
-//     .sidebar a i {
-//         font-size: 23px;
-//         margin-right: 16px;
-//     }
+        .home-page-side-bar-language-option {
+            // position: absolute;
+            width: 100%;
+            // bottom: 3px;
+            // left: 4px;
+            height: 60px !important;
+            // border: 1px solid red;
+            padding-bottom: 20px;
+            padding-left: 20px;
+            display: flex;
+            justify-content: left;
+            /* Căn giữa theo chiều ngang */
+            align-items: center;
+            gap: 20px;
+            border-right: 2px solid #2b49a1;
 
-//     .sidebar a span {
-//         letter-spacing: 1px;
-//         text-transform: uppercase;
-//     }
 
-//     #check {
-//         display: none;
-//     }
+            .vietnamese-option {
+                background: url('../../../assets/homePageIcon/vietnam.png');
+                background-size: contain;
+                height: 40px;
+                width: 40px;
+                /* Or contain, or specific dimensions */
+                background-position: center;
+                background-repeat: no-repeat;
+                cursor: pointer;
 
-//     label #btn,
-//     label #cancel {
-//         position: absolute;
-//         cursor: pointer;
-//         color: white;
-//         border-radius: 5px;
-//         border: 1px solid #262626;
-//         margin: 15px 30px;
-//         font-size: 29px;
-//         background: #262626;
-//         height: 45px;
-//         width: 45px;
-//         text-align: center;
-//         line-height: 45px;
-//         transition: all .5s ease;
-//     }
+                &.active {
+                    //khi thêm class active cvaof class cha này thì những css trong active sẽ hoạt động
+                    border: 3px solid #50b8db;
+                }
+            }
 
-//     label #cancel {
-//         opacity: 0;
-//         visibility: hidden;
-//     }
+            .english-option {
+                background: url('../../../assets/homePageIcon/united-kingdom.png');
+                background-size: 110% 150%; //để hcho vừa khít với border bên ngoài
+                height: 30px;
+                width: 40px;
+                /* Or contain, or specific dimensions */
+                background-position: center;
+                border: 2px solid black;
+                border-radius: 3px;
+                background-repeat: no-repeat;
+                cursor: pointer;
 
-//     #check:checked~.sidebar {
-//         left: 0;
-//     }
+                &.active {
+                    //khi thêm class active cvaof class cha này thì những css trong active sẽ hoạt động
+                    border: 3px solid #50b8db;
+                }
+            }
+        }
+    }
 
-//     #check:checked~label #btn {
-//         margin-left: 245px;
-//         opacity: 0;
-//         visibility: hidden;
-//     }
+    .sidebar::-webkit-scrollbar {
+        display: none;
+        width: 8px;
+    }
 
-//     #check:checked~label #cancel {
-//         margin-left: 245px;
-//         opacity: 1;
-//         visibility: visible;
-//     }
+    .sidebar header {
+        font-size: 28px;
+        color: white;
+        line-height: 70px;
+        text-align: center;
+        background: #2b49a1;
+        user-select: none;
+        font-family: 'Montserrat', sans-serif;
+    }
 
-//     @media(max-width : 860px) {
-//         .sidebar {
-//             height: auto;
-//             width: 70px;
-//             left: 0;
-//             margin: 100px 0;
-//         }
+    .sidebar a {
+        display: block;
+        height: 50px;
+        width: 100%;
+        color: #49BCE2;
+        line-height: 50px;
+        padding-left: 15px;
+        box-sizing: border-box;
+        border-bottom: 1px solid black;
+        border-top: 1px solid rgba(50, 54, 255, 0.1);
+        border-left: 5px solid transparent;
+        border-right: 2px solid #2b49a1;
+        font-family: 'Open Sans', sans-serif;
+        transition: all .3s ease;
+    }
 
-//         header,
-//         #btn,
-//         #cancel {
-//             display: none;
-//         }
+    a.active,
+    a:hover {
+        border-left: 5px solid #2b49a1;
+        color: #2b49a1;
+        font-size: 17px;
+    }
 
-//         span {
-//             position: absolute;
-//             margin-left: 23px;
-//             opacity: 0;
-//             visibility: hidden;
-//         }
+    .sidebar a i {
+        font-size: 23px;
+        margin-right: 16px;
+    }
 
-//         .sidebar a {
-//             height: 60px;
-//         }
+    .sidebar a span {
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
 
-//         .sidebar a i {
-//             margin-left: -10px;
-//         }
+    #check {
+        display: none;
+    }
 
-//         a:hover {
-//             width: 200px;
-//             background: inherit;
-//         }
+    label #btn,
+    label #cancel {
+        position: absolute;
+        top: -3px;
+        left: -6px;
+        cursor: pointer;
+        font-size: 25px;
+        cursor: pointer;
+        color: rgb(132, 132, 132);
+        border: 2px solid rgb(255, 255, 255);
+        background-color: white;
+        // height: 40px;
+        // width: 40px;
+        border-radius: 15px;
+        text-align: center;
+        // line-height: 45px;
+        transition: all .3s ease;
+        z-index: 8;
 
-//         .sidebar a:hover span {
-//             opacity: 1;
-//             visibility: visible;
-//         }
-//     }
-// }
+        .fas.fa-bars {
+            padding: 30px !important;
+            height: 40px;
+            width: 40px;
+        }
+
+        .fas.fa-times {
+            padding: 30px !important;
+            height: 40px;
+            width: 40px;
+        }
+    }
+
+    label #cancel {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    #check:checked~.sidebar {
+        left: 0;
+    }
+
+    #check:checked~label #btn {
+        margin-left: 223px;
+        border: 2px solid #2b49a1;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    #check:checked~label #cancel {
+        margin-left: 223px;
+        border: 2px solid white;
+        background-color: #50b8db;
+        color: white;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    @media(max-width : 860px) {
+        .sidebar {
+            height: auto;
+            width: 70px;
+            left: 0;
+            margin: 100px 0;
+        }
+
+        header,
+        #btn,
+        #cancel {
+            display: none;
+        }
+
+        span {
+            position: absolute;
+            margin-left: 23px;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .sidebar a {
+            height: 60px;
+        }
+
+        .sidebar a i {
+            margin-left: -10px;
+        }
+
+        a:hover {
+            width: 200px;
+            background: inherit;
+        }
+
+        .sidebar a:hover span {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
