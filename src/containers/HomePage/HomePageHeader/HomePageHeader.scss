@@ -255,12 +255,25 @@ body::-webkit-scrollbar-track {
 
                 .header-user-nation-icon {
                     background: url('../../../assets/homePageIcon/vietnam.png');
-                    background-size: contain;
-                    height: 25px;
+                    background-size: 120% 160%;
+                    height: 18.75px;
                     width: 25px;
                     /* Or contain, or specific dimensions */
+                    border: 1px solid black;
                     background-position: center;
                     background-repeat: no-repeat;
+
+                    &.active {
+                        background: url('../../../assets/homePageIcon/united-kingdom.png');
+                        background-size: 110% 150%; //để cho vừa khít với border bên ngoài
+                        height: 18.75px;
+                        width: 25px;
+                        /* Or contain, or specific dimensions */
+                        background-position: center;
+                        border: 1px solid black;
+                        border-radius: 3px;
+                        background-repeat: no-repeat;
+                    }
                 }
             }
         }
@@ -752,6 +765,7 @@ body::-webkit-scrollbar-track {
             // border: 1px solid red;
             padding-bottom: 20px;
             padding-left: 20px;
+            padding-top: 20px;
             display: flex;
             justify-content: left;
             /* Căn giữa theo chiều ngang */
@@ -762,17 +776,21 @@ body::-webkit-scrollbar-track {
 
             .vietnamese-option {
                 background: url('../../../assets/homePageIcon/vietnam.png');
-                background-size: contain;
-                height: 40px;
+                background-size: 120% 160%;
+                height: 30px;
                 width: 40px;
                 /* Or contain, or specific dimensions */
+                border: 2px solid black;
+                border-radius: 3px;
                 background-position: center;
                 background-repeat: no-repeat;
+                opacity: 0.5;
                 cursor: pointer;
 
                 &.active {
                     //khi thêm class active cvaof class cha này thì những css trong active sẽ hoạt động
                     border: 3px solid #50b8db;
+                    opacity: 1;
                 }
             }
 
@@ -787,10 +805,12 @@ body::-webkit-scrollbar-track {
                 border-radius: 3px;
                 background-repeat: no-repeat;
                 cursor: pointer;
+                opacity: 0.5;
 
                 &.active {
                     //khi thêm class active cvaof class cha này thì những css trong active sẽ hoạt động
                     border: 3px solid #50b8db;
+                    opacity: 1;
                 }
             }
         }

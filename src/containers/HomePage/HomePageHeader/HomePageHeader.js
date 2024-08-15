@@ -10,11 +10,20 @@ import { faTooth, faHeartPulse, faSuitcaseMedical, faStethoscope } from '@fortaw
 import { } from '@fortawesome/free-solid-svg-icons';
 import { } from '@fortawesome/react-fontawesome';
 import { FormattedMessage } from 'react-intl';
+import { LANGUAGES } from "../../../utils";
+import { switchLanguageOfWebsite } from "../../../store/actions";
 
 class HomePageHeader extends Component {
 
-    render() {
+    switchLanguageOfWebsite = (language) => {
+        //fire redux events
+        // khi gọi hàm ở đây có thể gọi bằng tên tự đặt bên hàm mapDisplatchToProp bên dưới
+        this.props.switchLanguageOfWebsite(language);
+    }
 
+    render() {
+        //lấy ra biến language từ redux để set lá cờ ngôn ngữ ở header à trong sideBar
+        let language = this.props.language;
         return (
             <React.Fragment>
                 <div className="home-header-container">
@@ -76,7 +85,7 @@ class HomePageHeader extends Component {
                                 <div className="header-right-section-title title-3"><FormattedMessage id="home-page-header.login" /></div>
                             </div>
                             <div className="header-user-language-option">
-                                <div className='header-user-nation-icon'></div>
+                                <div className={language === LANGUAGES.VI ? "header-user-nation-icon" : "header-user-nation-icon active"}></div>
                             </div>
                         </div>
                     </div>
@@ -139,7 +148,7 @@ class HomePageHeader extends Component {
                         <i className="fas fa-times" id="cancel"></i>
                     </label>
                     <div className="sidebar">
-                        <header>Kính chào</header>
+                        <header><FormattedMessage id="side-bar.side-bar-menu" /></header>
                         <a href="#">
                             <i className="fas fa-qrcode"></i>
                             <span>Dashboard</span>
@@ -201,8 +210,8 @@ class HomePageHeader extends Component {
                             <span>Contact</span>
                         </a>
                         <div className="home-page-side-bar-language-option">
-                            <div className="vietnamese-option"></div>
-                            <div className="english-option"></div>
+                            <div className={language === LANGUAGES.VI ? "vietnamese-option active" : "vietnamese-option"} onClick={() => this.switchLanguageOfWebsite(LANGUAGES.VI)}></div>
+                            <div className={language === LANGUAGES.EN ? "english-option active" : "english-option"} onClick={() => this.switchLanguageOfWebsite(LANGUAGES.EN)}></div>
                         </div>
                     </div>
                 </div>
@@ -226,6 +235,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        //tên này có thể tư đặt                         nhưng tên này thì không
+        switchLanguageOfWebsite: (language) => dispatch(switchLanguageOfWebsite(language)),
     };
 };
 
