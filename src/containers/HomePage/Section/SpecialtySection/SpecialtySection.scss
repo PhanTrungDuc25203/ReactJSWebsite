@@ -1,0 +1,12 @@
+.specialty-section {
+    width: 100%;
+    height: 330px;
+    border: 1px solid red;
+    display: flex;
+    align-items: center;
+
+    .specialty-contents {
+        width: 70%;
+        padding: 50px;
+    }
+}

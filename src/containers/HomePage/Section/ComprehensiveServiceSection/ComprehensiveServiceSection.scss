@@ -1,0 +1,229 @@
+.comprehensive-service-section {
+    width: 100%;
+    height: 720px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    // border: 1px solid red;
+    flex-direction: column;
+
+    .section-title {
+        display: flex;
+        font-size: 40px;
+        font-weight: 500;
+        color: #3494b5;
+        flex-direction: row;
+        // border: 1px solid red;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .service-contents {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // border: 1x solid red;
+        width: 100%;
+        gap: 100px;
+
+        .content-background {
+            background: url('../../../../assets/images/ic_background_grid_item.b108f491.png');
+            background-size: contain;
+            height: 80%;
+            width: 100%;
+            background-position: center;
+            border: 2px solid #3494b5;
+            border-radius: 10px;
+            background-repeat: no-repeat;
+            color: #3494b5;
+            font-size: 22px;
+            cursor: pointer;
+
+            .service-icon-container {
+                height: 100%;
+                width: 78px;
+                background: radial-gradient(circle, rgb(255, 211, 84), rgb(255, 239, 195), rgb(254, 253, 251), rgb(255, 255, 255));
+                margin: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+        }
+
+        .content-background:hover {
+            border: 3px solid #3494b5;
+        }
+
+        .left-contents {
+            width: 40%;
+            height: 100px;
+
+            .specialty-exam {
+                display: flex;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 40px;
+
+                .specialty-icon {
+                    background: url('../../../../assets/homePageIcon/161905-iconkham-chuyen-khoa.webp');
+                    background-size: contain;
+                    height: 50px;
+                    width: 50px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+            }
+
+            .general-exam {
+                display: flex;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 40px;
+
+                .check-list-icon {
+                    background: url('../../../../assets/homePageIcon/161350-iconkham-tong-quan.webp');
+                    background-size: contain;
+                    height: 50px;
+                    width: 50px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+            }
+
+            .mental-health {
+                display: flex;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 40px;
+
+                .mental-icon {
+                    background: url('../../../../assets/homePageIcon/161403-iconsuc-khoe-tinh-than.webp');
+                    background-size: contain;
+                    height: 50px;
+                    width: 50px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+            }
+
+            .surgery-pack {
+                display: flex;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 40px;
+
+                .surgery-icon {
+                    background: url('../../../../assets/homePageIcon/161421-icongoi-phau-thuat.webp');
+                    background-size: contain;
+                    height: 50px;
+                    width: 50px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+            }
+
+            .health-checkup {
+                display: flex;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 40px;
+
+                .health-checkup-icon {
+                    background: url('../../../../assets/homePageIcon/161442-iconbai-test-suc-khoe2.webp');
+                    background-size: contain;
+                    height: 50px;
+                    width: 50px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+            }
+        }
+
+        .right-contents {
+            width: 40%;
+            height: 100px;
+
+            .remote-exam {
+                display: flex;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 40px;
+
+                .phone-call-icon {
+                    background: url('../../../../assets/homePageIcon/161817-iconkham-tu-xa.webp');
+                    background-size: contain;
+                    height: 50px;
+                    width: 50px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+            }
+
+            .medical-testing {
+                display: flex;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 40px;
+
+                .medical-tube-icon {
+                    background: url('../../../../assets/homePageIcon/161340-iconxet-nghiem-y-hoc.webp');
+                    background-size: contain;
+                    height: 50px;
+                    width: 50px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+            }
+
+            .dental-health {
+                display: flex;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 40px;
+
+                .tooth-icon {
+                    background: url('../../../../assets/homePageIcon/161410-iconkham-nha-khoa.webp');
+                    background-size: contain;
+                    height: 50px;
+                    width: 50px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+            }
+
+            .healthy-with-diabetes {
+                display: flex;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 40px;
+
+                .blood-glucose-meter-icon {
+                    background: url('../../../../assets/homePageIcon/145257-thiet-ke-chua-co-ten-3.webp');
+                    background-size: contain;
+                    height: 50px;
+                    width: 50px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+            }
+
+            .nearly-clinic {
+                display: flex;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 40px;
+
+                .locate-icon {
+                    background: url('../../../../assets/homePageIcon/163421-153524-near-home-01.webp');
+                    background-size: contain;
+                    height: 50px;
+                    width: 50px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+            }
+        }
+    }
+
+}

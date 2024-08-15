@@ -3,25 +3,25 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow-y: auto;
+    // overflow-y: auto;
 }
 
-body::-webkit-scrollbar {
-    width: 8px;
-    /* Độ rộng thanh cuộn */
-}
+// body::-webkit-scrollbar {
+//     width: 8px;
+//     /* Độ rộng thanh cuộn */
+// }
 
-body::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.5);
-    /* Màu thanh cuộn */
-    border-radius: 10px;
-    /* Bo tròn các góc */
-}
+// body::-webkit-scrollbar-thumb {
+//     background-color: rgba(0, 0, 0, 0.5);
+//     /* Màu thanh cuộn */
+//     border-radius: 10px;
+//     /* Bo tròn các góc */
+// }
 
-body::-webkit-scrollbar-track {
-    background-color: rgba(255, 255, 255, 0.3);
-    /* Nền của thanh cuộn */
-}
+// body::-webkit-scrollbar-track {
+//     background-color: rgba(255, 255, 255, 0.3);
+//     /* Nền của thanh cuộn */
+// }
 
 
 .home-header-container {
