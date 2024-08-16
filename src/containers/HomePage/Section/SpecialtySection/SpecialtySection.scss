@@ -1,12 +1,195 @@
 .specialty-section {
     width: 100%;
-    height: 330px;
+    height: 1000px;
     border: 1px solid red;
     display: flex;
-    align-items: center;
+    justify-content: center;
+    position: relative;
 
     .specialty-contents {
-        width: 70%;
-        padding: 50px;
+        position: relative;
+        width: 90%;
+
+        .item-content {
+            // border: 1px solid red;
+            border-radius: 10px;
+            font-size: 22px;
+            width: 350px;
+            height: 286px;
+
+            .item-of-slider {
+                // position: relative;
+                border: 2px solid #3494b5;
+                margin: 10px;
+                border-radius: 10px;
+                cursor: pointer;
+
+                .image-item {
+                    // position: relative;
+                    height: auto;
+                    width: 240px;
+                    margin: 15px;
+                    border-radius: 10px !important;
+                }
+
+                .item-content {
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    margin-left: 15px;
+                    margin-right: 15px;
+                    width: 360px;
+                    height: 50px;
+                }
+
+                .image-css {
+                    background-size: contain;
+                    height: 180px;
+                    width: 360px;
+                    background-position: center;
+                    border: 1px solid rgb(193, 233, 255);
+                    border-radius: 15px;
+                    margin: 15px;
+                    background-repeat: no-repeat;
+                }
+
+                .image-of-item-1 {
+                    background-image: url('../../../../assets/specialty-image/101739-viem-gan.png');
+                }
+
+                .image-of-item-2 {
+                    background-image: url('../../../../assets/specialty-image/101627-cham-cuu.png');
+                }
+
+                .image-of-item-3 {
+                    background-image: url('../../../../assets/specialty-image/101627-co-xuong-khop.png');
+                }
+
+                .image-of-item-4 {
+                    background-image: url('../../../../assets/specialty-image/101638-di-ung-mien-dich.png');
+                }
+
+                .image-of-item-5 {
+                    background-image: url('../../../../assets/specialty-image/101627-cot-song.png');
+                }
+
+                .image-of-item-6 {
+                    background-image: url('../../../../assets/specialty-image/101638-da-lieu.png');
+                }
+
+                .image-of-item-7 {
+                    background-image: url('../../../../assets/specialty-image/101655-nhi-khoa.png');
+                }
+
+                .image-of-item-8 {
+                    background-image: url('../../../../assets/specialty-image/101713-san-phu-khoa.png');
+                }
+
+                .image-of-item-9 {
+                    background-image: url('../../../../assets/specialty-image/101713-sieu-am-thai.png');
+                }
+
+                .image-of-item-10 {
+                    background-image: url('../../../../assets/specialty-image/101713-suc-khoe-tam-than.png');
+                }
+
+                .image-of-item-11 {
+                    background-image: url('../../../../assets/specialty-image/101713-tai-mui-hong.png');
+                }
+
+                .image-of-item-12 {
+                    background-image: url('../../../../assets/specialty-image/101713-tieu-hoa.png');
+                }
+
+                .image-of-item-13 {
+                    background-image: url('../../../../assets/specialty-image/101713-tim-mach.png');
+                }
+
+                .image-of-item-14 {
+                    background-image: url('../../../../assets/specialty-image/101739-than-kinh.png');
+                }
+
+                .image-of-item-15 {
+                    background-image: url('../../../../assets/specialty-image/101739-y-hoc-co-truyen.png');
+                }
+            }
+        }
+
+        .specialty-section-title {
+            position: relative;
+            width: 100%;
+            font-size: 40px;
+            font-weight: 500;
+            margin-top: 50px;
+            margin-bottom: 50px;
+
+            .more-detail-button {
+                position: relative;
+                display: inline-block;
+            }
+        }
+
+        .slider-button-next::before {
+            position: absolute;
+            color: rgb(114, 192, 255) !important;
+            background: rgb(232, 250, 255);
+            border: 1px solid rgb(86, 191, 239);
+            opacity: 1;
+            border-radius: 15px;
+            padding: 13px;
+            right: 1px;
+            top: -15px;
+        }
+
+        .override {
+            // position: relative;
+            height: 15px;
+            width: 15px;
+        }
+
+        .slider-button-prev::before {
+            position: absolute;
+            color: rgb(114, 192, 255) !important;
+            background: rgb(232, 250, 255);
+            border: 1px solid rgb(86, 191, 239);
+            border-radius: 15px;
+            opacity: 1;
+            padding: 13px;
+            top: -15px;
+            left: 2px;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            50% {
+                transform: translateX(5px);
+            }
+
+            75% {
+                transform: translateX(10px);
+            }
+
+            100% {
+                transform: translateX(15px);
+            }
+        }
+
+        .slider-button-prev:hover {
+            // position: absolute;
+
+            // animation: shake 0.5s;
+        }
+
+        .slider-button-prev {
+            z-index: 2 !important;
+        }
     }
+
+
 }
