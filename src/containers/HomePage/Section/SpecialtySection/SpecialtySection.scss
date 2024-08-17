@@ -1,24 +1,25 @@
 .specialty-section {
     width: 100%;
-    height: 1000px;
-    border: 1px solid red;
+    height: 475px;
+    // border: 1px solid red;
     display: flex;
     justify-content: center;
     position: relative;
 
     .specialty-contents {
         position: relative;
-        width: 90%;
+        width: 89%;
 
         .item-content {
-            // border: 1px solid red;
             border-radius: 10px;
-            font-size: 22px;
+            font-size: 25px;
+            color: #3494b5;
             width: 350px;
+            text-align: center;
             height: 286px;
 
             .item-of-slider {
-                // position: relative;
+
                 border: 2px solid #3494b5;
                 margin: 10px;
                 border-radius: 10px;
@@ -48,7 +49,7 @@
                     background-position: center;
                     border: 1px solid rgb(193, 233, 255);
                     border-radius: 15px;
-                    margin: 15px;
+                    margin: 13px;
                     background-repeat: no-repeat;
                 }
 
@@ -116,15 +117,81 @@
 
         .specialty-section-title {
             position: relative;
+            height: 60px;
             width: 100%;
-            font-size: 40px;
-            font-weight: 500;
+            display: flex;
             margin-top: 50px;
             margin-bottom: 50px;
+            margin-left: 10px;
+
+            .title-text {
+                height: 60px;
+                width: 235.73px;
+                font-size: 40px;
+                color: #3494b5;
+                font-weight: 500;
+
+                text-decoration: none;
+            }
+
+            .spacing {
+                height: 100%;
+                width: 842px;
+            }
+
 
             .more-detail-button {
-                position: relative;
-                display: inline-block;
+                $color: rgb(54, 215, 255);
+                text-align: center;
+
+                .button {
+                    position: absolute;
+                    display: inline-block;
+                    padding: 15px;
+                    border-radius: 15px;
+                    color: #fff;
+                    font-size: 20px;
+                    transition: all .3s;
+                    border: 2px solid #3494b5;
+                    position: relative;
+                    overflow: hidden;
+                    z-index: 1;
+                    border: 0px;
+                    text-decoration: none;
+
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: $color;
+                        border-radius: 15px;
+                        z-index: -2;
+                    }
+
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 0%;
+                        height: 100%;
+                        background-color: darken($color, 15%);
+                        transition: all .3s;
+                        border-radius: 15px;
+                        z-index: -1;
+                    }
+
+                    &:hover {
+                        color: #fff;
+
+                        &:before {
+                            width: 100%;
+                        }
+                    }
+                }
             }
         }
 
@@ -155,7 +222,7 @@
             opacity: 1;
             padding: 13px;
             top: -15px;
-            left: 2px;
+            left: 7px;
         }
 
         @keyframes shake {
@@ -178,12 +245,6 @@
             100% {
                 transform: translateX(15px);
             }
-        }
-
-        .slider-button-prev:hover {
-            // position: absolute;
-
-            // animation: shake 0.5s;
         }
 
         .slider-button-prev {

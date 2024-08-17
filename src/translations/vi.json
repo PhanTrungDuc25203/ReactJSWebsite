@@ -31,6 +31,38 @@
     "side-bar": {
         "side-bar-menu": "Kính chào"
     },
+    "comprehensive-service-section": {
+        "section-title": "Dịch vụ toàn diện",
+        "option-specialty-exam": "Khám chuyên khoa",
+        "option-general-exam": "Khám tổng quát",
+        "option-mental-health": "Sức khỏe tinh thần",
+        "option-surgery-pack": "Gói phẫu thuật",
+        "option-health-exam": "Kiểm tra sức khỏe",
+        "option-remote-exam": "Khám từ xa",
+        "option-medical-testing": "Xét nghiệm y học",
+        "option-dental-exam": "Khám nha khoa",
+        "option-diabetes": "Sống khỏe với tiểu đường",
+        "option-near-clinic": "Cơ sở y tế gần bạn"
+    },
+    "specialty-section": {
+        "specialty-section-title": "Chuyên khoa",
+        "button-more-detail": "Xem thêm",
+        "hepatitis": "Bệnh viêm gan",
+        "acupuncture": "Châm cứu",
+        "bone-and-joint-disease": "Bệnh xương khớp",
+        "immune-system": "Hệ miễn dịch",
+        "spine": "Cột sống",
+        "dermatology": "Da liễu",
+        "pediatrics": "Nhi khoa",
+        "obstetrics-and-gynecology": "Sản phụ khoa",
+        "fetal-ultrasound": "Siêu âm thai",
+        "mental-health": "Sức khỏe tinh thần",
+        "ent": "Tai mũi họng",
+        "gastric-disease": "Bệnh dạ dày",
+        "cardiology": "Tim mạch",
+        "neurology": "Thần kinh khoa",
+        "traditional-medicine": "Y học cổ truyền"
+    },
     "common": {
         "add": "Thêm",
         "edit": "Sửa",

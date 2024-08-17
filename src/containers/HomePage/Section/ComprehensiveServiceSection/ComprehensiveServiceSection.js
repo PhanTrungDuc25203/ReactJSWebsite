@@ -10,56 +10,58 @@ import { faTooth, faHeartPulse, faSuitcaseMedical, faStethoscope } from '@fortaw
 import { } from '@fortawesome/free-solid-svg-icons';
 import { } from '@fortawesome/react-fontawesome';
 import { FormattedMessage } from 'react-intl';
+import { LANGUAGES } from "../../../../utils";
+import { switchLanguageOfWebsite } from "../../../../store/actions";
 
 class ComprehensiveServiceSection extends Component {
 
     render() {
         return (
             <div className="comprehensive-service-section">
-                <div className="section-title">Dịch vụ toàn diện</div>
+                <div className="section-title"><FormattedMessage id="comprehensive-service-section.section-title" /></div>
                 <div className="service-contents">
                     <div className="left-contents">
                         <div className="specialty-exam content-background ">
                             <div className="service-icon-container"><div className="specialty-icon"></div></div>
-                            Khám chuyên khoa
+                            <FormattedMessage id="comprehensive-service-section.option-specialty-exam" />
                         </div>
                         <div className="general-exam content-background">
                             <div className="service-icon-container"><div className="check-list-icon"></div></div>
-                            Khám tổng quát
+                            <FormattedMessage id="comprehensive-service-section.option-general-exam" />
                         </div>
                         <div className="mental-health content-background">
                             <div className="service-icon-container"><div className="mental-icon"></div></div>
-                            Sức khỏe tinh thần
+                            <FormattedMessage id="comprehensive-service-section.option-mental-health" />
                         </div>
                         <div className="surgery-pack content-background">
                             <div className="service-icon-container"><div className="surgery-icon"></div></div>
-                            Gói phẫu thuật
+                            <FormattedMessage id="comprehensive-service-section.option-surgery-pack" />
                         </div>
                         <div className="health-checkup content-background">
                             <div className="service-icon-container"><div className="health-checkup-icon"></div></div>
-                            Kiểm tra sức khỏe
+                            <FormattedMessage id="comprehensive-service-section.option-health-exam" />
                         </div>
                     </div>
                     <div className="right-contents">
                         <div className="remote-exam content-background">
                             <div className="service-icon-container"><div className="phone-call-icon"></div></div>
-                            Khám từ xa
+                            <FormattedMessage id="comprehensive-service-section.option-remote-exam" />
                         </div>
                         <div className="medical-testing content-background">
                             <div className="service-icon-container"><div className="medical-tube-icon"></div></div>
-                            Xét nghiệm y học
+                            <FormattedMessage id="comprehensive-service-section.option-medical-testing" />
                         </div>
                         <div className="dental-health content-background">
                             <div className="service-icon-container"><div className="tooth-icon"></div></div>
-                            Khám nha khoa
+                            <FormattedMessage id="comprehensive-service-section.option-dental-exam" />
                         </div>
                         <div className="healthy-with-diabetes content-background">
                             <div className="service-icon-container"><div className="blood-glucose-meter-icon"></div></div>
-                            Sống khỏe với tiểu đường
+                            <FormattedMessage id="comprehensive-service-section.option-diabetes" />
                         </div>
                         <div className="nearly-clinic content-background">
                             <div className="service-icon-container"><div className="locate-icon"></div></div>
-                            Cơ sở y tế gần bạn
+                            <FormattedMessage id="comprehensive-service-section.option-near-clinic" />
                         </div>
                     </div>
                 </div>

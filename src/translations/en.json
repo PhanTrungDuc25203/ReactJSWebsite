@@ -31,6 +31,38 @@
     "side-bar": {
         "side-bar-menu": "Sincerely"
     },
+    "comprehensive-service-section": {
+        "section-title": "Comprehensive services",
+        "option-specialty-exam": "Specialty exam",
+        "option-general-exam": "General exam",
+        "option-mental-health": "Mental health",
+        "option-surgery-pack": "Surgery pack",
+        "option-health-exam": "Health exam",
+        "option-remote-exam": "Remote exam",
+        "option-medical-testing": "Medical testing",
+        "option-dental-exam": "Dental exam",
+        "option-diabetes": "Live healthy with diabetes",
+        "option-near-clinic": "Near clinic"
+    },
+    "specialty-section": {
+        "specialty-section-title": "Specialty",
+        "button-more-detail": "More",
+        "hepatitis": "Hepatitis",
+        "acupuncture": "Acupuncture",
+        "bone-and-joint-disease": "Bone and Joint",
+        "immune-system": "Immune System",
+        "spine": "Spine",
+        "dermatology": "Dermatology",
+        "pediatrics": "Pediatrics",
+        "obstetrics-and-gynecology": "Obstetrics and Gynecology",
+        "fetal-ultrasound": "Fetal Ultrasound",
+        "mental-health": "Mental Health",
+        "ent": "Ear, Nose, and Throat (ENT)",
+        "gastric-disease": "Gastric Disease",
+        "cardiology": "Cardiology",
+        "neurology": "Neurology",
+        "traditional-medicine": "Traditional Medicine"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",
