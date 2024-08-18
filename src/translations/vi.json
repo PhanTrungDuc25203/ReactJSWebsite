@@ -63,6 +63,25 @@
         "neurology": "Thần kinh khoa",
         "traditional-medicine": "Y học cổ truyền"
     },
+    "medical-facilities-section": {
+        "medical-facilities-section-title": "Cơ sở y tế",
+        "button-more-detail": "Xem thêm",
+        "hospital-1": "Bệnh viên quân đội trung ương",
+        "hospital-2": "Phòng khám Meditec",
+        "hospital-3": "Phòng khám Doctor check",
+        "hospital-4": "Phòng khám bác sĩ gia đình Med247",
+        "hospital-5": "Phòng khám sức khỏe Saigon",
+        "hospital-6": "Hệ thống y tế Thu Cúc",
+        "hospital-7": "Phòng khám quốc tế EXSON",
+        "hospital-8": "Phòng khám mắt quốc tế DND",
+        "hospital-9": "Bệnh viện Chợ Rẫy",
+        "hospital-10": "Phòng khám đa khoa Hưng Việt",
+        "hospital-11": "Bệnh viện đại học Y dược 1 TP.HCM",
+        "hospital-12": "Trung tâm xét nghiệm DIAG",
+        "hospital-13": "Bệnh viện nam học và sinh sản",
+        "hospital-14": "Bệnh  viện y học cổ truyền quốc gia",
+        "hospital-15": "Phòng khám Hồng Phát"
+    },
     "common": {
         "add": "Thêm",
         "edit": "Sửa",

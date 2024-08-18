@@ -63,6 +63,25 @@
         "neurology": "Neurology",
         "traditional-medicine": "Traditional Medicine"
     },
+    "medical-facilities-section": {
+        "medical-facilities-section-title": "Medical facilities",
+        "button-more-detail": "More",
+        "hospital-1": "Military central hospital",
+        "hospital-2": "Meditec clinic",
+        "hospital-3": "Doctor check clinic",
+        "hospital-4": "Family doctor med247 clinic",
+        "hospital-5": "Saigon healthcare clinic",
+        "hospital-6": "Thucuc medical system",
+        "hospital-7": "International EXSON clinic",
+        "hospital-8": "International eye-care DND clinic ",
+        "hospital-9": "Cho Ray hospital",
+        "hospital-10": "Hung Viet general clinic",
+        "hospital-11": "HCM City's UMP hospital",
+        "hospital-12": "Testing central DIAG",
+        "hospital-13": "Andrology and fertility hospital",
+        "hospital-14": "National hospital of traditional medicine",
+        "hospital-15": "Hong Phat clinic"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",

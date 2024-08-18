@@ -1,18 +1,19 @@
-.specialty-section {
+.elite-doctor-section {
     width: 100%;
     height: 475px;
+    background-image: url('../../../../assets/images/140311-background5.png');
     // border: 1px solid red;
     display: flex;
     justify-content: center;
     position: relative;
 
-    .specialty-contents {
+    .elite-doctor-section-contents {
         position: relative;
         width: 89%;
 
         .item-content {
             border-radius: 10px;
-            font-size: 25px;
+            font-size: 18px;
             color: #3494b5;
             width: 350px;
             text-align: center;
@@ -24,11 +25,12 @@
                 margin: 10px;
                 border-radius: 10px;
                 cursor: pointer;
+                align-items: center;
 
                 .image-item {
                     // position: relative;
                     height: auto;
-                    width: 240px;
+                    width: 180px;
                     margin: 15px;
                     border-radius: 10px !important;
                 }
@@ -38,95 +40,98 @@
                     margin-bottom: 10px;
                     margin-left: 15px;
                     margin-right: 15px;
-                    width: 360px;
+                    width: 253px;
                     height: 50px;
                 }
 
                 .image-css {
-                    background-size: contain;
+                    background-size: 108% 120%;
                     height: 180px;
-                    width: 360px;
+                    width: 180px;
                     background-position: center;
                     border: 1px solid rgb(193, 233, 255);
-                    border-radius: 15px;
-                    margin: 13px;
+                    border-radius: 500px;
+                    margin-top: 13px;
+                    margin-bottom: 13px;
+                    margin-left: 51px;
+                    margin-right: 51px;
                     background-repeat: no-repeat;
                 }
 
                 .image-of-item-1 {
-                    background-image: url('../../../../assets/specialty-image/101739-viem-gan.png');
+                    background-image: url('../../../../assets/elite-doctor-image/Screenshot\ 2024-06-28\ 120111.png');
                 }
 
                 .image-of-item-2 {
-                    background-image: url('../../../../assets/specialty-image/101627-cham-cuu.png');
+                    background-image: url('../../../../assets/medical-facilities-image/181208mediteclogo.jpeg');
                 }
 
                 .image-of-item-3 {
-                    background-image: url('../../../../assets/specialty-image/101627-co-xuong-khop.png');
+                    background-image: url('../../../../assets/medical-facilities-image/092249-doctor-check.jpg');
                 }
 
                 .image-of-item-4 {
-                    background-image: url('../../../../assets/specialty-image/101638-di-ung-mien-dich.png');
+                    background-image: url('../../../../assets/medical-facilities-image/100649-med247.jpg');
                 }
 
                 .image-of-item-5 {
-                    background-image: url('../../../../assets/specialty-image/101627-cot-song.png');
+                    background-image: url('../../../../assets/medical-facilities-image/101707-logo-sg.png');
                 }
 
                 .image-of-item-6 {
-                    background-image: url('../../../../assets/specialty-image/101638-da-lieu.png');
+                    background-image: url('../../../../assets/medical-facilities-image/103904-logo-thucuc.png');
                 }
 
                 .image-of-item-7 {
-                    background-image: url('../../../../assets/specialty-image/101655-nhi-khoa.png');
+                    background-image: url('../../../../assets/medical-facilities-image/112054logo-phong-kham-da-khoa-quoc-te-exson1.jpg');
                 }
 
                 .image-of-item-8 {
-                    background-image: url('../../../../assets/specialty-image/101713-san-phu-khoa.png');
+                    background-image: url('../../../../assets/medical-facilities-image/143306logp-bv-mat-dnd.jpg');
                 }
 
                 .image-of-item-9 {
-                    background-image: url('../../../../assets/specialty-image/101713-sieu-am-thai.png');
+                    background-image: url('../../../../assets/medical-facilities-image/152704logo-bvcr-moi.jpg');
                 }
 
                 .image-of-item-10 {
-                    background-image: url('../../../../assets/specialty-image/101713-suc-khoe-tam-than.png');
+                    background-image: url('../../../../assets/medical-facilities-image/153236-logo-hung-viet.jpg');
                 }
 
                 .image-of-item-11 {
-                    background-image: url('../../../../assets/specialty-image/101713-tai-mui-hong.png');
+                    background-image: url('../../../../assets/medical-facilities-image/155206-logo-y-duoc-1.jpg');
                 }
 
                 .image-of-item-12 {
-                    background-image: url('../../../../assets/specialty-image/101713-tieu-hoa.png');
+                    background-image: url('../../../../assets/medical-facilities-image/160340-logo-diag.png');
                 }
 
                 .image-of-item-13 {
-                    background-image: url('../../../../assets/specialty-image/101713-tim-mach.png');
+                    background-image: url('../../../../assets/medical-facilities-image/160343logo-nam-hoc-hn.jpg');
                 }
 
                 .image-of-item-14 {
-                    background-image: url('../../../../assets/specialty-image/101739-than-kinh.png');
+                    background-image: url('../../../../assets/medical-facilities-image/160857-791310225786250729637925205413557167980544o.jpg');
                 }
 
                 .image-of-item-15 {
-                    background-image: url('../../../../assets/specialty-image/101739-y-hoc-co-truyen.png');
+                    background-image: url('../../../../assets/medical-facilities-image/165735-logo-hong-phat.png');
                 }
             }
         }
 
-        .specialty-section-title {
+        .elite-doctor-section-section-title {
             position: relative;
             height: 60px;
             width: 100%;
             display: flex;
-            margin-top: 50px;
-            margin-bottom: 50px;
+            margin-top: 40px;
+            margin-bottom: 30px;
             margin-left: 10px;
 
             .title-text {
                 height: 60px;
-                width: 235.73px;
+                width: 305px;
                 font-size: 40px;
                 color: #3494b5;
                 font-weight: 500;
@@ -136,7 +141,7 @@
 
             .spacing {
                 height: 100%;
-                width: 842px;
+                width: 775px;
             }
 
 
@@ -253,9 +258,11 @@
             z-index: 2 !important;
         }
     }
+
+
 }
 
-.specialty-section-slider {
+.elite-doctor-section-slider {
 
     .slick-dots {
         margin-left: 7px;

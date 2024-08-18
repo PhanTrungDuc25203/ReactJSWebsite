@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './SpecialtySection.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { } from '@fortawesome/free-brands-svg-icons';
-import { } from '@fortawesome/fontawesome-free-webfonts';
-import { } from '@fortawesome/fontawesome-svg-core';
-import { } from '@fortawesome/free-regular-svg-icons';
-import { faTooth, faHeartPulse, faSuitcaseMedical, faStethoscope } from '@fortawesome/free-solid-svg-icons';
-import { } from '@fortawesome/free-solid-svg-icons';
-import { } from '@fortawesome/react-fontawesome';
+import './MedicalFacilitiesSection.scss';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -16,7 +8,7 @@ import { FormattedMessage } from 'react-intl';
 import { LANGUAGES } from "../../../../utils";
 import { switchLanguageOfWebsite } from "../../../../store/actions";
 
-class SpecialtySection extends Component {
+class MedicalFacilitiesSection extends Component {
 
     SampleNextArrow(props) {
         const { className, style, onClick } = props;
@@ -50,7 +42,7 @@ class SpecialtySection extends Component {
             nextArrow: <this.SampleNextArrow />,  // Sử dụng SampleNextArrow
             prevArrow: <this.SamplePrevArrow />,  // Sử dụng SamplePrevArrow
             autoplay: true,
-            className: 'specialty-section-slider',
+            className: 'medical-facilities-section-slider',
             // dotsClass: 'medical-facilities-section-dots-of-slider',
             autoplaySpeed: 6000,
             speed: 1000,
@@ -61,19 +53,23 @@ class SpecialtySection extends Component {
         };
 
         return (
-            <div className="specialty-section">
-                <div className="specialty-contents">
-                    <div className="specialty-section-title">
-                        <div className="title-text"><FormattedMessage id="specialty-section.specialty-section-title" /></div>
+            <div className="medical-facilities-section">
+                <div className="medical-facilities-section-contents">
+                    <div className="medical-facilities-section-section-title">
+                        <div className="title-text">
+                            <FormattedMessage id="medical-facilities-section.medical-facilities-section-title" />
+                        </div>
                         <div className="spacing"></div>
-                        <div className="more-detail-button"><a href="#" className="button"><FormattedMessage id="specialty-section.button-more-detail" /></a></div>
+                        <div className="more-detail-button"><a href="#" className="button">
+                            <FormattedMessage id="medical-facilities-section.button-more-detail" />
+                        </a></div>
                     </div>
 
                     <Slider {...settings}>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-1 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.hepatitis" />
+                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-1" />
                                 </div>
                             </div>
                         </div>
@@ -81,98 +77,99 @@ class SpecialtySection extends Component {
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-2 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.acupuncture" />
+                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-2" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-3 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.bone-and-joint-disease" />
+                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-3" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-4 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.immune-system" /></div>
+                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-4" />
+                                </div>
 
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-5 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.spine" />
+                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-5" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-6 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.dermatology" />
+                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-6" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-7 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.pediatrics" />
+                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-7" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-8 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.obstetrics-and-gynecology" />
+                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-8" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-9 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.fetal-ultrasound" />
+                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-9" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-10 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.mental-health" />
+                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-10" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-11 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.ent" />
+                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-11" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-12 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.gastric-disease" />
+                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-12" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-13 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.cardiology" />
+                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-13" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-14 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.neurology" />
+                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-14" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-15 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.traditional-medicine" />
+                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-15" />
                                 </div>
                             </div>
                         </div>
@@ -197,4 +194,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SpecialtySection);
+export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacilitiesSection);
