@@ -17,8 +17,18 @@ class RecentDiseaseSection extends Component {
 
     render() {
         return (
-            <div className="about-section">
-                This is recent disease
+            <div className="recent-disease-section">
+                <div className="recent-disease-section-title">
+                    Những dịch bệnh gần đây
+                </div>
+                <div className="recent-disease-section-contents">
+                    <div className="left-contents">
+
+                    </div>
+                    <div className="right-contents">
+
+                    </div>
+                </div>
             </div>
         );
     }

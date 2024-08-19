@@ -19,10 +19,10 @@ class HomeFooter extends Component {
         return (
 
             <div className="homepage-footer">
-                <footer class="footer">
-                    <div class="container">
-                        <div class="row">
-                            <div class="footer-col">
+                <footer className="footer">
+                    <div className="container">
+                        <div className="row">
+                            <div className="footer-col">
                                 <h4><b>Công ty một thành viên</b></h4>
                                 <ul>
                                     <li><a href="#">Thông tin</a></li>
@@ -31,7 +31,7 @@ class HomeFooter extends Component {
                                     <li><a href="#">Chi nhánh</a></li>
                                 </ul>
                             </div>
-                            <div class="footer-col">
+                            <div className="footer-col">
                                 <h4><b>Công nghệ sử dụng</b></h4>
                                 <ul>
                                     <li><a href="https://nodejs.org/fr" target="_blank">NodeJS</a></li>
@@ -41,7 +41,7 @@ class HomeFooter extends Component {
                                     <li><a href="#">payment options</a></li> */}
                                 </ul>
                             </div>
-                            <div class="footer-col">
+                            <div className="footer-col">
                                 <h4><b>Giới thiệu</b></h4>
                                 <div className="about-me-briefly-content">
                                     Mình là Phan Piscean, mình học IT-E6 ở Đại học Bách Khoa Hà Nội.
@@ -57,13 +57,13 @@ class HomeFooter extends Component {
                                     <li><a href="#">dress</a></li>
                                 </ul> */}
                             </div>
-                            <div class="footer-col">
+                            <div className="footer-col">
                                 <h4><b>Theo dõi</b></h4>
-                                <div class="social-links">
-                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <div className="social-links">
+                                    <a href="#"><i className="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i className="fab fa-twitter"></i></a>
+                                    <a href="#"><i className="fab fa-instagram"></i></a>
+                                    <a href="#"><i className="fab fa-linkedin-in"></i></a>
                                 </div>
                             </div>
                         </div>
