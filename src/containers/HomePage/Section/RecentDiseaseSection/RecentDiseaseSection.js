@@ -23,10 +23,20 @@ class RecentDiseaseSection extends Component {
                 </div>
                 <div className="recent-disease-section-contents">
                     <div className="left-contents">
-
+                        <iframe width="697"
+                            height="392"
+                            src="https://www.youtube.com/embed/Jz2Pyf_Mu5U"
+                            title="Triệu chứng bệnh bạch hầu - Căn bệnh đang bùng phát tại nhiều tỉnh thành | VTV24"
+                            // style={{ border: "none",  }}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allowFullScreen>
+                        </iframe>
                     </div>
                     <div className="right-contents">
+                        <div className="">
 
+                        </div>
                     </div>
                 </div>
             </div>
