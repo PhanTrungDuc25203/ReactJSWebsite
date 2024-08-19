@@ -82,6 +82,35 @@
         "hospital-14": "Bệnh  viện y học cổ truyền quốc gia",
         "hospital-15": "Phòng khám Hồng Phát"
     },
+    "elite-doctor-section": {
+        "elite-doctor-section-title": "Bác sĩ nổi bật",
+        "more-detail-button": "Xem thêm"
+    },
+    "remote-exam-section": {
+        "remote-exam-section-title": "Khám từ xa",
+        "button-more-detail": "Xem thêm",
+        "option-1": "Sức khỏe tinh thần",
+        "option-2": "Cơ-Xương-Khớp",
+        "option-3": "Da liễu",
+        "option-4": "Bác sĩ Nhi khoa",
+        "option-5": "Bác sĩ Nội khoa",
+        "option-6": "Bác sĩ Sản phụ khoa",
+        "option-7": "Tai-Mũi-họng",
+        "option-8": "Bác sĩ Thần kinh",
+        "option-9": "Dạ dày",
+        "option-10": "Tim mạch",
+        "option-11": "Tư vấn Mùa dịch",
+        "option-12": "Tư vấn Tâm lý"
+    },
+    "mental-health-section": {
+        "mental-health-section-title": "Sức khỏe tâm lý",
+        "button-more-detail": "Xem thêm",
+        "option-1": "Bài test sức khỏe",
+        "option-2": "Sức khỏe tâm thần",
+        "option-3": "Tư vấn Tâm lý",
+        "option-4": "Sức khỏe tâm thần từ xa",
+        "option-5": "Tư vấn tâm lý từ xa"
+    },
     "common": {
         "add": "Thêm",
         "edit": "Sửa",

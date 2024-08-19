@@ -82,6 +82,35 @@
         "hospital-14": "National hospital of traditional medicine",
         "hospital-15": "Hong Phat clinic"
     },
+    "elite-doctor-section": {
+        "elite-doctor-section-title": "Outstanding doctor",
+        "more-detail-button": "More"
+    },
+    "remote-exam-section": {
+        "remote-exam-section-title": "Remote exam",
+        "button-more-detail": "More",
+        "option-1": "Mental health",
+        "option-2": "Bone and Joint",
+        "option-3": "Dermatology",
+        "option-4": "Pediatrician",
+        "option-5": "Internal Medicine Doctor",
+        "option-6": "Obstetrician-Gynecologist",
+        "option-7": "Otolaryngology",
+        "option-8": "Neurologist",
+        "option-9": "Gastroenterology",
+        "option-10": "Cardiology",
+        "option-11": "Pandemic Consultation",
+        "option-12": "Psychological Counseling"
+    },
+    "mental-health-section": {
+        "mental-health-section-title": "Mental health",
+        "button-more-detail": "More",
+        "option-1": "Mental health Test",
+        "option-2": "Mental health",
+        "option-3": "Psychological counseling",
+        "option-4": "Remote mental health",
+        "option-5": "Remote psychological counseling"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",

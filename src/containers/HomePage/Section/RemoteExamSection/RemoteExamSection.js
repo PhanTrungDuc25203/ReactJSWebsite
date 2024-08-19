@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './MedicalFacilitiesSection.scss';
+import './RemoteExamSection.scss';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -8,7 +8,7 @@ import { FormattedMessage } from 'react-intl';
 import { LANGUAGES } from "../../../../utils";
 import { switchLanguageOfWebsite } from "../../../../store/actions";
 
-class MedicalFacilitiesSection extends Component {
+class RemoteExamSection extends Component {
 
     SampleNextArrow(props) {
         const { className, style, onClick } = props;
@@ -42,9 +42,9 @@ class MedicalFacilitiesSection extends Component {
             nextArrow: <this.SampleNextArrow />,  // Sử dụng SampleNextArrow
             prevArrow: <this.SamplePrevArrow />,  // Sử dụng SamplePrevArrow
             autoplay: true,
-            className: 'medical-facilities-section-slider',
-            // dotsClass: 'medical-facilities-section-dots-of-slider',
-            autoplaySpeed: 7000,
+            className: 'remote-exam-section-slider',
+            // dotsClass: 'remote-exam-section-dots-of-slider',
+            autoplaySpeed: 10000,
             speed: 1000,
             pauseOnHover: true,
             // fade: true,
@@ -53,15 +53,15 @@ class MedicalFacilitiesSection extends Component {
         };
 
         return (
-            <div className="medical-facilities-section">
-                <div className="medical-facilities-section-contents">
-                    <div className="medical-facilities-section-section-title">
+            <div className="remote-exam-section">
+                <div className="remote-exam-section-contents">
+                    <div className="remote-exam-section-section-title">
                         <div className="title-text">
-                            <FormattedMessage id="medical-facilities-section.medical-facilities-section-title" />
+                            <FormattedMessage id="remote-exam-section.remote-exam-section-title" />
                         </div>
                         <div className="spacing"></div>
                         <div className="more-detail-button"><a href="#" className="button">
-                            <FormattedMessage id="medical-facilities-section.button-more-detail" />
+                            <FormattedMessage id="remote-exam-section.button-more-detail" />
                         </a></div>
                     </div>
 
@@ -69,7 +69,7 @@ class MedicalFacilitiesSection extends Component {
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-1 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-1" />
+                                <div className="item-content"><FormattedMessage id="remote-exam-section.option-1" />
                                 </div>
                             </div>
                         </div>
@@ -77,21 +77,21 @@ class MedicalFacilitiesSection extends Component {
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-2 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-2" />
+                                <div className="item-content"><FormattedMessage id="remote-exam-section.option-2" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-3 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-3" />
+                                <div className="item-content"><FormattedMessage id="remote-exam-section.option-3" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-4 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-4" />
+                                <div className="item-content"><FormattedMessage id="remote-exam-section.option-4" />
                                 </div>
 
                             </div>
@@ -99,80 +99,60 @@ class MedicalFacilitiesSection extends Component {
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-5 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-5" />
+                                <div className="item-content"><FormattedMessage id="remote-exam-section.option-5" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-6 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-6" />
+                                <div className="item-content"><FormattedMessage id="remote-exam-section.option-6" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-7 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-7" />
+                                <div className="item-content"><FormattedMessage id="remote-exam-section.option-7" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-8 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-8" />
+                                <div className="item-content"><FormattedMessage id="remote-exam-section.option-8" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-9 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-9" />
+                                <div className="item-content"><FormattedMessage id="remote-exam-section.option-9" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-10 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-10" />
+                                <div className="item-content"><FormattedMessage id="remote-exam-section.option-10" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-11 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-11" />
+                                <div className="item-content"><FormattedMessage id="remote-exam-section.option-11" />
                                 </div>
                             </div>
                         </div>
                         <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-12 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-12" />
+                                <div className="item-content"><FormattedMessage id="remote-exam-section.option-12" />
                                 </div>
                             </div>
                         </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-13 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-13" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-14 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-14" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-15 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-15" />
-                                </div>
-                            </div>
-                        </div>
+
                     </Slider>
                 </div>
             </div >
@@ -194,4 +174,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacilitiesSection);
+export default connect(mapStateToProps, mapDispatchToProps)(RemoteExamSection);

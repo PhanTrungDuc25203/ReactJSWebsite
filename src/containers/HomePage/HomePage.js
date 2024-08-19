@@ -7,8 +7,10 @@ import SpecialtySection from './Section/SpecialtySection/SpecialtySection';
 import ComprehensiveServiceSection from './Section/ComprehensiveServiceSection/ComprehensiveServiceSection';
 import MedicalFacilitiesSection from './Section/MedicalFacilitiesSection/MedicalFacilitiesSection';
 import EliteDoctorSection from './Section/EliteDoctorSection/EliteDoctorSection';
-import AboutSection from './Section/AboutSection/AboutSection';
+import RecentDiseaseSection from './Section/RecentDiseaseSection/RecentDiseaseSection';
 import HomeFooter from '../HomePage/HomeFooter/HomeFooter';
+import RemoteExamSection from './Section/RemoteExamSection/RemoteExamSection';
+import MentalHealthSection from './Section/MentalHealthSection/MentalHealthSection';
 
 class HomePage extends Component {
 
@@ -21,7 +23,9 @@ class HomePage extends Component {
                 <SpecialtySection />
                 <MedicalFacilitiesSection />
                 <EliteDoctorSection />
-                <AboutSection />
+                <RemoteExamSection />
+                <MentalHealthSection />
+                <RecentDiseaseSection />
                 <HomeFooter />
             </React.Fragment>
 

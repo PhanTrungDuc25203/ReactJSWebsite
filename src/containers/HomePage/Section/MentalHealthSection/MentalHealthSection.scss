@@ -1,12 +1,13 @@
-.specialty-section {
+.mental-health-section {
     width: 100%;
     height: 475px;
+    background-image: url('../../../../assets/images/140308-background2.png');
     // border: 1px solid red;
     display: flex;
     justify-content: center;
     position: relative;
 
-    .specialty-contents {
+    .mental-health-contents {
         position: relative;
         width: 89%;
 
@@ -42,6 +43,10 @@
                     height: 50px;
                 }
 
+                .special-image {
+                    background-size: 100% 125% !important;
+                }
+
                 .image-css {
                     background-size: contain;
                     height: 180px;
@@ -54,74 +59,34 @@
                 }
 
                 .image-of-item-1 {
-                    background-image: url('../../../../assets/specialty-image/101739-viem-gan.png');
+                    background-image: url('../../../../assets/mental-health-section/141458-congdongtinhthan.jpeg');
                 }
 
                 .image-of-item-2 {
-                    background-image: url('../../../../assets/specialty-image/101627-cham-cuu.png');
+                    background-image: url('../../../../assets/mental-health-section/101713-suc-khoe-tam-than.png');
                 }
 
                 .image-of-item-3 {
-                    background-image: url('../../../../assets/specialty-image/101627-co-xuong-khop.png');
+                    background-image: url('../../../../assets/mental-health-section/101739-tu-van-tam-ly.png');
                 }
 
                 .image-of-item-4 {
-                    background-image: url('../../../../assets/specialty-image/101638-di-ung-mien-dich.png');
+                    background-image: url('../../../../assets/mental-health-section/103343-tam-than-tu-xa-1.png');
                 }
 
                 .image-of-item-5 {
-                    background-image: url('../../../../assets/specialty-image/101627-cot-song.png');
-                }
-
-                .image-of-item-6 {
-                    background-image: url('../../../../assets/specialty-image/101638-da-lieu.png');
-                }
-
-                .image-of-item-7 {
-                    background-image: url('../../../../assets/specialty-image/101655-nhi-khoa.png');
-                }
-
-                .image-of-item-8 {
-                    background-image: url('../../../../assets/specialty-image/101713-san-phu-khoa.png');
-                }
-
-                .image-of-item-9 {
-                    background-image: url('../../../../assets/specialty-image/101713-sieu-am-thai.png');
-                }
-
-                .image-of-item-10 {
-                    background-image: url('../../../../assets/specialty-image/101713-suc-khoe-tam-than.png');
-                }
-
-                .image-of-item-11 {
-                    background-image: url('../../../../assets/specialty-image/101713-tai-mui-hong.png');
-                }
-
-                .image-of-item-12 {
-                    background-image: url('../../../../assets/specialty-image/101713-tieu-hoa.png');
-                }
-
-                .image-of-item-13 {
-                    background-image: url('../../../../assets/specialty-image/101713-tim-mach.png');
-                }
-
-                .image-of-item-14 {
-                    background-image: url('../../../../assets/specialty-image/101739-than-kinh.png');
-                }
-
-                .image-of-item-15 {
-                    background-image: url('../../../../assets/specialty-image/101739-y-hoc-co-truyen.png');
+                    background-image: url('../../../../assets/mental-health-section/160245-tam-ly-tu-xa.png');
                 }
             }
         }
 
-        .specialty-section-title {
+        .mental-health-section-title {
             position: relative;
             height: 60px;
             width: 100%;
             display: flex;
-            margin-top: 50px;
-            margin-bottom: 50px;
+            margin-top: 40px;
+            margin-bottom: 30px;
             margin-left: 10px;
 
             .title-text {
@@ -255,7 +220,7 @@
     }
 }
 
-.specialty-section-slider {
+.mental-health-section-slider {
 
     .slick-dots {
         margin-left: 7px;

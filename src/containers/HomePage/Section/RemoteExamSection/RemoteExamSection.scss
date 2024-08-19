@@ -1,4 +1,4 @@
-.specialty-section {
+.remote-exam-section {
     width: 100%;
     height: 475px;
     // border: 1px solid red;
@@ -6,7 +6,7 @@
     justify-content: center;
     position: relative;
 
-    .specialty-contents {
+    .remote-exam-section-contents {
         position: relative;
         width: 89%;
 
@@ -54,73 +54,73 @@
                 }
 
                 .image-of-item-1 {
-                    background-image: url('../../../../assets/specialty-image/101739-viem-gan.png');
+                    background-image: url('../../../../assets/remote-exam-image/103343-tam-than-tu-xa-1.png');
                 }
 
                 .image-of-item-2 {
-                    background-image: url('../../../../assets/specialty-image/101627-cham-cuu.png');
+                    background-image: url('../../../../assets/remote-exam-image/160245-cxk-tu--xa.png');
                 }
 
                 .image-of-item-3 {
-                    background-image: url('../../../../assets/specialty-image/101627-co-xuong-khop.png');
+                    background-image: url('../../../../assets/remote-exam-image/160245-da-lieu-tu--xa.png');
                 }
 
                 .image-of-item-4 {
-                    background-image: url('../../../../assets/specialty-image/101638-di-ung-mien-dich.png');
+                    background-image: url('../../../../assets/remote-exam-image/160245-nhi-khoa-tu-xa.png');
                 }
 
                 .image-of-item-5 {
-                    background-image: url('../../../../assets/specialty-image/101627-cot-song.png');
+                    background-image: url('../../../../assets/remote-exam-image/160245-noi-khoa-tu-xa.png');
                 }
 
                 .image-of-item-6 {
-                    background-image: url('../../../../assets/specialty-image/101638-da-lieu.png');
+                    background-image: url('../../../../assets/remote-exam-image/160245-san-phu-khoa-tu-xa.png');
                 }
 
                 .image-of-item-7 {
-                    background-image: url('../../../../assets/specialty-image/101655-nhi-khoa.png');
+                    background-image: url('../../../../assets/remote-exam-image/160245-tai-mui-hong-tu--xa.png');
                 }
 
                 .image-of-item-8 {
-                    background-image: url('../../../../assets/specialty-image/101713-san-phu-khoa.png');
+                    background-image: url('../../../../assets/remote-exam-image/160245-tam-ly-tu-xa.png');
                 }
 
                 .image-of-item-9 {
-                    background-image: url('../../../../assets/specialty-image/101713-sieu-am-thai.png');
+                    background-image: url('../../../../assets/remote-exam-image/160245-tieu-hoa-tu--xa.png');
                 }
 
                 .image-of-item-10 {
-                    background-image: url('../../../../assets/specialty-image/101713-suc-khoe-tam-than.png');
+                    background-image: url('../../../../assets/remote-exam-image/160245-tim-mach-tu--xa.png');
                 }
 
                 .image-of-item-11 {
-                    background-image: url('../../../../assets/specialty-image/101713-tai-mui-hong.png');
+                    background-image: url('../../../../assets/remote-exam-image/160245-tu-van-f0-tu-xa.png');
                 }
 
                 .image-of-item-12 {
-                    background-image: url('../../../../assets/specialty-image/101713-tieu-hoa.png');
+                    background-image: url('../../../../assets/remote-exam-image/160245-than-kinh-tu-xa.png');
                 }
 
-                .image-of-item-13 {
-                    background-image: url('../../../../assets/specialty-image/101713-tim-mach.png');
-                }
+                // .image-of-item-13 {
+                //     background-image: url('../../../../assets/remote-exam-image/');
+                // }
 
-                .image-of-item-14 {
-                    background-image: url('../../../../assets/specialty-image/101739-than-kinh.png');
-                }
+                // .image-of-item-14 {
+                //     background-image: url('../../../../assets/remote-exam-image');
+                // }
 
-                .image-of-item-15 {
-                    background-image: url('../../../../assets/specialty-image/101739-y-hoc-co-truyen.png');
-                }
+                // .image-of-item-15 {
+                //     background-image: url('../../../../assets/remote-exam-image');
+                // }
             }
         }
 
-        .specialty-section-title {
+        .remote-exam-section-section-title {
             position: relative;
             height: 60px;
             width: 100%;
             display: flex;
-            margin-top: 50px;
+            margin-top: 40px;
             margin-bottom: 50px;
             margin-left: 10px;
 
@@ -253,9 +253,11 @@
             z-index: 2 !important;
         }
     }
+
+
 }
 
-.specialty-section-slider {
+.remote-exam-section-slider {
 
     .slick-dots {
         margin-left: 7px;
