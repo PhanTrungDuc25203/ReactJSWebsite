@@ -6,7 +6,7 @@ import { } from '@fortawesome/free-brands-svg-icons';
 import { } from '@fortawesome/fontawesome-free-webfonts';
 import { } from '@fortawesome/fontawesome-svg-core';
 import { } from '@fortawesome/free-regular-svg-icons';
-import { faTooth, faHeartPulse, faSuitcaseMedical, faStethoscope } from '@fortawesome/free-solid-svg-icons';
+import { faTooth, faHeartPulse, faSuitcaseMedical, faStethoscope, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { } from '@fortawesome/free-solid-svg-icons';
 import { } from '@fortawesome/react-fontawesome';
 import { FormattedMessage } from 'react-intl';
@@ -16,6 +16,7 @@ import { switchLanguageOfWebsite } from "../../../../store/actions";
 class RecentDiseaseSection extends Component {
 
     render() {
+
         return (
             <div className="recent-disease-section">
                 <div className="recent-disease-section-title">
@@ -34,8 +35,30 @@ class RecentDiseaseSection extends Component {
                         </iframe>
                     </div>
                     <div className="right-contents">
-                        <div className="">
-
+                        <div className="information-source">
+                            <div className="ensurance-text"><FontAwesomeIcon icon={faCheck} className="fontawesome-icon" />
+                                Thông tin, số liệu đã được Cục thống kê và Bộ y tế xác nhận
+                            </div>
+                            <div className="ensurance-text"><FontAwesomeIcon icon={faCheck} className="fontawesome-icon" />
+                                Được trích dẫn từ những nguồn thông tin uy tín
+                            </div>
+                            <div className="ensurance-text"><FontAwesomeIcon icon={faCheck} className="fontawesome-icon" />
+                                Cung cấp cho người dân để người dân có thể sớm nắm bắt tình hình và có cách thức phòng tránh
+                            </div>
+                            <div className="source-image">
+                                <a href="https://moh.gov.vn/" target="_blank" rel="noopener noreferrer" className="source-1 image-css">
+                                    {/* <div className="source-1 image-css"></div> */}
+                                </a>
+                                <a href="https://vtv.vn/tim-kiem.htm?type=3&keywords=b%E1%BB%87nh" target="_blank" rel="noopener noreferrer" className="source-2 image-css">
+                                    {/* <div className="source-2 image-css"></div> */}
+                                </a>
+                                <a href="https://timkiem.vnexpress.net/?search_q=b%E1%BA%A1ch%20h%E1%BA%A7u%27&cate_code=&media_type=all&latest=&fromdate=&todate=&date_format=all&" target="_blank" rel="noopener noreferrer" className="source-3 image-css special-image-css">
+                                    {/* <div className="source-3 image-css special-image-css"></div> */}
+                                </a>
+                                <a href="https://dantri.com.vn/tim-kiem/b%E1%BA%A1ch+h%E1%BA%A7u.htm" target="_blank" rel="noopener noreferrer" className="source-4 image-css">
+                                    {/* <div className="source-4 image-css"></div> */}
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -29,6 +29,10 @@ body {
     height: 70px;
     // border: 1px solid red;
     width: 100%;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 4999;
 
     .home-header-contents {
         width: 100%;
@@ -97,12 +101,12 @@ body {
                         padding-bottom: 2px;
                         color: #49BCE2;
                         transition: background-color 0.3s, color 0.3s, border 0.3s;
-                        border-bottom: 3px solid #dff3ff;
+                        border-bottom: 2.5px solid #dff3ff;
                         border-left: none;
                     }
 
                     a:hover {
-                        border-bottom: 3px solid #49BCE2;
+                        border-bottom: 2.5px solid #49BCE2;
                     }
                 }
 
@@ -736,7 +740,8 @@ body {
     }
 
     .side-bar-toggle {
-        z-index: 8;
+        z-index: 5001;
+        cursor: pointer;
     }
 
     // .side-bar-toggle:hover {
@@ -745,10 +750,10 @@ body {
 
     .sidebar {
         position: fixed;
-        z-index: 7;
+        z-index: 5000;
         width: 240px;
         top: 0;
-        left: -240px;
+        left: -241px;
         height: 100%;
         background: #ffffff;
         transition: all .3s ease;

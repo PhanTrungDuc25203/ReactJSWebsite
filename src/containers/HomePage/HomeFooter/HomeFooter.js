@@ -46,7 +46,7 @@ class HomeFooter extends Component {
                                 <div className="about-me-briefly-content">
                                     Mình là Phan Piscean, mình học IT-E6 ở Đại học Bách Khoa Hà Nội.
                                     Đây là dự án mình tạo ra với mục đích là học tập.
-                                    Với giao diện sạch sẽ, chia layout dễ hiểu, thao tác đơn giản và tiếp cận nhiều người dùng ( trừ người khiếm thị ), mình mong nhận dược sự ủng hộ của chính bản thân để có thể làm dự án pet của mình tiến xa hơn.
+                                    Với giao diện sạch sẽ, chia layout dễ hiểu, thao tác đơn giản và tiếp cận nhiều người dùng , mình mong nhận dược sự ủng hộ của chính bản thân để có thể làm dự án pet của mình tiến xa hơn.
                                     Và hiện tại mình đang cố gắng áp dụng nhiều công nghệ nhất có thể ví dụ như Trí tuệ nhân tạo.
                                     Với sự giúp sức của Trí tuệ nhân tạo thì người dùng có thể sử dụng tốt ứng dụng này hơn.
                                 </div>

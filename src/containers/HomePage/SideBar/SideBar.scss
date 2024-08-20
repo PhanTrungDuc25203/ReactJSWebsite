@@ -9,7 +9,7 @@
 
 .side-bar-toggle {
     position: fixed;
-    z-index: 7;
+    z-index: 12;
     width: 240px;
     top: 0;
     left: 0;
@@ -17,7 +17,7 @@
 
 .sidebar {
     position: fixed;
-    z-index: 7;
+    z-index: 13;
     width: 240px;
     top: 0;
     left: -240px;
@@ -86,6 +86,7 @@ label #cancel {
     text-align: center;
     line-height: 45px;
     transition: all .5s ease;
+    // z-index: 2000;
 }
 
 label #cancel {
