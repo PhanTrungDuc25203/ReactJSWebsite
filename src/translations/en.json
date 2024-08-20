@@ -111,6 +111,47 @@
         "option-4": "Remote mental health",
         "option-5": "Remote counseling"
     },
+    "recent-disease-section": {
+        "recent-disease-section-title": "Recent diseases",
+        "button-more-detail": "More",
+        "guaranty-text-1": "Verified by the Statistics Office and the Ministry of Health.",
+        "guaranty-text-2": "Cited from reliable sources.",
+        "guaranty-text-3": "Provided to the public so that they can quickly grasp the situation and take preventive measures."
+    },
+    "stay-a-healthy-life-section": {
+        "stay-a-healthy-life-section-title": "Stay a healthy life",
+        "button-more-detail": "More",
+        "article-1": "Obesity Level 1: Causes, Symptoms, and Treatment.",
+        "article-2": "Safe and Effective Tooth Inflammation Treatment.",
+        "article-3": "Top 5 Common Diseases During the Rainy Season.",
+        "article-4": "Explained: Is Spinal Cord Compression Dangerous?",
+        "article-5": "Spinal Cord Compression: Causes, Symptoms, Diagnosis, and Treatment.",
+        "article-6": "Solution: Does Implant Placement Hurt?",
+        "article-7": "Comprehensive Information on Dental Implants.",
+        "article-8": "Guide to Oral Care After Implant Placement.",
+        "article-9": "Tooth Inflammation and What You Need to Know.",
+        "article-10": "Anaplastic Thyroid Cancer: Symptoms, Causes, and Treatment.",
+        "article-11": "Signs of Infection After Wisdom Tooth Extraction.",
+        "article-12": "Medullary Thyroid Cancer: Causes and Treatment.",
+        "article-13": "Blurred Vision Like a Veil: A Warning Sign of Dangerous Eye Diseases.",
+        "article-14": "Tips to Recognize Symptoms of Tooth Inflammation.",
+        "article-15": "Tooth Inflammation Is More Dangerous Than You Think."
+    },
+    "footer": {
+        "company": "One-Member Company",
+        "infor": "Information",
+        "service": "Services",
+        "security-term": "Privacy Policy",
+        "branch": "Branch",
+        "used-technology": "Technologies Used",
+        "tech-1": "NodeJS",
+        "tech-2": "Express",
+        "tech-3": "React",
+        "library": "And other supporting libraries",
+        "title": "Hello!",
+        "present": "I am Phan Piscean, a student of IT-E6 at Hanoi University of Science and Technology. This project was created for learning purposes. With a clean interface, understandable layout, simple interactions, and accessibility to many users, I hope to gain support from myself to push this pet project further. Currently, I am trying to apply as many technologies as possible, such as Artificial Intelligence. With the help of AI, users can better utilize this application.",
+        "follow": "Follow me"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",

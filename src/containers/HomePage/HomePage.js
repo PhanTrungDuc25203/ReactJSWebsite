@@ -11,6 +11,7 @@ import RecentDiseaseSection from './Section/RecentDiseaseSection/RecentDiseaseSe
 import HomeFooter from '../HomePage/HomeFooter/HomeFooter';
 import RemoteExamSection from './Section/RemoteExamSection/RemoteExamSection';
 import MentalHealthSection from './Section/MentalHealthSection/MentalHealthSection';
+import StayAHealthyLifeSection from './Section/StayAHealthyLifeSection/StayAHealthyLifeSection';
 
 class HomePage extends Component {
 
@@ -26,6 +27,7 @@ class HomePage extends Component {
                 <RemoteExamSection />
                 <MentalHealthSection />
                 <RecentDiseaseSection />
+                <StayAHealthyLifeSection />
                 <HomeFooter />
             </React.Fragment>
 

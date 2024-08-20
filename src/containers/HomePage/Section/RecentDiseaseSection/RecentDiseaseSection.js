@@ -20,7 +20,7 @@ class RecentDiseaseSection extends Component {
         return (
             <div className="recent-disease-section">
                 <div className="recent-disease-section-title">
-                    Những dịch bệnh gần đây
+                    <FormattedMessage id="recent-disease-section.recent-disease-section-title" />
                 </div>
                 <div className="recent-disease-section-contents">
                     <div className="left-contents">
@@ -37,13 +37,13 @@ class RecentDiseaseSection extends Component {
                     <div className="right-contents">
                         <div className="information-source">
                             <div className="ensurance-text"><FontAwesomeIcon icon={faCheck} className="fontawesome-icon" />
-                                Thông tin, số liệu đã được Cục thống kê và Bộ y tế xác nhận
+                                <FormattedMessage id="recent-disease-section.guaranty-text-1" />
                             </div>
                             <div className="ensurance-text"><FontAwesomeIcon icon={faCheck} className="fontawesome-icon" />
-                                Được trích dẫn từ những nguồn thông tin uy tín
+                                <FormattedMessage id="recent-disease-section.guaranty-text-2" />
                             </div>
                             <div className="ensurance-text"><FontAwesomeIcon icon={faCheck} className="fontawesome-icon" />
-                                Cung cấp cho người dân để người dân có thể sớm nắm bắt tình hình và có cách thức phòng tránh
+                                <FormattedMessage id="recent-disease-section.guaranty-text-3" />
                             </div>
                             <div className="source-image">
                                 <a href="https://moh.gov.vn/" target="_blank" rel="noopener noreferrer" className="source-1 image-css">

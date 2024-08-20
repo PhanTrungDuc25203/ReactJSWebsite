@@ -111,6 +111,47 @@
         "option-4": "Sức khỏe tâm thần từ xa",
         "option-5": "Tư vấn tâm lý từ xa"
     },
+    "recent-disease-section": {
+        "recent-disease-section-title": "Những dịch bệnh gần đây",
+        "button-more-detail": "Xem thêm",
+        "guaranty-text-1": "Thông tin, số liệu đã được Cục thống kê và Bộ y tế xác nhận.",
+        "guaranty-text-2": "Được trích dẫn từ những nguồn thông tin uy tín.",
+        "guaranty-text-3": "Cung cấp cho người dân để người dân có thể sớm nắm bắt tình hình và có cách thức phòng tránh."
+    },
+    "stay-a-healthy-life-section": {
+        "stay-a-healthy-life-section-title": "Sống khỏe mỗi ngày",
+        "button-more-detail": "Xem thêm",
+        "article-1": "Béo phì cấp độ 1: nguyên nhân, triệu chứng và cách điều trị.",
+        "article-2": "Điều trị viêm răng an toàn và hiệu quả.",
+        "article-3": "Top 5 bệnh thường gặp trong mùa mưa.",
+        "article-4": "Giải đáp: chèn ép tủy sống có nguy hiểm không?",
+        "article-5": "Chèn ép tủy sống: nguyên nhân, triệu chứng, phương pháp chuẩn đoán và điều trị",
+        "article-6": "Giải pháp: trồng răng Implant có đau không?",
+        "article-7": "Tổng hợp các thông tin về trồng răng Implant.",
+        "article-8": "Hướng dẫn cách chăm sóc răng miệng khi cắm Implant.",
+        "article-9": "Viêm răng và những điều bạn cần biết.",
+        "article-10": "Ung thư tuyến giáp thể không biệt hóa: triệu chứng, nguyên nhân và cách điều trị.",
+        "article-11": "Dấu hiệu nhiễm trùng sau khi nhổ răng khôn.",
+        "article-12": "Ung thư tuyến giáp thể tủy: nguyên nhân và cách điều trị.",
+        "article-13": "Mắt mờ như có màng che: dấu hiệu cảnh báo bệnh lý nguy hiểm về mắt.",
+        "article-14": "Mách bạn nhận biết các triệu chứng viêm răng.",
+        "article-15": "Viêm răng nguy hiểm hơn bạn nghĩ."
+    },
+    "footer": {
+        "company": "Công ty một thành viên",
+        "infor": "Thông tin",
+        "service": "Dịch vụ",
+        "security-term": "Chính sách bảo mật",
+        "branch": "Chi nhánh",
+        "used-technology": "Công nghệ sử dụng",
+        "tech-1": "NodeJS",
+        "tech-2": "Express",
+        "tech-3": "React",
+        "library": "Và các thư viện hỗ trợ khác",
+        "title": "Xin chào!",
+        "present": "Mình là Phan Piscean, mình học IT-E6 ở Đại học Bách Khoa Hà Nội. Đây là dự án mình tạo ra với mục đích là học tập. Với giao diện sạch sẽ, chia layout dễ hiểu, thao tác đơn giản và tiếp cận nhiều người dùng , mình mong nhận dược sự ủng hộ của chính bản thân để có thể làm dự án pet của mình tiến xa hơn. Và hiện tại mình đang cố gắng áp dụng nhiều công nghệ nhất có thể ví dụ như Trí tuệ nhân tạo. Với sự giúp sức của Trí tuệ nhân tạo thì người dùng có thể sử dụng tốt ứng dụng này hơn.",
+        "follow": "Theo dõi"
+    },
     "common": {
         "add": "Thêm",
         "edit": "Sửa",

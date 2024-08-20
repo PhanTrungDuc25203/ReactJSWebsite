@@ -23,32 +23,28 @@ class HomeFooter extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="footer-col">
-                                <h4><b>Công ty một thành viên</b></h4>
+                                <h4><b><FormattedMessage id="footer.company" /></b></h4>
                                 <ul>
-                                    <li><a href="#">Thông tin</a></li>
-                                    <li><a href="#">Dịch vụ</a></li>
-                                    <li><a href="#">Chính sách bảo mật</a></li>
-                                    <li><a href="#">Chi nhánh</a></li>
+                                    <li><a href="#"><FormattedMessage id="footer.infor" /></a></li>
+                                    <li><a href="#"><FormattedMessage id="footer.service" /></a></li>
+                                    <li><a href="#"><FormattedMessage id="footer.security-term" /></a></li>
+                                    <li><a href="#"><FormattedMessage id="footer.branch" /></a></li>
                                 </ul>
                             </div>
                             <div className="footer-col">
-                                <h4><b>Công nghệ sử dụng</b></h4>
+                                <h4><b><FormattedMessage id="footer.used-technology" /></b></h4>
                                 <ul>
-                                    <li><a href="https://nodejs.org/fr" target="_blank">NodeJS</a></li>
-                                    <li><a href="https://expressjs.com/" target="_blank">Express</a></li>
-                                    <li><a href="https://react.dev/" target="_blank">React</a></li>
+                                    <li><a href="https://nodejs.org/fr" target="_blank"><FormattedMessage id="footer.tech-1" /></a></li>
+                                    <li><a href="https://expressjs.com/" target="_blank"><FormattedMessage id="footer.tech-2" /></a></li>
+                                    <li><a href="https://react.dev/" target="_blank"><FormattedMessage id="footer.tech-3" /></a></li>
                                     {/* <li><a href="#">order status</a></li>
                                     <li><a href="#">payment options</a></li> */}
                                 </ul>
                             </div>
                             <div className="footer-col">
-                                <h4><b>Giới thiệu</b></h4>
+                                <h4><b><FormattedMessage id="footer.title" /></b></h4>
                                 <div className="about-me-briefly-content">
-                                    Mình là Phan Piscean, mình học IT-E6 ở Đại học Bách Khoa Hà Nội.
-                                    Đây là dự án mình tạo ra với mục đích là học tập.
-                                    Với giao diện sạch sẽ, chia layout dễ hiểu, thao tác đơn giản và tiếp cận nhiều người dùng , mình mong nhận dược sự ủng hộ của chính bản thân để có thể làm dự án pet của mình tiến xa hơn.
-                                    Và hiện tại mình đang cố gắng áp dụng nhiều công nghệ nhất có thể ví dụ như Trí tuệ nhân tạo.
-                                    Với sự giúp sức của Trí tuệ nhân tạo thì người dùng có thể sử dụng tốt ứng dụng này hơn.
+                                    <FormattedMessage id="footer.present" />
                                 </div>
                                 {/* <ul>
                                     <li><a href="#">watch</a></li>
@@ -58,7 +54,7 @@ class HomeFooter extends Component {
                                 </ul> */}
                             </div>
                             <div className="footer-col">
-                                <h4><b>Theo dõi</b></h4>
+                                <h4><b><FormattedMessage id="footer.follow" /></b></h4>
                                 <div className="social-links">
                                     <a href="#"><i className="fab fa-facebook-f"></i></a>
                                     <a href="#"><i className="fab fa-twitter"></i></a>
