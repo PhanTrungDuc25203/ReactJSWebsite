@@ -150,7 +150,8 @@
         "library": "And other supporting libraries",
         "title": "Hello!",
         "present": "I am Phan Piscean, a student of IT-E6 at Hanoi University of Science and Technology. This project was created for learning purposes. With a clean interface, understandable layout, simple interactions, and accessibility to many users, I hope to gain support from myself to push this pet project further. Currently, I am trying to apply as many technologies as possible, such as Artificial Intelligence. With the help of AI, users can better utilize this application.",
-        "follow": "Follow me"
+        "follow": "Follow me",
+        "check-out-me": "Check out my github for more information"
     },
     "common": {
         "add": "Add",

@@ -69,7 +69,7 @@ class HomeFooter extends Component {
 
                         </p>
                         <a href="https://github.com/PhanTrungDuc25203" target="_blank">
-                            &#8594; Ghé thăm Github để biết thêm thông tin
+                            &#8594; <FormattedMessage id="footer.check-out-me" />
                         </a>
                     </div>
                 </footer >
