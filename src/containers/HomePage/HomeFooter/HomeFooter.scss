@@ -1,5 +1,6 @@
 .homepage-footer {
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 
     a {
         text-decoration: none;
@@ -55,6 +56,10 @@
         // display: block;
         transition: all 0.3s ease;
         border: none;
+        font-family: 'Pacifico', cursive !important;
+        // font-weight: 100;
+        // text-transform: lowercase;
+        font-size: 17px;
     }
 
     .footer-col h4 {
@@ -64,6 +69,7 @@
         margin-bottom: 35px;
         font-weight: 500;
         position: relative;
+
     }
 
     .footer-col h4::before {
