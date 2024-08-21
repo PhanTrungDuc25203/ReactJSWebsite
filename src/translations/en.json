@@ -182,7 +182,33 @@
             "admin-manage": "Admin manage",
             "clinic-manage": "Clinic manage",
             "specialty-manage": "Specialty manage",
-            "article-handbook-manage": "Article/handbook manage"
+            "article-handbook-manage": "Article/handbook manage",
+            "user-manage-by-redux-form": {
+                "title": "User manage by Redux",
+                "email": "Email",
+                "password": "Password",
+                "firstName": "First name",
+                "lastName": "Last name",
+                "address": "Address",
+                "phoneNumber": "Phone number",
+                "gender": "Gender",
+                "gender-value": {
+                    "male": "Male",
+                    "female": "Female",
+                    "femboy": "Femboy",
+                    "tomboy": "Tomboy",
+                    "bisexual": "Futanari"
+                },
+                "role": "Role",
+                "role-value": {
+                    "patient": "Patient",
+                    "admin": "Admin",
+                    "doctor": "Doctor"
+                },
+                "position": "Position",
+                "position-value": {},
+                "avatar-image": "Avatar"
+            }
         }
     }
 }

@@ -5,10 +5,12 @@
   .custom-form-control {
     background-color: $common-white;
     border: 1px solid $border;
+
     &.readonly {
       cursor: not-allowed;
       background-color: darken($common-white, 5);
     }
+
     &:focus {
       outline: none;
       border: 1px solid darken($border, 50);

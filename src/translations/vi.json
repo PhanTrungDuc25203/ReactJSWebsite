@@ -182,7 +182,33 @@
             "admin-manage": "Quản lý quản trị viên",
             "clinic-manage": "Quản lý phòng khám",
             "specialty-manage": "Quản lý chuyên khoa",
-            "article-handbook-manage": "Quản lý bài đăng, cẩm nang"
+            "article-handbook-manage": "Quản lý bài đăng, cẩm nang",
+            "user-manage-by-redux-form": {
+                "title": "Quản lý người dùng bằng Redux",
+                "email": "Địa chỉ hòm thư điện tử (Email)",
+                "password": "Mật khẩu",
+                "firstName": "Tên",
+                "lastName": "Họ và tên đệm",
+                "address": "Địa chỉ",
+                "phoneNumber": "Số điện thoại",
+                "gender": "Giới tính",
+                "gender-value": {
+                    "male": "Nam",
+                    "female": "Nữ",
+                    "femboy": "trai cong",
+                    "tomboy": "nữ cong",
+                    "bisexual": "lưỡng tính"
+                },
+                "role": "vai trò",
+                "role-value": {
+                    "patient": "Bệnh nhân",
+                    "admin": "Quản trị viên",
+                    "doctor": "Bác sĩ"
+                },
+                "position": "Vị trí",
+                "position-value": {},
+                "avatar-image": "Ảnh đại diện"
+            }
         }
     }
 }
