@@ -1,9 +1,7 @@
 .homepage-footer {
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-    @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 
     a {
-        text-decoration: none;
         border: none;
     }
 
@@ -46,7 +44,7 @@
     }
 
     .about-me-briefly-content {
-        font-size: 16px;
+        font-size: 17px;
         width: 520px;
         // text-transform: capitalize;
         color: #49BCE2;
@@ -56,10 +54,14 @@
         // display: block;
         transition: all 0.3s ease;
         border: none;
-        font-family: 'Pacifico', cursive !important;
-        // font-weight: 100;
-        // text-transform: lowercase;
-        font-size: 17px;
+
+        .highlight-my-name {
+            @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+            font-family: 'Pacifico', cursive !important;
+            // font-weight: 100;
+            // text-transform: lowercase;
+            font-size: 25px;
+        }
     }
 
     .footer-col h4 {
@@ -91,7 +93,6 @@
         font-size: 16px;
         text-transform: capitalize;
         color: #49BCE2;
-        text-decoration: none;
         font-weight: 300;
         color: #49BCE2;
         display: block;

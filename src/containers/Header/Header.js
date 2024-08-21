@@ -5,6 +5,7 @@ import * as actions from "../../store/actions";
 import Navigator from '../../components/Navigator';
 import { adminMenu } from './menuApp';
 import './Header.scss';
+import { FormattedMessage } from 'react-intl';
 import { LANGUAGES } from "../../utils";
 import { switchLanguageOfWebsite } from "../../store/actions";
 
@@ -15,8 +16,8 @@ class Header extends Component {
     }
 
     render() {
-        const { processLogout, language } = this.props;
-
+        const { processLogout, language, userInfo } = this.props;
+        console.log(userInfo);
         return (
             <div className="header-container">
                 {/* thanh navigator */}
@@ -25,6 +26,9 @@ class Header extends Component {
                 </div>
 
                 <div className="switch-languages-and-logout">
+                    <span className="welcome"><FormattedMessage id="menu.content.welcome-text" />
+                        {userInfo && userInfo.firstName ? ', ' + userInfo.firstName : ''} !
+                    </span>
                     <span
                         className={language === LANGUAGES.VI ? "vietnamese active" : "vietnamese"}
                         onClick={() => this.handleSwitchLanguage(LANGUAGES.VI)} >
@@ -52,6 +56,7 @@ class Header extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
+        userInfo: state.user.userInfo,
         language: state.app.language,
     };
 };

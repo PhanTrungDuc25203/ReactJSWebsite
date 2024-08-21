@@ -44,7 +44,9 @@ class HomeFooter extends Component {
                             <div className="footer-col">
                                 <h4><b><FormattedMessage id="footer.title" /></b></h4>
                                 <div className="about-me-briefly-content">
-                                    <FormattedMessage id="footer.present" />
+                                    <FormattedMessage id="footer.present-1" />
+                                    <span className="highlight-my-name" ><FormattedMessage id="footer.my-nick-name" /></span>
+                                    <FormattedMessage id="footer.present-2" />
                                 </div>
                                 {/* <ul>
                                     <li><a href="#">watch</a></li>
