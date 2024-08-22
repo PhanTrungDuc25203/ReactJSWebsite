@@ -1,33 +1,41 @@
+// Redux-getGender-(8): tạo xong file thì sang rootReducer import nó vào
+
+// Redux-getGender-(12): viết code
 import actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    isLoggedIn: false,
-    adminInfo: null
+    // Redux-getGender-(13): thì ra không chỉ lưu mỗi gender:))
+    genders: [],
+    roles: [],
+    positions: [],
 }
 
-const appReducer = (state = initialState, action) => {
+const adminReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.ADMIN_LOGIN_SUCCESS:
+        case actionTypes.FETCH_GENDER_VALUE_START:
+            console.log('fire start: ', action)
             return {
                 ...state,
-                isLoggedIn: true,
-                adminInfo: action.adminInfo
             }
-        case actionTypes.ADMIN_LOGIN_FAIL:
+        case actionTypes.FETCH_GENDER_VALUE_SUCCESSFULLY:
+            // Redux-getGender-(25): 
+            let copyState = { ...state };
+            copyState.genders = action.data;
+            console.log('fire successfully: ', copyState)
+            // Redux-getGender-(25): khi đó biến copyState trả ra 3 thuộc tính gender, position và role, nhưng chỉ có gender là có giá trị
+            // Redux-getGender-(26): khi lấy được state rồi thì phải map nó vào hàm mapStateToProps để sử dụng trong file UserManageByRedux.js
             return {
-                ...state,
-                isLoggedIn: false,
-                adminInfo: null
+                ...copyState,
             }
-        case actionTypes.PROCESS_LOGOUT:
+        case actionTypes.FETCH_GENDER_VALUE_FAILED:
+            console.log('fire failed: ', action)
             return {
                 ...state,
-                isLoggedIn: false,
-                adminInfo: null
             }
         default:
             return state;
     }
 }
 
-export default appReducer;
+export default adminReducer;
+// Redux-getGender-(14): quay lại UserManageByRedux.js

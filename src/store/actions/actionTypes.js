@@ -8,6 +8,14 @@ const actionTypes = Object.freeze({
     USER_LOGIN_SUCCESS: 'USER_LOGIN_SUCCESS',
     USER_LOGIN_FAIL: 'USER_LOGIN_FAIL',
     PROCESS_LOGOUT: 'PROCESS_LOGOUT',
+
+
+    // Redux-getGender-(6): khai báo actiontypes
+    //admin redux
+    FETCH_GENDER_VALUE_START: 'FETCH_GENDER_VALUE_START',
+    FETCH_GENDER_VALUE_SUCCESSFULLY: 'FETCH_GENDER_VALUE_SUCCESSFULLY',
+    FETCH_GENDER_VALUE_FAILED: 'FETCH_GENDER_VALUE_FAILED',
+    // Redux-getGender-(7): khai báo xong thì tạo một reducer adminReducer
 })
 
 export default actionTypes;

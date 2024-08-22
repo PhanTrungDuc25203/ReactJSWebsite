@@ -5,12 +5,17 @@ import './UserManageByRedux.scss';
 import { LANGUAGES } from "../../../utils";
 import { switchLanguageOfWebsite } from "../../../store/actions";
 import { Form, Col, FormGroup, Label, Input, Row, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { getAllCodesService } from "../../../services/userService";
+// Redux-getGender-(17):import actions
+import * as actions from "../../../store/actions";
+// Redux-getGender-(18):import xong rồi thì xuống cuối sửa hàm mapDispatchToProps
+
 class UserManageByRedux extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-
+            genderArr: [],
         }
     }
 
@@ -18,11 +23,48 @@ class UserManageByRedux extends Component {
 
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        //đây là cách gọi api trực tiếp để lấy dữ liệu, nhưng từ bây giờ thì sẽ
+        //gọi qua redux, tôi sẽ để các bước lập trình như sau: Redux-getGender-(n) với n thuộc số tự nhiên
+        //Redux-getGender-(1) trước hết hãy vào thư mục store/actions nha, khai báo action đi adminActions 
+
+        // Redux-getGender-(15):comment đống code gọi api trực tiếp bên dưới
+        // try {
+        //     let res = await getAllCodesService('gender');
+        //     if (res && res.errCode === 0) {
+        //         this.setState({
+        //             genderArr: res.data,
+        //         })
+        //     }
+        //     console.log('Check res: ', res);
+        // } catch (e) {
+        //     console.log(e);
+        // }
+
+        // Redux-getGender-(16): quay lên import actions
+        // Redux-getGender-(20): gọi hàm redux fetchGenderValueStart
+        this.props.getGenderValueStart();
+        // Redux-getGender-(21): vậy là ta đã fire được một action
+        // Redux-getGender-(22): quay lại để viết api cho redux khi gọi hàm này, trở lại adminActions
+        //ta có một cách khác để fire action trên khi chưa có hàm mapDispatchToProps
+        // this.props.dispatch(actions.getGenderValueStart());
+
+    }
+    // Redux-getGender-(28):viết componentDidUpdate
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.genderValueByRedux != this.props.genderValueByRedux) {
+            this.setState({
+                genderArr: this.props.genderValueByRedux,
+            })
+        }
+        // Redux-getGender-(29): vậy là qua 29 bước code tụt loll thì cuối cùng <option> cũng nhận data
     }
 
 
     render() {
+        let genders = this.state.genderArr;
+        let language = this.props.language;
+        // Redux-getGender-(27): cỏ vẻ <option> vẫn chưa nhận data, cần hàm componentDidUpdate
         return (
             <div className="user-manage-by-redux-container">
                 <div className="title">
@@ -140,21 +182,19 @@ class UserManageByRedux extends Component {
                                                     onChange={(event) => { this.handleOnChangeInputTag(event, "gender") }}
                                                     value={this.state.gender}
                                                 >
-                                                    <option value="1">
-                                                        <FormattedMessage id="menu.admin.user-manage-by-redux-form.gender-value.male" />
-                                                    </option>
-                                                    <option value="0">
-                                                        <FormattedMessage id="menu.admin.user-manage-by-redux-form.gender-value.female" />
-                                                    </option>
-                                                    <option value="1">
-                                                        <FormattedMessage id="menu.admin.user-manage-by-redux-form.gender-value.femboy" />
-                                                    </option>
-                                                    <option value="0">
-                                                        <FormattedMessage id="menu.admin.user-manage-by-redux-form.gender-value.tomboy" />
-                                                    </option>
-                                                    <option value="0">
-                                                        <FormattedMessage id="menu.admin.user-manage-by-redux-form.gender-value.bisexual" />
-                                                    </option>
+                                                    {/* ở đây không thể khai cứng là cần bào nhiều option và option đó thuộc ngôn ngữ gì theo kiểu
+                                                    <option><FormattedMessage id="..."/></option> được, nên ta sẽ làm theo các lấy từ AllCodes
+                                                    trong allcodes có khai value_Vie và Eng thì kiểm tra biến language của redux xem đang ở
+                                                    ngôn ngữ nào thì dùng ngôn ngữ đó */}
+                                                    {genders && genders.length > 0 &&
+                                                        genders.map((item, index) => {
+                                                            return (
+                                                                <option key={index}>
+                                                                    {language === LANGUAGES.VI ? item.value_Vie : item.value_Eng}
+                                                                </option>
+                                                            )
+                                                        })
+                                                    }
                                                 </Input>
                                             </Col>
                                         </FormGroup>
@@ -242,11 +282,20 @@ class UserManageByRedux extends Component {
 
 const mapStateToProps = state => {
     return {
+        language: state.app.language,
+        // Redux-getGender-(25): map state tại đây, thông qua admin có thể lấy được adminReducer
+        //và trong adminReducer tôi muốn lấy state của genders (state bao gồm genders,roles và positions)
+        // Redux-getGender-(26): và cuối cùng cho render lấy và hiển thị thôi
+        genderValueByRedux: state.admin.genders,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        getGenderValueStart: () => dispatch(actions.fetchGenderValueStart())
+        // Redux-getGender-(19): trở lại hàm didMount
+        // processLogout: () => dispatch(actions.processLogout()),
+        // switchLanguageOfWebsite: (language) => dispatch(actions.switchLanguageOfWebsite(language)),
     };
 };
 
