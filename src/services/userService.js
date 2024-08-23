@@ -52,7 +52,7 @@ const editUserService = (data) => {
 }
 
 const getAllCodesService = (inputType) => {
-    return axios.get(`/getallcodesdata?type=${inputType}`);
+    return axios.get(`/api/getallcodesdata?type=${inputType}`);
 }
 
 export {

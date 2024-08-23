@@ -16,6 +16,7 @@ import { getAllCodesService } from "../../services/userService";
 export const fetchGenderValueStart = () => {
     return async (dispatch, getState) => {
         try {
+            dispatch({ type: actionTypes.FETCH_GENDER_VALUE_START });
             let res = await getAllCodesService('gender');
             if (res && res.errCode === 0) {
                 dispatch(fetchGenderValueSuccessfully(res.data));
@@ -39,3 +40,54 @@ export const fetchGenderValueFailed = () => ({
 })
 
 //Redux-getGender-(5): qua actionTypes khai báo type
+
+//position
+export const fetchPositionValueStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({ type: actionTypes.FETCH_POSITION_VALUE_START });
+            let res = await getAllCodesService('position');
+            if (res && res.errCode === 0) {
+                dispatch(fetchPositionValueSuccessfully(res.data));
+            } else {
+                dispatch(fetchPositionValueFailed());
+            }
+        } catch (e) {
+            dispatch(fetchPositionValueFailed());
+            console.log('fetchPositionValueStart function error: ', e);
+        }
+    }
+}
+
+export const fetchPositionValueSuccessfully = (positionData) => ({
+    type: actionTypes.FETCH_POSITION_VALUE_SUCCESSFULLY,
+    data: positionData,
+})
+export const fetchPositionValueFailed = () => ({
+    type: actionTypes.FETCH_POSITION_VALUE_FAILED,
+})
+//role
+export const fetchRoleValueStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({ type: actionTypes.FETCH_ROLE_VALUE_START });
+            let res = await getAllCodesService('role');
+            if (res && res.errCode === 0) {
+                dispatch(fetchRoleValueSuccessfully(res.data));
+            } else {
+                dispatch(fetchRoleValueFailed());
+            }
+        } catch (e) {
+            dispatch(fetchRoleValueFailed());
+            console.log('fetchRoleValueStart function error: ', e);
+        }
+    }
+}
+
+export const fetchRoleValueSuccessfully = (roleData) => ({
+    type: actionTypes.FETCH_ROLE_VALUE_SUCCESSFULLY,
+    data: roleData,
+})
+export const fetchRoleValueFailed = () => ({
+    type: actionTypes.FETCH_ROLE_VALUE_FAILED,
+})

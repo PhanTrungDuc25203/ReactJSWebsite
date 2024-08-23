@@ -42,6 +42,68 @@
                     padding: 0 15px;
                     /* Khoảng cách giữa các cột */
                 }
+
+                .avatar-image-section {
+
+                    .fontawesome-icon {
+                        font-size: 18px;
+                        margin-left: 8px;
+                    }
+
+                    .upload-avatar-image {
+                        margin-bottom: 20px;
+                        display: flex;
+                        // text-align: center;
+                        justify-content: center;
+                        /* Căn giữa theo chiều ngang */
+                        align-items: center;
+                        line-height: 31px;
+                        border: 2px solid rgb(81, 163, 251);
+                        border-radius: 5px;
+                        background-color: white;
+                        /* Căn giữa theo chiều dọc */
+                        transition: background-color 0.3s, color 0.3s;
+                        cursor: pointer;
+                    }
+
+                    .delete-btn {
+                        margin-bottom: 20px;
+                        display: flex;
+                        // text-align: center;
+                        justify-content: center;
+                        /* Căn giữa theo chiều ngang */
+                        align-items: center;
+                        line-height: 31px;
+                        border: 2px solid red;
+                        border-radius: 5px;
+                        background-color: white;
+                        /* Căn giữa theo chiều dọc */
+                        transition: background-color 0.3s, color 0.3s;
+                        cursor: pointer;
+                    }
+
+                    .delete-btn:hover {
+                        background-color: red;
+                        color: white;
+                    }
+
+                    .upload-avatar-image:hover {
+                        // border: 2px solid rgb(81, 163, 251);
+                        background-color: rgb(81, 163, 251);
+                        color: white;
+                    }
+
+                    .image-preview {
+                        height: 100%;
+                        aspect-ratio: 1 / 1;
+                        border: 2px solid rgb(81, 163, 251);
+                        border-radius: 5px;
+                        background-size: contain;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        cursor: pointer;
+                    }
+                }
             }
         }
     }

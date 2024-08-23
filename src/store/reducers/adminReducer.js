@@ -5,6 +5,7 @@ import actionTypes from '../actions/actionTypes';
 
 const initialState = {
     // Redux-getGender-(13): thì ra không chỉ lưu mỗi gender:))
+    isLoadingGenderValue: false,
     genders: [],
     roles: [],
     positions: [],
@@ -13,22 +14,49 @@ const initialState = {
 const adminReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_GENDER_VALUE_START:
-            console.log('fire start: ', action)
+            state.isLoadingGenderValue = true;
+            // console.log('fire start: ', action)
             return {
                 ...state,
             }
         case actionTypes.FETCH_GENDER_VALUE_SUCCESSFULLY:
             // Redux-getGender-(25): 
-            let copyState = { ...state };
-            copyState.genders = action.data;
-            console.log('fire successfully: ', copyState)
-            // Redux-getGender-(25): khi đó biến copyState trả ra 3 thuộc tính gender, position và role, nhưng chỉ có gender là có giá trị
+            state.genders = action.data;
+            //có phần loading vì đó là chuẩn của một redux, nếu không có thì code này sẽ bỏ qua
+            //phần start
+            state.isLoadingGenderValue = false;
+            // console.log('fire successfully: ', state)
+            // Redux-getGender-(25): khi đó biến copyState/state trả ra 3 thuộc tính gender, position và role, nhưng chỉ có gender là có giá trị
             // Redux-getGender-(26): khi lấy được state rồi thì phải map nó vào hàm mapStateToProps để sử dụng trong file UserManageByRedux.js
             return {
-                ...copyState,
+                ...state,
             }
         case actionTypes.FETCH_GENDER_VALUE_FAILED:
-            console.log('fire failed: ', action)
+            // console.log('fire failed: ', action)
+            state.genders = [];
+            state.isLoadingGenderValue = false;
+            return {
+                ...state,
+            }
+        //position
+        case actionTypes.FETCH_POSITION_VALUE_SUCCESSFULLY:
+            state.positions = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_POSITION_VALUE_FAILED:
+            state.positions = [];
+            return {
+                ...state,
+            }
+        //role
+        case actionTypes.FETCH_ROLE_VALUE_SUCCESSFULLY:
+            state.roles = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_ROLE_VALUE_FAILED:
+            state.roles = [];
             return {
                 ...state,
             }

@@ -16,6 +16,16 @@ const actionTypes = Object.freeze({
     FETCH_GENDER_VALUE_SUCCESSFULLY: 'FETCH_GENDER_VALUE_SUCCESSFULLY',
     FETCH_GENDER_VALUE_FAILED: 'FETCH_GENDER_VALUE_FAILED',
     // Redux-getGender-(7): khai báo xong thì tạo một reducer adminReducer
+
+    //tạo redux getPosition và role không theo chuẩn redux: có 2 case là success và fail thôi
+    //không có case start
+    FETCH_POSITION_VALUE_START: 'FETCH_GENDER_VALUE_START',
+    FETCH_POSITION_VALUE_SUCCESSFULLY: 'FETCH_POSITION_VALUE_SUCCESSFULLY',
+    FETCH_POSITION_VALUE_FAILED: 'FETCH_POSITION_VALUE_FAILED',
+
+    FETCH_ROLE_VALUE_START: 'FETCH_GENDER_VALUE_START',
+    FETCH_ROLE_VALUE_SUCCESSFULLY: 'FETCH_ROLE_VALUE_SUCCESSFULLY',
+    FETCH_ROLE_VALUE_FAILED: 'FETCH_ROLE_VALUE_FAILED',
 })
 
 export default actionTypes;
