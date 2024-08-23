@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManageByRedux.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileUpload, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faFileUpload, faTrashAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { LANGUAGES } from "../../../utils";
 import { switchLanguageOfWebsite } from "../../../store/actions";
 import { Form, Col, FormGroup, Label, Input, Row, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
@@ -25,6 +25,17 @@ class UserManageByRedux extends Component {
             roleArr: [],
             previewAvatarImageUrl: '',
             imagePreviewOpened: false,
+            //biến cần để lưu người dùng
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            phoneNumber: '',
+            address: '',
+            gender: '',
+            position: '',
+            role: '',
+            avatarImage: '',
         }
     }
 
@@ -65,22 +76,31 @@ class UserManageByRedux extends Component {
     }
     // Redux-getGender-(28):viết componentDidUpdate
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.genderValueByRedux != this.props.genderValueByRedux) {
+        if (prevProps.genderValueByRedux !== this.props.genderValueByRedux) {
+            let tempArr = this.props.genderValueByRedux
             this.setState({
-                genderArr: this.props.genderValueByRedux,
+                // genderArr: this.props.genderValueByRedux,
+                genderArr: tempArr,
+                gender: tempArr && tempArr.length > 0 ? tempArr[0].key : '',
             })
         }
         // Redux-getGender-(29): vậy là qua 29 bước code tụt loll thì cuối cùng <option> cũng nhận data
         //position
-        if (prevProps.positionValueByRedux != this.props.positionValueByRedux) {
+        if (prevProps.positionValueByRedux !== this.props.positionValueByRedux) {
+            let tempArr = this.props.positionValueByRedux
             this.setState({
-                positionArr: this.props.positionValueByRedux,
+                // genderArr: this.props.genderValueByRedux,
+                positionArr: tempArr,
+                position: tempArr && tempArr.length > 0 ? tempArr[0].key : '',
             })
         }
         //role
-        if (prevProps.roleValueByRedux != this.props.roleValueByRedux) {
+        if (prevProps.roleValueByRedux !== this.props.roleValueByRedux) {
+            let tempArr = this.props.roleValueByRedux
             this.setState({
-                roleArr: this.props.roleValueByRedux,
+                // genderArr: this.props.genderValueByRedux,
+                roleArr: tempArr,
+                role: tempArr && tempArr.length > 0 ? tempArr[0].key : '',
             })
         }
     }
@@ -92,6 +112,7 @@ class UserManageByRedux extends Component {
             let objectUrl = URL.createObjectURL(file);
             this.setState({
                 previewAvatarImageUrl: objectUrl,
+                avatar: file,
             })
         }
 
@@ -105,6 +126,71 @@ class UserManageByRedux extends Component {
         })
     }
 
+    deleteSelectedAvatarImage = () => {
+        if (this.state.previewAvatarImageUrl) {
+            // console.log("Before deleted: ", this.state.previewAvatarImageUrl)
+            let tempImage = this.state.previewAvatarImageUrl;
+            tempImage = null;
+            this.setState({
+                previewAvatarImageUrl: tempImage,
+            })
+            // console.log("After deleted: ", tempImage);
+            // console.log("After deleted: ", this.state.previewAvatarImageUrl);
+            //tại sao câu lệnh trên vẫn in ra bức ảnh đó nhỉ??? cho dù khi bấm lại vào nút xóa
+            //thì code đã chạy đến case là không có ảnh nào (tức là in ra dòng alert)
+        } else {
+            alert('Bạn chưa chọn bức ảnh nào!')
+        }
+    }
+
+    handleAddNewUser = () => {
+        let isValid = this.checkInputValidation();
+        if (isValid === false) {
+            return;
+        } else {
+            //fire redux action
+            this.props.addNewUserByRedux({
+                email: this.state.email,
+                password: this.state.password,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                address: this.state.address,
+                phoneNumber: this.state.phoneNumber,
+                gender: this.state.gender,
+                //vì chưa có chỗ nhập image và position nên tôi sẽ để là một string bất kì thôi
+                image: this.state.previewAvatarImageUrl,
+                roleId: this.state.role,
+                positionId: this.state.position,
+            });
+        }
+    }
+
+    checkInputValidation = () => {
+        let isValid = true;
+        let needCheckInput = ['email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address'];
+        for (let i = 0; i < needCheckInput.length; i++) {
+            if (!this.state[needCheckInput[i]]) {
+                isValid = false;
+                alert('Thiếu giá trị cho: ' + needCheckInput[i]);
+                break;
+            }
+        }
+
+        return isValid;
+    }
+
+    onChangeInput = (event, idForEvent) => {
+        let copyState = {
+            ...this.state,
+        };
+        copyState[idForEvent] = event.target.value;
+        this.setState({
+            ...copyState
+        }, () => {
+            console.log('Check Input onChange: ', this.state);
+        })
+    }
+
     render() {
         let genders = this.state.genderArr;
         let language = this.props.language;
@@ -112,6 +198,9 @@ class UserManageByRedux extends Component {
         let isLoadingGenderValue = this.props.isLoadingGenderValue;
         let positions = this.state.positionArr;
         let roles = this.state.roleArr;
+
+        let { email, password, firstName, lastName, phoneNumber, address, gender,
+            position, role, avatarImage } = this.state;
         return (
             <div className="user-manage-by-redux-container">
                 <div className="title">
@@ -132,8 +221,8 @@ class UserManageByRedux extends Component {
                                                 name="email"
                                                 placeholder="abc@gmail.com"
                                                 type="email"
-                                                onChange={(event) => { this.handleOnChangeInputTag(event, "email") }}
-                                                value={this.state.email}
+                                                onChange={(event) => { this.onChangeInput(event, 'email') }}
+                                                value={email}
                                             />
                                         </FormGroup>
                                     </Col>
@@ -147,8 +236,8 @@ class UserManageByRedux extends Component {
                                                 name="password"
                                                 placeholder="your password"
                                                 type="password"
-                                                onChange={(event) => { this.handleOnChangeInputTag(event, "password") }}
-                                                value={this.state.password}
+                                                onChange={(event) => { this.onChangeInput(event, 'password') }}
+                                                value={password}
                                             />
                                         </FormGroup>
                                     </Col>
@@ -164,8 +253,8 @@ class UserManageByRedux extends Component {
                                                 name="firstName"
                                                 placeholder="Jackman"
                                                 type="text"
-                                                onChange={(event) => { this.handleOnChangeInputTag(event, "firstName") }}
-                                                value={this.state.firstName}
+                                                onChange={(event) => { this.onChangeInput(event, 'firstName') }}
+                                                value={firstName}
                                             />
                                         </FormGroup>
                                     </Col>
@@ -179,8 +268,8 @@ class UserManageByRedux extends Component {
                                                 name="lastName"
                                                 placeholder="Hugh"
                                                 type="text"
-                                                onChange={(event) => { this.handleOnChangeInputTag(event, "lastName") }}
-                                                value={this.state.lastName}
+                                                onChange={(event) => { this.onChangeInput(event, 'lastName') }}
+                                                value={lastName}
                                             />
                                         </FormGroup>
                                     </Col>
@@ -195,8 +284,8 @@ class UserManageByRedux extends Component {
                                                 id="addUserAddress"
                                                 name="address"
                                                 placeholder="khu 2 Hoàng Cương Thanh Ba Phú Thọ"
-                                                onChange={(event) => { this.handleOnChangeInputTag(event, "address") }}
-                                                value={this.state.address}
+                                                onChange={(event) => { this.onChangeInput(event, 'address') }}
+                                                value={address}
                                             />
                                         </FormGroup>
                                     </Col>
@@ -210,12 +299,12 @@ class UserManageByRedux extends Component {
                                             <Input
                                                 id="addUserPhoneNumber"
                                                 name="city"
-                                                onChange={(event) => { this.handleOnChangeInputTag(event, "phoneNumber") }}
-                                                value={this.state.phoneNumber}
+                                                onChange={(event) => { this.onChangeInput(event, 'phoneNumber') }}
+                                                value={phoneNumber}
                                             />
                                         </FormGroup>
                                     </Col>
-                                    <Col md={3}>
+                                    <Col md={2}>
                                         <FormGroup>
                                             <Label for="addUserGenderSelection">
                                                 <FormattedMessage id="menu.admin.user-manage-by-redux-form.gender" />
@@ -226,8 +315,8 @@ class UserManageByRedux extends Component {
                                                     name="select"
                                                     className="py-10 mt-10"
                                                     type="select"
-                                                    onChange={(event) => { this.handleOnChangeInputTag(event, "gender") }}
-                                                    value={this.state.gender}
+                                                    onChange={(event) => { this.onChangeInput(event, 'gender') }}
+                                                    // value={gender}
                                                     placeholder={isLoadingGenderValue === true ? `Loading gender's value` : ''}
                                                 >
                                                     {/* ở đây không thể khai cứng là cần bào nhiều option và option đó thuộc ngôn ngữ gì theo kiểu
@@ -239,7 +328,7 @@ class UserManageByRedux extends Component {
                                                     {genders && genders.length > 0 &&
                                                         genders.map((item, index) => {
                                                             return (
-                                                                <option key={index}>
+                                                                <option key={index} value={item.key}>
                                                                     {language === LANGUAGES.VI ? item.value_Vie : item.value_Eng}
                                                                 </option>
                                                             )
@@ -249,7 +338,7 @@ class UserManageByRedux extends Component {
                                             </Col>
                                         </FormGroup>
                                     </Col>
-                                    <Col md={3}>
+                                    <Col md={4}>
                                         <FormGroup>
                                             <Label for="addUserRoleSelection">
                                                 <FormattedMessage id="menu.admin.user-manage-by-redux-form.role" />
@@ -259,13 +348,13 @@ class UserManageByRedux extends Component {
                                                     id="addUserRoleSelection"
                                                     name="select"
                                                     type="select"
-                                                    onChange={(event) => { this.handleOnChangeInputTag(event, "roleId") }}
-                                                    value={this.state.roleId}
+                                                    onChange={(event) => { this.onChangeInput(event, 'role') }}
+                                                    value={role}
                                                 >
                                                     {roles && roles.length > 0 &&
                                                         roles.map((item, index) => {
                                                             return (
-                                                                <option key={index}>
+                                                                <option key={index} value={item.key}>
                                                                     {language === LANGUAGES.VI ? item.value_Vie : item.value_Eng}
                                                                 </option>
                                                             )
@@ -287,13 +376,13 @@ class UserManageByRedux extends Component {
                                                     id="addUserPositionSelection"
                                                     name="select"
                                                     type="select"
-                                                    onChange={(event) => { this.handleOnChangeInputTag(event, "roleId") }}
-                                                    value={this.state.roleId}
+                                                    onChange={(event) => { this.onChangeInput(event, 'position') }}
+                                                    value={position}
                                                 >
                                                     {positions && positions.length > 0 &&
                                                         positions.map((item, index) => {
                                                             return (
-                                                                <option key={index}>
+                                                                <option key={index} value={item.key}>
                                                                     {language === LANGUAGES.VI ? item.value_Vie : item.value_Eng}
                                                                 </option>
                                                             )
@@ -309,7 +398,7 @@ class UserManageByRedux extends Component {
                                             </Col>
                                         </FormGroup>
                                     </Col>
-                                    <Col md={3} className="avatar-image-section">
+                                    <Col md={2} className="avatar-image-section">
                                         <FormGroup>
                                             <Label for="addUserAvatar">
                                                 <FormattedMessage id="menu.admin.user-manage-by-redux-form.avatar-image" />
@@ -322,10 +411,14 @@ class UserManageByRedux extends Component {
                                                 hidden
                                             />
                                             <label className="upload-avatar-image" htmlFor="addUserAvatar">Tải ảnh<FontAwesomeIcon icon={faFileUpload} className="fontawesome-icon" /></label>
-                                            <label className="delete-btn">Xóa ảnh<FontAwesomeIcon icon={faTrashAlt} className="fontawesome-icon" /></label>
+                                            <label className="delete-btn"
+                                                onClick={() => this.deleteSelectedAvatarImage()}
+                                            >
+                                                Xóa ảnh
+                                                <FontAwesomeIcon icon={faTrashAlt} className="fontawesome-icon" /></label>
                                         </FormGroup>
                                     </Col>
-                                    <Col md={3} className="avatar-image-section">
+                                    <Col md={4} className="avatar-image-section">
                                         <FormGroup>
                                             <Label>Xem trước</Label>
                                             <div className="image-preview"
@@ -334,6 +427,15 @@ class UserManageByRedux extends Component {
                                             ></div>
                                         </FormGroup>
 
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={12}>
+                                        <Button className="add-new-user-button"
+                                            onClick={() => this.handleAddNewUser()}
+                                        >
+                                            Thêm mới <FontAwesomeIcon icon={faUserPlus} />
+                                        </Button>
                                     </Col>
                                 </Row>
                             </Form>
@@ -376,6 +478,7 @@ const mapDispatchToProps = dispatch => {
         // switchLanguageOfWebsite: (language) => dispatch(actions.switchLanguageOfWebsite(language)),
         getPositionValueStart: () => dispatch(actions.fetchPositionValueStart()),
         getRoleValueStart: () => dispatch(actions.fetchRoleValueStart()),
+        addNewUserByRedux: (data) => dispatch(actions.addNewUserByRedux(data)),
     };
 };
 

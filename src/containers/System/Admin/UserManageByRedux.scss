@@ -59,6 +59,7 @@
                         align-items: center;
                         line-height: 31px;
                         border: 2px solid rgb(81, 163, 251);
+                        color: rgb(81, 163, 251);
                         border-radius: 5px;
                         background-color: white;
                         /* Căn giữa theo chiều dọc */
@@ -74,6 +75,7 @@
                         /* Căn giữa theo chiều ngang */
                         align-items: center;
                         line-height: 31px;
+                        color: rgb(98, 32, 32);
                         border: 2px solid red;
                         border-radius: 5px;
                         background-color: white;
@@ -103,6 +105,22 @@
                         background-repeat: no-repeat;
                         cursor: pointer;
                     }
+                }
+
+                .add-new-user-button {
+                    width: 100%;
+                    background-color: white;
+                    color: rgb(81, 163, 251);
+                    border: 2px solid rgb(81, 163, 251);
+                    gap: 30px;
+                    margin-top: 20px;
+                    font-weight: 600;
+                    transition: color 0.3s, background-color 0.3s;
+                }
+
+                .add-new-user-button:hover {
+                    background-color: rgb(81, 163, 251);
+                    color: white;
                 }
             }
         }

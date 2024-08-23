@@ -2,7 +2,7 @@
 //để sử dụng được file này thì bào index để export
 import actionTypes from './actionTypes';
 // Redux-getGender-(21): import để gọi api
-import { getAllCodesService } from "../../services/userService";
+import { getAllCodesService, createNewUserService } from "../../services/userService";
 
 
 //Redux-getGender-(4): tạo action
@@ -90,4 +90,28 @@ export const fetchRoleValueSuccessfully = (roleData) => ({
 })
 export const fetchRoleValueFailed = () => ({
     type: actionTypes.FETCH_ROLE_VALUE_FAILED,
+})
+
+export const addNewUserByRedux = (data) => {
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await createNewUserService(data);
+            if (res && res.errCode === 0) {
+                dispatch(addNewUserSuccessfully());
+            } else {
+                dispatch(addNewUserFailed());
+            }
+        } catch (e) {
+            dispatch(addNewUserFailed());
+        }
+    }
+}
+
+export const addNewUserSuccessfully = () => ({
+    type: 'ADD_NEW_USER_SUCCESSFULLY',
+})
+
+export const addNewUserFailed = () => ({
+    type: 'ADD_NEW_USER_FAILED',
 })

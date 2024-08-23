@@ -243,19 +243,19 @@ class ModalUser extends Component {
                                                 onChange={(event) => { this.handleOnChangeInputTag(event, "gender") }}
                                                 value={this.state.gender}
                                             >
-                                                <option value="1">
+                                                <option value="M">
                                                     Male
                                                 </option>
-                                                <option value="0">
+                                                <option value="F">
                                                     Female
                                                 </option>
-                                                <option value="1">
+                                                <option value="M">
                                                     Femboy
                                                 </option>
-                                                <option value="0">
+                                                <option value="F">
                                                     Tomboy
                                                 </option>
-                                                <option value="0">
+                                                <option value="O">
                                                     Futanari
                                                 </option>
                                             </Input>
