@@ -38,6 +38,9 @@ const actionTypes = Object.freeze({
     // xóa user bằng redux
     DELETE_USER_SUCCESSFULLY: 'DELETE_USER_SUCCESSFULLY',
     DELETE_USER_FAILED: 'DELETE_USER_FAILED',
+    //edit bằng redux
+    EDIT_USER_SUCCESSFULLY: 'EDIT_USER_SUCCESSFULLY',
+    EDIT_USER_FAILED: 'EDIT_USER_FAILED',
 })
 
 export default actionTypes;

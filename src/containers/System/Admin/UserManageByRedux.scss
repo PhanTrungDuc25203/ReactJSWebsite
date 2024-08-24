@@ -112,6 +112,22 @@
                     background-color: rgb(81, 163, 251);
                     color: white;
                 }
+
+                .edit-user-button {
+                    width: 100%;
+                    background-color: white;
+                    color: rgb(255, 157, 81);
+                    border: 2px solid rgb(255, 157, 81);
+                    gap: 30px;
+                    margin-top: 20px;
+                    font-weight: 600;
+                    transition: color 0.3s, background-color 0.3s;
+                }
+
+                .edit-user-button:hover {
+                    background-color: rgb(255, 157, 81);
+                    color: white;
+                }
             }
         }
     }

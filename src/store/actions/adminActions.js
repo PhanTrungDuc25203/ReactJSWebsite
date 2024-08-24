@@ -2,7 +2,7 @@
 //để sử dụng được file này thì bào index để export
 import actionTypes from './actionTypes';
 // Redux-getGender-(21): import để gọi api
-import { getAllCodesService, createNewUserService, getAllUsersToDisplayInReact, deleteUserService } from "../../services/userService";
+import { getAllCodesService, createNewUserService, getAllUsersToDisplayInReact, deleteUserService, editUserService } from "../../services/userService";
 import { toast } from "react-toastify";
 
 
@@ -173,4 +173,32 @@ export const deleteUserSuccessfully = () => ({
 
 export const deleteUserFailed = () => ({
     type: actionTypes.DELETE_USER_FAILED,
+})
+
+export const editUserByRedux = (data) => {
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await editUserService(data);
+            if (res && res.errCode === 0) {
+                toast.success("An user has been editted!");
+                dispatch(editUserSuccessfully());
+                dispatch(fetchAllUsersValueStart());
+            } else {
+                toast.error("Edit fail!");
+                dispatch(editUserFailed());
+            }
+        } catch (e) {
+            toast.error("Edit fail");
+            dispatch(editUserFailed());
+        }
+    }
+}
+
+export const editUserSuccessfully = () => ({
+    type: actionTypes.EDIT_USER_SUCCESSFULLY,
+})
+
+export const editUserFailed = () => ({
+    type: actionTypes.EDIT_USER_FAILED,
 })

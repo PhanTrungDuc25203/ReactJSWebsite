@@ -29,6 +29,10 @@ class UserDisplayTableByRedux extends Component {
         this.props.deleteUserByRedux(user.id);
     }
 
+    handleEditUserByRedux = (user) => {
+        this.props.editUserByReduxFromParent(user);
+    }
+
     render() {
         // console.log("Users from redux: ", this.props.usersFromRedux);
         // console.log('Check: ', this.state.usersDataFromRedux)
@@ -63,7 +67,9 @@ class UserDisplayTableByRedux extends Component {
                                         <td>{item.address}</td>
                                         <td>{item.phoneNumber}</td>
                                         <td className="action-column-redux">
-                                            <button className="modify-data-button-redux edit-button-redux"><i className="fas fa-pencil-alt"></i></button>
+                                            <button className="modify-data-button-redux edit-button-redux"
+                                                onClick={() => this.handleEditUserByRedux(item)}
+                                            ><i className="fas fa-pencil-alt"></i></button>
                                             <button className="modify-data-button-redux delete-button-redux"
                                                 onClick={() => this.handleDeleteUserByRedux(item)}
                                             ><i className="fas fa-trash"></i></button>

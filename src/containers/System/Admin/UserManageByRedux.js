@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './UserManageByRedux.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileUpload, faTrashAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import { LANGUAGES } from "../../../utils";
+import { LANGUAGES, CRUD_ACTIONS } from "../../../utils";
 import { switchLanguageOfWebsite } from "../../../store/actions";
 import { Form, Col, FormGroup, Label, Input, Row, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { getAllCodesService } from "../../../services/userService";
@@ -37,6 +37,9 @@ class UserManageByRedux extends Component {
             position: '',
             role: '',
             avatarImage: '',
+
+            action: '',
+            idForEditUser: '',
         }
     }
 
@@ -106,6 +109,11 @@ class UserManageByRedux extends Component {
         }
 
         if (prevProps.usersFromRedux !== this.props.usersFromRedux) {
+
+            let tempGenderArr = this.props.genderValueByRedux;
+            let tempPositionArr = this.props.positionValueByRedux;
+            let tempRoleArr = this.props.roleValueByRedux;
+
             this.setState({
                 email: '',
                 password: '',
@@ -113,10 +121,11 @@ class UserManageByRedux extends Component {
                 lastName: '',
                 phoneNumber: '',
                 address: '',
-                gender: '',
-                position: '',
-                role: '',
+                gender: tempGenderArr && tempGenderArr.length > 0 ? tempGenderArr[0].key : '',
+                position: tempPositionArr && tempPositionArr.length > 0 ? tempPositionArr[0].key : '',
+                role: tempRoleArr && tempRoleArr.length > 0 ? tempRoleArr[0].key : '',
                 avatarImage: '',
+                action: CRUD_ACTIONS.CREATE,
             })
         }
     }
@@ -164,33 +173,53 @@ class UserManageByRedux extends Component {
         if (isValid === false) {
             return;
         } else {
-            //fire redux action
-            this.props.addNewUserByRedux({
-                email: this.state.email,
-                password: this.state.password,
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                address: this.state.address,
-                phoneNumber: this.state.phoneNumber,
-                gender: this.state.gender,
-                //vì chưa có chỗ nhập image và position nên tôi sẽ để là một string bất kì thôi
-                image: this.state.previewAvatarImageUrl,
-                roleId: this.state.role,
-                positionId: this.state.position,
-            });
-            //chạy hàm dưới đây thì trang web sẽ tự refresh khi thêm mới người dùng
-            // vì nó sẽ chạy vào adminReducer.js và chạy vào câu successffuly, khi đó bién 
-            //users được cập nhật, thì nó sẽ chạy vào componentDidUpdate của file userdisplaytablebyredux.js
-            //sau đó biến usersDataFromRedux được thay đổi theo thì file đó sẽ thực thi lại hàm setState
-            // thì trang web sẽ tự động render lại 
-            // cần xét timeout vì tốc độ truy cập vào db chậm hơn tốc độ mà câu lệnh dưới đây thực hiện
-            //vì câu lệnh dưới đây được viết trong cùng một project
-            //nhưng thay vì làm như thế này khi thời gian chờ là cố định
-            // setTimeout(() => {
-            //     this.props.fetchUserFromRedux();
-            // }, 1000)
-            //sang file adminActions.js để thêm action lấy AllUsers mỗi khi bấm thêm một người dùng mới
+            let { action } = this.state;
+            // = let action = this.state.action;
+            if (action === CRUD_ACTIONS.CREATE) {
+                //fire redux action
+                this.props.addNewUserByRedux({
+                    email: this.state.email,
+                    password: this.state.password,
+                    firstName: this.state.firstName,
+                    lastName: this.state.lastName,
+                    address: this.state.address,
+                    phoneNumber: this.state.phoneNumber,
+                    gender: this.state.gender,
+                    //vì chưa có chỗ nhập image và position nên tôi sẽ để là một string bất kì thôi
+                    image: this.state.previewAvatarImageUrl,
+                    roleId: this.state.role,
+                    positionId: this.state.position,
+                });
+                //chạy hàm dưới đây thì trang web sẽ tự refresh khi thêm mới người dùng
+                // vì nó sẽ chạy vào adminReducer.js và chạy vào câu successffuly, khi đó bién 
+                //users được cập nhật, thì nó sẽ chạy vào componentDidUpdate của file userdisplaytablebyredux.js
+                //sau đó biến usersDataFromRedux được thay đổi theo thì file đó sẽ thực thi lại hàm setState
+                // thì trang web sẽ tự động render lại 
+                // cần xét timeout vì tốc độ truy cập vào db chậm hơn tốc độ mà câu lệnh dưới đây thực hiện
+                //vì câu lệnh dưới đây được viết trong cùng một project
+                //nhưng thay vì làm như thế này khi thời gian chờ là cố định
+                // setTimeout(() => {
+                //     this.props.fetchUserFromRedux();
+                // }, 1000)
+                //sang file adminActions.js để thêm action lấy AllUsers mỗi khi bấm thêm một người dùng mới
 
+            }
+            if (action === CRUD_ACTIONS.EDIT) {
+                this.props.editUserByRedux({
+                    id: this.state.idForEditUser,
+                    email: this.state.email,
+                    password: this.state.password,
+                    firstName: this.state.firstName,
+                    lastName: this.state.lastName,
+                    address: this.state.address,
+                    phoneNumber: this.state.phoneNumber,
+                    gender: this.state.gender,
+                    //vì chưa có chỗ nhập image và position nên tôi sẽ để là một string bất kì thôi
+                    image: this.state.previewAvatarImageUrl,
+                    roleId: this.state.role,
+                    positionId: this.state.position,
+                });
+            }
         }
     }
 
@@ -217,6 +246,23 @@ class UserManageByRedux extends Component {
             ...copyState
         }, () => {
             console.log('Check Input onChange: ', this.state);
+        })
+    }
+
+    editUserByRedux = (user) => {
+        this.setState({
+            email: user.email,
+            password: 'jvch98wy80yt0h8weff0as0d',
+            firstName: user.firstName,
+            lastName: user.lastName,
+            phoneNumber: user.phoneNumber,
+            address: user.address,
+            gender: user.gender,
+            role: user.roleId,
+            position: user.positionId,
+            avatar: '',
+            action: CRUD_ACTIONS.EDIT,
+            idForEditUser: user.id,
         })
     }
 
@@ -252,6 +298,7 @@ class UserManageByRedux extends Component {
                                                 type="email"
                                                 onChange={(event) => { this.onChangeInput(event, 'email') }}
                                                 value={email}
+                                                disabled={this.state.action === CRUD_ACTIONS.EDIT ? true : false}
                                             />
                                         </FormGroup>
                                     </Col>
@@ -267,6 +314,7 @@ class UserManageByRedux extends Component {
                                                 type="password"
                                                 onChange={(event) => { this.onChangeInput(event, 'password') }}
                                                 value={password}
+                                                disabled={this.state.action === CRUD_ACTIONS.EDIT ? true : false}
                                             />
                                         </FormGroup>
                                     </Col>
@@ -375,7 +423,7 @@ class UserManageByRedux extends Component {
                                                     className="py-10 mt-10"
                                                     type="select"
                                                     onChange={(event) => { this.onChangeInput(event, 'gender') }}
-                                                    // value={gender}
+                                                    value={gender}
                                                     placeholder={isLoadingGenderValue === true ? `Loading gender's value` : ''}
                                                 >
                                                     {/* ở đây không thể khai cứng là cần bào nhiều option và option đó thuộc ngôn ngữ gì theo kiểu
@@ -492,17 +540,25 @@ class UserManageByRedux extends Component {
                                 </Row>
                                 <Row>
                                     <Col md={12}>
-                                        <Button className="add-new-user-button"
+                                        <Button className={this.state.action === CRUD_ACTIONS.EDIT ? "edit-user-button" : "add-new-user-button"}
                                             onClick={() => this.handleAddNewUser()}
                                         >
-                                            Lưu người dùng <FontAwesomeIcon icon={faUserPlus} />
+                                            {this.state.action === CRUD_ACTIONS.EDIT ?
+                                                'Lưu thay đổi'
+                                                :
+                                                'Lưu người dùng'
+                                            }
+                                            {/* Lưu người dùng <FontAwesomeIcon icon={faUserPlus} /> */}
                                         </Button>
                                     </Col>
                                 </Row>
                             </Form>
                         </div>
                         <div className="user-display-table">
-                            <UserDisplayTableByRedux />
+                            <UserDisplayTableByRedux
+                                editUserByReduxFromParent={this.editUserByRedux}
+                                action={this.state.action}
+                            />
                         </div>
                     </div>
                     {this.state.imagePreviewOpened === true &&
@@ -545,7 +601,7 @@ const mapDispatchToProps = dispatch => {
         getRoleValueStart: () => dispatch(actions.fetchRoleValueStart()),
         addNewUserByRedux: (data) => dispatch(actions.addNewUserByRedux(data)),
         fetchUserFromRedux: () => dispatch(actions.fetchAllUsersValueStart()),
-
+        editUserByRedux: (data) => dispatch(actions.editUserByRedux(data)),
     };
 };
 
