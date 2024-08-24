@@ -1,17 +1,29 @@
 .user-manage-by-redux-container {
-    .title {}
+    width: 100%;
+
+    // .title {}
 
     .user-manage-by-redux-body {
+        width: 100%;
+
         .container {
+            width: 100%;
+            // display: flex;
+
+
+            .user-display-table {
+                width: 100%;
+                border: 1px solid red;
+            }
+
             .form-contents-container {
                 padding: 20px;
                 background-color: #f9f9f9;
                 /* Màu nền nhẹ */
                 border-radius: 8px;
+
                 /* Bo góc cho form */
-                max-width: 850px;
-                /* Giới hạn chiều rộng tối đa */
-                margin: 0 auto;
+                max-width: 100%;
 
                 /* Căn giữa form */
                 .form-group {
@@ -97,7 +109,7 @@
 
                     .image-preview {
                         height: 100%;
-                        aspect-ratio: 1 / 1;
+                        aspect-ratio: 2 / 1;
                         border: 2px solid rgb(81, 163, 251);
                         border-radius: 5px;
                         background-size: contain;

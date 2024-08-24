@@ -2,7 +2,8 @@
 //để sử dụng được file này thì bào index để export
 import actionTypes from './actionTypes';
 // Redux-getGender-(21): import để gọi api
-import { getAllCodesService, createNewUserService } from "../../services/userService";
+import { getAllCodesService, createNewUserService, getAllUsersToDisplayInReact, deleteUserService } from "../../services/userService";
+import { toast } from "react-toastify";
 
 
 //Redux-getGender-(4): tạo action
@@ -98,20 +99,78 @@ export const addNewUserByRedux = (data) => {
 
             let res = await createNewUserService(data);
             if (res && res.errCode === 0) {
+                toast.success("Add new user successfully!");
                 dispatch(addNewUserSuccessfully());
+                dispatch(fetchAllUsersValueStart());
             } else {
+                toast.error("Add fail!");
                 dispatch(addNewUserFailed());
             }
         } catch (e) {
+            toast.error("Add fail!");
             dispatch(addNewUserFailed());
         }
     }
 }
 
 export const addNewUserSuccessfully = () => ({
-    type: 'ADD_NEW_USER_SUCCESSFULLY',
+    type: actionTypes.ADD_NEW_USER_SUCCESSFULLY,
 })
 
 export const addNewUserFailed = () => ({
-    type: 'ADD_NEW_USER_FAILED',
+    type: actionTypes.ADD_NEW_USER_FAILED,
+})
+
+export const fetchAllUsersValueStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllUsersToDisplayInReact('ALL');
+            if (res && res.errCode === 0) {
+                //đảo ngược lại để những user được thêm thì chèn lên trên đầu thay vì xuốngc cuối
+                dispatch(fetchAllUsersValueSuccessfully(res.users.reverse()));
+            } else {
+                dispatch(fetchAllUsersValueFailed());
+            }
+        } catch (e) {
+            dispatch(fetchAllUsersValueFailed());
+            console.log('fetchAllUsersValueSuccessfully function error: ', e);
+        }
+    }
+}
+
+export const fetchAllUsersValueSuccessfully = (data) => ({
+    type: actionTypes.FETCH_ALL_USERS_VALUE_SUCCESSFULLY,
+    users: data
+})
+
+export const fetchAllUsersValueFailed = () => ({
+    type: actionTypes.FETCH_ALL_USERS_VALUE_FAILED,
+})
+
+export const deleteUserByRedux = (userId) => {
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await deleteUserService(userId);
+            if (res && res.errCode === 0) {
+                toast.success("An user has been deleted!");
+                dispatch(deleteUserSuccessfully());
+                dispatch(fetchAllUsersValueStart());
+            } else {
+                toast.error("Delete fail!");
+                dispatch(deleteUserFailed());
+            }
+        } catch (e) {
+            toast.error("Delete fail");
+            dispatch(deleteUserFailed());
+        }
+    }
+}
+
+export const deleteUserSuccessfully = () => ({
+    type: actionTypes.DELETE_USER_SUCCESSFULLY,
+})
+
+export const deleteUserFailed = () => ({
+    type: actionTypes.DELETE_USER_FAILED,
 })

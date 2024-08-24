@@ -10,6 +10,7 @@ import { Form, Col, FormGroup, Label, Input, Row, Button, Modal, ModalHeader, Mo
 import { getAllCodesService } from "../../../services/userService";
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
+import UserDisplayTableByRedux from './UserDisplayTableByRedux';
 
 // Redux-getGender-(17):import actions
 import * as actions from "../../../store/actions";
@@ -103,6 +104,21 @@ class UserManageByRedux extends Component {
                 role: tempArr && tempArr.length > 0 ? tempArr[0].key : '',
             })
         }
+
+        if (prevProps.usersFromRedux !== this.props.usersFromRedux) {
+            this.setState({
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                phoneNumber: '',
+                address: '',
+                gender: '',
+                position: '',
+                role: '',
+                avatarImage: '',
+            })
+        }
     }
 
     handleOnChangeAvatarImage = (event) => {
@@ -162,6 +178,19 @@ class UserManageByRedux extends Component {
                 roleId: this.state.role,
                 positionId: this.state.position,
             });
+            //chạy hàm dưới đây thì trang web sẽ tự refresh khi thêm mới người dùng
+            // vì nó sẽ chạy vào adminReducer.js và chạy vào câu successffuly, khi đó bién 
+            //users được cập nhật, thì nó sẽ chạy vào componentDidUpdate của file userdisplaytablebyredux.js
+            //sau đó biến usersDataFromRedux được thay đổi theo thì file đó sẽ thực thi lại hàm setState
+            // thì trang web sẽ tự động render lại 
+            // cần xét timeout vì tốc độ truy cập vào db chậm hơn tốc độ mà câu lệnh dưới đây thực hiện
+            //vì câu lệnh dưới đây được viết trong cùng một project
+            //nhưng thay vì làm như thế này khi thời gian chờ là cố định
+            // setTimeout(() => {
+            //     this.props.fetchUserFromRedux();
+            // }, 1000)
+            //sang file adminActions.js để thêm action lấy AllUsers mỗi khi bấm thêm một người dùng mới
+
         }
     }
 
@@ -211,7 +240,7 @@ class UserManageByRedux extends Component {
                         <div className="form-contents-container">
                             <Form>
                                 <Row>
-                                    <Col md={6}>
+                                    <Col md={3}>
                                         <FormGroup>
                                             <Label for="addUserEmail">
                                                 <FormattedMessage id="menu.admin.user-manage-by-redux-form.email" />
@@ -226,7 +255,7 @@ class UserManageByRedux extends Component {
                                             />
                                         </FormGroup>
                                     </Col>
-                                    <Col md={6}>
+                                    <Col md={3}>
                                         <FormGroup>
                                             <Label for="addUserPassword">
                                                 <FormattedMessage id="menu.admin.user-manage-by-redux-form.password" />
@@ -241,9 +270,39 @@ class UserManageByRedux extends Component {
                                             />
                                         </FormGroup>
                                     </Col>
+                                    <Col md={2} className="avatar-image-section">
+                                        <FormGroup>
+                                            <Label for="addUserAvatar">
+                                                <FormattedMessage id="menu.admin.user-manage-by-redux-form.avatar-image" />
+                                            </Label>
+                                            <Input
+                                                id="addUserAvatar"
+                                                name="avatar"
+                                                type="file"
+                                                onChange={(event) => this.handleOnChangeAvatarImage(event)}
+                                                hidden
+                                            />
+                                            <label className="upload-avatar-image" htmlFor="addUserAvatar">Tải ảnh<FontAwesomeIcon icon={faFileUpload} className="fontawesome-icon" /></label>
+                                            <label className="delete-btn"
+                                                onClick={() => this.deleteSelectedAvatarImage()}
+                                            >
+                                                Xóa ảnh
+                                                <FontAwesomeIcon icon={faTrashAlt} className="fontawesome-icon" /></label>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col md={4} className="avatar-image-section">
+                                        <FormGroup>
+                                            <Label>Xem trước</Label>
+                                            <div className="image-preview"
+                                                style={{ backgroundImage: `url(${this.state.previewAvatarImageUrl})` }}
+                                                onClick={() => this.openImagePreview()}
+                                            ></div>
+                                        </FormGroup>
+
+                                    </Col>
                                 </Row>
                                 <Row>
-                                    <Col md={6}>
+                                    <Col md={3}>
                                         <FormGroup>
                                             <Label for="addUserFirstName">
                                                 <FormattedMessage id="menu.admin.user-manage-by-redux-form.firstName" />
@@ -258,7 +317,7 @@ class UserManageByRedux extends Component {
                                             />
                                         </FormGroup>
                                     </Col>
-                                    <Col md={6}>
+                                    <Col md={3}>
                                         <FormGroup>
                                             <Label for="addUserLastName">
                                                 <FormattedMessage id="menu.admin.user-manage-by-redux-form.lastName" />
@@ -304,7 +363,7 @@ class UserManageByRedux extends Component {
                                             />
                                         </FormGroup>
                                     </Col>
-                                    <Col md={2}>
+                                    <Col md={6}>
                                         <FormGroup>
                                             <Label for="addUserGenderSelection">
                                                 <FormattedMessage id="menu.admin.user-manage-by-redux-form.gender" />
@@ -338,7 +397,10 @@ class UserManageByRedux extends Component {
                                             </Col>
                                         </FormGroup>
                                     </Col>
-                                    <Col md={4}>
+
+                                </Row>
+                                <Row>
+                                    <Col md={6}>
                                         <FormGroup>
                                             <Label for="addUserRoleSelection">
                                                 <FormattedMessage id="menu.admin.user-manage-by-redux-form.role" />
@@ -364,8 +426,6 @@ class UserManageByRedux extends Component {
                                             </Col>
                                         </FormGroup>
                                     </Col>
-                                </Row>
-                                <Row>
                                     <Col md={6}>
                                         <FormGroup>
                                             <Label for="addUserPositionSelection">
@@ -398,7 +458,8 @@ class UserManageByRedux extends Component {
                                             </Col>
                                         </FormGroup>
                                     </Col>
-                                    <Col md={2} className="avatar-image-section">
+
+                                    {/* <Col md={2} className="avatar-image-section">
                                         <FormGroup>
                                             <Label for="addUserAvatar">
                                                 <FormattedMessage id="menu.admin.user-manage-by-redux-form.avatar-image" />
@@ -427,19 +488,21 @@ class UserManageByRedux extends Component {
                                             ></div>
                                         </FormGroup>
 
-                                    </Col>
+                                    </Col> */}
                                 </Row>
                                 <Row>
                                     <Col md={12}>
                                         <Button className="add-new-user-button"
                                             onClick={() => this.handleAddNewUser()}
                                         >
-                                            Thêm mới <FontAwesomeIcon icon={faUserPlus} />
+                                            Lưu người dùng <FontAwesomeIcon icon={faUserPlus} />
                                         </Button>
                                     </Col>
                                 </Row>
                             </Form>
-
+                        </div>
+                        <div className="user-display-table">
+                            <UserDisplayTableByRedux />
                         </div>
                     </div>
                     {this.state.imagePreviewOpened === true &&
@@ -467,6 +530,8 @@ const mapStateToProps = state => {
         positionValueByRedux: state.admin.positions,
         roleValueByRedux: state.admin.roles,
         isLoadingGenderValue: state.admin.isLoadingGenderValue,
+        usersFromRedux: state.admin.users,
+
     };
 };
 
@@ -479,6 +544,8 @@ const mapDispatchToProps = dispatch => {
         getPositionValueStart: () => dispatch(actions.fetchPositionValueStart()),
         getRoleValueStart: () => dispatch(actions.fetchRoleValueStart()),
         addNewUserByRedux: (data) => dispatch(actions.addNewUserByRedux(data)),
+        fetchUserFromRedux: () => dispatch(actions.fetchAllUsersValueStart()),
+
     };
 };
 

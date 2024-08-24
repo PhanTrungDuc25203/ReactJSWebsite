@@ -31,6 +31,13 @@ const actionTypes = Object.freeze({
     //không có case start
     ADD_NEW_USER_SUCCESSFULLY: 'SAVE_USER_SUCCESSFULLY',
     ADD_NEW_USER_FAILED: 'SAVE_USER_FAILED',
+
+    //action lấy dữ liệu user từ redux để cho vào bảng displayRedux, (menu 1 option 2)
+    FETCH_ALL_USERS_VALUE_SUCCESSFULLY: 'FETCH_ALL_USERS_VALUE_SUCCESSFULLY',
+    FETCH_ALL_USERS_VALUE_FAILED: 'FETCH_ALL_USERS_VALUE_FAILED',
+    // xóa user bằng redux
+    DELETE_USER_SUCCESSFULLY: 'DELETE_USER_SUCCESSFULLY',
+    DELETE_USER_FAILED: 'DELETE_USER_FAILED',
 })
 
 export default actionTypes;

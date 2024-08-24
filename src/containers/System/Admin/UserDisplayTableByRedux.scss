@@ -1,0 +1,104 @@
+.user-display-container-redux {
+
+
+    .table-title-redux {
+        margin-top: 20px;
+        margin-bottom: 0px;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-right: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    .users-display-table-redux {
+        max-width: 100%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+        #users-redux {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #users-redux td,
+        #users-redux th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #users-redux tr:nth-child(even) {
+            max-width: 30px;
+            background-color: #d9d9d9;
+        }
+
+        #users-redux tr:hover {
+            background-color: #a9d6f4;
+        }
+
+        #users-redux th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #0071ba;
+            color: white;
+        }
+
+        .modify-data-button-redux {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            // height: 100px;
+            margin: 0 5px;
+            /* Đặt chiều rộng và chiều cao bằng nhau */
+            height: 30px;
+
+            border-radius: 5px;
+        }
+
+        .edit-button-redux {
+            font-size: 15px;
+            border: 2px solid #0071ba;
+            color: #0071ba;
+            transition: background-color 0.3s, color 0.3s;
+            /* Hiệu ứng chuyển đổi màu */
+        }
+
+        .modify-data-button-redux.edit-button-redux:hover {
+            background-color: #0071ba;
+            /* Đổi nền thành màu xanh */
+            color: #fff;
+            /* Đổi chữ thành màu trắng */
+        }
+
+        .delete-button-redux {
+            font-size: 15px;
+            border: 2px solid red;
+            color: red;
+            transition: background-color 0.3s, color 0.3s;
+            /* Hiệu ứng chuyển đổi màu */
+        }
+
+        .modify-data-button-redux.delete-button-redux:hover {
+            background-color: red;
+            /* Đổi nền thành màu xanh */
+            color: #fff;
+            /* Đổi chữ thành màu trắng */
+        }
+
+        .action-column-redux {
+            max-width: 140px;
+            width: 140px;
+            white-space: nowrap;
+            /* Giữ cho các nút không bị ngắt dòng */
+            text-align: center;
+            /* Căn giữa nội dung bên trong cột */
+            padding: 5px;
+            /* Thêm khoảng cách giữa các nút và biên của cột */
+        }
+    }
+}
