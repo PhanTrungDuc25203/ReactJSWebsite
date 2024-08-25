@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './UserManageByRedux.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileUpload, faTrashAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import { LANGUAGES, CRUD_ACTIONS } from "../../../utils";
+import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from "../../../utils";
 import { switchLanguageOfWebsite } from "../../../store/actions";
 import { Form, Col, FormGroup, Label, Input, Row, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { getAllCodesService } from "../../../services/userService";
@@ -125,19 +125,21 @@ class UserManageByRedux extends Component {
                 position: tempPositionArr && tempPositionArr.length > 0 ? tempPositionArr[0].key : '',
                 role: tempRoleArr && tempRoleArr.length > 0 ? tempRoleArr[0].key : '',
                 avatarImage: '',
+                previewAvatarImageUrl: '',
                 action: CRUD_ACTIONS.CREATE,
             })
         }
     }
 
-    handleOnChangeAvatarImage = (event) => {
+    handleOnChangeAvatarImage = async (event) => {
         let data = event.target.files;
         let file = data[0];
         if (file) {
+            let base64 = await CommonUtils.getBase64(file);
             let objectUrl = URL.createObjectURL(file);
             this.setState({
                 previewAvatarImageUrl: objectUrl,
-                avatar: file,
+                avatar: base64,
             })
         }
 
@@ -186,7 +188,7 @@ class UserManageByRedux extends Component {
                     phoneNumber: this.state.phoneNumber,
                     gender: this.state.gender,
                     //vì chưa có chỗ nhập image và position nên tôi sẽ để là một string bất kì thôi
-                    image: this.state.previewAvatarImageUrl,
+                    image: this.state.avatarImage,
                     roleId: this.state.role,
                     positionId: this.state.position,
                 });
@@ -218,6 +220,7 @@ class UserManageByRedux extends Component {
                     image: this.state.previewAvatarImageUrl,
                     roleId: this.state.role,
                     positionId: this.state.position,
+                    avatar: this.state.avatarImage,
                 });
             }
         }
@@ -250,6 +253,13 @@ class UserManageByRedux extends Component {
     }
 
     editUserByRedux = (user) => {
+
+        let imageByBase64 = '';
+        if (user.image) {
+            imageByBase64 = Buffer.from(user.image, 'base64').toString('binary');
+        }
+
+
         this.setState({
             email: user.email,
             password: 'jvch98wy80yt0h8weff0as0d',
@@ -261,6 +271,7 @@ class UserManageByRedux extends Component {
             role: user.roleId,
             position: user.positionId,
             avatar: '',
+            previewAvatarImageUrl: imageByBase64,
             action: CRUD_ACTIONS.EDIT,
             idForEditUser: user.id,
         })
