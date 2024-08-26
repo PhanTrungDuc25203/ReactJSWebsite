@@ -139,7 +139,7 @@ class UserManageByRedux extends Component {
             let objectUrl = URL.createObjectURL(file);
             this.setState({
                 previewAvatarImageUrl: objectUrl,
-                avatar: base64,
+                avatarImage: base64,
             })
         }
 
@@ -174,55 +174,55 @@ class UserManageByRedux extends Component {
         let isValid = this.checkInputValidation();
         if (isValid === false) {
             return;
-        } else {
-            let { action } = this.state;
-            // = let action = this.state.action;
-            if (action === CRUD_ACTIONS.CREATE) {
-                //fire redux action
-                this.props.addNewUserByRedux({
-                    email: this.state.email,
-                    password: this.state.password,
-                    firstName: this.state.firstName,
-                    lastName: this.state.lastName,
-                    address: this.state.address,
-                    phoneNumber: this.state.phoneNumber,
-                    gender: this.state.gender,
-                    //vì chưa có chỗ nhập image và position nên tôi sẽ để là một string bất kì thôi
-                    image: this.state.avatarImage,
-                    roleId: this.state.role,
-                    positionId: this.state.position,
-                });
-                //chạy hàm dưới đây thì trang web sẽ tự refresh khi thêm mới người dùng
-                // vì nó sẽ chạy vào adminReducer.js và chạy vào câu successffuly, khi đó bién 
-                //users được cập nhật, thì nó sẽ chạy vào componentDidUpdate của file userdisplaytablebyredux.js
-                //sau đó biến usersDataFromRedux được thay đổi theo thì file đó sẽ thực thi lại hàm setState
-                // thì trang web sẽ tự động render lại 
-                // cần xét timeout vì tốc độ truy cập vào db chậm hơn tốc độ mà câu lệnh dưới đây thực hiện
-                //vì câu lệnh dưới đây được viết trong cùng một project
-                //nhưng thay vì làm như thế này khi thời gian chờ là cố định
-                // setTimeout(() => {
-                //     this.props.fetchUserFromRedux();
-                // }, 1000)
-                //sang file adminActions.js để thêm action lấy AllUsers mỗi khi bấm thêm một người dùng mới
+        }
 
-            }
-            if (action === CRUD_ACTIONS.EDIT) {
-                this.props.editUserByRedux({
-                    id: this.state.idForEditUser,
-                    email: this.state.email,
-                    password: this.state.password,
-                    firstName: this.state.firstName,
-                    lastName: this.state.lastName,
-                    address: this.state.address,
-                    phoneNumber: this.state.phoneNumber,
-                    gender: this.state.gender,
-                    //vì chưa có chỗ nhập image và position nên tôi sẽ để là một string bất kì thôi
-                    image: this.state.previewAvatarImageUrl,
-                    roleId: this.state.role,
-                    positionId: this.state.position,
-                    avatar: this.state.avatarImage,
-                });
-            }
+        let { action } = this.state;
+        // = let action = this.state.action;
+        if (action === CRUD_ACTIONS.CREATE) {
+            //fire redux action
+            this.props.addNewUserByRedux({
+                email: this.state.email,
+                password: this.state.password,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                address: this.state.address,
+                phoneNumber: this.state.phoneNumber,
+                gender: this.state.gender,
+                //vì chưa có chỗ nhập image và position nên tôi sẽ để là một string bất kì thôi
+                image: this.state.avatarImage,
+                roleId: this.state.role,
+                positionId: this.state.position,
+            });
+            //chạy hàm dưới đây thì trang web sẽ tự refresh khi thêm mới người dùng
+            // vì nó sẽ chạy vào adminReducer.js và chạy vào câu successffuly, khi đó bién 
+            //users được cập nhật, thì nó sẽ chạy vào componentDidUpdate của file userdisplaytablebyredux.js
+            //sau đó biến usersDataFromRedux được thay đổi theo thì file đó sẽ thực thi lại hàm setState
+            // thì trang web sẽ tự động render lại 
+            // cần xét timeout vì tốc độ truy cập vào db chậm hơn tốc độ mà câu lệnh dưới đây thực hiện
+            //vì câu lệnh dưới đây được viết trong cùng một project
+            //nhưng thay vì làm như thế này khi thời gian chờ là cố định
+            // setTimeout(() => {
+            //     this.props.fetchUserFromRedux();
+            // }, 1000)
+            //sang file adminActions.js để thêm action lấy AllUsers mỗi khi bấm thêm một người dùng mới
+
+        }
+        if (action === CRUD_ACTIONS.EDIT) {
+            this.props.editUserByRedux({
+                id: this.state.idForEditUser,
+                email: this.state.email,
+                password: this.state.password,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                address: this.state.address,
+                phoneNumber: this.state.phoneNumber,
+                gender: this.state.gender,
+                //vì chưa có chỗ nhập image và position nên tôi sẽ để là một string bất kì thôi
+                // image: this.state.previewAvatarImageUrl,
+                roleId: this.state.role,
+                positionId: this.state.position,
+                image: this.state.avatarImage,
+            });
         }
     }
 
@@ -270,7 +270,7 @@ class UserManageByRedux extends Component {
             gender: user.gender,
             role: user.roleId,
             position: user.positionId,
-            avatar: '',
+            avatarImage: '',
             previewAvatarImageUrl: imageByBase64,
             action: CRUD_ACTIONS.EDIT,
             idForEditUser: user.id,
