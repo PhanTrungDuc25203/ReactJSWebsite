@@ -41,6 +41,9 @@ const actionTypes = Object.freeze({
     //edit bằng redux
     EDIT_USER_SUCCESSFULLY: 'EDIT_USER_SUCCESSFULLY',
     EDIT_USER_FAILED: 'EDIT_USER_FAILED',
+    //lấy dữ liệu các bác sĩ nổi bật
+    FETCH_ELITE_DOCTORS_VALUE_SUCCESSFULLY: 'FETCH_ELITE_DOCTORS_VALUE_SUCCESSFULLY',
+    FETCH_ELITE_DOCTORS_VALUE_FAILED: 'FETCH_ELITE_DOCTORS_VALUE_FAILED',
 })
 
 export default actionTypes;

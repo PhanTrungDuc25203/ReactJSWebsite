@@ -2,7 +2,14 @@
 //để sử dụng được file này thì bào index để export
 import actionTypes from './actionTypes';
 // Redux-getGender-(21): import để gọi api
-import { getAllCodesService, createNewUserService, getAllUsersToDisplayInReact, deleteUserService, editUserService } from "../../services/userService";
+import {
+    getAllCodesService,
+    createNewUserService,
+    getAllUsersToDisplayInReact,
+    deleteUserService,
+    editUserService,
+    getEliteDoctorsForHomePageService
+} from "../../services/userService";
 import { toast } from "react-toastify";
 
 
@@ -202,3 +209,29 @@ export const editUserSuccessfully = () => ({
 export const editUserFailed = () => ({
     type: actionTypes.EDIT_USER_FAILED,
 })
+
+// let res_for_doctor_fetching = await getEliteDoctorsForHomePageService('');
+//             console.log("Check elitedoctor fetching: ", res_for_doctor_fetching);
+export const fetchEliteDoctors = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getEliteDoctorsForHomePageService('');
+            console.log("Check res fetch elite doctors: ", res);
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_ELITE_DOCTORS_VALUE_SUCCESSFULLY,
+                    eliteDoctorsData: res.data,
+                })
+            } else {
+                dispatch({
+                    type: actionTypes.FETCH_ELITE_DOCTORS_VALUE_FAILED,
+                })
+            }
+        } catch (e) {
+            console.log('Fetch elite doctors data fail: ', e);
+            dispatch({
+                type: actionTypes.FETCH_ELITE_DOCTORS_VALUE_FAILED,
+            })
+        }
+    }
+}

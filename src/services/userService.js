@@ -55,11 +55,16 @@ const getAllCodesService = (inputType) => {
     return axios.get(`/api/getallcodesdata?type=${inputType}`);
 }
 
+const getEliteDoctorsForHomePageService = (limitEliteDoctor) => {
+    return axios.get(`/api/get-elite-doctor-for-homepage?limitEliteDoctor=${limitEliteDoctor}`);
+}
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
     createNewUserService,
     deleteUserService,
     editUserService,
-    getAllCodesService
+    getAllCodesService,
+    getEliteDoctorsForHomePageService,
 };

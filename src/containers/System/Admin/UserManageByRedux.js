@@ -85,7 +85,7 @@ class UserManageByRedux extends Component {
             this.setState({
                 // genderArr: this.props.genderValueByRedux,
                 genderArr: tempArr,
-                gender: tempArr && tempArr.length > 0 ? tempArr[0].key : '',
+                gender: tempArr && tempArr.length > 0 ? tempArr[0].keyMap : '',
             })
         }
         // Redux-getGender-(29): vậy là qua 29 bước code tụt loll thì cuối cùng <option> cũng nhận data
@@ -95,7 +95,7 @@ class UserManageByRedux extends Component {
             this.setState({
                 // genderArr: this.props.genderValueByRedux,
                 positionArr: tempArr,
-                position: tempArr && tempArr.length > 0 ? tempArr[0].key : '',
+                position: tempArr && tempArr.length > 0 ? tempArr[0].keyMap : '',
             })
         }
         //role
@@ -104,7 +104,7 @@ class UserManageByRedux extends Component {
             this.setState({
                 // genderArr: this.props.genderValueByRedux,
                 roleArr: tempArr,
-                role: tempArr && tempArr.length > 0 ? tempArr[0].key : '',
+                role: tempArr && tempArr.length > 0 ? tempArr[0].keyMap : '',
             })
         }
 
@@ -121,9 +121,9 @@ class UserManageByRedux extends Component {
                 lastName: '',
                 phoneNumber: '',
                 address: '',
-                gender: tempGenderArr && tempGenderArr.length > 0 ? tempGenderArr[0].key : '',
-                position: tempPositionArr && tempPositionArr.length > 0 ? tempPositionArr[0].key : '',
-                role: tempRoleArr && tempRoleArr.length > 0 ? tempRoleArr[0].key : '',
+                gender: tempGenderArr && tempGenderArr.length > 0 ? tempGenderArr[0].keyMap : '',
+                position: tempPositionArr && tempPositionArr.length > 0 ? tempPositionArr[0].keyMap : '',
+                role: tempRoleArr && tempRoleArr.length > 0 ? tempRoleArr[0].keyMap : '',
                 avatarImage: '',
                 previewAvatarImageUrl: '',
                 action: CRUD_ACTIONS.CREATE,
@@ -446,7 +446,7 @@ class UserManageByRedux extends Component {
                                                     {genders && genders.length > 0 &&
                                                         genders.map((item, index) => {
                                                             return (
-                                                                <option key={index} value={item.key}>
+                                                                <option key={index} value={item.keyMap}>
                                                                     {language === LANGUAGES.VI ? item.value_Vie : item.value_Eng}
                                                                 </option>
                                                             )
@@ -475,7 +475,7 @@ class UserManageByRedux extends Component {
                                                     {roles && roles.length > 0 &&
                                                         roles.map((item, index) => {
                                                             return (
-                                                                <option key={index} value={item.key}>
+                                                                <option key={index} value={item.keyMap}>
                                                                     {language === LANGUAGES.VI ? item.value_Vie : item.value_Eng}
                                                                 </option>
                                                             )
@@ -501,7 +501,7 @@ class UserManageByRedux extends Component {
                                                     {positions && positions.length > 0 &&
                                                         positions.map((item, index) => {
                                                             return (
-                                                                <option key={index} value={item.key}>
+                                                                <option key={index} value={item.keyMap}>
                                                                     {language === LANGUAGES.VI ? item.value_Vie : item.value_Eng}
                                                                 </option>
                                                             )
