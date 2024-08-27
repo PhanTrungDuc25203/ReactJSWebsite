@@ -341,17 +341,19 @@ class UserManageByRedux extends Component {
                                                 onChange={(event) => this.handleOnChangeAvatarImage(event)}
                                                 hidden
                                             />
-                                            <label className="upload-avatar-image" htmlFor="addUserAvatar">Tải ảnh<FontAwesomeIcon icon={faFileUpload} className="fontawesome-icon" /></label>
+                                            <label className="upload-avatar-image" htmlFor="addUserAvatar">
+                                                <FormattedMessage id="menu.admin.user-manage-by-redux-form.image-upload" />
+                                                <FontAwesomeIcon icon={faFileUpload} className="fontawesome-icon" /></label>
                                             <label className="delete-btn"
                                                 onClick={() => this.deleteSelectedAvatarImage()}
                                             >
-                                                Xóa ảnh
+                                                <FormattedMessage id="menu.admin.user-manage-by-redux-form.image-delete" />
                                                 <FontAwesomeIcon icon={faTrashAlt} className="fontawesome-icon" /></label>
                                         </FormGroup>
                                     </Col>
                                     <Col md={4} className="avatar-image-section">
                                         <FormGroup>
-                                            <Label>Xem trước</Label>
+                                            <Label><FormattedMessage id="menu.admin.user-manage-by-redux-form.image-preview" /></Label>
                                             <div className="image-preview"
                                                 style={{ backgroundImage: `url(${this.state.previewAvatarImageUrl})` }}
                                                 onClick={() => this.openImagePreview()}
@@ -555,9 +557,10 @@ class UserManageByRedux extends Component {
                                             onClick={() => this.handleAddNewUser()}
                                         >
                                             {this.state.action === CRUD_ACTIONS.EDIT ?
-                                                'Lưu thay đổi'
+                                                <FormattedMessage id="menu.admin.user-manage-by-redux-form.save-changes-button" />
+
                                                 :
-                                                'Lưu người dùng'
+                                                <FormattedMessage id="menu.admin.user-manage-by-redux-form.add-new-button" />
                                             }
                                             {/* Lưu người dùng <FontAwesomeIcon icon={faUserPlus} /> */}
                                         </Button>

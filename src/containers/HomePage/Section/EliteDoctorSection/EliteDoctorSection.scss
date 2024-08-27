@@ -11,6 +11,11 @@
         position: relative;
         width: 89%;
 
+        //thêm class này để khi ở cuối hay đầu slide thì nút bấm sẽ biến mất, nhớ set infinity=false ở phần settings
+        .slick-disabled {
+            display: none !important;
+        }
+
         .item-content {
             border-radius: 10px;
             font-size: 18px;

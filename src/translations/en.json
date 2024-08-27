@@ -207,7 +207,13 @@
                 },
                 "position": "Position",
                 "position-value": {},
-                "avatar-image": "Avatar"
+                "avatar-image": "Avatar",
+                "image-preview": "Image preview",
+                "image-upload": "Upload image",
+                "image-delete": "Delete image",
+                "update-data-column": "Update data",
+                "add-new-button": "Save new user",
+                "save-changes-button": "Save changes"
             }
         }
     }

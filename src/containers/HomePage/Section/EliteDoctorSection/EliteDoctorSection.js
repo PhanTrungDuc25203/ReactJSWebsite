@@ -63,7 +63,7 @@ class EliteDoctorSection extends Component {
 
         let settings = {
             dots: true,
-            infinite: true,
+            infinite: false,
             slidesToShow: 4,
             slidesToScroll: 4,
             nextArrow: <this.SampleNextArrow />,  // Sử dụng SampleNextArrow

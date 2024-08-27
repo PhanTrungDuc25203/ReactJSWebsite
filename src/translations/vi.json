@@ -185,7 +185,7 @@
             "article-handbook-manage": "Quản lý bài đăng, cẩm nang",
             "user-manage-by-redux-form": {
                 "title": "Quản lý người dùng bằng Redux",
-                "email": "Địa chỉ hòm thư điện tử (Email)",
+                "email": "Thư điện tử (Email)",
                 "password": "Mật khẩu",
                 "firstName": "Tên",
                 "lastName": "Họ và tên đệm",
@@ -207,7 +207,13 @@
                 },
                 "position": "Vị trí",
                 "position-value": {},
-                "avatar-image": "Ảnh đại diện"
+                "avatar-image": "Ảnh đại diện",
+                "image-preview": "Xem trước",
+                "image-upload": "Tải ảnh",
+                "image-delete": "Xóa ảnh",
+                "update-data-column": "Cập nhật",
+                "add-new-button": "Lưu người dùng",
+                "save-changes-button": "Lưu thay đổi"
             }
         }
     }

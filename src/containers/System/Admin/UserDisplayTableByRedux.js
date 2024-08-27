@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { LANGUAGES } from "../../../utils";
 import { connect } from 'react-redux';
 import * as actions from "../../../store/actions";
 import './UserDisplayTableByRedux.scss';
@@ -41,21 +42,23 @@ class UserDisplayTableByRedux extends Component {
             <div className="user-display-container-redux">
                 <div className="title table-title-redux">
                     Users
-                    {/* <div className="mx-1">
-                        <button className="btn btn-primary add-new-user-button"
-                            onClick={() => this.handleAddNewUserInReact()}>New user<i className="fas fa-user-plus"></i></button>
-                    </div> */}
                 </div>
                 <div className="users-display-table-redux">
                     <table id="users-redux">
                         <tbody>
                             <tr>
-                                <th>Email</th>
-                                <th>First name</th>
-                                <th>Last name</th>
-                                <th>Address</th>
-                                <th>Phone number</th>
-                                <th>Update data</th>
+                                <th> <FormattedMessage id="menu.admin.user-manage-by-redux-form.email" />
+                                </th>
+                                <th> <FormattedMessage id="menu.admin.user-manage-by-redux-form.firstName" />
+                                </th>
+                                <th> <FormattedMessage id="menu.admin.user-manage-by-redux-form.lastName" />
+                                </th>
+                                <th> <FormattedMessage id="menu.admin.user-manage-by-redux-form.address" />
+                                </th>
+                                <th> <FormattedMessage id="menu.admin.user-manage-by-redux-form.phoneNumber" />
+                                </th>
+                                <th><FormattedMessage id="menu.admin.user-manage-by-redux-form.update-data-column" />
+                                </th>
                             </tr>
 
                             {arrUsers && arrUsers.map((item, index) => {
