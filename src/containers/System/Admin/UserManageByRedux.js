@@ -11,6 +11,7 @@ import { getAllCodesService } from "../../../services/userService";
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
 import UserDisplayTableByRedux from './UserDisplayTableByRedux';
+import EditorLiteForDoctorArticle from './EditorLiteForDoctorArticle/EditorLiteForDoctorArticle';
 
 // Redux-getGender-(17):import actions
 import * as actions from "../../../store/actions";
@@ -573,6 +574,9 @@ class UserManageByRedux extends Component {
                                 editUserByReduxFromParent={this.editUserByRedux}
                                 action={this.state.action}
                             />
+                        </div>
+                        <div className="editor-elite-for-doctor-article">
+                            <EditorLiteForDoctorArticle />
                         </div>
                     </div>
                     {this.state.imagePreviewOpened === true &&
