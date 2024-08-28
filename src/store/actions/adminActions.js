@@ -9,7 +9,8 @@ import {
     deleteUserService,
     editUserService,
     getEliteDoctorsForHomePageService,
-    getAllDoctorsForDoctorArticlePageService
+    getAllDoctorsForDoctorArticlePageService,
+    saveInforAndArticleForADoctor
 } from "../../services/userService";
 import { toast } from "react-toastify";
 
@@ -256,6 +257,32 @@ export const fetchAllDoctorsForDoctorArticlePage = () => {
             console.log('Fetch all doctors data fail: ', e);
             dispatch({
                 type: actionTypes.GET_All_DOCTORS_FOR_DOCTOR_ARTICLE_PAGE_FAILED,
+            })
+        }
+    }
+}
+
+export const saveDoctorDetails = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await saveInforAndArticleForADoctor(data);
+            console.log("Check save doctor: ", res);
+            if (res && res.errCode === 0) {
+                toast.success("Doctor's article saved successfully!");
+                dispatch({
+                    type: actionTypes.SAVE_INFOR_AND_ARTICLE_FOR_A_DOCTOR_SUCCESSFULLY,
+                })
+            } else {
+                toast.error("Doctor's article saved fail!");
+                dispatch({
+                    type: actionTypes.SAVE_INFOR_AND_ARTICLE_FOR_A_DOCTOR_FAILED,
+                })
+            }
+        } catch (e) {
+            toast.error("Doctor's article saved fail!");
+            console.log('Save doctor fail: ', e);
+            dispatch({
+                type: actionTypes.SAVE_INFOR_AND_ARTICLE_FOR_A_DOCTOR_FAILED,
             })
         }
     }

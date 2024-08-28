@@ -63,6 +63,10 @@ const getAllDoctorsForDoctorArticlePageService = () => {
     return axios.get('/api/get-all-doctors-for-doctor-article-page');
 }
 
+const saveInforAndArticleForADoctor = (data) => {
+    return axios.post('/api/save-infor-and-article-of-a-doctor', data);
+}
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -72,5 +76,6 @@ export {
     getAllCodesService,
     getEliteDoctorsForHomePageService,
     getAllDoctorsForDoctorArticlePageService,
+    saveInforAndArticleForADoctor,
 
 };

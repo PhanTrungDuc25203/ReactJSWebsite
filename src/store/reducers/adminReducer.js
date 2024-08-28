@@ -94,6 +94,15 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+
+        case actionTypes.SAVE_INFOR_AND_ARTICLE_FOR_A_DOCTOR_SUCCESSFULLY:
+            return {
+                ...state,
+            }
+        case actionTypes.SAVE_INFOR_AND_ARTICLE_FOR_A_DOCTOR_FAILED:
+            return {
+                ...state,
+            }
         default:
             return state;
     }
