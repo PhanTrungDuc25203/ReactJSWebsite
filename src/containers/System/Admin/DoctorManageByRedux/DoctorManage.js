@@ -4,16 +4,10 @@ import { LANGUAGES } from "../../../../utils";
 import { connect } from 'react-redux';
 import './DoctorManage.scss';
 import * as actions from "../../../../store/actions";
-import EditorLiteForDoctorArticle from '../EditorLiteForDoctorArticle/EditorLiteForDoctorArticle';
+import 'react-markdown-editor-lite/lib/index.css';
 import Select from 'react-select';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
-
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-];
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -25,14 +19,27 @@ class DoctorManage extends Component {
             htmlContent: '',
             selectedDoctor: null,
             description: '',
+            listDoctors: [],
         }
     }
 
     componentDidMount() {
-
+        this.props.fetchAllDoctorsForDoctorArticlePage();
     }
-    componentDidUpdate(prevProps, prevState, snapshot) {
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.allDoctorsForDoctorArticlePage !== this.props.allDoctorsForDoctorArticlePage) {
+            let selectData = this.buildDataForDoctorSelectBox(this.props.allDoctorsForDoctorArticlePage)
+            this.setState({
+                listDoctors: selectData,
+            })
+        }
+        if (prevProps.language !== this.props.language) {
+            let selectData = this.buildDataForDoctorSelectBox(this.props.allDoctorsForDoctorArticlePage)
+            this.setState({
+                listDoctors: selectData,
+            })
+        }
     }
 
     handleEditorChange = ({ html, text }) => {
@@ -52,11 +59,28 @@ class DoctorManage extends Component {
         console.log("CHeck parent state: ", this.state);
     }
 
-    handleChange = (selectedDoctor) => {
+    handleChangeOnSelectBox = (selectedDoctor) => {
         this.setState({ selectedDoctor }, () =>
             console.log(`Option selected:`, this.state.selectedDoctor)
         );
     };
+
+    buildDataForDoctorSelectBox = (data) => {
+        let result = [];
+        let { language } = this.props;
+        if (data && data.length > 0) {
+            data.map((item, index) => {
+                let tempObj = {};
+                let labelInVie = `${item.lastName} ${item.firstName}`;
+                let labelInEng = `${item.firstName} ${item.lastName}`;
+                tempObj.label = language === LANGUAGES.VI ? labelInVie : labelInEng;
+                tempObj.value = item.id;
+                result.push(tempObj);
+            })
+
+        }
+        return result;
+    }
 
     render() {
         return (
@@ -77,9 +101,10 @@ class DoctorManage extends Component {
                     <div className="option-section">
                         <Select
                             value={this.state.selectedDoctor}
-                            onChange={this.handleChange}
-                            options={options}
+                            onChange={this.handleChangeOnSelectBox}
+                            options={this.state.listDoctors}
                             className="doctor-option"
+                            placeholder="Chọn bác sĩ..."
                         />
                         <button className="save-doctor-article-button"
                             onClick={() => this.handleSaveMarkdownContent()}
@@ -96,8 +121,6 @@ class DoctorManage extends Component {
                 <div className="editor-lite-for-doctor-article">
                     <MdEditor style={{ height: '500px' }}
                         renderHTML={text => mdParser.render(text)}
-                        //nếu dùng () => ở function này thì sẽ không thể bắt được sự kiện onChange vì đây là
-                        //truyền props cho MdEditor
                         onChange={this.handleEditorChange} />
                 </div>
             </div>
@@ -108,14 +131,14 @@ class DoctorManage extends Component {
 
 const mapStateToProps = state => {
     return {
-        usersFromRedux: state.admin.users,
+        language: state.app.language,
+        allDoctorsForDoctorArticlePage: state.admin.allDoctorsForDoctorArticlePage,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchUserFromRedux: () => dispatch(actions.fetchAllUsersValueStart()),
-        deleteUserByRedux: (id) => dispatch(actions.deleteUserByRedux(id)),
+        fetchAllDoctorsForDoctorArticlePage: () => dispatch(actions.fetchAllDoctorsForDoctorArticlePage()),
     };
 };
 

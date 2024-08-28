@@ -574,9 +574,6 @@ class UserManageByRedux extends Component {
                                 action={this.state.action}
                             />
                         </div>
-                        {/* <div className="editor-elite-for-doctor-article">
-                            <EditorLiteForDoctorArticle />
-                        </div> */}
                     </div>
                     {this.state.imagePreviewOpened === true &&
                         <Lightbox

@@ -8,7 +8,8 @@ import {
     getAllUsersToDisplayInReact,
     deleteUserService,
     editUserService,
-    getEliteDoctorsForHomePageService
+    getEliteDoctorsForHomePageService,
+    getAllDoctorsForDoctorArticlePageService
 } from "../../services/userService";
 import { toast } from "react-toastify";
 
@@ -216,7 +217,7 @@ export const fetchEliteDoctors = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getEliteDoctorsForHomePageService('');
-            console.log("Check res fetch elite doctors: ", res);
+            // console.log("Check res fetch elite doctors: ", res);
             if (res && res.errCode === 0) {
                 dispatch({
                     type: actionTypes.FETCH_ELITE_DOCTORS_VALUE_SUCCESSFULLY,
@@ -231,6 +232,30 @@ export const fetchEliteDoctors = () => {
             console.log('Fetch elite doctors data fail: ', e);
             dispatch({
                 type: actionTypes.FETCH_ELITE_DOCTORS_VALUE_FAILED,
+            })
+        }
+    }
+}
+
+export const fetchAllDoctorsForDoctorArticlePage = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllDoctorsForDoctorArticlePageService();
+            console.log("Check res fetch all doctors: ", res);
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.GET_All_DOCTORS_FOR_DOCTOR_ARTICLE_PAGE_SUCCESSFULLY,
+                    allDoctorsData: res.data,
+                })
+            } else {
+                dispatch({
+                    type: actionTypes.GET_All_DOCTORS_FOR_DOCTOR_ARTICLE_PAGE_FAILED,
+                })
+            }
+        } catch (e) {
+            console.log('Fetch all doctors data fail: ', e);
+            dispatch({
+                type: actionTypes.GET_All_DOCTORS_FOR_DOCTOR_ARTICLE_PAGE_FAILED,
             })
         }
     }

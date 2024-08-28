@@ -11,6 +11,7 @@ const initialState = {
     positions: [],
     users: [],
     eliteDoctors: [],
+    allDoctorsForDoctorArticlePage: [],
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -80,6 +81,16 @@ const adminReducer = (state = initialState, action) => {
             }
         case actionTypes.FETCH_ELITE_DOCTORS_VALUE_FAILED:
             state.eliteDoctors = [];
+            return {
+                ...state,
+            }
+        case actionTypes.GET_All_DOCTORS_FOR_DOCTOR_ARTICLE_PAGE_SUCCESSFULLY:
+            state.allDoctorsForDoctorArticlePage = action.allDoctorsData;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_All_DOCTORS_FOR_DOCTOR_ARTICLE_PAGE_FAILED:
+            state.allDoctorsForDoctorArticlePage = [];
             return {
                 ...state,
             }
