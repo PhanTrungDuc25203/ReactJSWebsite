@@ -19,7 +19,7 @@ class HomePage extends Component {
 
         return (
             <React.Fragment>
-                <HomePageHeader />
+                <HomePageHeader isShowBanner={true} />
                 <ComprehensiveServiceSection />
                 <SpecialtySection />
                 <MedicalFacilitiesSection />

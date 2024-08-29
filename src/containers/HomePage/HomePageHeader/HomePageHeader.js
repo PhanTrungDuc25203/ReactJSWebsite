@@ -90,57 +90,59 @@ class HomePageHeader extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="menu-between-header-and-banner">
-                    <nav>
-                        <ul id="home-top-navigator">
-                            <li><FormattedMessage id="home-top-navigator.option-home" /></li>
-                            <li><i className="far fa-hospital nav-icon"></i><FormattedMessage id="home-top-navigator.option-specialty-exam" /></li>
-                            <li><i className="fas fa-phone-volume nav-icon"></i><FormattedMessage id="home-top-navigator.option-remote-exam" /></li>
-                            <li><i className="fas fa-child nav-icon"></i><FormattedMessage id="home-top-navigator.option-general-exam" /></li>
-                            <li><i className="fas fa-vial nav-icon"></i><FormattedMessage id="home-top-navigator.option-medical-testing" /></li>
-                            <li><FontAwesomeIcon icon={faHeartPulse} className="nav-icon fontawesome-icon" /><FormattedMessage id="home-top-navigator.option-mental-health" /></li>
-                            {/* <li><i className="fas fa-tablets nav-icon"></i>Khám nha khoa</li> */}
-                            <li><FontAwesomeIcon icon={faTooth} className="nav-icon fontawesome-icon" /><FormattedMessage id="home-top-navigator.option-dental-exam" /></li>
+                {this.props.isShowBanner === true &&
+                    <div className="menu-between-header-and-banner">
+                        <nav>
+                            <ul id="home-top-navigator">
+                                <li><FormattedMessage id="home-top-navigator.option-home" /></li>
+                                <li><i className="far fa-hospital nav-icon"></i><FormattedMessage id="home-top-navigator.option-specialty-exam" /></li>
+                                <li><i className="fas fa-phone-volume nav-icon"></i><FormattedMessage id="home-top-navigator.option-remote-exam" /></li>
+                                <li><i className="fas fa-child nav-icon"></i><FormattedMessage id="home-top-navigator.option-general-exam" /></li>
+                                <li><i className="fas fa-vial nav-icon"></i><FormattedMessage id="home-top-navigator.option-medical-testing" /></li>
+                                <li><FontAwesomeIcon icon={faHeartPulse} className="nav-icon fontawesome-icon" /><FormattedMessage id="home-top-navigator.option-mental-health" /></li>
+                                {/* <li><i className="fas fa-tablets nav-icon"></i>Khám nha khoa</li> */}
+                                <li><FontAwesomeIcon icon={faTooth} className="nav-icon fontawesome-icon" /><FormattedMessage id="home-top-navigator.option-dental-exam" /></li>
 
-                            <div id="marker"></div>
-                        </ul>
-                    </nav>
-                </div>
+                                <div id="marker"></div>
+                            </ul>
+                        </nav>
+                    </div>
+                }
+                {this.props.isShowBanner === true &&
+                    <div className="home-header-banner-container">
+                        <div className="search-area">
+                            <div className="container">
 
-                <div className="home-header-banner-container">
-                    <div className="search-area">
-                        <div className="container">
+                                <FormattedMessage id="home-banner.search-area-search-box-placeholder">
+                                    {(placeholderText) => (
+                                        <input
+                                            type="text"
+                                            placeholder={placeholderText}
+                                        />
+                                    )}
+                                </FormattedMessage>
+                                {/* câu lệnh bên dưới không thể cho <FormattedMessage vào được  */}
+                                {/* <input type="text" placeholder="Tìm kiếm..."></input> */}
+                                <div className="search"></div>
+                                <div className="search-box-title"><FormattedMessage id="home-banner.search-area-search-box-title" /></div>
+                                <div className="search-box-content"><FormattedMessage id="home-banner.search-area-search-box-content" /></div>
 
-                            <FormattedMessage id="home-banner.search-area-search-box-placeholder">
-                                {(placeholderText) => (
-                                    <input
-                                        type="text"
-                                        placeholder={placeholderText}
-                                    />
-                                )}
-                            </FormattedMessage>
-                            {/* câu lệnh bên dưới không thể cho <FormattedMessage vào được  */}
-                            {/* <input type="text" placeholder="Tìm kiếm..."></input> */}
-                            <div className="search"></div>
-                            <div className="search-box-title"><FormattedMessage id="home-banner.search-area-search-box-title" /></div>
-                            <div className="search-box-content"><FormattedMessage id="home-banner.search-area-search-box-content" /></div>
-
-                            {/* <div className="spacing"></div> */}
-                            <div className="quick-search-container">
-                                <div className="quick-search">
-                                    <div className="quick-search-icon-1"><FontAwesomeIcon icon={faSuitcaseMedical} /></div>
-                                    <div className="quick-search-content-1"><marquee><FormattedMessage id="home-banner.search-area-quick-search-content-1" /></marquee></div>
-                                </div>
-                                <div className="quick-search">
-                                    <div className="quick-search-icon-2"><FontAwesomeIcon icon={faStethoscope} /></div>
-                                    <div className="quick-search-content-2"><marquee><FormattedMessage id="home-banner.search-area-quick-search-content-2" /></marquee></div>
+                                {/* <div className="spacing"></div> */}
+                                <div className="quick-search-container">
+                                    <div className="quick-search">
+                                        <div className="quick-search-icon-1"><FontAwesomeIcon icon={faSuitcaseMedical} /></div>
+                                        <div className="quick-search-content-1"><marquee><FormattedMessage id="home-banner.search-area-quick-search-content-1" /></marquee></div>
+                                    </div>
+                                    <div className="quick-search">
+                                        <div className="quick-search-icon-2"><FontAwesomeIcon icon={faStethoscope} /></div>
+                                        <div className="quick-search-content-2"><marquee><FormattedMessage id="home-banner.search-area-quick-search-content-2" /></marquee></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div className="home-page-banners"></div>
                     </div>
-                    <div className="home-page-banners"></div>
-                </div>
-
+                }
                 <div className="header-side-bar">
                     <input type="checkbox" id="check" />
                     <label htmlFor="check" className="side-bar-toggle">

@@ -8,6 +8,8 @@ import { FormattedMessage } from 'react-intl';
 import { LANGUAGES } from "../../../../utils";
 import { switchLanguageOfWebsite } from "../../../../store/actions";
 import * as actions from '../../../../store/actions';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 class EliteDoctorSection extends Component {
 
@@ -56,6 +58,7 @@ class EliteDoctorSection extends Component {
 
     handleViewDetailArticleOfADoctor = (doctor) => {
         console.log("Check this doctor: ", doctor);
+        this.props.history.push(`/detail-doctor-article/doctor/${doctor.id}`);
     }
 
     render() {
@@ -105,7 +108,7 @@ class EliteDoctorSection extends Component {
                                 if (item.image) {
                                     imageByBase64 = Buffer.from(item.image, 'base64').toString('binary');
                                 }
-                                let nameInVie = `${item.positionData.value_Vie}, ${item.firstName} ${item.lastName}`;
+                                let nameInVie = `${item.positionData.value_Vie}, ${item.lastName} ${item.firstName}`;
                                 let nameInEng = `${item.positionData.value_Eng}, ${item.firstName} ${item.lastName}`;
                                 return (
                                     <div className="item-content" key={index}
@@ -192,4 +195,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EliteDoctorSection);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EliteDoctorSection));

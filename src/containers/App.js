@@ -54,7 +54,7 @@ class App extends Component {
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     {/* booking care cho bác sĩ và bệnh nhân*/}
                                     <Route path={path.HOMEPAGE} component={(HomePage)} />
-                                    <Route path="/users/:id" component={DetailArticleForADoctor} />
+                                    <Route path={path.DETAIL_DOCTOR_ARTICLE} component={DetailArticleForADoctor} />
                                 </Switch>
                             </CustomScrollbars>
                         </div>

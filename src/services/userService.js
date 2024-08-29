@@ -67,6 +67,10 @@ const saveInforAndArticleForADoctor = (data) => {
     return axios.post('/api/save-infor-and-article-of-a-doctor', data);
 }
 
+const getInforAndArticleForADoctor = (id) => {
+    return axios.get(`/api/get-a-particular-doctor-infor-for-his-or-her-page?id=${id}`);
+}
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -77,5 +81,6 @@ export {
     getEliteDoctorsForHomePageService,
     getAllDoctorsForDoctorArticlePageService,
     saveInforAndArticleForADoctor,
+    getInforAndArticleForADoctor,
 
 };
