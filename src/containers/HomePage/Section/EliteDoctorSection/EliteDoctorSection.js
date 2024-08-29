@@ -54,6 +54,10 @@ class EliteDoctorSection extends Component {
         );
     }
 
+    handleViewDetailArticleOfADoctor = (doctor) => {
+        console.log("Check this doctor: ", doctor);
+    }
+
     render() {
         console.log("Check elite doctors data from redux: ", this.props.eliteDoctorsData);
         let arrEliteDoctor = this.props.eliteDoctorsData;
@@ -104,7 +108,9 @@ class EliteDoctorSection extends Component {
                                 let nameInVie = `${item.positionData.value_Vie}, ${item.firstName} ${item.lastName}`;
                                 let nameInEng = `${item.positionData.value_Eng}, ${item.firstName} ${item.lastName}`;
                                 return (
-                                    <div className="item-content" key={index}>
+                                    <div className="item-content" key={index}
+                                        onClick={() => this.handleViewDetailArticleOfADoctor(item)}
+                                    >
                                         <div className="item-of-slider">
                                             {/* <div className="image-of-item-1 image-css" */}
                                             <div className="image-css"
