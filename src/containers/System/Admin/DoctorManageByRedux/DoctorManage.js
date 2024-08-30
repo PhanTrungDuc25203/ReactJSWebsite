@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { LANGUAGES } from "../../../../utils";
+import { LANGUAGES, CRUD_ACTIONS } from "../../../../utils";
 import { connect } from 'react-redux';
 import './DoctorManage.scss';
 import * as actions from "../../../../store/actions";
@@ -20,6 +20,8 @@ class DoctorManage extends Component {
             selectedDoctor: null,
             description: '',
             listDoctors: [],
+            selectedDoctorDetails: {},
+            hadOldDataForEdit: false,
         }
     }
 
@@ -40,6 +42,12 @@ class DoctorManage extends Component {
                 listDoctors: selectData,
             })
         }
+        if (prevProps.detailsOfADoctor !== this.props.detailsOfADoctor) {
+            // console.log("Check doctor details for DoctorManagePage: ", this.props.detailsOfADoctor);
+            this.setState({
+                selectedDoctorDetails: this.props.detailsOfADoctor,
+            });
+        }
     }
 
     handleEditorChange = ({ html, text }) => {
@@ -56,19 +64,39 @@ class DoctorManage extends Component {
     }
 
     handleSaveMarkdownContent = () => {
+        let { hadOldDataForEdit } = this.state;
         this.props.saveDoctorDetails({
             htmlContent: this.state.htmlContent,
             markdownContent: this.state.markdownContent,
             description: this.state.description,
             doctorId: this.state.selectedDoctor.value,
+            action: hadOldDataForEdit === true ? CRUD_ACTIONS.EDIT : CRUD_ACTIONS.CREATE,
         })
-        console.log("CHeck parent state: ", this.state);
+        console.log("Check parent state: ", this.state);
     }
 
-    handleChangeOnSelectBox = (selectedDoctor) => {
-        this.setState({ selectedDoctor }, () =>
-            console.log(`Option selected:`, this.state.selectedDoctor)
-        );
+    handleChangeOnSelectBox = async (selectedDoctor) => {
+        this.setState({ selectedDoctor });
+        // console.log(selectedDoctor.value);
+        await this.props.fetchDoctorDetailsForDoctorManagePage(selectedDoctor.value);
+        // console.log("Check doctor details for DoctorManagePage: ", this.state.selectedDoctorDetails);
+        let { selectedDoctorDetails } = this.state;
+        if (selectedDoctorDetails && selectedDoctorDetails.ArticleMarkdown) {
+            let tempMarkdown = selectedDoctorDetails.ArticleMarkdown;
+            this.setState({
+                htmlContent: tempMarkdown.htmlContent,
+                markdownContent: tempMarkdown.markdownContent,
+                description: tempMarkdown.description,
+                hadOldDataForEdit: true,
+            })
+        } else {
+            this.setState({
+                htmlContent: '',
+                markdownContent: '',
+                description: '',
+                hadOldDataForEdit: false,
+            })
+        }
     };
 
     buildDataForDoctorSelectBox = (data) => {
@@ -89,10 +117,13 @@ class DoctorManage extends Component {
     }
 
     render() {
+
+        let { hadOldDataForEdit } = this.state;
+
         return (
             <div className="doctor-manage-container">
                 <div className="doctor-manage-page-title title">
-                    Tạo thông tin bác sĩ
+                    Tạo thông tin, bài báo cho bác sĩ
                 </div>
                 <div className="header-article-container">
                     <div className="more-info-for-a-doctor">
@@ -112,10 +143,14 @@ class DoctorManage extends Component {
                             className="doctor-option"
                             placeholder="Chọn bác sĩ..."
                         />
-                        <button className="save-doctor-article-button"
+                        <button className={hadOldDataForEdit === true ? "save-changes-of-doctor-article-button" : "save-doctor-article-button"}
                             onClick={() => this.handleSaveMarkdownContent()}
                         >
-                            Lưu bài báo
+                            {hadOldDataForEdit === true ?
+                                <span>Lưu thay đổi</span>
+                                :
+                                <span>Lưu bài báo</span>
+                            }
                         </button>
                     </div>
 
@@ -127,7 +162,9 @@ class DoctorManage extends Component {
                 <div className="editor-lite-for-doctor-article">
                     <MdEditor style={{ height: '500px' }}
                         renderHTML={text => mdParser.render(text)}
-                        onChange={this.handleEditorChange} />
+                        onChange={this.handleEditorChange}
+                        value={this.state.markdownContent}
+                    />
                 </div>
             </div>
         );
@@ -139,6 +176,7 @@ const mapStateToProps = state => {
     return {
         language: state.app.language,
         allDoctorsForDoctorArticlePage: state.admin.allDoctorsForDoctorArticlePage,
+        detailsOfADoctor: state.admin.detailsOfADoctor,
     };
 };
 
@@ -146,6 +184,7 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchAllDoctorsForDoctorArticlePage: () => dispatch(actions.fetchAllDoctorsForDoctorArticlePage()),
         saveDoctorDetails: (data) => dispatch(actions.saveDoctorDetails(data)),
+        fetchDoctorDetailsForDoctorManagePage: (id) => dispatch(actions.fetchDoctorDetailsForDoctorManagePage(id))
     };
 };
 

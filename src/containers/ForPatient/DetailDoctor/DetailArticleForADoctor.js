@@ -70,16 +70,6 @@ class DetailArticleForADoctor extends Component {
                                     {language === LANGUAGES.VI ? nameInVie : nameInEng}
                                 </div>
                                 <div className="general-information">
-                                    {/* <p>
-                                        Hơn 20 năm kinh nghiệm trong lĩnh vực Tai Mũi Họng.
-                                        <br></br>
-                                        Giám Đốc chuyên môn Bệnh viện Đa khoa Quốc tế Nam Sài Gòn.
-                                        <br></br>
-                                        Bác sĩ nhận khám mọi độ tuổi.
-                                        <br></br>
-                                        <FontAwesomeIcon icon={faMapLocationDot} className="location-icon" />
-                                        Hà Nội
-                                    </p> */}
                                     {doctorDetails && doctorDetails.ArticleMarkdown && doctorDetails.ArticleMarkdown.description &&
                                         <span>
                                             {doctorDetails.ArticleMarkdown.description}
@@ -96,28 +86,6 @@ class DetailArticleForADoctor extends Component {
                         booking
                     </div>
                     <div className="curriculum-vitae">
-                        {/* <p><strong>Phó Giáo sư, Tiến sĩ Phan Trung Đức</strong></p>
-                        <ul>
-                            <li>Bác sĩ có nhiều năm kinh nghiệm trong khám và điều trị Sản phụ khoa</li>
-                            <li>Bác sĩ từng công tác tại khoa Yêu cầu, Bệnh viện Phụ sản Hà Nội</li>
-                            <li>Hiện đang công tác tại phòng khám Mediplus</li>
-                            <li>Bác sĩ nhận khám mọi độ tuổi</li>
-                        </ul>
-                        <p><strong>Nhận khám và điều trị</strong></p>
-                        <ul>
-                            <li>Khám và tư vấn điều trị các bệnh phụ khoa: Viêm nhiễm âm đạo, Viêm nhiễm cổ tử cung</li>
-                            <li>Xử lý tổn thương bất thường tại cổ tử cung, âm đạo</li>
-                            <li>Tư vấn kiến thức về sinh khỏe sinh sản cho mọi lứa tuổi, các biện pháp tránh thai</li>
-                            <li>Khám và tư vấn các bất thường về phụ khoa về sinh đẻ tuổi tiền mãn kinh và mãn kinh</li>
-                            <li>Khám và tư vấn tiền hôn nhân</li>
-                            <li>Khám và tư vấn thai cho bà mẹ ở các mốc của thai kỳ</li>
-                            <li>Tư vấn cách chăm sóc sức khỏe sinh sản ở độ tuổi vị thành niên</li>
-                        </ul>
-                        <p><strong>Quá trình công tác</strong></p>
-                        <ul>
-                            <li>Bác sĩ Sản phụ khoa, Tổ hợp Y tế Mediplus (2022 - nay)</li>
-                            <li>Bác sĩ tại phòng khám yêu cầu, Bệnh viện Phụ sản Hà Nội (2006 - 2022)</li>
-                        </ul> */}
                         {doctorDetails && doctorDetails.ArticleMarkdown && doctorDetails.ArticleMarkdown.htmlContent &&
                             <div dangerouslySetInnerHTML={{ __html: doctorDetails.ArticleMarkdown.htmlContent }} className="doctor-CV-html"></div>
                         }

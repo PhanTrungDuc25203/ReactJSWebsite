@@ -12,6 +12,7 @@ const initialState = {
     users: [],
     eliteDoctors: [],
     allDoctorsForDoctorArticlePage: [],
+    detailsOfADoctor: {},
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -100,6 +101,16 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
             }
         case actionTypes.SAVE_INFOR_AND_ARTICLE_FOR_A_DOCTOR_FAILED:
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_DOCTOR_DETAILS_FOR_DOCTOR_MANAGE_PAGE_SUCCESSFULLY:
+            state.detailsOfADoctor = action.detailsOfADoctor;
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_DOCTOR_DETAILS_FOR_DOCTOR_MANAGE_PAGE_FAILED:
+            state.detailsOfADoctor = {};
             return {
                 ...state,
             }
