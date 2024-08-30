@@ -12,6 +12,8 @@ import { } from '@fortawesome/react-fontawesome';
 import { FormattedMessage } from 'react-intl';
 import { LANGUAGES } from "../../../utils";
 import { switchLanguageOfWebsite } from "../../../store/actions";
+import { withRouter } from 'react-router';
+
 
 class HomePageHeader extends Component {
 
@@ -19,6 +21,10 @@ class HomePageHeader extends Component {
         //fire redux events
         // khi gọi hàm ở đây có thể gọi bằng tên tự đặt bên hàm mapDisplatchToProp bên dưới
         this.props.switchLanguageOfWebsite(language);
+    }
+
+    handleWebLogoClicked = () => {
+        this.props.history.push(`/home`);
     }
 
     render() {
@@ -30,7 +36,7 @@ class HomePageHeader extends Component {
                     <div className="home-header-contents">
                         <div className="left-contents">
                             {/* <i className="fas fa-bars"></i> */}
-                            <div className="header-logo">
+                            <div className="header-logo" onClick={() => this.handleWebLogoClicked()}>
                             </div>
                         </div>
                         <div className="center-contents">
@@ -242,4 +248,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePageHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomePageHeader));
