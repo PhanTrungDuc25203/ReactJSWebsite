@@ -215,6 +215,10 @@
                 "add-new-button": "Save new user",
                 "save-changes-button": "Save changes"
             }
+        },
+        "doctor": {
+            "manage-schedule-and-timetable": "Manage exam schedule",
+            "schedule-and-timetable": "Exam schedule"
         }
     }
 }

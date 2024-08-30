@@ -16,6 +16,7 @@ import ConfirmModal from '../components/ConfirmModal';
 import HomePage from './HomePage/HomePage.js';
 import CustomScrollbars from '../components/CustomScrollbars.js';
 import DetailArticleForADoctor from './ForPatient/DetailDoctor/DetailArticleForADoctor.js';
+import Doctor from '../routes/Doctor.js';
 
 class App extends Component {
 
@@ -55,6 +56,9 @@ class App extends Component {
                                     {/* booking care cho bác sĩ và bệnh nhân*/}
                                     <Route path={path.HOMEPAGE} component={(HomePage)} />
                                     <Route path={path.DETAIL_DOCTOR_ARTICLE} component={DetailArticleForADoctor} />
+
+                                    {/* path for doctor*/}
+                                    <Route path={'/doctor/'} component={userIsAuthenticated(Doctor)} />
                                 </Switch>
                             </CustomScrollbars>
                         </div>

@@ -215,6 +215,10 @@
                 "add-new-button": "Lưu người dùng",
                 "save-changes-button": "Lưu thay đổi"
             }
+        },
+        "doctor": {
+            "manage-schedule-and-timetable": "Quản lý kế hoạch khám bệnh",
+            "schedule-and-timetable": "Kế hoạch khám bệnh"
         }
     }
 }
