@@ -13,6 +13,7 @@ const initialState = {
     eliteDoctors: [],
     allDoctorsForDoctorArticlePage: [],
     detailsOfADoctor: {},
+    examHoursData: [],
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -111,6 +112,17 @@ const adminReducer = (state = initialState, action) => {
             }
         case actionTypes.FETCH_DOCTOR_DETAILS_FOR_DOCTOR_MANAGE_PAGE_FAILED:
             state.detailsOfADoctor = {};
+            return {
+                ...state,
+            }
+        //lấy khung giờ cho trang schedule manage
+        case actionTypes.FETCH_HOURS_IN_ALLCODES_FOR_SCHEDULE_MANAGE_PAGE_SUCCESSFULLY:
+            state.examHoursData = action.examHoursData;
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_HOURS_IN_ALLCODES_FOR_SCHEDULE_MANAGE_PAGE_FAILED:
+            state.examHoursData = [];
             return {
                 ...state,
             }

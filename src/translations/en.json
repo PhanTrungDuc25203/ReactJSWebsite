@@ -220,5 +220,11 @@
             "manage-schedule-and-timetable": "Manage exam schedule",
             "schedule-and-timetable": "Exam schedule"
         }
+    },
+    "schedule-and-timetable-manage-page": {
+        "title": "Schedule and timetable manage",
+        "choose-dotor":"Choose doctor",
+        "choose-day":"Choose appointment day and time frame",
+        "save-button":"Save appointment day"
     }
 }

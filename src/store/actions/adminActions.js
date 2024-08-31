@@ -243,7 +243,7 @@ export const fetchAllDoctorsForDoctorArticlePage = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getAllDoctorsForDoctorArticlePageService();
-            console.log("Check res fetch all doctors: ", res);
+            // console.log("Check res fetch all doctors: ", res);
             if (res && res.errCode === 0) {
                 dispatch({
                     type: actionTypes.GET_All_DOCTORS_FOR_DOCTOR_ARTICLE_PAGE_SUCCESSFULLY,
@@ -267,7 +267,7 @@ export const saveDoctorDetails = (data) => {
     return async (dispatch, getState) => {
         try {
             let res = await saveInforAndArticleForADoctor(data);
-            console.log("Check save doctor: ", res);
+            // console.log("Check save doctor: ", res);
             if (res && res.errCode === 0) {
                 toast.success("Doctor's article saved successfully!");
                 dispatch({
@@ -293,7 +293,7 @@ export const fetchDoctorDetailsForDoctorManagePage = (id) => {
     return async (dispatch, getState) => {
         try {
             let res = await getInforAndArticleForADoctor(id);
-            console.log("Check doctor details in redux: ", res);
+            // console.log("Check doctor details in redux: ", res);
             if (res && res.errCode === 0) {
                 dispatch({
                     type: actionTypes.FETCH_DOCTOR_DETAILS_FOR_DOCTOR_MANAGE_PAGE_SUCCESSFULLY,
@@ -308,6 +308,30 @@ export const fetchDoctorDetailsForDoctorManagePage = (id) => {
             console.log('Fetch doctor details fail: ', e);
             dispatch({
                 type: actionTypes.FETCH_DOCTOR_DETAILS_FOR_DOCTOR_MANAGE_PAGE_FAILED,
+            })
+        }
+    }
+}
+
+export const fetchHoursInAllcodesForScheduleManagePage = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCodesService('time');
+            console.log("Check hours in redux: ", res);
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_HOURS_IN_ALLCODES_FOR_SCHEDULE_MANAGE_PAGE_SUCCESSFULLY,
+                    examHoursData: res.data,
+                })
+            } else {
+                dispatch({
+                    type: actionTypes.FETCH_HOURS_IN_ALLCODES_FOR_SCHEDULE_MANAGE_PAGE_FAILED,
+                })
+            }
+        } catch (e) {
+            console.log('Fetch hours iin allcodes fail: ', e);
+            dispatch({
+                type: actionTypes.FETCH_HOURS_IN_ALLCODES_FOR_SCHEDULE_MANAGE_PAGE_FAILED,
             })
         }
     }

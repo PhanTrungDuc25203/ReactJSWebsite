@@ -220,5 +220,11 @@
             "manage-schedule-and-timetable": "Quản lý kế hoạch khám bệnh",
             "schedule-and-timetable": "Kế hoạch khám bệnh"
         }
+    },
+    "schedule-and-timetable-manage-page": {
+        "title": "Quản lý thời gian biểu và lịch khám",
+        "choose-dotor":"Chọn bác sĩ",
+        "choose-day":"Chọn ngày hẹn và khung giờ",
+        "save-button":"Lưu ngày hẹn"
     }
 }
