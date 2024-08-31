@@ -317,7 +317,7 @@ export const fetchHoursInAllcodesForScheduleManagePage = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getAllCodesService('time');
-            console.log("Check hours in redux: ", res);
+            // console.log("Check hours in redux: ", res);
             if (res && res.errCode === 0) {
                 dispatch({
                     type: actionTypes.FETCH_HOURS_IN_ALLCODES_FOR_SCHEDULE_MANAGE_PAGE_SUCCESSFULLY,

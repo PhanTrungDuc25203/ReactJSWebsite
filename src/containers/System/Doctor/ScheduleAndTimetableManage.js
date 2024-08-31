@@ -6,6 +6,8 @@ import { LANGUAGES, dateFormat } from "../../../utils";
 import Select from 'react-select';
 import * as actions from "../../../store/actions";
 import DatePicker from '../../../components/Input/DatePicker';
+import { toast } from 'react-toastify';
+import _ from 'lodash';
 //package formatting date
 import moment from 'moment';
 
@@ -34,8 +36,12 @@ class ScheduleAndTimetableManage extends Component {
             })
         }
         if (prevProps.examHoursData !== this.props.examHoursData) {
+            let data = this.props.examHoursData;
+            if (data && data.length > 0) {
+                data = data.map(item => ({ ...item, isSelected: false }))
+            }
             this.setState({
-                timeframe: this.props.examHoursData,
+                timeframe: data,
             })
         }
         // if (prevProps.language !== this.props.language) {
@@ -73,8 +79,56 @@ class ScheduleAndTimetableManage extends Component {
         })
     }
 
+    handleTimeFrameClicked = (time) => {
+        let { timeframe } = this.state;
+        if (timeframe && timeframe.length > 0) {
+            timeframe = timeframe.map(item => {
+                if (item.id === time.id) item.isSelected = !item.isSelected;
+                return item;
+            })
+            this.setState({
+                timeframe: timeframe,
+            })
+        }
+    }
+
+    handleSaveScheduleButtonClicked = () => {
+        let { timeframe, selectedDoctor, selectedDay } = this.state;
+        let result = [];
+
+        if (!selectedDay) {
+            toast.error("Invalid or missing date!");
+            return;
+        }
+
+        if (selectedDoctor && _.isEmpty(selectedDoctor)) {
+            toast.error("Invalid selcted doctor!");
+            return;
+        }
+
+        let formatedDate = moment(selectedDay).format(dateFormat.SEND_TO_SERVER);
+
+        if (timeframe && timeframe.length > 0) {
+            let selectedTimeTemp = timeframe.filter(item => item.isSelected === true);
+            if (selectedTimeTemp && selectedTimeTemp.length > 0) {
+                selectedTimeTemp.map((schedule, index) => {
+                    let object = {};
+                    object.date = formatedDate;
+                    object.doctorId = selectedDoctor.value;
+                    object.time = schedule.keyMap;
+                    result.push(object);
+                })
+            } else {
+                toast.error("Invalid selected time!");
+                return;
+            }
+        }
+
+        console.log("Check result: ", result);
+    }
+
     render() {
-        console.log("Check state: ", this.state);
+        // console.log("Check state: ", this.state);
         let { timeframe } = this.state;
         let { language } = this.props;
         return (
@@ -111,7 +165,11 @@ class ScheduleAndTimetableManage extends Component {
                                 {timeframe && timeframe.length > 0 &&
                                     timeframe.map((item, index) => {
                                         return (
-                                            <button key={index} className="time-frame-button">
+                                            <button
+                                                key={index}
+                                                className={item.isSelected === true ? "time-frame-button active" : "time-frame-button"}
+                                                onClick={() => this.handleTimeFrameClicked(item)}
+                                            >
                                                 {language === LANGUAGES.VI ? item.value_Vie : item.value_Eng}
                                             </button>
                                         )
@@ -122,7 +180,9 @@ class ScheduleAndTimetableManage extends Component {
                             <div className="col-md-10 spacing">
 
                             </div>
-                            <button className="save-button btn btn-primary">
+                            <button className="save-button btn btn-primary"
+                                onClick={() => this.handleSaveScheduleButtonClicked()}
+                            >
                                 <FormattedMessage id="schedule-and-timetable-manage-page.save-button" />
                             </button>
                         </div>

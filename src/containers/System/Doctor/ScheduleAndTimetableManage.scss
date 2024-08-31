@@ -29,6 +29,7 @@
             height            : auto;
             display           : block;
             margin-top        : 10px;
+            padding: 10px 0 10px 0;
             // justify-content: center;
             // // text-align: center;
             // align-items    : center;
@@ -36,13 +37,18 @@
 
             .time-frame-button {
                 height          : 30px;
-                width           : 180px;
+                width           : 160px;
                 margin          : 10px 20px 10px 0;
+                // padding: 10px 0 10px 0;
                 border          : 2px solid #0071ba;
                 border-radius   : 10px;
                 background-color: white;
                 color           : #0071ba;
-                transition      : background-color 0.3s;
+                transition      : background-color 0.3s, height 0.3s;
+                &.active{
+                    color           : white;
+                    background-color: #0071ba;
+                }
             }
 
             .time-frame-button:hover {
