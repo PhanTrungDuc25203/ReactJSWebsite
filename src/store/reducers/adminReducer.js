@@ -126,6 +126,15 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+        //tạo khung giờ cho lịch biểu của bác sĩ
+        case actionTypes.CREATE_TIMEFRAMES_FOR_DOCTOR_SCHEDULE_SUCCESSFULLY:
+            return {
+                ...state,
+            }
+        case actionTypes.CREATE_TIMEFRAMES_FOR_DOCTOR_SCHEDULE_FAILED:
+            return {
+                ...state,
+            }
         default:
             return state;
     }

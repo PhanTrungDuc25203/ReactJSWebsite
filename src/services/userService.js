@@ -71,6 +71,10 @@ const getInforAndArticleForADoctor = (id) => {
     return axios.get(`/api/get-a-particular-doctor-infor-for-his-or-her-page?id=${id}`);
 }
 
+const createTimeframesForDoctorScheduleService = (data) => {
+    return axios.post('/api/bulk-create-timeframes-for-doctor-appointment-schedule', data);
+}
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -82,5 +86,5 @@ export {
     getAllDoctorsForDoctorArticlePageService,
     saveInforAndArticleForADoctor,
     getInforAndArticleForADoctor,
-
+    createTimeframesForDoctorScheduleService,
 };

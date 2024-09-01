@@ -106,7 +106,8 @@ class ScheduleAndTimetableManage extends Component {
             return;
         }
 
-        let formatedDate = moment(selectedDay).format(dateFormat.SEND_TO_SERVER);
+        // let formatedDate = moment(selectedDay).format(dateFormat.SEND_TO_SERVER);
+        let formatedDate = new Date(selectedDay).getTime();
 
         if (timeframe && timeframe.length > 0) {
             let selectedTimeTemp = timeframe.filter(item => item.isSelected === true);
@@ -115,7 +116,7 @@ class ScheduleAndTimetableManage extends Component {
                     let object = {};
                     object.date = formatedDate;
                     object.doctorId = selectedDoctor.value;
-                    object.time = schedule.keyMap;
+                    object.timeType = schedule.keyMap;
                     result.push(object);
                 })
             } else {
@@ -123,7 +124,11 @@ class ScheduleAndTimetableManage extends Component {
                 return;
             }
         }
-
+        this.props.createTimeframesForDoctorSchedule({
+            scheduleArr: result,
+            doctorId: selectedDoctor.value,
+            formatedDate: formatedDate,
+        });
         console.log("Check result: ", result);
     }
 
@@ -206,7 +211,7 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchAllDoctorsForDoctorArticlePage: () => dispatch(actions.fetchAllDoctorsForDoctorArticlePage()),
         fetchHoursInAllcodesForScheduleManagePage: () => dispatch(actions.fetchHoursInAllcodesForScheduleManagePage()),
-
+        createTimeframesForDoctorSchedule: (result) => dispatch(actions.createTimeframesForDoctorSchedule(result)),
     };
 };
 

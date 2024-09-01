@@ -11,7 +11,8 @@ import {
     getEliteDoctorsForHomePageService,
     getAllDoctorsForDoctorArticlePageService,
     saveInforAndArticleForADoctor,
-    getInforAndArticleForADoctor
+    getInforAndArticleForADoctor,
+    createTimeframesForDoctorScheduleService
 } from "../../services/userService";
 import { toast } from "react-toastify";
 
@@ -332,6 +333,32 @@ export const fetchHoursInAllcodesForScheduleManagePage = () => {
             console.log('Fetch hours iin allcodes fail: ', e);
             dispatch({
                 type: actionTypes.FETCH_HOURS_IN_ALLCODES_FOR_SCHEDULE_MANAGE_PAGE_FAILED,
+            })
+        }
+    }
+}
+
+export const createTimeframesForDoctorSchedule = (timeframeForDoctor) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await createTimeframesForDoctorScheduleService(timeframeForDoctor);
+            // console.log("Check save doctor: ", res);
+            if (res && res.errCode === 0) {
+                toast.success("Doctor's article saved successfully!");
+                dispatch({
+                    type: actionTypes.CREATE_TIMEFRAMES_FOR_DOCTOR_SCHEDULE_SUCCESSFULLY,
+                })
+            } else {
+                toast.error("Doctor's article saved fail!");
+                dispatch({
+                    type: actionTypes.CREATE_TIMEFRAMES_FOR_DOCTOR_SCHEDULE_FAILED,
+                })
+            }
+        } catch (e) {
+            toast.error("Doctor's article saved fail!");
+            console.log('Save doctor fail: ', e);
+            dispatch({
+                type: actionTypes.CREATE_TIMEFRAMES_FOR_DOCTOR_SCHEDULE_FAILED,
             })
         }
     }
