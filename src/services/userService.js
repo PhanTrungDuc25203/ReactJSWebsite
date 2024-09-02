@@ -75,6 +75,10 @@ const createTimeframesForDoctorScheduleService = (data) => {
     return axios.post('/api/bulk-create-timeframes-for-doctor-appointment-schedule', data);
 }
 
+const getDoctorScheduleByDateService = (doctorId, date) => {
+    return axios.get(`/api/get-doctor-schedule-by-date?doctorId=${doctorId}&date=${date}`);
+}
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -87,4 +91,5 @@ export {
     saveInforAndArticleForADoctor,
     getInforAndArticleForADoctor,
     createTimeframesForDoctorScheduleService,
+    getDoctorScheduleByDateService,
 };

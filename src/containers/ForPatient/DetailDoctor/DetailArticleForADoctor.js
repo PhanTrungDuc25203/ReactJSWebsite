@@ -8,6 +8,7 @@ import { faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { getInforAndArticleForADoctor } from '../../../services/userService';
 import defaultAvatar from '../../../assets/images/default-avatar-circle.png'
 import { LANGUAGES } from '../../../utils';
+import DoctorScheduleSection from './DoctorScheduleSection';
 
 class DetailArticleForADoctor extends Component {
 
@@ -83,7 +84,15 @@ class DetailArticleForADoctor extends Component {
                         </div>
                     </div>
                     <div className="booking-time-and-exam-location">
-                        booking
+                        <div className="left-content-timeframe">
+                            <DoctorScheduleSection
+                                selectedDoctorId={doctorDetails && doctorDetails.id ? doctorDetails.id : -1}
+                            />
+                        </div>
+                        <div className="right-content-location">
+
+                        </div>
+
                     </div>
                     <div className="curriculum-vitae">
                         {doctorDetails && doctorDetails.ArticleMarkdown && doctorDetails.ArticleMarkdown.htmlContent &&
