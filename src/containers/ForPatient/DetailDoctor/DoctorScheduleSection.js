@@ -33,10 +33,8 @@ class DoctorScheduleSection extends Component {
 
             if (language === LANGUAGES.VI) {
                 object.label = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
-                // console.log("Check date type: ", object.label);
             } else if (language === LANGUAGES.EN) {
                 object.label = moment(new Date()).add(i, 'days').locale('en').format('ddd - DD/MM');
-                // console.log("Check date type: ", object.label);
             }
 
             object.value = moment(new Date()).add(i, 'days').startOf('day').valueOf();
@@ -53,12 +51,10 @@ class DoctorScheduleSection extends Component {
         if (this.props.selectedDoctorId && this.props.selectedDoctorId !== -1) {
             let doctorId = this.props.selectedDoctorId;
             let date = event.target.value;
-            console.log("timestamp: ", date);
 
             let res = await getDoctorScheduleByDateService(doctorId, date);
-            console.log("Check res get schedule: ", res);
+            // console.log("Check res get schedule: ", res);
         }
-        // alert('select box changes')
     }
 
     render() {
