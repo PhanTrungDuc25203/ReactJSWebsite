@@ -223,14 +223,21 @@
     },
     "schedule-and-timetable-manage-page": {
         "title": "Schedule and timetable manage",
-        "choose-dotor":"Choose doctor",
-        "choose-day":"Choose appointment day and time frame",
-        "save-button":"Save appointment day"
+        "choose-dotor": "Choose doctor",
+        "choose-day": "Choose appointment day and time frame",
+        "save-button": "Save appointment day"
     },
-    "doctor-detail-page-for-patient":{
+    "doctor-detail-page-for-patient": {
         "schedule-section": {
-            "available-timeframe-section-title":"Arrange your time:",
-            "sorry-text":"Sorry, the doctor is currently busy today! Please choose another day!"
+            "available-timeframe-section-title": "Arrange your time:",
+            "sorry-text": "Sorry, the doctor is currently busy today! Please choose another day!"
         }
+    },
+    "doctor-manage-page-for-admin": {
+        "page-title": "Create information, article for doctor",
+        "description-placeholder": "Introduction information...",
+        "select-doctor-placeholder": "Choose doctor...",
+        "save-article-button": "Save article",
+        "save-changes-button": "Save changes"
     }
 }

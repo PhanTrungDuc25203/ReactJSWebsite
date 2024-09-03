@@ -119,15 +119,20 @@ class DoctorManage extends Component {
     render() {
 
         let { hadOldDataForEdit } = this.state;
+        let { language } = this.props;
 
         return (
             <div className="doctor-manage-container">
                 <div className="doctor-manage-page-title title">
-                    Tạo thông tin, bài báo cho bác sĩ
+                    <FormattedMessage id="doctor-manage-page-for-admin.page-title" />
                 </div>
                 <div className="header-article-container">
                     <div className="more-info-for-a-doctor">
-                        <textarea placeholder='Thông tin giới thiệu:...'
+                        <textarea placeholder={language === LANGUAGES.VI ?
+                            "Thông tin giới thiệu..."
+                            :
+                            "Introduction information..."
+                        }
                             onChange={(event) => this.handleOnChangeAtDescriptionArea(event)}
                             value={this.state.description}
                         >
@@ -141,15 +146,15 @@ class DoctorManage extends Component {
                             onChange={this.handleChangeOnSelectBox}
                             options={this.state.listDoctors}
                             className="doctor-option"
-                            placeholder="Chọn bác sĩ..."
+                            placeholder={<FormattedMessage id="doctor-manage-page-for-admin.select-doctor-placeholder" />}
                         />
                         <button className={hadOldDataForEdit === true ? "save-changes-of-doctor-article-button" : "save-doctor-article-button"}
                             onClick={() => this.handleSaveMarkdownContent()}
                         >
                             {hadOldDataForEdit === true ?
-                                <span>Lưu thay đổi</span>
+                                <span><FormattedMessage id="doctor-manage-page-for-admin.save-changes-button" /></span>
                                 :
-                                <span>Lưu bài báo</span>
+                                <span><FormattedMessage id="doctor-manage-page-for-admin.save-article-button" /></span>
                             }
                         </button>
                     </div>
