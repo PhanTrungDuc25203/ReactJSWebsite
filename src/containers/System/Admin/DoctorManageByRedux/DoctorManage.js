@@ -15,6 +15,8 @@ class DoctorManage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+
+            //save to markdown table in db
             markdownContent: '',
             htmlContent: '',
             selectedDoctor: null,
@@ -22,22 +24,32 @@ class DoctorManage extends Component {
             listDoctors: [],
             selectedDoctorDetails: {},
             hadOldDataForEdit: false,
+
+            //save to doctor_infor table in db
+            priceList: [], selectedPrice: '',
+            paymentMethodList: [], selectedPaymentMethod: '',
+            vietnamProvinceList: [], selectedProvince: '',
+            clinicName: '',
+            clinicAddress: '',
+            note: '',
         }
     }
 
     componentDidMount() {
         this.props.fetchAllDoctorsForDoctorArticlePage();
+        //lấy extra data cho doctor
+        this.props.getRequiredDataForDoctorArticleManagePage();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.allDoctorsForDoctorArticlePage !== this.props.allDoctorsForDoctorArticlePage) {
-            let selectData = this.buildDataForDoctorSelectBox(this.props.allDoctorsForDoctorArticlePage)
+            let selectData = this.buildDataForDoctorSelectBox(this.props.allDoctorsForDoctorArticlePage, 'doctorSelection')
             this.setState({
                 listDoctors: selectData,
             })
         }
         if (prevProps.language !== this.props.language) {
-            let selectData = this.buildDataForDoctorSelectBox(this.props.allDoctorsForDoctorArticlePage)
+            let selectData = this.buildDataForDoctorSelectBox(this.props.allDoctorsForDoctorArticlePage, 'doctorSelection')
             this.setState({
                 listDoctors: selectData,
             })
@@ -46,6 +58,30 @@ class DoctorManage extends Component {
             // console.log("Check doctor details for DoctorManagePage: ", this.props.detailsOfADoctor);
             this.setState({
                 selectedDoctorDetails: this.props.detailsOfADoctor,
+            });
+        }
+
+        if (prevProps.allRequiredDoctorData !== this.props.allRequiredDoctorData) {
+            // console.log("Doctor extra data in page: ", this.props.allRequiredDoctorData);
+            let { resPaymentMethod, resPrice, resProvince } = this.props.allRequiredDoctorData;
+            let selectPriceData = this.buildDataForDoctorSelectBox(resPrice);
+            let selectPaymentMethodData = this.buildDataForDoctorSelectBox(resPaymentMethod);
+            let selectProvinceData = this.buildDataForDoctorSelectBox(resProvince);
+            this.setState({
+                priceList: selectPriceData,
+                paymentMethodList: selectPaymentMethodData,
+                vietnamProvinceList: selectProvinceData,
+            });
+        }
+        if (prevProps.language !== this.props.language) {
+            let { resPaymentMethod, resPrice, resProvince } = this.props.allRequiredDoctorData;
+            let selectPriceData = this.buildDataForDoctorSelectBox(resPrice);
+            let selectPaymentMethodData = this.buildDataForDoctorSelectBox(resPaymentMethod);
+            let selectProvinceData = this.buildDataForDoctorSelectBox(resProvince);
+            this.setState({
+                priceList: selectPriceData,
+                paymentMethodList: selectPaymentMethodData,
+                vietnamProvinceList: selectProvinceData,
             });
         }
     }
@@ -99,14 +135,14 @@ class DoctorManage extends Component {
         }
     };
 
-    buildDataForDoctorSelectBox = (data) => {
+    buildDataForDoctorSelectBox = (data, isBuiltFor) => {
         let result = [];
         let { language } = this.props;
         if (data && data.length > 0) {
             data.map((item, index) => {
                 let tempObj = {};
-                let labelInVie = `${item.lastName} ${item.firstName}`;
-                let labelInEng = `${item.firstName} ${item.lastName}`;
+                let labelInVie = isBuiltFor === 'doctorSelection' ? `${item.lastName} ${item.firstName}` : item.value_Vie;
+                let labelInEng = isBuiltFor === 'doctorSelection' ? `${item.firstName} ${item.lastName}` : item.value_Eng;
                 tempObj.label = language === LANGUAGES.VI ? labelInVie : labelInEng;
                 tempObj.value = item.id;
                 result.push(tempObj);
@@ -141,13 +177,6 @@ class DoctorManage extends Component {
                     </div>
 
                     <div className="option-section">
-                        <Select
-                            value={this.state.selectedDoctor}
-                            onChange={this.handleChangeOnSelectBox}
-                            options={this.state.listDoctors}
-                            className="doctor-option"
-                            placeholder={<FormattedMessage id="doctor-manage-page-for-admin.select-doctor-placeholder" />}
-                        />
                         <button className={hadOldDataForEdit === true ? "save-changes-of-doctor-article-button" : "save-doctor-article-button"}
                             onClick={() => this.handleSaveMarkdownContent()}
                         >
@@ -157,12 +186,66 @@ class DoctorManage extends Component {
                                 <span><FormattedMessage id="doctor-manage-page-for-admin.save-article-button" /></span>
                             }
                         </button>
+                        <Select
+                            value={this.state.selectedDoctor}
+                            onChange={this.handleChangeOnSelectBox}
+                            options={this.state.listDoctors}
+                            className="doctor-option"
+                            placeholder={<FormattedMessage id="doctor-manage-page-for-admin.select-doctor-placeholder" />}
+                        />
                     </div>
 
 
                 </div>
 
-
+                <div className="extra-infor-container">
+                    <div className="row row-in-form">
+                        <div className="col-md-4 mb-3">
+                            <label>Tỉnh thành</label>
+                            <Select
+                                value={this.state.selectedProvince}
+                                // onChange={this.handleChangeOnSelectBox}
+                                options={this.state.vietnamProvinceList}
+                                className="doctor-option"
+                            // placeholder={<FormattedMessage id="doctor-manage-page-for-admin.select-doctor-placeholder" />}
+                            />
+                        </div>
+                        <div className="col-md-4 mb-3">
+                            <label>Địa chỉ phòng khám</label>
+                            <input type="text" className="form-control" placeholder="State" required></input>
+                        </div>
+                        <div className="col-md-4 mb-3">
+                            <label>Tên phòng khám</label>
+                            <input type="text" className="form-control" placeholder="Zip" required></input>
+                        </div>
+                    </div>
+                    <div className="row row-in-form">
+                        <div className="col-md-4 mb-3">
+                            <label>Giá khám bệnh</label>
+                            <Select
+                                value={this.state.selectedDoctor}
+                                // onChange={this.handleChangeOnSelectBox}
+                                options={this.state.priceList}
+                                className="doctor-option"
+                            // placeholder={<FormattedMessage id="doctor-manage-page-for-admin.select-doctor-placeholder" />}
+                            />
+                        </div>
+                        <div className="col-md-4 mb-3">
+                            <label>Phương thức thanh toán</label>
+                            <Select
+                                value={this.state.selectedDoctor}
+                                // onChange={this.handleChangeOnSelectBox}
+                                options={this.state.paymentMethodList}
+                                className="doctor-option"
+                            // placeholder={<FormattedMessage id="doctor-manage-page-for-admin.select-doctor-placeholder" />}
+                            />
+                        </div>
+                        <div className="col-md-4 mb-3">
+                            <label>Ghi chú</label>
+                            <input type="text" className="form-control" placeholder="Zip" required></input>
+                        </div>
+                    </div>
+                </div>
 
                 <div className="editor-lite-for-doctor-article">
                     <MdEditor style={{ height: '500px' }}
@@ -182,6 +265,7 @@ const mapStateToProps = state => {
         language: state.app.language,
         allDoctorsForDoctorArticlePage: state.admin.allDoctorsForDoctorArticlePage,
         detailsOfADoctor: state.admin.detailsOfADoctor,
+        allRequiredDoctorData: state.admin.allRequiredDoctorData,
     };
 };
 
@@ -189,7 +273,9 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchAllDoctorsForDoctorArticlePage: () => dispatch(actions.fetchAllDoctorsForDoctorArticlePage()),
         saveDoctorDetails: (data) => dispatch(actions.saveDoctorDetails(data)),
-        fetchDoctorDetailsForDoctorManagePage: (id) => dispatch(actions.fetchDoctorDetailsForDoctorManagePage(id))
+        fetchDoctorDetailsForDoctorManagePage: (id) => dispatch(actions.fetchDoctorDetailsForDoctorManagePage(id)),
+
+        getRequiredDataForDoctorArticleManagePage: () => dispatch(actions.getRequiredDataForDoctorArticleManagePage())
     };
 };
 

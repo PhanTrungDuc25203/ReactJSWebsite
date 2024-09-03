@@ -14,6 +14,8 @@ const initialState = {
     allDoctorsForDoctorArticlePage: [],
     detailsOfADoctor: {},
     examHoursData: [],
+
+    allRequiredDoctorData: [],
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -132,6 +134,17 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
             }
         case actionTypes.CREATE_TIMEFRAMES_FOR_DOCTOR_SCHEDULE_FAILED:
+            return {
+                ...state,
+            }
+        //lấy dữ liệu price, paymentMethod, province,.. từ Doctor_infor table cho trang doctormanage
+        case actionTypes.GET_REQUIRED_DATA_FOR_DOCTOR_MANAGE_PAGE_SUCCESSFULLY:
+            state.allRequiredDoctorData = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_REQUIRED_DATA_FOR_DOCTOR_MANAGE_PAGE_FAILED:
+            state.allRequiredDoctorData = [];
             return {
                 ...state,
             }

@@ -363,3 +363,42 @@ export const createTimeframesForDoctorSchedule = (timeframeForDoctor) => {
         }
     }
 }
+
+//lấy dữ liệu cho để chọn cho trang quản lý thông tin và bài báo bác sĩ
+export const getRequiredDataForDoctorArticleManagePage = () => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({ type: actionTypes.GET_REQUIRED_DATA_FOR_DOCTOR_MANAGE_PAGE_START });
+
+            let resPrice = await getAllCodesService('price');
+            let resPaymentMethod = await getAllCodesService('payment');
+            let resProvince = await getAllCodesService('province');
+
+            if (resPrice && resPrice.errCode === 0 &&
+                resPaymentMethod && resPaymentMethod.errCode === 0 &&
+                resProvince && resProvince.errCode === 0) {
+
+                let data = {
+                    resPrice: resPrice.data,
+                    resPaymentMethod: resPaymentMethod.data,
+                    resProvince: resProvince.data,
+                }
+
+                dispatch(getRequiredDataForDoctorArticleManagePageSuccessfully(data));
+            } else {
+                dispatch(getRequiredDataForDoctorArticleManagePageFailed());
+            }
+        } catch (e) {
+            dispatch(getRequiredDataForDoctorArticleManagePageFailed());
+            console.log('getDoctorPriceForDoctorArticleManagePage function error: ', e);
+        }
+    }
+}
+
+export const getRequiredDataForDoctorArticleManagePageSuccessfully = (allRequiredData) => ({
+    type: actionTypes.GET_REQUIRED_DATA_FOR_DOCTOR_MANAGE_PAGE_SUCCESSFULLY,
+    data: allRequiredData,
+})
+export const getRequiredDataForDoctorArticleManagePageFailed = () => ({
+    type: actionTypes.GET_REQUIRED_DATA_FOR_DOCTOR_MANAGE_PAGE_FAILED,
+})
