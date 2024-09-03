@@ -18,7 +18,7 @@ class ScheduleAndTimetableManage extends Component {
         this.state = {
             listDoctors: [],
             selectedDoctor: {},
-            selectedDay: new Date(),
+            selectedDay: new Date().setHours(0, 0, 0, 0),
             timeframe: [],
         }
     }
@@ -163,7 +163,7 @@ class ScheduleAndTimetableManage extends Component {
                                     onChange={this.handleDatePickerChanged}
                                     className="form-control"
                                     value={this.state.selectedDay}
-                                    minDate={new Date()}
+                                    minDate={new Date().setHours(0, 0, 0, 0)}
                                 />
                             </div>
                             <div className="col-md-12 choose-time-frame">

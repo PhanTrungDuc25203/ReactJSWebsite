@@ -226,5 +226,11 @@
         "choose-dotor":"Choose doctor",
         "choose-day":"Choose appointment day and time frame",
         "save-button":"Save appointment day"
+    },
+    "doctor-detail-page-for-patient":{
+        "schedule-section": {
+            "available-timeframe-section-title":"Arrange your time:",
+            "sorry-text":"Sorry, the doctor is currently busy today! Please choose another day!"
+        }
     }
 }

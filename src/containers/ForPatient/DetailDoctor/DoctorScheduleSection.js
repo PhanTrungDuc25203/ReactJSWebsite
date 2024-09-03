@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
 import { LANGUAGES } from '../../../utils';
+import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import localization from 'moment/locale/vi';
 import { getDoctorScheduleByDateService } from '../../../services/userService';
@@ -19,12 +20,30 @@ class DoctorScheduleSection extends Component {
 
     async componentDidMount() {
         let { language } = this.props;
-        this.buildSelectionOpion(language);
+        let tempDateArr = this.buildSelectionOpion(language);
+
+        this.setState({
+            availableDays: tempDateArr,
+        })
+
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    async componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.language !== this.props.language) {
-            this.buildSelectionOpion(this.props.language);
+            let tempDateArr = this.buildSelectionOpion(this.props.language);
+            this.setState({
+                availableDays: tempDateArr,
+            })
+        }
+
+        if (prevProps.selectedDoctorId !== this.props.selectedDoctorId) {
+            let tempDateArr = this.buildSelectionOpion(this.props.language);
+            if (tempDateArr && tempDateArr.length > 0) {
+                let res = await getDoctorScheduleByDateService(this.props.selectedDoctorId, tempDateArr[0].value);
+                this.setState({
+                    allAvailableTimeframe: res.data ? res.data : [],
+                })
+            }
         }
     }
 
@@ -38,20 +57,31 @@ class DoctorScheduleSection extends Component {
             let object = {};
 
             if (language === LANGUAGES.VI) {
-                let labelVi = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
-                object.label = this.capitalizeFirstLetter(labelVi);
+                if(i===0){
+let ddMM = moment(new Date()).format('DD/MM');
+let today = `Hôm nay - ${ddMM}`;
+object.label = today;
+                }else{
+                    let labelVi = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
+                    object.label = this.capitalizeFirstLetter(labelVi);
+                }
+                
             } else if (language === LANGUAGES.EN) {
-                object.label = moment(new Date()).add(i, 'days').locale('en').format('ddd - DD/MM');
+                if(i===0){
+                    let ddMM = moment(new Date()).format('DD/MM');
+                    let today = `Today - ${ddMM}`;
+                    object.label = today;
+                } else{
+                    object.label = moment(new Date()).add(i, 'days').locale('en').format('ddd - DD/MM');
+
+                }
             }
 
             object.value = moment(new Date()).add(i, 'days').startOf('day').valueOf();
-
             tempDateArr.push(object);
         }
 
-        this.setState({
-            availableDays: tempDateArr,
-        })
+        return tempDateArr;
     }
 
     handleOnChangeAtSelectBox = async (event) => {
@@ -100,7 +130,8 @@ class DoctorScheduleSection extends Component {
                 <div className="available-timeframe">
                     <div className="section-title">
                         <FontAwesomeIcon icon={faCalendarDays} className="calendar-icon" />
-                        THỜI GIAN KHÁM:
+                        <FormattedMessage id="doctor-detail-page-for-patient.schedule-section.available-timeframe-section-title" />
+
                     </div>
                     <div className="timeframe-selection">
                         {allAvailableTimeframe && allAvailableTimeframe.length > 0 ?
@@ -114,8 +145,7 @@ class DoctorScheduleSection extends Component {
                             :
 
                             <div className="sorry-text-because-noavailable-timeframe">
-                                Xin lỗi quý khách, bác sĩ hiện không còn trống lịch hôm nay!
-                                Vui lòng chọn một hôm khác.
+                                <FormattedMessage id="doctor-detail-page-for-patient.schedule-section.sorry-text" />
                             </div>
                         }
                     </div>

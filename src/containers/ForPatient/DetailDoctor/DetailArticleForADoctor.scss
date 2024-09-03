@@ -87,79 +87,80 @@
         padding   : 30px 5.5% 20px 5.5%;
         border-top: 2px solid rgb(193, 233, 255);
         margin    : 30px 0 0 0;
-        display: flex;
-        min-height:230px;
+        display   : flex;
+        min-height: 230px;
 
-        .left-content-timeframe{
-            width:52%;
-            .available-day{
+        .left-content-timeframe {
+            width: 52%;
+
+            .available-day {
                 .available-day-selection {
-                    border: none;
-                    border-bottom: 2px solid #0fbcf6;
-                    color: #0fbcf6;
-                    font-weight: bold;
-                    font-size:17px;
+                    border          : none;
+                    border-bottom   : 2px solid #0fbcf6;
+                    color           : #0fbcf6;
+                    font-weight     : bold;
+                    font-size       : 17px;
                     background-color: transparent;
-                    padding: 10px 0 10px 0;
-                    cursor: pointer;
+                    padding         : 10px 0 10px 0;
+                    cursor          : pointer;
                     // transition: border-bottom 0.1s, padding 0.1s;
 
-                    option{}
+                    option {}
                 }
-                
+
                 .available-day-selection:focus {
-                    outline: none;
+                    outline      : none;
                     border-bottom: 2px solid #0fbcf6;
                 }
 
-                .available-day-selection:hover{
+                .available-day-selection:hover {
                     border-bottom: 4px solid #0fbcf6;
-                    padding: 10px 0 8px 0;
+                    padding      : 10px 0 8px 0;
                 }
-                
+
             }
 
-            .available-timeframe{
+            .available-timeframe {
                 margin: 10px 0 10px 0;
 
-                .section-title{
+                .section-title {
                     font-size: 17px;
-                    
-                    .calendar-icon{
+
+                    .calendar-icon {
                         margin: 0 8px 0 0;
-                        color: #0fbcf6;
+                        color : #0fbcf6;
                     }
                 }
 
-                .timeframe-selection{
-                    .timeframe-button{
-                        font-size:14px;
-                        height: 40px;
-                        width: 145px;
-                        margin: 10px 12px 10px 0;
-                        background-color:white;
-                        border:2px solid #0fbcf6;
-                        color: #0fbcf6;
-                        transition: all 0.3s;
-                        border-radius: 7px;
+                .timeframe-selection {
+                    .timeframe-button {
+                        font-size       : 14px;
+                        height          : 40px;
+                        width           : 145px;
+                        margin          : 10px 12px 10px 0;
+                        background-color: white;
+                        border          : 2px solid #0fbcf6;
+                        color           : #0fbcf6;
+                        transition      : all 0.3s;
+                        border-radius   : 7px;
                     }
 
-                    .timeframe-button:hover{
-                        color: white;
-                        background-color:#0fbcf6;
+                    .timeframe-button:hover {
+                        color           : white;
+                        background-color: #0fbcf6;
                     }
 
-                    .sorry-text-because-noavailable-timeframe{
-                        font-size:17px;
-                        margin: 20px 20px 20px 0;
-
+                    .sorry-text-because-noavailable-timeframe {
+                        font-size : 17px;
+                        margin    : 20px 20px 20px 0;
+                        font-style: italic;
                     }
                 }
             }
         }
 
-        .right-content-location{
-            width:48%;
+        .right-content-location {
+            width: 48%;
         }
     }
 

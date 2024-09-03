@@ -226,5 +226,11 @@
         "choose-dotor":"Chọn bác sĩ",
         "choose-day":"Chọn ngày hẹn và khung giờ",
         "save-button":"Lưu ngày hẹn"
+    },
+    "doctor-detail-page-for-patient":{
+        "schedule-section": {
+            "available-timeframe-section-title":"Thời gian khám:",
+            "sorry-text":"Xin lỗi quý khách, bác sĩ hiện không còn trống lịch hôm nay! Vui lòng chọn một hôm khác."
+        }
     }
 }
