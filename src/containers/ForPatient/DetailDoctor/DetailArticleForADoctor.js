@@ -9,6 +9,7 @@ import { getInforAndArticleForADoctor } from '../../../services/userService';
 import defaultAvatar from '../../../assets/images/default-avatar-circle.png'
 import { LANGUAGES } from '../../../utils';
 import DoctorScheduleSection from './DoctorScheduleSection';
+import DoctorExtraInforSection from './DoctorExtraInforSection';
 
 class DetailArticleForADoctor extends Component {
 
@@ -90,7 +91,7 @@ class DetailArticleForADoctor extends Component {
                             />
                         </div>
                         <div className="right-content-location">
-
+                            <DoctorExtraInforSection />
                         </div>
 
                     </div>

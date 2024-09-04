@@ -57,21 +57,21 @@ class DoctorScheduleSection extends Component {
             let object = {};
 
             if (language === LANGUAGES.VI) {
-                if(i===0){
-let ddMM = moment(new Date()).format('DD/MM');
-let today = `Hôm nay - ${ddMM}`;
-object.label = today;
-                }else{
+                if (i === 0) {
+                    let ddMM = moment(new Date()).format('DD/MM');
+                    let today = `Hôm nay - ${ddMM}`;
+                    object.label = today;
+                } else {
                     let labelVi = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
                     object.label = this.capitalizeFirstLetter(labelVi);
                 }
-                
+
             } else if (language === LANGUAGES.EN) {
-                if(i===0){
+                if (i === 0) {
                     let ddMM = moment(new Date()).format('DD/MM');
                     let today = `Today - ${ddMM}`;
                     object.label = today;
-                } else{
+                } else {
                     object.label = moment(new Date()).add(i, 'days').locale('en').format('ddd - DD/MM');
 
                 }

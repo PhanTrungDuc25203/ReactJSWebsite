@@ -134,17 +134,48 @@ class DoctorManage extends Component {
 
     handleChangeOnSelectBox = async (selectedDoctor) => {
         this.setState({ selectedDoctor });
+        let { priceList, paymentMethodList, vietnamProvinceList } = this.state;
         // console.log(selectedDoctor.value);
         await this.props.fetchDoctorDetailsForDoctorManagePage(selectedDoctor.value);
-        // console.log("Check doctor details for DoctorManagePage: ", this.state.selectedDoctorDetails);
+        console.log("Check doctor details for DoctorManagePage: ", this.state.selectedDoctorDetails);
         let { selectedDoctorDetails } = this.state;
         if (selectedDoctorDetails && selectedDoctorDetails.ArticleMarkdown) {
             let tempMarkdown = selectedDoctorDetails.ArticleMarkdown;
+
+            let tempClinicAddress = '', tempClinicName = '', tempNote = '', tempPaymentId = '',
+                tempPriceId = '', tempProvinceId = '', tempSelectedPaymentMethod = '',
+                tempSelectedPrice = '', tempSelectedProvince = '';
+
+            if (selectedDoctorDetails.Doctor_infor) {
+                tempClinicAddress = selectedDoctorDetails.Doctor_infor.clinicAddress;
+                tempClinicName = selectedDoctorDetails.Doctor_infor.clinicName;
+                tempNote = selectedDoctorDetails.Doctor_infor.note;
+                tempPaymentId = selectedDoctorDetails.Doctor_infor.paymentId;
+                tempPriceId = selectedDoctorDetails.Doctor_infor.priceId;
+                tempProvinceId = selectedDoctorDetails.Doctor_infor.provinceId;
+
+                tempSelectedPaymentMethod = paymentMethodList.find(item => {
+                    return item && item.value === tempPaymentId;
+                })
+                tempSelectedPrice = priceList.find(item => {
+                    return item && item.value === tempPriceId;
+                })
+                tempProvinceId = vietnamProvinceList.find(item => {
+                    return item && item.value === tempProvinceId;
+                })
+            }
+
             this.setState({
                 htmlContent: tempMarkdown.htmlContent,
                 markdownContent: tempMarkdown.markdownContent,
                 description: tempMarkdown.description,
                 hadOldDataForEdit: true,
+                selectedPrice: tempSelectedPrice,
+                selectedPaymentMethod: tempSelectedPaymentMethod,
+                selectedProvince: tempProvinceId,
+                clinicName: tempClinicName,
+                clinicAddress: tempClinicAddress,
+                note: tempNote,
             })
         } else {
             this.setState({
@@ -152,6 +183,9 @@ class DoctorManage extends Component {
                 markdownContent: '',
                 description: '',
                 hadOldDataForEdit: false,
+                clinicName: '',
+                clinicAddress: '',
+                note: '',
             })
         }
     };
