@@ -13,7 +13,8 @@ class DoctorExtraInforSection extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            isShowPriceDetail: false,
+            isShowInsurenceDetail: false,
         }
     }
 
@@ -25,7 +26,24 @@ class DoctorExtraInforSection extends Component {
 
     }
 
+    handleMoreButtonClicked = (status, isShow) => {
+
+        if (isShow === 'price') {
+            this.setState({
+                isShowPriceDetail: status,
+            })
+        }
+        if (isShow === 'insurance') {
+            this.setState({
+                isShowInsurenceDetail: status,
+            })
+        }
+    }
+
     render() {
+
+        let { isShowPriceDetail, isShowInsurenceDetail } = this.state;
+
         return (
             <React.Fragment>
                 <div className="appointment-address-sct1">
@@ -36,34 +54,86 @@ class DoctorExtraInforSection extends Component {
                         <div>
                             Bệnh viện Đa khoa Bảo Sơn 2
                         </div>
-                           <div>
+                        <div>
                             Số 52 Nguyễn Chí Thanh - Đống Đa - Hà Nội
                         </div>
                     </div>
                 </div>
-                <div className="examination-price-sct2">
+                <div className={isShowPriceDetail === false ? "examination-price-sct2 css-for-less-content" : "examination-price-sct2"}>
                     <div className="sct2-title">
                         <FontAwesomeIcon icon={faMoneyCheckDollar} className="money-check-icon" />Giá khám:
                     </div>
-                    <div className="examination-price">
-                        300.000đ
-                    </div>
-                    <button className="more-button">
-                        Xem thêm
-                    </button>
+                    {isShowPriceDetail === false ?
+                        <React.Fragment>
+                            <div className="examination-price">
+                                300.000đ
+                            </div>
+                            <button className="more-button"
+                                onClick={() => this.handleMoreButtonClicked(true, 'price')}
+                            >
+                                Xem thêm
+                            </button>
+                        </React.Fragment>
+                        :
+                        <div className="price-detail">
+                            <div className="price-in-detail">
+                                <div className="section-content">Chưa bao gồm chi phí siêu âm, xét nghiệm</div>
+                                <div className="price">300.000đ</div>
+                            </div>
+                            <div className="sale-promotion">
+                                Miễn phí khám thai khi khách hàng mua phiếu siêu âm thai 2D hoặc 5D (khám thai 0đ)
+                            </div>
+                            <div className="payment-method">
+                                Bệnh viện có thanh toán bằng hình thức tiền mặt và quẹt thẻ
+                            </div>
+
+                            <div className="less-button-container">
+                                <button className="less-button"
+                                    onClick={() => this.handleMoreButtonClicked(false, 'price')}
+                                >
+                                    Thu gọn
+                                </button>
+                            </div>
+
+                        </div>
+                    }
+
                 </div>
-                <div className="insurance-sct3">
+                <div className={isShowInsurenceDetail === false ? "insurance-sct3 css-for-less-content" : "insurance-sct3"}>
                     <div className="sct3-title">
                         <FontAwesomeIcon icon={faUserShield} className="insurance-icon" />
                         Bảo hiểm áp dụng:
-                        <button className="more-button">
-                            Xem thêm
-                        </button>
                     </div>
-
-                    <div className="applying-insurance">
-
-                    </div>
+                    {isShowInsurenceDetail === false ?
+                        <React.Fragment>
+                            <button className="more-button"
+                                onClick={() => this.handleMoreButtonClicked(true, 'insurance')}
+                            >
+                                Xem thêm
+                            </button>
+                        </React.Fragment>
+                        :
+                        <div className="insurance-detail">
+                            <div className="insurance-type-1">
+                                <div>Bảo hiểm y tế nhà nước</div>
+                                <div className="section-content">Áp dụng với Bảo hiểm y tế hạng 3 (bao gồm BHYT ở Phường, Quận TPHCM và Tỉnh)</div>
+                            </div>
+                            <div className="insurance-type-2">
+                                <div>Bảo hiểm bảo lãnh</div>
+                                <div className="section-content">Đối với các đơn vị bảo hiểm không bảo lãnh trực tiếp: Bệnh viện xuất hoá đơn tài chính (hoá đơn điện tử) và hỗ trợ bệnh nhân hoàn thiện hồ sơ</div>
+                            </div>
+                            <div className="more-insurance-type">
+                                <div><a href="#">Xem danh sách</a></div>
+                            </div>
+                            <div className="less-button-container">
+                                <button className="less-button"
+                                    onClick={() => this.handleMoreButtonClicked(false, 'insurance')}
+                                >
+                                    Thu gọn
+                                </button>
+                            </div>
+                        </div>
+                    }
                 </div>
             </React.Fragment >
 
