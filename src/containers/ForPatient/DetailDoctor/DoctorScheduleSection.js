@@ -7,6 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import localization from 'moment/locale/vi';
 import { getDoctorScheduleByDateService } from '../../../services/userService';
+import { withRouter } from 'react-router';
 
 class DoctorScheduleSection extends Component {
 
@@ -20,7 +21,7 @@ class DoctorScheduleSection extends Component {
 
     async componentDidMount() {
         let { language } = this.props;
-        let tempDateArr = this.buildSelectionOpion(language);
+        let tempDateArr = this.buildSelectionOption(language);
 
         this.setState({
             availableDays: tempDateArr,
@@ -30,14 +31,14 @@ class DoctorScheduleSection extends Component {
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.language !== this.props.language) {
-            let tempDateArr = this.buildSelectionOpion(this.props.language);
+            let tempDateArr = this.buildSelectionOption(this.props.language);
             this.setState({
                 availableDays: tempDateArr,
             })
         }
 
         if (prevProps.selectedDoctorId !== this.props.selectedDoctorId) {
-            let tempDateArr = this.buildSelectionOpion(this.props.language);
+            let tempDateArr = this.buildSelectionOption(this.props.language);
             if (tempDateArr && tempDateArr.length > 0) {
                 let res = await getDoctorScheduleByDateService(this.props.selectedDoctorId, tempDateArr[0].value);
                 this.setState({
@@ -51,7 +52,7 @@ class DoctorScheduleSection extends Component {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    buildSelectionOpion = (language) => {
+    buildSelectionOption = (language) => {
         let tempDateArr = [];
         for (let i = 0; i < 7; i++) {
             let object = {};
@@ -88,7 +89,6 @@ class DoctorScheduleSection extends Component {
         if (this.props.selectedDoctorId && this.props.selectedDoctorId !== -1) {
             let doctorId = this.props.selectedDoctorId;
             let date = event.target.value;
-
             let res = await getDoctorScheduleByDateService(doctorId, date);
 
             let tempAllAvailableTimeframe = [];
@@ -99,6 +99,15 @@ class DoctorScheduleSection extends Component {
             }
             console.log("Check res get schedule: ", res);
         }
+    }
+
+    handleChoosingATimeframeForAppointment = (doctor) => {
+        console.log("Check this doctor: ", doctor);
+        let formattedDate = moment(doctor.date).format('YYYY-MM-DD');
+
+        // Sau đó truyền formattedDate thay vì doctor.date
+        this.props.history.push(`/make-appointment/${doctor.doctorId}/${formattedDate}/${doctor.timeType}`);
+        // this.props.history.push(`/make-appointment/${doctor.doctorId}/${doctor.date}/${doctor.timeType}`)
     }
 
     render() {
@@ -138,7 +147,13 @@ class DoctorScheduleSection extends Component {
                             allAvailableTimeframe.map((item, index) => {
                                 let timeframe = language === LANGUAGES.VI ? item.timeTypeData.value_Vie : item.timeTypeData.value_Eng;
                                 return (
-                                    <button key={index} className="timeframe-button">{timeframe}</button>
+                                    <button
+                                        key={index}
+                                        className="timeframe-button"
+                                        onClick={() => this.handleChoosingATimeframeForAppointment(item)}
+                                    >
+                                        {timeframe}
+                                    </button>
                                 )
                             })
 
@@ -173,5 +188,5 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DoctorScheduleSection);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DoctorScheduleSection));
 
