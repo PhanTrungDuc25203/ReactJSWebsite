@@ -91,7 +91,9 @@ class DetailArticleForADoctor extends Component {
                             />
                         </div>
                         <div className="right-content-location">
-                            <DoctorExtraInforSection />
+                            <DoctorExtraInforSection
+                                selectedDoctorId={doctorDetails && doctorDetails.id ? doctorDetails.id : -1}
+                            />
                         </div>
 
                     </div>

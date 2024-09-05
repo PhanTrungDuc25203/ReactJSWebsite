@@ -6,7 +6,8 @@ import { LANGUAGES } from '../../../utils';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import localization from 'moment/locale/vi';
-import { getDoctorScheduleByDateService } from '../../../services/userService';
+import { getExtraInforDoctorByIdService } from '../../../services/userService';
+import { NumericFormat } from 'react-number-format';
 
 class DoctorExtraInforSection extends Component {
 
@@ -15,6 +16,7 @@ class DoctorExtraInforSection extends Component {
         this.state = {
             isShowPriceDetail: false,
             isShowInsurenceDetail: false,
+            extraInfor: {},
         }
     }
 
@@ -23,7 +25,20 @@ class DoctorExtraInforSection extends Component {
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.language !== this.props.language) {
 
+        }
+
+        if (prevProps.selectedDoctorId !== this.props.selectedDoctorId) {
+            let res = await getExtraInforDoctorByIdService(this.props.selectedDoctorId);
+            // console.log("Check get extra infor: ", data);
+            if (res && res.errCode === 0) {
+                this.setState({
+                    extraInfor: res.data,
+                })
+            }
+
+        }
     }
 
     handleMoreButtonClicked = (status, isShow) => {
@@ -42,7 +57,8 @@ class DoctorExtraInforSection extends Component {
 
     render() {
 
-        let { isShowPriceDetail, isShowInsurenceDetail } = this.state;
+        let { isShowPriceDetail, isShowInsurenceDetail, extraInfor } = this.state;
+        let { language } = this.props;
 
         return (
             <React.Fragment>
@@ -52,10 +68,10 @@ class DoctorExtraInforSection extends Component {
                     </div>
                     <div className="clinic-name-and-address">
                         <div>
-                            Bệnh viện Đa khoa Bảo Sơn 2
+                            {extraInfor && extraInfor.clinicName ? extraInfor.clinicName : 'Phòng khám của bác sĩ chưa được cập nhật'}
                         </div>
                         <div>
-                            Số 52 Nguyễn Chí Thanh - Đống Đa - Hà Nội
+                            {extraInfor && extraInfor.clinicAddress ? extraInfor.clinicAddress : ''}
                         </div>
                     </div>
                 </div>
@@ -66,7 +82,22 @@ class DoctorExtraInforSection extends Component {
                     {isShowPriceDetail === false ?
                         <React.Fragment>
                             <div className="examination-price">
-                                300.000đ
+                                {extraInfor && extraInfor.priceTypeData && language === LANGUAGES.EN &&
+                                    <NumericFormat
+                                        value={extraInfor.priceTypeData.value_Eng}
+                                        displayType='text'
+                                        thousandSeparator=","
+                                        suffix='$'
+                                    />
+                                }
+                                {extraInfor && extraInfor.priceTypeData && language === LANGUAGES.VI &&
+                                    <NumericFormat
+                                        value={extraInfor.priceTypeData.value_Vie}
+                                        displayType='text'
+                                        thousandSeparator=","
+                                        suffix='đ'
+                                    />
+                                }
                             </div>
                             <button className="more-button"
                                 onClick={() => this.handleMoreButtonClicked(true, 'price')}
@@ -77,14 +108,39 @@ class DoctorExtraInforSection extends Component {
                         :
                         <div className="price-detail">
                             <div className="price-in-detail">
-                                <div className="section-content">Chưa bao gồm chi phí siêu âm, xét nghiệm</div>
-                                <div className="price">300.000đ</div>
+                                <div className="section-content">Chưa bao gồm chi phí siêu âm, xét nghiệm, chụp chiếu</div>
+                                <div className="price">
+                                    {extraInfor && extraInfor.priceTypeData && language === LANGUAGES.EN &&
+                                        <NumericFormat
+                                            value={extraInfor.priceTypeData.value_Eng}
+                                            displayType='text'
+                                            thousandSeparator=","
+                                            suffix='$'
+                                        />
+                                    }
+                                    {extraInfor && extraInfor.priceTypeData && language === LANGUAGES.VI &&
+                                        <NumericFormat
+                                            value={extraInfor.priceTypeData.value_Vie}
+                                            displayType='text'
+                                            thousandSeparator=","
+                                            suffix='đ'
+                                        />
+                                    }
+                                </div>
                             </div>
                             <div className="sale-promotion">
-                                Miễn phí khám thai khi khách hàng mua phiếu siêu âm thai 2D hoặc 5D (khám thai 0đ)
+                                {extraInfor && extraInfor.note ? extraInfor.note : 'Bác sĩ không có ghi chú gì thêm'}
                             </div>
                             <div className="payment-method">
-                                Bệnh viện có thanh toán bằng hình thức tiền mặt và quẹt thẻ
+                                {extraInfor && extraInfor.paymentId && extraInfor.paymentId === 'PAY3' &&
+                                    'Phòng khám nhận thanh toán bằng hình thức qua thẻ ngân hàng và tiền mặt'
+                                }
+                                {extraInfor && extraInfor.paymentId && extraInfor.paymentId === 'PAY2' &&
+                                    'Phòng khám chỉ nhận thanh toán bằng hình thức qua thẻ ngân hàng'
+                                }
+                                {extraInfor && extraInfor.paymentId && extraInfor.paymentId === 'PAY1' &&
+                                    'Phòng khám chỉ nhận thanh toán bằng hình thức tiền mặt'
+                                }
                             </div>
 
                             <div className="less-button-container">

@@ -1,11 +1,9 @@
 .doctor-article-container {
-    width             : 100%;
-    height            : auto;
-    display           : flex;
-    flex-direction    : column;
-    align-items       : center;
-    // justify-content: center;
-    // border: 1px solid red;
+    width         : 100%;
+    height        : auto;
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
 
     .avatar-and-general-introduction {
         height : 200px;
@@ -82,13 +80,12 @@
     }
 
     .booking-time-and-exam-location {
-        height       : auto;
-        width        : 100%;
-        padding      : 30px 5.5% 0px 5.5%;
-        // border-top: 2px solid rgb(193, 233, 255);
-        margin       : 10px 0 0 0;
-        display      : flex;
-        min-height   : 260px;
+        height    : auto;
+        width     : 100%;
+        padding   : 30px 5.5% 0px 5.5%;
+        margin    : 10px 0 0 0;
+        display   : flex;
+        min-height: 260px;
 
         .left-content-timeframe {
             width: 52%;
@@ -103,7 +100,6 @@
                     background-color: transparent;
                     padding         : 10px 0 10px 0;
                     cursor          : pointer;
-                    // transition: border-bottom 0.1s, padding 0.1s;
 
                     option {}
                 }
@@ -167,21 +163,16 @@
                 text-decoration : none;
                 background-color: white;
                 border          : none;
-                border-bottom   : 2px solid white;
-                color           : #0fbcf6;
+                color           : black;
                 font-size       : 17px;
                 margin          : 0 0 2px 10px;
                 padding         : 0px;
                 height          : 23px;
-                transition      : border 0.2s;
+                transition      : color 0.2s;
             }
 
-            // .more-button::after {
-            //     content: "+";
-            // }
-
             .more-button:hover {
-                border-bottom: 2px solid #0fbcf6;
+                color: #0fbcf6;
             }
 
             .appointment-address-sct1 {
@@ -280,25 +271,23 @@
                         position: relative;
 
                         .less-button {
-                            position           : absolute;
-                            right              : 0;
-                            bottom             : 0;
-                            width              : fit-content;
-                            float              : right;
-                            height             : 30px;
-                            text-decoration    : none;
-                            background-color   : white;
-                            border             : none;
-                            border-bottom      : 2px solid white;
-                            color              : #0fbcf6;
-                            font-size          : 17px;
-                            padding            : 5px 0;
-                            // margin          : 10px 0 10px 0;
-                            transition         : border 0.2s;
+                            position        : absolute;
+                            right           : 0;
+                            bottom          : 0;
+                            width           : fit-content;
+                            float           : right;
+                            height          : 30px;
+                            text-decoration : none;
+                            background-color: white;
+                            border          : none;
+                            color           : black;
+                            font-size       : 16px;
+                            padding         : 5px 0;
+                            transition      : color 0.2s;
                         }
 
                         .less-button:hover {
-                            border-bottom: 2px solid #0fbcf6;
+                            color: #0fbcf6;
                         }
                     }
                 }
@@ -364,7 +353,6 @@
                         padding         : 10px 5px;
 
                         a {
-                            // text-decoration: none;
                             border    : none;
                             cursor    : pointer;
                             color     : black;
@@ -376,32 +364,22 @@
                         }
                     }
 
-                    .less-button-container {
-                        height  : 35px;
-                        width   : 100%;
-                        position: relative;
+                    .less-button {
+                        width           : fit-content;
+                        float           : right;
+                        height          : 30px;
+                        text-decoration : none;
+                        background-color: white;
+                        border          : none;
+                        color           : black;
+                        font-size       : 16px;
+                        padding         : 5px 0;
+                        margin          : 5px 0 5px 0;
+                        transition      : color 0.2s;
+                    }
 
-                        .less-button {
-                            position           : absolute;
-                            right              : 0;
-                            bottom             : 0;
-                            width              : fit-content;
-                            float              : right;
-                            height             : 30px;
-                            text-decoration    : none;
-                            background-color   : white;
-                            border             : none;
-                            border-bottom      : 2px solid white;
-                            color              : #0fbcf6;
-                            font-size          : 17px;
-                            padding            : 5px 0;
-                            // margin          : 10px 0 10px 0;
-                            transition         : border 0.2s;
-                        }
-
-                        .less-button:hover {
-                            border-bottom: 2px solid #0fbcf6;
-                        }
+                    .less-button:hover {
+                        color: #0fbcf6;
                     }
                 }
             }
