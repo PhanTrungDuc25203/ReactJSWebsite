@@ -75,7 +75,7 @@ class EliteDoctorSection extends Component {
             slidesToScroll: 4,
             nextArrow: <this.SampleNextArrow />,  // Sử dụng SampleNextArrow
             prevArrow: <this.SamplePrevArrow />,  // Sử dụng SamplePrevArrow
-            autoplay: true,
+            autoplay: false,
             className: 'elite-doctor-section-slider',
             // dotsClass: 'elite-doctor-section-dots-of-slider',
             autoplaySpeed: 8000,
