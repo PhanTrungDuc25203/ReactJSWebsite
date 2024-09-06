@@ -27,7 +27,7 @@ class MakeAppointmentPage extends Component {
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
             let id = this.props.match.params.id;
             let res = await getInforAndArticleForADoctor(id);
-            console.log("Check doctor infor: ", res);
+            // console.log("Check doctor infor: ", res);
             if (res && res.errCode === 0) {
                 this.setState({
                     doctorDetails: res.data,
@@ -49,20 +49,19 @@ class MakeAppointmentPage extends Component {
                     genderList: genderList.data,
                 })
             }
-            console.log("Check genderlist", this.state.genderList);
+            // console.log("Check genderlist", this.state.genderList);
         }
     }
 
     appointmentDateFormat(language) {
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
             let date = this.props.match.params.date;
-            let timeframe = this.props.match.params.timeframe;
             let appoitmentDate;
             if (language === LANGUAGES.VI) {
                 appoitmentDate = this.state.timeframe.value_Vie + ' ngày ' + date;
             }
             if (language === LANGUAGES.EN) {
-                appoitmentDate = 'At ' + this.state.timeframe.value_Eng + ' day ' + date;
+                appoitmentDate = 'At ' + this.state.timeframe.value_Eng + ' ~ ' + date;
             }
             return appoitmentDate;
         }
@@ -184,7 +183,7 @@ class MakeAppointmentPage extends Component {
                                     <label><FormattedMessage id="make-appointment-page.right-content.name" /></label>
                                     <input
                                         type="text"
-                                        placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.name" />}
+                                    // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.name" />}
                                     ></input>
                                 </div>
                                 <div className="gender-section">
@@ -226,7 +225,7 @@ class MakeAppointmentPage extends Component {
                                 <DatePicker
                                     onChange={this.handleDatePickerChanged}
                                     className="date-picker-section"
-                                    placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.dob" />}
+                                // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.dob" />}
                                 // value={this.state.selectedDay}
                                 // minDate={new Date().setHours(0, 0, 0, 0)}
                                 />
@@ -236,21 +235,21 @@ class MakeAppointmentPage extends Component {
                                     <label><FormattedMessage id="make-appointment-page.right-content.address" /></label>
                                     <input
                                         type="text"
-                                        placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.address" />}
+                                    // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.address" />}
                                     ></input>
                                 </div>
                                 <div className="phone-number">
                                     <label><FormattedMessage id="make-appointment-page.right-content.phonenum" /></label>
                                     <input
                                         type="text"
-                                        placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.phonenum" />}
+                                    // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.phonenum" />}
                                     ></input>
                                 </div>
                                 <div className="email">
                                     <label><FormattedMessage id="make-appointment-page.right-content.email" /></label>
                                     <input
                                         type="email"
-                                        placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.email" />}
+                                    // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.email" />}
                                     ></input>
                                 </div>
                             </div>
@@ -258,13 +257,13 @@ class MakeAppointmentPage extends Component {
                                 <label><FormattedMessage id="make-appointment-page.right-content.booking-for" /></label>
                                 <input
                                     type="text"
-                                    placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.booking-for" />}
+                                // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.booking-for" />}
                                 ></input>
                             </div>
                             <div className="reason">
                                 <label><FormattedMessage id="make-appointment-page.right-content.reason" /></label>
                                 <textarea
-                                    placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.reason" />}
+                                // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.reason" />}
                                 >
 
                                 </textarea>

@@ -103,7 +103,13 @@ class DoctorScheduleSection extends Component {
 
     handleChoosingATimeframeForAppointment = (doctor) => {
         console.log("Check this doctor: ", doctor);
-        let formattedDate = moment(doctor.date).format('YYYY-MM-DD');
+        let formattedDate;
+        if (this.props.language === LANGUAGES.VI) {
+            formattedDate = this.capitalizeFirstLetter(moment(doctor.date).format('dddd, DD-MM-YYYY'));
+        }
+        if (this.props.language === LANGUAGES.EN) {
+            formattedDate = moment(doctor.date).locale('en').format('ddd, DD-MM-YYYY');
+        }
 
         // Sau đó truyền formattedDate thay vì doctor.date
         this.props.history.push(`/make-appointment/${doctor.doctorId}/${formattedDate}/${doctor.timeType}`);
