@@ -83,6 +83,10 @@ const getExtraInforDoctorByIdService = (doctorId) => {
     return axios.get(`/api/get-extra-infor-doctor-by-id?doctorId=${doctorId}`);
 }
 
+const patientInforWhenBookingAppointment = (data) => {
+    return axios.post('/api/patient-infor-when-booking-time', data);
+}
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -97,4 +101,5 @@ export {
     createTimeframesForDoctorScheduleService,
     getDoctorScheduleByDateService,
     getExtraInforDoctorByIdService,
+    patientInforWhenBookingAppointment,
 };

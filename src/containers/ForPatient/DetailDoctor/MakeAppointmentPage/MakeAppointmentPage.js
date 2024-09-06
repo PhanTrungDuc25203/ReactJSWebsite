@@ -11,6 +11,9 @@ import DatePicker from '../../../../components/Input/DatePicker';
 import { getAllCodesService } from "../../../../services/userService";
 import { NumericFormat } from 'react-number-format';
 import { FormattedMessage } from 'react-intl';
+import * as actions from '../../../../store/actions';
+import { patientInforWhenBookingAppointment } from '../../../../services/userService';
+import { toast } from 'react-toastify';
 
 class MakeAppointmentPage extends Component {
 
@@ -20,6 +23,16 @@ class MakeAppointmentPage extends Component {
             doctorDetails: {},
             timeframe: {},
             genderList: [],
+
+            fullname: '',
+            phoneNumber: '',
+            email: '',
+            address: '',
+            reason: '',
+            birthday: '',
+            selectedGender: '',
+            doctorId: '',
+            timeType: '',
         }
     }
 
@@ -43,12 +56,13 @@ class MakeAppointmentPage extends Component {
                     })
                 }
             }
-            let genderList = await getAllCodesService('gender');
-            if (genderList && genderList.data.length > 0) {
-                this.setState({
-                    genderList: genderList.data,
-                })
-            }
+            // let genderList = await getAllCodesService('gender');
+            // if (genderList && genderList.data.length > 0) {
+            //     this.setState({
+            //         genderList: genderList.data,
+            //     })
+            // }
+            this.props.getGenderList();
             // console.log("Check genderlist", this.state.genderList);
         }
     }
@@ -68,11 +82,60 @@ class MakeAppointmentPage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.genderList !== this.props.genderList) {
+            if (this.props.genderList.length > 0) {
+                this.setState({
+                    genderList: this.props.genderList,
+                })
+            }
+        }
+        if (prevProps.language !== this.props.language) {
 
+        }
     }
 
-    handleDatePickerChanged = () => {
+    handleDatePickerChanged = (date) => {
+        this.setState({
+            birthday: date[0],
+        })
+    }
 
+    handleOnchangeInput = (event, eventId) => {
+        let valueInput = event.target.value;
+        let copyState = { ...this.state };
+        copyState[eventId] = valueInput;
+        this.setState({
+            ...copyState,
+        })
+    }
+
+    handleGenderChange = (event) => {
+        this.setState({
+            selectedGender: event.target.value, // Cập nhật selectedGender theo giá trị của radio button đã chọn
+        });
+    };
+
+    handleSubmitForm = async () => {
+        //validate input
+
+        //call api
+        let res = await patientInforWhenBookingAppointment({
+            fullname: this.state.fullname,
+            phoneNumber: this.state.phoneNumber,
+            email: this.state.email,
+            address: this.state.address,
+            reason: this.state.reason,
+            date: this.state.birthday,
+            selectedGender: this.state.selectedGender,
+            doctorId: this.state.doctorDetails.id,
+            timeType: this.state.timeframe.keyMap,
+        });
+
+        if (res && res.errCode === 0) {
+            toast.success(`Record has been sent, wait for doctor's verification!`)
+        } else {
+            toast.error(`Send record fail!`)
+        }
     }
 
     render() {
@@ -88,6 +151,7 @@ class MakeAppointmentPage extends Component {
         }
 
         let appointmentDate = this.appointmentDateFormat(language);
+        console.log("check state in booking form: ", this.state);
 
         return (
             <React.Fragment>
@@ -185,6 +249,8 @@ class MakeAppointmentPage extends Component {
                                         <FontAwesomeIcon icon={faUser} className="input-icon" />
                                         <input
                                             type="text"
+                                            value={this.state.fullname}
+                                            onChange={(event) => this.handleOnchangeInput(event, 'fullname')}
                                         // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.name" />}
                                         ></input>
                                     </div>
@@ -200,6 +266,7 @@ class MakeAppointmentPage extends Component {
                                                     id={gender.keyMap}
                                                     name="gender"
                                                     value={gender.keyMap}
+                                                    onChange={this.handleGenderChange}
                                                 />
                                                 <label htmlFor={gender.keyMap}>{gender.value_Vie}</label>
                                             </div>
@@ -215,6 +282,7 @@ class MakeAppointmentPage extends Component {
                                                     id={gender.keyMap}
                                                     name="gender"
                                                     value={gender.keyMap}
+                                                    onChange={this.handleGenderChange}
                                                 />
                                                 <label htmlFor={gender.keyMap}>{gender.value_Eng}</label>
                                             </div>
@@ -230,8 +298,8 @@ class MakeAppointmentPage extends Component {
                                     <DatePicker
                                         onChange={this.handleDatePickerChanged}
                                         className="date-picker-section"
-                                    // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.dob" />}
-                                    // value={this.state.selectedDay}
+                                        // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.dob" />}
+                                        value={this.state.birthday}
                                     // minDate={new Date().setHours(0, 0, 0, 0)}
                                     />
                                 </div>
@@ -243,6 +311,8 @@ class MakeAppointmentPage extends Component {
                                         <FontAwesomeIcon icon={faLocationDot} className="input-icon" />
                                         <input
                                             type="text"
+                                            value={this.state.address}
+                                            onChange={(event) => this.handleOnchangeInput(event, 'address')}
                                         // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.address" />}
                                         ></input>
                                     </div>
@@ -253,6 +323,8 @@ class MakeAppointmentPage extends Component {
                                         <FontAwesomeIcon icon={faMobileScreenButton} className="input-icon" />
                                         <input
                                             type="text"
+                                            value={this.state.phoneNumber}
+                                            onChange={(event) => this.handleOnchangeInput(event, 'phoneNumber')}
                                         // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.phonenum" />}
                                         ></input>
                                     </div>
@@ -263,6 +335,8 @@ class MakeAppointmentPage extends Component {
                                         <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
                                         <input
                                             type="email"
+                                            value={this.state.email}
+                                            onChange={(event) => this.handleOnchangeInput(event, 'email')}
                                         // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.email" />}
                                         ></input>
                                     </div>
@@ -281,6 +355,8 @@ class MakeAppointmentPage extends Component {
                             <div className="reason">
                                 <label><FormattedMessage id="make-appointment-page.right-content.reason" /></label>
                                 <textarea
+                                    value={this.state.reason}
+                                    onChange={(event) => this.handleOnchangeInput(event, 'reason')}
                                 // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.reason" />}
                                 >
 
@@ -296,7 +372,9 @@ class MakeAppointmentPage extends Component {
                                     <span> của chúng tôi</span>
                                 </div>
                                 <div className="button">
-                                    <button>Xác nhận đặt khám</button>
+                                    <button
+                                        onClick={() => this.handleSubmitForm()}
+                                    >Xác nhận đặt khám</button>
                                 </div>
                             </div>
                         </div>
@@ -312,12 +390,13 @@ const mapStateToProps = state => {
         // systemMenuPath: state.app.systemMenuPath,
         // isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
+        genderList: state.admin.genders,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        getGenderList: () => dispatch(actions.fetchGenderValueStart()),
     };
 };
 
