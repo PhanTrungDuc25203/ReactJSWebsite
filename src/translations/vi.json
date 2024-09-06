@@ -231,7 +231,18 @@
         "schedule-section": {
             "available-timeframe-section-title": "Thời gian khám:",
             "sorry-text": "Xin lỗi quý khách, bác sĩ hiện không còn trống lịch hôm nay! Vui lòng chọn một hôm khác."
-        }
+        },
+            "extra-infor-section":{
+                "exam-address": "Địa chỉ khám",
+                "exam-price":"Giá khám",
+                "attention": "Chưa bao gồm phí siêu âm, xét nghiệm, chụp chiếu",
+                "no-note":"Bác sĩ không có chú thích gì thêm",
+                "payment-method-1":"Phòng khám nhận thanh toán bằng hình thức qua thẻ ngân hàng và tiền mặt",
+                "payment-method-2":"Phòng khám chỉ nhận thanh toán bằng hình thức qua thẻ ngân hàng",
+                "payment-method-3":"Phòng khám chỉ nhận thanh toán bằng hình thức tiền mặt",
+                "more-button":"Xem thêm",
+                "less-button":"Thu gọn"
+            }
     },
     "doctor-manage-page-for-admin": {
         "page-title": "Tạo thông tin, bài báo cho bác sĩ",
@@ -239,5 +250,34 @@
         "select-doctor-placeholder": "Chọn bác sĩ...",
         "save-article-button": "Lưu bài báo",
         "save-changes-button": "Lưu thay đổi"
+    },
+    "make-appointment-page":{
+        "right-content":{
+            "title":"Hồ sơ khám bệnh",
+            "name":"Họ và tên",
+            "gender":"Giới tính",
+            "dob":"Ngày sinh",
+            "address":"Địa chỉ (Nơi ở)",
+            "phonenum":"Số điện thoại",
+            "email":"Hòm thư điện tử (Email)",
+            "booking-for":"Đặt cho ai",
+            "reason":"Lý do khám bệnh",
+            "placeholder":{
+                "name": "Phan Piscean",
+                "dob": "Choose or input follow formatting: dd/mm/yyy",
+                "address": "1234 Main St",
+                "phonenum": "01234566789",
+                "email": "abc@gmail.com",
+                "booking-for": "Phan Piscean or relative",
+                "reason": "I have a suddenly headache"
+            }
+        },
+        "left-content":{
+            "page-title":"Booking appointment",
+            "specialty":"Bác sĩ khoa phụ sản",
+            "exam-price":"Giá khám khoa phụ sản",
+            "payment-method":"Thanh toán sau tại cơ sở y tế",
+            "receipt":"Tổng thanh toán (phí đặt lịch miễn phí): "
+        }
     }
 }

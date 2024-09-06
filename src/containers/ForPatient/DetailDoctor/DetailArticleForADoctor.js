@@ -77,7 +77,7 @@ class DetailArticleForADoctor extends Component {
                                             {doctorDetails.ArticleMarkdown.description}
                                             <br></br>
                                             <FontAwesomeIcon icon={faMapLocationDot} className="location-icon" />
-                                            Hà Nội
+                                            Phú Thọ
                                         </span>
                                     }
                                 </div>

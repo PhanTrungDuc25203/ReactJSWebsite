@@ -4,21 +4,68 @@ import HomePageHeader from '../../../HomePage/HomePageHeader/HomePageHeader';
 import './MakeAppointmentPage.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoneyCheckDollar, faCashRegister } from '@fortawesome/free-solid-svg-icons';
+import { getInforAndArticleForADoctor } from '../../../../services/userService';
 import { LANGUAGES } from '../../../../utils';
 import defaultAvatar from '../../../../assets/images/default-avatar-circle.png';
 import DatePicker from '../../../../components/Input/DatePicker';
+import { getAllCodesService } from "../../../../services/userService";
+import { NumericFormat } from 'react-number-format';
+import { FormattedMessage } from 'react-intl';
 
 class MakeAppointmentPage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-
+            doctorDetails: {},
+            timeframe: {},
+            genderList: [],
         }
     }
 
     async componentDidMount() {
+        if (this.props.match && this.props.match.params && this.props.match.params.id) {
+            let id = this.props.match.params.id;
+            let res = await getInforAndArticleForADoctor(id);
+            console.log("Check doctor infor: ", res);
+            if (res && res.errCode === 0) {
+                this.setState({
+                    doctorDetails: res.data,
+                })
+            }
 
+            let timeframeArrRes = await getAllCodesService('time');
+            if (timeframeArrRes && timeframeArrRes.data.length > 0) {
+                let result = timeframeArrRes.data.find(item => item.keyMap === this.props.match.params.timeframe);
+                if (result) {
+                    this.setState({
+                        timeframe: result,
+                    })
+                }
+            }
+            let genderList = await getAllCodesService('gender');
+            if (genderList && genderList.data.length > 0) {
+                this.setState({
+                    genderList: genderList.data,
+                })
+            }
+            console.log("Check genderlist", this.state.genderList);
+        }
+    }
+
+    appointmentDateFormat(language) {
+        if (this.props.match && this.props.match.params && this.props.match.params.id) {
+            let date = this.props.match.params.date;
+            let timeframe = this.props.match.params.timeframe;
+            let appoitmentDate;
+            if (language === LANGUAGES.VI) {
+                appoitmentDate = this.state.timeframe.value_Vie + ' ngày ' + date;
+            }
+            if (language === LANGUAGES.EN) {
+                appoitmentDate = 'At ' + this.state.timeframe.value_Eng + ' day ' + date;
+            }
+            return appoitmentDate;
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -31,27 +78,46 @@ class MakeAppointmentPage extends Component {
 
     render() {
 
+        let { doctorDetails } = this.state;
+        // console.log('This doctor: ', this.state.doctorDetails)
+        let { language } = this.props;
+        let nameInVie = '';
+        let nameInEng = '';
+        if (doctorDetails && doctorDetails.positionData) {
+            nameInVie = `${doctorDetails.positionData.value_Vie}, ${doctorDetails.lastName} ${doctorDetails.firstName}`;
+            nameInEng = `${doctorDetails.positionData.value_Eng}, ${doctorDetails.firstName} ${doctorDetails.lastName}`;
+        }
+
+        let appointmentDate = this.appointmentDateFormat(language);
+
         return (
             <React.Fragment>
                 <HomePageHeader />
                 <div className="making-appointment-container">
                     <div className="content-left">
                         <div className="page-title">
-                            Đặt lịch khám bệnh
+                            <FormattedMessage id="make-appointment-page.left-content.page-title" />
                         </div>
                         <div className="doctor-relative">
-                            <div className="doctor-avatar avatar-css" style={{ backgroundImage: `url(${defaultAvatar})` }}>
+                            <div className="doctor-avatar avatar-css"
+                                style={{
+                                    backgroundImage: `url(${doctorDetails.image
+                                        ? doctorDetails.image
+                                        : defaultAvatar
+                                        })`
+                                }}
+                            >
 
                             </div>
                             <div className="text-content">
                                 <div className="doctor-general-infor">
-                                    Phó giáo sư, Phan Trung Đức
+                                    {language === LANGUAGES.VI ? nameInVie : nameInEng}
                                 </div>
                                 <div className="specialty">
-                                    Bác sĩ khoa sản phụ
+                                    <FormattedMessage id="make-appointment-page.left-content.specialty" />
                                 </div>
                                 <div className="appointment-time">
-                                    8:00 - 9:00 ngày 05/09/2024
+                                    {appointmentDate}
                                 </div>
                             </div>
                         </div>
@@ -59,19 +125,50 @@ class MakeAppointmentPage extends Component {
                             <div className="exam-price">
                                 <div className="exam-specialty">
                                     <FontAwesomeIcon icon={faMoneyCheckDollar} className="price-icon" />
-                                    Giá khám sản phụ khoa
+                                    <FormattedMessage id="make-appointment-page.left-content.exam-price" />
                                 </div>
                                 <div className="price">
-                                    300,000đ
+                                    {doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.priceTypeData && language === LANGUAGES.EN &&
+                                        <NumericFormat
+                                            value={doctorDetails.Doctor_infor.priceTypeData.value_Eng}
+                                            displayType='text'
+                                            thousandSeparator=","
+                                            suffix='$'
+                                        />
+                                    }
+                                    {doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.priceTypeData && language === LANGUAGES.VI &&
+                                        <NumericFormat
+                                            value={doctorDetails.Doctor_infor.priceTypeData.value_Vie}
+                                            displayType='text'
+                                            thousandSeparator=","
+                                            suffix='đ'
+                                        />
+                                    }
                                 </div>
                             </div>
                             <div className="payment">
                                 <div className="payment-method">
                                     <FontAwesomeIcon icon={faCashRegister} className="receipt-icon" />
-                                    Thanh toán sau tại cơ sở y tế
+                                    <FormattedMessage id="make-appointment-page.left-content.payment-method" />
                                 </div>
                                 <div className="receipt">
-                                    Tổng thanh toán (phí đặt lịch miễn phí): 300,000đ
+                                    <span><FormattedMessage id="make-appointment-page.left-content.receipt" /> </span>
+                                    {doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.priceTypeData && language === LANGUAGES.EN &&
+                                        <NumericFormat
+                                            value={doctorDetails.Doctor_infor.priceTypeData.value_Eng}
+                                            displayType='text'
+                                            thousandSeparator=","
+                                            suffix='$'
+                                        />
+                                    }
+                                    {doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.priceTypeData && language === LANGUAGES.VI &&
+                                        <NumericFormat
+                                            value={doctorDetails.Doctor_infor.priceTypeData.value_Vie}
+                                            displayType='text'
+                                            thousandSeparator=","
+                                            suffix='đ'
+                                        />
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -80,63 +177,95 @@ class MakeAppointmentPage extends Component {
 
                         <div className="medical-records">
                             <div className="content-right-title">
-                                Hồ sơ khám bệnh
+                                <FormattedMessage id="make-appointment-page.right-content.title" />
                             </div>
                             <div className="name-gender">
                                 <div className="name-section">
-                                    <label>Họ và tên</label>
+                                    <label><FormattedMessage id="make-appointment-page.right-content.name" /></label>
                                     <input
                                         type="text"
+                                        placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.name" />}
                                     ></input>
                                 </div>
                                 <div className="gender-section">
-                                    <label>Giới tính</label>
-                                    <input type="radio" id="html" name="fav_language" value="HTML"></input>
-                                    <label htmlFor="html">Nam</label>
-                                    <input type="radio" id="css" name="fav_language" value="CSS"></input>
-                                    <label htmlFor="css">Nữ</label>
-                                    <input type="radio" id="javascript" name="fav_language" value="JavaScript"></input>
-                                    <label htmlFor="javascript">Khác...</label>
+                                    <label><FormattedMessage id="make-appointment-page.right-content.gender" /></label>
+                                    {this.state.genderList && this.state.genderList.length > 0 && language === LANGUAGES.VI &&
+                                        this.state.genderList.map((gender) => (
+                                            <div key={gender.id}>
+                                                <input
+                                                    className="radio-button-for-gender"
+                                                    type="radio"
+                                                    id={gender.keyMap}
+                                                    name="gender"
+                                                    value={gender.keyMap}
+                                                />
+                                                <label htmlFor={gender.keyMap}>{gender.value_Vie}</label>
+                                            </div>
+                                        ))
+                                    }
+
+                                    {this.state.genderList && this.state.genderList.length > 0 && language === LANGUAGES.EN &&
+                                        this.state.genderList.map((gender) => (
+                                            <div key={gender.id}>
+                                                <input
+                                                    className="radio-button-for-gender"
+                                                    type="radio"
+                                                    id={gender.keyMap}
+                                                    name="gender"
+                                                    value={gender.keyMap}
+                                                />
+                                                <label htmlFor={gender.keyMap}>{gender.value_Eng}</label>
+                                            </div>
+                                        ))
+                                    }
+
                                 </div>
                             </div>
                             <div className="dob">
-                                <label>Ngày sinh</label>
+                                <label><FormattedMessage id="make-appointment-page.right-content.dob" /></label>
                                 <DatePicker
                                     onChange={this.handleDatePickerChanged}
                                     className="date-picker-section"
+                                    placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.dob" />}
                                 // value={this.state.selectedDay}
                                 // minDate={new Date().setHours(0, 0, 0, 0)}
                                 />
                             </div>
                             <div className="contact-address">
                                 <div className="address">
-                                    <label>Địa chỉ (Nơi ở)</label>
+                                    <label><FormattedMessage id="make-appointment-page.right-content.address" /></label>
                                     <input
                                         type="text"
+                                        placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.address" />}
                                     ></input>
                                 </div>
                                 <div className="phone-number">
-                                    <label>Số điện thoại</label>
+                                    <label><FormattedMessage id="make-appointment-page.right-content.phonenum" /></label>
                                     <input
                                         type="text"
+                                        placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.phonenum" />}
                                     ></input>
                                 </div>
                                 <div className="email">
-                                    <label>Hòm thư điện tử (Email)</label>
+                                    <label><FormattedMessage id="make-appointment-page.right-content.email" /></label>
                                     <input
                                         type="email"
+                                        placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.email" />}
                                     ></input>
                                 </div>
                             </div>
                             <div className="booking-for">
-                                <label>Đặt cho ai</label>
+                                <label><FormattedMessage id="make-appointment-page.right-content.booking-for" /></label>
                                 <input
                                     type="text"
+                                    placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.booking-for" />}
                                 ></input>
                             </div>
                             <div className="reason">
-                                <label>Lí do khám bệnh</label>
-                                <textarea>
+                                <label><FormattedMessage id="make-appointment-page.right-content.reason" /></label>
+                                <textarea
+                                    placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.reason" />}
+                                >
 
                                 </textarea>
                             </div>

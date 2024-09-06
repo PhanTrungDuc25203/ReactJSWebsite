@@ -64,7 +64,8 @@ class DoctorExtraInforSection extends Component {
             <React.Fragment>
                 <div className="appointment-address-sct1">
                     <div className="sct1-title">
-                        <FontAwesomeIcon icon={faHospitalUser} className="hospital-icon" />Địa chỉ khám:
+                        <FontAwesomeIcon icon={faHospitalUser} className="hospital-icon" />
+                        <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.exam-address" />
                     </div>
                     <div className="clinic-name-and-address">
                         <div>
@@ -77,7 +78,8 @@ class DoctorExtraInforSection extends Component {
                 </div>
                 <div className={isShowPriceDetail === false ? "examination-price-sct2 css-for-less-content" : "examination-price-sct2"}>
                     <div className="sct2-title">
-                        <FontAwesomeIcon icon={faMoneyCheckDollar} className="money-check-icon" />Giá khám:
+                        <FontAwesomeIcon icon={faMoneyCheckDollar} className="money-check-icon" />
+                        <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.exam-price" />
                     </div>
                     {isShowPriceDetail === false ?
                         <React.Fragment>
@@ -102,13 +104,15 @@ class DoctorExtraInforSection extends Component {
                             <button className="more-button"
                                 onClick={() => this.handleMoreButtonClicked(true, 'price')}
                             >
-                                Xem thêm
+                                <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.more-button" />
                             </button>
                         </React.Fragment>
                         :
                         <div className="price-detail">
                             <div className="price-in-detail">
-                                <div className="section-content">Chưa bao gồm chi phí siêu âm, xét nghiệm, chụp chiếu</div>
+                                <div className="section-content">
+                                    <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.attention" />
+                                </div>
                                 <div className="price">
                                     {extraInfor && extraInfor.priceTypeData && language === LANGUAGES.EN &&
                                         <NumericFormat
@@ -129,17 +133,17 @@ class DoctorExtraInforSection extends Component {
                                 </div>
                             </div>
                             <div className="sale-promotion">
-                                {extraInfor && extraInfor.note ? extraInfor.note : 'Bác sĩ không có ghi chú gì thêm'}
+                                {extraInfor && extraInfor.note ? extraInfor.note : <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.no-note" />}
                             </div>
                             <div className="payment-method">
                                 {extraInfor && extraInfor.paymentId && extraInfor.paymentId === 'PAY3' &&
-                                    'Phòng khám nhận thanh toán bằng hình thức qua thẻ ngân hàng và tiền mặt'
+                                    <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.payment-method-1" />
                                 }
                                 {extraInfor && extraInfor.paymentId && extraInfor.paymentId === 'PAY2' &&
-                                    'Phòng khám chỉ nhận thanh toán bằng hình thức qua thẻ ngân hàng'
+                                    <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.payment-method-2" />
                                 }
                                 {extraInfor && extraInfor.paymentId && extraInfor.paymentId === 'PAY1' &&
-                                    'Phòng khám chỉ nhận thanh toán bằng hình thức tiền mặt'
+                                    <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.payment-method-3" />
                                 }
                             </div>
 
@@ -147,7 +151,7 @@ class DoctorExtraInforSection extends Component {
                                 <button className="less-button"
                                     onClick={() => this.handleMoreButtonClicked(false, 'price')}
                                 >
-                                    Thu gọn
+                                    <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.less-button" />
                                 </button>
                             </div>
 
@@ -165,7 +169,7 @@ class DoctorExtraInforSection extends Component {
                             <button className="more-button"
                                 onClick={() => this.handleMoreButtonClicked(true, 'insurance')}
                             >
-                                Xem thêm
+                                <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.more-button" />
                             </button>
                         </React.Fragment>
                         :
@@ -185,7 +189,7 @@ class DoctorExtraInforSection extends Component {
                                 <button className="less-button"
                                     onClick={() => this.handleMoreButtonClicked(false, 'insurance')}
                                 >
-                                    Thu gọn
+                                    <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.less-button" />
                                 </button>
                             </div>
                         </div>

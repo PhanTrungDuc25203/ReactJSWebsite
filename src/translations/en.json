@@ -231,6 +231,17 @@
         "schedule-section": {
             "available-timeframe-section-title": "Arrange your time:",
             "sorry-text": "Sorry, the doctor is currently busy today! Please choose another day!"
+        },
+        "extra-infor-section":{
+            "exam-address": "Examination address",
+            "exam-price":"Examination price",
+            "attention": "The cost of ultrasound, tests, and scans is not included",
+            "no-note":"The doctor did not have any further comments",
+            "payment-method-1":"The clinic accepts payment via bank card and cash",
+            "payment-method-2":"The clinic only accepts payment via bank card",
+            "payment-method-3":"The clinic accepts payment via cash",
+            "more-button":"More",
+            "less-button":"Less"
         }
     },
     "doctor-manage-page-for-admin": {
@@ -239,5 +250,34 @@
         "select-doctor-placeholder": "Choose doctor...",
         "save-article-button": "Save article",
         "save-changes-button": "Save changes"
-    }
+    },
+    "make-appointment-page":{
+        "right-content": {
+            "title": "Medical Records",
+            "name": "Full Name",
+            "gender": "Gender",
+            "dob": "Date of Birth",
+            "address": "Address",
+            "phonenum": "Phone Number",
+            "email": "Email",
+            "booking-for": "Booking For",
+            "reason": "Reason for Appointment",
+            "placeholder":{
+                "name": "Phan Piscean",
+                "dob": "Choose or input follow formatting: dd/mm/yyy",
+                "address": "1234 Main St",
+                "phonenum": "01234566789",
+                "email": "abc@gmail.com",
+                "booking-for": "Phan Piscean or relative",
+                "reason": "I have a suddenly headache"
+            }
+        },
+        "left-content": {
+            "page-title": "Booking Appointment",
+            "specialty": "Obstetrics and Gynecology Doctor",
+            "exam-price": "Obstetrics and Gynecology Examination Price",
+            "payment-method": "Pay Later at the Medical Facility",
+            "receipt": "Total Payment (Free Booking Fee):"
+        }
+    }     
 }
