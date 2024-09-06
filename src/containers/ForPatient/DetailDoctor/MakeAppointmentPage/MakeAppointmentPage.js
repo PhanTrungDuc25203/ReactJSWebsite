@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import HomePageHeader from '../../../HomePage/HomePageHeader/HomePageHeader';
 import './MakeAppointmentPage.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoneyCheckDollar, faCashRegister } from '@fortawesome/free-solid-svg-icons';
+import { faMoneyCheckDollar, faCashRegister, faUser, faCalendar, faLocationDot, faMobileScreenButton, faEnvelope, faPeopleArrows } from '@fortawesome/free-solid-svg-icons';
 import { getInforAndArticleForADoctor } from '../../../../services/userService';
 import { LANGUAGES } from '../../../../utils';
 import defaultAvatar from '../../../../assets/images/default-avatar-circle.png';
@@ -181,10 +181,13 @@ class MakeAppointmentPage extends Component {
                             <div className="name-gender">
                                 <div className="name-section">
                                     <label><FormattedMessage id="make-appointment-page.right-content.name" /></label>
-                                    <input
-                                        type="text"
-                                    // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.name" />}
-                                    ></input>
+                                    <div className="icon-and-input">
+                                        <FontAwesomeIcon icon={faUser} className="input-icon" />
+                                        <input
+                                            type="text"
+                                        // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.name" />}
+                                        ></input>
+                                    </div>
                                 </div>
                                 <div className="gender-section">
                                     <label><FormattedMessage id="make-appointment-page.right-content.gender" /></label>
@@ -222,43 +225,58 @@ class MakeAppointmentPage extends Component {
                             </div>
                             <div className="dob">
                                 <label><FormattedMessage id="make-appointment-page.right-content.dob" /></label>
-                                <DatePicker
-                                    onChange={this.handleDatePickerChanged}
-                                    className="date-picker-section"
-                                // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.dob" />}
-                                // value={this.state.selectedDay}
-                                // minDate={new Date().setHours(0, 0, 0, 0)}
-                                />
+                                <div className="icon-and-input">
+                                    <FontAwesomeIcon icon={faCalendar} className="input-icon" />
+                                    <DatePicker
+                                        onChange={this.handleDatePickerChanged}
+                                        className="date-picker-section"
+                                    // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.dob" />}
+                                    // value={this.state.selectedDay}
+                                    // minDate={new Date().setHours(0, 0, 0, 0)}
+                                    />
+                                </div>
                             </div>
                             <div className="contact-address">
                                 <div className="address">
                                     <label><FormattedMessage id="make-appointment-page.right-content.address" /></label>
-                                    <input
-                                        type="text"
-                                    // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.address" />}
-                                    ></input>
+                                    <div className="icon-and-input">
+                                        <FontAwesomeIcon icon={faLocationDot} className="input-icon" />
+                                        <input
+                                            type="text"
+                                        // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.address" />}
+                                        ></input>
+                                    </div>
                                 </div>
                                 <div className="phone-number">
                                     <label><FormattedMessage id="make-appointment-page.right-content.phonenum" /></label>
-                                    <input
-                                        type="text"
-                                    // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.phonenum" />}
-                                    ></input>
+                                    <div className="icon-and-input">
+                                        <FontAwesomeIcon icon={faMobileScreenButton} className="input-icon" />
+                                        <input
+                                            type="text"
+                                        // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.phonenum" />}
+                                        ></input>
+                                    </div>
                                 </div>
                                 <div className="email">
                                     <label><FormattedMessage id="make-appointment-page.right-content.email" /></label>
-                                    <input
-                                        type="email"
-                                    // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.email" />}
-                                    ></input>
+                                    <div className="icon-and-input">
+                                        <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
+                                        <input
+                                            type="email"
+                                        // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.email" />}
+                                        ></input>
+                                    </div>
                                 </div>
                             </div>
                             <div className="booking-for">
                                 <label><FormattedMessage id="make-appointment-page.right-content.booking-for" /></label>
-                                <input
-                                    type="text"
-                                // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.booking-for" />}
-                                ></input>
+                                <div className="icon-and-input">
+                                    <FontAwesomeIcon icon={faPeopleArrows} className="input-icon" />
+                                    <input
+                                        type="text"
+                                    // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.booking-for" />}
+                                    ></input>
+                                </div>
                             </div>
                             <div className="reason">
                                 <label><FormattedMessage id="make-appointment-page.right-content.reason" /></label>
@@ -272,7 +290,14 @@ class MakeAppointmentPage extends Component {
 
                             </div>
                             <div className="confirm-and-send">
-
+                                <div className="term">
+                                    <span>Bằng việc xác nhận đặt khám, bạn hoàn toàn đống ý với </span>
+                                    <a href="#">Điều khoản sử dụng</a>
+                                    <span> của chúng tôi</span>
+                                </div>
+                                <div className="button">
+                                    <button>Xác nhận đặt khám</button>
+                                </div>
                             </div>
                         </div>
                     </div>
