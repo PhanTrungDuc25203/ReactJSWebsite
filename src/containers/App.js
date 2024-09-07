@@ -17,7 +17,8 @@ import HomePage from './HomePage/HomePage.js';
 import CustomScrollbars from '../components/CustomScrollbars.js';
 import DetailArticleForADoctor from './ForPatient/DetailDoctor/DetailArticleForADoctor.js';
 import Doctor from '../routes/Doctor.js';
-import MakeAppointmentPage from './ForPatient/DetailDoctor/MakeAppointmentPage/MakeAppointmentPage.js'
+import MakeAppointmentPage from './ForPatient/DetailDoctor/MakeAppointmentPage/MakeAppointmentPage.js';
+import ConfirmBookingAppointment from './ForPatient/ConfirmBookingAppointment/ConfirmBookingAppointment.js';
 
 class App extends Component {
 
@@ -59,7 +60,8 @@ class App extends Component {
                                     <Route path={path.DETAIL_DOCTOR_ARTICLE} component={DetailArticleForADoctor} />
                                     {/* trang dăng kí khám bệnh theo khung giờ của từng bác sĩ cho bệnh nhân */}
                                     <Route path={path.MAKE_APPOINTMENT_WITH_DOCTOR} component={MakeAppointmentPage} />
-
+                                    {/* route xác nhận đặt hẹn với bác sĩ */}
+                                    <Route path={path.CONFIRM_BOOKING_APPOINTMENT} component={ConfirmBookingAppointment} />
                                     {/* path for doctor*/}
                                     <Route path={'/doctor'} component={userIsAuthenticated(Doctor)} />
                                 </Switch>

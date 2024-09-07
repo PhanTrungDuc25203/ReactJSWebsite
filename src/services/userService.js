@@ -87,6 +87,10 @@ const patientInforWhenBookingAppointment = (data) => {
     return axios.post('/api/patient-infor-when-booking-time', data);
 }
 
+const confirmBookingAppointmentService = (data) => {
+    return axios.post('/api/confirm-booking-appointment', data);
+}
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -102,4 +106,5 @@ export {
     getDoctorScheduleByDateService,
     getExtraInforDoctorByIdService,
     patientInforWhenBookingAppointment,
+    confirmBookingAppointmentService,
 };
