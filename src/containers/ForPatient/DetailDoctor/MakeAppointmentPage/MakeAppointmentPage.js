@@ -14,6 +14,7 @@ import { FormattedMessage } from 'react-intl';
 import * as actions from '../../../../store/actions';
 import { patientInforWhenBookingAppointment } from '../../../../services/userService';
 import { toast } from 'react-toastify';
+import moment from 'moment';
 
 class MakeAppointmentPage extends Component {
 
@@ -119,16 +120,28 @@ class MakeAppointmentPage extends Component {
         //validate input
 
         //call api
+        let appointmentMoment = this.props.match.params.date;
+        //chuyển dạng date về loại db có thể lưu được
+        if (this.props.language === LANGUAGES.VI) {
+            appointmentMoment = moment(appointmentMoment, 'dddd, DD-MM-YYYY', 'vi').toDate();
+        }
+        if (this.props.language === LANGUAGES.EN) {
+            appointmentMoment = moment(appointmentMoment, 'ddd, DD-MM-YYYY', 'en').toDate();
+        }
+
         let res = await patientInforWhenBookingAppointment({
             fullname: this.state.fullname,
             phoneNumber: this.state.phoneNumber,
             email: this.state.email,
             address: this.state.address,
             reason: this.state.reason,
-            date: this.state.birthday,
+            date: appointmentMoment, //ngày để lưu vào DB
+            birthday: this.state.birthday,
             selectedGender: this.state.selectedGender,
+            appointmentMoment: this.props.match.params.date,  //ngày để hiển thị dẽ dàng hơn
             doctorId: this.state.doctorDetails.id,
             timeType: this.state.timeframe.keyMap,
+            language: this.props.language,
         });
 
         if (res && res.errCode === 0) {
