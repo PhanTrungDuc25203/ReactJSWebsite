@@ -15,6 +15,7 @@ import * as actions from '../../../../store/actions';
 import { patientInforWhenBookingAppointment } from '../../../../services/userService';
 import { toast } from 'react-toastify';
 import moment from 'moment';
+import CustomScrollbars from '../../../../components/CustomScrollbars';
 
 class MakeAppointmentPage extends Component {
 
@@ -168,231 +169,233 @@ class MakeAppointmentPage extends Component {
 
         return (
             <React.Fragment>
-                <HomePageHeader />
-                <div className="making-appointment-container">
-                    <div className="content-left">
-                        <div className="page-title">
-                            <FormattedMessage id="make-appointment-page.left-content.page-title" />
-                        </div>
-                        <div className="doctor-relative">
-                            <div className="doctor-avatar avatar-css"
-                                style={{
-                                    backgroundImage: `url(${doctorDetails.image
-                                        ? doctorDetails.image
-                                        : defaultAvatar
-                                        })`
-                                }}
-                            >
-
+                <CustomScrollbars>
+                    <HomePageHeader />
+                    <div className="making-appointment-container">
+                        <div className="content-left">
+                            <div className="page-title">
+                                <FormattedMessage id="make-appointment-page.left-content.page-title" />
                             </div>
-                            <div className="text-content">
-                                <div className="doctor-general-infor">
-                                    {language === LANGUAGES.VI ? nameInVie : nameInEng}
-                                </div>
-                                <div className="specialty">
-                                    <FormattedMessage id="make-appointment-page.left-content.specialty" />
-                                </div>
-                                <div className="appointment-time">
-                                    {appointmentDate}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="patient-relative">
-                            <div className="exam-price">
-                                <div className="exam-specialty">
-                                    <FontAwesomeIcon icon={faMoneyCheckDollar} className="price-icon" />
-                                    <FormattedMessage id="make-appointment-page.left-content.exam-price" />
-                                </div>
-                                <div className="price">
-                                    {doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.priceTypeData && language === LANGUAGES.EN &&
-                                        <NumericFormat
-                                            value={doctorDetails.Doctor_infor.priceTypeData.value_Eng}
-                                            displayType='text'
-                                            thousandSeparator=","
-                                            suffix='$'
-                                        />
-                                    }
-                                    {doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.priceTypeData && language === LANGUAGES.VI &&
-                                        <NumericFormat
-                                            value={doctorDetails.Doctor_infor.priceTypeData.value_Vie}
-                                            displayType='text'
-                                            thousandSeparator=","
-                                            suffix='đ'
-                                        />
-                                    }
-                                </div>
-                            </div>
-                            <div className="payment">
-                                <div className="payment-method">
-                                    <FontAwesomeIcon icon={faCashRegister} className="receipt-icon" />
-                                    <FormattedMessage id="make-appointment-page.left-content.payment-method" />
-                                </div>
-                                <div className="receipt">
-                                    <span><FormattedMessage id="make-appointment-page.left-content.receipt" /> </span>
-                                    {doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.priceTypeData && language === LANGUAGES.EN &&
-                                        <NumericFormat
-                                            value={doctorDetails.Doctor_infor.priceTypeData.value_Eng}
-                                            displayType='text'
-                                            thousandSeparator=","
-                                            suffix='$'
-                                        />
-                                    }
-                                    {doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.priceTypeData && language === LANGUAGES.VI &&
-                                        <NumericFormat
-                                            value={doctorDetails.Doctor_infor.priceTypeData.value_Vie}
-                                            displayType='text'
-                                            thousandSeparator=","
-                                            suffix='đ'
-                                        />
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="content-right">
-
-                        <div className="medical-records">
-                            <div className="content-right-title">
-                                <FormattedMessage id="make-appointment-page.right-content.title" />
-                            </div>
-                            <div className="name-gender">
-                                <div className="name-section">
-                                    <label><FormattedMessage id="make-appointment-page.right-content.name" /></label>
-                                    <div className="icon-and-input">
-                                        <FontAwesomeIcon icon={faUser} className="input-icon" />
-                                        <input
-                                            type="text"
-                                            value={this.state.fullname}
-                                            onChange={(event) => this.handleOnchangeInput(event, 'fullname')}
-                                        // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.name" />}
-                                        ></input>
-                                    </div>
-                                </div>
-                                <div className="gender-section">
-                                    <label><FormattedMessage id="make-appointment-page.right-content.gender" /></label>
-                                    {this.state.genderList && this.state.genderList.length > 0 && language === LANGUAGES.VI &&
-                                        this.state.genderList.map((gender) => (
-                                            <div key={gender.id}>
-                                                <input
-                                                    className="radio-button-for-gender"
-                                                    type="radio"
-                                                    id={gender.keyMap}
-                                                    name="gender"
-                                                    value={gender.keyMap}
-                                                    onChange={this.handleGenderChange}
-                                                />
-                                                <label htmlFor={gender.keyMap}>{gender.value_Vie}</label>
-                                            </div>
-                                        ))
-                                    }
-
-                                    {this.state.genderList && this.state.genderList.length > 0 && language === LANGUAGES.EN &&
-                                        this.state.genderList.map((gender) => (
-                                            <div key={gender.id}>
-                                                <input
-                                                    className="radio-button-for-gender"
-                                                    type="radio"
-                                                    id={gender.keyMap}
-                                                    name="gender"
-                                                    value={gender.keyMap}
-                                                    onChange={this.handleGenderChange}
-                                                />
-                                                <label htmlFor={gender.keyMap}>{gender.value_Eng}</label>
-                                            </div>
-                                        ))
-                                    }
-
-                                </div>
-                            </div>
-                            <div className="dob">
-                                <label><FormattedMessage id="make-appointment-page.right-content.dob" /></label>
-                                <div className="icon-and-input">
-                                    <FontAwesomeIcon icon={faCalendar} className="input-icon" />
-                                    <DatePicker
-                                        onChange={this.handleDatePickerChanged}
-                                        className="date-picker-section"
-                                        // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.dob" />}
-                                        value={this.state.birthday}
-                                    // minDate={new Date().setHours(0, 0, 0, 0)}
-                                    />
-                                </div>
-                            </div>
-                            <div className="contact-address">
-                                <div className="address">
-                                    <label><FormattedMessage id="make-appointment-page.right-content.address" /></label>
-                                    <div className="icon-and-input">
-                                        <FontAwesomeIcon icon={faLocationDot} className="input-icon" />
-                                        <input
-                                            type="text"
-                                            value={this.state.address}
-                                            onChange={(event) => this.handleOnchangeInput(event, 'address')}
-                                        // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.address" />}
-                                        ></input>
-                                    </div>
-                                </div>
-                                <div className="phone-number">
-                                    <label><FormattedMessage id="make-appointment-page.right-content.phonenum" /></label>
-                                    <div className="icon-and-input">
-                                        <FontAwesomeIcon icon={faMobileScreenButton} className="input-icon" />
-                                        <input
-                                            type="text"
-                                            value={this.state.phoneNumber}
-                                            onChange={(event) => this.handleOnchangeInput(event, 'phoneNumber')}
-                                        // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.phonenum" />}
-                                        ></input>
-                                    </div>
-                                </div>
-                                <div className="email">
-                                    <label><FormattedMessage id="make-appointment-page.right-content.email" /></label>
-                                    <div className="icon-and-input">
-                                        <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
-                                        <input
-                                            type="email"
-                                            value={this.state.email}
-                                            onChange={(event) => this.handleOnchangeInput(event, 'email')}
-                                        // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.email" />}
-                                        ></input>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="booking-for">
-                                <label><FormattedMessage id="make-appointment-page.right-content.booking-for" /></label>
-                                <div className="icon-and-input">
-                                    <FontAwesomeIcon icon={faPeopleArrows} className="input-icon" />
-                                    <input
-                                        type="text"
-                                    // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.booking-for" />}
-                                    ></input>
-                                </div>
-                            </div>
-                            <div className="reason">
-                                <label><FormattedMessage id="make-appointment-page.right-content.reason" /></label>
-                                <textarea
-                                    value={this.state.reason}
-                                    onChange={(event) => this.handleOnchangeInput(event, 'reason')}
-                                // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.reason" />}
+                            <div className="doctor-relative">
+                                <div className="doctor-avatar avatar-css"
+                                    style={{
+                                        backgroundImage: `url(${doctorDetails.image
+                                            ? doctorDetails.image
+                                            : defaultAvatar
+                                            })`
+                                    }}
                                 >
 
-                                </textarea>
-                            </div>
-                            <div className="attention">
-
-                            </div>
-                            <div className="confirm-and-send">
-                                <div className="term">
-                                    <span>Bằng việc xác nhận đặt khám, bạn hoàn toàn đống ý với </span>
-                                    <a href="#">Điều khoản sử dụng</a>
-                                    <span> của chúng tôi</span>
                                 </div>
-                                <div className="button">
-                                    <button
-                                        onClick={() => this.handleSubmitForm()}
-                                    >Xác nhận đặt khám</button>
+                                <div className="text-content">
+                                    <div className="doctor-general-infor">
+                                        {language === LANGUAGES.VI ? nameInVie : nameInEng}
+                                    </div>
+                                    <div className="specialty">
+                                        <FormattedMessage id="make-appointment-page.left-content.specialty" />
+                                    </div>
+                                    <div className="appointment-time">
+                                        {appointmentDate}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="patient-relative">
+                                <div className="exam-price">
+                                    <div className="exam-specialty">
+                                        <FontAwesomeIcon icon={faMoneyCheckDollar} className="price-icon" />
+                                        <FormattedMessage id="make-appointment-page.left-content.exam-price" />
+                                    </div>
+                                    <div className="price">
+                                        {doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.priceTypeData && language === LANGUAGES.EN &&
+                                            <NumericFormat
+                                                value={doctorDetails.Doctor_infor.priceTypeData.value_Eng}
+                                                displayType='text'
+                                                thousandSeparator=","
+                                                suffix='$'
+                                            />
+                                        }
+                                        {doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.priceTypeData && language === LANGUAGES.VI &&
+                                            <NumericFormat
+                                                value={doctorDetails.Doctor_infor.priceTypeData.value_Vie}
+                                                displayType='text'
+                                                thousandSeparator=","
+                                                suffix='đ'
+                                            />
+                                        }
+                                    </div>
+                                </div>
+                                <div className="payment">
+                                    <div className="payment-method">
+                                        <FontAwesomeIcon icon={faCashRegister} className="receipt-icon" />
+                                        <FormattedMessage id="make-appointment-page.left-content.payment-method" />
+                                    </div>
+                                    <div className="receipt">
+                                        <span><FormattedMessage id="make-appointment-page.left-content.receipt" /> </span>
+                                        {doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.priceTypeData && language === LANGUAGES.EN &&
+                                            <NumericFormat
+                                                value={doctorDetails.Doctor_infor.priceTypeData.value_Eng}
+                                                displayType='text'
+                                                thousandSeparator=","
+                                                suffix='$'
+                                            />
+                                        }
+                                        {doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.priceTypeData && language === LANGUAGES.VI &&
+                                            <NumericFormat
+                                                value={doctorDetails.Doctor_infor.priceTypeData.value_Vie}
+                                                displayType='text'
+                                                thousandSeparator=","
+                                                suffix='đ'
+                                            />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="content-right">
+
+                            <div className="medical-records">
+                                <div className="content-right-title">
+                                    <FormattedMessage id="make-appointment-page.right-content.title" />
+                                </div>
+                                <div className="name-gender">
+                                    <div className="name-section">
+                                        <label><FormattedMessage id="make-appointment-page.right-content.name" /></label>
+                                        <div className="icon-and-input">
+                                            <FontAwesomeIcon icon={faUser} className="input-icon" />
+                                            <input
+                                                type="text"
+                                                value={this.state.fullname}
+                                                onChange={(event) => this.handleOnchangeInput(event, 'fullname')}
+                                            // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.name" />}
+                                            ></input>
+                                        </div>
+                                    </div>
+                                    <div className="gender-section">
+                                        <label><FormattedMessage id="make-appointment-page.right-content.gender" /></label>
+                                        {this.state.genderList && this.state.genderList.length > 0 && language === LANGUAGES.VI &&
+                                            this.state.genderList.map((gender) => (
+                                                <div key={gender.id}>
+                                                    <input
+                                                        className="radio-button-for-gender"
+                                                        type="radio"
+                                                        id={gender.keyMap}
+                                                        name="gender"
+                                                        value={gender.keyMap}
+                                                        onChange={this.handleGenderChange}
+                                                    />
+                                                    <label htmlFor={gender.keyMap}>{gender.value_Vie}</label>
+                                                </div>
+                                            ))
+                                        }
+
+                                        {this.state.genderList && this.state.genderList.length > 0 && language === LANGUAGES.EN &&
+                                            this.state.genderList.map((gender) => (
+                                                <div key={gender.id}>
+                                                    <input
+                                                        className="radio-button-for-gender"
+                                                        type="radio"
+                                                        id={gender.keyMap}
+                                                        name="gender"
+                                                        value={gender.keyMap}
+                                                        onChange={this.handleGenderChange}
+                                                    />
+                                                    <label htmlFor={gender.keyMap}>{gender.value_Eng}</label>
+                                                </div>
+                                            ))
+                                        }
+
+                                    </div>
+                                </div>
+                                <div className="dob">
+                                    <label><FormattedMessage id="make-appointment-page.right-content.dob" /></label>
+                                    <div className="icon-and-input">
+                                        <FontAwesomeIcon icon={faCalendar} className="input-icon" />
+                                        <DatePicker
+                                            onChange={this.handleDatePickerChanged}
+                                            className="date-picker-section"
+                                            // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.dob" />}
+                                            value={this.state.birthday}
+                                        // minDate={new Date().setHours(0, 0, 0, 0)}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="contact-address">
+                                    <div className="address">
+                                        <label><FormattedMessage id="make-appointment-page.right-content.address" /></label>
+                                        <div className="icon-and-input">
+                                            <FontAwesomeIcon icon={faLocationDot} className="input-icon" />
+                                            <input
+                                                type="text"
+                                                value={this.state.address}
+                                                onChange={(event) => this.handleOnchangeInput(event, 'address')}
+                                            // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.address" />}
+                                            ></input>
+                                        </div>
+                                    </div>
+                                    <div className="phone-number">
+                                        <label><FormattedMessage id="make-appointment-page.right-content.phonenum" /></label>
+                                        <div className="icon-and-input">
+                                            <FontAwesomeIcon icon={faMobileScreenButton} className="input-icon" />
+                                            <input
+                                                type="text"
+                                                value={this.state.phoneNumber}
+                                                onChange={(event) => this.handleOnchangeInput(event, 'phoneNumber')}
+                                            // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.phonenum" />}
+                                            ></input>
+                                        </div>
+                                    </div>
+                                    <div className="email">
+                                        <label><FormattedMessage id="make-appointment-page.right-content.email" /></label>
+                                        <div className="icon-and-input">
+                                            <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
+                                            <input
+                                                type="email"
+                                                value={this.state.email}
+                                                onChange={(event) => this.handleOnchangeInput(event, 'email')}
+                                            // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.email" />}
+                                            ></input>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="booking-for">
+                                    <label><FormattedMessage id="make-appointment-page.right-content.booking-for" /></label>
+                                    <div className="icon-and-input">
+                                        <FontAwesomeIcon icon={faPeopleArrows} className="input-icon" />
+                                        <input
+                                            type="text"
+                                        // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.booking-for" />}
+                                        ></input>
+                                    </div>
+                                </div>
+                                <div className="reason">
+                                    <label><FormattedMessage id="make-appointment-page.right-content.reason" /></label>
+                                    <textarea
+                                        value={this.state.reason}
+                                        onChange={(event) => this.handleOnchangeInput(event, 'reason')}
+                                    // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.reason" />}
+                                    >
+
+                                    </textarea>
+                                </div>
+                                <div className="attention">
+
+                                </div>
+                                <div className="confirm-and-send">
+                                    <div className="term">
+                                        <span>Bằng việc xác nhận đặt khám, bạn hoàn toàn đống ý với </span>
+                                        <a href="#">Điều khoản sử dụng</a>
+                                        <span> của chúng tôi</span>
+                                    </div>
+                                    <div className="button">
+                                        <button
+                                            onClick={() => this.handleSubmitForm()}
+                                        >Xác nhận đặt khám</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </CustomScrollbars>
             </React.Fragment>
         );
     }

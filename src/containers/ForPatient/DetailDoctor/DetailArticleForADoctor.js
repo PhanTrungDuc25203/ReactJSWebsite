@@ -10,6 +10,7 @@ import defaultAvatar from '../../../assets/images/default-avatar-circle.png'
 import { LANGUAGES } from '../../../utils';
 import DoctorScheduleSection from './DoctorScheduleSection';
 import DoctorExtraInforSection from './DoctorExtraInforSection';
+import CustomScrollbars from '../../../components/CustomScrollbars';
 
 class DetailArticleForADoctor extends Component {
 
@@ -51,63 +52,65 @@ class DetailArticleForADoctor extends Component {
 
         return (
             <React.Fragment>
-                <HomePageHeader isShowBanner={false} />
-                <div className="doctor-article-container">
-                    <div className="avatar-and-general-introduction">
-                        <div className="left-content">
-                            <div className="avatar-css"
-                                style={{
-                                    backgroundImage: `url(${doctorDetails.image
-                                        ? doctorDetails.image
-                                        : defaultAvatar
-                                        })`
-                                }}
-                            >
+                <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
+                    <HomePageHeader isShowBanner={false} />
+                    <div className="doctor-article-container">
+                        <div className="avatar-and-general-introduction">
+                            <div className="left-content">
+                                <div className="avatar-css"
+                                    style={{
+                                        backgroundImage: `url(${doctorDetails.image
+                                            ? doctorDetails.image
+                                            : defaultAvatar
+                                            })`
+                                    }}
+                                >
 
-                            </div>
-                        </div>
-                        <div className="right-content">
-                            <div className="general-introduction">
-                                <div className="name-and-position">
-                                    {language === LANGUAGES.VI ? nameInVie : nameInEng}
-                                </div>
-                                <div className="general-information">
-                                    {doctorDetails && doctorDetails.ArticleMarkdown && doctorDetails.ArticleMarkdown.description &&
-                                        <span>
-                                            {doctorDetails.ArticleMarkdown.description}
-                                            <br></br>
-                                            <FontAwesomeIcon icon={faMapLocationDot} className="location-icon" />
-                                            Phú Thọ
-                                        </span>
-                                    }
                                 </div>
                             </div>
+                            <div className="right-content">
+                                <div className="general-introduction">
+                                    <div className="name-and-position">
+                                        {language === LANGUAGES.VI ? nameInVie : nameInEng}
+                                    </div>
+                                    <div className="general-information">
+                                        {doctorDetails && doctorDetails.ArticleMarkdown && doctorDetails.ArticleMarkdown.description &&
+                                            <span>
+                                                {doctorDetails.ArticleMarkdown.description}
+                                                <br></br>
+                                                <FontAwesomeIcon icon={faMapLocationDot} className="location-icon" />
+                                                Phú Thọ
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="booking-time-and-exam-location">
-                        <div className="left-content-timeframe">
-                            <DoctorScheduleSection
-                                selectedDoctorId={doctorDetails && doctorDetails.id ? doctorDetails.id : -1}
-                            />
-                        </div>
-                        <div className="right-content-location">
-                            <DoctorExtraInforSection
-                                selectedDoctorId={doctorDetails && doctorDetails.id ? doctorDetails.id : -1}
-                            />
-                        </div>
+                        <div className="booking-time-and-exam-location">
+                            <div className="left-content-timeframe">
+                                <DoctorScheduleSection
+                                    selectedDoctorId={doctorDetails && doctorDetails.id ? doctorDetails.id : -1}
+                                />
+                            </div>
+                            <div className="right-content-location">
+                                <DoctorExtraInforSection
+                                    selectedDoctorId={doctorDetails && doctorDetails.id ? doctorDetails.id : -1}
+                                />
+                            </div>
 
-                    </div>
-                    <div className="curriculum-vitae">
-                        {doctorDetails && doctorDetails.ArticleMarkdown && doctorDetails.ArticleMarkdown.htmlContent &&
-                            <div dangerouslySetInnerHTML={{ __html: doctorDetails.ArticleMarkdown.htmlContent }} className="doctor-CV-html"></div>
-                        }
+                        </div>
+                        <div className="curriculum-vitae">
+                            {doctorDetails && doctorDetails.ArticleMarkdown && doctorDetails.ArticleMarkdown.htmlContent &&
+                                <div dangerouslySetInnerHTML={{ __html: doctorDetails.ArticleMarkdown.htmlContent }} className="doctor-CV-html"></div>
+                            }
 
+                        </div>
+                        <div className="feedback-and-comment">
+                            comment
+                        </div>
                     </div>
-                    <div className="feedback-and-comment">
-                        comment
-                    </div>
-                </div>
-                <HomeFooter />
+                    <HomeFooter />
+                </CustomScrollbars>
             </React.Fragment >
 
         );

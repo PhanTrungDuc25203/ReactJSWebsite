@@ -62,9 +62,7 @@ class EliteDoctorSection extends Component {
     }
 
     render() {
-        console.log("Check elite doctors data from redux: ", this.props.eliteDoctorsData);
         let arrEliteDoctor = this.props.eliteDoctorsData;
-        console.log("Check elite doctors data from redux: ", arrEliteDoctor);
         arrEliteDoctor = arrEliteDoctor.concat(arrEliteDoctor).concat(arrEliteDoctor);
         let { language } = this.props;
 
