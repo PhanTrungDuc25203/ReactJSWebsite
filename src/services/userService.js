@@ -91,6 +91,10 @@ const confirmBookingAppointmentService = (data) => {
     return axios.post('/api/confirm-booking-appointment', data);
 }
 
+const createNewSpecialtyService = (data) => {
+    return axios.post('/api/create-new-specialty', data);
+}
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -107,4 +111,5 @@ export {
     getExtraInforDoctorByIdService,
     patientInforWhenBookingAppointment,
     confirmBookingAppointmentService,
+    createNewSpecialtyService,
 };
