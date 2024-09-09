@@ -16,6 +16,7 @@ import { patientInforWhenBookingAppointment } from '../../../../services/userSer
 import { toast } from 'react-toastify';
 import moment from 'moment';
 import CustomScrollbars from '../../../../components/CustomScrollbars';
+import FooterLite from '../../../HomePage/HomeFooter/FooterLite';
 
 class MakeAppointmentPage extends Component {
 
@@ -395,6 +396,7 @@ class MakeAppointmentPage extends Component {
                             </div>
                         </div>
                     </div>
+                    <FooterLite />
                 </CustomScrollbars>
             </React.Fragment>
         );

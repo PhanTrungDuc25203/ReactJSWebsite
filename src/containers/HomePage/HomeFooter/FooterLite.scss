@@ -1,0 +1,15 @@
+.homepage-footer {
+
+    .footer {
+        background-color: #dff3ff;
+        padding-top: 70px;
+        padding-bottom: 0;
+    }
+
+    @media(max-width: 574px) {
+        .footer-col {
+            width: 100%;
+        }
+    }
+
+}
