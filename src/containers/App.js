@@ -19,6 +19,7 @@ import DetailArticleForADoctor from './ForPatient/DetailDoctor/DetailArticleForA
 import Doctor from '../routes/Doctor.js';
 import MakeAppointmentPage from './ForPatient/DetailDoctor/MakeAppointmentPage/MakeAppointmentPage.js';
 import ConfirmBookingAppointment from './ForPatient/ConfirmBookingAppointment/ConfirmBookingAppointment.js';
+import DetailSpecialty from './ForPatient/DetailSpecialty/DetailSpecialty.js';
 
 class App extends Component {
 
@@ -62,6 +63,8 @@ class App extends Component {
                                     <Route path={path.MAKE_APPOINTMENT_WITH_DOCTOR} component={MakeAppointmentPage} />
                                     {/* route xác nhận đặt hẹn với bác sĩ */}
                                     <Route path={path.CONFIRM_BOOKING_APPOINTMENT} component={ConfirmBookingAppointment} />
+                                    {/* route trang chi tiết một chuyên khoa và các bac sĩ thuộc chuyên khoa đó */}
+                                    <Route path={path.SPECIALTY_ARTICLE} component={DetailSpecialty} />
                                     {/* path for doctor*/}
                                     <Route path={'/doctor'} component={userIsAuthenticated(Doctor)} />
                                 </Switch>

@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './SpecialtySection.scss';
+import { withRouter } from 'react-router';
 import * as actions from '../../../../store/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { } from '@fortawesome/free-brands-svg-icons';
-import { } from '@fortawesome/fontawesome-free-webfonts';
-import { } from '@fortawesome/fontawesome-svg-core';
-import { } from '@fortawesome/free-regular-svg-icons';
-import { faTooth, faHeartPulse, faSuitcaseMedical, faStethoscope } from '@fortawesome/free-solid-svg-icons';
-import { } from '@fortawesome/free-solid-svg-icons';
-import { } from '@fortawesome/react-fontawesome';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -40,7 +34,7 @@ class SpecialtySection extends Component {
 
     handleViewDetailArticleOfASpecialty = (specialty) => {
         // console.log("Check this doctor: ", doctor);
-        // this.props.history.push(`/detail-doctor-article/doctor/${doctor.id}`);
+        this.props.history.push(`/detail-specialty-article/${specialty.id}`);
     }
 
     SampleNextArrow(props) {
@@ -68,26 +62,19 @@ class SpecialtySection extends Component {
 
     render() {
         let arrSpecialty = this.props.specialtiesData;
-        // arrSpecialty = arrEliteDoctor.concat(arrEliteDoctor).concat(arrEliteDoctor);
         let { language } = this.props;
-
-        console.log("Check specialty: ", arrSpecialty);
-
         const settings = {
             dots: true,
             infinite: true,
             slidesToShow: 3,
             slidesToScroll: 3,
-            nextArrow: <this.SampleNextArrow />,  // Sử dụng SampleNextArrow
-            prevArrow: <this.SamplePrevArrow />,  // Sử dụng SamplePrevArrow
+            nextArrow: <this.SampleNextArrow />,
+            prevArrow: <this.SamplePrevArrow />,
             autoplay: true,
             className: 'specialty-section-slider',
-            // dotsClass: 'medical-facilities-section-dots-of-slider',
             autoplaySpeed: 6000,
             speed: 1000,
             pauseOnHover: true,
-            // fade: true,
-            // focusOnSelect: true,
             pauseOnDotsHover: true,
         };
 
@@ -103,10 +90,7 @@ class SpecialtySection extends Component {
                             <FormattedMessage id="specialty-section.button-more-detail" />
                         </a></div>
                     </div>
-
                     <Slider {...settings}>
-
-
                         {arrSpecialty && arrSpecialty.length > 0 &&
                             arrSpecialty.map((item, index) => {
                                 let imageByBase64 = '';
@@ -133,115 +117,6 @@ class SpecialtySection extends Component {
                                 )
                             })
                         }
-
-
-
-                        {/* <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-1 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.hepatitis" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-2 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.acupuncture" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-3 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.bone-and-joint-disease" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-4 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.immune-system" /></div>
-
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-5 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.spine" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-6 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.dermatology" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-7 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.pediatrics" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-8 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.obstetrics-and-gynecology" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-9 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.fetal-ultrasound" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-10 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.mental-health" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-11 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.ent" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-12 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.gastric-disease" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-13 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.cardiology" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-14 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.neurology" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-15 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="specialty-section.traditional-medicine" />
-                                </div>
-                            </div>
-                        </div> */}
                     </Slider>
                 </div>
             </div >
@@ -264,4 +139,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SpecialtySection);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SpecialtySection));
