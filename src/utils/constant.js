@@ -7,6 +7,7 @@ export const path = {
     DETAIL_DOCTOR_ARTICLE: '/detail-doctor-article/doctor/:id',
     MAKE_APPOINTMENT_WITH_DOCTOR: '/make-appointment/:id/:date/:timeframe',
     CONFIRM_BOOKING_APPOINTMENT: '/confirm-booking',
+    SPECIALTY_ARTICLE: '/detail-specialty-article/:id',
 };
 
 export const LANGUAGES = {

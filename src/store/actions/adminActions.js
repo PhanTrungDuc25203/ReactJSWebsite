@@ -374,15 +374,18 @@ export const getRequiredDataForDoctorArticleManagePage = () => {
             let resPrice = await getAllCodesService('price');
             let resPaymentMethod = await getAllCodesService('payment');
             let resProvince = await getAllCodesService('province');
+            let resSpecialty = await getSpecialtiesForHomePageService('');
 
             if (resPrice && resPrice.errCode === 0 &&
                 resPaymentMethod && resPaymentMethod.errCode === 0 &&
-                resProvince && resProvince.errCode === 0) {
+                resProvince && resProvince.errCode === 0 &&
+                resSpecialty && resSpecialty.errCode === 0) {
 
                 let data = {
                     resPrice: resPrice.data,
                     resPaymentMethod: resPaymentMethod.data,
                     resProvince: resProvince.data,
+                    resSpecialty: resSpecialty.data,
                 }
 
                 dispatch(getRequiredDataForDoctorArticleManagePageSuccessfully(data));
