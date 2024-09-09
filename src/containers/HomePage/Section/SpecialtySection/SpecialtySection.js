@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './SpecialtySection.scss';
+import * as actions from '../../../../store/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { } from '@fortawesome/free-brands-svg-icons';
 import { } from '@fortawesome/fontawesome-free-webfonts';
@@ -17,6 +18,30 @@ import { LANGUAGES } from "../../../../utils";
 import { switchLanguageOfWebsite } from "../../../../store/actions";
 
 class SpecialtySection extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            arrSpecialty: [],
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.specialtiesData !== this.props.specialtiesData) {
+            this.setState({
+                arrSpecialty: this.props.arrSpecialty,
+            })
+        }
+    }
+
+    componentDidMount() {
+        this.props.loadSpecialties();
+    }
+
+    handleViewDetailArticleOfASpecialty = (specialty) => {
+        // console.log("Check this doctor: ", doctor);
+        // this.props.history.push(`/detail-doctor-article/doctor/${doctor.id}`);
+    }
 
     SampleNextArrow(props) {
         const { className, style, onClick } = props;
@@ -42,6 +67,12 @@ class SpecialtySection extends Component {
     }
 
     render() {
+        let arrSpecialty = this.props.specialtiesData;
+        // arrSpecialty = arrEliteDoctor.concat(arrEliteDoctor).concat(arrEliteDoctor);
+        let { language } = this.props;
+
+        console.log("Check specialty: ", arrSpecialty);
+
         const settings = {
             dots: true,
             infinite: true,
@@ -64,13 +95,48 @@ class SpecialtySection extends Component {
             <div className="specialty-section">
                 <div className="specialty-contents">
                     <div className="specialty-section-title">
-                        <div className="title-text"><FormattedMessage id="specialty-section.specialty-section-title" /></div>
+                        <div className="title-text">
+                            <FormattedMessage id="specialty-section.specialty-section-title" />
+                        </div>
                         <div className="spacing"></div>
-                        <div className="more-detail-button"><a href="#" className="button"><FormattedMessage id="specialty-section.button-more-detail" /></a></div>
+                        <div className="more-detail-button"><a href="#" className="button">
+                            <FormattedMessage id="specialty-section.button-more-detail" />
+                        </a></div>
                     </div>
 
                     <Slider {...settings}>
-                        <div className="item-content">
+
+
+                        {arrSpecialty && arrSpecialty.length > 0 &&
+                            arrSpecialty.map((item, index) => {
+                                let imageByBase64 = '';
+                                if (item.specialtyImage) {
+                                    imageByBase64 = Buffer.from(item.specialtyImage, 'base64').toString('binary');
+                                }
+                                let nameInVie = `${item.name}`;
+                                let nameInEng = `${item.name}`;
+                                return (
+                                    <div className="item-content" key={index}
+                                        onClick={() => this.handleViewDetailArticleOfASpecialty(item)}
+                                    >
+                                        <div className="item-of-slider">
+                                            <div className="image-css"
+                                                style={{ backgroundImage: `url(${imageByBase64})` }}
+                                            >
+
+                                            </div>
+                                            <div className="item-content">
+                                                {language === LANGUAGES.VI ? nameInVie : nameInEng}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+
+
+
+                        {/* <div className="item-content">
                             <div className="item-of-slider">
                                 <div className="image-of-item-1 image-css"></div>
                                 <div className="item-content"><FormattedMessage id="specialty-section.hepatitis" />
@@ -175,7 +241,7 @@ class SpecialtySection extends Component {
                                 <div className="item-content"><FormattedMessage id="specialty-section.traditional-medicine" />
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </Slider>
                 </div>
             </div >
@@ -188,12 +254,13 @@ const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
+        specialtiesData: state.admin.specialties,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        loadSpecialties: () => dispatch(actions.fetchSpecialties()),
     };
 };
 

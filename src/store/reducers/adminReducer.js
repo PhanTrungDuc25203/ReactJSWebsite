@@ -14,6 +14,7 @@ const initialState = {
     allDoctorsForDoctorArticlePage: [],
     detailsOfADoctor: {},
     examHoursData: [],
+    specialties: [],
 
     allRequiredDoctorData: [],
 }
@@ -145,6 +146,17 @@ const adminReducer = (state = initialState, action) => {
             }
         case actionTypes.GET_REQUIRED_DATA_FOR_DOCTOR_MANAGE_PAGE_FAILED:
             state.allRequiredDoctorData = [];
+            return {
+                ...state,
+            }
+        //lấy dữ liệu specialties cho trang home
+        case actionTypes.FETCH_SPECIALTIES_VALUE_SUCCESSFULLY:
+            state.specialties = action.specialtiesData;
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_SPECIALTIES_VALUE_FAILED:
+            state.specialties = [];
             return {
                 ...state,
             }

@@ -95,6 +95,10 @@ const createNewSpecialtyService = (data) => {
     return axios.post('/api/create-new-specialty', data);
 }
 
+const getSpecialtiesForHomePageService = () => {
+    return axios.get(`/api/get-specialty-for-homepage`);
+}
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -112,4 +116,5 @@ export {
     patientInforWhenBookingAppointment,
     confirmBookingAppointmentService,
     createNewSpecialtyService,
+    getSpecialtiesForHomePageService,
 };

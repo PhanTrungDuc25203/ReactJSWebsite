@@ -12,7 +12,8 @@ import {
     getAllDoctorsForDoctorArticlePageService,
     saveInforAndArticleForADoctor,
     getInforAndArticleForADoctor,
-    createTimeframesForDoctorScheduleService
+    createTimeframesForDoctorScheduleService,
+    getSpecialtiesForHomePageService
 } from "../../services/userService";
 import { toast } from "react-toastify";
 
@@ -402,3 +403,27 @@ export const getRequiredDataForDoctorArticleManagePageSuccessfully = (allRequire
 export const getRequiredDataForDoctorArticleManagePageFailed = () => ({
     type: actionTypes.GET_REQUIRED_DATA_FOR_DOCTOR_MANAGE_PAGE_FAILED,
 })
+
+export const fetchSpecialties = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getSpecialtiesForHomePageService('');
+            // console.log("Check res fetch specialties: ", res);
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_SPECIALTIES_VALUE_SUCCESSFULLY,
+                    specialtiesData: res.data,
+                })
+            } else {
+                dispatch({
+                    type: actionTypes.FETCH_SPECIALTIES_VALUE_FAILED,
+                })
+            }
+        } catch (e) {
+            console.log('Fetch specialties data fail: ', e);
+            dispatch({
+                type: actionTypes.FETCH_SPECIALTIES_VALUE_FAILED,
+            })
+        }
+    }
+}
