@@ -176,6 +176,7 @@
             "menu-title-2": "Phòng khám",
             "menu-title-3": "Chuyên khoa",
             "menu-title-4": "Bài đăng, cẩm nang",
+            "menu-title-5": "Trang chủ",
             "user-CRUD": "CRUD người dùng",
             "user-CRUD-by-redux": "CRUD người dùng bởi Redux",
             "doctor-manage": "Quản lý Bác sĩ",

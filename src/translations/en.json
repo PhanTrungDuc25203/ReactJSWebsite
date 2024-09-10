@@ -176,6 +176,7 @@
             "menu-title-2": "Clinic",
             "menu-title-3": "Specialty",
             "menu-title-4": "Article/handbook",
+            "menu-title-5": "Home page",
             "user-CRUD": "User CRUD",
             "user-CRUD-by-redux": "User CRUD by Redux",
             "doctor-manage": "Doctor manage",

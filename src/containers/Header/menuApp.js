@@ -46,6 +46,15 @@ export const adminMenu = [
             },
         ]
     },
+    {
+        name: 'menu.admin.menu-title-5',
+        menus: [
+            { //quản lý kế hoạch khám bệnh của bác sĩ
+                name: 'menu.admin.menu-title-5',
+                link: '/home'
+            },
+        ]
+    }
 ];
 
 export const doctorMenu = [
@@ -55,6 +64,15 @@ export const doctorMenu = [
             { //quản lý kế hoạch khám bệnh của bác sĩ
                 name: 'menu.doctor.schedule-and-timetable',
                 link: '/doctor/schedule-manage'
+            },
+        ]
+    },
+    {
+        name: 'menu.admin.menu-title-5',
+        menus: [
+            { //quản lý kế hoạch khám bệnh của bác sĩ
+                name: 'menu.admin.menu-title-5',
+                link: '/home'
             },
         ]
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './HomePageHeader.scss';
+import * as actions from "../../../store/actions";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { } from '@fortawesome/free-brands-svg-icons';
 import { } from '@fortawesome/fontawesome-free-webfonts';
@@ -9,6 +10,7 @@ import { } from '@fortawesome/free-regular-svg-icons';
 import { faTooth, faHeartPulse, faSuitcaseMedical, faStethoscope } from '@fortawesome/free-solid-svg-icons';
 import { } from '@fortawesome/free-solid-svg-icons';
 import { } from '@fortawesome/react-fontawesome';
+import Login from '../../Authenticate/Login';
 import { FormattedMessage } from 'react-intl';
 import { LANGUAGES } from "../../../utils";
 import { switchLanguageOfWebsite } from "../../../store/actions";
@@ -27,10 +29,25 @@ class HomePageHeader extends Component {
         this.props.history.push(`/home`);
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.isLoggedIn !== this.props.isLoggedIn) {
+
+        }
+    }
+
+
+    handleLoginForUser = (loginState) => {
+        if (loginState === true) {
+            this.props.processLogout();
+        } else {
+            this.props.history.push(`/login`);
+        }
+    }
+
     render() {
         //lấy ra biến language từ redux để set lá cờ ngôn ngữ ở header à trong sideBar
         let language = this.props.language;
-        let { userInfo, isLoggedIn } = this.props;
+        let { userInfo } = this.props;
         console.log("check props: ", this.props);
         return (
             <React.Fragment>
@@ -88,10 +105,11 @@ class HomePageHeader extends Component {
                                 <i className="far fa-question-circle"></i>
                                 <div className="header-right-section-title title-2"><FormattedMessage id="home-page-header.support" /></div>
                             </div>
-                            <div className="header-user-account-section">
+                            <div className="header-user-account-section"
+                                onClick={(isLoggedIn) => this.handleLoginForUser(this.props.isLoggedIn)}>
                                 <i className="far fa-user"></i>
                                 <div className="header-right-section-title title-3">
-                                    {isLoggedIn ?
+                                    {this.props.isLoggedIn ?
                                         userInfo.firstName
                                         :
                                         <FormattedMessage id="home-page-header.login" />
@@ -165,6 +183,12 @@ class HomePageHeader extends Component {
                     </label>
                     <div className="sidebar">
                         <header><FormattedMessage id="side-bar.side-bar-menu" /></header>
+                        {this.props.isLoggedIn && userInfo.roleId !== 'R3' &&
+                            <a href="/system">
+                                <i className="fas fa-qrcode"></i>
+                                <span>Trang quản lý</span>
+                            </a>
+                        }
                         <a href="#">
                             <i className="fas fa-qrcode"></i>
                             <span>Dashboard</span>
@@ -254,6 +278,7 @@ const mapDispatchToProps = dispatch => {
     return {
         //tên này có thể tư đặt                         nhưng tên này thì không
         switchLanguageOfWebsite: (language) => dispatch(switchLanguageOfWebsite(language)),
+        processLogout: () => dispatch(actions.processLogout()),
     };
 };
 
