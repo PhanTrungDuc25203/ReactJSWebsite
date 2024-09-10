@@ -30,6 +30,8 @@ class HomePageHeader extends Component {
     render() {
         //lấy ra biến language từ redux để set lá cờ ngôn ngữ ở header à trong sideBar
         let language = this.props.language;
+        let { userInfo, isLoggedIn } = this.props;
+        console.log("check props: ", this.props);
         return (
             <React.Fragment>
                 <div className="home-header-container">
@@ -88,7 +90,13 @@ class HomePageHeader extends Component {
                             </div>
                             <div className="header-user-account-section">
                                 <i className="far fa-user"></i>
-                                <div className="header-right-section-title title-3"><FormattedMessage id="home-page-header.login" /></div>
+                                <div className="header-right-section-title title-3">
+                                    {isLoggedIn ?
+                                        userInfo.firstName
+                                        :
+                                        <FormattedMessage id="home-page-header.login" />
+                                    }
+                                </div>
                             </div>
                             <div className="header-user-language-option">
                                 <div className={language === LANGUAGES.VI ? "header-user-nation-icon" : "header-user-nation-icon active"}></div>
@@ -238,6 +246,7 @@ const mapStateToProps = state => {
         //ở đây, giá trị bộ nhớ là state.app.language và biến ngôn ngữ là language được lưu trong redux
         // và khi muốn sử dụng chúng trong component thì ta cần sử dụng tới hàm mapStateToProps
         language: state.app.language,
+        userInfo: state.user.userInfo,
     };
 };
 

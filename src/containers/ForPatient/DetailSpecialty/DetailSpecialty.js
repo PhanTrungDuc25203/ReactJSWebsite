@@ -43,7 +43,12 @@ class DetailSpecialty extends Component {
                 <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
                     <HomePageHeader isShowBanner={false} />
                     <div className="specialty-article-container">
-                        hello im from specialty page
+                        <div className="specialty-décription">
+
+                        </div>
+                        <div className="doctors-of-this-specialty">
+
+                        </div>
                     </div>
                     <HomeFooter />
                 </CustomScrollbars>
