@@ -193,17 +193,17 @@
                 }
 
                 .clinic-name-and-address {
-                    margin: 4px 0 4px 25px;
+                    margin   : 4px 0 4px 25px;
                     font-size: 16px;
                 }
             }
 
             .examination-price-sct2 {
 
-                margin-top: 14px;
-    border-bottom: 2px solid #e2ebff;
-    margin-bottom: 10px;
-    padding-bottom: 12px;
+                margin-top    : 14px;
+                border-bottom : 2px solid #e2ebff;
+                margin-bottom : 10px;
+                padding-bottom: 12px;
 
                 &.css-for-less-content {
                     display    : flex;
@@ -400,7 +400,8 @@
             height: auto;
 
             p {
-                font-size:17px;
+                font-size: 17px;
+
                 strong {
                     color           : #0fbcf6;
                     font-size       : 20px;

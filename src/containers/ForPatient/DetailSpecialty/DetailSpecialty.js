@@ -66,7 +66,6 @@ class DetailSpecialty extends Component {
     render() {
         let { language } = this.props;
         let { arrDoctorId, specialtyDetailData, provinceList, } = this.state;
-        console.log("Check state in specialty detail page: ", this.state);
         return (
             <React.Fragment>
                 <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
@@ -88,15 +87,21 @@ class DetailSpecialty extends Component {
                             </div>
                         </div>
                         <div className="doctors-of-this-specialty-title">
-                            Các bác sĩ giỏi của chuyên khoa Cơ-Xương-Khớp
+                            Các bác sĩ ưu tú của chuyên khoa {specialtyDetailData.name}
                         </div>
-                        <div className="doctors-of-this-specialty">
-                            <DoctorScheduleComponent />
-                            <DoctorScheduleComponent />
-                            <DoctorScheduleComponent />
-                            <DoctorScheduleComponent />
-                            <DoctorScheduleComponent />
-                        </div>
+                        {arrDoctorId && arrDoctorId.length > 0 &&
+                            arrDoctorId.map((item, index) => {
+                                return (
+                                    <div className="doctors-of-this-specialty" key={index}>
+                                        <DoctorScheduleComponent
+                                            doctorId={item}
+                                        />
+                                    </div>
+                                )
+                            })
+
+                        }
+
                     </div>
                     <HomeFooter />
                 </CustomScrollbars>

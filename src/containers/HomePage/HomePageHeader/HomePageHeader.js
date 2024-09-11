@@ -48,7 +48,7 @@ class HomePageHeader extends Component {
         //lấy ra biến language từ redux để set lá cờ ngôn ngữ ở header à trong sideBar
         let language = this.props.language;
         let { userInfo } = this.props;
-        console.log("check props: ", this.props);
+        // console.log("check props: ", this.props);
         return (
             <React.Fragment>
                 <div className="home-header-container">
