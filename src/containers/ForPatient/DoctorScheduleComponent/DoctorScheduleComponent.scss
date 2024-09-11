@@ -1,0 +1,48 @@
+.doctor-schedule-component {
+    width        : 100%;
+    display      : flex;
+    border-bottom: 1px solid #0fbcf6;
+    padding      : 20px 85px 20px 85px;
+
+    .left-content {
+        width  : 50%;
+        display: flex;
+
+        .avatar-css {
+            background-size    : contain;
+            height             : 100px;
+            aspect-ratio       : 1/1;
+            background-position: center;
+            border             : 5px solid #c1e9ff;
+            border-radius      : 50%;
+            background-repeat  : no-repeat;
+        }
+
+        .doctor-information {
+            margin-left: 20px;
+
+            .name {
+                color    : #0fbcf6;
+                font-size: 20px;
+            }
+
+            .description {
+                font-size: 17px;
+            }
+
+            .address {
+                color    : #0fbcf6;
+                font-size: 17px;
+            }
+        }
+    }
+
+    .right-content {
+        width: 50%;
+
+        .schedule {}
+
+        .available-timeframe {}
+    }
+
+}

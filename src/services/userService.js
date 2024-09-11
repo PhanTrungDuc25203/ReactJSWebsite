@@ -99,6 +99,10 @@ const getSpecialtiesForHomePageService = () => {
     return axios.get(`/api/get-specialty-for-homepage`);
 }
 
+const getAllSpecialtyDetailsById = (data) => {
+    return axios.get(`/api/get-specialty-by-id?id=${data.id}&location=${data.location}`);
+}
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -117,4 +121,5 @@ export {
     confirmBookingAppointmentService,
     createNewSpecialtyService,
     getSpecialtiesForHomePageService,
+    getAllSpecialtyDetailsById,
 };
