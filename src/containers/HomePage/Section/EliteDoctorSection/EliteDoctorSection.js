@@ -63,7 +63,6 @@ class EliteDoctorSection extends Component {
 
     render() {
         let arrEliteDoctor = this.props.eliteDoctorsData;
-        arrEliteDoctor = arrEliteDoctor.concat(arrEliteDoctor).concat(arrEliteDoctor);
         let { language } = this.props;
 
         let settings = {

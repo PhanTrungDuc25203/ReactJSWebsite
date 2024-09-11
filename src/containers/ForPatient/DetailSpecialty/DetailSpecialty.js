@@ -89,7 +89,7 @@ class DetailSpecialty extends Component {
                         <div className="doctors-of-this-specialty-title">
                             Các bác sĩ ưu tú của chuyên khoa {specialtyDetailData.name}
                         </div>
-                        {arrDoctorId && arrDoctorId.length > 0 &&
+                        {arrDoctorId && arrDoctorId.length > 0 ?
                             arrDoctorId.map((item, index) => {
                                 return (
                                     <div className="doctors-of-this-specialty" key={index}>
@@ -99,7 +99,11 @@ class DetailSpecialty extends Component {
                                     </div>
                                 )
                             })
-
+                            :
+                            <div className="apologize">
+                                <div className="apologize-image"></div>
+                                Vô cùng xin lỗi quý khách! Hiện tại chưa có bác sĩ nào thuộc chuyên khoa này.
+                            </div>
                         }
 
                     </div>

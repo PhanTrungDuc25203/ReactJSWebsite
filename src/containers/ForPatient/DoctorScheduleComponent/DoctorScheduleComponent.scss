@@ -19,7 +19,8 @@
         }
 
         .doctor-information {
-            margin-left: 20px;
+            margin-left : 20px;
+            margin-right: 20px;
 
             .name {
                 color    : #0fbcf6;
@@ -111,7 +112,6 @@
         }
 
         .doctor-extra-information {
-            margin-left: 21px;
 
             .more-button {
                 text-decoration : none;
@@ -188,7 +188,7 @@
 
                     .price-in-detail {
 
-                        border          : 1px solid rgb(224, 238, 255);
+                        border          : 1px solid rgb(189, 219, 255);
                         background-color: rgb(245, 250, 255);
                         height          : auto;
                         width           : 100%;
@@ -212,7 +212,7 @@
                     }
 
                     .payment-method {
-                        border          : 1px solid rgb(224, 238, 255);
+                        border          : 1px solid rgb(189, 219, 255);
                         background-color: rgb(245, 250, 255);
                         height          : auto;
                         width           : 100%;
@@ -276,7 +276,7 @@
                     font-size: 16px;
 
                     .insurance-type-1 {
-                        border          : 1px solid rgb(224, 238, 255);
+                        border          : 1px solid rgb(189, 219, 255);
                         background-color: rgb(245, 250, 255);
                         height          : auto;
                         width           : 100%;
@@ -300,7 +300,7 @@
                     }
 
                     .more-insurance-type {
-                        border          : 1px solid rgb(224, 238, 255);
+                        border          : 1px solid rgb(189, 219, 255);
                         background-color: rgb(245, 250, 255);
                         height          : auto;
                         width           : 100%;
