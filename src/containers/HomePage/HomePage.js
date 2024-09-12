@@ -1,25 +1,27 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Suspense, lazy } from 'react';
+import { useSelector } from 'react-redux';
 import './HomePage.scss';
 import HomePageHeader from './HomePageHeader/HomePageHeader';
+import HomeFooter from './HomeFooter/HomeFooter';
+
+// Lazy loading các section
 import SideBar from './SideBar/SideBar';
-import SpecialtySection from './Section/SpecialtySection/SpecialtySection';
-import ComprehensiveServiceSection from './Section/ComprehensiveServiceSection/ComprehensiveServiceSection';
-import MedicalFacilitiesSection from './Section/MedicalFacilitiesSection/MedicalFacilitiesSection';
-import EliteDoctorSection from './Section/EliteDoctorSection/EliteDoctorSection';
-import RecentDiseaseSection from './Section/RecentDiseaseSection/RecentDiseaseSection';
-import HomeFooter from '../HomePage/HomeFooter/HomeFooter';
-import RemoteExamSection from './Section/RemoteExamSection/RemoteExamSection';
-import MentalHealthSection from './Section/MentalHealthSection/MentalHealthSection';
-import StayAHealthyLifeSection from './Section/StayAHealthyLifeSection/StayAHealthyLifeSection';
+const SpecialtySection = lazy(() => import('./Section/SpecialtySection/SpecialtySection'));
+const ComprehensiveServiceSection = lazy(() => import('./Section/ComprehensiveServiceSection/ComprehensiveServiceSection'));
+const MedicalFacilitiesSection = lazy(() => import('./Section/MedicalFacilitiesSection/MedicalFacilitiesSection'));
+const EliteDoctorSection = lazy(() => import('./Section/EliteDoctorSection/EliteDoctorSection'));
+const RecentDiseaseSection = lazy(() => import('./Section/RecentDiseaseSection/RecentDiseaseSection'));
+const RemoteExamSection = lazy(() => import('./Section/RemoteExamSection/RemoteExamSection'));
+const MentalHealthSection = lazy(() => import('./Section/MentalHealthSection/MentalHealthSection'));
+const StayAHealthyLifeSection = lazy(() => import('./Section/StayAHealthyLifeSection/StayAHealthyLifeSection'));
 
-class HomePage extends Component {
+const HomePage = () => {
+    const isLoggedIn = useSelector(state => state.user.isLoggedIn); // Sử dụng useSelector để lấy trạng thái
 
-    render() {
-
-        return (
-            <React.Fragment>
-                <HomePageHeader isShowBanner={true} />
+    return (
+        <React.Fragment>
+            <HomePageHeader isShowBanner={true} />
+            <Suspense fallback={<div>Loading...</div>}>
                 <ComprehensiveServiceSection />
                 <SpecialtySection />
                 <MedicalFacilitiesSection />
@@ -28,24 +30,11 @@ class HomePage extends Component {
                 <MentalHealthSection />
                 <RecentDiseaseSection />
                 <StayAHealthyLifeSection />
-                <HomeFooter />
-            </React.Fragment>
+            </Suspense>
 
-
-        );
-    }
-
-}
-
-const mapStateToProps = state => {
-    return {
-        isLoggedIn: state.user.isLoggedIn
-    };
+            <HomeFooter />
+        </React.Fragment>
+    );
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default HomePage;

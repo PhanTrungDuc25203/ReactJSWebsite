@@ -1,46 +1,46 @@
 .mental-health-section {
-    width: 100%;
-    height: 475px;
+    width           : 100%;
+    height          : 475px;
     background-image: url('../../../../assets/images/140308-background2.png');
     // border: 1px solid red;
-    display: flex;
-    justify-content: center;
-    position: relative;
+    display         : flex;
+    justify-content : center;
+    position        : relative;
 
     .mental-health-contents {
         position: relative;
-        width: 89%;
+        width   : 89%;
 
         .item-content {
             border-radius: 10px;
-            font-size: 25px;
-            color: #3494b5;
-            width: 350px;
-            text-align: center;
-            height: 286px;
+            font-size    : 25px;
+            color        : #3494b5;
+            width        : 350px;
+            text-align   : center;
+            height       : 286px;
 
             .item-of-slider {
 
-                border: 2px solid #3494b5;
-                margin: 10px;
+                border       : 2px solid #3494b5;
+                margin       : 10px;
                 border-radius: 10px;
-                cursor: pointer;
+                cursor       : pointer;
 
                 .image-item {
                     // position: relative;
-                    height: auto;
-                    width: 240px;
-                    margin: 15px;
+                    height       : auto;
+                    width        : 240px;
+                    margin       : 15px;
                     border-radius: 10px !important;
                 }
 
                 .item-content {
-                    margin-top: 10px;
+                    margin-top   : 10px;
                     margin-bottom: 10px;
-                    margin-left: 15px;
-                    margin-right: 15px;
-                    width: 360px;
-                    height: 50px;
+                    margin-left  : 15px;
+                    margin-right : 15px;
+                    width        : 360px;
+                    height       : 50px;
                 }
 
                 .special-image {
@@ -48,14 +48,14 @@
                 }
 
                 .image-css {
-                    background-size: contain;
-                    height: 180px;
-                    width: 360px;
+                    background-size    : contain;
+                    height             : 180px;
+                    width              : 360px;
                     background-position: center;
-                    border: 1px solid rgb(193, 233, 255);
-                    border-radius: 15px;
-                    margin: 13px;
-                    background-repeat: no-repeat;
+                    border             : 1px solid rgb(193, 233, 255);
+                    border-radius      : 15px;
+                    margin             : 13px;
+                    background-repeat  : no-repeat;
                 }
 
                 .image-of-item-1 {
@@ -81,19 +81,19 @@
         }
 
         .mental-health-section-title {
-            position: relative;
-            height: 60px;
-            width: 100%;
-            display: flex;
-            margin-top: 40px;
+            position     : relative;
+            height       : 60px;
+            width        : 100%;
+            display      : flex;
+            margin-top   : 40px;
             margin-bottom: 30px;
-            margin-left: 10px;
+            margin-left  : 10px;
 
             .title-text {
-                height: 60px;
-                width: 800px;
-                font-size: 40px;
-                color: #3494b5;
+                height     : 60px;
+                width      : 800px;
+                font-size  : 40px;
+                color      : #3494b5;
                 font-weight: 500;
 
                 text-decoration: none;
@@ -101,54 +101,54 @@
 
             .spacing {
                 height: 100%;
-                width: 282px;
+                width : 282px;
             }
 
 
             .more-detail-button {
-                $color: rgb(54, 215, 255);
+                $color    : rgb(54, 215, 255);
                 text-align: center;
 
                 .button {
-                    position: absolute;
-                    display: inline-block;
-                    padding: 15px;
-                    height: 60px;
-                    width: 121.15px;
-                    border-radius: 15px;
-                    color: #fff;
-                    font-size: 20px;
-                    transition: all .3s;
-                    border: 2px solid #3494b5;
-                    position: relative;
-                    overflow: hidden;
-                    z-index: 1;
-                    border: 0px;
+                    position       : absolute;
+                    display        : inline-block;
+                    padding        : 15px;
+                    height         : 60px;
+                    width          : 121.15px;
+                    border-radius  : 15px;
+                    color          : #fff;
+                    font-size      : 20px;
+                    transition     : all .3s;
+                    border         : 2px solid #3494b5;
+                    position       : relative;
+                    overflow       : hidden;
+                    z-index        : 1;
+                    border         : 0px;
                     text-decoration: none;
 
                     &:after {
-                        content: '';
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
+                        content         : '';
+                        position        : absolute;
+                        bottom          : 0;
+                        left            : 0;
+                        width           : 100%;
+                        height          : 100%;
                         background-color: $color;
-                        border-radius: 15px;
-                        z-index: -2;
+                        border-radius   : 15px;
+                        z-index         : -2;
                     }
 
                     &:before {
-                        content: '';
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        width: 0%;
-                        height: 100%;
+                        content         : '';
+                        position        : absolute;
+                        bottom          : 0;
+                        left            : 0;
+                        width           : 0%;
+                        height          : 100%;
                         background-color: darken($color, 15%);
-                        transition: all .3s;
-                        border-radius: 15px;
-                        z-index: -1;
+                        transition      : all .3s;
+                        border-radius   : 15px;
+                        z-index         : -1;
                     }
 
                     &:hover {
@@ -163,33 +163,33 @@
         }
 
         .slider-button-next::before {
-            position: absolute;
-            color: rgb(114, 192, 255) !important;
-            background: rgb(232, 250, 255);
-            border: 1px solid rgb(86, 191, 239);
-            opacity: 1;
+            position     : absolute;
+            color        : rgb(114, 192, 255) !important;
+            background   : rgb(232, 250, 255);
+            border       : 1px solid rgb(86, 191, 239);
+            opacity      : 1;
             border-radius: 15px;
-            padding: 13px;
-            right: 1px;
-            top: -15px;
+            padding      : 13px;
+            right        : 1px;
+            top          : -15px;
         }
 
         .override {
             // position: relative;
             height: 15px;
-            width: 15px;
+            width : 15px;
         }
 
         .slider-button-prev::before {
-            position: absolute;
-            color: rgb(114, 192, 255) !important;
-            background: rgb(232, 250, 255);
-            border: 1px solid rgb(86, 191, 239);
+            position     : absolute;
+            color        : rgb(114, 192, 255) !important;
+            background   : rgb(232, 250, 255);
+            border       : 1px solid rgb(86, 191, 239);
             border-radius: 15px;
-            opacity: 1;
-            padding: 13px;
-            top: -15px;
-            left: 7px;
+            opacity      : 1;
+            padding      : 13px;
+            top          : -15px;
+            left         : 7px;
         }
 
         @keyframes shake {
@@ -227,29 +227,29 @@
     }
 
     .slick-dots li button:before {
-        border: 1px solid #3494b5;
-        font-family: 'slick';
-        font-size: 7px;
-        line-height: 20px;
-        position: absolute;
-        top: 0;
-        left: 1px;
-        width: 10px;
-        height: 10px;
-        border-radius: 50px;
-        display: flex;
-        content: '•';
-        text-align: center;
-        opacity: .25;
-        color: rgb(173, 218, 255);
+        border                : 1px solid #3494b5;
+        font-family           : 'slick';
+        font-size             : 7px;
+        line-height           : 20px;
+        position              : absolute;
+        top                   : 2px;
+        left                  : 1px;
+        width                 : 10px;
+        height                : 10px;
+        border-radius         : 50px;
+        display               : flex;
+        content               : '•';
+        text-align            : center;
+        opacity               : .25;
+        color                 : rgb(173, 218, 255);
         -webkit-font-smoothing: antialiased;
-        align-items: center;
-        padding-left: 0px;
-        padding-top: 1px;
+        align-items           : center;
+        padding-left          : 0px;
+        padding-top           : 1px;
     }
 
     .slick-dots li.slick-active button:before {
         opacity: .75;
-        color: #5182c7;
+        color  : #5182c7;
     }
 }
