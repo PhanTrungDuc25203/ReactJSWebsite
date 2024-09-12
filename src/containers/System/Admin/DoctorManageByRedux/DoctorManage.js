@@ -140,7 +140,7 @@ class DoctorManage extends Component {
 
     handleChangeOnSelectBox = async (selectedDoctor) => {
         this.setState({ selectedDoctor });
-        let { priceList, paymentMethodList, vietnamProvinceList } = this.state;
+        let { priceList, paymentMethodList, vietnamProvinceList, specialtyList } = this.state;
         // console.log(selectedDoctor.value);
         await this.props.fetchDoctorDetailsForDoctorManagePage(selectedDoctor.value);
         console.log("Check doctor details for DoctorManagePage: ", this.state.selectedDoctorDetails);
@@ -150,7 +150,7 @@ class DoctorManage extends Component {
 
             let tempClinicAddress = '', tempClinicName = '', tempNote = '', tempPaymentId = '',
                 tempPriceId = '', tempProvinceId = '', tempSelectedPaymentMethod = '',
-                tempSelectedPrice = '', tempSelectedProvince = '';
+                tempSelectedPrice = '', tempSelectedProvince = '', tempSpecialtyId='', tempSelectedSpecialty='';
 
             if (selectedDoctorDetails.Doctor_infor) {
                 tempClinicAddress = selectedDoctorDetails.Doctor_infor.clinicAddress;
@@ -159,7 +159,7 @@ class DoctorManage extends Component {
                 tempPaymentId = selectedDoctorDetails.Doctor_infor.paymentId;
                 tempPriceId = selectedDoctorDetails.Doctor_infor.priceId;
                 tempProvinceId = selectedDoctorDetails.Doctor_infor.provinceId;
-
+                tempSpecialtyId = selectedDoctorDetails.Doctor_infor.specialtyId;
                 tempSelectedPaymentMethod = paymentMethodList.find(item => {
                     return item && item.value === tempPaymentId;
                 })
@@ -168,6 +168,9 @@ class DoctorManage extends Component {
                 })
                 tempSelectedProvince = vietnamProvinceList.find(item => {
                     return item && item.value === tempProvinceId;
+                })
+                tempSelectedSpecialty = specialtyList.find(item => {
+                    return item && item.value === tempSpecialtyId;
                 })
             }
 
@@ -182,6 +185,7 @@ class DoctorManage extends Component {
                 clinicName: tempClinicName,
                 clinicAddress: tempClinicAddress,
                 note: tempNote,
+                selectedSpecialty: tempSelectedSpecialty,
             })
         } else {
             this.setState({
@@ -192,6 +196,10 @@ class DoctorManage extends Component {
                 clinicName: '',
                 clinicAddress: '',
                 note: '',
+                selectedPaymentMethod: '',
+                selectedPrice: '',
+                selectedProvince: '',
+                selectedSpecialty: '',
             })
         }
     };
