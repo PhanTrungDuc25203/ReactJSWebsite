@@ -191,63 +191,43 @@ class HomePageHeader extends Component {
                         }
                         <a href="#">
                             <i className="fas fa-qrcode"></i>
-                            <span>Dashboard</span>
+                            <span>Trang chủ</span>
                         </a>
                         <a href="#">
-                            <i className="fas fa-link"></i>
-                            <span>Shortcuts</span>
+                            <i class="fas fa-book"></i>
+                            <span>Cẩm nang</span>
                         </a>
                         <a href="#">
-                            <i className="fas fa-link"></i>
-                            <span>Shortcuts</span>
+                            <i class="fas fa-handshake"></i>
+                            <span>Hợp tác</span>
                         </a>
                         <a href="#">
-                            <i className="fas fa-link"></i>
-                            <span>Shortcuts</span>
-                        </a>
-                        <a href="#">
-                            <i className="fas fa-link"></i>
-                            <span>Shortcuts</span>
-                        </a>
-                        <a href="#">
-                            <i className="fas fa-stream"></i>
-                            <span>Overview</span>
-                        </a>
-                        <a href="#">
-                            <i className="fas fa-calendar"></i>
-                            <span>Events</span>
-                        </a>
-                        <a href="#">
-                            <i className="far fa-question-circle"></i>
-                            <span>About</span>
-                        </a>
-                        <a href="#">
-                            <i className="far fa-question-circle"></i>
-                            <span>About</span>
-                        </a>
-                        <a href="#">
-                            <i className="far fa-question-circle"></i>
-                            <span>About</span>
-                        </a>
-                        <a href="#">
-                            <i className="far fa-question-circle"></i>
-                            <span>About</span>
-                        </a>
-                        <a href="#">
-                            <i className="far fa-question-circle"></i>
-                            <span>About</span>
-                        </a>
-                        <a href="#">
-                            <i className="far fa-question-circle"></i>
-                            <span>About</span>
-                        </a>
-                        <a href="#">
-                            <i className="fas fa-sliders-h"></i>
-                            <span>Services</span>
+                            <i class="fas fa-question"></i>
+                            <span>Câu hỏi thường gặp</span>
                         </a>
                         <a href="#">
                             <i className="far fa-envelope"></i>
-                            <span>Contact</span>
+                            <span>Liên hệ</span>
+                        </a>
+                        <a href="#">
+                            <i className="fas fa-sliders-h"></i>
+                            <span>Dịch vụ</span>
+                        </a>
+                        <a href="#">
+                            <i className="fas fa-link"></i>
+                            <span>Điều khoản sử dụng</span>
+                        </a>
+                        <a href="#">
+                            <i className="fas fa-stream"></i>
+                            <span>Quy chế hoạt động</span>
+                        </a>
+                        <a href="#">
+                            <i className="fas fa-calendar"></i>
+                            <span>Sự kiện</span>
+                        </a>
+                        <a href="#">
+                            <i className="far fa-question-circle"></i>
+                            <span>Về chúng tôi</span>
                         </a>
                         <div className="home-page-side-bar-language-option">
                             <div className={language === LANGUAGES.VI ? "vietnamese-option active" : "vietnamese-option"} onClick={() => this.switchLanguageOfWebsite(LANGUAGES.VI)}></div>
