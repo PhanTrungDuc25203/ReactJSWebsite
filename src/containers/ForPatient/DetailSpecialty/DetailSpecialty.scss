@@ -44,13 +44,30 @@
     }
 
     .doctors-of-this-specialty-title {
-        padding         : 5px 85px 5px 85px;
+        padding         : 7px 85px 7px 85px;
         margin          : 30px 0;
         width           : 100%;
         color           : white;
         font-size       : 20px;
         background-color: #0fbcf6;
         font-weight     : 600;
+        display         : flex;
+        justify-content : space-between;
+
+        .select-province-where-doctor-live {
+            select {
+                border       : 3px solid #0fbcf6;
+                width        : 180px;
+                color        : #0fbcf6;
+                border-radius: 7px;
+                font-size    : 19px;
+            }
+
+            select:focus {
+                outline: none; //bỏ đi viền đen đen trong viền của select mỗi khi double click vào <input>
+                border : 3px solid rgb(79, 166, 253);
+            }
+        }
     }
 
     .doctors-of-this-specialty {

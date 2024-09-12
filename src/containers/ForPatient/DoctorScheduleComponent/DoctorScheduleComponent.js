@@ -22,6 +22,7 @@ class DoctorScheduleComponent extends Component {
     }
 
     async componentDidMount() {
+        console.log("Check props from parent: ", this.props);
         let res = await getInforAndArticleForADoctor(this.props.doctorId);
         if (res && res.errCode === 0) {
             this.setState({
@@ -37,7 +38,7 @@ class DoctorScheduleComponent extends Component {
     render() {
 
         let { doctorDetails } = this.state;
-        console.log("Check doctor data: ", doctorDetails);
+        // console.log("Check doctor data: ", doctorDetails);
         let { language } = this.props;
         let nameInVie = '';
         let nameInEng = '';

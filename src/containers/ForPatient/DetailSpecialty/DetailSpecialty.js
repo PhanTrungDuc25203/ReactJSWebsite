@@ -8,7 +8,6 @@ import { faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { getInforAndArticleForADoctor, getAllSpecialtyDetailsById, getAllCodesService } from '../../../services/userService';
 import { LANGUAGES } from '../../../utils';
 import CustomScrollbars from '../../../components/CustomScrollbars';
-import defaultAvatar from '../../../assets/specialty-image/101627-co-xuong-khop.png';
 import DoctorScheduleComponent from '../DoctorScheduleComponent/DoctorScheduleComponent';
 import _ from 'lodash';
 
@@ -46,10 +45,21 @@ class DetailSpecialty extends Component {
                     }
                 }
 
+                let provinceData = resProvince.data;
+                if (provinceData && provinceData.length > 0) {
+                    provinceData.unshift({
+                        createAt: null,
+                        keyMap: 'ALL',
+                        type: "PROVINCE",
+                        value_Eng: "All",
+                        value_Vie: "Toàn quốc",
+                    })
+                }
+
                 this.setState({
                     specialtyDetailData: res.data,
                     arrDoctorId: arrDoctorId,
-                    provinceList: resProvince.data,
+                    provinceList: provinceData ? provinceData : [],
                 })
             }
         }
@@ -60,12 +70,46 @@ class DetailSpecialty extends Component {
     }
 
     handleOnChangeSelect = (event) => {
-        // console.log("check onchange: ", event.target.value);
-    }
+        // Reset lại danh sách bác sĩ trước khi cập nhật
+        this.setState({
+            arrDoctorId: [],
+        }, async () => {
+            if (this.props.match && this.props.match.params && this.props.match.params.id) {
+                let id = this.props.match.params.id;
+                let location = event.target.value;
+
+                let res = await getAllSpecialtyDetailsById({
+                    id: id,
+                    location: location
+                });
+
+                if (res && res.errCode === 0) {
+                    let data = res.data;
+                    let doctorIdArr = [];
+                    if (data && !_.isEmpty(data)) {
+                        let arr = data.doctorInSpecialty;
+                        if (arr && arr.length > 0) {
+                            arr.map(item => {
+                                doctorIdArr.push(item.doctorId);
+                            });
+                        }
+                    }
+
+                    this.setState({
+                        specialtyDetailData: res.data,
+                        arrDoctorId: doctorIdArr,
+                    });
+                }
+            }
+        });
+    };
+
 
     render() {
         let { language } = this.props;
         let { arrDoctorId, specialtyDetailData, provinceList, } = this.state;
+        // console.log("check state: ", this.state);
+        // console.log("check props: ", this.props);
         return (
             <React.Fragment>
                 <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
@@ -88,8 +132,26 @@ class DetailSpecialty extends Component {
                         </div>
                         <div className="doctors-of-this-specialty-title">
                             Các bác sĩ ưu tú của chuyên khoa {specialtyDetailData.name}
+                            <div className="select-province-where-doctor-live">
+                                <select
+                                    onChange={(event) => this.handleOnChangeSelect(event)}
+                                >
+                                    {provinceList && provinceList.length > 0 &&
+                                        provinceList.map((item, index) => {
+                                            return (
+                                                <option key={index}
+                                                    value={item.keyMap}
+                                                >
+                                                    {language === LANGUAGES.VI ? item.value_Vie : item.value_Eng}
+                                                </option>
+                                            )
+                                        })
+                                    }
+                                </select>
+                            </div>
                         </div>
-                        {arrDoctorId && arrDoctorId.length > 0 ?
+
+                        {this.state.arrDoctorId && this.state.arrDoctorId.length > 0 ?
                             arrDoctorId.map((item, index) => {
                                 return (
                                     <div className="doctors-of-this-specialty" key={index}>
