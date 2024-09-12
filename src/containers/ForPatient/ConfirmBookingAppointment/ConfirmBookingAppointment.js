@@ -63,13 +63,12 @@ class ConfirmBookingAppointment extends Component {
                             {confirmFail === 0 ?
                                 <div>Xác nhận thành công</div>
                                 :
-                                <div>Lịch hẹn không tồn tại</div>
+                                <div>Lịch hẹn đã tồn tại, bạn chỉ có thể đặt một lịch hẹn với bác sĩ</div>
                             }
                         </div>
                     }
                 </div>
             </React.Fragment >
-
         );
     }
 }

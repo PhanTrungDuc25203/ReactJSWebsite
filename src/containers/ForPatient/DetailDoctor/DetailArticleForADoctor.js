@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { useState, useEffect, useMemo, Fragment, Suspense } from 'react';
 import { connect } from "react-redux";
 import HomePageHeader from '../../HomePage/HomePageHeader/HomePageHeader';
 import './DetailArticleForADoctor.scss';
@@ -6,129 +6,113 @@ import HomeFooter from '../../HomePage/HomeFooter/HomeFooter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { getInforAndArticleForADoctor } from '../../../services/userService';
-import defaultAvatar from '../../../assets/images/default-avatar-circle.png'
+import defaultAvatar from '../../../assets/images/default-avatar-circle.png';
 import { LANGUAGES } from '../../../utils';
-import DoctorScheduleSection from './DoctorScheduleSection';
-import DoctorExtraInforSection from './DoctorExtraInforSection';
 import CustomScrollbars from '../../../components/CustomScrollbars';
 
-class DetailArticleForADoctor extends Component {
+// Lazy load for sections
+const DoctorScheduleSection = React.lazy(() => import('./DoctorScheduleSection'));
+const DoctorExtraInforSection = React.lazy(() => import('./DoctorExtraInforSection'));
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            doctorDetails: {},
-        }
-    }
+const DetailArticleForADoctor = (props) => {
+    const [doctorDetails, setDoctorDetails] = useState({});
 
-    async componentDidMount() {
-        if (this.props.match && this.props.match.params && this.props.match.params.id) {
-            let id = this.props.match.params.id;
-            let res = await getInforAndArticleForADoctor(id);
-            console.log("Check api get article: ", res);
-            if (res && res.errCode === 0) {
-                this.setState({
-                    doctorDetails: res.data,
-                })
+    const { language } = props;
+
+    useEffect(() => {
+        const fetchDoctorDetails = async () => {
+            if (props.match && props.match.params && props.match.params.id) {
+                let id = props.match.params.id;
+                let res = await getInforAndArticleForADoctor(id);
+                if (res && res.errCode === 0) {
+                    setDoctorDetails(res.data);
+                }
             }
-        }
-    }
+        };
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+        fetchDoctorDetails();
+    }, [props.match.params.id]); // Dependency array ensures it only re-fetches when ID changes
 
-    }
-
-    render() {
-        // const { systemMenuPath, isLoggedIn } = this.props;
-        let { doctorDetails } = this.state;
-        // console.log('This doctor: ', this.state.doctorDetails)
-        let { language } = this.props;
-        let nameInVie = '';
-        let nameInEng = '';
+    // Memoize the name to avoid re-calculating unnecessarily
+    const nameInVie = useMemo(() => {
         if (doctorDetails && doctorDetails.positionData) {
-            nameInVie = `${doctorDetails.positionData.value_Vie}, ${doctorDetails.lastName} ${doctorDetails.firstName}`;
-            nameInEng = `${doctorDetails.positionData.value_Eng}, ${doctorDetails.firstName} ${doctorDetails.lastName}`;
+            return `${doctorDetails.positionData.value_Vie}, ${doctorDetails.lastName} ${doctorDetails.firstName}`;
         }
+        return '';
+    }, [doctorDetails]);
 
-        return (
-            <React.Fragment>
-                <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
-                    <HomePageHeader isShowBanner={false} />
-                    <div className="doctor-article-container">
-                        <div className="avatar-and-general-introduction">
-                            <div className="left-content">
-                                <div className="avatar-css"
-                                    style={{
-                                        backgroundImage: `url(${doctorDetails.image
-                                            ? doctorDetails.image
-                                            : defaultAvatar
-                                            })`
-                                    }}
-                                >
+    const nameInEng = useMemo(() => {
+        if (doctorDetails && doctorDetails.positionData) {
+            return `${doctorDetails.positionData.value_Eng}, ${doctorDetails.firstName} ${doctorDetails.lastName}`;
+        }
+        return '';
+    }, [doctorDetails]);
 
+    return (
+        <Fragment>
+            <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
+                <HomePageHeader isShowBanner={false} />
+                <div className="doctor-article-container">
+                    <div className="avatar-and-general-introduction">
+                        <div className="left-content">
+                            <div className="avatar-css"
+                                style={{
+                                    backgroundImage: `url(${doctorDetails.image
+                                        ? doctorDetails.image
+                                        : defaultAvatar
+                                        })`
+                                }}>
+                            </div>
+                        </div>
+                        <div className="right-content">
+                            <div className="general-introduction">
+                                <div className="name-and-position">
+                                    {language === LANGUAGES.VI ? nameInVie : nameInEng}
+                                </div>
+                                <div className="general-information">
+                                    {doctorDetails?.ArticleMarkdown?.description &&
+                                        <span>
+                                            {doctorDetails.ArticleMarkdown.description}
+                                            <br />
+                                            <FontAwesomeIcon icon={faMapLocationDot} className="location-icon" />
+                                            Phú Thọ
+                                        </span>
+                                    }
                                 </div>
                             </div>
-                            <div className="right-content">
-                                <div className="general-introduction">
-                                    <div className="name-and-position">
-                                        {language === LANGUAGES.VI ? nameInVie : nameInEng}
-                                    </div>
-                                    <div className="general-information">
-                                        {doctorDetails && doctorDetails.ArticleMarkdown && doctorDetails.ArticleMarkdown.description &&
-                                            <span>
-                                                {doctorDetails.ArticleMarkdown.description}
-                                                <br></br>
-                                                <FontAwesomeIcon icon={faMapLocationDot} className="location-icon" />
-                                                Phú Thọ
-                                            </span>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="booking-time-and-exam-location">
-                            <div className="left-content-timeframe">
-                                <DoctorScheduleSection
-                                    selectedDoctorId={doctorDetails && doctorDetails.id ? doctorDetails.id : -1}
-                                />
-                            </div>
-                            <div className="right-content-location">
-                                <DoctorExtraInforSection
-                                    selectedDoctorId={doctorDetails && doctorDetails.id ? doctorDetails.id : -1}
-                                />
-                            </div>
-
-                        </div>
-                        <div className="curriculum-vitae">
-                            {doctorDetails && doctorDetails.ArticleMarkdown && doctorDetails.ArticleMarkdown.htmlContent &&
-                                <div dangerouslySetInnerHTML={{ __html: doctorDetails.ArticleMarkdown.htmlContent }} className="doctor-CV-html"></div>
-                            }
-
-                        </div>
-                        <div className="feedback-and-comment">
-                            comment
                         </div>
                     </div>
-                    <HomeFooter />
-                </CustomScrollbars>
-            </React.Fragment >
-
-        );
-    }
-}
+                    <div className="booking-time-and-exam-location">
+                        <Suspense fallback={<div>Loading schedule...</div>}>
+                            <div className="left-content-timeframe">
+                                <DoctorScheduleSection selectedDoctorId={doctorDetails.id || -1} />
+                            </div>
+                        </Suspense>
+                        <Suspense fallback={<div>Loading extra info...</div>}>
+                            <div className="right-content-location">
+                                <DoctorExtraInforSection selectedDoctorId={doctorDetails.id || -1} />
+                            </div>
+                        </Suspense>
+                    </div>
+                    <div className="curriculum-vitae">
+                        {doctorDetails?.ArticleMarkdown?.htmlContent &&
+                            <div dangerouslySetInnerHTML={{ __html: doctorDetails.ArticleMarkdown.htmlContent }} className="doctor-CV-html"></div>
+                        }
+                    </div>
+                    <div className="feedback-and-comment">
+                        comment
+                    </div>
+                </div>
+                <HomeFooter />
+            </CustomScrollbars>
+        </Fragment>
+    );
+};
 
 const mapStateToProps = state => {
     return {
-        // systemMenuPath: state.app.systemMenuPath,
-        // isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(DetailArticleForADoctor);
+export default connect(mapStateToProps)(DetailArticleForADoctor);

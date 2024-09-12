@@ -3,20 +3,23 @@ import { connect } from "react-redux";
 import { Redirect, Route, Switch } from 'react-router-dom';
 import ScheduleAndTimetableManage from '../containers/System/Doctor/ScheduleAndTimetableManage';
 import Header from '../containers/Header/Header';
+import CustomScrollbars from '../components/CustomScrollbars';
 
 class Doctor extends Component {
     render() {
         const { isLoggedIn } = this.props;
         return (
             <React.Fragment>
-                {isLoggedIn && <Header />}
-                < div className="system-container" >
-                    <div className="system-list">
-                        <Switch>
-                            <Route path="/doctor/schedule-manage" component={ScheduleAndTimetableManage} />
-                        </Switch>
-                    </div>
-                </div >
+                <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
+                    {isLoggedIn && <Header />}
+                    < div className="system-container" >
+                        <div className="system-list">
+                            <Switch>
+                                <Route path="/doctor/schedule-manage" component={ScheduleAndTimetableManage} />
+                            </Switch>
+                        </div>
+                    </div >
+                </CustomScrollbars>
             </React.Fragment>
         );
     }

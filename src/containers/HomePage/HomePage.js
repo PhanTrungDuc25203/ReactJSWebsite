@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import './HomePage.scss';
 import HomePageHeader from './HomePageHeader/HomePageHeader';
 import HomeFooter from './HomeFooter/HomeFooter';
+import CustomScrollbars from '../../components/CustomScrollbars';
 
 // Lazy loading các section
 import SideBar from './SideBar/SideBar';
@@ -20,19 +21,21 @@ const HomePage = () => {
 
     return (
         <React.Fragment>
-            <HomePageHeader isShowBanner={true} />
-            <Suspense fallback={<div>Loading...</div>}>
-                <ComprehensiveServiceSection />
-                <SpecialtySection />
-                <MedicalFacilitiesSection />
-                <EliteDoctorSection />
-                <RemoteExamSection />
-                <MentalHealthSection />
-                <RecentDiseaseSection />
-                <StayAHealthyLifeSection />
-            </Suspense>
+            <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
+                <HomePageHeader isShowBanner={true} />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <ComprehensiveServiceSection />
+                    <SpecialtySection />
+                    <MedicalFacilitiesSection />
+                    <EliteDoctorSection />
+                    <RemoteExamSection />
+                    <MentalHealthSection />
+                    <RecentDiseaseSection />
+                    <StayAHealthyLifeSection />
+                </Suspense>
 
-            <HomeFooter />
+                <HomeFooter />
+            </CustomScrollbars>
         </React.Fragment>
     );
 };

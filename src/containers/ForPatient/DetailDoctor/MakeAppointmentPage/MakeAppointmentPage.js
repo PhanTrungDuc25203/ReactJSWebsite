@@ -170,7 +170,7 @@ class MakeAppointmentPage extends Component {
 
         return (
             <React.Fragment>
-                <CustomScrollbars>
+                <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
                     <HomePageHeader />
                     <div className="making-appointment-container">
                         <div className="content-left">

@@ -6,6 +6,7 @@ import * as actions from "../../store/actions";
 import './Login.scss';
 import { FormattedMessage } from 'react-intl';
 import { handleLoginAPI } from '../../services/userService';
+import CustomScrollbars from '../../components/CustomScrollbars';
 
 class Login extends Component {
     constructor(props) {
@@ -100,67 +101,69 @@ class Login extends Component {
             // khi code HTML thuần mà muốn cho chúng vào một lớp thì sử dụng thuộc tính class,
             // nhưng code react thì sử dụng thuộc tính className
             <div className="login-background">
-                <div className="login-container">
-                    <div className="login-contents row">
-                        <div className="col-12 text-center login-text">Login</div>
-                        <div className="col-12 form-group login-input">
-                            <label>Username</label>
-                            <input type="text"
-                                className="form-control input-place"
-                                placeholder="Piscean"
-                                value={this.state.username}
-                                onChange={(event) => this.handleOnChangeUsernameInput(event)} />
-                            {/* value khiến cho ô input username luôn hiện gia trị của
+                <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
+                    <div className="login-container">
+                        <div className="login-contents row">
+                            <div className="col-12 text-center login-text">Login</div>
+                            <div className="col-12 form-group login-input">
+                                <label>Username</label>
+                                <input type="text"
+                                    className="form-control input-place"
+                                    placeholder="Piscean"
+                                    value={this.state.username}
+                                    onChange={(event) => this.handleOnChangeUsernameInput(event)} />
+                                {/* value khiến cho ô input username luôn hiện gia trị của
                             biến username của state và không thể bị thay đổi
                             - onChange xử lý sự kiện */}
-                        </div>
-
-                        <div className="col-12 form-group login-input">
-                            <label>Password</label>
-                            <div className="password-input-and-eye">
-                                <input type={this.state.passwordShown ? 'text' : 'password'}
-                                    className="form-control input-place"
-                                    placeholder="Enter your password"
-                                    value={this.state.password}
-                                    onChange={(event) => this.handleOnChangePasswordInput(event)}
-                                    onKeyDown={(event) => this.handleEnterKeyPressed(event)}
-                                />
-                                <span
-                                    onClick={(event) => { this.handleShowAndHidePassword() }}>
-                                    <i className={this.state.passwordShown ? "far fa-eye" : "far fa-eye-slash"}></i>
-                                </span>
-
                             </div>
-                        </div>
-                        <div className="col-12 error-message-while-login">
-                            {this.state.errMessage}
-                        </div>
-                        <div className="col-6">
-                            <div className="wrapper">
-                                <a href="#" onClick={(event) => { this.handleLoginButtonClicked() }}><span>Login</span></a>
+
+                            <div className="col-12 form-group login-input">
+                                <label>Password</label>
+                                <div className="password-input-and-eye">
+                                    <input type={this.state.passwordShown ? 'text' : 'password'}
+                                        className="form-control input-place"
+                                        placeholder="Enter your password"
+                                        value={this.state.password}
+                                        onChange={(event) => this.handleOnChangePasswordInput(event)}
+                                        onKeyDown={(event) => this.handleEnterKeyPressed(event)}
+                                    />
+                                    <span
+                                        onClick={(event) => { this.handleShowAndHidePassword() }}>
+                                        <i className={this.state.passwordShown ? "far fa-eye" : "far fa-eye-slash"}></i>
+                                    </span>
+
+                                </div>
                             </div>
-                        </div>
+                            <div className="col-12 error-message-while-login">
+                                {this.state.errMessage}
+                            </div>
+                            <div className="col-6">
+                                <div className="wrapper">
+                                    <a href="#" onClick={(event) => { this.handleLoginButtonClicked() }}><span>Login</span></a>
+                                </div>
+                            </div>
 
 
-                        <div className="col-12">
-                            <span className="forgot-password">For got your password?</span>
-                        </div>
-                        <div className="or-login-with-options">
-                            <span>Or login with:</span>
-                        </div>
-                        <div className="more-login-options">
-                            <div className="icon-container">
-                                <i className="fab fa-google-plus-g"></i>
+                            <div className="col-12">
+                                <span className="forgot-password">For got your password?</span>
                             </div>
-                            <div className="icon-container">
-                                <i className="fab fa-facebook-f"></i>
+                            <div className="or-login-with-options">
+                                <span>Or login with:</span>
                             </div>
-                            <div className="icon-container">
-                                <i className="fab fa-apple"></i>
+                            <div className="more-login-options">
+                                <div className="icon-container">
+                                    <i className="fab fa-google-plus-g"></i>
+                                </div>
+                                <div className="icon-container">
+                                    <i className="fab fa-facebook-f"></i>
+                                </div>
+                                <div className="icon-container">
+                                    <i className="fab fa-apple"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </CustomScrollbars>
             </div>
         )
     }

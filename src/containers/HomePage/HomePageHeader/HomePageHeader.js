@@ -185,7 +185,7 @@ class HomePageHeader extends Component {
                         <header><FormattedMessage id="side-bar.side-bar-menu" /></header>
                         {this.props.isLoggedIn && userInfo.roleId !== 'R3' &&
                             <a href="/system">
-                                <i className="fas fa-qrcode"></i>
+                                <i className="fas fa-screwdriver"></i>
                                 <span>Trang quản lý</span>
                             </a>
                         }
