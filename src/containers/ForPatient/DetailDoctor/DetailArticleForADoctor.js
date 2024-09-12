@@ -47,7 +47,6 @@ const DetailArticleForADoctor = (props) => {
         }
         return '';
     }, [doctorDetails]);
-
     return (
         <Fragment>
             <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
@@ -75,7 +74,7 @@ const DetailArticleForADoctor = (props) => {
                                             {doctorDetails.ArticleMarkdown.description}
                                             <br />
                                             <FontAwesomeIcon icon={faMapLocationDot} className="location-icon" />
-                                            Phú Thọ
+                                            {language === LANGUAGES.VI ? doctorDetails.Doctor_infor.provinceTypeData.value_Vie : doctorDetails.Doctor_infor.provinceTypeData.value_Eng}
                                         </span>
                                     }
                                 </div>

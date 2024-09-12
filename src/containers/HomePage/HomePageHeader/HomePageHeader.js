@@ -194,15 +194,15 @@ class HomePageHeader extends Component {
                             <span>Trang chủ</span>
                         </a>
                         <a href="#">
-                            <i class="fas fa-book"></i>
+                            <i className="fas fa-book"></i>
                             <span>Cẩm nang</span>
                         </a>
                         <a href="#">
-                            <i class="fas fa-handshake"></i>
+                            <i className="fas fa-handshake"></i>
                             <span>Hợp tác</span>
                         </a>
                         <a href="#">
-                            <i class="fas fa-question"></i>
+                            <i className="fas fa-question"></i>
                             <span>Câu hỏi thường gặp</span>
                         </a>
                         <a href="#">
