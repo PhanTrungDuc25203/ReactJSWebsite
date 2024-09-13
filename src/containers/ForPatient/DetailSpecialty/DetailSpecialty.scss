@@ -1,7 +1,6 @@
 .specialty-article-container {
     padding: 60px 0 60px 0;
 
-
     .specialty-description {
 
         height : fit-content;
@@ -97,5 +96,9 @@
             border-radius      : 15px;
             background-repeat  : no-repeat;
         }
+    }
+
+    .spinner-container{
+        margin-left: 85px;
     }
 }

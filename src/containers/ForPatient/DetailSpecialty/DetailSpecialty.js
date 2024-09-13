@@ -10,6 +10,7 @@ import { LANGUAGES } from '../../../utils';
 import CustomScrollbars from '../../../components/CustomScrollbars';
 import DoctorScheduleComponent from '../DoctorScheduleComponent/DoctorScheduleComponent';
 import _ from 'lodash';
+import { MoonLoader } from 'react-spinners';
 
 class DetailSpecialty extends Component {
 
@@ -19,6 +20,11 @@ class DetailSpecialty extends Component {
             arrDoctorId: [],
             specialtyDetailData: {},
             provinceList: [],
+
+            isLoading: true,
+            spinnerType: 'MoonLoader', // Default spinner type
+            color: '#123abc', // Default color
+            size: 25, // Default size
         }
     }
 
@@ -60,6 +66,7 @@ class DetailSpecialty extends Component {
                     specialtyDetailData: res.data,
                     arrDoctorId: arrDoctorId,
                     provinceList: provinceData ? provinceData : [],
+                    isLoading: false,
                 })
             }
         }
@@ -73,6 +80,7 @@ class DetailSpecialty extends Component {
         // Reset lại danh sách bác sĩ trước khi cập nhật
         this.setState({
             arrDoctorId: [],
+            isLoading: true,
         }, async () => {
             if (this.props.match && this.props.match.params && this.props.match.params.id) {
                 let id = this.props.match.params.id;
@@ -98,18 +106,31 @@ class DetailSpecialty extends Component {
                     this.setState({
                         specialtyDetailData: res.data,
                         arrDoctorId: doctorIdArr,
+                        isLoading: false,
                     });
                 }
             }
         });
     };
 
+    handleSpinnerTypeChange = (event) => {
+        this.setState({ spinnerType: event.target.value });
+    };
+
+    handleColorChange = (event) => {
+        this.setState({ color: event.target.value });
+    };
+
+    handleSizeChange = (event) => {
+        this.setState({ size: parseInt(event.target.value, 10) });
+    };
 
     render() {
         let { language } = this.props;
-        let { arrDoctorId, specialtyDetailData, provinceList, } = this.state;
+        let { arrDoctorId, specialtyDetailData, provinceList, isLoading, spinnerType, color, size } = this.state;
         // console.log("check state: ", this.state);
         // console.log("check props: ", this.props);
+
         return (
             <React.Fragment>
                 <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
@@ -151,21 +172,29 @@ class DetailSpecialty extends Component {
                             </div>
                         </div>
 
-                        {this.state.arrDoctorId && this.state.arrDoctorId.length > 0 ?
-                            arrDoctorId.map((item, index) => {
-                                return (
-                                    <div className="doctors-of-this-specialty" key={index}>
-                                        <DoctorScheduleComponent
-                                            doctorId={item}
-                                        />
-                                    </div>
-                                )
-                            })
-                            :
-                            <div className="apologize">
-                                <div className="apologize-image"></div>
-                                Vô cùng xin lỗi quý khách! Hiện tại chưa có bác sĩ nào thuộc chuyên khoa này.
+                        {isLoading ?
+                            <div className="spinner-container">
+                                <MoonLoader
+                                    color={color}
+                                    loading={isLoading}
+                                    size={size}
+                                    aria-label="Loading Spinner"
+                                />
                             </div>
+                            :
+                            arrDoctorId && arrDoctorId.length > 0 ?
+                                arrDoctorId.map((item, index) => {
+                                    return (
+                                        <div className="doctors-of-this-specialty" key={index}>
+                                            <DoctorScheduleComponent doctorId={item} />
+                                        </div>
+                                    )
+                                })
+                                :
+                                <div className="apologize">
+                                    <div className="apologize-image"></div>
+                                    Vô cùng xin lỗi quý khách! Hiện tại chưa có bác sĩ nào thuộc chuyên khoa này.
+                                </div>
                         }
 
                     </div>
