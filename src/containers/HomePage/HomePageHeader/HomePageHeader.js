@@ -37,11 +37,12 @@ class HomePageHeader extends Component {
 
 
     handleLoginForUser = (loginState) => {
-        if (loginState === true) {
-            this.props.processLogout();
-        } else {
-            this.props.history.push(`/login`);
-        }
+        // if (loginState === true) {
+        //     this.props.processLogout();
+        // } else {
+        //     this.props.history.push(`/login`);
+        // }
+        this.props.history.push(`/user-profile/${this.props.userInfo.email}`);
     }
 
     render() {
