@@ -1,0 +1,41 @@
+.user-profile-container {
+    width: 100%;
+
+    .content-container {
+        margin: 0 150px 0 150px;
+        height: 500px;
+        border: 1px solid red;
+
+        .nav-bar {
+            overflow        : hidden;
+            background-color: white;
+
+            a {
+                float          : left;
+                color          : #49BCE2;
+                text-align     : center;
+                padding        : 10px 10px 6px 10px;
+                border-bottom  : 4px solid white;
+                text-decoration: none;
+                font-size      : 18px;
+                border-left    : none;
+                transition     : all 0.2s;
+
+                &.active {
+                    border-bottom: 4px solid rgb(78, 116, 181);
+                    color        : rgb(78, 116, 181);
+                }
+            }
+
+            a:hover {
+                background-color: #daf6ff;
+                border-bottom   : 4px solid #8de3ff;
+            }
+
+            a.active:hover {
+                background-color: #daf6ff;
+                border-bottom   : 4px solid rgb(78, 116, 181);
+            }
+        }
+    }
+}
