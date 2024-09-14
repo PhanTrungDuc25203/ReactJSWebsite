@@ -24,11 +24,12 @@
                 &.active {
                     border-bottom: 4px solid rgb(78, 116, 181);
                     color        : rgb(78, 116, 181);
+                    background-color: #e9faff;
                 }
             }
 
             a:hover {
-                background-color: #daf6ff;
+                background-color: #e9faff;
                 border-bottom   : 4px solid #8de3ff;
             }
 

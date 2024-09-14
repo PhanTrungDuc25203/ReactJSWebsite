@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, Suspense, lazy } from 'react';
 import { connect } from "react-redux";
 import './UserProfile.scss';
 import HomeFooter from '../HomePage/HomeFooter/HomeFooter';
@@ -11,6 +11,8 @@ import { withRouter } from 'react-router';
 import * as actions from "../../store/actions";
 import { MoonLoader } from 'react-spinners';
 import UserBackgroundContainer from './UserBackgroundContainer/UserBackgroundContainer';
+
+const PersonalProfile = lazy(() => import('./PersonalProfile/PersonalProfile'));
 
 class UserProfile extends Component {
 
@@ -90,9 +92,11 @@ class UserProfile extends Component {
                         </div>
                         {
                             personalProfileOpened === true &&
-                            <div className="personal-profile">
-                                Personal profile
-                            </div>
+                            <Suspense fallback={<div>Loading profile...</div>}>
+                                <div className="personal-profile">
+                                    <PersonalProfile />
+                                </div>
+                            </Suspense>
                         }
                         {
                             appointmentOpened === true &&
@@ -106,7 +110,6 @@ class UserProfile extends Component {
                                 Your comments about doctors
                             </div>
                         }
-                        This is user's profile page
                         <button onClick={() => this.handleLoginForUser()}>Log out </button>
                     </div>
                     <HomeFooter />
