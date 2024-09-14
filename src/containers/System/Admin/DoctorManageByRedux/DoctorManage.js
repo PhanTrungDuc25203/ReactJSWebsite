@@ -348,7 +348,7 @@ class DoctorManage extends Component {
                                 className="form-control"
                                 placeholder="Tên phòng khám..."
                                 required
-                                // onChange={(event) => this.handleOnChangeText(event, 'clinicName')}
+                                onChange={(event) => this.handleTempForNoError(event)}
                                 value={this.state.selectedClinic}
                             ></input>
                         </div>

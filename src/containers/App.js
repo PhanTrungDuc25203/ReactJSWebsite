@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
 import { ToastContainer } from 'react-toastify';
-import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
+import { userIsAuthenticated, userIsNotAuthenticated, userIsNotPatient } from '../hoc/authentication';
 import { path } from '../utils'
 import Home from '../routes/Home';
 // import Login from '../routes/Login';
@@ -56,7 +56,7 @@ class App extends Component {
                                     <Route path={path.HOME} exact component={(Home)} />
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     {/* dành cho admin  */}
-                                    <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                                    <Route path={path.SYSTEM} component={userIsNotPatient(userIsAuthenticated(System))} />
                                     {/* booking care cho bác sĩ và bệnh nhân*/}
                                     <Route path={path.HOMEPAGE} component={(HomePage)} />
                                     <Route path={path.DETAIL_DOCTOR_ARTICLE} component={DetailArticleForADoctor} />
@@ -69,7 +69,7 @@ class App extends Component {
                                     {/* trang hồ sơ người dùng */}
                                     <Route path={path.USER_PROFILE} component={UserProfile} />
                                     {/* path for doctor*/}
-                                    <Route path={'/doctor'} component={userIsAuthenticated(Doctor)} />
+                                    <Route path={'/doctor'} component={userIsNotPatient(userIsAuthenticated(Doctor))} />
                                 </Switch>
                             {/* </CustomScrollbars> */}
                         </div>

@@ -9,20 +9,21 @@ import CustomScrollbars from '../../components/CustomScrollbars';
 import _ from 'lodash';
 import * as actions from "../../store/actions";
 import { MoonLoader } from 'react-spinners';
+import UserBackgroundContainer from './UserBackgroundContainer/UserBackgroundContainer';
 
 class UserProfile extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            
+
         }
     }
 
     async componentDidMount() {
         if (this.props.match && this.props.match.params && this.props.match.params.email) {
             let userEmail = this.props.match.params.email;
-            
+
         }
     }
 
@@ -31,18 +32,19 @@ class UserProfile extends Component {
     }
 
     handleLoginForUser = (loginState) => {
-            this.props.processLogout();
-            this.props.history.push(`/login`);
+        this.props.processLogout();
+        this.props.history.push(`/login`);
     }
 
     render() {
         return (
             <React.Fragment>
-                {/* <CustomScrollbars style={{ height: '100vh', width: '100%' }}> */}
+                <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
+                    <UserBackgroundContainer />
                     This is user's profile page
                     <button onClick={() => this.handleLoginForUser()}>Log out </button>
                     <HomeFooter />
-                {/* </CustomScrollbars> */}
+                </CustomScrollbars>
             </React.Fragment >
 
         );
