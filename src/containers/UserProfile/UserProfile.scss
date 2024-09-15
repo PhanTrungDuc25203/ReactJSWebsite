@@ -2,9 +2,9 @@
     width: 100%;
 
     .content-container {
-        margin: 0 150px 0 150px;
-        height: 500px;
-        border: 1px solid red;
+        margin: 0 150px 30px 150px;
+        height: auto;
+        // border: 1px solid red;
 
         .nav-bar {
             overflow        : hidden;
@@ -24,7 +24,6 @@
                 &.active {
                     border-bottom: 4px solid rgb(78, 116, 181);
                     color        : rgb(78, 116, 181);
-                    background-color: #e9faff;
                 }
             }
 
@@ -36,6 +35,25 @@
             a.active:hover {
                 background-color: #daf6ff;
                 border-bottom   : 4px solid rgb(78, 116, 181);
+            }
+        }
+
+        .logout-button-container{
+            height: 40px;
+            width: 100%;
+            .log-out-button-of-profile-page{
+                padding: 5px 10px;
+                font-size: 18px;
+                color: #D9534F;
+                border: 2px solid #D9534F;
+                border-radius: 10px;
+                background-color: white;
+                transition: all 0.2s;
+                float: inline-end;
+            }
+            .log-out-button-of-profile-page:hover{
+                color: white;
+                background-color: #D9534F;
             }
         }
     }

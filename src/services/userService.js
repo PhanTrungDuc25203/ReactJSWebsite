@@ -103,6 +103,10 @@ const getAllSpecialtyDetailsById = (data) => {
     return axios.get(`/api/get-specialty-by-id?id=${data.id}&location=${data.location}`);
 }
 
+const getAllRelativeInforsOfCurrentSystemUserService = (email) => {
+    return axios.get(`/api/get-all-relative-infors-of-current-system-user?email=${email}`);
+}
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -122,4 +126,5 @@ export {
     createNewSpecialtyService,
     getSpecialtiesForHomePageService,
     getAllSpecialtyDetailsById,
+    getAllRelativeInforsOfCurrentSystemUserService,
 };

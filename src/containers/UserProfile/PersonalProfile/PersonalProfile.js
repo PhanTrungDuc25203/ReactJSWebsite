@@ -8,20 +8,27 @@ import _ from 'lodash';
 import { withRouter } from 'react-router';
 import * as actions from "../../../store/actions";
 import { MoonLoader } from 'react-spinners';
+import { getAllRelativeInforsOfCurrentSystemUserService } from '../../../services/userService';
 
 class PersonalProfile extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-
+            currentUser: {},
         }
     }
 
     async componentDidMount() {
         if (this.props.match && this.props.match.params && this.props.match.params.email) {
             let userEmail = this.props.match.params.email;
-
+            let res = await getAllRelativeInforsOfCurrentSystemUserService(userEmail);
+            console.log("check res: ", res);
+            if (res && res.errCode === 0) {
+                this.setState({
+                    currentUser: res.data,
+                })
+            }
         }
     }
 
@@ -34,22 +41,49 @@ class PersonalProfile extends Component {
     }
 
     render() {
-
+        console.log("Check current user role: ", this.state.currentUser);
+        let { currentUser } = this.state;
         return (
             <div className="personal-profile-for-profile-page-container">
                 <div className="phone-number">
                     <label>Số điện thoại</label>
-                    <input value="01231231233"></input>
+                    <input disabled value={currentUser && currentUser.phoneNumber ? currentUser.phoneNumber : 'Chưa cập nhật'} onChange={() => this.tempFunction()}></input>
                 </div>
                 <div className="gender">
                     <label>Giới tính</label>
-                    <input value="Nam"></input>
+                    <input disabled value={currentUser && currentUser.genderData ? currentUser.genderData.value_Vie : 'Chưa cập nhật'} onChange={() => this.tempFunction()}></input>
                 </div>
                 <div className="address">
                     <label>Địa chỉ</label>
-                    <input value="Phố Hồng Hà 1, phương Bến Gót thành phố Việt Trì tỉnh Phú Thọ"></input>
+                    <input disabled value={currentUser && currentUser.address ? currentUser.address : 'Chưa cập nhật'} onChange={() => this.tempFunction()}></input>
                 </div>
-            </div>
+                {currentUser && currentUser.roleId && currentUser.roleId !== 'R3' &&
+                    <div className="more-infor-if-user-is-not-patient">
+                        <div className="role">
+                            <label>Vai trò</label>
+                            <input disabled value={currentUser && currentUser.roleData ? currentUser.roleData.value_Vie : 'Chưa cập nhật'} onChange={() => this.tempFunction()}></input>
+                        </div>
+                        {currentUser && currentUser.roleId && currentUser.roleId === 'R2' &&
+                            <div className="more-infor-if-user-is-not-patient-and-admin">
+                                <div className="level">
+                                    <label>Trình độ</label>
+                                    <input disabled value={currentUser && currentUser.positionData ? currentUser.positionData.value_Vie : 'Chưa cập nhật'} onChange={() => this.tempFunction()}></input>
+                                </div>
+                                <div className="clinic-name">
+                                    <label>Tên phòng khám</label>
+                                    <input disabled value={currentUser && currentUser.Doctor_infor && currentUser.Doctor_infor.clinicName ? currentUser.Doctor_infor.clinicName : 'Chưa cập nhật'}
+                                        onChange={() => this.tempFunction()}></input>
+                                </div>
+                                <div className="clinic-address">
+                                    <label>Địa chỉ phòng khám</label>
+                                    <input disabled value={currentUser && currentUser.Doctor_infor && currentUser.Doctor_infor.clinicAddress ? currentUser.Doctor_infor.clinicAddress : 'Chưa cập nhật'}
+                                        onChange={() => this.tempFunction()}></input>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div >
         );
     }
 }

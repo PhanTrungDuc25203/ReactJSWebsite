@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import './UserProfile.scss';
 import HomeFooter from '../HomePage/HomeFooter/HomeFooter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faCaretLeft, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { LANGUAGES } from '../../utils';
 import CustomScrollbars from '../../components/CustomScrollbars';
 import _ from 'lodash';
@@ -88,7 +88,7 @@ class UserProfile extends Component {
                             <a href="#" onClick={() => this.handleProfileTabClicked('personalProfileOpen')} className={personalProfileOpened === true ? "active" : ""} >Trang cá nhân</a>
                             <a href="#" onClick={() => this.handleProfileTabClicked('appointmentOpen')} className={appointmentOpened === true ? "active" : ""} >Lịch hẹn bác sĩ</a>
                             <a href="#" onClick={() => this.handleProfileTabClicked('commentAboutDoctorsOpen')} className={commentAboutDoctorsOpended === true ? "active" : ""} >Nhận xét về bác sĩ</a>
-                            <a href="#" onClick={() => this.handleProfileTabClicked('returnToHomePage')} className={returnToHomePage === true ? "active" : ""} >Trang chủ</a>
+                            <a href="#" onClick={() => this.handleProfileTabClicked('returnToHomePage')} className={returnToHomePage === true ? "active" : ""} ><FontAwesomeIcon icon={faCaretLeft} /> Trang chủ</a>
                         </div>
                         {
                             personalProfileOpened === true &&
@@ -110,7 +110,9 @@ class UserProfile extends Component {
                                 Your comments about doctors
                             </div>
                         }
-                        <button onClick={() => this.handleLoginForUser()}>Log out </button>
+                        <div className="logout-button-container">
+                            <button onClick={() => this.handleLoginForUser()} className="log-out-button-of-profile-page">Log out <FontAwesomeIcon icon={faRightFromBracket} /></button>
+                        </div>
                     </div>
                     <HomeFooter />
                 </CustomScrollbars>

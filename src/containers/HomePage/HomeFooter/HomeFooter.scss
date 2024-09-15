@@ -36,6 +36,11 @@
         background-color: #dff3ff;
         padding-top: 70px;
         padding-bottom: 0;
+        .home-footer{
+            a{
+                border-left: none;
+            }
+        }
     }
 
     .footer-col {
