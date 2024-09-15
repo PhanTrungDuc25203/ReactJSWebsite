@@ -21,7 +21,7 @@ class PersonalProfile extends Component {
 
     async componentDidMount() {
         if (this.props && this.props.currentUser) {
-            console.log("check props: ", this.props);
+            // console.log("check props: ", this.props);
             this.setState({
                 currentUser: this.props.currentUser,
             })
@@ -68,6 +68,10 @@ class PersonalProfile extends Component {
                                 <div className="level">
                                     <label>Trình độ</label>
                                     <input disabled value={currentUser && currentUser.positionData ? currentUser.positionData.value_Vie : 'Chưa cập nhật'} onChange={() => this.tempFunction()}></input>
+                                </div>
+                                <div className="doctor-specialty">
+                                    <label>Chuyên ngành</label>
+                                    <input disabled value={currentUser && currentUser.Doctor_infor && currentUser.Doctor_infor.belongToSpecialty && currentUser.Doctor_infor.belongToSpecialty.name ? currentUser.Doctor_infor.belongToSpecialty.name : 'Chưa cập nhật'} onChange={() => this.tempFunction()}></input>
                                 </div>
                                 <div className="clinic-name">
                                     <label>Tên phòng khám</label>

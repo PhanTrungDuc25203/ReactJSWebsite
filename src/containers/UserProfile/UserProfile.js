@@ -14,6 +14,7 @@ import UserBackgroundContainer from './UserBackgroundContainer/UserBackgroundCon
 import { getAllRelativeInforsOfCurrentSystemUserService } from '../../services/userService';
 
 const PersonalProfile = lazy(() => import('./PersonalProfile/PersonalProfile'));
+const AppointmentInProfilePage = lazy(() => import('./Appointment/AppointmentInProfilePage'));
 
 class UserProfile extends Component {
 
@@ -87,10 +88,17 @@ class UserProfile extends Component {
 
     render() {
         let { personalProfileOpened, appointmentOpened, commentAboutDoctorsOpended, returnToHomePage, currentUser } = this.state;
+        let combinedAppointments = {
+            doctorAppointments: currentUser.doctorHasAppointmentWithPatients,
+            patientAppointments: currentUser.patientHasAppointmentWithDoctors
+        };
         return (
             <div className="user-profile-container">
                 <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
-                    <UserBackgroundContainer />
+                    <UserBackgroundContainer
+                        currentUserEmail={currentUser.email}
+                        currentUserName={currentUser.lastName && currentUser.firstName ? currentUser.lastName + ' ' + currentUser.firstName : 'Đang tải...'}
+                    />
                     <div className="content-container">
                         <div className="nav-bar">
                             <a href="#" onClick={() => this.handleProfileTabClicked('personalProfileOpen')} className={personalProfileOpened === true ? "active" : ""} >Trang cá nhân</a>
@@ -108,9 +116,14 @@ class UserProfile extends Component {
                         }
                         {
                             appointmentOpened === true &&
-                            <div className="personal-profile">
-                                Appoitment with doctor
-                            </div>
+                            <Suspense fallback={<div>Loading appointment...</div>}>
+                                <div className="appointment-of-current-user">
+                                    <AppointmentInProfilePage
+                                        combinedAppointments={combinedAppointments}
+                                        userRole={currentUser.roleId}
+                                    />
+                                </div>
+                            </Suspense>
                         }
                         {
                             commentAboutDoctorsOpended === true &&
