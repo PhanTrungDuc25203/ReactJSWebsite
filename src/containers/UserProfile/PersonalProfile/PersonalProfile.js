@@ -20,20 +20,20 @@ class PersonalProfile extends Component {
     }
 
     async componentDidMount() {
-        if (this.props.match && this.props.match.params && this.props.match.params.email) {
-            let userEmail = this.props.match.params.email;
-            let res = await getAllRelativeInforsOfCurrentSystemUserService(userEmail);
-            console.log("check res: ", res);
-            if (res && res.errCode === 0) {
-                this.setState({
-                    currentUser: res.data,
-                })
-            }
+        if (this.props && this.props.currentUser) {
+            console.log("check props: ", this.props);
+            this.setState({
+                currentUser: this.props.currentUser,
+            })
         }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-
+        if (prevProps.currentUser !== this.props.currentUser) {
+            this.setState({
+                currentUser: this.props.currentUser
+            });
+        }
     }
 
     handleProfileTabClicked(whichClicked) {

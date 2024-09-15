@@ -11,6 +11,7 @@ import { withRouter } from 'react-router';
 import * as actions from "../../store/actions";
 import { MoonLoader } from 'react-spinners';
 import UserBackgroundContainer from './UserBackgroundContainer/UserBackgroundContainer';
+import { getAllRelativeInforsOfCurrentSystemUserService } from '../../services/userService';
 
 const PersonalProfile = lazy(() => import('./PersonalProfile/PersonalProfile'));
 
@@ -23,13 +24,20 @@ class UserProfile extends Component {
             appointmentOpened: false,
             commentAboutDoctorsOpended: false,
             returnToHomePage: false,
+            currentUser: {},
         }
     }
 
     async componentDidMount() {
         if (this.props.match && this.props.match.params && this.props.match.params.email) {
             let userEmail = this.props.match.params.email;
-
+            let res = await getAllRelativeInforsOfCurrentSystemUserService(userEmail);
+            // console.log("check res: ", res);
+            if (res && res.errCode === 0) {
+                this.setState({
+                    currentUser: res.data,
+                })
+            }
         }
     }
 
@@ -78,7 +86,7 @@ class UserProfile extends Component {
     }
 
     render() {
-        let { personalProfileOpened, appointmentOpened, commentAboutDoctorsOpended, returnToHomePage } = this.state;
+        let { personalProfileOpened, appointmentOpened, commentAboutDoctorsOpended, returnToHomePage, currentUser } = this.state;
         return (
             <div className="user-profile-container">
                 <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
@@ -94,7 +102,7 @@ class UserProfile extends Component {
                             personalProfileOpened === true &&
                             <Suspense fallback={<div>Loading profile...</div>}>
                                 <div className="personal-profile">
-                                    <PersonalProfile />
+                                    <PersonalProfile currentUser={currentUser} />
                                 </div>
                             </Suspense>
                         }
