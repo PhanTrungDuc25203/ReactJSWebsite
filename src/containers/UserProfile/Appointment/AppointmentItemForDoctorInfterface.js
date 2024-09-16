@@ -68,27 +68,26 @@ class AppointmentItemForDoctorInfterface extends Component {
         return (
             <div className="appointment-item-for-doctor-interface">
                 <div className="patient-name">
-                    Bệnh nhân: {patientInfor && patientInfor.lastName ? patientInfor.lastName : ''}
+                    <label>Bệnh nhân: </label>{patientInfor && patientInfor.lastName ? patientInfor.lastName : ''}
                     {patientInfor && patientInfor.firstName ? ' ' + patientInfor.firstName : ''}
-                    .ID:
+                    {'. '}<label>ID:</label>{' '}
                     {meetPatientId && meetPatientId}
                 </div>
                 <div className="patient-phone-number">
-                    Số điện thoại của bệnh nhân: {patientInfor && patientInfor.phoneNumber && patientInfor.phoneNumber}
+                    <label>Số điện thoại của bệnh nhân: </label>{patientInfor && patientInfor.phoneNumber && patientInfor.phoneNumber}
                 </div>
                 <div className="patient-email">
-                    Địa chỉ email của bệnh nhân: {patientInfor && patientInfor.email && patientInfor.email}
+                    <label>Địa chỉ email của bệnh nhân: </label>{patientInfor && patientInfor.email && patientInfor.email}
                 </div>
                 <div className="patient-birthday">
-                    Ngày sinh của bệnh nhân: {patientBirthday && patientBirthday}
+                    <label>Ngày sinh của bệnh nhân: </label>{patientBirthday && patientBirthday}
                 </div>
                 <div className="patient-date">
-                    Ngày hẹn: {appointmentDate && appointmentDate}
+                    <label>Ngày hẹn: </label>{appointmentDate && appointmentDate}
                 </div>
                 <div className="patient-timeframe">
-                    Khung giờ hẹn: {appointmentTimeFrame && appointmentTimeFrame}
+                    <label>Khung giờ hẹn: </label>{appointmentTimeFrame && appointmentTimeFrame}
                 </div>
-                <div>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
             </div >
         );
     }

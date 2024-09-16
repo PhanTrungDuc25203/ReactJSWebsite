@@ -1,0 +1,57 @@
+.appointment-item-for-doctor-interface {
+
+    height       : fit-content;
+    width        : 100%;
+    border       : 1px solid #b5daff;
+    border-radius: 5px;
+    padding      : 10px;
+    margin       : 10px 0 15px 0;
+
+    .patient-name {
+        font-size: 16px;
+
+        label {
+            color: rgb(44, 185, 255);
+        }
+    }
+
+    .patient-phone-number {
+        font-size: 16px;
+
+        label {
+            color: rgb(44, 185, 255);
+        }
+    }
+
+    .patient-email {
+        font-size: 16px;
+
+        label {
+            color: rgb(44, 185, 255);
+        }
+    }
+
+    .patient-birthday {
+        font-size: 16px;
+
+        label {
+            color: rgb(44, 185, 255);
+        }
+    }
+
+    .patient-date {
+        font-size: 16px;
+
+        label {
+            color: rgb(44, 185, 255);
+        }
+    }
+
+    .patient-timeframe {
+        font-size: 16px;
+
+        label {
+            color: rgb(44, 185, 255);
+        }
+    }
+}

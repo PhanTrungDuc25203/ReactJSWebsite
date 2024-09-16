@@ -1,19 +1,23 @@
-.appointment-in-profile-page{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: 30px auto;
-    padding: 20px;
+.appointment-in-profile-page {
+    display         : flex;
+    flex-direction  : column;
+    width           : 100%;
+    margin          : 30px auto;
+    padding         : 20px;
     background-color: #f8f9fa;
-    border: 1px solid #95caff;
-    border-radius: 5px;
-    .appointment-in-profile-page-title{
-        font-size: 20px;
-        color    : #49BCE2;
-    }
-    .appointment-container{
-        .appointment-item{
+    border          : 1px solid #95caff;
+    border-radius   : 5px;
 
-        }
+    .appointment-in-profile-page-title {
+        font-size    : 20px;
+        margin-bottom: 10px;
+        color        : #49BCE2;
+    }
+
+    .appointment-container {
+        height: auto;
+        width : 100%;
+
+        .appointment-item {}
     }
 }

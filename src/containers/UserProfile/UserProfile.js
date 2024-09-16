@@ -63,7 +63,12 @@ class UserProfile extends Component {
         const { personalProfileOpened, currentUser } = this.state;
         if (personalProfileOpened) {
             return (
-                <Suspense fallback={<div><MoonLoader /></div>}>
+                <Suspense fallback={<div>
+                    <MoonLoader
+                        color='#123abc'
+                        size='25'
+                        aria-label="Loading Spinner"
+                    /></div>}>
                     <div className="personal-profile">
                         <PersonalProfile currentUser={currentUser} />
                     </div>
