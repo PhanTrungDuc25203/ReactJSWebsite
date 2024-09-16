@@ -74,13 +74,13 @@ class AppointmentItemForDoctorInfterface extends Component {
                     {meetPatientId && meetPatientId}
                 </div>
                 <div className="patient-phone-number">
-                    Số điện thoại của bệnh nhân: {patientInfor.phoneNumber}
+                    Số điện thoại của bệnh nhân: {patientInfor && patientInfor.phoneNumber && patientInfor.phoneNumber}
                 </div>
                 <div className="patient-email">
-                    Địa chỉ email của bệnh nhân: {patientInfor.email}
+                    Địa chỉ email của bệnh nhân: {patientInfor && patientInfor.email && patientInfor.email}
                 </div>
                 <div className="patient-birthday">
-                    Ngày sinh của bệnh nhân: {patientBirthday}
+                    Ngày sinh của bệnh nhân: {patientBirthday && patientBirthday}
                 </div>
                 <div className="patient-date">
                     Ngày hẹn: {appointmentDate && appointmentDate}

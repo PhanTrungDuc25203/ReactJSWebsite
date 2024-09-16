@@ -65,13 +65,14 @@ class AppointmentItemForPatientInfterface extends Component {
         return (
             <div className="appointment-item-for-patient-interface">
                 <div className="doctor-name">
-                    Bác sĩ: {doctorInfor.lastName + ' ' + doctorInfor.firstName}
+                    Bác sĩ: {doctorInfor && doctorInfor.lastName && doctorInfor.lastName}{' '}
+                    {doctorInfor && doctorInfor.firstName && doctorInfor.firstName}
                 </div>
                 <div className="doctor-phone-number">
-                    Số điện thoại của bác sĩ: {doctorInfor.phoneNumber}
+                    Số điện thoại của bác sĩ: {doctorInfor && doctorInfor.phoneNumber && doctorInfor.phoneNumber}
                 </div>
                 <div className="doctor-email">
-                    Địa chỉ email của bác sĩ: {doctorInfor.email}
+                    Địa chỉ email của bác sĩ: {doctorInfor && doctorInfor.email && doctorInfor.email}
                 </div>
                 <div className="doctor-specialty">
                     Chuyên ngành bác sĩ: {doctorInfor.Doctor_infor && doctorInfor.Doctor_infor.belongToSpecialty
