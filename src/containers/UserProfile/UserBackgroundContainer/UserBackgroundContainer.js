@@ -2,8 +2,15 @@ import React from 'react';
 import './UserBackgroundContainer.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import defaultAvatar from '../../../assets/images/default-avatar-circle.png';
 
-const UserBackgroundContainer = ({ currentUserEmail, currentUserName }) => {
+const UserBackgroundContainer = ({ currentUserEmail, currentUserName, currentUserAvatar }) => {
+
+    let imageByBase64 = '';
+    if (currentUserAvatar) {
+        imageByBase64 = Buffer.from(currentUserAvatar, 'base64').toString('binary');
+    }
+
     return (
         <React.Fragment>
             <div className="background-and-avatar-container">
@@ -11,8 +18,10 @@ const UserBackgroundContainer = ({ currentUserEmail, currentUserName }) => {
 
                 </div>
                 <div className="avatar-and-name">
-                    <div className="avatar-section">
-                        {/* Avatar */}
+                    <div className="avatar-section"
+                        style={{ backgroundImage: `url(${imageByBase64 ? imageByBase64 : defaultAvatar})` }}
+                    >
+
                     </div>
                     <div className="infor-section">
                         <div className="name">

@@ -63,7 +63,7 @@ class UserProfile extends Component {
         const { personalProfileOpened, currentUser } = this.state;
         if (personalProfileOpened) {
             return (
-                <Suspense fallback={<div>
+                <Suspense fallback={<div className="loading-circle">
                     <MoonLoader
                         color='#123abc'
                         size='25'
@@ -86,7 +86,12 @@ class UserProfile extends Component {
                 patientAppointments: currentUser.patientHasAppointmentWithDoctors
             };
             return (
-                <Suspense fallback={<div>Loading appointment...</div>}>
+                <Suspense fallback={<div className="loading-circle">
+                    <MoonLoader
+                        color='#123abc'
+                        size='25'
+                        aria-label="Loading Spinner"
+                    /></div>}>
                     <div className="appointment-of-current-user">
                         <AppointmentInProfilePage
                             combinedAppointments={combinedAppointments}
@@ -114,6 +119,7 @@ class UserProfile extends Component {
             <div className="user-profile-container">
                 <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
                     <UserBackgroundContainer
+                        currentUserAvatar={currentUser.image}
                         currentUserEmail={currentUser.email}
                         currentUserName={currentUser.lastName && currentUser.firstName ? `${currentUser.lastName} ${currentUser.firstName}` : 'Đang tải...'}
                     />
