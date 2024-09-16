@@ -88,6 +88,7 @@ class AppointmentInProfilePage extends Component {
                         :
                         userRole === 'R2' && 'Bạn chưa có lịch hẹn nào với bệnh nhân'
                     }
+                    {userRole === 'R1' && 'Bạn là admin nên không có gì trong này đâu:))'}
                 </div>
             </div >
         );

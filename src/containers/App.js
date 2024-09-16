@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
 import { ToastContainer } from 'react-toastify';
-import { userIsAuthenticated, userIsNotAuthenticated, userIsNotPatient } from '../hoc/authentication';
+import { userIsAuthenticated, userIsNotAuthenticated, userIsNotPatient, userIsNotPatientAndDoctor } from '../hoc/authentication';
 import { path } from '../utils'
 import Home from '../routes/Home';
 // import Login from '../routes/Login';
@@ -52,25 +52,25 @@ class App extends Component {
 
                         <div className="content-container">
                             {/* <CustomScrollbars style={{ height: '100vh', width: '100%' }}> */}
-                                <Switch>
-                                    <Route path={path.HOME} exact component={(Home)} />
-                                    <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
-                                    {/* dành cho admin  */}
-                                    <Route path={path.SYSTEM} component={userIsNotPatient(userIsAuthenticated(System))} />
-                                    {/* booking care cho bác sĩ và bệnh nhân*/}
-                                    <Route path={path.HOMEPAGE} component={(HomePage)} />
-                                    <Route path={path.DETAIL_DOCTOR_ARTICLE} component={DetailArticleForADoctor} />
-                                    {/* trang dăng kí khám bệnh theo khung giờ của từng bác sĩ cho bệnh nhân */}
-                                    <Route path={path.MAKE_APPOINTMENT_WITH_DOCTOR} component={MakeAppointmentPage} />
-                                    {/* route xác nhận đặt hẹn với bác sĩ */}
-                                    <Route path={path.CONFIRM_BOOKING_APPOINTMENT} component={ConfirmBookingAppointment} />
-                                    {/* route trang chi tiết một chuyên khoa và các bac sĩ thuộc chuyên khoa đó */}
-                                    <Route path={path.SPECIALTY_ARTICLE} component={DetailSpecialty} />
-                                    {/* trang hồ sơ người dùng */}
-                                    <Route path={path.USER_PROFILE} component={UserProfile} />
-                                    {/* path for doctor*/}
-                                    <Route path={'/doctor'} component={userIsNotPatient(userIsAuthenticated(Doctor))} />
-                                </Switch>
+                            <Switch>
+                                <Route path={path.HOME} exact component={(Home)} />
+                                <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
+                                {/* dành cho admin  */}
+                                <Route path={path.SYSTEM} component={userIsNotPatientAndDoctor(userIsNotPatient(userIsAuthenticated(System)))} />
+                                {/* booking care cho bác sĩ và bệnh nhân*/}
+                                <Route path={path.HOMEPAGE} component={(HomePage)} />
+                                <Route path={path.DETAIL_DOCTOR_ARTICLE} component={DetailArticleForADoctor} />
+                                {/* trang dăng kí khám bệnh theo khung giờ của từng bác sĩ cho bệnh nhân */}
+                                <Route path={path.MAKE_APPOINTMENT_WITH_DOCTOR} component={MakeAppointmentPage} />
+                                {/* route xác nhận đặt hẹn với bác sĩ */}
+                                <Route path={path.CONFIRM_BOOKING_APPOINTMENT} component={ConfirmBookingAppointment} />
+                                {/* route trang chi tiết một chuyên khoa và các bac sĩ thuộc chuyên khoa đó */}
+                                <Route path={path.SPECIALTY_ARTICLE} component={DetailSpecialty} />
+                                {/* trang hồ sơ người dùng */}
+                                <Route path={path.USER_PROFILE} component={UserProfile} />
+                                {/* path for doctor*/}
+                                <Route path={'/doctor/schedule-manage'} component={userIsNotPatient(userIsAuthenticated(Doctor))} />
+                            </Switch>
                             {/* </CustomScrollbars> */}
                         </div>
 
