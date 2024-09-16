@@ -59,6 +59,7 @@ class AppointmentInProfilePage extends Component {
                             return (
                                 <div className="appointment-item" key={index}>
                                     <AppointmentItemForPatientInfterface
+                                        appointmentId={item.id}
                                         meetDoctorId={item.doctorId}
                                         appointmentDate={moment(item.date).format('DD-MM-YYYY')}
                                         appointmentTimeFrame={item.appointmentTimeTypeData && item.appointmentTimeTypeData.value_Vie}
@@ -76,6 +77,7 @@ class AppointmentInProfilePage extends Component {
                                 <div className="appointment-item" key={index}>
                                     <div className="appointment-item" key={index}>
                                         <AppointmentItemForDoctorInfterface
+                                            appointmentId={item.id}
                                             meetPatientId={item.patientId}
                                             appointmentDate={moment(item.date).format('DD-MM-YYYY')}
                                             appointmentTimeFrame={item.appointmentTimeTypeData && item.appointmentTimeTypeData.value_Vie}

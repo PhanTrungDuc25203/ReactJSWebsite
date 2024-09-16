@@ -16,6 +16,7 @@ class AppointmentItemForDoctorInfterface extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            appointmentId: '',
             meetPatientId: '',
             appointmentDate: '',
             appointmentTimeFrame: '',
@@ -25,11 +26,12 @@ class AppointmentItemForDoctorInfterface extends Component {
     }
 
     async componentDidMount() {
-        if (this.props && this.props.meetPatientId && this.props.appointmentDate && this.props.appointmentTimeFrame) {
+        if (this.props && this.props.meetPatientId && this.props.appointmentDate && this.props.appointmentTimeFrame && this.props.appointmentId) {
             // console.log("check props: ", this.props);
             let patientInfor = await getAllUsersToDisplayInReact(this.props.meetPatientId);
             if (patientInfor && patientInfor.errCode === 0) {
                 this.setState({
+                    appointmentId: this.props.appointmentId,
                     meetPatientId: this.props.meetPatientId,
                     appointmentDate: this.props.appointmentDate,
                     appointmentTimeFrame: this.props.appointmentTimeFrame,
@@ -43,11 +45,13 @@ class AppointmentItemForDoctorInfterface extends Component {
     async componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.meetPatientId !== this.props.meetPatientId &&
             prevProps.appointmentDate !== this.props.appointmentDate &&
-            prevProps.appointmentTimeFrame !== this.props.appointmentTimeFrame
+            prevProps.appointmentTimeFrame !== this.props.appointmentTimeFrame &&
+            prevProps.appointmentId !== this.props.appointmentId
         ) {
             let patientInfor = await getAllUsersToDisplayInReact(this.props.meetPatientId);
             if (patientInfor && patientInfor.errCode === 0) {
                 this.setState({
+                    appointmentId: this.props.appointmentId,
                     meetPatientId: this.props.meetPatientId,
                     appointmentDate: this.props.appointmentDate,
                     appointmentTimeFrame: this.props.appointmentTimeFrame,
@@ -63,30 +67,34 @@ class AppointmentItemForDoctorInfterface extends Component {
     }
 
     render() {
-        let { meetPatientId, patientInfor, appointmentDate, appointmentTimeFrame, patientBirthday } = this.state;
-        // console.log("check state: ", this.state);
+        let { appointmentId, meetPatientId, patientInfor, appointmentDate, appointmentTimeFrame, patientBirthday } = this.state;
+        console.log("check state: ", this.state);
         return (
             <div className="appointment-item-for-doctor-interface">
+                <div className="appointment-id">
+                    <label>Mã số cuộc hẹn:</label> {' '}
+                    {appointmentId && appointmentId}
+                </div>
                 <div className="patient-name">
-                    <label>Bệnh nhân: </label>{patientInfor && patientInfor.lastName ? patientInfor.lastName : ''}
+                    <label>Bệnh nhân: </label>{' '}{patientInfor && patientInfor.lastName ? patientInfor.lastName : ''}
                     {patientInfor && patientInfor.firstName ? ' ' + patientInfor.firstName : ''}
                     {'. '}<label>ID:</label>{' '}
                     {meetPatientId && meetPatientId}
                 </div>
                 <div className="patient-phone-number">
-                    <label>Số điện thoại của bệnh nhân: </label>{patientInfor && patientInfor.phoneNumber && patientInfor.phoneNumber}
+                    <label>Số điện thoại của bệnh nhân: </label>{' '}{patientInfor && patientInfor.phoneNumber && patientInfor.phoneNumber}
                 </div>
                 <div className="patient-email">
-                    <label>Địa chỉ email của bệnh nhân: </label>{patientInfor && patientInfor.email && patientInfor.email}
+                    <label>Địa chỉ email của bệnh nhân: </label>{' '}{patientInfor && patientInfor.email && patientInfor.email}
                 </div>
                 <div className="patient-birthday">
-                    <label>Ngày sinh của bệnh nhân: </label>{patientBirthday && patientBirthday}
+                    <label>Ngày sinh của bệnh nhân: </label>{' '}{patientBirthday && patientBirthday}
                 </div>
                 <div className="patient-date">
-                    <label>Ngày hẹn: </label>{appointmentDate && appointmentDate}
+                    <label>Ngày hẹn: </label>{' '}{appointmentDate && appointmentDate}
                 </div>
                 <div className="patient-timeframe">
-                    <label>Khung giờ hẹn: </label>{appointmentTimeFrame && appointmentTimeFrame}
+                    <label>Khung giờ hẹn: </label>{' '}{appointmentTimeFrame && appointmentTimeFrame}
                 </div>
             </div >
         );
