@@ -20,6 +20,7 @@
                 font-size      : 18px;
                 border-left    : none;
                 transition     : all 0.2s;
+                cursor         : pointer;
 
                 &.active {
                     border-bottom: 4px solid rgb(78, 116, 181);

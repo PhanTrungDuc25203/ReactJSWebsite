@@ -9,7 +9,8 @@ import { withRouter } from 'react-router';
 import * as actions from "../../../store/actions";
 import { MoonLoader } from 'react-spinners';
 import moment from 'moment';
-import AppointmentItemForPatientInfterface from './AppointmentItemForPatientInfterface'
+import AppointmentItemForPatientInfterface from './AppointmentItemForPatientInfterface';
+import AppointmentItemForDoctorInfterface from './AppointmentItemForDoctorInfterface';
 
 class AppointmentInProfilePage extends Component {
 
@@ -46,7 +47,7 @@ class AppointmentInProfilePage extends Component {
 
     render() {
         let { combinedAppointments, userRole } = this.state;
-        console.log("check props: ", combinedAppointments, userRole);
+        // console.log("check props: ", combinedAppointments, userRole);
         return (
             <div className="appointment-in-profile-page">
                 <div className="appointment-in-profile-page-title">
@@ -60,7 +61,7 @@ class AppointmentInProfilePage extends Component {
                                     <AppointmentItemForPatientInfterface
                                         meetDoctorId={item.doctorId}
                                         appointmentDate={moment(item.date).format('DD-MM-YYYY')}
-                                        appointmentTimeFrame={item.timeType}
+                                        appointmentTimeFrame={item.appointmentTimeTypeData && item.appointmentTimeTypeData.value_Vie}
                                     />
                                 </div>
                             )
@@ -73,13 +74,14 @@ class AppointmentInProfilePage extends Component {
                         combinedAppointments.doctorAppointments.map((item, index) => {
                             return (
                                 <div className="appointment-item" key={index}>
-                                    <div>ID Bệnh nhân: {item.patientId}</div>
-                                    <div>Ngày hẹn: {moment(item.date).format('DD-MM-YYYY')}</div>
-                                    <div>Số điện thoại bệnh nhân: {item.patientPhoneNumber}</div>
-                                    <div>Địa chỉ bệnh nhân: {item.patientAddress}</div>
-                                    <div>Ngày sinh bệnh nhân: {moment(item.patientBirthday).format('DD-MM-YYYY')}</div>
-                                    <div>Giới tính bệnh nhân: {item.patientGender}</div>
-                                    <div>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+                                    <div className="appointment-item" key={index}>
+                                        <AppointmentItemForDoctorInfterface
+                                            meetPatientId={item.patientId}
+                                            appointmentDate={moment(item.date).format('DD-MM-YYYY')}
+                                            appointmentTimeFrame={item.appointmentTimeTypeData && item.appointmentTimeTypeData.value_Vie}
+                                            patientBirthday={moment(item.patientBirthday).format('DD-MM-YYYY')}
+                                        />
+                                    </div>
                                 </div>
                             )
                         })

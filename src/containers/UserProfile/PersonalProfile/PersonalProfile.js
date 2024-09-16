@@ -41,7 +41,7 @@ class PersonalProfile extends Component {
     }
 
     render() {
-        console.log("Check current user role: ", this.state.currentUser);
+        // console.log("Check current user role: ", this.state.currentUser);
         let { currentUser } = this.state;
         return (
             <div className="personal-profile-for-profile-page-container">

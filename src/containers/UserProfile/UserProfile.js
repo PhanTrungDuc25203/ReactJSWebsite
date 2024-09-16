@@ -33,8 +33,7 @@ class UserProfile extends Component {
         if (this.props.match && this.props.match.params && this.props.match.params.email) {
             let userEmail = this.props.match.params.email;
             let res = await getAllRelativeInforsOfCurrentSystemUserService(userEmail);
-            // console.log("check res: ", res);
-            if (res && res.errCode === 0) {
+            if (res && res.errCode === 0 && !_.isEqual(res.data, this.state.currentUser)) {
                 this.setState({
                     currentUser: res.data,
                 })
@@ -42,111 +41,111 @@ class UserProfile extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    handleProfileTabClicked = (whichClicked) => {
+        const stateMapping = {
+            personalProfileOpen: { personalProfileOpened: true, appointmentOpened: false, commentAboutDoctorsOpended: false, returnToHomePage: false },
+            appointmentOpen: { personalProfileOpened: false, appointmentOpened: true, commentAboutDoctorsOpended: false, returnToHomePage: false },
+            commentAboutDoctorsOpen: { personalProfileOpened: false, appointmentOpened: false, commentAboutDoctorsOpended: true, returnToHomePage: false },
+            returnToHomePage: { personalProfileOpened: false, appointmentOpened: false, commentAboutDoctorsOpended: false, returnToHomePage: true }
+        };
+        this.setState(stateMapping[whichClicked] || {});
+        if (whichClicked === 'returnToHomePage') {
+            this.props.history.push(`/home`);
+        }
+    };
 
-    }
-
-    handleLoginForUser = (loginState) => {
+    handleLoginForUser = () => {
         this.props.processLogout();
         this.props.history.push(`/login`);
-    }
+    };
 
-    handleProfileTabClicked(whichClicked) {
-        if (whichClicked === 'personalProfileOpen') {
-            this.setState({
-                personalProfileOpened: true,
-                appointmentOpened: false,
-                commentAboutDoctorsOpended: false,
-                returnToHomePage: false,
-            })
+    renderProfileSection = () => {
+        const { personalProfileOpened, currentUser } = this.state;
+        if (personalProfileOpened) {
+            return (
+                <Suspense fallback={<div><MoonLoader /></div>}>
+                    <div className="personal-profile">
+                        <PersonalProfile currentUser={currentUser} />
+                    </div>
+                </Suspense>
+            );
         }
-        if (whichClicked === 'appointmentOpen') {
-            this.setState({
-                personalProfileOpened: false,
-                appointmentOpened: true,
-                commentAboutDoctorsOpended: false,
-                returnToHomePage: false,
-            })
+        return null;
+    };
+
+    renderAppointmentSection = () => {
+        const { appointmentOpened, currentUser } = this.state;
+        if (appointmentOpened) {
+            const combinedAppointments = {
+                doctorAppointments: currentUser.doctorHasAppointmentWithPatients,
+                patientAppointments: currentUser.patientHasAppointmentWithDoctors
+            };
+            return (
+                <Suspense fallback={<div>Loading appointment...</div>}>
+                    <div className="appointment-of-current-user">
+                        <AppointmentInProfilePage
+                            combinedAppointments={combinedAppointments}
+                            userRole={currentUser.roleId}
+                        />
+                    </div>
+                </Suspense>
+            );
         }
-        if (whichClicked === 'commentAboutDoctorsOpen') {
-            this.setState({
-                personalProfileOpened: false,
-                appointmentOpened: false,
-                commentAboutDoctorsOpended: true,
-                returnToHomePage: false,
-            })
+        return null;
+    };
+
+    renderCommentSection = () => {
+        const { commentAboutDoctorsOpended } = this.state;
+        if (commentAboutDoctorsOpended) {
+            return <div className="personal-profile">Your comments about doctors</div>;
         }
-        if (whichClicked === 'returnToHomePage') {
-            this.setState({
-                personalProfileOpened: false,
-                appointmentOpened: false,
-                commentAboutDoctorsOpended: false,
-                returnToHomePage: true,
-            }, this.props.history.push(`/home`));
-        }
-    }
+        return null;
+    };
 
     render() {
-        let { personalProfileOpened, appointmentOpened, commentAboutDoctorsOpended, returnToHomePage, currentUser } = this.state;
-        let combinedAppointments = {
-            doctorAppointments: currentUser.doctorHasAppointmentWithPatients,
-            patientAppointments: currentUser.patientHasAppointmentWithDoctors
-        };
+        const { currentUser } = this.state;
+
         return (
             <div className="user-profile-container">
                 <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
                     <UserBackgroundContainer
                         currentUserEmail={currentUser.email}
-                        currentUserName={currentUser.lastName && currentUser.firstName ? currentUser.lastName + ' ' + currentUser.firstName : 'Đang tải...'}
+                        currentUserName={currentUser.lastName && currentUser.firstName ? `${currentUser.lastName} ${currentUser.firstName}` : 'Đang tải...'}
                     />
+
                     <div className="content-container">
                         <div className="nav-bar">
-                            <a href="#" onClick={() => this.handleProfileTabClicked('personalProfileOpen')} className={personalProfileOpened === true ? "active" : ""} >Trang cá nhân</a>
-                            <a href="#" onClick={() => this.handleProfileTabClicked('appointmentOpen')} className={appointmentOpened === true ? "active" : ""} >Lịch hẹn bác sĩ</a>
-                            <a href="#" onClick={() => this.handleProfileTabClicked('commentAboutDoctorsOpen')} className={commentAboutDoctorsOpended === true ? "active" : ""} >Nhận xét về bác sĩ</a>
-                            <a href="#" onClick={() => this.handleProfileTabClicked('returnToHomePage')} className={returnToHomePage === true ? "active" : ""} ><FontAwesomeIcon icon={faCaretLeft} /> Trang chủ</a>
+                            <a onClick={() => this.handleProfileTabClicked('personalProfileOpen')} className={this.state.personalProfileOpened ? "active" : ""}>
+                                Trang cá nhân
+                            </a>
+                            <a onClick={() => this.handleProfileTabClicked('appointmentOpen')} className={this.state.appointmentOpened ? "active" : ""}>
+                                Lịch hẹn bác sĩ
+                            </a>
+                            <a onClick={() => this.handleProfileTabClicked('commentAboutDoctorsOpen')} className={this.state.commentAboutDoctorsOpended ? "active" : ""}>
+                                Nhận xét về bác sĩ
+                            </a>
+                            <a onClick={() => this.handleProfileTabClicked('returnToHomePage')} className={this.state.returnToHomePage ? "active" : ""}>
+                                <FontAwesomeIcon icon={faCaretLeft} /> Trang chủ
+                            </a>
                         </div>
-                        {
-                            personalProfileOpened === true &&
-                            <Suspense fallback={<div>Loading profile...</div>}>
-                                <div className="personal-profile">
-                                    <PersonalProfile currentUser={currentUser} />
-                                </div>
-                            </Suspense>
-                        }
-                        {
-                            appointmentOpened === true &&
-                            <Suspense fallback={<div>Loading appointment...</div>}>
-                                <div className="appointment-of-current-user">
-                                    <AppointmentInProfilePage
-                                        combinedAppointments={combinedAppointments}
-                                        userRole={currentUser.roleId}
-                                    />
-                                </div>
-                            </Suspense>
-                        }
-                        {
-                            commentAboutDoctorsOpended === true &&
-                            <div className="personal-profile">
-                                Your comments about doctors
-                            </div>
-                        }
+                        {this.renderProfileSection()}
+                        {this.renderAppointmentSection()}
+                        {this.renderCommentSection()}
                         <div className="logout-button-container">
-                            <button onClick={() => this.handleLoginForUser()} className="log-out-button-of-profile-page">Log out <FontAwesomeIcon icon={faRightFromBracket} /></button>
+                            <button onClick={this.handleLoginForUser} className="log-out-button-of-profile-page">
+                                Log out <FontAwesomeIcon icon={faRightFromBracket} />
+                            </button>
                         </div>
                     </div>
                     <HomeFooter />
                 </CustomScrollbars>
-            </div >
-
+            </div>
         );
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
-        // systemMenuPath: state.app.systemMenuPath,
-        // isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
     };
 };
