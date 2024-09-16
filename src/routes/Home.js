@@ -27,7 +27,7 @@ class Home extends Component {
 
         if (isLoggedIn) {
             // Kiểm tra vai trò người dùng và thiết lập liên kết điều hướng
-            const linkToRedirect = userInfo.roleId === 'R3' ? '/home' : '/system/user-manage';
+            const linkToRedirect = userInfo.roleId === 'R3' ? '/home' : userInfo.roleId === 'R2' ? '/doctor/schedule-manage' : '/system/user-manage';
             this.setState({ redirectTo: linkToRedirect });
         } else {
             this.setState({ redirectTo: '/home' });
