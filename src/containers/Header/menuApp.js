@@ -65,6 +65,10 @@ export const doctorMenu = [
                 name: 'menu.doctor.schedule-and-timetable',
                 link: '/doctor/schedule-manage'
             },
+            { //quản lý kế hoạch khám bệnh của bác sĩ
+                name: 'menu.doctor.all-information-manage',
+                link: '/doctor/doctor-information-manage'
+            },
         ]
     },
     {

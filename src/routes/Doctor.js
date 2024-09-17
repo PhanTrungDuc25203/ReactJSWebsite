@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from 'react-router-dom';
 import ScheduleAndTimetableManage from '../containers/System/Doctor/ScheduleAndTimetableManage';
+import DoctorManage from '../containers/System/Admin/DoctorManageByRedux/DoctorManage';
 import Header from '../containers/Header/Header';
 import CustomScrollbars from '../components/CustomScrollbars';
 
@@ -16,6 +17,8 @@ class Doctor extends Component {
                         <div className="system-list">
                             <Switch>
                                 <Route path="/doctor/schedule-manage" component={ScheduleAndTimetableManage} />
+                                <Route path="/doctor/doctor-information-manage" component={DoctorManage} />
+                                <Route component={() => { return (<Redirect to={'/doctor/schedule-manage'} />) }} />
                             </Switch>
                         </div>
                     </div >

@@ -69,7 +69,7 @@ class App extends Component {
                                 {/* trang hồ sơ người dùng */}
                                 <Route path={path.USER_PROFILE} component={UserProfile} />
                                 {/* path for doctor*/}
-                                <Route path={'/doctor/schedule-manage'} component={userIsNotPatient(userIsAuthenticated(Doctor))} />
+                                <Route path={'/doctor'} component={userIsNotPatient(userIsAuthenticated(Doctor))} />
                             </Switch>
                             {/* </CustomScrollbars> */}
                         </div>

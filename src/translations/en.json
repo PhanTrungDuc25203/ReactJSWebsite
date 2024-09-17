@@ -219,7 +219,8 @@
         },
         "doctor": {
             "manage-schedule-and-timetable": "Manage exam schedule",
-            "schedule-and-timetable": "Exam schedule"
+            "schedule-and-timetable": "Exam schedule",
+            "all-information-manage": "All information manage"
         }
     },
     "schedule-and-timetable-manage-page": {
