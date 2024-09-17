@@ -16,6 +16,7 @@ class AppointmentItemForPatientInfterface extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            scheduleStatus: '',
             appointmentId: '',
             meetDoctorId: '',
             doctorInfor: {},
@@ -25,11 +26,12 @@ class AppointmentItemForPatientInfterface extends Component {
     }
 
     async componentDidMount() {
-        if (this.props && this.props.meetDoctorId && this.props.appointmentDate && this.props.appointmentTimeFrame && this.props.appointmentId) {
+        if (this.props && this.props.meetDoctorId && this.props.appointmentDate && this.props.appointmentTimeFrame && this.props.appointmentId && this.props.scheduleStatus) {
             // console.log("check props: ", this.props);
             let doctorInfor = await getInforAndArticleForADoctor(this.props.meetDoctorId);
             if (doctorInfor && doctorInfor.errCode === 0) {
                 this.setState({
+                    scheduleStatus: this.props.scheduleStatus,
                     appointmentId: this.props.appointmentId,
                     meetDoctorId: this.props.meetDoctorId,
                     appointmentDate: this.props.appointmentDate,
@@ -44,11 +46,13 @@ class AppointmentItemForPatientInfterface extends Component {
         if (prevProps.meetDoctorId !== this.props.meetDoctorId &&
             prevProps.appointmentDate !== this.props.appointmentDate &&
             prevProps.appointmentTimeFrame !== this.props.appointmentTimeFrame &&
-            prevProps.appointmentId !== this.props.appointmentId
+            prevProps.appointmentId !== this.props.appointmentId &&
+            prevProps.scheduleStatus !== this.props.scheduleStatus
         ) {
             let doctorInfor = await getInforAndArticleForADoctor(this.props.meetDoctorId);
             if (doctorInfor && doctorInfor.errCode === 0) {
                 this.setState({
+                    scheduleStatus: this.props.scheduleStatus,
                     appointmentId: this.props.appointmentId,
                     meetDoctorId: this.props.meetDoctorId,
                     appointmentDate: this.props.appointmentDate,
@@ -64,7 +68,7 @@ class AppointmentItemForPatientInfterface extends Component {
     }
 
     render() {
-        let { appointmentId, doctorInfor, appointmentDate, appointmentTimeFrame } = this.state;
+        let { scheduleStatus, appointmentId, doctorInfor, appointmentDate, appointmentTimeFrame } = this.state;
         // console.log("check state: ", this.state);
         return (
             <div className="appointment-item-for-patient-interface">

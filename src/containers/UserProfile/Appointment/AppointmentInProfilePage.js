@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import './AppointmentInProfilePage.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { } from '@fortawesome/free-solid-svg-icons';
+import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
 import { LANGUAGES } from '../../../utils';
 import _ from 'lodash';
 import { withRouter } from 'react-router';
@@ -19,6 +19,7 @@ class AppointmentInProfilePage extends Component {
         this.state = {
             combinedAppointments: {},
             userRole: '',
+            historyOrHandling: false,
         }
     }
 
@@ -46,12 +47,15 @@ class AppointmentInProfilePage extends Component {
     }
 
     render() {
-        let { combinedAppointments, userRole } = this.state;
+        let { historyOrHandling, combinedAppointments, userRole } = this.state;
         // console.log("check props: ", combinedAppointments, userRole);
         return (
             <div className="appointment-in-profile-page">
-                <div className="appointment-in-profile-page-title">
-                    Danh sách lịch hẹn đã đặt
+                <div className="appointment-in-profile-page-header">
+                    <div className="appointment-in-profile-page-title">
+                        Danh sách lịch hẹn đã đặt
+                    </div>
+                    <a href="#" className="btn-flip" data-back="Lịch sử" data-front="Sắp tới"></a>
                 </div>
                 <div className="appointment-container">
                     {combinedAppointments && combinedAppointments.patientAppointments && combinedAppointments.patientAppointments.length > 0 ?
@@ -59,6 +63,7 @@ class AppointmentInProfilePage extends Component {
                             return (
                                 <div className="appointment-item" key={index}>
                                     <AppointmentItemForPatientInfterface
+                                        scheduleStatus={item.statusId}
                                         appointmentId={item.id}
                                         meetDoctorId={item.doctorId}
                                         appointmentDate={moment(item.date).format('DD-MM-YYYY')}
@@ -77,6 +82,7 @@ class AppointmentInProfilePage extends Component {
                                 <div className="appointment-item" key={index}>
                                     <div className="appointment-item" key={index}>
                                         <AppointmentItemForDoctorInfterface
+                                            scheduleStatus={item.statusId}
                                             appointmentId={item.id}
                                             meetPatientId={item.patientId}
                                             appointmentDate={moment(item.date).format('DD-MM-YYYY')}

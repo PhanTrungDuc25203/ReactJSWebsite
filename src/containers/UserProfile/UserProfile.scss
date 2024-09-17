@@ -2,8 +2,8 @@
     width: 100%;
 
     .content-container {
-        margin: 0 150px 30px 150px;
-        height: auto;
+        margin   : 0 150px 40px 150px;
+        height   : auto;
         // border: 1px solid red;
 
         .nav-bar {
@@ -39,26 +39,28 @@
             }
         }
 
-        .logout-button-container{
+        .logout-button-container {
             height: 40px;
-            width: 100%;
-            .log-out-button-of-profile-page{
-                padding: 5px 10px;
-                font-size: 18px;
-                color: #D9534F;
-                border: 2px solid #D9534F;
-                border-radius: 10px;
+            width : 100%;
+
+            .log-out-button-of-profile-page {
+                padding         : 10px;
+                font-size       : 18px;
+                color           : #D9534F;
+                border          : 2px solid #D9534F;
+                border-radius   : 10px;
                 background-color: white;
-                transition: all 0.2s;
-                float: inline-end;
+                transition      : all 0.2s;
+                float           : inline-end;
             }
-            .log-out-button-of-profile-page:hover{
-                color: white;
+
+            .log-out-button-of-profile-page:hover {
+                color           : white;
                 background-color: #D9534F;
             }
         }
 
-        .loading-circle{
+        .loading-circle {
             margin: 30px 0 0 30px;
         }
     }
