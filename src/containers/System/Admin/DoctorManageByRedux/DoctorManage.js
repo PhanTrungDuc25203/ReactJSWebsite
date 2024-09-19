@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import './DoctorManage.scss';
 import * as actions from "../../../../store/actions";
 import 'react-markdown-editor-lite/lib/index.css';
+import { getInforAndArticleForADoctor } from '../../../../services/userService';
 import Select from 'react-select';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
@@ -24,6 +25,7 @@ class DoctorManage extends Component {
             listDoctors: [],
             selectedDoctorDetails: {},
             hadOldDataForEdit: false,
+            isSelectDisabled: true,
 
             //save to doctor_infor table in db
             priceList: [], selectedPrice: '',
@@ -38,10 +40,17 @@ class DoctorManage extends Component {
     }
 
     componentDidMount() {
+        this.enableSelectAfterDelay();
         this.props.fetchAllDoctorsForDoctorArticlePage();
         //lấy extra data cho doctor
         this.props.getRequiredDataForDoctorArticleManagePage();
     }
+
+    enableSelectAfterDelay = () => {
+        setTimeout(() => {
+            this.setState({ isSelectDisabled: false });
+        }, 3000);
+    };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.allDoctorsForDoctorArticlePage !== this.props.allDoctorsForDoctorArticlePage) {
@@ -52,14 +61,12 @@ class DoctorManage extends Component {
         }
 
         if (prevProps.detailsOfADoctor !== this.props.detailsOfADoctor) {
-            // console.log("Check doctor details for DoctorManagePage: ", this.props.detailsOfADoctor);
             this.setState({
                 selectedDoctorDetails: this.props.detailsOfADoctor,
             });
         }
 
         if (prevProps.allRequiredDoctorData !== this.props.allRequiredDoctorData) {
-            // console.log("Doctor extra data in page: ", this.props.allRequiredDoctorData);
             let { resPaymentMethod, resPrice, resProvince, resSpecialty } = this.props.allRequiredDoctorData;
             let selectPriceData = this.buildDataForDoctorSelectBox(resPrice, 'priceSelection');
             let selectPaymentMethodData = this.buildDataForDoctorSelectBox(resPaymentMethod, 'paymentMethodSelection');
@@ -118,7 +125,6 @@ class DoctorManage extends Component {
             clinicId: this.state.selectedClinic && this.state.selectedClinic.value ? this.state.selectedClinic.value : '',
             specialtyId: this.state.selectedSpecialty.value,
         })
-        console.log("Check parent state: ", this.state);
     }
 
     handleChangeSelectDoctorInfor = async (selectedOption, name) => {
@@ -139,18 +145,17 @@ class DoctorManage extends Component {
     }
 
     handleChangeOnSelectBox = async (selectedDoctor) => {
+        console.log(selectedDoctor);
         this.setState({ selectedDoctor });
         let { priceList, paymentMethodList, vietnamProvinceList, specialtyList } = this.state;
-        // console.log(selectedDoctor.value);
         await this.props.fetchDoctorDetailsForDoctorManagePage(selectedDoctor.value);
-        console.log("Check doctor details for DoctorManagePage: ", this.state.selectedDoctorDetails);
         let { selectedDoctorDetails } = this.state;
         if (selectedDoctorDetails && selectedDoctorDetails.ArticleMarkdown) {
             let tempMarkdown = selectedDoctorDetails.ArticleMarkdown;
 
             let tempClinicAddress = '', tempClinicName = '', tempNote = '', tempPaymentId = '',
                 tempPriceId = '', tempProvinceId = '', tempSelectedPaymentMethod = '',
-                tempSelectedPrice = '', tempSelectedProvince = '', tempSpecialtyId='', tempSelectedSpecialty='';
+                tempSelectedPrice = '', tempSelectedProvince = '', tempSpecialtyId = '', tempSelectedSpecialty = '';
 
             if (selectedDoctorDetails.Doctor_infor) {
                 tempClinicAddress = selectedDoctorDetails.Doctor_infor.clinicAddress;
@@ -208,14 +213,7 @@ class DoctorManage extends Component {
         let result = [];
         let { language } = this.props;
         if (data && data.length > 0) {
-            // data.map((item, index) => {
-            //     let tempObj = {};
-            //     let labelInVie = isBuiltFor === 'doctorSelection' ? `${item.lastName} ${item.firstName}` : item.value_Vie;
-            //     let labelInEng = isBuiltFor === 'doctorSelection' ? `${item.firstName} ${item.lastName}` : item.value_Eng;
-            //     tempObj.label = language === LANGUAGES.VI ? labelInVie : labelInEng;
-            //     tempObj.value = item.id;
-            //     result.push(tempObj);
-            // })
+
             if (isBuiltFor === 'doctorSelection') {
                 data.map((item, index) => {
                     let tempObj = {};
@@ -259,10 +257,34 @@ class DoctorManage extends Component {
         return result;
     }
 
+    checkIfThisDoctorIsInDoctorList = (thisDoctor, doctorList) => {
+        // Tìm đối tượng bác sĩ trong danh sách dựa trên trường 'name'
+        let foundDoctor = doctorList.find(doctor => doctor.label === thisDoctor);
+
+        // Nếu tìm thấy bác sĩ, trả về đối tượng chứa tên và id
+        if (foundDoctor) {
+
+            return [{
+                label: foundDoctor.label,
+                value: foundDoctor.value
+            }];
+        }
+
+        // Nếu không tìm thấy, trả về null
+        return null;
+    }
+
+
+
     render() {
 
         let { hadOldDataForEdit, specialtyList } = this.state;
-        let { language } = this.props;
+        let { language, userInfo } = this.props;
+        let tempObj = {};
+        let labelInVie = `${userInfo.lastName} ${userInfo.firstName}`;
+        let labelInEng = `${userInfo.firstName} ${userInfo.lastName}`;
+        tempObj = language === LANGUAGES.VI ? labelInVie : labelInEng;
+        let checkPresentInDoctorList = this.checkIfThisDoctorIsInDoctorList(tempObj, this.state.listDoctors);
 
         return (
             <div className="doctor-manage-container">
@@ -296,9 +318,10 @@ class DoctorManage extends Component {
                         <Select
                             value={this.state.selectedDoctor}
                             onChange={this.handleChangeOnSelectBox}
-                            options={this.state.listDoctors}
+                            options={checkPresentInDoctorList ? checkPresentInDoctorList : this.state.listDoctors}
                             className="doctor-option"
-                            placeholder={<FormattedMessage id="doctor-manage-page-for-admin.select-doctor-placeholder" />}
+                            placeholder={this.state.isSelectDisabled ? "Đang tải..." : <FormattedMessage id="doctor-manage-page-for-admin.select-doctor-placeholder" />}
+                            isDisabled={this.state.isSelectDisabled}
                         />
                     </div>
 
@@ -420,6 +443,7 @@ const mapStateToProps = state => {
         allDoctorsForDoctorArticlePage: state.admin.allDoctorsForDoctorArticlePage,
         detailsOfADoctor: state.admin.detailsOfADoctor,
         allRequiredDoctorData: state.admin.allRequiredDoctorData,
+        userInfo: state.user.userInfo,
     };
 };
 

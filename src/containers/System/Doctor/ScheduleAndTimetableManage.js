@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import './ScheduleAndTimetableManage.scss';
 import { FormattedMessage } from 'react-intl';
 import { LANGUAGES, dateFormat } from "../../../utils";
+import { getInforAndArticleForADoctor } from '../../../services/userService';
 import Select from 'react-select';
 import * as actions from "../../../store/actions";
 import DatePicker from '../../../components/Input/DatePicker';
@@ -132,10 +133,34 @@ class ScheduleAndTimetableManage extends Component {
         console.log("Check result: ", result);
     }
 
+    checkIfThisDoctorIsInDoctorList = (thisDoctor, doctorList) => {
+        // Tìm đối tượng bác sĩ trong danh sách dựa trên trường 'name'
+        console.log("check doctor list: ", doctorList);
+        let foundDoctor = doctorList.find(doctor => doctor.label === thisDoctor);
+
+        // Nếu tìm thấy bác sĩ, trả về đối tượng chứa tên và id
+        if (foundDoctor) {
+
+            return [{
+                label: foundDoctor.label,
+                value: foundDoctor.value
+            }];
+        }
+
+        // Nếu không tìm thấy, trả về null
+        return null;
+    }
+
     render() {
         // console.log("Check state: ", this.state);
         let { timeframe } = this.state;
-        let { language } = this.props;
+        let { language, userInfo } = this.props;
+        console.log("Check props: ", userInfo);
+        let tempObj = {};
+        let labelInVie = `${userInfo.lastName} ${userInfo.firstName}`;
+        let labelInEng = `${userInfo.firstName} ${userInfo.lastName}`;
+        tempObj = language === LANGUAGES.VI ? labelInVie : labelInEng;
+        let checkPresentInDoctorList = this.checkIfThisDoctorIsInDoctorList(tempObj, this.state.listDoctors);
         return (
             <div className="schedule-manage-page-container">
                 <div className="schedule-page-title">
@@ -151,7 +176,7 @@ class ScheduleAndTimetableManage extends Component {
                                 <Select
                                     value={this.state.selectedDoctor}
                                     onChange={this.handleChangeOnSelectBox}
-                                    options={this.state.listDoctors}
+                                    options={checkPresentInDoctorList ? checkPresentInDoctorList : this.state.listDoctors}
                                     placeholder="Chọn bác sĩ..."
                                 />
                             </div>
@@ -204,6 +229,7 @@ const mapStateToProps = state => {
         language: state.app.language,
         allDoctorsForDoctorArticlePage: state.admin.allDoctorsForDoctorArticlePage,
         examHoursData: state.admin.examHoursData,
+        userInfo: state.user.userInfo,
     };
 };
 

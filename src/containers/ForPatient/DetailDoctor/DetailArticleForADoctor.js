@@ -75,7 +75,11 @@ const DetailArticleForADoctor = (props) => {
                                             <br />
                                             <FontAwesomeIcon icon={faMapLocationDot} className="location-icon" />
                                             {
-                                                doctorDetails?.Doctor_infor?.provinceTypeData?.value_Vie ?? language === LANGUAGES.VI ? 'Chưa cập nhật vị trí' : 'Address not updated'
+                                                // doctorDetails.Doctor_infor.provinceTypeData.value_Vie ?? language === LANGUAGES.VI ? 'Chưa cập nhật vị trí' : 'Address not updated'
+                                                language === LANGUAGES.VI ?
+                                                    doctorDetails && doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.provinceTypeData && doctorDetails.Doctor_infor.provinceTypeData.value_Vie ? doctorDetails.Doctor_infor.provinceTypeData.value_Vie : 'Chưa cập nhật vị trí'
+                                                    :
+                                                    doctorDetails && doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.provinceTypeData && doctorDetails.Doctor_infor.provinceTypeData.value_Eng ? doctorDetails.Doctor_infor.provinceTypeData.value_Eng : 'Address nto updated yet'
                                             }
                                         </span>
                                     }
