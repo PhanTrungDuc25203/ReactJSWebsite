@@ -42,7 +42,11 @@ class HomePageHeader extends Component {
         // } else {
         //     this.props.history.push(`/login`);
         // }
-        this.props.history.push(`/user-profile/${this.props.userInfo.email}`);
+        if (!this.props.userInfo || !this.props.userInfo.email) {
+            this.props.history.push(`/login`);
+        } else {
+            this.props.history.push(`/user-profile/${this.props.userInfo.email}`);
+        }
     }
 
     render() {
