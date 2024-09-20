@@ -19,13 +19,12 @@ class AppointmentInProfilePage extends Component {
         this.state = {
             combinedAppointments: {},
             userRole: '',
-            historyOrHandling: false,
+            historyOrHandling: 'handling',
         }
     }
 
     async componentDidMount() {
         if (this.props && this.props.combinedAppointments && this.props.userRole) {
-            // console.log("check props: ", this.props);
             this.setState({
                 combinedAppointments: this.props.combinedAppointments,
                 userRole: this.props.userRole,
@@ -42,20 +41,28 @@ class AppointmentInProfilePage extends Component {
         }
     }
 
-    handleProfileTabClicked(whichClicked) {
-
+    handleHistoryOrHandlingButtonClicked = () => {
+        if (this.state.historyOrHandling === 'history') {
+            this.setState({
+                historyOrHandling: 'handling',
+            })
+        }
+        if (this.state.historyOrHandling === 'handling') {
+            this.setState({
+                historyOrHandling: 'history',
+            })
+        }
     }
 
     render() {
-        let { historyOrHandling, combinedAppointments, userRole } = this.state;
-        // console.log("check props: ", combinedAppointments, userRole);
+        let { combinedAppointments, userRole } = this.state;
         return (
             <div className="appointment-in-profile-page">
                 <div className="appointment-in-profile-page-header">
                     <div className="appointment-in-profile-page-title">
                         Danh sách lịch hẹn đã đặt
                     </div>
-                    <a href="#" className="btn-flip" data-back="Lịch sử" data-front="Sắp tới"></a>
+                    <a href="#" className={this.state.historyOrHandling === 'history' ? "btn-flip-backward" : "btn-flip"} data-back={this.state.historyOrHandling === 'history' ? "Sắp tới" : "Lịch sử"} data-front={this.state.historyOrHandling === 'history' ? "Lịch sử" : "Sắp tới"} onClick={this.handleHistoryOrHandlingButtonClicked}></a>
                 </div>
                 <div className="appointment-container">
                     {combinedAppointments && combinedAppointments.patientAppointments && combinedAppointments.patientAppointments.length > 0 ?
@@ -63,6 +70,7 @@ class AppointmentInProfilePage extends Component {
                             return (
                                 <div className="appointment-item" key={index}>
                                     <AppointmentItemForPatientInfterface
+                                        historyOrHandling={this.state.historyOrHandling}
                                         scheduleStatus={item.statusId}
                                         appointmentId={item.id}
                                         meetDoctorId={item.doctorId}
@@ -82,6 +90,7 @@ class AppointmentInProfilePage extends Component {
                                 <div className="appointment-item" key={index}>
                                     <div className="appointment-item" key={index}>
                                         <AppointmentItemForDoctorInfterface
+                                            historyOrHandling={this.state.historyOrHandling}
                                             scheduleStatus={item.statusId}
                                             appointmentId={item.id}
                                             meetPatientId={item.patientId}
