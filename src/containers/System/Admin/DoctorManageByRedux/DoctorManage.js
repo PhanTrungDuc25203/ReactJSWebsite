@@ -122,7 +122,7 @@ class DoctorManage extends Component {
             clinicName: this.state.clinicName,
             clinicAddress: this.state.clinicAddress,
             note: this.state.note,
-            clinicId: this.state.selectedClinic && this.state.selectedClinic.value ? this.state.selectedClinic.value : '',
+            clinicId: -1,
             specialtyId: this.state.selectedSpecialty.value,
         })
     }
