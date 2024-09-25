@@ -9,6 +9,7 @@ import { path } from '../utils'
 import Home from '../routes/Home';
 // import Login from '../routes/Login';
 import Login from './Authenticate/Login.js';
+import Register from './Authenticate/Register.js';
 // import Header from './Header/Header';
 import System from '../routes/System';
 import { CustomToastCloseButton } from '../components/CustomToast';
@@ -55,6 +56,7 @@ class App extends Component {
                             <Switch>
                                 <Route path={path.HOME} exact component={(Home)} />
                                 <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
+                                <Route path={path.REGISTER} component={userIsNotAuthenticated(Register)} />
                                 {/* dành cho admin  */}
                                 <Route path={path.SYSTEM} component={userIsNotPatientAndDoctor(userIsNotPatient(userIsAuthenticated(System)))} />
                                 {/* booking care cho bác sĩ và bệnh nhân*/}

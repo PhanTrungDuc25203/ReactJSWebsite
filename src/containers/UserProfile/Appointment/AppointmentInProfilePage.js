@@ -1,129 +1,130 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from "react-redux";
+import React, { PureComponent, Suspense, lazy } from 'react';
+import { connect } from 'react-redux';
 import './AppointmentInProfilePage.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
-import { LANGUAGES } from '../../../utils';
-import _ from 'lodash';
 import { withRouter } from 'react-router';
-import * as actions from "../../../store/actions";
-import { MoonLoader } from 'react-spinners';
+import * as actions from '../../../store/actions';
 import moment from 'moment';
-import AppointmentItemForPatientInfterface from './AppointmentItemForPatientInfterface';
-import AppointmentItemForDoctorInfterface from './AppointmentItemForDoctorInfterface';
 
-class AppointmentInProfilePage extends Component {
+// Lazy load appointment components
+const AppointmentItemForPatientInfterface = lazy(() => import('./AppointmentItemForPatientInfterface'));
+const AppointmentItemForDoctorInfterface = lazy(() => import('./AppointmentItemForDoctorInfterface'));
+const HistoryOfDoctorAppointment = lazy(() => import('./HistoryOfDoctorAppointment'));
+const HistoryOfPatientAppointment = lazy(() => import('./HistoryOfPatientAppointment'));
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            combinedAppointments: {},
-            userRole: '',
-            historyOrHandling: 'handling',
+class AppointmentInProfilePage extends PureComponent {
+    state = {
+        combinedAppointments: {},
+        userRole: '',
+        historyOrHandling: 'handling',
+        currentUserEmail: '',
+    };
+
+    componentDidMount() {
+        const { combinedAppointments, userRole, currentUserEmail } = this.props;
+        if (combinedAppointments && userRole) {
+            this.setState({ combinedAppointments, userRole, currentUserEmail });
         }
     }
 
-    async componentDidMount() {
-        if (this.props && this.props.combinedAppointments && this.props.userRole) {
-            this.setState({
-                combinedAppointments: this.props.combinedAppointments,
-                userRole: this.props.userRole,
-            })
-        }
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.combinedAppointments !== this.props.combinedAppointments && prevProps.userRole !== this.props.userRole) {
-            this.setState({
-                combinedAppointments: this.props.combinedAppointments,
-                userRole: this.props.userRole,
-            });
+    componentDidUpdate(prevProps) {
+        const { combinedAppointments, userRole, currentUserEmail } = this.props;
+        if (prevProps.combinedAppointments !== combinedAppointments || prevProps.userRole !== userRole || prevProps.currentUserEmail !== currentUserEmail) {
+            this.setState({ combinedAppointments, userRole, currentUserEmail });
         }
     }
 
     handleHistoryOrHandlingButtonClicked = () => {
-        if (this.state.historyOrHandling === 'history') {
-            this.setState({
-                historyOrHandling: 'handling',
-            })
-        }
-        if (this.state.historyOrHandling === 'handling') {
-            this.setState({
-                historyOrHandling: 'history',
-            })
-        }
-    }
+        this.setState(prevState => ({
+            historyOrHandling: prevState.historyOrHandling === 'history' ? 'handling' : 'history',
+        }));
+    };
+
+    renderAppointmentItems = (appointments, isDoctor) => {
+        const { historyOrHandling, currentUserEmail } = this.state;
+        console.log("Check props from parent: ", currentUserEmail);
+        return (
+            <div className="appointment-container">
+                {historyOrHandling === 'handling' ? (
+                    appointments.map((item, index) => (
+                        <div className="appointment-item" key={index}>
+                            <Suspense fallback={<div>Loading...</div>}>
+                                {isDoctor ? (
+                                    <AppointmentItemForDoctorInfterface
+                                        scheduleStatus={item.statusId}
+                                        appointmentId={item.id}
+                                        meetPatientId={item.patientId}
+                                        appointmentDate={moment(item.date).format('DD-MM-YYYY')}
+                                        appointmentTimeFrame={item.appointmentTimeTypeData?.value_Vie}
+                                        patientBirthday={moment(item.patientBirthday).format('DD-MM-YYYY')}
+                                    />
+                                ) : (
+                                    <AppointmentItemForPatientInfterface
+                                        scheduleStatus={item.statusId}
+                                        appointmentId={item.id}
+                                        meetDoctorId={item.doctorId}
+                                        appointmentDate={moment(item.date).format('DD-MM-YYYY')}
+                                        appointmentTimeFrame={item.appointmentTimeTypeData?.value_Vie}
+                                    />
+                                )}
+                            </Suspense>
+                        </div>
+                    ))
+                ) : (
+                    <Suspense fallback={<div>Loading...</div>}>
+                        {isDoctor ? (
+                            <HistoryOfDoctorAppointment
+                                currentUserEmail={currentUserEmail}
+                            />
+                        ) : (
+                            <HistoryOfPatientAppointment
+                                currentUserEmail={currentUserEmail}
+                            />
+                        )}
+                    </Suspense>
+                )}
+            </div>
+        );
+    };
 
     render() {
-        let { combinedAppointments, userRole } = this.state;
+        const { combinedAppointments, userRole, historyOrHandling } = this.state;
+
         return (
             <div className="appointment-in-profile-page">
                 <div className="appointment-in-profile-page-header">
                     <div className="appointment-in-profile-page-title">
                         Danh sách lịch hẹn đã đặt
                     </div>
-                    <a href="#" className={this.state.historyOrHandling === 'history' ? "btn-flip-backward" : "btn-flip"} data-back={this.state.historyOrHandling === 'history' ? "Sắp tới" : "Lịch sử"} data-front={this.state.historyOrHandling === 'history' ? "Lịch sử" : "Sắp tới"} onClick={this.handleHistoryOrHandlingButtonClicked}></a>
+                    <a
+                        href="#"
+                        className={historyOrHandling === 'history' ? 'btn-flip-backward' : 'btn-flip'}
+                        data-back={historyOrHandling === 'history' ? 'Sắp tới' : 'Lịch sử'}
+                        data-front={historyOrHandling === 'history' ? 'Lịch sử' : 'Sắp tới'}
+                        onClick={this.handleHistoryOrHandlingButtonClicked}
+                    />
                 </div>
                 <div className="appointment-container">
-                    {combinedAppointments && combinedAppointments.patientAppointments && combinedAppointments.patientAppointments.length > 0 ?
-                        combinedAppointments.patientAppointments.map((item, index) => {
-                            return (
-                                <div className="appointment-item" key={index}>
-                                    <AppointmentItemForPatientInfterface
-                                        historyOrHandling={this.state.historyOrHandling}
-                                        scheduleStatus={item.statusId}
-                                        appointmentId={item.id}
-                                        meetDoctorId={item.doctorId}
-                                        appointmentDate={moment(item.date).format('DD-MM-YYYY')}
-                                        appointmentTimeFrame={item.appointmentTimeTypeData && item.appointmentTimeTypeData.value_Vie}
-                                    />
-                                </div>
-                            )
-                        })
-                        :
-                        userRole === 'R3' && 'Bạn chưa có lịch hẹn nào với bác sĩ'
-                    }
+                    {combinedAppointments.patientAppointments && combinedAppointments.patientAppointments.length > 0
+                        ? this.renderAppointmentItems(combinedAppointments.patientAppointments, false)
+                        : userRole === 'R3' && 'Bạn chưa có lịch hẹn nào với bác sĩ'}
 
-                    {combinedAppointments && combinedAppointments.doctorAppointments && combinedAppointments.doctorAppointments.length > 0 ?
-                        combinedAppointments.doctorAppointments.map((item, index) => {
-                            return (
-                                <div className="appointment-item" key={index}>
-                                    <div className="appointment-item" key={index}>
-                                        <AppointmentItemForDoctorInfterface
-                                            historyOrHandling={this.state.historyOrHandling}
-                                            scheduleStatus={item.statusId}
-                                            appointmentId={item.id}
-                                            meetPatientId={item.patientId}
-                                            appointmentDate={moment(item.date).format('DD-MM-YYYY')}
-                                            appointmentTimeFrame={item.appointmentTimeTypeData && item.appointmentTimeTypeData.value_Vie}
-                                            patientBirthday={moment(item.patientBirthday).format('DD-MM-YYYY')}
-                                        />
-                                    </div>
-                                </div>
-                            )
-                        })
-                        :
-                        userRole === 'R2' && 'Bạn chưa có lịch hẹn nào với bệnh nhân'
-                    }
+                    {combinedAppointments.doctorAppointments && combinedAppointments.doctorAppointments.length > 0
+                        ? this.renderAppointmentItems(combinedAppointments.doctorAppointments, true)
+                        : userRole === 'R2' && 'Bạn chưa có lịch hẹn nào với bệnh nhân'}
+
                     {userRole === 'R1' && 'Bạn là admin nên không có gì trong này đâu:))'}
                 </div>
-            </div >
+            </div>
         );
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        // systemMenuPath: state.app.systemMenuPath,
-        // isLoggedIn: state.user.isLoggedIn,
-        language: state.app.language,
-    };
-};
+const mapStateToProps = state => ({
+    language: state.app.language,
+});
 
-const mapDispatchToProps = dispatch => {
-    return {
-        processLogout: () => dispatch(actions.processLogout()),
-    };
-};
+const mapDispatchToProps = dispatch => ({
+    processLogout: () => dispatch(actions.processLogout()),
+});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppointmentInProfilePage));

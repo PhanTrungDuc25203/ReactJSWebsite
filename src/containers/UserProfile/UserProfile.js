@@ -94,6 +94,7 @@ class UserProfile extends Component {
                     /></div>}>
                     <div className="appointment-of-current-user">
                         <AppointmentInProfilePage
+                            currentUserEmail={currentUser.email}
                             combinedAppointments={combinedAppointments}
                             userRole={currentUser.roleId}
                         />

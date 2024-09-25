@@ -2,6 +2,7 @@ export const path = {
     HOME: '/',
     HOMEPAGE: '/home', //dự án booking care: chưa cần đăng nhập nhưng vẫn có thể vào Homepage
     LOGIN: '/login',
+    REGISTER: '/register',
     LOG_OUT: '/logout',
     SYSTEM: '/system',
     DETAIL_DOCTOR_ARTICLE: '/detail-doctor-article/doctor/:id',

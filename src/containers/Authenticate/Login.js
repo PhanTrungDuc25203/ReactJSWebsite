@@ -7,6 +7,7 @@ import './Login.scss';
 import { FormattedMessage } from 'react-intl';
 import { handleLoginAPI } from '../../services/userService';
 import CustomScrollbars from '../../components/CustomScrollbars';
+import { withRouter } from 'react-router';
 
 class Login extends Component {
     constructor(props) {
@@ -86,6 +87,11 @@ class Login extends Component {
             this.handleLoginButtonClicked();
         }
     }
+
+    handleRegisterClicked = () => {
+        this.props.history.push(`/register`);
+    }
+
     render() {
         //JSX
         return (
@@ -142,7 +148,12 @@ class Login extends Component {
 
 
                         <div className="col-12">
-                            <span className="forgot-password">For got your password?</span>
+                            <div className="account-operation">
+                                <span className="forgot-password">For got your password?</span>
+                                <span className="register-link"
+                                    onClick={() => this.handleRegisterClicked()}
+                                >No account? Register here</span>
+                            </div>
                         </div>
                         <div className="or-login-with-options">
                             <span>Or login with:</span>
@@ -179,4 +190,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

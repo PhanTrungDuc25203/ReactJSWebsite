@@ -1,0 +1,87 @@
+.register-background {
+    height    : auto;
+    width     : 100%;
+    background: linear-gradient(135deg, rgb(117, 97, 244) 0%, rgb(214, 152, 233) 100%);
+    //chiều cao tràn nguyên màn hình
+    height    : 100vh;
+
+    //làm <div> con hiển thị ở chính giữa theo cả chiều dài lẫn chiều dọc của <div> cha
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    font-family    : Arial, Helvetica, sans-serif;
+
+    .register-container {
+        height          : auto;
+        width           : 500px;
+        border-radius   : 20px;
+        background-color: white;
+        padding         : 40px;
+
+        .register-contents {
+            .register-text {
+                color      : #60067b;
+                font-weight: 700;
+                font-size  : 25px;
+                margin-top : -10px !important;
+            }
+            .register-input {
+                margin: 5px 0;
+
+                .password-input-and-eye {
+                    position: relative;
+
+                    i {
+                        font-size: 18px;
+                        opacity  : 0.7;
+                    }
+
+                    i.far.fa-eye {
+                        position: absolute;
+                        right   : 15px;
+                        top     : 15px;
+                        // để khi di chuột vào đối tượng eye thì con chuột sẽ chuyển thành
+                        //bàn tay có ngón tay trỏ chỉ tới đối tượng thì sử dụng câu lệnh dươis đây
+                        cursor  : pointer;
+                    }
+
+                    i.far.fa-eye-slash {
+                        position: absolute;
+                        right   : 15px;
+                        top     : 15px;
+                        // để khi di chuột vào đối tượng eye thì con chuột sẽ chuyển thành
+                        //bàn tay có ngón tay trỏ chỉ tới đối tượng thì sử dụng câu lệnh dươis đây
+                        cursor  : pointer;
+                    }
+                }
+
+                input {
+                    height: 45px;
+                }
+
+                label {
+                    color    : #60067b;
+                    font-size: 18px;
+                }
+
+                .input-place {
+                    margin: 10px 0 0 0;
+                }
+            }
+
+            .back-or-next-button{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .back-button{
+
+                }
+
+                .next-button{
+                    
+                }
+            }
+        }
+    }
+}
