@@ -74,12 +74,66 @@
                 align-items: center;
                 justify-content: space-between;
 
-                .back-button{
-
+                .login-link {
+                    color        : #60067b;
+                    border-bottom: 2px solid white;
+                    transition   : border 0.2s;
+                    cursor       : pointer;
+                    margin-top: 30px;
                 }
 
-                .next-button{
-                    
+                .login-link:hover {
+                    border-bottom: 2px solid #60067b;
+                }
+
+                .wrapper-for-next-button {
+                    // transform: translate(-50%, -50%);
+                    margin   : 30px 0 0px 0px !important;
+    
+                    a {
+                        display        : block;
+                        width          : 100px;
+                        height         : 45px;
+                        line-height    : 45px;
+                        font-size      : 18px;
+                        font-family    : sans-serif;
+                        text-decoration: none;
+                        color          : #60067b;
+                        border         : 2px solid #60067b;
+                        border-radius  : 5px;
+                        letter-spacing : 2px;
+                        text-align     : center;
+                        position       : relative;
+                        transition     : all .35s;
+                        text-align: center;
+                    }
+    
+                    a span {
+                        position     : relative;
+                        z-index      : 2;
+                        border-radius: 5px;
+                    }
+    
+                    a:after {
+                        position     : absolute;
+                        content      : "";
+                        top          : 0;
+                        left         : 0;
+                        width        : 0;
+                        height       : 100%;
+                        background   : rgb(184, 126, 226);
+                        transition   : all .35s;
+                        border-radius: 5px;
+                    }
+    
+                    a:hover {
+                        color: #fff;
+                    }
+    
+                    a:hover:after {
+                        width        : 100%;
+                        border-radius: 3px;
+                    }
                 }
             }
         }

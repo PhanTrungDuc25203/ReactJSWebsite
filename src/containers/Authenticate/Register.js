@@ -15,6 +15,7 @@ class Register extends Component {
         this.state = {
             username: '',
             password: '',
+            verifyPassword: '',
             passwordShown: false,
             errMessage: '',
         }
@@ -34,7 +35,7 @@ class Register extends Component {
 
     handleOnChangeInputPasswordAgainInput = (event) => {
         this.setState({
-            password: event.target.value,
+            verifyPassword: event.target.value,
         })
     }
 
@@ -76,8 +77,12 @@ class Register extends Component {
         }
     }
 
-    handleLoginClicked = () => {
-        this.props.history.push(`/login`);
+    handleBackClicked = () => {
+        this.props.history.goBack();
+    }
+
+    nextStepToCreateAccount = () => {
+        console.log("Check state: ", this.state);
     }
 
     render() {
@@ -115,8 +120,8 @@ class Register extends Component {
                             <div className="password-input-and-eye">
                                 <input type={this.state.passwordShown ? 'text' : 'password'}
                                     className="form-control input-place"
-                                    placeholder="Enter your password"
-                                    value={this.state.password}
+                                    placeholder="Re-input your password"
+                                    value={this.state.verifyPassword}
                                     onChange={(event) => this.handleOnChangeInputPasswordAgainInput(event)}
                                 />
                                 <span
@@ -128,8 +133,12 @@ class Register extends Component {
                         </div>
                         <div className="col-12">
                             <div className="back-or-next-button">
-                                <button className="back-button">Back</button>
-                                <button className="next-button">Next</button>
+                                <span className="login-link"
+                                    onClick={() => this.handleBackClicked()}
+                                >Already have account? Login here</span>
+                                <div className="wrapper-for-next-button">
+                                    <a href="#" onClick={(event) => { this.nextStepToCreateAccount() }}><span>Next</span></a>
+                                </div>
                             </div>
                         </div>
                     </div>
