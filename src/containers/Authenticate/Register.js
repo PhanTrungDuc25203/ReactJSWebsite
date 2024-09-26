@@ -15,30 +15,38 @@ class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
+            email: '',
             password: '',
             verifyPassword: '',
             passwordShown: false,
             errMessage: '',
+            isPasswordMatch: false,
         }
     }
 
-    handleOnChangeUsernameInput = (event) => {
+    handleOnChangeEmailInput = (event) => {
         this.setState({
-            username: event.target.value,
+            email: event.target.value,
         })
     }
 
     handleOnChangePasswordInput = (event) => {
         this.setState({
             password: event.target.value,
-        })
+        }, this.checkPasswordMatch);
     }
 
     handleOnChangeInputPasswordAgainInput = (event) => {
         this.setState({
             verifyPassword: event.target.value,
-        })
+        }, this.checkPasswordMatch);
+    }
+
+    checkPasswordMatch = () => {
+        const { password, verifyPassword } = this.state;
+        this.setState({
+            isPasswordMatch: password === verifyPassword
+        });
     }
 
     handleRegisterButtonClicked = async (event) => {
@@ -75,7 +83,7 @@ class Register extends Component {
 
     handleEnterKeyPressed = (event) => {
         if (event.key === 'Enter' || event.keyCode === 13) {
-            this.handleLoginButtonClicked();
+
         }
     }
 
@@ -84,11 +92,15 @@ class Register extends Component {
     }
 
     nextStepToCreateAccount = () => {
-        // console.log("Check state: ", this.state);
-        this.props.history.push(`/register/personal-info`);
+        if (this.state.isPasswordMatch) {
+            this.props.history.push(`/register/personal-info`);
+        }
     }
 
     render() {
+
+        const { isPasswordMatch } = this.state;
+
         return (
             <div className="register-background">
                 <div className="register-container">
@@ -100,7 +112,7 @@ class Register extends Component {
                                 className="form-control input-place"
                                 placeholder="Piscean"
                                 value={this.state.username}
-                                onChange={(event) => this.handleOnChangeUsernameInput(event)} />
+                                onChange={(event) => this.handleOnChangeEmailInput(event)} />
                         </div>
                         <div className="col-12 form-group register-input">
                             <label>Password</label>
@@ -131,7 +143,13 @@ class Register extends Component {
                                     onClick={(event) => { this.handleShowAndHidePassword() }}>
                                     <i className={this.state.passwordShown ? "far fa-eye" : "far fa-eye-slash"}></i>
                                 </span>
-
+                                {/* Hiển thị thông báo dưới ô input của mật khẩu xác nhận */}
+                                {!isPasswordMatch && this.state.verifyPassword && (
+                                    <div className="text-danger announce-text-with-password">Password is not matching!</div>
+                                )}
+                                {isPasswordMatch && this.state.verifyPassword && (
+                                    <div className="text-success announce-text-with-password">Password is matching!</div>
+                                )}
                             </div>
                         </div>
                         <div className="col-12">
@@ -140,7 +158,7 @@ class Register extends Component {
                                     onClick={() => this.handleBackClicked()}
                                 >Already have account? Login here</span>
                                 <div className="wrapper-for-next-button">
-                                    <a onClick={() => { this.nextStepToCreateAccount() }}><span>Next</span></a>
+                                    <a onClick={() => { this.nextStepToCreateAccount() }} disabled={!isPasswordMatch}><span>Next</span></a>
                                 </div>
                             </div>
                         </div>
