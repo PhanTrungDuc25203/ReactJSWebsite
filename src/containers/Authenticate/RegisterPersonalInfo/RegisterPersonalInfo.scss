@@ -1,0 +1,280 @@
+.register-personal-info-background {
+    height         : auto;
+    width          : 100%;
+    background     : linear-gradient(135deg, rgb(117, 97, 244) 0%, rgb(214, 152, 233) 100%);
+    height         : 100vh;
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    font-family    : Arial, Helvetica, sans-serif;
+
+    .register-personal-info-container {
+        height          : auto;
+        width           : 1000px;
+        border-radius   : 20px;
+        background-color: white;
+        padding         : 40px;
+
+        .register-personal-info-text {
+            color        : #60067b;
+            font-weight  : 700;
+            font-size    : 25px;
+            margin-top   : -10px !important;
+            margin-bottom: 10px;
+        }
+
+        .input-field-container {
+            display        : flex;
+            justify-content: space-between;
+
+            .register-personal-info-contents {
+
+                .register-input {
+                    margin: 5px 0;
+
+                    .password-input-and-eye {
+                        position: relative;
+
+                        i {
+                            font-size: 18px;
+                            opacity  : 0.7;
+                        }
+
+                        i.far.fa-eye {
+                            position: absolute;
+                            right   : 15px;
+                            top     : 15px;
+                            cursor  : pointer;
+                        }
+
+                        i.far.fa-eye-slash {
+                            position: absolute;
+                            right   : 15px;
+                            top     : 15px;
+                            cursor  : pointer;
+                        }
+                    }
+
+                    input {
+                        height: 45px;
+                    }
+
+                    label {
+                        color    : #60067b;
+                        font-size: 18px;
+                    }
+
+                    .input-place {
+                        margin: 10px 0 0 0;
+                    }
+                }
+
+                .operation-button-container {
+                    margin-top     : 30px;
+                    width          : 100%;
+                    height         : auto;
+                    display        : flex;
+                    justify-content: space-between;
+
+                    .register-button-wrapper {
+
+                        a {
+                            display        : block;
+                            width          : 161px;
+                            height         : 50px;
+                            line-height    : 50px;
+                            font-size      : 18px;
+                            font-family    : sans-serif;
+                            text-decoration: none;
+                            color          : #60067b;
+                            border         : 2px solid #60067b;
+                            border-radius  : 5px;
+                            letter-spacing : 2px;
+                            text-align     : center;
+                            position       : relative;
+                            transition     : all .35s;
+                        }
+
+                        a span {
+                            position     : relative;
+                            z-index      : 2;
+                            border-radius: 5px;
+                        }
+
+                        a:after {
+                            position     : absolute;
+                            content      : "";
+                            top          : 0;
+                            left         : 0;
+                            width        : 0;
+                            height       : 100%;
+                            background   : rgb(184, 126, 226);
+                            transition   : all .35s;
+                            border-radius: 5px;
+                        }
+
+                        a:hover {
+                            color: #fff;
+                        }
+
+                        a:hover:after {
+                            width        : 100%;
+                            border-radius: 3px;
+                        }
+                    }
+
+                    .back-to-login-button-wrapper {
+
+                        a {
+                            display        : block;
+                            width          : 161px;
+                            height         : 50px;
+                            line-height    : 50px;
+                            font-size      : 18px;
+                            font-family    : sans-serif;
+                            text-decoration: none;
+                            color          : #60067b;
+                            border         : 2px solid #60067b;
+                            border-radius  : 5px;
+                            letter-spacing : 2px;
+                            text-align     : center;
+                            position       : relative;
+                            transition     : all .35s;
+                        }
+
+                        a span {
+                            position     : relative;
+                            z-index      : 2;
+                            border-radius: 5px;
+                        }
+
+                        a:after {
+                            position     : absolute;
+                            content      : "";
+                            top          : 0;
+                            right        : 0;
+                            width        : 0;
+                            height       : 100%;
+                            background   : rgb(184, 126, 226);
+                            transition   : all .35s;
+                            border-radius: 5px;
+                        }
+
+                        a:hover {
+                            color: #fff;
+                        }
+
+                        a:hover:after {
+                            width        : 100%;
+                            top          : 0;
+                            //nếu đổi chỗ này thành left 0 thì ảnh sẽ di chuyển như tàu hỏa từ trái qua phải
+                            border-radius: 3px;
+                        }
+                    }
+                }
+            }
+
+            .user-avatar-container {
+                width : 340px;
+                height: auto;
+
+                .image-frame {
+                    border         : 5px solid #a37caf;
+                    height         : 170px;
+                    aspect-ratio   : 1 / 1;
+                    margin         : 41px auto 41px 0px;
+                    border-radius  : 30px;
+                    display        : flex;
+                    justify-content: center;
+                    align-items    : center;
+
+                    .choose-avatar-button {
+                        font-size : 40px;
+                        color     : #9850ad;
+                        transition: transform 0.3s ease-in-out;
+                        cursor    : pointer;
+                    }
+
+                    .switch-to-button-change-image {
+                        font-size : 40px;
+                        color     : #9850ad;
+                        transition: transform 0.5s ease;
+                        transform : translateY(130px);
+                        cursor    : pointer;
+                    }
+
+                    .switch-to-button-change-image:hover {
+                        animation                : smooth-shake-for-change-image-button 0.5s ease-in-out;
+                        animation-iteration-count: infinite;
+                    }
+
+                    .choose-avatar-button:hover {
+                        animation                : smooth-shake 0.5s ease-in-out;
+                        animation-iteration-count: infinite;
+                    }
+
+                    @keyframes smooth-shake {
+                        0% {
+                            transform: rotate(0deg);
+                        }
+
+                        20% {
+                            transform: rotate(8deg);
+                        }
+
+                        40% {
+                            transform: rotate(-8deg);
+                        }
+
+                        60% {
+                            transform: rotate(6deg);
+                        }
+
+                        80% {
+                            transform: rotate(-6deg);
+                        }
+
+                        100% {
+                            transform: rotate(0deg);
+                        }
+                    }
+
+                    @keyframes smooth-shake-for-change-image-button {
+                        0% {
+                            transform: translateY(130px) rotate(0deg);
+                        }
+
+                        20% {
+                            transform: translateY(130px) rotate(8deg);
+                        }
+
+                        40% {
+                            transform: translateY(130px) rotate(-8deg);
+                        }
+
+                        60% {
+                            transform: translateY(130px) rotate(6deg);
+                        }
+
+                        80% {
+                            transform: translateY(130px) rotate(-6deg);
+                        }
+
+                        100% {
+                            transform: translateY(130px) rotate(0deg);
+                        }
+                    }
+                }
+
+                .avatar-css {
+                    background-size    : cover;
+                    height             : 170px;
+                    aspect-ratio       : 1 / 1;
+                    background-position: center;
+                    background-repeat  : no-repeat;
+                    background-position: bottom center;
+                }
+            }
+        }
+    }
+}

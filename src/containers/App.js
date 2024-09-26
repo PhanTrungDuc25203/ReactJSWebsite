@@ -22,6 +22,7 @@ import MakeAppointmentPage from './ForPatient/DetailDoctor/MakeAppointmentPage/M
 import ConfirmBookingAppointment from './ForPatient/ConfirmBookingAppointment/ConfirmBookingAppointment.js';
 import DetailSpecialty from './ForPatient/DetailSpecialty/DetailSpecialty.js';
 import UserProfile from './UserProfile/UserProfile.js';
+import DefaultRegister from './Authenticate/DefaultRegister.js';
 
 class App extends Component {
 
@@ -56,7 +57,7 @@ class App extends Component {
                             <Switch>
                                 <Route path={path.HOME} exact component={(Home)} />
                                 <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
-                                <Route path={path.REGISTER} component={userIsNotAuthenticated(Register)} />
+                                <Route path={path.REGISTER} component={userIsNotAuthenticated(DefaultRegister)} />
                                 {/* dành cho admin  */}
                                 <Route path={path.SYSTEM} component={userIsNotPatientAndDoctor(userIsNotPatient(userIsAuthenticated(System)))} />
                                 {/* booking care cho bác sĩ và bệnh nhân*/}

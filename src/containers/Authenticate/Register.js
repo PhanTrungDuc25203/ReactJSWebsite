@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from "connected-react-router";
-// import * as actions from "../store/actions";
+import { Route, Switch, Redirect } from 'react-router-dom';
 import * as actions from "../../store/actions";
 import './Register.scss';
+import { path } from '../../utils';
 import { FormattedMessage } from 'react-intl';
 import { handleLoginAPI } from '../../services/userService';
 import CustomScrollbars from '../../components/CustomScrollbars';
 import { withRouter } from 'react-router';
+import RegisterPersonalInfo from './RegisterPersonalInfo/RegisterPersonalInfo';
 
 class Register extends Component {
     constructor(props) {
@@ -82,7 +84,8 @@ class Register extends Component {
     }
 
     nextStepToCreateAccount = () => {
-        console.log("Check state: ", this.state);
+        // console.log("Check state: ", this.state);
+        this.props.history.push(`/register/personal-info`);
     }
 
     render() {
@@ -137,7 +140,7 @@ class Register extends Component {
                                     onClick={() => this.handleBackClicked()}
                                 >Already have account? Login here</span>
                                 <div className="wrapper-for-next-button">
-                                    <a href="#" onClick={(event) => { this.nextStepToCreateAccount() }}><span>Next</span></a>
+                                    <a onClick={() => { this.nextStepToCreateAccount() }}><span>Next</span></a>
                                 </div>
                             </div>
                         </div>

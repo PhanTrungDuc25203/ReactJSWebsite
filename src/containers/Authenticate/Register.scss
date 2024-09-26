@@ -25,6 +25,7 @@
                 font-size  : 25px;
                 margin-top : -10px !important;
             }
+
             .register-input {
                 margin: 5px 0;
 
@@ -69,9 +70,9 @@
                 }
             }
 
-            .back-or-next-button{
-                display: flex;
-                align-items: center;
+            .back-or-next-button {
+                display        : flex;
+                align-items    : center;
                 justify-content: space-between;
 
                 .login-link {
@@ -79,7 +80,7 @@
                     border-bottom: 2px solid white;
                     transition   : border 0.2s;
                     cursor       : pointer;
-                    margin-top: 30px;
+                    margin-top   : 30px;
                 }
 
                 .login-link:hover {
@@ -88,8 +89,9 @@
 
                 .wrapper-for-next-button {
                     // transform: translate(-50%, -50%);
-                    margin   : 30px 0 0px 0px !important;
-    
+                    margin: 30px 0 0px 0px !important;
+                    cursor: pointer;
+
                     a {
                         display        : block;
                         width          : 100px;
@@ -105,15 +107,15 @@
                         text-align     : center;
                         position       : relative;
                         transition     : all .35s;
-                        text-align: center;
+                        text-align     : center;
                     }
-    
+
                     a span {
                         position     : relative;
                         z-index      : 2;
                         border-radius: 5px;
                     }
-    
+
                     a:after {
                         position     : absolute;
                         content      : "";
@@ -125,11 +127,11 @@
                         transition   : all .35s;
                         border-radius: 5px;
                     }
-    
+
                     a:hover {
                         color: #fff;
                     }
-    
+
                     a:hover:after {
                         width        : 100%;
                         border-radius: 3px;
