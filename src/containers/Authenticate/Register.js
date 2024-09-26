@@ -10,6 +10,8 @@ import { handleLoginAPI } from '../../services/userService';
 import CustomScrollbars from '../../components/CustomScrollbars';
 import { withRouter } from 'react-router';
 import RegisterPersonalInfo from './RegisterPersonalInfo/RegisterPersonalInfo';
+import { checkUserEmailIsAlreadyExist } from '../../services/userService';
+import { toast } from "react-toastify";
 
 class Register extends Component {
     constructor(props) {
@@ -91,8 +93,17 @@ class Register extends Component {
         this.props.history.goBack();
     }
 
-    nextStepToCreateAccount = () => {
-        if (this.state.isPasswordMatch) {
+    nextStepToCreateAccount = async () => {
+        let isAlreadyExist = true;
+        if (this.state.email && this.state.password) {
+            isAlreadyExist = await checkUserEmailIsAlreadyExist(this.state.email);
+            if (!isAlreadyExist) {
+                this.props.saveUserEmailAndPasswordTemporarily(this.state.email, this.state.password);
+            } else {
+                toast.error("User is already exist, try another email!");
+            }
+        }
+        if (this.state.isPasswordMatch && !isAlreadyExist) {
             this.props.history.push(`/register/personal-info`);
         }
     }
@@ -178,8 +189,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         navigate: (path) => dispatch(push(path)),
-        // userLoginFail: () => dispatch(actions.adminLoginFail()),
         userLoginSuccess: (userInfor) => dispatch(actions.userLoginSuccess(userInfor)),
+        saveUserEmailAndPasswordTemporarily: (email, password) => dispatch(actions.saveUserEmailAndPasswordTemporarily(email, password)),
     };
 };
 

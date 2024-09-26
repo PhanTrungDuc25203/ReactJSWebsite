@@ -39,6 +39,10 @@ const createNewUserService = (data) => {
     return axios.post('/api/create-new-user-in-react', data)
 }
 
+const checkUserEmailIsAlreadyExist = (inputType) => {
+    return axios.get(`/api/check-user-email-already-exist?email=${inputType}`);
+}
+
 const deleteUserService = (userId) => {
     return axios.delete('/api/delete-user-in-react', {
         data: {
@@ -127,4 +131,5 @@ export {
     getSpecialtiesForHomePageService,
     getAllSpecialtyDetailsById,
     getAllRelativeInforsOfCurrentSystemUserService,
+    checkUserEmailIsAlreadyExist,
 };

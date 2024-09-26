@@ -7,6 +7,7 @@ import './RegisterPersonalInfo.scss';
 import { LANGUAGES, CommonUtils } from "../../../utils";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCameraRetro, faCameraRotate } from '@fortawesome/free-solid-svg-icons';
+import { Input } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router';
 import defaultAvatar from '../../../assets/images/default-avatar-circle.png';
@@ -21,8 +22,24 @@ class RegisterPersonalInfo extends Component {
             address: '',
             roleId: 'R3',
             positionId: 'P0',
+            gender: '',
+            genderList: [],
             previewAvatarImageUrl: '',
             avatarImage: '',
+        }
+    }
+
+    async componentDidMount() {
+        this.props.getGenderValueStart();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.genderValueByRedux !== this.props.genderValueByRedux) {
+            let tempArr = this.props.genderValueByRedux
+            this.setState({
+                genderList: tempArr,
+                gender: tempArr && tempArr.length > 0 ? tempArr[0].keyMap : '',
+            })
         }
     }
 
@@ -50,8 +67,22 @@ class RegisterPersonalInfo extends Component {
         })
     }
 
-    handleRegisterButtonClicked = () => {
-        console.log("check state before save: ", this.state);
+    handleRegisterButtonClicked = async () => {
+        // console.log("check state before save: ", this.state);
+        // console.log("check props before save: ", this.props);
+        this.props.addNewUserByRedux({
+            email: this.props.userTemporaryEmail,
+            password: this.props.userTemporaryPassword,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            address: this.state.address,
+            phoneNumber: this.state.phoneNumber,
+            gender: this.state.gender,
+            image: this.state.avatarImage,
+            roleId: this.state.roleId,
+            positionId: this.state.positionId,
+        });
+        this.props.history.push(`/login`);
     }
 
     handleBackToLoginButtonClicked = () => {
@@ -59,6 +90,10 @@ class RegisterPersonalInfo extends Component {
     }
 
     render() {
+
+        let genders = this.state.genderList;
+        let isLoadingGenderValue = this.props.isLoadingGenderValue;
+
         return (
             <div className="register-personal-info-background">
                 <div className="register-personal-info-container">
@@ -84,7 +119,7 @@ class RegisterPersonalInfo extends Component {
                             </div>
                         </div>
                         <div className="register-personal-info-contents row">
-                            <div className="col-6 form-group register-input">
+                            <div className="col-4 form-group register-input">
                                 <label>First name</label>
                                 <input type="text"
                                     className="form-control input-place"
@@ -94,7 +129,7 @@ class RegisterPersonalInfo extends Component {
                                     onChange={(event) => this.onChangeInput(event, 'firstName')}
                                 />
                             </div>
-                            <div className="col-6 form-group register-input">
+                            <div className="col-4 form-group register-input">
                                 <label>Last name</label>
                                 <input type="text"
                                     className="form-control input-place"
@@ -104,6 +139,29 @@ class RegisterPersonalInfo extends Component {
                                     onChange={(event) => this.onChangeInput(event, 'lastName')}
                                 />
                             </div>
+                            <div className="col-4 form-group register-input">
+                                <label>Gender</label>
+                                <Input
+                                    id="addUserGenderSelection"
+                                    name="select"
+                                    className="gender-choice-box"
+                                    type="select"
+                                    onChange={(event) => { this.onChangeInput(event, 'gender') }}
+                                    value={this.state.gender}
+                                    placeholder={isLoadingGenderValue === true ? `Loading gender's value` : ''}
+                                >
+                                    {genders && genders.length > 0 &&
+                                        genders.map((item, index) => {
+                                            return (
+                                                <option key={index} value={item.keyMap}>
+                                                    {this.props.language === LANGUAGES.VI ? item.value_Vie : item.value_Eng}
+                                                </option>
+                                            )
+                                        })
+                                    }
+                                </Input>
+                            </div>
+
                             <div className="col-12 form-group register-input">
                                 <label>Phone number</label>
                                 <input type="text"
@@ -142,15 +200,20 @@ class RegisterPersonalInfo extends Component {
 
 const mapStateToProps = state => {
     return {
-        language: state.app.language
+        language: state.app.language,
+        userTemporaryEmail: state.user.temporaryEmail,
+        userTemporaryPassword: state.user.temporaryPassword,
+        genderValueByRedux: state.admin.genders,
+        isLoadingGenderValue: state.admin.isLoadingGenderValue,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         navigate: (path) => dispatch(push(path)),
-        // userLoginFail: () => dispatch(actions.adminLoginFail()),
         userLoginSuccess: (userInfor) => dispatch(actions.userLoginSuccess(userInfor)),
+        getGenderValueStart: () => dispatch(actions.fetchGenderValueStart()),
+        addNewUserByRedux: (data) => dispatch(actions.addNewUserByRedux(data)),
     };
 };
 

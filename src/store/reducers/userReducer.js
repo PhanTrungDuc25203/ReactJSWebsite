@@ -2,7 +2,9 @@ import actionTypes from '../actions/actionTypes';
 
 const initialState = {
     isLoggedIn: false,
-    userInfo: null
+    userInfo: null,
+    temporaryEmail: '',
+    temporaryPassword: '',
 }
 
 const appReducer = (state = initialState, action) => {
@@ -24,6 +26,18 @@ const appReducer = (state = initialState, action) => {
                 ...state,
                 isLoggedIn: false,
                 userInfo: null
+            }
+        case actionTypes.SAVE_USER_EMAIL_AND_PASSWORD_TEMPORARILY_SUCCESSFULLY:
+            state.temporaryEmail = action.email;
+            state.temporaryPassword = action.password;
+            return {
+                ...state,
+            }
+        case actionTypes.SAVE_USER_EMAIL_AND_PASSWORD_TEMPORARILY_FAIL:
+            state.temporaryEmail = '';
+            state.temporaryPassword = '';
+            return {
+                ...state,
             }
         default:
             return state;

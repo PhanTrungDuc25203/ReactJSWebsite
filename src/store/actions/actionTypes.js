@@ -68,6 +68,10 @@ const actionTypes = Object.freeze({
     //lây dữ liệu speacilties cho trang homePage
     FETCH_SPECIALTIES_VALUE_SUCCESSFULLY: 'FETCH_SPECIALTIES_VALUE_SUCCESSFULLY',
     FETCH_SPECIALTIES_VALUE_FAILED: 'FETCH_SPECIALTIES_VALUE_FAILED',
+
+    //lưu dữ liệu tạm thời cho trang register để chuyển hướng sang trang yêu cầu thêm thông tin của người dùng
+    SAVE_USER_EMAIL_AND_PASSWORD_TEMPORARILY_SUCCESSFULLY: 'SAVE_USER_EMAIL_AND_PASSWORD_TEMPORARILY_SUCCESSFULLY',
+    SAVE_USER_EMAIL_AND_PASSWORD_TEMPORARILY_FAIL: 'SAVE_USER_EMAIL_AND_PASSWORD_TEMPORARILY_FAIL',
 })
 
 export default actionTypes;
