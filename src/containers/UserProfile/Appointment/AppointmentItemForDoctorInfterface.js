@@ -10,6 +10,10 @@ import * as actions from "../../../store/actions";
 import { MoonLoader } from 'react-spinners';
 import { getAllUsersToDisplayInReact } from '../../../services/userService';
 import moment from 'moment';
+import Modal from 'react-modal';
+import fileDownload from 'js-file-download';
+import { saveAs } from 'file-saver'; // để lưu file
+import ModalPatientReport from './ModalPatientReport';
 
 class AppointmentItemForDoctorInfterface extends Component {
 
@@ -23,7 +27,9 @@ class AppointmentItemForDoctorInfterface extends Component {
             appointmentTimeFrame: '',
             patientBirthday: '',
             patientInfor: {},
-            isButtonClicked: false,  // Thêm state cho trạng thái nút
+            buttonState: '',
+            isModalOpen: false, // trạng thái mở modal
+            fileContent: '', // nội dung file khi chỉnh sửa
         }
     }
 
@@ -67,15 +73,90 @@ class AppointmentItemForDoctorInfterface extends Component {
         }
     }
 
+    openModal = () => {
+        this.setState({ isModalOpen: true });
+    }
+
+    closeModal = () => {
+        this.setState({ isModalOpen: false });
+    }
+
+    handleFileContentChange = (event) => {
+        this.setState({ fileContent: event.target.value });
+    }
+
+    saveFile = () => {
+    const { fileContent } = this.state;
+
+    // Cập nhật nội dung file vào state
+    this.setState({ fileContent });
+
+    // Tải file về máy
+    fileDownload(fileContent, 'Updated_Patient_Report.txt');
+
+    // Đóng modal
+    this.setState({ isModalOpen: false });
+}
+
     handleProfileTabClicked(whichClicked) {
         // Xử lý cho sự kiện khác nếu có
     }
 
     handleButtonClick = () => {
-        // Cập nhật trạng thái khi nút được bấm
+        console.log("Check state: ", this.state);
+
+        //gọi api để lưu vào bảng history
+
         this.setState({
-            isButtonClicked: true
+            buttonState: 'onclic'
         });
+
+        setTimeout(() => {
+            this.setState({
+                buttonState: '',
+            });
+            this.setState({
+                buttonState: 'validate',
+            });
+
+            // Mô phỏng callback() function trong jQuery
+            // setTimeout(() => {
+            //     this.setState({
+            //         buttonState: ''  // Xóa trạng thái 'validate'
+            //     });
+            // }, 1250);
+        }, 2250);
+    }
+
+    generatePatientReport = () => {
+        const { fileContent, appointmentId, meetPatientId, patientInfor, appointmentDate, appointmentTimeFrame, patientBirthday } = this.state;
+
+        // Tạo nội dung cho file báo cáo
+        let reportContent = fileContent ? fileContent : `
+            Thông tin bệnh nhân:
+                - Mã số cuộc hẹn: ${appointmentId || 'Không có'}
+                - Bệnh nhân: ${patientInfor ? (patientInfor.lastName + ' ' + patientInfor.firstName) : 'Không có'}
+                - ID Bệnh nhân: ${meetPatientId || 'Không có'}
+                - Số điện thoại bệnh nhân: ${patientInfor.phoneNumber || 'Không có'}
+                - Email bệnh nhân: ${patientInfor.email || 'Không có'}
+                - Ngày sinh: ${patientBirthday || 'Không có'}
+                - Ngày hẹn: ${appointmentDate || 'Không có'}
+                - Khung giờ hẹn: ${appointmentTimeFrame || 'Không có'}
+            Thông tin bác sĩ: (Bác sĩ tự điền thông tin nếu cần thiết)
+                - Thanh toán (VND):
+                             ( $ ):
+                - Khám với bác sĩ:
+                - Chuyên khoa Bác sĩ:
+                - Địa chỉ Bác sĩ:
+            Kết quả khám bênh (đã khám): (Bác sĩ tự điền thông tin nếu cần thiết)
+                - Chuẩn đoán: 
+                            
+                - Phương pháp điều trị:
+
+        `;
+
+        // Cập nhật nội dung báo cáo vào state và mở modal
+        this.setState({ fileContent: reportContent, isModalOpen: true });
     }
 
     render() {
@@ -109,15 +190,29 @@ class AppointmentItemForDoctorInfterface extends Component {
                     <div className="patient-timeframe">
                         <label>Khung giờ hẹn: </label>{' '}{appointmentTimeFrame && appointmentTimeFrame}
                     </div>
+                    <div className="file-icon" onClick={this.generatePatientReport}>
+                        <i className="fas fa-file-alt"></i> Báo cáo khám bệnh
+                    </div>
                 </div>
                 <div className="done-button-container-for-doctor">
-                <button 
-                        className={`done-button ${this.state.isButtonClicked ? 'clicked' : ''}`} 
+                    <button
+                        className={`done-button ${this.state.buttonState}`}  // Áp dụng class theo state
                         onClick={this.handleButtonClick}
                     >
-                        {!this.state.isButtonClicked ? 'Đã khám' : ''}
+
                     </button>
                 </div>
+
+                <ModalPatientReport
+                    isOpen={this.state.isModalOpen}
+                    onRequestClose={this.closeModal}
+                    className={'edit-patient-report-modal'}
+                    createNewUser={this.createNewUser}
+                    fileContent={this.state.fileContent}
+                    handleFileContentChange={this.handleFileContentChange}
+                    generatePatientReport={this.generatePatientReport}
+                    saveFile={this.saveFile}
+                />
             </div >
         );
     }

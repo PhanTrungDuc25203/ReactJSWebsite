@@ -1,6 +1,5 @@
 .appointment-item-for-doctor-interface {
-
-    height         : 190px;
+    height         : 230px;
     width          : 100%;
     border         : 1px solid #b5daff;
     border-radius  : 5px;
@@ -9,46 +8,93 @@
     display        : flex;
     justify-content: space-between;
 
-
     .done-button-container-for-doctor {
         height         : 100%;
         border-left    : 1px solid #95caff;
-        width          : 120px;
+        width          : 140px;
         display        : flex;
         justify-content: center;
         align-items    : center;
 
+        $aqua : #7dbcfc;
+        $green: #1ecd97;
+        $gray : #bbbbbb;
+
         .done-button {
-            border          : 2px solid #0bb40b;
-            color           : #0bb40b;
-            background-color: white;
-            height          : 35px;
-            border-radius   : 4px;
-            width           : 80px;
-            margin-left     : 10px;
-            transition      : all 0.3s;
+            outline       : none;
+            height        : 40px;
+            text-align    : center;
+            width         : 80px;
+            border-radius : 5px;
+            background    : #fff;
+            border        : 2px solid $aqua;
+            color         : $aqua;
+            letter-spacing: 1px;
+            text-shadow   : 0;
+            font-size     : 12px;
+            margin-left   : 10px;
+
+            cursor    : pointer;
+            transition: all 0.25s ease;
+
+            &:hover {
+                color     : white;
+                background: $aqua;
+            }
+
+            &:active {
+                //letter-spacing: 2px;
+                letter-spacing: 2px;
+                border-radius : 40px;
+            }
+
+            &:after {
+                content: "Xác nhận";
+            }
         }
 
-        .done-button:hover {
-            color           : white;
-            background-color: #0bb40b;
+        .onclic {
+            width            : 40px;
+            border-color     : $gray;
+            border-width     : 3px;
+            border-radius    : 40px;
+            font-size        : 0;
+            border-left-color: $aqua;
+            animation        : rotating 2s 0.25s linear infinite;
+
+            &:after {
+                border-radius: 40px;
+                content      : "";
+            }
+
+            &:hover {
+                border-radius: 40px;
+                color        : $green;
+                background   : white;
+            }
         }
 
-        .done-button.clicked {
-            width           : 35px;
-            height          : 35px;
-            border-radius   : 50%;
-            background-color: #0bb40b;
-            color           : white;
-            border          : 2px solid #0bb40b;
-            padding         : 0;
-            justify-content : center;
+        .validate {
+            border-radius: 40px;
+            border-color : $green;
+            font-size    : 13px;
+            color        : white;
+            background   : $green;
+
+            &:after {
+                border-radius: 40px;
+                content      : "Đã khám";
+            }
         }
 
-        .done-button.clicked::before {
-            content  : '✔';
-            color    : white;
-            font-size: 18px;
+        @keyframes rotating {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
     }
 
@@ -108,5 +154,194 @@
                 color: rgb(44, 185, 255);
             }
         }
+
+        .file-icon {
+            margin        : 10px 0 10px 0;
+            height        : 25px;
+            width         : fit-content;
+            padding-bottom: 15px;
+            font-size     : 16px;
+            cursor        : pointer;
+            transition    : all 0.3s;
+
+            .fas.fa-file-alt {
+                font-size: 25px;
+                color    : rgb(44, 185, 255);
+            }
+        }
+
+        .file-icon:hover {
+            color      : rgb(44, 185, 255);
+            margin-left: 10px;
+        }
+    }
+
+    .download-report-container {
+        margin-top: 20px;
+        text-align: right;
+
+        .download-report-button {
+            padding         : 8px 16px;
+            background-color: #4caf50;
+            color           : white;
+            border          : none;
+            border-radius   : 5px;
+            cursor          : pointer;
+            font-size       : 14px;
+            transition      : background-color 0.3s ease;
+
+            &:hover {
+                background-color: #45a049;
+            }
+        }
+    }
+
+    .modal-title {
+        line-height: 50px;
+        font-weight: 500;
+        font-size  : 20px;
+    }
+}
+
+/* Tùy chỉnh header của modal */
+.edit-patient-report-modal {
+    padding: 10px;
+
+    .modal-header-customize {
+        height         : 50px !important;
+        display        : inline-flex;
+        justify-content: center;
+        align-items    : center;
+    }
+
+    .report-content-label {
+        font-size: 20px;
+        margin   : 0 0 10px 0;
+    }
+
+    /* Tùy chỉnh container chính của modal */
+    .report-modal-contents-container {
+        padding         : 20px;
+        background-color: #f9f9f9;
+        border-radius   : 5px;
+    }
+
+    /* Tùy chỉnh textarea trong modal */
+    .modal-textarea {
+        width           : 100%;
+        // padding      : 10px;
+        font-size       : 16px;
+        border-radius   : 5px;
+        border          : 1px solid #ddd;
+        transition      : border-color 0.3s ease;
+    }
+
+    /* Khi textarea được focus */
+    .modal-textarea:focus {
+        outline     : none;
+        border-color: #007bff;
+        box-shadow  : 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    /* Tùy chỉnh footer của modal */
+    .custom-modal-footer {
+        padding               : 15px;
+        // background-color: #f1f1f1;
+        // border-top         : 1px solid #ddd;
+        text-align            : right;
+    }
+
+    /* Tùy chỉnh container chứa các nút */
+    .buttons-container {
+        display        : flex;
+        justify-content: flex-end;
+        gap            : 10px;
+    }
+
+    /* Nút hủy */
+    .cancel-btn {
+        background-color: #f44336;
+        color           : white;
+        padding         : 8px 16px;
+        border          : none;
+        border-radius   : 5px;
+        font-size       : 14px;
+        cursor          : pointer;
+        transition      : background-color 0.3s ease;
+    }
+
+    .cancel-btn:hover {
+        background-color: #d32f2f;
+    }
+
+    /* Nút lưu và tải về */
+    .add-new-user-btn {
+        background-color: #007bff;
+        color           : white;
+        padding         : 8px 16px;
+        border          : none;
+        border-radius   : 5px;
+        font-size       : 14px;
+        cursor          : pointer;
+        transition      : background-color 0.3s ease;
+    }
+
+    .add-new-user-btn:hover {
+        background-color: #0056b3;
+    }
+
+    /* Tùy chỉnh modal kích thước lớn */
+    .modal-lg {
+        max-width: 90%;
+    }
+
+    /* Đảm bảo modal được căn giữa theo chiều dọc */
+    .modal-content {
+        margin       : auto;
+        border-radius: 10px;
+    }
+
+    /* Căn giữa nội dung modal */
+    .modal-body {
+        text-align: left;
+    }
+
+    /* Tùy chỉnh thanh cuộn (scrollbar) của textarea */
+    .modal-textarea::-webkit-scrollbar {
+        width: 8px;
+        /* Giảm độ rộng của thanh cuộn */
+    }
+
+    /* Tùy chỉnh phần thumb (kéo di chuyển) của thanh cuộn */
+    .modal-textarea::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 123, 255, 0.3);
+        /* Màu xanh nhạt */
+        border-radius   : 10px;
+        /* Làm thanh cuộn tròn hơn */
+        border          : 2px solid rgba(255, 255, 255, 0.7);
+        /* Tạo không gian nhỏ xung quanh thanh cuộn */
+        transition      : background-color 0.3s ease;
+        /* Tạo hiệu ứng chuyển màu mượt */
+    }
+
+    /* Khi hover vào thanh cuộn */
+    .modal-textarea::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(0, 123, 255, 0.6);
+        /* Màu đậm hơn khi hover */
+    }
+
+    /* Tùy chỉnh phần track (nền phía sau thanh cuộn) */
+    .modal-textarea::-webkit-scrollbar-track {
+        background-color: rgba(0, 0, 0, 0.1);
+        /* Màu nền nhạt hơn */
+        border-radius   : 10px;
+    }
+
+    /* Tùy chỉnh cho các trình duyệt khác không hỗ trợ webkit */
+    .modal-textarea {
+        scrollbar-width: thin;
+        /* Firefox     : làm thanh cuộn mỏng */
+        scrollbar-color: rgba(0, 123, 255, 0.3) rgba(0, 0, 0, 0.1);
+        /* Màu cho Firefox */
     }
 }
