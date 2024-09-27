@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import './AppointmentItemForDoctorInfterface.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { LANGUAGES } from '../../../utils';
 import _ from 'lodash';
 import { withRouter } from 'react-router';
@@ -23,6 +23,7 @@ class AppointmentItemForDoctorInfterface extends Component {
             appointmentTimeFrame: '',
             patientBirthday: '',
             patientInfor: {},
+            isButtonClicked: false,  // Thêm state cho trạng thái nút
         }
     }
 
@@ -67,7 +68,14 @@ class AppointmentItemForDoctorInfterface extends Component {
     }
 
     handleProfileTabClicked(whichClicked) {
+        // Xử lý cho sự kiện khác nếu có
+    }
 
+    handleButtonClick = () => {
+        // Cập nhật trạng thái khi nút được bấm
+        this.setState({
+            isButtonClicked: true
+        });
     }
 
     render() {
@@ -75,30 +83,40 @@ class AppointmentItemForDoctorInfterface extends Component {
         console.log("check state: ", this.state);
         return (
             <div className="appointment-item-for-doctor-interface">
-                <div className="appointment-id">
-                    <label>Mã số cuộc hẹn:</label> {' '}
-                    {appointmentId && appointmentId}
+                <div className="appointment-item-for-doctor-info">
+                    <div className="appointment-id">
+                        <label>Mã số cuộc hẹn:</label> {' '}
+                        {appointmentId && appointmentId}
+                    </div>
+                    <div className="patient-name">
+                        <label>Bệnh nhân: </label>{' '}{patientInfor && patientInfor.lastName ? patientInfor.lastName : ''}
+                        {patientInfor && patientInfor.firstName ? ' ' + patientInfor.firstName : ''}
+                        {'. '}<label>ID:</label>{' '}
+                        {meetPatientId && meetPatientId}
+                    </div>
+                    <div className="patient-phone-number">
+                        <label>Số điện thoại của bệnh nhân: </label>{' '}{patientInfor && patientInfor.phoneNumber && patientInfor.phoneNumber}
+                    </div>
+                    <div className="patient-email">
+                        <label>Địa chỉ email của bệnh nhân: </label>{' '}{patientInfor && patientInfor.email && patientInfor.email}
+                    </div>
+                    <div className="patient-birthday">
+                        <label>Ngày sinh của bệnh nhân: </label>{' '}{patientBirthday && patientBirthday}
+                    </div>
+                    <div className="patient-date">
+                        <label>Ngày hẹn: </label>{' '}{appointmentDate && appointmentDate}
+                    </div>
+                    <div className="patient-timeframe">
+                        <label>Khung giờ hẹn: </label>{' '}{appointmentTimeFrame && appointmentTimeFrame}
+                    </div>
                 </div>
-                <div className="patient-name">
-                    <label>Bệnh nhân: </label>{' '}{patientInfor && patientInfor.lastName ? patientInfor.lastName : ''}
-                    {patientInfor && patientInfor.firstName ? ' ' + patientInfor.firstName : ''}
-                    {'. '}<label>ID:</label>{' '}
-                    {meetPatientId && meetPatientId}
-                </div>
-                <div className="patient-phone-number">
-                    <label>Số điện thoại của bệnh nhân: </label>{' '}{patientInfor && patientInfor.phoneNumber && patientInfor.phoneNumber}
-                </div>
-                <div className="patient-email">
-                    <label>Địa chỉ email của bệnh nhân: </label>{' '}{patientInfor && patientInfor.email && patientInfor.email}
-                </div>
-                <div className="patient-birthday">
-                    <label>Ngày sinh của bệnh nhân: </label>{' '}{patientBirthday && patientBirthday}
-                </div>
-                <div className="patient-date">
-                    <label>Ngày hẹn: </label>{' '}{appointmentDate && appointmentDate}
-                </div>
-                <div className="patient-timeframe">
-                    <label>Khung giờ hẹn: </label>{' '}{appointmentTimeFrame && appointmentTimeFrame}
+                <div className="done-button-container-for-doctor">
+                <button 
+                        className={`done-button ${this.state.isButtonClicked ? 'clicked' : ''}`} 
+                        onClick={this.handleButtonClick}
+                    >
+                        {!this.state.isButtonClicked ? 'Đã khám' : ''}
+                    </button>
                 </div>
             </div >
         );

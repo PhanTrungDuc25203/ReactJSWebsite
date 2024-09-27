@@ -18,6 +18,7 @@ class Register extends Component {
         super(props);
         this.state = {
             email: '',
+            isEmailValid: false,
             password: '',
             verifyPassword: '',
             passwordShown: false,
@@ -27,9 +28,16 @@ class Register extends Component {
     }
 
     handleOnChangeEmailInput = (event) => {
+        const email = event.target.value;
+
+        // Biểu thức chính quy để kiểm tra định dạng email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const isEmailValid = emailRegex.test(email);
+
         this.setState({
-            email: event.target.value,
-        })
+            email: email,
+            isEmailValid: isEmailValid
+        });
     }
 
     handleOnChangePasswordInput = (event) => {
@@ -103,7 +111,7 @@ class Register extends Component {
                 toast.error("User is already exist, try another email!");
             }
         }
-        if (this.state.isPasswordMatch && !isAlreadyExist) {
+        if (this.state.isPasswordMatch && !isAlreadyExist && this.state.isEmailValid) {
             this.props.history.push(`/register/personal-info`);
         }
     }
@@ -119,11 +127,14 @@ class Register extends Component {
                         <div className="col-12 text-center register-text">Create your account</div>
                         <div className="col-12 form-group register-input">
                             <label>Email</label>
-                            <input type="text"
+                            <input type="email"
                                 className="form-control input-place"
                                 placeholder="Piscean"
                                 value={this.state.username}
                                 onChange={(event) => this.handleOnChangeEmailInput(event)} />
+                            {!this.state.isEmailValid && this.state.email && (
+                                <div className="text-danger announce-text-with-email">Your email syntax is not valid!</div>
+                            )}
                         </div>
                         <div className="col-12 form-group register-input">
                             <label>Password</label>

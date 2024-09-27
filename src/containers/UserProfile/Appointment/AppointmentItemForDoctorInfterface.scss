@@ -1,64 +1,112 @@
 .appointment-item-for-doctor-interface {
 
-    height       : fit-content;
-    width        : 100%;
-    border       : 1px solid #b5daff;
-    border-radius: 5px;
-    padding      : 10px;
-    margin       : 10px 0 15px 0;
+    height         : 190px;
+    width          : 100%;
+    border         : 1px solid #b5daff;
+    border-radius  : 5px;
+    padding        : 10px;
+    margin         : 10px 0 15px 0;
+    display        : flex;
+    justify-content: space-between;
 
-    .appointment-id {
-        font-size: 16px;
 
-        label {
-            color: rgb(44, 185, 255);
+    .done-button-container-for-doctor {
+        height         : 100%;
+        border-left    : 1px solid #95caff;
+        width          : 120px;
+        display        : flex;
+        justify-content: center;
+        align-items    : center;
+
+        .done-button {
+            border          : 2px solid #0bb40b;
+            color           : #0bb40b;
+            background-color: white;
+            height          : 35px;
+            border-radius   : 4px;
+            width           : 80px;
+            margin-left     : 10px;
+            transition      : all 0.3s;
+        }
+
+        .done-button:hover {
+            color           : white;
+            background-color: #0bb40b;
+        }
+
+        .done-button.clicked {
+            width           : 35px;
+            height          : 35px;
+            border-radius   : 50%;
+            background-color: #0bb40b;
+            color           : white;
+            border          : 2px solid #0bb40b;
+            padding         : 0;
+            justify-content : center;
+        }
+
+        .done-button.clicked::before {
+            content  : '✔';
+            color    : white;
+            font-size: 18px;
         }
     }
-    .patient-name {
-        font-size: 16px;
 
-        label {
-            color: rgb(44, 185, 255);
+    .appointment-item-for-doctor-info {
+        .appointment-id {
+            font-size: 16px;
+
+            label {
+                color: rgb(44, 185, 255);
+            }
         }
-    }
 
-    .patient-phone-number {
-        font-size: 16px;
+        .patient-name {
+            font-size: 16px;
 
-        label {
-            color: rgb(44, 185, 255);
+            label {
+                color: rgb(44, 185, 255);
+            }
         }
-    }
 
-    .patient-email {
-        font-size: 16px;
+        .patient-phone-number {
+            font-size: 16px;
 
-        label {
-            color: rgb(44, 185, 255);
+            label {
+                color: rgb(44, 185, 255);
+            }
         }
-    }
 
-    .patient-birthday {
-        font-size: 16px;
+        .patient-email {
+            font-size: 16px;
 
-        label {
-            color: rgb(44, 185, 255);
+            label {
+                color: rgb(44, 185, 255);
+            }
         }
-    }
 
-    .patient-date {
-        font-size: 16px;
+        .patient-birthday {
+            font-size: 16px;
 
-        label {
-            color: rgb(44, 185, 255);
+            label {
+                color: rgb(44, 185, 255);
+            }
         }
-    }
 
-    .patient-timeframe {
-        font-size: 16px;
+        .patient-date {
+            font-size: 16px;
 
-        label {
-            color: rgb(44, 185, 255);
+            label {
+                color: rgb(44, 185, 255);
+            }
+        }
+
+        .patient-timeframe {
+            font-size: 16px;
+
+            label {
+                color: rgb(44, 185, 255);
+            }
         }
     }
 }
