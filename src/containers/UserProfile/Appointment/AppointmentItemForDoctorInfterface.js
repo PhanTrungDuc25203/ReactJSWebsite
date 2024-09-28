@@ -102,8 +102,9 @@ class AppointmentItemForDoctorInfterface extends Component {
         // Xử lý cho sự kiện khác nếu có
     }
 
-    handleButtonClick = () => {
+    handleConfirmButtonClick = () => {
         console.log("Check state: ", this.state);
+        console.log("Check props: ", this.props);
 
         //gọi api để lưu vào bảng history
 
@@ -118,13 +119,6 @@ class AppointmentItemForDoctorInfterface extends Component {
             this.setState({
                 buttonState: 'validate',
             });
-
-            // Mô phỏng callback() function trong jQuery
-            // setTimeout(() => {
-            //     this.setState({
-            //         buttonState: ''  // Xóa trạng thái 'validate'
-            //     });
-            // }, 1250);
         }, 2250);
     }
 
@@ -155,7 +149,6 @@ class AppointmentItemForDoctorInfterface extends Component {
 
         `;
 
-        // Cập nhật nội dung báo cáo vào state và mở modal
         this.setState({ fileContent: reportContent, isModalOpen: true });
     }
 
@@ -196,8 +189,8 @@ class AppointmentItemForDoctorInfterface extends Component {
                 </div>
                 <div className="done-button-container-for-doctor">
                     <button
-                        className={`done-button ${this.state.buttonState}`}  // Áp dụng class theo state
-                        onClick={this.handleButtonClick}
+                        className={`done-button ${this.state.buttonState}`}
+                        onClick={this.handleConfirmButtonClick}
                     >
 
                     </button>
