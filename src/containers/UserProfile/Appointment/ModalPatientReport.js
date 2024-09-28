@@ -1,6 +1,8 @@
 import { maxBy } from 'lodash';
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 import { Form, Col, FormGroup, Label, Input, Row, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
@@ -51,6 +53,10 @@ class ModalPatientReport extends Component {
         this.props.saveFile();
     }
 
+    saveFileButNotDownload = ()=>{
+        this.props.saveFileButNotDownload();
+    }
+
     render() {
         return (
             <Modal
@@ -90,7 +96,16 @@ class ModalPatientReport extends Component {
                                     <div className="custom-modal-footer">
                                         <div className="buttons-container">
                                             {/* <button className="cancel-btn" onClick={() => this.onRequestClose()}>Hủy</button> */}
-                                            <button className="add-new-user-btn"
+                                            <button className="save-new-appointment-history"
+                                                onClick={(event) => {
+                                                    event.preventDefault(); // Ngăn việc submit form và reload trang
+                                                    this.onRequestClose();
+                                                    this.props.saveFileButNotDownload();
+                                                }}
+                                            >
+                                                Lưu
+                                            </button>
+                                            <button className="save-and-download-new-appointment-history"
                                                 onClick={(event) => {
                                                     event.preventDefault(); // Ngăn việc submit form và reload trang
                                                     this.onRequestClose();
@@ -98,6 +113,7 @@ class ModalPatientReport extends Component {
                                                 }}
                                             >
                                                 Lưu và tải về
+                                                <FontAwesomeIcon className="download-icon-in-modal" icon={faDownload}/>
                                             </button>
                                         </div>
                                     </div>

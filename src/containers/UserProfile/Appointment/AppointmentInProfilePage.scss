@@ -70,24 +70,25 @@
             }
 
             &:before {
-                top          : 0;
-                left         : 0;
-                opacity      : 1;
-                color        : #49BCE2;
-                border       : 2px solid #49BCE2;
-                border-radius: 5px;
-                display      : block;
-                padding      : 0 30px;
-                line-height  : 40px;
-                transition   : $speed;
-                position     : relative;
-                background   : white;
-                content      : attr(data-front);
-                transform    : translateY(0) rotateX(0);
+                top             : 0;
+                left            : 0;
+                opacity         : 1;
+                color           : #49BCE2;
+                border          : 2px solid #49BCE2;
+                border-radius   : 5px;
+                display         : block;
+                // padding      : 0 15px;
+                width           : 115px;
+                line-height     : 40px;
+                transition      : $speed;
+                position        : relative;
+                background      : white;
+                content         : attr(data-front);
+                transform       : translateY(0) rotateX(0);
             }
         }
 
-        .btn-flip-backward{
+        .btn-flip-backward {
             border-left    : none;
             opacity        : 1;
             outline        : 0;
@@ -129,20 +130,21 @@
             }
 
             &:before {
-                top          : 0;
-                left         : 0;
-                opacity      : 1;
-                color        : #5a5a5a;
-                border       : 2px solid #5a5a5a;
-                border-radius: 5px;
-                display      : block;
-                padding      : 0 30px;
-                line-height  : 40px;
-                transition   : $speed;
-                position     : relative;
-                background   : white;
-                content      : attr(data-front);
-                transform    : translateY(0) rotateX(0);
+                top             : 0;
+                left            : 0;
+                opacity         : 1;
+                color           : #5a5a5a;
+                border          : 2px solid #5a5a5a;
+                border-radius   : 5px;
+                display         : block;
+                // padding      : 0 30px;
+                width           : 115px;
+                line-height     : 40px;
+                transition      : $speed;
+                position        : relative;
+                background      : white;
+                content         : attr(data-front);
+                transform       : translateY(0) rotateX(0);
             }
         }
     }

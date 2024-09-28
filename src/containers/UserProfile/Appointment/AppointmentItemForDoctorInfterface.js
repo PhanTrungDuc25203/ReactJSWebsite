@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import './AppointmentItemForDoctorInfterface.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
-import { LANGUAGES } from '../../../utils';
+import { LANGUAGES, CommonUtils } from '../../../utils';
 import _ from 'lodash';
 import { withRouter } from 'react-router';
 import * as actions from "../../../store/actions";
@@ -14,6 +14,8 @@ import Modal from 'react-modal';
 import fileDownload from 'js-file-download';
 import { saveAs } from 'file-saver'; // để lưu file
 import ModalPatientReport from './ModalPatientReport';
+import { toast } from 'react-toastify';
+import { saveAppointmentHistory } from '../../../services/userService';
 
 class AppointmentItemForDoctorInfterface extends Component {
 
@@ -28,14 +30,13 @@ class AppointmentItemForDoctorInfterface extends Component {
             patientBirthday: '',
             patientInfor: {},
             buttonState: '',
-            isModalOpen: false, // trạng thái mở modal
-            fileContent: '', // nội dung file khi chỉnh sửa
+            isModalOpen: false,
+            fileContent: '',
         }
     }
 
     async componentDidMount() {
         if (this.props && this.props.meetPatientId && this.props.appointmentDate && this.props.appointmentTimeFrame && this.props.appointmentId && this.props.scheduleStatus) {
-            // console.log("check props: ", this.props);
             let patientInfor = await getAllUsersToDisplayInReact(this.props.meetPatientId);
             if (patientInfor && patientInfor.errCode === 0) {
                 this.setState({
@@ -49,6 +50,7 @@ class AppointmentItemForDoctorInfterface extends Component {
                 })
             }
         }
+        this.generatePatientReport('anotherFunction');
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
@@ -86,43 +88,70 @@ class AppointmentItemForDoctorInfterface extends Component {
     }
 
     saveFile = () => {
-    const { fileContent } = this.state;
-
-    // Cập nhật nội dung file vào state
-    this.setState({ fileContent });
-
-    // Tải file về máy
-    fileDownload(fileContent, 'Updated_Patient_Report.txt');
-
-    // Đóng modal
-    this.setState({ isModalOpen: false });
-}
-
-    handleProfileTabClicked(whichClicked) {
-        // Xử lý cho sự kiện khác nếu có
+        const { fileContent } = this.state;
+        this.setState({ fileContent });
+        fileDownload(fileContent, 'Updated_Patient_Report.txt');
+        this.setState({ isModalOpen: false });
     }
 
-    handleConfirmButtonClick = () => {
-        console.log("Check state: ", this.state);
-        console.log("Check props: ", this.props);
-
-        //gọi api để lưu vào bảng history
-
-        this.setState({
-            buttonState: 'onclic'
-        });
-
-        setTimeout(() => {
-            this.setState({
-                buttonState: '',
-            });
-            this.setState({
-                buttonState: 'validate',
-            });
-        }, 2250);
+    saveFileButNotDownload = () => {
+        const { fileContent } = this.state;
+        this.setState({ fileContent });
+        this.setState({ isModalOpen: false });
     }
 
-    generatePatientReport = () => {
+    handleConfirmButtonClick = async () => {
+        try {
+            this.generatePatientReport('anotherFunction');
+
+            const { appointmentId, meetPatientId, appointmentDate, appointmentTimeFrame, patientInfor, fileContent } = this.state;
+            const doctorEmail = this.props.match.params.email;
+            const patientEmail = patientInfor.email;
+            const description = 'S3';
+
+            console.log("check fileContent before convert: ", fileContent);
+            const base64File = Buffer.from(fileContent, 'utf-8').toString('base64');
+            console.log("check fileContent after convert: ", base64File);
+
+            // Chuẩn bị dữ liệu để gửi tới API
+            if (doctorEmail && patientEmail && description && base64File) {
+                const historyData = {
+                    patientEmail,
+                    doctorEmail,
+                    description,
+                    files: base64File
+                };
+                // Gọi API lưu lịch sử cuộc hẹn
+                let response = await saveAppointmentHistory(historyData);
+
+                if (response && response.errCode === 0) {
+                    toast.success(`Xác nhận bệnh nhân ${patientInfor.email} đã khám`);
+                } else {
+                    toast.error(`Lỗi! Không thể lưu lịch sử khám bệnh này!`);
+                }
+            } else {
+                toast.error(`Lỗi! Thiếu thông tin cần lưu!`);
+            }
+
+            // Đổi class cho nút xác nhận lịch khám
+            this.setState({
+                buttonState: 'onclic'
+            });
+
+            setTimeout(() => {
+                this.setState({
+                    buttonState: '',
+                });
+                this.setState({
+                    buttonState: 'validate',
+                });
+            }, 2250);
+        } catch (error) {
+            console.error('Có lỗi xảy ra khi xử lý:', error);
+        }
+    }
+
+    generatePatientReport = (actionFrom) => {
         const { fileContent, appointmentId, meetPatientId, patientInfor, appointmentDate, appointmentTimeFrame, patientBirthday } = this.state;
 
         // Tạo nội dung cho file báo cáo
@@ -148,13 +177,17 @@ class AppointmentItemForDoctorInfterface extends Component {
                 - Phương pháp điều trị:
 
         `;
+        if (actionFrom === 'anotherFunction') {
+            this.setState({ fileContent: reportContent });
+        } else {
+            this.setState({ fileContent: reportContent, isModalOpen: true });
+        }
 
-        this.setState({ fileContent: reportContent, isModalOpen: true });
     }
 
     render() {
         let { scheduleStatus, appointmentId, meetPatientId, patientInfor, appointmentDate, appointmentTimeFrame, patientBirthday } = this.state;
-        console.log("check state: ", this.state);
+
         return (
             <div className="appointment-item-for-doctor-interface">
                 <div className="appointment-item-for-doctor-info">
@@ -205,6 +238,7 @@ class AppointmentItemForDoctorInfterface extends Component {
                     handleFileContentChange={this.handleFileContentChange}
                     generatePatientReport={this.generatePatientReport}
                     saveFile={this.saveFile}
+                    saveFileButNotDownload={this.saveFileButNotDownload}
                 />
             </div >
         );

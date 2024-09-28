@@ -98,8 +98,8 @@ class AppointmentInProfilePage extends PureComponent {
                     <a
                         href="#"
                         className={historyOrHandling === 'history' ? 'btn-flip-backward' : 'btn-flip'}
-                        data-back={historyOrHandling === 'history' ? 'Sắp tới' : 'Lịch sử'}
-                        data-front={historyOrHandling === 'history' ? 'Lịch sử' : 'Sắp tới'}
+                        data-back={historyOrHandling === 'history' ? 'Chưa khám' : 'Lịch sử'}
+                        data-front={historyOrHandling === 'history' ? 'Lịch sử' : 'Chưa khám'}
                         onClick={this.handleHistoryOrHandlingButtonClicked}
                     />
                 </div>

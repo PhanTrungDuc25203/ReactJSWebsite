@@ -275,8 +275,8 @@
     }
 
     /* Nút lưu và tải về */
-    .add-new-user-btn {
-        background-color: #007bff;
+    .save-new-appointment-history {
+        background-color: #3697ff;
         color           : white;
         padding         : 8px 16px;
         border          : none;
@@ -286,7 +286,27 @@
         transition      : background-color 0.3s ease;
     }
 
-    .add-new-user-btn:hover {
+    .save-new-appointment-history:hover {
+        background-color: #007bff;
+    }
+
+    .save-and-download-new-appointment-history {
+        background-color: #007bff;
+        color           : white;
+        padding         : 8px 16px;
+        border          : none;
+        border-radius   : 5px;
+        font-size       : 14px;
+        cursor          : pointer;
+        transition      : background-color 0.3s ease;
+
+        .download-icon-in-modal {
+            font-size  : 16px;
+            margin-left: 10px;
+        }
+    }
+
+    .save-and-download-new-appointment-history:hover {
         background-color: #0056b3;
     }
 
