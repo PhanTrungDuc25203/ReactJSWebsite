@@ -46,28 +46,30 @@ class AppointmentInProfilePage extends PureComponent {
             <div className="appointment-container">
                 {historyOrHandling === 'handling' ? (
                     appointments.map((item, index) => (
-                        <div className="appointment-item" key={index}>
-                            <Suspense fallback={<div>Loading...</div>}>
-                                {isDoctor ? (
-                                    <AppointmentItemForDoctorInfterface
-                                        scheduleStatus={item.statusId}
-                                        appointmentId={item.id}
-                                        meetPatientId={item.patientId}
-                                        appointmentDate={moment(item.date).format('DD-MM-YYYY')}
-                                        appointmentTimeFrame={item.appointmentTimeTypeData?.value_Vie}
-                                        patientBirthday={moment(item.patientBirthday).format('DD-MM-YYYY')}
-                                    />
-                                ) : (
-                                    <AppointmentItemForPatientInfterface
-                                        scheduleStatus={item.statusId}
-                                        appointmentId={item.id}
-                                        meetDoctorId={item.doctorId}
-                                        appointmentDate={moment(item.date).format('DD-MM-YYYY')}
-                                        appointmentTimeFrame={item.appointmentTimeTypeData?.value_Vie}
-                                    />
-                                )}
-                            </Suspense>
-                        </div>
+                        item.statusId !== 'S3' && (
+                            <div className="appointment-item" key={index}>
+                                <Suspense fallback={<div>Loading...</div>}>
+                                    {isDoctor ? (
+                                        <AppointmentItemForDoctorInfterface
+                                            scheduleStatus={item.statusId}
+                                            appointmentId={item.id}
+                                            meetPatientId={item.patientId}
+                                            appointmentDate={moment(item.date).format('DD-MM-YYYY')}
+                                            appointmentTimeFrame={item.appointmentTimeTypeData?.value_Vie}
+                                            patientBirthday={moment(item.patientBirthday).format('DD-MM-YYYY')}
+                                        />
+                                    ) : (
+                                        <AppointmentItemForPatientInfterface
+                                            scheduleStatus={item.statusId}
+                                            appointmentId={item.id}
+                                            meetDoctorId={item.doctorId}
+                                            appointmentDate={moment(item.date).format('DD-MM-YYYY')}
+                                            appointmentTimeFrame={item.appointmentTimeTypeData?.value_Vie}
+                                        />
+                                    )}
+                                </Suspense>
+                            </div>
+                        )
                     ))
                 ) : (
                     <Suspense fallback={<div>Loading...</div>}>

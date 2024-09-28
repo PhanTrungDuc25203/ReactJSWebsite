@@ -109,13 +109,14 @@ class AppointmentItemForDoctorInfterface extends Component {
             const patientEmail = patientInfor.email;
             const description = 'S3';
 
-            console.log("check fileContent before convert: ", fileContent);
+            // console.log("check fileContent before convert: ", fileContent);
             const base64File = Buffer.from(fileContent, 'utf-8').toString('base64');
-            console.log("check fileContent after convert: ", base64File);
+            // console.log("check fileContent after convert: ", base64File);
 
             // Chuẩn bị dữ liệu để gửi tới API
             if (doctorEmail && patientEmail && description && base64File) {
                 const historyData = {
+                    appointmentId,
                     patientEmail,
                     doctorEmail,
                     description,
