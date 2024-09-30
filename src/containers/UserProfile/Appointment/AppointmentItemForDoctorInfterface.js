@@ -16,6 +16,7 @@ import { saveAs } from 'file-saver'; // để lưu file
 import ModalPatientReport from './ModalPatientReport';
 import { toast } from 'react-toastify';
 import { saveAppointmentHistory } from '../../../services/userService';
+import defaultAvatar from '../../../assets/images/default-avatar-circle.png';
 
 class AppointmentItemForDoctorInfterface extends Component {
 
@@ -109,9 +110,7 @@ class AppointmentItemForDoctorInfterface extends Component {
             const patientEmail = patientInfor.email;
             const description = 'S3';
 
-            // console.log("check fileContent before convert: ", fileContent);
             const base64File = Buffer.from(fileContent, 'utf-8').toString('base64');
-            // console.log("check fileContent after convert: ", base64File);
 
             // Chuẩn bị dữ liệu để gửi tới API
             if (doctorEmail && patientEmail && description && base64File) {
@@ -157,26 +156,25 @@ class AppointmentItemForDoctorInfterface extends Component {
 
         // Tạo nội dung cho file báo cáo
         let reportContent = fileContent ? fileContent : `
-            Thông tin bệnh nhân:
-                - Mã số cuộc hẹn: ${appointmentId || 'Không có'}
-                - Bệnh nhân: ${patientInfor ? (patientInfor.lastName + ' ' + patientInfor.firstName) : 'Không có'}
-                - ID Bệnh nhân: ${meetPatientId || 'Không có'}
-                - Số điện thoại bệnh nhân: ${patientInfor.phoneNumber || 'Không có'}
-                - Email bệnh nhân: ${patientInfor.email || 'Không có'}
-                - Ngày sinh: ${patientBirthday || 'Không có'}
-                - Ngày hẹn: ${appointmentDate || 'Không có'}
-                - Khung giờ hẹn: ${appointmentTimeFrame || 'Không có'}
-            Thông tin bác sĩ: (Bác sĩ tự điền thông tin nếu cần thiết)
-                - Thanh toán (VND):
-                             ( $ ):
-                - Khám với bác sĩ:
-                - Chuyên khoa Bác sĩ:
-                - Địa chỉ Bác sĩ:
-            Kết quả khám bênh (đã khám): (Bác sĩ tự điền thông tin nếu cần thiết)
-                - Chuẩn đoán: 
-                            
-                - Phương pháp điều trị:
-
+    Thông tin bệnh nhân:
+        - Mã số cuộc hẹn: ${appointmentId || 'Không có'}
+        - Bệnh nhân: ${patientInfor ? (patientInfor.lastName + ' ' + patientInfor.firstName) : 'Không có'}
+        - ID Bệnh nhân: ${meetPatientId || 'Không có'}
+        - Số điện thoại bệnh nhân: ${patientInfor.phoneNumber || 'Không có'}
+        - Email bệnh nhân: ${patientInfor.email || 'Không có'}
+        - Ngày sinh: ${patientBirthday || 'Không có'}
+        - Ngày hẹn: ${appointmentDate || 'Không có'}
+        - Khung giờ hẹn: ${appointmentTimeFrame || 'Không có'}
+    Thông tin bác sĩ: (Bác sĩ tự điền thông tin nếu cần thiết)
+        - Thanh toán (VND):
+                     ( $ ):
+        - Khám với bác sĩ:
+        - Chuyên khoa Bác sĩ:
+        - Địa chỉ Bác sĩ:
+    Kết quả khám bênh (đã khám): (Bác sĩ tự điền thông tin nếu cần thiết)
+        - Chuẩn đoán: 
+                    
+        - Phương pháp điều trị:
         `;
         if (actionFrom === 'anotherFunction') {
             this.setState({ fileContent: reportContent });
@@ -188,9 +186,20 @@ class AppointmentItemForDoctorInfterface extends Component {
 
     render() {
         let { scheduleStatus, appointmentId, meetPatientId, patientInfor, appointmentDate, appointmentTimeFrame, patientBirthday } = this.state;
+        let patientImageByBase64 = '';
+        if (patientInfor && patientInfor.image) {
+            patientImageByBase64 = Buffer.from(patientInfor.image, 'base64').toString('binary');
+        }
 
         return (
             <div className="appointment-item-for-doctor-interface">
+                <div className="patient-avatar-container">
+                    <div className="patient-avatar-section"
+                        style={{ backgroundImage: `url(${patientImageByBase64 ? patientImageByBase64 : defaultAvatar})` }}
+                    >
+
+                    </div>
+                </div>
                 <div className="appointment-item-for-doctor-info">
                     <div className="appointment-id">
                         <label>Mã số cuộc hẹn:</label> {' '}

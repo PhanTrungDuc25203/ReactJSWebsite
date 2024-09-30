@@ -99,6 +99,9 @@
     }
 
     .appointment-item-for-doctor-info {
+        min-width: 650px;
+        width    : auto;
+
         .appointment-id {
             font-size: 16px;
 
@@ -200,6 +203,23 @@
         line-height: 50px;
         font-weight: 500;
         font-size  : 20px;
+    }
+
+    .patient-avatar-container {
+        margin-left: 25px;
+        display    : flex;
+        align-items: center;
+
+        .patient-avatar-section {
+            position           : relative;
+            height             : 120px;
+            aspect-ratio       : 1 / 1;
+            border             : 5px solid #c3e8ff;
+            border-radius      : 50%;
+            background-size    : 105% 105%;
+            background-position: center;
+            background-repeat  : no-repeat;
+        }
     }
 }
 
