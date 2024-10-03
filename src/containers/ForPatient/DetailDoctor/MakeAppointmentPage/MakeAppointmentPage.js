@@ -166,7 +166,9 @@ class MakeAppointmentPage extends Component {
         }
 
         let appointmentDate = this.appointmentDateFormat(language);
-        console.log("check state in booking form: ", this.state);
+        // let specialtyName = doctorDetails.belongToSpecialty.name;
+        // console.log("Check spcialty: ", specialtyName);
+        // console.log("check state in booking form: ", this.state);
 
         return (
             <React.Fragment>
@@ -205,6 +207,8 @@ class MakeAppointmentPage extends Component {
                                     <div className="exam-specialty">
                                         <FontAwesomeIcon icon={faMoneyCheckDollar} className="price-icon" />
                                         <FormattedMessage id="make-appointment-page.left-content.exam-price" />
+                                        {/* {doctorDetails.Doctor_infor.belongToSpecialty ? doctorDetails.Doctor_infor.belongToSpecialty.name : ''} */}
+                                        {doctorDetails && doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.belongToSpecialty ? doctorDetails.Doctor_infor.belongToSpecialty.name : ''}
                                     </div>
                                     <div className="price">
                                         {doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.priceTypeData && language === LANGUAGES.EN &&
