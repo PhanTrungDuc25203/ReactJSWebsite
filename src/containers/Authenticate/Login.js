@@ -64,6 +64,7 @@ class Login extends Component {
                 //đăng nhập thành công thì cần làm gì đó ở đây
                 //cần sử dụng tới redux
                 this.props.userLoginSuccess(data.user);
+                this.props.currentSystemUserInfo(data.user.email);
             }
         } catch (e) {
             if (e.response) {
@@ -187,6 +188,7 @@ const mapDispatchToProps = dispatch => {
         navigate: (path) => dispatch(push(path)),
         // userLoginFail: () => dispatch(actions.adminLoginFail()),
         userLoginSuccess: (userInfor) => dispatch(actions.userLoginSuccess(userInfor)),
+        currentSystemUserInfo: (currentUserEmail) => dispatch(actions.getAllRelativeInfoOfCurrentSystemUserAction(currentUserEmail)),
     };
 };
 

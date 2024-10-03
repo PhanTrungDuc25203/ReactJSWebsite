@@ -72,6 +72,10 @@ const actionTypes = Object.freeze({
     //lưu dữ liệu tạm thời cho trang register để chuyển hướng sang trang yêu cầu thêm thông tin của người dùng
     SAVE_USER_EMAIL_AND_PASSWORD_TEMPORARILY_SUCCESSFULLY: 'SAVE_USER_EMAIL_AND_PASSWORD_TEMPORARILY_SUCCESSFULLY',
     SAVE_USER_EMAIL_AND_PASSWORD_TEMPORARILY_FAIL: 'SAVE_USER_EMAIL_AND_PASSWORD_TEMPORARILY_FAIL',
+
+    //lấy tất cả thông tin liên quan của người dùng hệ thống hiện tại trong database
+    GET_ALL_RELATIVE_INFOR_OF_CURRENT_SYSTEM_USER_SUCCESSFULLY: 'GET_ALL_RELATIVE_INFOR_OF_CURRENT_SYSTEM_USER_SUCCESSFULLY',
+    GET_ALL_RELATIVE_INFOR_OF_CURRENT_SYSTEM_USER_FAILED: 'GET_ALL_RELATIVE_INFOR_OF_CURRENT_SYSTEM_USER_FAILED',
 })
 
 export default actionTypes;

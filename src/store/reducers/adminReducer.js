@@ -17,6 +17,7 @@ const initialState = {
     specialties: [],
 
     allRequiredDoctorData: [],
+    currentSystemUser: {},
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -157,6 +158,17 @@ const adminReducer = (state = initialState, action) => {
             }
         case actionTypes.FETCH_SPECIALTIES_VALUE_FAILED:
             state.specialties = [];
+            return {
+                ...state,
+            }
+        //lấy dữ liệu của người dùng hiện tại của hệ thống
+        case actionTypes.GET_ALL_RELATIVE_INFOR_OF_CURRENT_SYSTEM_USER_SUCCESSFULLY:
+            state.currentSystemUser = action.currentSystemUser;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_ALL_RELATIVE_INFOR_OF_CURRENT_SYSTEM_USER_FAILED:
+            state.currentSystemUser = {};
             return {
                 ...state,
             }

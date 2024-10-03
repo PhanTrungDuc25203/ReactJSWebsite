@@ -36,6 +36,7 @@ class MakeAppointmentPage extends Component {
             selectedGender: '',
             doctorId: '',
             timeType: '',
+            currentSystemUser: {},
         }
     }
 
@@ -66,7 +67,18 @@ class MakeAppointmentPage extends Component {
             //     })
             // }
             this.props.getGenderList();
-            // console.log("Check genderlist", this.state.genderList);
+            this.props.currentSystemUserInfo(this.props.userInfo.email);
+            if (this.props.currentSystemUser && this.props.currentSystemUser.gender) {
+                this.setState({
+                    selectedGender: this.props.currentSystemUser.gender
+                });
+            }
+        }
+
+        if (this.props.currentSystemUser) {
+            this.setState({
+                currentSystemUser: this.props.currentSystemUser,
+            })
         }
     }
 
@@ -92,8 +104,26 @@ class MakeAppointmentPage extends Component {
                 })
             }
         }
+
         if (prevProps.language !== this.props.language) {
 
+        }
+
+        if (prevProps.currentSystemUser !== this.props.currentSystemUser) {
+            this.setState({
+                currentSystemUser: this.props.currentSystemUser,
+                selectedGender: this.props.currentSystemUser.gender,
+
+                fullname: this.props.language === LANGUAGES.VI ? this.props.currentSystemUser.lastName + ' ' + this.props.currentSystemUser.firstName : this.props.currentSystemUser.firstName + ' ' + this.props.currentSystemUser.lastName,
+                phoneNumber: this.props.currentSystemUser.phoneNumber && this.props.currentSystemUser.phoneNumber,
+                email: this.props.currentSystemUser.email && this.props.currentSystemUser.email,
+                address: this.props.currentSystemUser.address && this.props.currentSystemUser.address,
+                birthday: this.props.currentSystemUser &&
+                    this.props.currentSystemUser.patientHasAppointmentWithDoctors &&
+                    this.props.currentSystemUser.patientHasAppointmentWithDoctors[0].patientBirthday
+                    ? moment(this.props.currentSystemUser.patientHasAppointmentWithDoctors[0].patientBirthday).format('YYYY-MM-DD 00:00:00')
+                    : ''
+            })
         }
     }
 
@@ -113,6 +143,7 @@ class MakeAppointmentPage extends Component {
     }
 
     handleGenderChange = (event) => {
+        console.log("check gender value: ", event.target.value);
         this.setState({
             selectedGender: event.target.value, // Cập nhật selectedGender theo giá trị của radio button đã chọn
         });
@@ -155,8 +186,7 @@ class MakeAppointmentPage extends Component {
 
     render() {
 
-        let { doctorDetails } = this.state;
-        // console.log('This doctor: ', this.state.doctorDetails)
+        let { doctorDetails, currentSystemUser } = this.state;
         let { language } = this.props;
         let nameInVie = '';
         let nameInEng = '';
@@ -166,9 +196,7 @@ class MakeAppointmentPage extends Component {
         }
 
         let appointmentDate = this.appointmentDateFormat(language);
-        // let specialtyName = doctorDetails.belongToSpecialty.name;
-        // console.log("Check spcialty: ", specialtyName);
-        // console.log("check state in booking form: ", this.state);
+        console.log("check state current patient: ", this.state.currentSystemUser);
 
         return (
             <React.Fragment>
@@ -257,7 +285,6 @@ class MakeAppointmentPage extends Component {
                             </div>
                         </div>
                         <div className="content-right">
-
                             <div className="medical-records">
                                 <div className="content-right-title">
                                     <FormattedMessage id="make-appointment-page.right-content.title" />
@@ -269,9 +296,9 @@ class MakeAppointmentPage extends Component {
                                             <FontAwesomeIcon icon={faUser} className="input-icon" />
                                             <input
                                                 type="text"
-                                                value={this.state.fullname}
+                                                value={currentSystemUser && currentSystemUser.lastName && currentSystemUser.firstName ? language === LANGUAGES.VI ? currentSystemUser.lastName + ' ' + currentSystemUser.firstName : currentSystemUser.firstName + ' ' + currentSystemUser.lastName : this.state.fullname}
                                                 onChange={(event) => this.handleOnchangeInput(event, 'fullname')}
-                                            // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.name" />}
+                                                readOnly={currentSystemUser && currentSystemUser.lastName && currentSystemUser.firstName ? true : false}
                                             ></input>
                                         </div>
                                     </div>
@@ -286,6 +313,8 @@ class MakeAppointmentPage extends Component {
                                                         id={gender.keyMap}
                                                         name="gender"
                                                         value={gender.keyMap}
+                                                        checked={this.state.selectedGender === gender.keyMap}
+                                                        disabled={!!this.state.selectedGender}
                                                         onChange={this.handleGenderChange}
                                                     />
                                                     <label htmlFor={gender.keyMap}>{gender.value_Vie}</label>
@@ -302,6 +331,8 @@ class MakeAppointmentPage extends Component {
                                                         id={gender.keyMap}
                                                         name="gender"
                                                         value={gender.keyMap}
+                                                        checked={this.state.selectedGender === gender.keyMap}
+                                                        disabled={!!this.state.selectedGender}
                                                         onChange={this.handleGenderChange}
                                                     />
                                                     <label htmlFor={gender.keyMap}>{gender.value_Eng}</label>
@@ -319,7 +350,7 @@ class MakeAppointmentPage extends Component {
                                             onChange={this.handleDatePickerChanged}
                                             className="date-picker-section"
                                             // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.dob" />}
-                                            value={this.state.birthday}
+                                            value={currentSystemUser && currentSystemUser.patientHasAppointmentWithDoctors && currentSystemUser.patientHasAppointmentWithDoctors[0].patientBirthday ? currentSystemUser.patientHasAppointmentWithDoctors[0].patientBirthday : this.state.birthday}
                                         // minDate={new Date().setHours(0, 0, 0, 0)}
                                         />
                                     </div>
@@ -331,9 +362,9 @@ class MakeAppointmentPage extends Component {
                                             <FontAwesomeIcon icon={faLocationDot} className="input-icon" />
                                             <input
                                                 type="text"
-                                                value={this.state.address}
+                                                value={currentSystemUser && currentSystemUser.address ? currentSystemUser.address : this.state.address}
                                                 onChange={(event) => this.handleOnchangeInput(event, 'address')}
-                                            // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.address" />}
+                                                readOnly={currentSystemUser && currentSystemUser.address ? true : false}
                                             ></input>
                                         </div>
                                     </div>
@@ -343,8 +374,9 @@ class MakeAppointmentPage extends Component {
                                             <FontAwesomeIcon icon={faMobileScreenButton} className="input-icon" />
                                             <input
                                                 type="text"
-                                                value={this.state.phoneNumber}
+                                                value={currentSystemUser && currentSystemUser.phoneNumber ? currentSystemUser.phoneNumber : this.state.phoneNumber}
                                                 onChange={(event) => this.handleOnchangeInput(event, 'phoneNumber')}
+                                                readOnly={currentSystemUser && currentSystemUser.phoneNumber ? true : false}
                                             // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.phonenum" />}
                                             ></input>
                                         </div>
@@ -355,8 +387,9 @@ class MakeAppointmentPage extends Component {
                                             <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
                                             <input
                                                 type="email"
-                                                value={this.state.email}
+                                                value={currentSystemUser && currentSystemUser.email ? currentSystemUser.email : this.state.email}
                                                 onChange={(event) => this.handleOnchangeInput(event, 'email')}
+                                                readOnly={currentSystemUser && currentSystemUser.email ? true : false}
                                             // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.email" />}
                                             ></input>
                                         </div>
@@ -368,6 +401,8 @@ class MakeAppointmentPage extends Component {
                                         <FontAwesomeIcon icon={faPeopleArrows} className="input-icon" />
                                         <input
                                             type="text"
+                                            value={currentSystemUser && currentSystemUser.lastName && currentSystemUser.firstName ? language === LANGUAGES.VI ? currentSystemUser.lastName + ' ' + currentSystemUser.firstName : currentSystemUser.firstName + ' ' + currentSystemUser.lastName : this.state.fullname}
+                                            onChange={(event) => this.tempOnchangeFuncForNoError(event, 'bookingfor')}
                                         // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.booking-for" />}
                                         ></input>
                                     </div>
@@ -402,7 +437,7 @@ class MakeAppointmentPage extends Component {
                     </div>
                     <FooterLite />
                 </CustomScrollbars>
-            </React.Fragment>
+            </React.Fragment >
         );
     }
 }
@@ -413,12 +448,15 @@ const mapStateToProps = state => {
         // isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
         genderList: state.admin.genders,
+        userInfo: state.user.userInfo,
+        currentSystemUser: state.admin.currentSystemUser,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         getGenderList: () => dispatch(actions.fetchGenderValueStart()),
+        currentSystemUserInfo: (currentUserEmail) => dispatch(actions.getAllRelativeInfoOfCurrentSystemUserAction(currentUserEmail)),
     };
 };
 

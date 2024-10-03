@@ -13,7 +13,8 @@ import {
     saveInforAndArticleForADoctor,
     getInforAndArticleForADoctor,
     createTimeframesForDoctorScheduleService,
-    getSpecialtiesForHomePageService
+    getSpecialtiesForHomePageService,
+    getAllRelativeInforsOfCurrentSystemUserService
 } from "../../services/userService";
 import { toast } from "react-toastify";
 
@@ -426,6 +427,29 @@ export const fetchSpecialties = () => {
             console.log('Fetch specialties data fail: ', e);
             dispatch({
                 type: actionTypes.FETCH_SPECIALTIES_VALUE_FAILED,
+            })
+        }
+    }
+}
+
+export const getAllRelativeInfoOfCurrentSystemUserAction = (inputEmail) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllRelativeInforsOfCurrentSystemUserService(inputEmail);
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.GET_ALL_RELATIVE_INFOR_OF_CURRENT_SYSTEM_USER_SUCCESSFULLY,
+                    currentSystemUser: res.data,
+                })
+            } else {
+                dispatch({
+                    type: actionTypes.GET_ALL_RELATIVE_INFOR_OF_CURRENT_SYSTEM_USER_FAILED,
+                })
+            }
+        } catch (e) {
+            console.log('Fetch specialties data fail: ', e);
+            dispatch({
+                type: actionTypes.GET_ALL_RELATIVE_INFOR_OF_CURRENT_SYSTEM_USER_FAILED,
             })
         }
     }
