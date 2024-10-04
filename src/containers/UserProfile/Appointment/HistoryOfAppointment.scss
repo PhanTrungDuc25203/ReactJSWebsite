@@ -1,0 +1,61 @@
+.doctor-appointment-history-container {
+
+    .doctor-appointment-history-item {
+        padding      : 10px 20px;
+        margin       : 10px 0 15px 0;
+        border       : 1px solid rgb(181, 181, 181);
+        border-radius: 5px;
+
+        .doctor-appointment-history-item-id {
+            .doctor-appointment-history-label {
+                width : 200px;
+                height: auto;
+            }
+
+            .doctor-appointment-history-content {
+                width : fit-content;
+                height: auto;
+                color: rgb(130, 130, 130);
+            }
+        }
+
+        .doctor-appointment-history-item-patient-email {
+            .doctor-appointment-history-label {
+                width : 200px;
+                height: auto;
+            }
+
+            .doctor-appointment-history-content {
+                width : fit-content;
+                height: auto;
+                color: rgb(130, 130, 130);
+            }
+        }
+
+        .doctor-appointment-history-item-date {
+            .doctor-appointment-history-label {
+                width : 200px;
+                height: auto;
+            }
+
+            .doctor-appointment-history-content {
+                width : fit-content;
+                height: auto;
+                color: rgb(130, 130, 130);
+            }
+        }
+
+        .doctor-appointment-history-item-timeframe {
+            .doctor-appointment-history-label {
+                width : 200px;
+                height: auto;
+            }
+
+            .doctor-appointment-history-content {
+                width : fit-content;
+                height: auto;
+                color: rgb(130, 130, 130);
+            }
+        }
+    }
+}

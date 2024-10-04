@@ -118,9 +118,7 @@ class MakeAppointmentPage extends Component {
                 phoneNumber: this.props.currentSystemUser.phoneNumber && this.props.currentSystemUser.phoneNumber,
                 email: this.props.currentSystemUser.email && this.props.currentSystemUser.email,
                 address: this.props.currentSystemUser.address && this.props.currentSystemUser.address,
-                birthday: this.props.currentSystemUser &&
-                    this.props.currentSystemUser.patientHasAppointmentWithDoctors &&
-                    this.props.currentSystemUser.patientHasAppointmentWithDoctors[0].patientBirthday
+                birthday: this.props.currentSystemUser?.patientHasAppointmentWithDoctors?.[0]?.patientBirthday
                     ? moment(this.props.currentSystemUser.patientHasAppointmentWithDoctors[0].patientBirthday).format('YYYY-MM-DD 00:00:00')
                     : ''
             })
@@ -350,7 +348,7 @@ class MakeAppointmentPage extends Component {
                                             onChange={this.handleDatePickerChanged}
                                             className="date-picker-section"
                                             // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.dob" />}
-                                            value={currentSystemUser && currentSystemUser.patientHasAppointmentWithDoctors && currentSystemUser.patientHasAppointmentWithDoctors[0].patientBirthday ? currentSystemUser.patientHasAppointmentWithDoctors[0].patientBirthday : this.state.birthday}
+                                            value={currentSystemUser?.patientHasAppointmentWithDoctors?.[0]?.patientBirthday || this.state.birthday}
                                         // minDate={new Date().setHours(0, 0, 0, 0)}
                                         />
                                     </div>
