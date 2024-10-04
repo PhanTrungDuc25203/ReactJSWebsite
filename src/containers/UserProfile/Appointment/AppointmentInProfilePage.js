@@ -4,6 +4,7 @@ import './AppointmentInProfilePage.scss';
 import { withRouter } from 'react-router';
 import * as actions from '../../../store/actions';
 import moment from 'moment';
+import { getAllRelativeBookingsOfCurrentSystemUserService } from '../../../services/userService';
 
 // Lazy load appointment components
 const AppointmentItemForPatientInfterface = lazy(() => import('./AppointmentItemForPatientInfterface'));
@@ -19,24 +20,44 @@ class AppointmentInProfilePage extends PureComponent {
         currentUserEmail: '',
     };
 
-    componentDidMount() {
-        const { combinedAppointments, userRole, currentUserEmail } = this.props;
-        if (combinedAppointments && userRole) {
-            this.setState({ combinedAppointments, userRole, currentUserEmail });
+    async componentDidMount() {
+        const { userRole, currentUserEmail } = this.props;
+        if (userRole) {
+            this.setState({ userRole, currentUserEmail }, async () => {
+                let res = await getAllRelativeBookingsOfCurrentSystemUserService(this.state.currentUserEmail);
+                if (res && res.errCode === 0) {
+                    console.log("call api again");
+                    const combinedAppointments = {
+                        doctorAppointments: res.data.doctorHasAppointmentWithPatients,
+                        patientAppointments: res.data.patientHasAppointmentWithDoctors
+                    };
+
+                    this.setState({ combinedAppointments });
+                }
+            });
         }
     }
 
-    componentDidUpdate(prevProps) {
-        const { combinedAppointments, userRole, currentUserEmail } = this.props;
-        if (prevProps.combinedAppointments !== combinedAppointments || prevProps.userRole !== userRole || prevProps.currentUserEmail !== currentUserEmail) {
-            this.setState({ combinedAppointments, userRole, currentUserEmail });
-        }
-    }
+    // componentDidUpdate(prevProps) {
+    //     const { combinedAppointments, userRole, currentUserEmail } = this.props;
+    //     if (prevProps.combinedAppointments !== combinedAppointments || prevProps.userRole !== userRole || prevProps.currentUserEmail !== currentUserEmail) {
+    //         this.setState({ combinedAppointments, userRole, currentUserEmail });
+    //     }
+    // }
 
-    handleHistoryOrHandlingButtonClicked = () => {
+    handleHistoryOrHandlingButtonClicked = async () => {
         this.setState(prevState => ({
             historyOrHandling: prevState.historyOrHandling === 'history' ? 'handling' : 'history',
         }));
+        let res = await getAllRelativeBookingsOfCurrentSystemUserService(this.state.currentUserEmail);
+        if (res && res.errCode === 0) {
+            const combinedAppointments = {
+                doctorAppointments: res.data.doctorHasAppointmentWithPatients,
+                patientAppointments: res.data.patientHasAppointmentWithDoctors
+            };
+
+            this.setState({ combinedAppointments });
+        }
     };
 
     renderAppointmentItems = (appointments, isDoctor) => {
