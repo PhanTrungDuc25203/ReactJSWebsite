@@ -8,6 +8,7 @@ import _ from 'lodash';
 import * as actions from "../../../store/actions";
 import { MoonLoader } from 'react-spinners';
 import moment from 'moment';
+import { getAppointmentHistoriesByDoctorEmail } from '../../../services/userService';
 
 class HistoryOfDoctorAppointment extends Component {
 
@@ -15,28 +16,57 @@ class HistoryOfDoctorAppointment extends Component {
         super(props);
         this.state = {
             currentUserEmail: '',
+            appointmentHistory: [],
+            loading: false,
         }
     }
 
     async componentDidMount() {
-        let { currentUserEmail } = this.state;
         if (this.props && this.props.currentUserEmail) {
-            this.setState({ currentUserEmail })
+            this.setState({ currentUserEmail: this.props.currentUserEmail });
+            await this.fetchAppointmentHistory(this.props.currentUserEmail);
         }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const { currentUserEmail } = this.props;
-        if (prevProps.currentUserEmail !== currentUserEmail) {
-            this.setState({ currentUserEmail });
+        if (prevProps.currentUserEmail !== this.props.currentUserEmail) {
+            this.setState({ currentUserEmail: this.props.currentUserEmail });
+            this.fetchAppointmentHistory(this.props.currentUserEmail);
+        }
+    }
+
+    fetchAppointmentHistory = async (email) => {
+        this.setState({ loading: true });
+        try {
+            const response = await getAppointmentHistoriesByDoctorEmail(email);
+            if (response && response.data) {
+                this.setState({ appointmentHistory: response.data });
+            }
+        } catch (error) {
+            console.error("Error fetching appointment history:", error);
+        } finally {
+            this.setState({ loading: false });
         }
     }
 
     render() {
-        console.log("Check props: ", this.props);
+        let { appointmentHistory } = this.state;
+        console.log("Check state: ", appointmentHistory);
+        // console.log("Check props: ", this.props);
         return (
             <div className="doctor-appointment-history-container">
-                This is doctor {this.props.currentUserEmail} history
+                {appointmentHistory && appointmentHistory.length > 0 ? (
+                    appointmentHistory.map((appointment, index) => (
+                        <div key={index} className="appointment-history-item">
+                            <div className="appointment-history-item-id">
+                                {/* <label>Mã số cuộc hẹn:</label> {' '}
+                                {appointmentId && appointmentId} */}
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <p>Bạn không có lịch sử khám cho bệnh nhân.</p>
+                )}
             </div >
         );
     }

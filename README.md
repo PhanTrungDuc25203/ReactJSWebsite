@@ -1,4 +1,5 @@
-Remaining problems: - 
+Remaining problems: - chưa xử lí dữ liệu timeframe khi gửi cho client, phải từ keyMap thành giá trị
+                    - chưa làm được các item trong phần history của bác sĩ
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -111,8 +111,12 @@ const getAllRelativeInforsOfCurrentSystemUserService = (email) => {
     return axios.get(`/api/get-all-relative-infors-of-current-system-user?email=${email}`);
 }
 
-const saveAppointmentHistory = (appointmentHistory) =>{
+const saveAppointmentHistory = (appointmentHistory) => {
     return axios.post(`/api/save-appointment-history`, appointmentHistory);
+}
+
+const getAppointmentHistoriesByDoctorEmail = (doctorEmail) => {
+    return axios.get(`/api/get-appointement-histories-by-doctor-email?doctorEmail=${doctorEmail}`);
 }
 
 export {
@@ -137,4 +141,5 @@ export {
     getAllRelativeInforsOfCurrentSystemUserService,
     checkUserEmailIsAlreadyExist,
     saveAppointmentHistory,
+    getAppointmentHistoriesByDoctorEmail,
 };

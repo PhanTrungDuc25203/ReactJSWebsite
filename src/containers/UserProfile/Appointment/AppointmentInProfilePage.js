@@ -98,7 +98,7 @@ class AppointmentInProfilePage extends PureComponent {
                         Danh sách lịch hẹn đã đặt
                     </div>
                     <a
-                        href="#"
+                        // href="#"
                         className={historyOrHandling === 'history' ? 'btn-flip-backward' : 'btn-flip'}
                         data-back={historyOrHandling === 'history' ? 'Chưa khám' : 'Lịch sử'}
                         data-front={historyOrHandling === 'history' ? 'Lịch sử' : 'Chưa khám'}

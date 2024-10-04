@@ -118,6 +118,8 @@ class AppointmentItemForDoctorInfterface extends Component {
                     appointmentId,
                     patientEmail,
                     doctorEmail,
+                    appointmentDate,
+                    appointmentTimeFrame,
                     description,
                     files: base64File
                 };
