@@ -1,7 +1,7 @@
 .appointment-item-for-doctor-interface {
     height         : 230px;
     width          : 100%;
-    border         : 1px solid #b5daff;
+    border         : 2px solid #b5daff;
     border-radius  : 5px;
     padding        : 10px;
     margin         : 10px 0 15px 0;
@@ -100,61 +100,101 @@
 
     .appointment-item-for-doctor-info {
         min-width: 650px;
-        width    : auto;
 
         .appointment-id {
             font-size: 16px;
-
-            label {
-                color: rgb(44, 185, 255);
+            .appointment-item-for-doctor-label{
+                width: 215px;
+                height: auto;
+                color: #49BCE2;
+            }
+            .appointment-item-for-doctor-content{
+                width : fit-content;
+                height: auto;
             }
         }
 
         .patient-name {
             font-size: 16px;
 
-            label {
-                color: rgb(44, 185, 255);
+            .appointment-item-for-doctor-label{
+                width: 215px;
+                height: auto;
+                color: #49BCE2;
+            }
+            .appointment-item-for-doctor-content{
+                width : fit-content;
+                height: auto;
             }
         }
 
         .patient-phone-number {
             font-size: 16px;
 
-            label {
-                color: rgb(44, 185, 255);
+            .appointment-item-for-doctor-label{
+                width: 215px;
+                height: auto;
+                color: #49BCE2;
+            }
+            .appointment-item-for-doctor-content{
+                width : fit-content;
+                height: auto;
             }
         }
 
         .patient-email {
             font-size: 16px;
 
-            label {
-                color: rgb(44, 185, 255);
+            .appointment-item-for-doctor-label{
+                width: 215px;
+                height: auto;
+                color: #49BCE2;
+            }
+            .appointment-item-for-doctor-content{
+                width : fit-content;
+                height: auto;
             }
         }
 
         .patient-birthday {
             font-size: 16px;
 
-            label {
-                color: rgb(44, 185, 255);
+            .appointment-item-for-doctor-label{
+                width: 215px;
+                height: auto;
+                color: #49BCE2;
+            }
+            .appointment-item-for-doctor-content{
+                width : fit-content;
+                height: auto;
             }
         }
 
         .patient-date {
             font-size: 16px;
 
-            label {
-                color: rgb(44, 185, 255);
+            .appointment-item-for-doctor-label{
+                width: 215px;
+                height: auto;
+                color: #49BCE2;
+            }
+            .appointment-item-for-doctor-content{
+                width : fit-content;
+                height: auto;
             }
         }
 
         .patient-timeframe {
             font-size: 16px;
 
-            label {
-                color: rgb(44, 185, 255);
+            .appointment-item-for-doctor-label{
+                width: 215px;
+                height: auto;
+                color: #49BCE2;
+            }
+            .appointment-item-for-doctor-content{
+                width : fit-content;
+                height: auto;
             }
         }
 
@@ -222,6 +262,10 @@
         }
     }
 }
+
+// .appointment-item-for-doctor-interface:hover {
+//     border-right: 8px solid #b5daff;
+// }
 
 /* Tùy chỉnh header của modal */
 .edit-patient-report-modal {

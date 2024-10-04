@@ -204,29 +204,49 @@ class AppointmentItemForDoctorInfterface extends Component {
                 </div>
                 <div className="appointment-item-for-doctor-info">
                     <div className="appointment-id">
-                        <label>Mã số cuộc hẹn:</label> {' '}
-                        {appointmentId && appointmentId}
+                        <label className="appointment-item-for-doctor-label">Mã số cuộc hẹn:</label>
+                        <span className="appointment-item-for-doctor-content">
+                            {appointmentId && appointmentId}
+                        </span>
                     </div>
                     <div className="patient-name">
-                        <label>Bệnh nhân: </label>{' '}{patientInfor && patientInfor.lastName ? patientInfor.lastName : ''}
-                        {patientInfor && patientInfor.firstName ? ' ' + patientInfor.firstName : ''}
+                        <label className="appointment-item-for-doctor-label">Bệnh nhân: </label>
+                        <span className="appointment-item-for-doctor-content">
+                            {patientInfor && patientInfor.lastName ? patientInfor.lastName : ''}
+                            {patientInfor && patientInfor.firstName ? ' ' + patientInfor.firstName : ''}
+                        </span>
                         {'. '}<label>ID:</label>{' '}
                         {meetPatientId && meetPatientId}
                     </div>
                     <div className="patient-phone-number">
-                        <label>Số điện thoại của bệnh nhân: </label>{' '}{patientInfor && patientInfor.phoneNumber && patientInfor.phoneNumber}
+                        <label className="appointment-item-for-doctor-label">Số điện thoại của bệnh nhân: </label>
+                        <span className="appointment-item-for-doctor-content">
+                            {patientInfor && patientInfor.phoneNumber && patientInfor.phoneNumber}
+                        </span>
                     </div>
                     <div className="patient-email">
-                        <label>Địa chỉ email của bệnh nhân: </label>{' '}{patientInfor && patientInfor.email && patientInfor.email}
+                        <label className="appointment-item-for-doctor-label">Địa chỉ email của bệnh nhân: </label>
+                        <span className="appointment-item-for-doctor-content">
+                            {patientInfor && patientInfor.email && patientInfor.email}
+                        </span>
                     </div>
                     <div className="patient-birthday">
-                        <label>Ngày sinh của bệnh nhân: </label>{' '}{patientBirthday && patientBirthday}
+                        <label className="appointment-item-for-doctor-label">Ngày sinh của bệnh nhân: </label>
+                        <span className="appointment-item-for-doctor-content">
+                            {patientBirthday && patientBirthday}
+                        </span>
                     </div>
                     <div className="patient-date">
-                        <label>Ngày hẹn: </label>{' '}{appointmentDate && appointmentDate}
+                        <label className="appointment-item-for-doctor-label">Ngày hẹn: </label>
+                        <span className="appointment-item-for-doctor-content">
+                            {appointmentDate && appointmentDate}
+                        </span>
                     </div>
                     <div className="patient-timeframe">
-                        <label>Khung giờ hẹn: </label>{' '}{appointmentTimeFrame && appointmentTimeFrame}
+                        <label className="appointment-item-for-doctor-label">Khung giờ hẹn: </label>
+                        <span className="appointment-item-for-doctor-content">
+                            {appointmentTimeFrame && appointmentTimeFrame}
+                        </span>
                     </div>
                     <div className="file-icon" onClick={this.generatePatientReport}>
                         <i className="fas fa-file-alt"></i> Báo cáo khám bệnh
