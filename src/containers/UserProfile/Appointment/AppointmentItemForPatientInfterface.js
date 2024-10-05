@@ -73,28 +73,48 @@ class AppointmentItemForPatientInfterface extends Component {
         return (
             <div className="appointment-item-for-patient-interface">
                 <div className="appointment-id">
-                    <label>Mã số cuộc hẹn:</label> {' '}
-                    {appointmentId && appointmentId}
+                    <label className="appointment-item-for-patient-label">Mã số cuộc hẹn:</label>
+                    <span className="appointment-item-for-patient-content">
+                        {appointmentId && appointmentId}
+                    </span>
                 </div>
                 <div className="doctor-name">
-                    <label>Bác sĩ: </label>{' '}{doctorInfor && doctorInfor.lastName && doctorInfor.lastName}{' '}
-                    {doctorInfor && doctorInfor.firstName && doctorInfor.firstName}
+                    <label className="appointment-item-for-patient-label">Bác sĩ: </label>
+                    <span className="appointment-item-for-patient-content">
+                        {doctorInfor && doctorInfor.lastName && doctorInfor.lastName}{' '}
+                        {doctorInfor && doctorInfor.firstName && doctorInfor.firstName}
+                    </span>
                 </div>
                 <div className="doctor-phone-number">
-                    <label>Số điện thoại của bác sĩ: </label>{' '}{doctorInfor && doctorInfor.phoneNumber && doctorInfor.phoneNumber}
+                    <label className="appointment-item-for-patient-label">Số điện thoại của bác sĩ: </label>
+                    <span className="appointment-item-for-patient-content">
+                        {doctorInfor && doctorInfor.phoneNumber && doctorInfor.phoneNumber}
+                    </span>
                 </div>
                 <div className="doctor-email">
-                    <label>Địa chỉ email của bác sĩ: </label>{' '}{doctorInfor && doctorInfor.email && doctorInfor.email}
+                    <label className="appointment-item-for-patient-label">Địa chỉ email của bác sĩ: </label>
+                    <span className="appointment-item-for-patient-content">
+                        {doctorInfor && doctorInfor.email && doctorInfor.email}
+                    </span>
                 </div>
                 <div className="doctor-specialty">
-                    <label>Chuyên ngành bác sĩ: </label>{' '}{doctorInfor.Doctor_infor && doctorInfor.Doctor_infor.belongToSpecialty
-                        && doctorInfor.Doctor_infor.belongToSpecialty.name}
+                    <label className="appointment-item-for-patient-label">Chuyên ngành bác sĩ: </label>
+                    <span className="appointment-item-for-patient-content">
+                        {doctorInfor.Doctor_infor && doctorInfor.Doctor_infor.belongToSpecialty
+                            && doctorInfor.Doctor_infor.belongToSpecialty.name}
+                    </span>
                 </div>
                 <div className="appointment-date">
-                    <label>Ngày hẹn: </label>{' '}{appointmentDate && appointmentDate}
+                    <label className="appointment-item-for-patient-label">Ngày hẹn: </label>
+                    <span className="appointment-item-for-patient-content">
+                        {appointmentDate && appointmentDate}
+                    </span>
                 </div>
                 <div className="appointment-timeframe">
-                    <label>Khung giờ hẹn: </label>{' '}{appointmentTimeFrame && appointmentTimeFrame}
+                    <label className="appointment-item-for-patient-label">Khung giờ hẹn: </label>
+                    <span className="appointment-item-for-patient-content">
+                        {appointmentTimeFrame && appointmentTimeFrame}
+                    </span>
                 </div>
             </div >
         );
@@ -103,8 +123,6 @@ class AppointmentItemForPatientInfterface extends Component {
 
 const mapStateToProps = state => {
     return {
-        // systemMenuPath: state.app.systemMenuPath,
-        // isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
     };
 };
