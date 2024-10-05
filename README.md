@@ -1,5 +1,4 @@
-Remaining problems: - chưa xử lí dữ liệu timeframe khi gửi cho client, phải từ keyMap thành giá trị
-                    - chưa làm được các item trong phần history của bác sĩ
+Remaining problems: - chưa tự điền được ngày sinh khi bệnh nhân muốn đặt lịch khám (bắt đầu từ lần thứ 2)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

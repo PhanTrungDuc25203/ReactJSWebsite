@@ -196,7 +196,7 @@ class MakeAppointmentPage extends Component {
         }
 
         let appointmentDate = this.appointmentDateFormat(language);
-        console.log("check state current patient: ", this.state.currentSystemUser);
+        // console.log("check state current patient: ", this.state.currentSystemUser);
 
         return (
             <React.Fragment>
@@ -403,6 +403,9 @@ class MakeAppointmentPage extends Component {
                                             type="text"
                                             value={currentSystemUser && currentSystemUser.lastName && currentSystemUser.firstName ? language === LANGUAGES.VI ? currentSystemUser.lastName + ' ' + currentSystemUser.firstName : currentSystemUser.firstName + ' ' + currentSystemUser.lastName : this.state.fullname}
                                             onChange={(event) => this.tempOnchangeFuncForNoError(event, 'bookingfor')}
+                                            //không nên có onchange trường này vì hàm onchange để tạm cho bớt lỗi thôi
+                                            //tôts nhất tôi sẽ vô hiệu hóa trường này đi
+                                            readOnly={currentSystemUser && currentSystemUser.email ? true : false}
                                         // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.booking-for" />}
                                         ></input>
                                     </div>
