@@ -67,7 +67,9 @@ class MakeAppointmentPage extends Component {
             //     })
             // }
             this.props.getGenderList();
-            this.props.currentSystemUserInfo(this.props.userInfo.email);
+            if (this.props.userInfo) {
+                this.props.currentSystemUserInfo(this.props.userInfo.email);
+            }
             if (this.props.currentSystemUser && this.props.currentSystemUser.gender) {
                 this.setState({
                     selectedGender: this.props.currentSystemUser.gender
