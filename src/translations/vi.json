@@ -173,7 +173,7 @@
         },
         "admin": {
             "menu-title-1": "Người dùng",
-            "menu-title-2": "Phòng khám",
+            "menu-title-2": "Cơ sở y tế",
             "menu-title-3": "Chuyên khoa",
             "menu-title-4": "Bài đăng, cẩm nang",
             "menu-title-5": "Trang chủ",
@@ -181,7 +181,7 @@
             "user-CRUD-by-redux": "CRUD người dùng bởi Redux",
             "doctor-manage": "Quản lý Bác sĩ",
             "admin-manage": "Quản lý quản trị viên",
-            "clinic-manage": "Quản lý phòng khám",
+            "clinic-manage": "Quản lý Cơ sở y tế",
             "specialty-manage": "Quản lý chuyên khoa",
             "article-handbook-manage": "Quản lý bài đăng, cẩm nang",
             "user-manage-by-redux-form": {

@@ -26,7 +26,7 @@ export const adminMenu = [
     { //quản lý phòng khám
         name: 'menu.admin.menu-title-2', menus: [
             {
-                name: 'menu.admin.clinic-manage', link: '/system/clinic-manage'
+                name: 'menu.admin.clinic-manage', link: '/system/medical-facilities-manage'
             },
         ]
     },
