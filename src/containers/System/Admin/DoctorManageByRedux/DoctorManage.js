@@ -365,7 +365,7 @@ class DoctorManage extends Component {
                             ></input>
                         </div>
                         <div className="col-md-3 mb-3">
-                            <label>Chọn phòng khám</label>
+                            <label>Chọn bệnh viện, cơ sở y tế đang công tác</label>
                             <input
                                 type="text"
                                 className="form-control"
