@@ -1,0 +1,89 @@
+.medical-facility-manage-container {
+    padding         : 20px;
+    background-color: #f8f9fa;
+    border-radius   : 10px;
+    box-shadow      : 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    .medical-facility-manage-form-title {
+        font-size    : 24px;
+        font-weight  : bold;
+        color        : #5c4e85;
+        margin-bottom: 20px;
+    }
+
+    .information-container {
+        margin-bottom: 20px;
+    }
+
+    .image-preview-section {
+        display       : flex;
+        flex-direction: column;
+        align-items   : center;
+        margin-top    : 20px;
+
+        .image-preview-container {
+            width    : 100%;
+            max-width: 300px;
+            position : relative;
+
+            .image-frame {
+                border         : 5px solid #a37caf;
+                height         : 170px;
+                aspect-ratio   : 1 / 1;
+                margin         : 0 auto;
+                border-radius  : 30px;
+                display        : flex;
+                justify-content: center;
+                align-items    : center;
+                position       : relative;
+                transition     : all 0.3s ease;
+
+                &:hover {
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                }
+
+                .switch-to-button-change-image {
+                    position : absolute;
+                    top      : 50%;
+                    left     : 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                .choose-avatar-button {
+                    font-size : 40px;
+                    color     : #9850ad;
+                    transition: transform 0.3s ease-in-out;
+                    cursor    : pointer;
+
+                    &:hover {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+
+            .avatar-css {
+                background-size    : cover;
+                height             : 170px;
+                aspect-ratio       : 1 / 1;
+                background-position: center;
+                background-repeat  : no-repeat;
+            }
+        }
+    }
+
+    label {
+        font-size    : 16px;
+        font-weight  : bold;
+        margin-bottom: 8px;
+        color        : #333;
+    }
+
+    .editor-lite-for-medical-facility-description,
+    .editor-lite-for-medical-facility-equipments {
+        margin-top      : 20px;
+        border          : 1px solid #ddd;
+        border-radius   : 5px;
+        padding         : 10px;
+        background-color: #fff;
+    }
+}

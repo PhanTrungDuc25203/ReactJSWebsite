@@ -123,6 +123,10 @@ const getAppointmentHistoriesByDoctorEmail = (doctorEmail) => {
     return axios.get(`/api/get-appointement-histories-by-doctor-email?doctorEmail=${doctorEmail}`);
 }
 
+const getAllSpecialtyAndProvinceForMedicalFacilityManagePage = () => {
+    return axios.get(`/api/get-specialty-and-province-for-medical-facility-manage-page`);
+}
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -147,4 +151,5 @@ export {
     saveAppointmentHistory,
     getAppointmentHistoriesByDoctorEmail,
     getAllRelativeBookingsOfCurrentSystemUserService,
+    getAllSpecialtyAndProvinceForMedicalFacilityManagePage,
 };
