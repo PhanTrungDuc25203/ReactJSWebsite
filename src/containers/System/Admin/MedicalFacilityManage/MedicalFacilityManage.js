@@ -167,7 +167,7 @@ class MedicalFacilityManage extends Component {
                                     <label className="facility-manage-page-title">Tên cơ sở Y tế</label>
                                     <input
                                         type="text"
-                                        className="form-control"
+                                        className="form-control text-input"
                                         placeholder="Bệnh viện/phòng khám..."
                                         required
                                         onChange={(event) => this.handleOnChangeText(event, 'medicalFacilityName')}
@@ -190,7 +190,7 @@ class MedicalFacilityManage extends Component {
                                     <label className="facility-manage-page-title">Địa chỉ cơ sở Y tế</label>
                                     <input
                                         type="text"
-                                        className="form-control"
+                                        className="form-control text-input"
                                         placeholder="Địa chỉ cụ thể..."
                                         required
                                         onChange={(event) => this.handleOnChangeText(event, 'medicalFacilityAddress')} // Sử dụng hàm mới

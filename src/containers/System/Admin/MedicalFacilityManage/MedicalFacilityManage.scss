@@ -4,6 +4,10 @@
 
     .information-container {
         margin-bottom: 20px;
+
+        .text-input {
+            height: 38px;
+        }
     }
 
     .image-preview-section {
@@ -19,7 +23,7 @@
 
             .image-frame {
                 border         : 2px solid #9e9d9e;
-                height         : 180px;
+                height         : 195px;
                 aspect-ratio   : 1.5 / 1;
                 margin         : 0 auto;
                 border-radius  : 10px;
@@ -53,7 +57,7 @@
 
             .avatar-css {
                 background-size    :contain;
-                height             : 180px;
+                height             : 195px;
                 aspect-ratio       : 1.5 / 1;
                 background-position: center;
                 background-repeat  : no-repeat;
@@ -63,14 +67,14 @@
 
     .facility-manage-page-title {
         font-size    : 16px;
-        margin: 0px 0 10px 0;
+        margin: 0px 0 15px 0;
         font-weight  : 600;
         color        : #333;
     }
 
     .editor-lite-for-medical-facility-description,
     .editor-lite-for-medical-facility-equipments {
-        margin      : 10px 0 20px 0;
+        margin      : 10px 0 25px 0;
         border          : 1px solid #ddd;
         border-radius   : 5px;
         padding         : 10px;
