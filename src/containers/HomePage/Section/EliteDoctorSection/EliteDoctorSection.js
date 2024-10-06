@@ -10,6 +10,7 @@ import { switchLanguageOfWebsite } from "../../../../store/actions";
 import * as actions from '../../../../store/actions';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import defaultAvatar from '../../../../assets/images/default-avatar-circle.png';
 
 class EliteDoctorSection extends Component {
 
@@ -114,7 +115,7 @@ class EliteDoctorSection extends Component {
                                         <div className="item-of-slider">
                                             {/* <div className="image-of-item-1 image-css" */}
                                             <div className="image-css"
-                                                style={{ backgroundImage: `url(${imageByBase64})` }}
+                                                style={{ backgroundImage: `url(${imageByBase64 ? imageByBase64 : defaultAvatar})` }}
                                             >
 
                                             </div>
