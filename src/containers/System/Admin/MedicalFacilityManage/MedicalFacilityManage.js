@@ -141,18 +141,49 @@ class MedicalFacilityManage extends Component {
         }
     }
 
-    handleSaveMedicalFacilityInformation = () => {
-        let saveFacilityRes = createMedicalFacility({
-            name: this.state.medicalFacilityName,
-            provinceId: this.state.selectedProvince.value,
-            address: this.state.medicalFacilityAddress,
-            htmlDescription: this.state.htmlDescription,
-            markdownDescription: this.state.markdownDescription,
-            htmlEquipment: this.state.htmlEquipment,
-            markdownEquipment: this.state.markdownEquipment,
-            image: this.state.image,
-        })
-        console.log("Check res: ", saveFacilityRes);
+    checkInputValidation = () => {
+        let isValid = true;
+        let needCheckInput = ['medicalFacilityName', 'selectedProvince', 'medicalFacilityAddress',
+            'selectedSpecialty', 'image', 'htmlDescription', 'markdownEquipment'];
+        for (let i = 0; i < needCheckInput.length; i++) {
+            if (!this.state[needCheckInput[i]]) {
+                isValid = false;
+                alert('Thiếu giá trị cho: ' + needCheckInput[i]);
+                break;
+            }
+        }
+
+        return isValid;
+    }
+
+    handleSaveMedicalFacilityInformation = async () => {
+        console.log("Check facility state: ", this.state);
+        let isValid = this.checkInputValidation();
+        if (isValid === false) {
+            return;
+        }
+
+        try {
+            let saveFacilityRes = await createMedicalFacility({
+                name: this.state.medicalFacilityName,
+                provinceId: this.state.selectedProvince.value,
+                selectedSpecialty: this.state.selectedSpecialty,
+                address: this.state.medicalFacilityAddress,
+                htmlDescription: this.state.htmlDescription,
+                markdownDescription: this.state.markdownDescription,
+                htmlEquipment: this.state.htmlEquipment,
+                markdownEquipment: this.state.markdownEquipment,
+                image: this.state.image,
+            })
+
+            if (saveFacilityRes.errCode === 0) {
+                toast.success("Tạo Cơ sở Y tế thành công!");
+            } else {
+                toast.success(saveFacilityRes.ereMessage);
+            }
+        } catch (error) {
+            console.error("Error saving medical facility: ", error);
+        }
     }
 
     render() {
