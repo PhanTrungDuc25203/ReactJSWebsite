@@ -37,6 +37,12 @@ class DoctorManage extends Component {
             clinicAddress: '',
             note: '',
         }
+        this.timeoutId = null;
+        //biến này để tránh một lỗi khá dị là khi setTimout chưa hết tgian của nó mà user lại 
+        //unmount component này thì sẽ bị lỗi (ko ảnh hưởng đến trải nghiệm j lắm nhưng dev ngứa mắt)
+        //nên biến này sẽ để hủy hàm setTimout khi component này unmount
+        //giá trị của bién này bằng số dịch vụ dược gọi lên từ server nên khi unmount thì nên hủy dịch vụ
+        //đó đi để tránh lộ thông tin
     }
 
     componentDidMount() {
@@ -47,10 +53,16 @@ class DoctorManage extends Component {
     }
 
     enableSelectAfterDelay = () => {
-        setTimeout(() => {
+        this.timeoutId = setTimeout(() => {
             this.setState({ isSelectDisabled: false });
-        }, 3000);
-    };
+        }, 2000);
+    }
+
+    componentWillUnmount() {
+        if (this.timeoutId) {
+            clearTimeout(this.timeoutId);
+        }
+    }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.allDoctorsForDoctorArticlePage !== this.props.allDoctorsForDoctorArticlePage) {

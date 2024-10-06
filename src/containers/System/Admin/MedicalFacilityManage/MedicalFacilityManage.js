@@ -10,7 +10,7 @@ import { faCameraRetro, faCameraRotate } from '@fortawesome/free-solid-svg-icons
 import Select from 'react-select';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
-import { getAllSpecialtyAndProvinceForMedicalFacilityManagePage } from '../../../../services/userService';
+import { getAllSpecialtyAndProvinceForMedicalFacilityManagePage, createMedicalFacility } from '../../../../services/userService';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -140,8 +140,20 @@ class MedicalFacilityManage extends Component {
         }
     }
 
+    handleSaveMedicalFacilityInformation = () => {
+        createMedicalFacility({
+            name: this.state.medicalFacilityName,
+            provinceId: this.state.selectedProvince.value,
+            address: this.state.medicalFacilityAddress,
+            htmlDescription: this.state.htmlDescription,
+            markdownDescription: this.state.markdownDescription,
+            htmlEquipment: this.state.htmlEquipment,
+            markdownEquipment: this.state.markdownEquipment,
+            image: this.state.image,
+        })
+    }
+
     render() {
-        console.log("check state: ", this.state);
         return (
             <div className="medical-facility-manage-container">
                 <div className="container mt-5">
@@ -241,6 +253,11 @@ class MedicalFacilityManage extends Component {
                             onChange={this.handleEditorForEquipmentChange}
                             value={this.state.markdownContent}
                         />
+                    </div>
+                    <div className="save-facility-button">
+                        <button
+                            onClick={() => this.handleSaveMedicalFacilityInformation()}
+                        >Thêm cơ sở Y tế</button>
                     </div>
                 </div>
             </div>

@@ -127,6 +127,10 @@ const getAllSpecialtyAndProvinceForMedicalFacilityManagePage = () => {
     return axios.get(`/api/get-specialty-and-province-for-medical-facility-manage-page`);
 }
 
+const createMedicalFacility = (inputData) => {
+    return axios.post(`/api/create-medical-facility`, inputData);
+}
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -152,4 +156,5 @@ export {
     getAppointmentHistoriesByDoctorEmail,
     getAllRelativeBookingsOfCurrentSystemUserService,
     getAllSpecialtyAndProvinceForMedicalFacilityManagePage,
+    createMedicalFacility,
 };
