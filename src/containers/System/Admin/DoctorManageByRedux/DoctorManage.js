@@ -377,7 +377,7 @@ class DoctorManage extends Component {
                             ></input>
                         </div>
                         <div className="col-md-3 mb-3">
-                            <label>Chọn bệnh viện, cơ sở y tế đang công tác</label>
+                            <label>Chọn cơ sở y tế đang công tác</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -433,6 +433,7 @@ class DoctorManage extends Component {
                                 value={this.state.note}
                             ></input>
                         </div>
+                        <label>Bài báo giới thiệu</label>
                     </div>
                 </div>
 

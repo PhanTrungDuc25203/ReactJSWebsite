@@ -22,7 +22,8 @@
         margin: 20px 0 0 0;
 
         label {
-            margin: 10px 0 10px 0;
+            margin     : 10px 0 10px 0;
+            font-weight: 600;
         }
 
         .choose-time-frame {
@@ -45,7 +46,8 @@
                 background-color: white;
                 color           : #0071ba;
                 transition      : background-color 0.3s, height 0.3s;
-                &.active{
+
+                &.active {
                     color           : white;
                     background-color: #0071ba;
                 }

@@ -10,6 +10,7 @@ import { faCameraRetro, faCameraRotate } from '@fortawesome/free-solid-svg-icons
 import Select from 'react-select';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
+import { toast } from "react-toastify";
 import { getAllSpecialtyAndProvinceForMedicalFacilityManagePage, createMedicalFacility } from '../../../../services/userService';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
@@ -141,7 +142,7 @@ class MedicalFacilityManage extends Component {
     }
 
     handleSaveMedicalFacilityInformation = () => {
-        createMedicalFacility({
+        let saveFacilityRes = createMedicalFacility({
             name: this.state.medicalFacilityName,
             provinceId: this.state.selectedProvince.value,
             address: this.state.medicalFacilityAddress,
@@ -151,18 +152,19 @@ class MedicalFacilityManage extends Component {
             markdownEquipment: this.state.markdownEquipment,
             image: this.state.image,
         })
+        console.log("Check res: ", saveFacilityRes);
     }
 
     render() {
         return (
             <div className="medical-facility-manage-container">
+                <div className="medical-facility-manage-form-title title mb-4">Thông tin cho Cơ sở Y tế</div>
                 <div className="container mt-5">
-                    <div className="medical-facility-manage-form-title mb-4">Thông tin cho Cơ sở Y tế</div>
                     <div className="row">
                         <div className="col-md-8 information-container">
                             <div className="row row-in-form">
                                 <div className="col-md-6 mb-3">
-                                    <label>Tên cơ sở Y tế</label>
+                                    <label className="facility-manage-page-title">Tên cơ sở Y tế</label>
                                     <input
                                         type="text"
                                         className="form-control"
@@ -173,7 +175,7 @@ class MedicalFacilityManage extends Component {
                                     />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label>Tỉnh thành</label>
+                                    <label className="facility-manage-page-title">Tỉnh thành</label>
                                     <Select
                                         value={this.state.selectedProvince}
                                         onChange={this.handleChangeSelectProvince}
@@ -185,7 +187,7 @@ class MedicalFacilityManage extends Component {
 
                                 {/* Full-width input for clinic address */}
                                 <div className="col-md-12 mb-3">
-                                    <label>Địa chỉ cơ sở Y tế</label>
+                                    <label className="facility-manage-page-title">Địa chỉ cơ sở Y tế</label>
                                     <input
                                         type="text"
                                         className="form-control"
@@ -198,7 +200,7 @@ class MedicalFacilityManage extends Component {
 
                                 {/* Full-width multi-select for services */}
                                 <div className="col-md-12 mb-3">
-                                    <label>Chọn các chuyên khoa của Cơ sở</label>
+                                    <label className="facility-manage-page-title">Chọn các chuyên khoa của Cơ sở</label>
                                     <Select
                                         isMulti
                                         closeMenuOnSelect={false}
@@ -214,7 +216,7 @@ class MedicalFacilityManage extends Component {
 
                         <div className="col-md-4 image-preview-section">
                             <div className="image-preview-container">
-                                <label>Ảnh đại diện của cơ sở Y tế (Logo, tên viết tắt,...)</label>
+                                <label className="facility-manage-page-title">Ảnh đại diện của cơ sở Y tế (Logo, tên viết tắt,...)</label>
                                 <div
                                     className="image-frame avatar-css"
                                     style={{ backgroundImage: `url(${this.state.previewImageURL})` }}
@@ -236,7 +238,7 @@ class MedicalFacilityManage extends Component {
                         </div>
                     </div>
 
-                    <label>Bài báo giới thiệu chung về cơ sở</label>
+                    <label className="facility-manage-page-title">Bài báo giới thiệu chung về cơ sở</label>
                     <div className="editor-lite-for-medical-facility-description">
                         <MdEditor
                             style={{ height: '500px' }}
@@ -245,7 +247,7 @@ class MedicalFacilityManage extends Component {
                             value={this.state.markdownContent}
                         />
                     </div>
-                    <label>Bài báo về trang thiết bị của cơ sở</label>
+                    <label className="facility-manage-page-title">Bài báo về trang thiết bị của cơ sở</label>
                     <div className="editor-lite-for-medical-facility-equipments">
                         <MdEditor
                             style={{ height: '500px' }}
