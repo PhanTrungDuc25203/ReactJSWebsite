@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import './MedicalFacilitiesSection.scss';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -54,7 +55,7 @@ class MedicalFacilitiesSection extends Component {
     }
 
     handleViewDetailArticleOfAFacility = (facility) => {
-        console.log("check this facility:", facility);
+        this.props.history.push(`/detail-medical-facility/${facility}`);
     }
 
     render() {
@@ -138,4 +139,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacilitiesSection);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MedicalFacilitiesSection));
