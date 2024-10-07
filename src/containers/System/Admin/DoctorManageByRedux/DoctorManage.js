@@ -33,6 +33,7 @@ class DoctorManage extends Component {
             vietnamProvinceList: [], selectedProvince: '',
             clinicList: [], selectedClinic: '',
             specialtyList: [], selectedSpecialty: '',
+            medicalFacilityList: [], selectedMedicalFacility: '',
             clinicName: '',
             clinicAddress: '',
             note: '',
@@ -50,6 +51,7 @@ class DoctorManage extends Component {
         this.props.fetchAllDoctorsForDoctorArticlePage();
         //lấy extra data cho doctor
         this.props.getRequiredDataForDoctorArticleManagePage();
+        this.props.getBriefInfoOfMedicalFaclityAction('ALL');
     }
 
     enableSelectAfterDelay = () => {
@@ -103,6 +105,12 @@ class DoctorManage extends Component {
                 vietnamProvinceList: selectProvinceData,
                 listDoctors: selectData,
             });
+        }
+        if (prevProps.medicalFacility !== this.props.medicalFacility) {
+            let selectData = this.buildDataForDoctorSelectBox(this.props.medicalFacility, 'medicalFacilitySelection')
+            this.setState({
+                medicalFacilityList: selectData,
+            })
         }
     }
 
@@ -264,6 +272,14 @@ class DoctorManage extends Component {
                     result.push(tempObj);
                 })
             }
+            if (isBuiltFor === 'medicalFacilitySelection') {
+                data.map((item, index) => {
+                    let tempObj = {};
+                    tempObj.label = item.name;
+                    tempObj.value = item.id;
+                    result.push(tempObj);
+                })
+            }
 
         }
         return result;
@@ -377,15 +393,15 @@ class DoctorManage extends Component {
                             ></input>
                         </div>
                         <div className="col-md-3 mb-3">
-                            <label>Chọn cơ sở y tế đang công tác</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Tên phòng khám..."
-                                required
-                                onChange={(event) => this.handleTempForNoError(event)}
-                                value={this.state.selectedClinic}
-                            ></input>
+                            <label>Cơ sở Y tế đang công tác</label>
+                            <Select
+                                value={this.state.selectedMedicalFacility}
+                                onChange={this.handleChangeSelectDoctorInfor}
+                                options={this.state.medicalFacilityList}
+                                className="doctor-option"
+                                name="selectedMedicalFacility"
+                            // placeholder={<FormattedMessage id="doctor-manage-page-for-admin.select-doctor-placeholder" />}
+                            />
                         </div>
                     </div>
                     <div className="row row-in-form">
@@ -455,6 +471,7 @@ const mapStateToProps = state => {
         language: state.app.language,
         allDoctorsForDoctorArticlePage: state.admin.allDoctorsForDoctorArticlePage,
         detailsOfADoctor: state.admin.detailsOfADoctor,
+        medicalFacility: state.admin.medicalFacility,
         allRequiredDoctorData: state.admin.allRequiredDoctorData,
         userInfo: state.user.userInfo,
     };
@@ -465,7 +482,7 @@ const mapDispatchToProps = dispatch => {
         fetchAllDoctorsForDoctorArticlePage: () => dispatch(actions.fetchAllDoctorsForDoctorArticlePage()),
         saveDoctorDetails: (data) => dispatch(actions.saveDoctorDetails(data)),
         fetchDoctorDetailsForDoctorManagePage: (id) => dispatch(actions.fetchDoctorDetailsForDoctorManagePage(id)),
-
+        getBriefInfoOfMedicalFaclityAction: (id) => dispatch(actions.getBriefInfoOfMedicalFaclityAction(id)),
         getRequiredDataForDoctorArticleManagePage: () => dispatch(actions.getRequiredDataForDoctorArticleManagePage())
     };
 };

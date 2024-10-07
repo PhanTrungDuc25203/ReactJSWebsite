@@ -15,6 +15,7 @@ const initialState = {
     detailsOfADoctor: {},
     examHoursData: [],
     specialties: [],
+    medicalFacility: [],
 
     allRequiredDoctorData: [],
     currentSystemUser: {},
@@ -169,6 +170,17 @@ const adminReducer = (state = initialState, action) => {
             }
         case actionTypes.GET_ALL_RELATIVE_INFOR_OF_CURRENT_SYSTEM_USER_FAILED:
             state.currentSystemUser = {};
+            return {
+                ...state,
+            }
+        //lấy dữ liệu ngắn gọn về cơ sở y tế
+        case actionTypes.GET_BRIEF_INFO_OF_MEDICAL_FACILITY_SUCCESSFULLY:
+            state.medicalFacility = action.medicalFacilityInfo;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_BRIEF_INFO_OF_MEDICAL_FACILITY_FAILED:
+            state.medicalFacility = [];
             return {
                 ...state,
             }

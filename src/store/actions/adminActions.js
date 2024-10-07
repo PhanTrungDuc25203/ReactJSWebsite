@@ -14,7 +14,8 @@ import {
     getInforAndArticleForADoctor,
     createTimeframesForDoctorScheduleService,
     getSpecialtiesForHomePageService,
-    getAllRelativeInforsOfCurrentSystemUserService
+    getAllRelativeInforsOfCurrentSystemUserService,
+    getBriefInfoOfMedicalFacility
 } from "../../services/userService";
 import { toast } from "react-toastify";
 
@@ -450,6 +451,29 @@ export const getAllRelativeInfoOfCurrentSystemUserAction = (inputEmail) => {
             console.log('Fetch specialties data fail: ', e);
             dispatch({
                 type: actionTypes.GET_ALL_RELATIVE_INFOR_OF_CURRENT_SYSTEM_USER_FAILED,
+            })
+        }
+    }
+}
+
+export const getBriefInfoOfMedicalFaclityAction = (facilityId) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getBriefInfoOfMedicalFacility(facilityId);
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.GET_BRIEF_INFO_OF_MEDICAL_FACILITY_SUCCESSFULLY,
+                    medicalFacilityInfo: res.infor,
+                })
+            } else {
+                dispatch({
+                    type: actionTypes.GET_BRIEF_INFO_OF_MEDICAL_FACILITY_FAILED,
+                })
+            }
+        } catch (e) {
+            console.log('Get medical facility brief data fail: ', e);
+            dispatch({
+                type: actionTypes.GET_BRIEF_INFO_OF_MEDICAL_FACILITY_FAILED,
             })
         }
     }
