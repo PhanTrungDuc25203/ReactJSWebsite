@@ -92,7 +92,7 @@ class SpecialtySection extends Component {
                     </div>
                     <Slider {...settings}>
                         {arrSpecialty && arrSpecialty.length > 0 &&
-                            arrSpecialty.map((item, index) => {
+                            arrSpecialty.slice(0, 15).map((item, index) => {
                                 let imageByBase64 = '';
                                 if (item.specialtyImage) {
                                     imageByBase64 = Buffer.from(item.specialtyImage, 'base64').toString('binary');

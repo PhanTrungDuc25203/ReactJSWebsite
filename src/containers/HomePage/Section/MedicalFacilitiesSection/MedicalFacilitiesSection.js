@@ -53,8 +53,8 @@ class MedicalFacilitiesSection extends Component {
         );
     }
 
-    handleViewDetailArticleOfAFacility = () => {
-
+    handleViewDetailArticleOfAFacility = (facility) => {
+        console.log("check this facility:", facility);
     }
 
     render() {
@@ -100,7 +100,7 @@ class MedicalFacilitiesSection extends Component {
                                 }
                                 return (
                                     <div className="item-content" key={index}
-                                        onClick={() => this.handleViewDetailArticleOfAFacility(item)}
+                                        onClick={() => this.handleViewDetailArticleOfAFacility(item.id)}
                                     >
                                         <div className="item-of-slider">
                                             <div className="image-css"
