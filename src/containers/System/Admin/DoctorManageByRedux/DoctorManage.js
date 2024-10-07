@@ -141,6 +141,7 @@ class DoctorManage extends Component {
             selectedProvince: this.state.selectedProvince.value,
             clinicName: this.state.clinicName,
             clinicAddress: this.state.clinicAddress,
+            selectedMedicalFacility: this.state.selectedMedicalFacility.value,
             note: this.state.note,
             clinicId: -1,
             specialtyId: this.state.selectedSpecialty.value,
