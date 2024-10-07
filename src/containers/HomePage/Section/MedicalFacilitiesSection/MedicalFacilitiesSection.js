@@ -5,10 +5,30 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FormattedMessage } from 'react-intl';
+import * as actions from "../../../../store/actions";
 import { LANGUAGES } from "../../../../utils";
 import { switchLanguageOfWebsite } from "../../../../store/actions";
 
 class MedicalFacilitiesSection extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            arrMedicalFacility: [],
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.medicalFacility !== this.props.medicalFacility) {
+            this.setState({
+                arrMedicalFacility: this.props.medicalFacility,
+            })
+        }
+    }
+
+    componentDidMount() {
+        this.props.loadMedicalFacilities('ALLANDIMAGE');
+    }
 
     SampleNextArrow(props) {
         const { className, style, onClick } = props;
@@ -33,7 +53,14 @@ class MedicalFacilitiesSection extends Component {
         );
     }
 
+    handleViewDetailArticleOfAFacility = () => {
+
+    }
+
     render() {
+
+        let { arrMedicalFacility } = this.state;
+
         const settings = {
             dots: true,
             infinite: true,
@@ -64,115 +91,31 @@ class MedicalFacilitiesSection extends Component {
                             <FormattedMessage id="medical-facilities-section.button-more-detail" />
                         </a></div>
                     </div>
-
                     <Slider {...settings}>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-1 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-1" />
-                                </div>
-                            </div>
-                        </div>
+                        {arrMedicalFacility && arrMedicalFacility.length > 0 &&
+                            arrMedicalFacility.map((item, index) => {
+                                let imageByBase64 = '';
+                                if (item.image) {
+                                    imageByBase64 = Buffer.from(item.image, 'base64').toString('binary');
+                                }
+                                return (
+                                    <div className="item-content" key={index}
+                                        onClick={() => this.handleViewDetailArticleOfAFacility(item)}
+                                    >
+                                        <div className="item-of-slider">
+                                            <div className="image-css"
+                                                style={{ backgroundImage: `url(${imageByBase64})` }}
+                                            >
 
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-2 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-2" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-3 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-3" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-4 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-4" />
-                                </div>
-
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-5 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-5" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-6 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-6" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-7 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-7" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-8 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-8" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-9 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-9" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-10 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-10" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-11 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-11" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-12 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-12" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-13 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-13" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-14 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-14" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item-content">
-                            <div className="item-of-slider">
-                                <div className="image-of-item-15 image-css"></div>
-                                <div className="item-content"><FormattedMessage id="medical-facilities-section.hospital-15" />
-                                </div>
-                            </div>
-                        </div>
+                                            </div>
+                                            <div className="item-content">
+                                                {item.name}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
                     </Slider>
                 </div>
             </div >
@@ -185,12 +128,13 @@ const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
+        medicalFacility: state.admin.medicalFacility,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        loadMedicalFacilities: (id) => dispatch(actions.getBriefInfoOfMedicalFaclityAction(id)),
     };
 };
 

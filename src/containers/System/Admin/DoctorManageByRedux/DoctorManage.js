@@ -168,7 +168,7 @@ class DoctorManage extends Component {
     handleChangeOnSelectBox = async (selectedDoctor) => {
         console.log(selectedDoctor);
         this.setState({ selectedDoctor });
-        let { priceList, paymentMethodList, vietnamProvinceList, specialtyList } = this.state;
+        let { priceList, paymentMethodList, vietnamProvinceList, specialtyList, medicalFacilityList } = this.state;
         await this.props.fetchDoctorDetailsForDoctorManagePage(selectedDoctor.value);
         let { selectedDoctorDetails } = this.state;
         if (selectedDoctorDetails && selectedDoctorDetails.ArticleMarkdown) {
@@ -176,7 +176,8 @@ class DoctorManage extends Component {
 
             let tempClinicAddress = '', tempClinicName = '', tempNote = '', tempPaymentId = '',
                 tempPriceId = '', tempProvinceId = '', tempSelectedPaymentMethod = '',
-                tempSelectedPrice = '', tempSelectedProvince = '', tempSpecialtyId = '', tempSelectedSpecialty = '';
+                tempSelectedPrice = '', tempSelectedProvince = '', tempSpecialtyId = '', tempSelectedSpecialty = '',
+                tempMedicalFacilityId = '', tempSelectedMedicalFacility = '';
 
             if (selectedDoctorDetails.Doctor_infor) {
                 tempClinicAddress = selectedDoctorDetails.Doctor_infor.clinicAddress;
@@ -186,6 +187,7 @@ class DoctorManage extends Component {
                 tempPriceId = selectedDoctorDetails.Doctor_infor.priceId;
                 tempProvinceId = selectedDoctorDetails.Doctor_infor.provinceId;
                 tempSpecialtyId = selectedDoctorDetails.Doctor_infor.specialtyId;
+                tempMedicalFacilityId = selectedDoctorDetails?.Doctor_specialty_medicalFacility?.ComplexMedicalFacility?.id;
                 tempSelectedPaymentMethod = paymentMethodList.find(item => {
                     return item && item.value === tempPaymentId;
                 })
@@ -197,6 +199,9 @@ class DoctorManage extends Component {
                 })
                 tempSelectedSpecialty = specialtyList.find(item => {
                     return item && item.value === tempSpecialtyId;
+                })
+                tempSelectedMedicalFacility = medicalFacilityList.find(item => {
+                    return item && item.value === tempMedicalFacilityId;
                 })
             }
 
@@ -212,6 +217,7 @@ class DoctorManage extends Component {
                 clinicAddress: tempClinicAddress,
                 note: tempNote,
                 selectedSpecialty: tempSelectedSpecialty,
+                selectedMedicalFacility: tempSelectedMedicalFacility ? tempSelectedMedicalFacility : '',
             })
         } else {
             this.setState({
