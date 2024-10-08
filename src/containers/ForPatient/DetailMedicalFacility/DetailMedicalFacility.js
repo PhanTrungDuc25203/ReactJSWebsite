@@ -17,7 +17,10 @@ class DetailMedicalFacility extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            isLoading: true,
+            spinnerType: 'MoonLoader',
+            color: '#123abc',
+            size: 25,
         }
     }
 

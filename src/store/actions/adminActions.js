@@ -15,7 +15,7 @@ import {
     createTimeframesForDoctorScheduleService,
     getSpecialtiesForHomePageService,
     getAllRelativeInforsOfCurrentSystemUserService,
-    getBriefInfoOfMedicalFacility
+    getInfoOfMedicalFacility
 } from "../../services/userService";
 import { toast } from "react-toastify";
 
@@ -459,7 +459,7 @@ export const getAllRelativeInfoOfCurrentSystemUserAction = (inputEmail) => {
 export const getBriefInfoOfMedicalFaclityAction = (facilityId) => {
     return async (dispatch, getState) => {
         try {
-            let res = await getBriefInfoOfMedicalFacility(facilityId);
+            let res = await getInfoOfMedicalFacility(facilityId);
             if (res && res.errCode === 0) {
                 dispatch({
                     type: actionTypes.GET_BRIEF_INFO_OF_MEDICAL_FACILITY_SUCCESSFULLY,
