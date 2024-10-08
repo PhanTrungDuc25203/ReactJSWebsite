@@ -5,7 +5,7 @@ import './DetailMedicalFacility.scss';
 import HomeFooter from '../../HomePage/HomeFooter/HomeFooter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
-import { getInforAndArticleForADoctor, getAllSpecialtyDetailsById, getAllCodesService } from '../../../services/userService';
+import { getInfoOfMedicalFacility } from '../../../services/userService';
 import { LANGUAGES } from '../../../utils';
 import CustomScrollbars from '../../../components/CustomScrollbars';
 import DoctorScheduleComponent from '../DoctorScheduleComponent/DoctorScheduleComponent';
@@ -17,6 +17,7 @@ class DetailMedicalFacility extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            medicalFacility: {},
             isLoading: true,
             spinnerType: 'MoonLoader',
             color: '#123abc',
@@ -28,10 +29,12 @@ class DetailMedicalFacility extends Component {
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
             let id = this.props.match.params.id;
 
-            let res = await getAllSpecialtyDetailsById({
-                id: id,
-                location: 'ALL',
-            });
+            let res = await getInfoOfMedicalFacility(id);
+            if (res && res.infor && res.infor[0]) {
+                this.setState({
+                    medicalFacility: res.infor[0],
+                })
+            }
         }
     }
 
@@ -52,6 +55,7 @@ class DetailMedicalFacility extends Component {
     };
 
     render() {
+        console.log("check state: ", this.state.medicalFacility);
         return (
             <React.Fragment>
                 <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
