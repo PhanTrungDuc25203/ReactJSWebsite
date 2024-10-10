@@ -8,7 +8,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FormattedMessage } from 'react-intl';
-import { LANGUAGES } from "../../../../utils";
+import { LANGUAGES, path } from "../../../../utils";
 import { switchLanguageOfWebsite } from "../../../../store/actions";
 
 class SpecialtySection extends Component {
@@ -86,7 +86,7 @@ class SpecialtySection extends Component {
                             <FormattedMessage id="specialty-section.specialty-section-title" />
                         </div>
                         <div className="spacing"></div>
-                        <div className="more-detail-button"><a href="#" className="button">
+                        <div className="more-detail-button"><a href={path.ALL_SPECIALTIES} className="button">
                             <FormattedMessage id="specialty-section.button-more-detail" />
                         </a></div>
                     </div>
