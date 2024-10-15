@@ -114,8 +114,8 @@ class DetailMedicalFacility extends Component {
                                     <a onClick={() => this.scrollToSection('booking-appointment')} className={activeSection === 'booking-appointment' ? 'active' : ''}>Đặt lịch khám</a>
                                     <a onClick={() => this.scrollToSection('general-introduction')} className={activeSection === 'general-introduction' ? 'active' : ''}>Giới thiệu chung</a>
                                     <a onClick={() => this.scrollToSection('equipments')} className={activeSection === 'equipments' ? 'active' : ''}>Trang thiết bị</a>
-                                    <a onClick={() => this.scrollToSection('specialty-area')} className={activeSection === 'specialty-area' ? 'active' : ''}>Thế mạnh chuyên môn</a>
-                                    <a onClick={() => this.scrollToSection('location')} className={activeSection === 'location' ? 'active' : ''}>Vị trí</a>
+                                    <a onClick={() => this.scrollToSection('specialty-area')} className={activeSection === 'specialty-area' ? 'active' : ''}>Chuyên ngành</a>
+                                    <a onClick={() => this.scrollToSection('location')} className={activeSection === 'location' ? 'active' : ''}>Vị trí & Bản đồ</a>
                                     <a onClick={() => this.scrollToSection('exam-process')} className={activeSection === 'exam-process' ? 'active' : ''}>Quy trình khám</a>
                                 </nav>
                             </header>

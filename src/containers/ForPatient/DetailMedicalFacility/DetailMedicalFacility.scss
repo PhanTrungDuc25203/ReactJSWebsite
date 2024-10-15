@@ -1,5 +1,6 @@
 .medical-facility-article-container {
     width: 100%;
+    margin-bottom: 10px;
 
     .medical-facility-background-and-avatar-image {
         width : 100%;
@@ -83,7 +84,9 @@
         margin-top   : 20px;
         margin-bottom: 10px;
 
-        .doctors-of-this-medical-facility {}
+        .doctors-of-this-medical-facility {
+            background-color: rgb(245, 250, 255);
+        }
     }
 
     .medical-facility-booking-exam-package-section {}
@@ -210,18 +213,18 @@
         margin    : 0px 0 10px 0;
         position  : sticky;
         top       : 70px;
-        transition: all 0.3s ease; // Thêm hiệu ứng chuyển đổi mượt
+        transition: all 0.3s ease;
 
         &.sticky {
-            width      : 70%; // Thu gọn độ rộng khi dính
-            margin-left: 200px; // Dịch sang phải
+            width      : 70%;
+            margin-left: 200px;
         }
 
         .scrollspy-menu-header {
             width             : 100%;
             padding           : 5px 100px;
             display           : flex;
-            background        : #0fbcf6;
+            background        : #2cb9ff;
             // border-radius  : 10px;
             justify-content   : center;
             align-items       : center;
@@ -229,22 +232,26 @@
 
             .facility-scrollspy-menu-navigation a {
                 font-size      : 16px;
+                display        : inline-block;
+                width          : 150px;
+                text-align     : center;
                 color          : white;
                 text-decoration: none;
-                border         : none;
+                border-left : 2px solid transparent;
+                border-right: 2px solid transparent;
                 font-weight    : 600;
-                margin-left    : 35px;
                 transition     : 0.3s;
                 cursor         : pointer;
             }
 
             .facility-scrollspy-menu-navigation a.active {
                 font-weight: bold;
-                color      : #007bff; // Màu sắc hoặc kiểu dáng mà bạn muốn
+                color      : #005eff; // Màu sắc hoặc kiểu dáng mà bạn muốn
             }
 
             .facility-scrollspy-menu-navigation a:hover {
-                color: #FFA500;
+                border-left : 2px solid white;
+                border-right: 2px solid white;
             }
         }
     }
