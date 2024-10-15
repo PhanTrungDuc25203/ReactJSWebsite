@@ -182,6 +182,7 @@
             "doctor-manage": "Quản lý Bác sĩ",
             "admin-manage": "Quản lý quản trị viên",
             "clinic-manage": "Quản lý Cơ sở y tế",
+            "exam-package-manage": "Quản lý Gói khám bệnh",
             "specialty-manage": "Quản lý chuyên khoa",
             "article-handbook-manage": "Quản lý bài đăng, cẩm nang",
             "user-manage-by-redux-form": {

@@ -28,6 +28,9 @@ export const adminMenu = [
             {
                 name: 'menu.admin.clinic-manage', link: '/system/medical-facilities-manage'
             },
+            {
+                name: 'menu.admin.exam-package-manage', link: '/system/exam-package-manage'
+            },
         ]
     },
 
