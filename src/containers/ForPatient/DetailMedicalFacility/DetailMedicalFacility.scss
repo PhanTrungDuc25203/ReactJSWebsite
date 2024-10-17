@@ -81,7 +81,7 @@
     }
 
     .medical-facility-booking-with-doctor-section {
-        margin-top   : 20px;
+        // margin-top   : 20px;
         margin-bottom: 10px;
 
         .doctors-of-this-medical-facility {
@@ -231,27 +231,29 @@
             z-index           : 20;
 
             .facility-scrollspy-menu-navigation a {
-                font-size      : 16px;
+                font-size      : 15px;
                 display        : inline-block;
                 width          : 150px;
                 text-align     : center;
                 color          : white;
                 text-decoration: none;
-                border-left : 2px solid transparent;
-                border-right: 2px solid transparent;
+                border: 1px solid transparent;
+                border-radius: 5px;
                 font-weight    : 600;
-                transition     : 0.3s;
+                transition     : 0.2s;
                 cursor         : pointer;
             }
 
             .facility-scrollspy-menu-navigation a.active {
-                font-weight: bold;
-                color      : #005eff; // Màu sắc hoặc kiểu dáng mà bạn muốn
+                border: 1px solid white;
+                background  : #78d2ff;
+                border-radius: 5px;
             }
 
             .facility-scrollspy-menu-navigation a:hover {
-                border-left : 2px solid white;
-                border-right: 2px solid white;
+                border: 1px solid white;
+                background  : #78d2ff;
+                border-radius: 5px;
             }
         }
     }
