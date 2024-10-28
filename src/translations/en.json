@@ -29,7 +29,19 @@
         "search-area-quick-search-content-2": "Recently, there have been many cases of diseases, including diphtheria. Do you have any advice for people on how to prevent them?"
     },
     "side-bar": {
-        "side-bar-menu": "Sincerely"
+        "side-bar-menu": "Sincerely",
+        "side-bar-item": {
+            "managepage": "Manage page",
+            "homepage": "Home page",
+            "handbook": "Handbook",
+            "cooperate": "Cooperate",
+            "question": "Question",
+            "contact": "Contact",
+            "service": "Services",
+            "term": "Term",
+            "regulation": "Regulations",
+            "about-us": "About us"
+        }
     },
     "comprehensive-service-section": {
         "section-title": "Comprehensive services",

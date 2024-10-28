@@ -191,48 +191,44 @@ class HomePageHeader extends Component {
                         {this.props.isLoggedIn && userInfo.roleId !== 'R3' &&
                             <a href={userInfo.roleId === 'R2' ? '/doctor/schedule-manage' : '/system/user-manage'}>
                                 <i className="fas fa-screwdriver"></i>
-                                <span>Trang quản lý</span>
+                                <span><FormattedMessage id="side-bar.side-bar-item.managepage" /></span>
                             </a>
                         }
                         <a href="#">
                             <i className="fas fa-qrcode"></i>
-                            <span>Trang chủ</span>
+                            <span><FormattedMessage id="side-bar.side-bar-item.homepage" /></span>
                         </a>
                         <a href="#">
                             <i className="fas fa-book"></i>
-                            <span>Cẩm nang</span>
+                            <span><FormattedMessage id="side-bar.side-bar-item.handbook" /></span>
                         </a>
                         <a href="#">
                             <i className="fas fa-handshake"></i>
-                            <span>Hợp tác</span>
+                            <span><FormattedMessage id="side-bar.side-bar-item.cooperate" /></span>
                         </a>
                         <a href="#">
                             <i className="fas fa-question"></i>
-                            <span>Câu hỏi thường gặp</span>
+                            <span><FormattedMessage id="side-bar.side-bar-item.question" /></span>
                         </a>
                         <a href="#">
                             <i className="far fa-envelope"></i>
-                            <span>Liên hệ</span>
+                            <span><FormattedMessage id="side-bar.side-bar-item.contact" /></span>
                         </a>
                         <a href="#">
                             <i className="fas fa-sliders-h"></i>
-                            <span>Dịch vụ</span>
+                            <span><FormattedMessage id="side-bar.side-bar-item.service" /></span>
                         </a>
                         <a href="#">
                             <i className="fas fa-link"></i>
-                            <span>Điều khoản sử dụng</span>
+                            <span><FormattedMessage id="side-bar.side-bar-item.term" /></span>
                         </a>
                         <a href="#">
                             <i className="fas fa-stream"></i>
-                            <span>Quy chế hoạt động</span>
-                        </a>
-                        <a href="#">
-                            <i className="fas fa-calendar"></i>
-                            <span>Sự kiện</span>
+                            <span><FormattedMessage id="side-bar.side-bar-item.regulation" /></span>
                         </a>
                         <a href="#">
                             <i className="far fa-question-circle"></i>
-                            <span>Về chúng tôi</span>
+                            <span><FormattedMessage id="side-bar.side-bar-item.about-us" /></span>
                         </a>
                         <div className="home-page-side-bar-language-option">
                             <div className={language === LANGUAGES.VI ? "vietnamese-option active" : "vietnamese-option"} onClick={() => this.switchLanguageOfWebsite(LANGUAGES.VI)}></div>

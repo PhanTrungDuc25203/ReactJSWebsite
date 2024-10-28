@@ -29,7 +29,19 @@
         "search-area-quick-search-content-2": "Dạo này xảy ra rất nhiều những trường hợp mắc bệnh, bạch hầu, bác sĩ có lời khuyên gì cho mọi người để phòng tránh?"
     },
     "side-bar": {
-        "side-bar-menu": "Kính chào"
+        "side-bar-menu": "Kính chào",
+        "side-bar-item": {
+            "managepage": "Trang quản lý",
+            "homepage": "Trang chủ",
+            "handbook": "Cẩm nang",
+            "cooperate": "Hợp tác",
+            "question": "Câu hỏi thường gặp",
+            "contact": "Liên hệ",
+            "service": "Dịch vụ",
+            "term": "Điều khoản sử dụng",
+            "regulation": "Quy chế hoạt động",
+            "about-us": "Về chúng tôi"
+        }
     },
     "comprehensive-service-section": {
         "section-title": "Dịch vụ toàn diện",
