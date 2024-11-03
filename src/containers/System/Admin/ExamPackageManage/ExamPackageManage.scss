@@ -1,0 +1,126 @@
+.exam-package-manage-container {
+    padding: 15px;
+    background-color: #f8f9fa;
+
+    .information-container {
+        margin-bottom: 20px;
+
+        .text-input {
+            height: 38px;
+        }
+    }
+
+    .image-preview-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 0px;
+
+        .image-preview-container {
+            width: 100%;
+            max-width: 300px;
+            position: relative;
+
+            .image-frame {
+                border: 2px solid #9e9d9e;
+                height: 195px;
+                aspect-ratio: 1.5 / 1;
+                margin: 0 auto;
+                border-radius: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+
+                .switch-to-button-change-image {
+                    font-size: 35px;
+                    color: black;
+                    transition: transform 0.3s ease-in-out;
+                    cursor: pointer;
+                    position: absolute;
+                    top: 70%;
+                    left: 80%;
+                }
+
+                .choose-avatar-button {
+                    font-size: 35px;
+                    color: black;
+                    transition: transform 0.3s ease-in-out;
+                    cursor: pointer;
+
+                    &:hover {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+
+            .avatar-css {
+                background-size: contain;
+                height: 195px;
+                aspect-ratio: 1.5 / 1;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+    }
+
+    .facility-manage-page-title {
+        font-size: 16px;
+        margin: 0px 0 15px 0;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .editor-lite-for-exam-package-description,
+    .editor-lite-for-exam-package-equipments {
+        margin: 10px 0 25px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        background-color: #fff;
+    }
+
+    .save-facility-button {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+
+        button {
+            display: inline-block;
+            font-weight: 400;
+            color: #fff;
+            text-align: center;
+            vertical-align: middle;
+            background-color: #007bff;
+            border: 1px solid transparent;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+            color: #fff;
+        }
+
+        button:focus {
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+        }
+
+        button:active {
+            background-color: #004085;
+            border-color: #003768;
+        }
+
+        button.disabled,
+        button:disabled {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            cursor: not-allowed;
+        }
+    }
+}

@@ -11,7 +11,7 @@ import Select from 'react-select';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import { toast } from "react-toastify";
-import { } from '../../../../services/userService';
+import { createPackageFacility } from '../../../../services/userService';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -36,18 +36,49 @@ class ExamPackageManage extends Component {
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.requiredPackageData !== this.props.requiredPackageData) {
+            let { resPrice, resMedicalFacility, resSpecialty } = this.props.requiredPackageData;
+            let selectPriceData = this.buildDataForSelectBox(resPrice, 'priceSelection');
+            let selectMedicalFacilityData = this.buildDataForSelectBox(resMedicalFacility, 'medicalFacilitySelection');
+            let selectSpecialtyData = this.buildDataForSelectBox(resSpecialty, 'specialtySelection');
+            this.setState({
+                listPrice: selectPriceData,
+                listMedicalFacility: selectMedicalFacilityData,
+                listSpecialty: selectSpecialtyData,
+            });
+        }
 
+        if (prevProps.language !== this.props.language) {
+            let { resPrice, resMedicalFacility, resSpecialty } = this.props.requiredPackageData;
+            let selectPriceData = this.buildDataForSelectBox(resPrice, 'priceSelection');
+            let selectMedicalFacilityData = this.buildDataForSelectBox(resMedicalFacility, 'medicalFacilitySelection');
+            let selectSpecialtyData = this.buildDataForSelectBox(resSpecialty, 'specialtySelection');
+            this.setState({
+                listPrice: selectPriceData,
+                listMedicalFacility: selectMedicalFacilityData,
+                listSpecialty: selectSpecialtyData,
+            });
+        }
     }
 
     buildDataForSelectBox = (data, isBuiltFor) => {
         let result = [];
         let { language } = this.props;
         if (data && data.length > 0) {
-            if (isBuiltFor === 'provinceSelection') {
+            if (isBuiltFor === 'priceSelection') {
                 data.map((item) => {
                     let tempObj = {};
                     tempObj.label = language === LANGUAGES.VI ? item.value_Vie : item.value_Eng;
                     tempObj.value = item.keyMap;
+                    result.push(tempObj);
+                });
+            }
+
+            if (isBuiltFor === 'medicalFacilitySelection') {
+                data.map((item) => {
+                    let tempObj = {};
+                    tempObj.label = item.name;
+                    tempObj.value = item.id;
                     result.push(tempObj);
                 });
             }
@@ -71,10 +102,10 @@ class ExamPackageManage extends Component {
         })
     }
 
-    handleEditorForEquipmentChange = ({ html, text }) => {
+    handleEditorForCategoryChange = ({ html, text }) => {
         this.setState({
-            markdownEquipment: text,
-            htmlEquipment: html,
+            markdownCategory: text,
+            htmlCategory: html,
         })
     }
 
@@ -86,14 +117,16 @@ class ExamPackageManage extends Component {
         })
     }
 
-    handleChangeSelectProvince = (selectedOption) => {
-        this.setState({ selectedProvince: selectedOption });
+    handleChangeSelectSpecialty = (selectedOption) => {
+        this.setState({ selectedSpecialty: selectedOption });
     }
 
-    handleChangeSelectSpecialty = (selectedOptions) => {
-        this.setState({
-            selectedSpecialty: selectedOptions
-        });
+    handleChangeSelectMedicalFacility = (selectedOption) => {
+        this.setState({ selectedMedicalFacility: selectedOption })
+    }
+
+    handleChangeSelectPrice = (selectedOptions) => {
+        this.setState({ selectedPrice: selectedOptions })
     }
 
     handleFacilityImageChange = async (event) => {
@@ -112,7 +145,15 @@ class ExamPackageManage extends Component {
     checkInputValidation = () => {
         let isValid = true;
         let needCheckInput = [
-            //những trường cần check
+            'name',
+            'selectedSpecialty',
+            'selectedPrice',
+            'selectedMedicalFacility',
+            'htmlDescription',
+            'markdownDescription',
+            'htmlCategory',
+            'markdownCategory',
+            'image',
         ];
         for (let i = 0; i < needCheckInput.length; i++) {
             if (!this.state[needCheckInput[i]]) {
@@ -125,39 +166,40 @@ class ExamPackageManage extends Component {
         return isValid;
     }
 
-    // handleSaveMedicalFacilityInformation = async () => {
-    //     console.log("Check facility state: ", this.state);
-    //     let isValid = this.checkInputValidation();
-    //     if (isValid === false) {
-    //         return;
-    //     }
+    handleSaveExamPackageInformation = async () => {
+        console.log("Check facility state: ", this.state);
+        let isValid = this.checkInputValidation();
+        if (isValid === false) {
+            return;
+        }
+        try {
+            let savePackageRes = await createPackageFacility({
+                name: this.state.name,
+                selectedSpecialty: this.state.selectedSpecialty.value,
+                selectedPrice: this.state.selectedPrice.value,
+                selectedMedicalFacility: this.state.selectedMedicalFacility.value,
+                htmlDescription: this.state.htmlDescription,
+                markdownDescription: this.state.markdownDescription,
+                htmlCategory: this.state.htmlCategory,
+                markdownCategory: this.state.markdownCategory,
+                image: this.state.image,
+            })
 
-    //     try {
-    //         let saveFacilityRes = await createMedicalFacility({
-    //             name: this.state.medicalFacilityName,
-    //             provinceId: this.state.selectedProvince.value,
-    //             selectedSpecialty: this.state.selectedSpecialty,
-    //             address: this.state.medicalFacilityAddress,
-    //             htmlDescription: this.state.htmlDescription,
-    //             markdownDescription: this.state.markdownDescription,
-    //             htmlEquipment: this.state.htmlEquipment,
-    //             markdownEquipment: this.state.markdownEquipment,
-    //             image: this.state.image,
-    //         })
-
-    //         if (saveFacilityRes.errCode === 0) {
-    //             toast.success("Tạo Cơ sở Y tế thành công!");
-    //         } else {
-    //             toast.success(saveFacilityRes.ereMessage);
-    //         }
-    //     } catch (error) {
-    //         console.error("Error saving medical facility: ", error);
-    //     }
-    // }
+            if (savePackageRes.errCode === 0) {
+                toast.success("Tạo Gói khám cho Cơ sở y tế thành công!");
+            } else {
+                toast.success(savePackageRes.errMessage);
+            }
+        } catch (error) {
+            console.error("Error saving medical facility: ", error);
+        }
+    }
 
     render() {
 
         console.log("Check package data: ", this.props.requiredPackageData);
+
+
 
         return (
             <div className="exam-package-manage-container">
@@ -173,42 +215,40 @@ class ExamPackageManage extends Component {
                                         className="form-control text-input"
                                         placeholder="Gói khám tổng quát..."
                                         required
-                                        onChange={(event) => this.handleOnChangeText(event, 'medicalFacilityName')}
+                                        onChange={(event) => this.handleOnChangeText(event, 'name')}
                                         value={this.state.clinicName}
                                     />
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label className="facility-manage-page-title">Chuyên khoa</label>
                                     <Select
-                                        value={this.state.selectedProvince}
-                                        onChange={this.handleChangeSelectProvince}
-                                        options={this.state.provinceOptions}
+                                        value={this.state.selectedSpecialty}
+                                        onChange={this.handleChangeSelectSpecialty}
+                                        options={this.state.listSpecialty}
                                         className="province-option"
-                                        name="selectedProvince"
+                                        name="selectedSpecialty"
                                     />
                                 </div>
 
                                 <div className="col-md-12 mb-3">
                                     <label className="facility-manage-page-title">Thuộc về Cở sở y tế</label>
                                     <Select
-                                        value={this.state.selectedProvince}
-                                        onChange={this.handleChangeSelectProvince}
-                                        options={this.state.provinceOptions}
+                                        value={this.state.selectedMedicalFacility}
+                                        onChange={this.handleChangeSelectMedicalFacility}
+                                        options={this.state.listMedicalFacility}
                                         className="province-option"
-                                        name="selectedProvince"
+                                        name="selectedMedicalFacility"
                                     />
                                 </div>
 
                                 <div className="col-md-12 mb-3">
                                     <label className="facility-manage-page-title">Giá của Gói khám</label>
                                     <Select
-                                        isMulti
-                                        closeMenuOnSelect={false}
-                                        value={this.state.selectedSpecialty}
-                                        onChange={this.handleChangeSelectSpecialty}
-                                        options={this.state.specialtyOptions}
+                                        value={this.state.selectedPrice}
+                                        onChange={this.handleChangeSelectPrice}
+                                        options={this.state.listPrice}
                                         className="service-options"
-                                        name="selectedServices"
+                                        name="selectedPrice"
                                     />
                                 </div>
                             </div>
@@ -252,14 +292,14 @@ class ExamPackageManage extends Component {
                         <MdEditor
                             style={{ height: '500px' }}
                             renderHTML={text => mdParser.render(text)}
-                            onChange={this.handleEditorForEquipmentChange}
+                            onChange={this.handleEditorForCategoryChange}
                             value={this.state.markdownContent}
                         />
                     </div>
                     <div className="save-facility-button">
                         <button
-                            onClick={() => this.handleSaveMedicalFacilityInformation()}
-                        >Thêm cơ sở Y tế</button>
+                            onClick={() => this.handleSaveExamPackageInformation()}
+                        >Thêm Gói khám cho Cơ sở y tế</button>
                     </div>
                 </div>
             </div>

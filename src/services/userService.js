@@ -135,6 +135,10 @@ const getInfoOfMedicalFacility = (facilityId) => {
     return axios.get(`/api/get-info-of-medical-facility?id=${facilityId}`);
 }
 
+const createPackageFacility = (inputData) => {
+    return axios.post(`/api/create-exam-package`, inputData);
+}
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -162,4 +166,5 @@ export {
     getAllSpecialtyAndProvinceForMedicalFacilityManagePage,
     createMedicalFacility,
     getInfoOfMedicalFacility,
+    createPackageFacility,
 };
