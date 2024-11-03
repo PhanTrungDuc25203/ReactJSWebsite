@@ -11,7 +11,7 @@ import Select from 'react-select';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import { toast } from "react-toastify";
-import { getAllSpecialtyAndProvinceForExamPackageManagePage, createMedicalFacility } from '../../../../services/userService';
+import { } from '../../../../services/userService';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -19,12 +19,20 @@ class ExamPackageManage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            name: '',
+            listSpecialty: [], selectedSpecialty: '',
+            listMedicalFacility: [], selectedMedicalFacility: '',
+            htmlDescription: '',
+            markdownDescription: '',
+            htmlCategory: '',
+            markdownCategory: '',
+            listPrice: [], selectedPrice: '',
+            image: '',
         }
     }
 
     async componentDidMount() {
-
+        this.props.getRequiredDataForExamPackageManagePage();
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
@@ -148,6 +156,9 @@ class ExamPackageManage extends Component {
     // }
 
     render() {
+
+        console.log("Check package data: ", this.props.requiredPackageData);
+
         return (
             <div className="exam-package-manage-container">
                 <div className="exam-package-manage-form-title title mb-4">Thông tin cho Gói khám bệnh của Cơ sở Y tế</div>
@@ -156,18 +167,18 @@ class ExamPackageManage extends Component {
                         <div className="col-md-8 information-container">
                             <div className="row row-in-form">
                                 <div className="col-md-6 mb-3">
-                                    <label className="facility-manage-page-title">Tên cơ sở Y tế</label>
+                                    <label className="facility-manage-page-title">Tên của Gói khám</label>
                                     <input
                                         type="text"
                                         className="form-control text-input"
-                                        placeholder="Bệnh viện/phòng khám..."
+                                        placeholder="Gói khám tổng quát..."
                                         required
                                         onChange={(event) => this.handleOnChangeText(event, 'medicalFacilityName')}
                                         value={this.state.clinicName}
                                     />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label className="facility-manage-page-title">Tỉnh thành</label>
+                                    <label className="facility-manage-page-title">Chuyên khoa</label>
                                     <Select
                                         value={this.state.selectedProvince}
                                         onChange={this.handleChangeSelectProvince}
@@ -177,22 +188,19 @@ class ExamPackageManage extends Component {
                                     />
                                 </div>
 
-                                {/* Full-width input for clinic address */}
                                 <div className="col-md-12 mb-3">
-                                    <label className="facility-manage-page-title">Địa chỉ cơ sở Y tế</label>
-                                    <input
-                                        type="text"
-                                        className="form-control text-input"
-                                        placeholder="Địa chỉ cụ thể..."
-                                        required
-                                        onChange={(event) => this.handleOnChangeText(event, 'medicalFacilityAddress')} // Sử dụng hàm mới
-                                        value={this.state.clinicAddress}
+                                    <label className="facility-manage-page-title">Thuộc về Cở sở y tế</label>
+                                    <Select
+                                        value={this.state.selectedProvince}
+                                        onChange={this.handleChangeSelectProvince}
+                                        options={this.state.provinceOptions}
+                                        className="province-option"
+                                        name="selectedProvince"
                                     />
                                 </div>
 
-                                {/* Full-width multi-select for services */}
                                 <div className="col-md-12 mb-3">
-                                    <label className="facility-manage-page-title">Chọn các chuyên khoa của Cơ sở</label>
+                                    <label className="facility-manage-page-title">Giá của Gói khám</label>
                                     <Select
                                         isMulti
                                         closeMenuOnSelect={false}
@@ -208,7 +216,7 @@ class ExamPackageManage extends Component {
 
                         <div className="col-md-4 image-preview-section">
                             <div className="image-preview-container">
-                                <label className="facility-manage-page-title">Ảnh đại diện của cơ sở Y tế (Logo, tên viết tắt,...)</label>
+                                <label className="facility-manage-page-title">Ảnh đại diện Gói khám (Logo, tên viết tắt,...)</label>
                                 <div
                                     className="image-frame avatar-css"
                                     style={{ backgroundImage: `url(${this.state.previewImageURL})` }}
@@ -230,7 +238,7 @@ class ExamPackageManage extends Component {
                         </div>
                     </div>
 
-                    <label className="facility-manage-page-title">Bài báo giới thiệu chung về cơ sở</label>
+                    <label className="facility-manage-page-title">Bài báo giới thiệu chung về Gói khám</label>
                     <div className="editor-lite-for-exam-package-description">
                         <MdEditor
                             style={{ height: '500px' }}
@@ -239,7 +247,7 @@ class ExamPackageManage extends Component {
                             value={this.state.markdownContent}
                         />
                     </div>
-                    <label className="facility-manage-page-title">Bài báo về trang thiết bị của cơ sở</label>
+                    <label className="facility-manage-page-title">Các danh mục của Gói khám</label>
                     <div className="editor-lite-for-exam-package-equipments">
                         <MdEditor
                             style={{ height: '500px' }}
@@ -262,11 +270,14 @@ class ExamPackageManage extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
+        requiredPackageData: state.admin.allRequiredDataForExamPackageManage,
     };
 }
 
 const mapDispatchToProps = dispatch => {
-    return {};
+    return {
+        getRequiredDataForExamPackageManagePage: () => dispatch(actions.getRequiredDataForExamPackageManagePage()),
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExamPackageManage);

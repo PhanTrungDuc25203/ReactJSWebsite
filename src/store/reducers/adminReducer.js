@@ -19,6 +19,7 @@ const initialState = {
 
     allRequiredDoctorData: [],
     currentSystemUser: {},
+    allRequiredDataForExamPackageManage: {},
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -181,6 +182,17 @@ const adminReducer = (state = initialState, action) => {
             }
         case actionTypes.GET_BRIEF_INFO_OF_MEDICAL_FACILITY_FAILED:
             state.medicalFacility = [];
+            return {
+                ...state,
+            }
+        //lấy dữ liệu liên quan tới một gói khám cho trang quản lý gói khám
+        case actionTypes.GET_ALL_RELATIVE_INFOR_FOR_A_EXAM_PACKAGE_SUCCESSFULLY:
+            state.allRequiredDataForExamPackageManage = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_ALL_RELATIVE_INFOR_FOR_A_EXAM_PACKAGE_FAIL:
+            state.medicalFacility = {};
             return {
                 ...state,
             }

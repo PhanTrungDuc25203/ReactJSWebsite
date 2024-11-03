@@ -478,3 +478,39 @@ export const getBriefInfoOfMedicalFaclityAction = (facilityId) => {
         }
     }
 }
+
+export const getRequiredDataForExamPackageManagePage = () => {
+    return async (dispatch, getState) => {
+        try {
+            let resPrice = await getAllCodesService('price');
+            let resMedicalFacility = await getInfoOfMedicalFacility('ALL');
+            let resSpecialty = await getSpecialtiesForHomePageService('');
+
+            if (resPrice && resPrice.errCode === 0 &&
+                resPrice && resPrice.errCode === 0 &&
+                resMedicalFacility && resMedicalFacility.errCode === 0 &&
+                resSpecialty && resSpecialty.errCode === 0) {
+
+                let data = {
+                    resPrice: resPrice.data,
+                    resMedicalFacility: resMedicalFacility.infor,
+                    resSpecialty: resSpecialty.data,
+                }
+
+                dispatch({
+                    type: actionTypes.GET_ALL_RELATIVE_INFOR_FOR_A_EXAM_PACKAGE_SUCCESSFULLY,
+                    data: data,
+                })
+            } else {
+                dispatch({
+                    type: actionTypes.GET_ALL_RELATIVE_INFOR_FOR_A_EXAM_PACKAGE_FAIL,
+                })
+            }
+        } catch (e) {
+            dispatch({
+                type: actionTypes.GET_ALL_RELATIVE_INFOR_FOR_A_EXAM_PACKAGE_FAIL,
+            })
+            console.log('getRequiredDataForExamPackageManagePage function error: ', e);
+        }
+    }
+}
