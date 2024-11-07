@@ -10,6 +10,7 @@ import DoctorManage from '../containers/System/Admin/DoctorManageByRedux/DoctorM
 import SpecialtyManage from '../containers/System/Specialty/SpecialtyManage';
 import CustomScrollbars from '../components/CustomScrollbars';
 import ExamPackageManage from '../containers/System/Admin/ExamPackageManage/ExamPackageManage';
+import ExamPackageScheduleManage from '../containers/System/Admin/ExamPackageManage/ExamPackageScheduleManage';
 
 class System extends Component {
     render() {
@@ -27,6 +28,7 @@ class System extends Component {
                                 <Route path="/system/specialty-manage" component={SpecialtyManage} />
                                 <Route path="/system/medical-facilities-manage" component={MedicalFacilityManage} />
                                 <Route path="/system/exam-package-manage" component={ExamPackageManage} />
+                                <Route path="/system/exam-package-schedule-manage" component={ExamPackageScheduleManage} />
                                 <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                             </Switch>
                         </div>

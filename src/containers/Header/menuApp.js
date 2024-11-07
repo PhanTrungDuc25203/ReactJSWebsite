@@ -31,6 +31,9 @@ export const adminMenu = [
             {
                 name: 'menu.admin.exam-package-manage', link: '/system/exam-package-manage'
             },
+            {
+                name: 'menu.admin.exam-package-schedule-manage', link: '/system/exam-package-schedule-manage'
+            },
         ]
     },
 

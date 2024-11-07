@@ -196,11 +196,6 @@ class ExamPackageManage extends Component {
     }
 
     render() {
-
-        console.log("Check package data: ", this.props.requiredPackageData);
-
-
-
         return (
             <div className="exam-package-manage-container">
                 <div className="exam-package-manage-form-title title mb-4">Thông tin cho Gói khám bệnh của Cơ sở Y tế</div>

@@ -195,6 +195,7 @@
             "admin-manage": "Admin manage",
             "clinic-manage": "Medical facilities manage",
             "exam-package-manage": "Exam package manager",
+            "exam-package-schedule-manage": "Exam package schedule manage",
             "specialty-manage": "Specialty manage",
             "article-handbook-manage": "Article/handbook manage",
             "user-manage-by-redux-form": {
