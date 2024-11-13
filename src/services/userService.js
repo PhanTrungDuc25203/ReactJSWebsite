@@ -136,7 +136,11 @@ const getInfoOfMedicalFacility = (facilityId) => {
 }
 
 const createPackageFacility = (inputData) => {
-    return axios.post(`/api/create-exam-package`, inputData);
+    return axios.post(`/api/bulk-create-timeframes-for-exam-package-schedule`, inputData);
+}
+
+const getAllExamPackageService = (inputData) => {
+    return axios.get(`/api/get-all-exam-package?id=${inputData}`);
 }
 
 export {
@@ -167,4 +171,5 @@ export {
     createMedicalFacility,
     getInfoOfMedicalFacility,
     createPackageFacility,
+    getAllExamPackageService,
 };

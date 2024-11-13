@@ -129,7 +129,8 @@ const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
-        specialtiesData: state.admin.specialties,
+        // specialtiesData: state.admin.specialties,
+        specialtiesData: state.admin?.specialties || [],
     };
 };
 

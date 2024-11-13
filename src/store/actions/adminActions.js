@@ -15,7 +15,8 @@ import {
     createTimeframesForDoctorScheduleService,
     getSpecialtiesForHomePageService,
     getAllRelativeInforsOfCurrentSystemUserService,
-    getInfoOfMedicalFacility
+    getInfoOfMedicalFacility,
+    getAllExamPackageService
 } from "../../services/userService";
 import { toast } from "react-toastify";
 
@@ -511,6 +512,29 @@ export const getRequiredDataForExamPackageManagePage = () => {
                 type: actionTypes.GET_ALL_RELATIVE_INFOR_FOR_A_EXAM_PACKAGE_FAIL,
             })
             console.log('getRequiredDataForExamPackageManagePage function error: ', e);
+        }
+    }
+}
+
+export const getAllExamPackage = (inputId) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllExamPackageService(inputId);
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.GET_ALL_EXAM_PACKAGE_SUCCESFULLY,
+                    data: res.infor,
+                })
+            } else {
+                dispatch({
+                    type: actionTypes.GET_ALL_EXAM_PACKAGE_FAIL,
+                })
+            }
+        } catch (e) {
+            console.log('Get all package data fail: ', e);
+            dispatch({
+                type: actionTypes.GET_ALL_EXAM_PACKAGE_FAIL,
+            })
         }
     }
 }
