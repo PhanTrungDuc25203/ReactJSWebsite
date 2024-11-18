@@ -1,0 +1,37 @@
+.package-schedule-component {
+    padding      : 20px 85px;
+    border-bottom: 1px solid #0fbcf6;
+
+    .avatar-name-and-description {
+        display: flex;
+        gap    : 2rem;
+
+        .avatar-css {
+            background-size    : cover;
+            height             : 100px;
+            aspect-ratio       : 1/1;
+            background-position: center;
+            border             : 5px solid #c1e9ff;
+            border-radius      : 50%;
+            background-repeat  : no-repeat;
+        }
+
+        .package-name-and-description {
+            p {
+                strong {
+                    color      : #0fbcf6;
+                    font-weight: 500 !important;
+                    font-size  : 20px;
+                }
+            }
+
+            ul {
+                li {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+
+    .schedule-and-insurance {}
+}

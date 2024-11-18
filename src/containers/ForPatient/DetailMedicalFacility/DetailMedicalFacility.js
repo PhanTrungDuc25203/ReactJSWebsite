@@ -12,6 +12,7 @@ import _ from 'lodash';
 import { MoonLoader } from 'react-spinners';
 import defaultMedicalFacility from '../../../assets/images/default-medical-facility-avatar-lite-1.jpg';
 import DoctorScheduleComponent from '../../ForPatient/DoctorScheduleComponent/DoctorScheduleComponent';
+import PackageScheduleComponent from '../../ForPatient/PackageScheduleComponent/PackageScheduleComponent';
 
 class DetailMedicalFacility extends Component {
 
@@ -130,6 +131,21 @@ class DetailMedicalFacility extends Component {
                                     return (
                                         <div className="doctors-of-this-medical-facility" key={index}>
                                             <DoctorScheduleComponent doctorId={item.doctorId} />
+                                        </div>
+                                    )
+                                }
+                                )
+                            }
+                        </div>
+                        <div className="medical-facility-booking-with-package-section">
+                            {medicalFacility.medicalFacilityPackage && medicalFacility.medicalFacilityPackage.length > 0 &&
+                                <label className="section-label">Các Gói khám tại Cơ sở y tế</label>
+                            }
+                            {medicalFacility.medicalFacilityPackage && medicalFacility.medicalFacilityPackage.length > 0 &&
+                                medicalFacility.medicalFacilityPackage.map((item, index) => {
+                                    return (
+                                        <div className="doctors-of-this-medical-facility" key={index}>
+                                            <PackageScheduleComponent packageId={item.id} />
                                         </div>
                                     )
                                 }

@@ -8,7 +8,7 @@ import 'react-markdown-editor-lite/lib/index.css';
 import DatePicker from '../../../../components/Input/DatePicker';
 import Select from 'react-select';
 import { toast } from "react-toastify";
-import { createPackageFacility } from '../../../../services/userService';
+import { createTimeframeForPackage } from '../../../../services/userService';
 import _ from 'lodash';
 
 class ExamPackageScheduleManage extends Component {
@@ -117,7 +117,7 @@ class ExamPackageScheduleManage extends Component {
             }
         }
         try {
-            let response = await createPackageFacility({
+            let response = await createTimeframeForPackage({
                 scheduleArr: result,
                 examPackageId: selectedPackage.value,
                 formatedDate: formatedDate,
