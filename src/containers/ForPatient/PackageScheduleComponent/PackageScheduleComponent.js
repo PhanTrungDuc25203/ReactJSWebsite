@@ -9,6 +9,7 @@ import { LANGUAGES } from '../../../utils';
 import DoctorScheduleSection from '../DetailDoctor/DoctorScheduleSection';
 import { getAllExamPackageService } from '../../../services/userService';
 import defaultAvatar from '../../../assets/images/default-avatar-circle.png';
+import PackageScheduleSection from './PackageScheduleSection';
 
 class PackageScheduleComponent extends Component {
     constructor(props) {
@@ -86,7 +87,7 @@ class PackageScheduleComponent extends Component {
                 </div>
                 <div className="schedule-and-insurance">
                     <div className="schedule">
-                        đây là phần schedule
+                        <PackageScheduleSection selectedPackageId={packagerDetails.id || -1} />
                     </div>
                     <div className="insurance">
                         đây là phần bảo hiểm

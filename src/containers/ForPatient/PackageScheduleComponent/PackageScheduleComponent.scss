@@ -33,5 +33,73 @@
         }
     }
 
-    .schedule-and-insurance {}
+    .schedule-and-insurance {
+        .schedule{
+            width: 100%;
+
+            .available-day {
+                .available-day-selection {
+                    border          : none;
+                    border-bottom   : 2px solid #0fbcf6;
+                    color           : #0fbcf6;
+                    font-weight     : bold;
+                    font-size       : 17px;
+                    background-color: transparent;
+                    padding         : 10px 0 10px 0;
+                    cursor          : pointer;
+
+                    option {}
+                }
+
+                .available-day-selection:focus {
+                    outline      : none;
+                    border-bottom: 2px solid #0fbcf6;
+                }
+
+                .available-day-selection:hover {
+                    border-bottom: 4px solid #0fbcf6;
+                    padding      : 10px 0 8px 0;
+                }
+
+            }
+
+            .available-timeframe {
+                margin: 10px 0 10px 0;
+
+                .section-title {
+                    font-size: 17px;
+
+                    .calendar-icon {
+                        margin: 0 8px 0 0;
+                        color : #0fbcf6;
+                    }
+                }
+
+                .timeframe-selection {
+                    .timeframe-button {
+                        font-size       : 14px;
+                        height          : 40px;
+                        width           : 145px;
+                        margin          : 10px 12px 10px 0;
+                        background-color: white;
+                        border          : 2px solid #0fbcf6;
+                        color           : #0fbcf6;
+                        transition      : all 0.3s;
+                        border-radius   : 7px;
+                    }
+
+                    .timeframe-button:hover {
+                        color           : white;
+                        background-color: #0fbcf6;
+                    }
+
+                    .sorry-text-because-noavailable-timeframe {
+                        font-size : 17px;
+                        margin    : 20px 20px 20px 0;
+                        font-style: italic;
+                    }
+                }
+            }
+        }
+    }
 }

@@ -147,6 +147,10 @@ const createTimeframeForPackage = (inputData) => {
     return axios.post(`/api/bulk-create-timeframes-for-exam-package-schedule`, inputData);
 }
 
+const getPackageScheduleByDateService = (packageId, date) => {
+    return axios.get(`/api/get-package-schedule-by-date?packageId=${packageId}&date=${date}`);
+}
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -177,4 +181,5 @@ export {
     createPackageFacility,
     getAllExamPackageService,
     createTimeframeForPackage,
+    getPackageScheduleByDateService,
 };
