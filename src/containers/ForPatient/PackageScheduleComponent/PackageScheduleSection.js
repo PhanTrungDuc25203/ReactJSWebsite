@@ -144,13 +144,12 @@ class PackageScheduleSection extends Component {
                 <div className="available-timeframe">
                     <div className="section-title">
                         <FontAwesomeIcon icon={faCalendarDays} className="calendar-icon" />
-                        Thời gian khám:
-
+                        Thời gian khám định kỳ:
                     </div>
                     <div className="timeframe-selection">
                         {allAvailableTimeframe && allAvailableTimeframe.length > 0 ?
                             allAvailableTimeframe.map((item, index) => {
-                                let timeframe = language === LANGUAGES.VI ? item.timeTypeData.value_Vie : item.timeTypeData.value_Eng;
+                                let timeframe = language === LANGUAGES.VI ? item.timeTypeDataForPackage.value_Vie : item.timeTypeDataForPackage.value_Eng;
                                 return (
                                     <button
                                         key={index}

@@ -4,18 +4,21 @@ import { connect } from 'react-redux';
 import './PackageScheduleComponent.scss';
 import { emitter } from "../../../utils/emitter";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faMoneyCheckDollar, faUserShield } from '@fortawesome/free-solid-svg-icons';
 import { LANGUAGES } from '../../../utils';
 import DoctorScheduleSection from '../DetailDoctor/DoctorScheduleSection';
 import { getAllExamPackageService } from '../../../services/userService';
 import defaultAvatar from '../../../assets/images/default-avatar-circle.png';
 import PackageScheduleSection from './PackageScheduleSection';
+import { NumericFormat } from 'react-number-format';
 
 class PackageScheduleComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
             packagerDetails: {},
+            isShowInsurenceDetail: false,
+            isShowPriceDetail: false,
         }
     }
 
@@ -60,9 +63,22 @@ class PackageScheduleComponent extends Component {
         return resultHTML;
     }
 
+    handleMoreButtonClicked = (status, isShow) => {
+
+        if (isShow === 'price') {
+            this.setState({
+                isShowPriceDetail: status,
+            })
+        }
+        if (isShow === 'insurance') {
+            this.setState({
+                isShowInsurenceDetail: status,
+            })
+        }
+    }
 
     render() {
-        let { packagerDetails } = this.state;
+        let { packagerDetails, isShowPriceDetail, isShowInsurenceDetail } = this.state;
         let htmlDescription = packagerDetails.htmlDescription
             ? this.extractFirstSection(packagerDetails.htmlDescription)
             : '';
@@ -70,6 +86,7 @@ class PackageScheduleComponent extends Component {
         if (packagerDetails && packagerDetails.image) {
             imageByBase64 = Buffer.from(packagerDetails.image, 'base64').toString('binary');
         }
+        let { language } = this.props;
 
         return (
             <div className="package-schedule-component">
@@ -89,8 +106,117 @@ class PackageScheduleComponent extends Component {
                     <div className="schedule">
                         <PackageScheduleSection selectedPackageId={packagerDetails.id || -1} />
                     </div>
-                    <div className="insurance">
-                        đây là phần bảo hiểm
+                    <div className="detail-informations">
+                        <div className="price">
+                            <div className={isShowPriceDetail === false ? "examination-price-sct2 css-for-less-content" : "examination-price-sct2"}>
+                                <div className="sct2-title">
+                                    <FontAwesomeIcon icon={faMoneyCheckDollar} className="money-check-icon" />
+                                    Giá gói:
+                                </div>
+                                {isShowPriceDetail === false ?
+                                    <React.Fragment>
+                                        <div className="examination-price">
+                                            {packagerDetails && packagerDetails.priceDataForPackage && language === LANGUAGES.EN &&
+                                                <NumericFormat
+                                                    value={packagerDetails.priceDataForPackage.value_Eng}
+                                                    displayType='text'
+                                                    thousandSeparator=","
+                                                    suffix='$'
+                                                />
+                                            }
+                                            {packagerDetails && packagerDetails.priceDataForPackage && language === LANGUAGES.VI &&
+                                                <NumericFormat
+                                                    value={packagerDetails.priceDataForPackage.value_Vie}
+                                                    displayType='text'
+                                                    thousandSeparator=","
+                                                    suffix='đ'
+                                                />
+                                            }
+                                        </div>
+                                        <button className="more-button"
+                                            onClick={() => this.handleMoreButtonClicked(true, 'price')}
+                                        >
+                                            <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.more-button" />
+                                        </button>
+                                    </React.Fragment>
+                                    :
+                                    <div className="price-detail">
+                                        <div className="price-in-detail">
+                                            <div className="section-content">
+                                                Giá của gói khám
+                                            </div>
+                                            <div className="price-number">
+                                                {packagerDetails && packagerDetails.priceDataForPackage && language === LANGUAGES.EN &&
+                                                    <NumericFormat
+                                                        value={packagerDetails.priceDataForPackage.value_Eng}
+                                                        displayType='text'
+                                                        thousandSeparator=","
+                                                        suffix='$'
+                                                    />
+                                                }
+                                                {packagerDetails && packagerDetails.priceDataForPackage && language === LANGUAGES.VI &&
+                                                    <NumericFormat
+                                                        value={packagerDetails.priceDataForPackage.value_Vie}
+                                                        displayType='text'
+                                                        thousandSeparator=","
+                                                        suffix='đ'
+                                                    />
+                                                }
+                                            </div>
+                                        </div>
+                                        <div className="sale-method">
+                                            Phòng khám hỗ trợ cách hình thức: Chuyển khoản, quẹt thẻ và tiền mặt
+                                        </div>
+
+                                        <div className="less-button-container">
+                                            <button className="less-button"
+                                                onClick={() => this.handleMoreButtonClicked(false, 'price')}
+                                            >
+                                                <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.less-button" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div className="insurance">
+                            <div className={isShowInsurenceDetail === false ? "insurance-sct3 css-for-less-content" : "insurance-sct3"}>
+                                <div className="sct3-title">
+                                    <FontAwesomeIcon icon={faUserShield} className="insurance-icon" />
+                                    Bảo hiểm áp dụng:
+                                </div>
+                                {isShowInsurenceDetail === false ?
+                                    <React.Fragment>
+                                        <button className="more-button"
+                                            onClick={() => this.handleMoreButtonClicked(true, 'insurance')}
+                                        >
+                                            <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.more-button" />
+                                        </button>
+                                    </React.Fragment>
+                                    :
+                                    <div className="insurance-detail">
+                                        <div className="insurance-type-1">
+                                            <div>Bảo hiểm y tế nhà nước</div>
+                                            <div className="section-content">Áp dụng với khách hàng đăng kí khám chữa bệnh ban đầu tại phòng khám, trung tâm y tế bệnh viện tuyến quận huyện tại TP. HCM. Khách hàng có giấy chuyển viện tuyến 3-4 ở tỉnh đến khám hoặc các trường hợp cấp cứu.(áp dụng từ ngày 01/04/2023)</div>
+                                        </div>
+                                        <div className="insurance-type-2">
+                                            <div>Bảo hiểm bảo lãnh</div>
+                                            <div className="section-content">Đối với các đơn vị bảo hiểm không bảo lãnh trực tiếp: Bệnh viện xuất hoá đơn tài chính (hoá đơn điện tử) và hỗ trợ bệnh nhân hoàn thiện hồ sơ</div>
+                                        </div>
+                                        <div className="more-insurance-type">
+                                            <div><a href="#">Xem danh sách</a></div>
+                                        </div>
+                                        <div className="less-button-container">
+                                            <button className="less-button"
+                                                onClick={() => this.handleMoreButtonClicked(false, 'insurance')}
+                                            >
+                                                <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.less-button" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
