@@ -101,7 +101,7 @@ class PackageScheduleSection extends Component {
         }
     }
 
-    handleChoosingATimeframeForAppointment = (pack) => {
+    handleChoosingATimeframeForPeriodicExam = (pack) => {
         // console.log("Check this doctor: ", doctor);
         let formattedDate;
         if (this.props.language === LANGUAGES.VI) {
@@ -154,7 +154,7 @@ class PackageScheduleSection extends Component {
                                     <button
                                         key={index}
                                         className="timeframe-button"
-                                        onClick={() => this.handleChoosingATimeframeForAppointment(item)}
+                                        onClick={() => this.handleChoosingATimeframeForPeriodicExam(item)}
                                     >
                                         {timeframe}
                                     </button>

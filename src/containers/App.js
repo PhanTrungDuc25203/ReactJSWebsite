@@ -25,6 +25,7 @@ import UserProfile from './UserProfile/UserProfile.js';
 import DefaultRegister from './Authenticate/DefaultRegister.js';
 import DetailMedicalFacility from './ForPatient/DetailMedicalFacility/DetailMedicalFacility.js';
 import AllSpecialties from './ForPatient/DetailSpecialty/AllSpecialties/AllSpecialties.js';
+import BookingAExamPackagePage from './ForPatient/DetailMedicalFacility/BookingAExamPackagePage/BookingAExamPackagePage.js';
 
 class App extends Component {
 
@@ -67,6 +68,8 @@ class App extends Component {
                                 <Route path={path.DETAIL_DOCTOR_ARTICLE} component={DetailArticleForADoctor} />
                                 {/* trang dăng kí khám bệnh theo khung giờ của từng bác sĩ cho bệnh nhân */}
                                 <Route path={path.MAKE_APPOINTMENT_WITH_DOCTOR} component={MakeAppointmentPage} />
+                                {/* trang dăng kí Gói khám cho bệnh nhân */}
+                                <Route path={path.BOOKING_A_EXAM_PACKAGE} component={BookingAExamPackagePage} />
                                 {/* route xác nhận đặt hẹn với bác sĩ */}
                                 <Route path={path.CONFIRM_BOOKING_APPOINTMENT} component={ConfirmBookingAppointment} />
                                 {/* route trang chi tiết một chuyên khoa và các bac sĩ thuộc chuyên khoa đó */}
