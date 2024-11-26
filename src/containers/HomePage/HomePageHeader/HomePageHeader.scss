@@ -333,7 +333,7 @@ body {
     li {
         margin: 0;
         color: white;
-        width: 196px;
+        width: calc(100vw / 7);
         display: block;
         // text-align: center;
         padding: 15px 0px;
@@ -347,7 +347,7 @@ body {
         background: #4a82c2 !important;
         position: absolute;
         bottom: 0;
-        width: 196px;
+        width: calc(100vw / 7);
         z-index: 2;
         -webkit-transition: all 0.35s;
         -moz-transition: all 0.35s;
@@ -378,10 +378,10 @@ body {
     }
 
     #home-top-navigator li:nth-child(2):hover~#marker {
-        -webkit-transform: translate(196px, 0);
-        -moz-transform: translate(196px, 0);
-        -ms-transform: translate(196px, 0);
-        transform: translate(196px, 0);
+        -webkit-transform: translate(100%, 0);
+        -moz-transform: translate(100%, 0);
+        -ms-transform: translate(100%, 0);
+        transform: translate(100%, 0);
     }
 
     #home-top-navigator li:nth-child(3):hover ul div {
@@ -392,10 +392,10 @@ body {
     }
 
     #home-top-navigator li:nth-child(3):hover~#marker {
-        -webkit-transform: translate(392px, 0);
-        -moz-transform: translate(392px, 0);
-        -ms-transform: translate(392px, 0);
-        transform: translate(392px, 0);
+        -webkit-transform: translate(200%, 0);
+        -moz-transform: translate(200%, 0);
+        -ms-transform: translate(200%, 0);
+        transform: translate(200%, 0);
     }
 
     #home-top-navigator li:nth-child(4):hover ul div {
@@ -406,10 +406,10 @@ body {
     }
 
     #home-top-navigator li:nth-child(4):hover~#marker {
-        -webkit-transform: translate(588px, 0);
-        -moz-transform: translate(588px, 0);
-        -ms-transform: translate(588px, 0);
-        transform: translate(588px, 0);
+        -webkit-transform: translate(300%, 0);
+        -moz-transform: translate(300%, 0);
+        -ms-transform: translate(300%, 0);
+        transform: translate(300%, 0);
     }
 
     #home-top-navigator li:nth-child(5):hover ul div {
@@ -420,10 +420,10 @@ body {
     }
 
     #home-top-navigator li:nth-child(5):hover~#marker {
-        -webkit-transform: translate(784px, 0);
-        -moz-transform: translate(784px, 0);
-        -ms-transform: translate(784px, 0);
-        transform: translate(784px, 0);
+        -webkit-transform: translate(400%, 0);
+        -moz-transform: translate(400%, 0);
+        -ms-transform: translate(400%, 0);
+        transform: translate(400%, 0);
     }
 
     #home-top-navigator li:nth-child(6):hover ul div {
@@ -434,10 +434,10 @@ body {
     }
 
     #home-top-navigator li:nth-child(6):hover~#marker {
-        -webkit-transform: translate(980px, 0);
-        -moz-transform: translate(980px, 0);
-        -ms-transform: translate(980px, 0);
-        transform: translate(980px, 0);
+        -webkit-transform: translate(500%, 0);
+        -moz-transform: translate(500%, 0);
+        -ms-transform: translate(500%, 0);
+        transform: translate(500%, 0);
     }
 
     #home-top-navigator li:nth-child(7):hover ul div {
@@ -448,10 +448,10 @@ body {
     }
 
     #home-top-navigator li:nth-child(7):hover~#marker {
-        -webkit-transform: translate(1176px, 0);
-        -moz-transform: translate(1176px, 0);
-        -ms-transform: translate(1176px, 0);
-        transform: translate(1176px, 0);
+        -webkit-transform: translate(600%, 0);
+        -moz-transform: translate(600%, 0);
+        -ms-transform: translate(600%, 0);
+        transform: translate(600%, 0);
     }
 
     #home-top-navigator li:nth-child(8):hover ul div {
@@ -462,10 +462,10 @@ body {
     }
 
     #home-top-navigator li:nth-child(8):hover~#marker {
-        -webkit-transform: translate(1372px, 0);
-        -moz-transform: translate(1372px, 0);
-        -ms-transform: translate(1372px, 0);
-        transform: translate(1372px, 0);
+        -webkit-transform: translate(700%, 0);
+        -moz-transform: translate(700%, 0);
+        -ms-transform: translate(700%, 0);
+        transform: translate(700%, 0);
     }
 
     #home-top-navigator li:nth-child(9):hover ul div {
@@ -476,10 +476,10 @@ body {
     }
 
     #home-top-navigator li:nth-child(9):hover~#marker {
-        -webkit-transform: translate(1568px, 0);
-        -moz-transform: translate(1568px, 0);
-        -ms-transform: translate(1568px, 0);
-        transform: translate(1568px, 0);
+        -webkit-transform: translate(800%, 0);
+        -moz-transform: translate(800%, 0);
+        -ms-transform: translate(800%, 0);
+        transform: translate(800%, 0);
     }
 }
 
@@ -968,5 +968,32 @@ body {
             opacity: 1;
             visibility: visible;
         }
+    }
+}
+
+@media (max-width: 800px) {
+    .home-header-container .center-contents {
+        display: none; /* Ẩn phần center-contents */
+    }
+
+    .home-header-container .right-contents {
+        display: flex; /* Thiết lập flexbox */
+        justify-content: space-between; /* Dãn cách đều các mục trong right-contents */
+        align-items: center; /* Căn giữa theo trục dọc */
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+    }
+
+    .home-header-container .header-booking-section,
+    .home-header-container .header-support-section,
+    .home-header-container .header-user-account-section,
+    .home-header-container .header-user-language-option {
+        flex: 1; /* Chia đều khoảng cách giữa các phần tử */
+        text-align: center; /* Căn giữa nội dung */
+    }
+
+    .home-header-container .header-booking-section i,
+    .home-header-container .header-support-section i,
+    .home-header-container .header-user-account-section i {
+        margin-bottom: 4px; /* Khoảng cách giữa icon và text */
     }
 }
