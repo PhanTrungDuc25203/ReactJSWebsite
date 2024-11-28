@@ -299,4 +299,92 @@
         opacity: .75;
         color  : #5182c7;
     }
+
+    @media only screen and (max-width: 431px) {
+        .item-of-slider {
+            display       : flex !important;
+            flex-direction: column !important;
+            height        : 225px;
+            width         : 170px;
+            margin        : 0 !important;
+        }
+
+        .slick-slide {
+            width       : 183px !important;
+            margin-right: 4px !important;
+        }
+
+        .slick-track {
+            width : max-content !important;
+        }
+
+        .item-content {
+            width: unset !important;
+        }
+    }
+}
+
+@media only screen and (max-width: 431px) {
+    .elite-doctor-section {
+        width: 100% !important;
+        height: 340px;
+
+        .elite-doctor-section-contents {
+            width       : 100% !important;
+            padding-left: 30px;
+            padding-right: 30px;
+
+            .elite-doctor-section-section-title {
+                display:flex;
+                align-items: center;
+                margin: 0 !important;
+                height: unset !important;
+
+                .title-text {
+                    font-size : 20px !important;
+                    margin: 20px 20px 20px 0;
+                    height: unset !important;
+                }
+
+                .more-detail-button {
+                    .button {
+                        font-size     : 15px !important;
+                        padding       : 10px 20px !important;
+                        text-align    : center !important;
+                        vertical-align: middle !important;
+                        height        : unset !important;
+                    }
+                }
+
+                .spacing {
+                    width: 10px !important;
+                }
+            }
+
+            .slider-button-next::before {
+                right: 10px;
+            }
+
+            .item-content {
+                display: -webkit-box;              /* Sử dụng flexbox để hiển thị nội dung */
+                -webkit-line-clamp: 2;             /* Giới hạn tối đa số dòng là 2 */
+                -webkit-box-orient: vertical;      /* Định dạng các dòng theo chiều dọc */
+                overflow: hidden;                  /* Ẩn phần văn bản vượt quá chiều cao */
+                text-overflow: ellipsis;           /* Hiển thị '...' khi văn bản bị cắt */
+                width: 100%;                       /* Đảm bảo chiếm toàn bộ chiều rộng của phần tử cha */
+                line-height: 1.5;    
+                .item-of-slider {
+                    width: 170px;
+                    .image-css{
+                        height: 140px;
+    width: 140px;
+    margin: 10px 0 0 0;
+                    }
+                    .item-content {
+                        width: unset !important;
+                    }
+                }
+            }
+        }
+    }
 }
