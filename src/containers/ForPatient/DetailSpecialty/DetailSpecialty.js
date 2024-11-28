@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { getInforAndArticleForADoctor, getAllSpecialtyDetailsById, getAllCodesService } from '../../../services/userService';
 import { LANGUAGES } from '../../../utils';
+import * as actions from "../../../store/actions";
 import CustomScrollbars from '../../../components/CustomScrollbars';
 import DoctorScheduleComponent from '../DoctorScheduleComponent/DoctorScheduleComponent';
 import _ from 'lodash';
@@ -26,6 +27,9 @@ class DetailSpecialty extends Component {
             spinnerType: 'MoonLoader', // Default spinner type
             color: '#123abc', // Default color
             size: 25, // Default size
+
+            isMobile: false,
+            truncatedSpecialtyDetailsContent: ''
         }
     }
 
@@ -69,8 +73,53 @@ class DetailSpecialty extends Component {
                     provinceList: provinceData ? provinceData : [],
                     isLoading: false,
                 })
+                this.checkMobileView(res.data.htmlDescription);
             }
         }
+    }
+
+    checkMobileView(content) {
+        // Kiểm tra xem có phải trên thiết bị di động không
+        const isMobile = window.innerWidth <= 500;
+        if (isMobile) {
+            this.setState({
+                isMobile: true,
+            })
+            this.extractContent(content);
+        }
+
+        this.setState({ isMobile, truncatedContent: content });
+    }
+
+    extractContent(content) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(content, 'text/html');
+
+        // Tìm tất cả các thẻ <p><strong> trong document
+        const strongTags = doc.querySelectorAll('p > strong');
+
+        if (strongTags.length < 2) {
+            // Nếu không có đủ hai thẻ <p><strong>, trả về nguyên văn content
+            return content;
+        }
+
+        // Lấy thẻ <p><strong> thứ hai
+        const secondStrongTag = strongTags[1];
+
+        // Lấy tất cả các phần tử trước thẻ <p><strong> thứ hai, bao gồm cả các thẻ <ul>
+        let splitContent = '';
+        let currentElement = secondStrongTag.parentElement.previousElementSibling;
+
+        // Duyệt qua các phần tử trước thẻ <p><strong> thứ hai và thêm vào splitContent
+        while (currentElement) {
+            splitContent = currentElement.outerHTML + splitContent;
+            if (currentElement === strongTags[0].parentElement) break; // Dừng khi đến thẻ <p><strong> thứ nhất
+            currentElement = currentElement.previousElementSibling;
+        }
+        this.setState({
+            truncatedSpecialtyDetailsContent: splitContent,
+        })
+        return splitContent;
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -110,6 +159,8 @@ class DetailSpecialty extends Component {
                         isLoading: false,
                         selectedProvince: location
                     });
+
+                    this.checkMobileView(res.data.htmlDescription);
                 }
             }
         });
@@ -129,9 +180,8 @@ class DetailSpecialty extends Component {
 
     render() {
         let { language } = this.props;
-        let { arrDoctorId, specialtyDetailData, provinceList, isLoading, spinnerType, color, size, selectedProvince } = this.state;
-        // console.log("check state: ", this.state);
-        // console.log("check props: ", this.props);
+        let { arrDoctorId, specialtyDetailData, provinceList, isLoading, spinnerType, color, size, selectedProvince, isMobile, truncatedSpecialtyDetailsContent } = this.state;
+        console.log("check mobile: ", isMobile, truncatedSpecialtyDetailsContent)
         return (
             <React.Fragment>
                 <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
@@ -147,8 +197,12 @@ class DetailSpecialty extends Component {
                                 {specialtyDetailData.name}
                             </div>
                             <div className="details">
-                                {specialtyDetailData && !_.isEmpty(specialtyDetailData) &&
+                                {/* {specialtyDetailData && !_.isEmpty(specialtyDetailData) &&
                                     <div dangerouslySetInnerHTML={{ __html: specialtyDetailData.htmlDescription }} className="specialty-html"></div>
+                                } */}
+
+                                {specialtyDetailData && !_.isEmpty(specialtyDetailData) &&
+                                    <div dangerouslySetInnerHTML={{ __html: isMobile ? truncatedSpecialtyDetailsContent : specialtyDetailData.htmlDescription }} className="specialty-html"></div>
                                 }
                             </div>
                         </div>
@@ -223,7 +277,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        
     };
 };
 
