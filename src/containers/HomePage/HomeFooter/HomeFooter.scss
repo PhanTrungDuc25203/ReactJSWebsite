@@ -11,20 +11,20 @@
     }
 
     * {
-        margin: 0;
-        padding: 0;
+        margin    : 0;
+        padding   : 0;
         box-sizing: border-box;
-        gap: 30px;
+        gap       : 30px;
     }
 
     .container {
         max-width: 1170px;
-        margin: auto;
+        margin   : auto;
     }
 
     .row {
-        display: flex;
-        flex-wrap: wrap;
+        display      : flex;
+        flex-wrap    : wrap;
         margin-bottom: 20px;
     }
 
@@ -34,60 +34,61 @@
 
     .footer {
         background-color: #dff3ff;
-        padding-top: 70px;
-        padding-bottom: 0;
-        .home-footer{
-            a{
+        padding-top     : 70px;
+        padding-bottom  : 0;
+
+        .home-footer {
+            a {
                 border-left: none;
             }
         }
     }
 
     .footer-col {
-        width: 25%;
+        width  : 25%;
         padding: 0 15px;
     }
 
     .about-me-briefly-content {
-        font-size: 17px;
-        width: 520px;
+        font-size        : 17px;
+        width            : 200%;
         // text-transform: capitalize;
-        color: #49BCE2;
-        text-decoration: none;
-        font-weight: 300;
-        color: #49BCE2;
+        color            : #49BCE2;
+        text-decoration  : none;
+        font-weight      : 300;
+        color            : #49BCE2;
         // display: block;
-        transition: all 0.3s ease;
-        border: none;
+        transition       : all 0.3s ease;
+        border           : none;
 
         .highlight-my-name {
             @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
-            font-family: 'Pacifico', cursive !important;
+            font-family       : 'Pacifico', cursive !important;
             // font-weight: 100;
             // text-transform: lowercase;
-            font-size: 25px;
+            font-size         : 25px;
         }
     }
 
     .footer-col h4 {
-        font-size: 18px;
-        color: #49BCE2;
+        font-size     : 18px;
+        color         : #49BCE2;
         text-transform: capitalize;
-        margin-bottom: 35px;
-        font-weight: 500;
-        position: relative;
+        margin-bottom : 35px;
+        font-weight   : 500;
+        position      : relative;
 
     }
 
     .footer-col h4::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: -10px;
+        content         : '';
+        position        : absolute;
+        left            : 0;
+        bottom          : -10px;
         background-color: #49BCE2;
-        height: 2px;
-        box-sizing: border-box;
-        width: 215px;
+        height          : 2px;
+        box-sizing      : border-box;
+        width           : 215px;
     }
 
     .footer-col ul li:not(:last-child) {
@@ -95,37 +96,37 @@
     }
 
     .footer-col ul li a {
-        font-size: 16px;
+        font-size     : 16px;
         text-transform: capitalize;
-        color: #49BCE2;
-        font-weight: 300;
-        border-left:none;
-        color: #49BCE2;
-        display: block;
-        transition: all 0.3s ease;
+        color         : #49BCE2;
+        font-weight   : 300;
+        border-left   : none;
+        color         : #49BCE2;
+        display       : block;
+        transition    : all 0.3s ease;
     }
 
     .footer-col ul li a:hover {
-        color: #49BCE2;
+        color       : #49BCE2;
         padding-left: 8px;
     }
 
     .footer-col .social-links a {
-        display: inline-block;
-        height: 40px;
-        width: 40px;
+        display         : inline-block;
+        height          : 40px;
+        width           : 40px;
         background-color: rgb(44, 185, 255);
-        border-left: none;
-        margin: 0 10px 10px 3px;
-        text-align: center;
-        line-height: 40px;
-        border-radius: 50%;
-        color: #d4e7ff;
-        transition: all 0.3s ease;
+        border-left     : none;
+        margin          : 0 10px 10px 3px;
+        text-align      : center;
+        line-height     : 40px;
+        border-radius   : 50%;
+        color           : #d4e7ff;
+        transition      : all 0.3s ease;
     }
 
     .footer-col .social-links a:hover {
-        color: #49BCE2;
+        color           : #49BCE2;
         background-color: #ffffff;
     }
 
@@ -143,4 +144,22 @@
         }
     }
 
+}
+
+@media (max-width: 430px) {
+    .homepage-footer {
+        .footer-col {
+            padding: 0 30px;
+        }
+
+        .about-me-briefly-content {
+            width: 95%;
+        }
+
+        .home-footer {
+            a {
+                display: none;
+            }
+        }
+    }
 }
