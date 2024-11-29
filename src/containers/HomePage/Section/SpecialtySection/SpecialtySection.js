@@ -63,8 +63,9 @@ class SpecialtySection extends Component {
     render() {
         let arrSpecialty = this.props.specialtiesData;
         let { language } = this.props;
+        const isMobile = window.innerWidth <= 430;
         const settings = {
-            dots: true,
+            dots: isMobile ? false : true,
             infinite: true,
             slidesToShow: 3,
             slidesToScroll: 3,
@@ -76,6 +77,15 @@ class SpecialtySection extends Component {
             speed: 1000,
             pauseOnHover: true,
             pauseOnDotsHover: true,
+            responsive: [
+                {
+                    breakpoint: 430,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                }
+            ],
         };
 
         return (

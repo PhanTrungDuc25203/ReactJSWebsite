@@ -315,7 +315,7 @@
         }
 
         .slick-track {
-            width : max-content !important;
+            width: max-content !important;
         }
 
         .item-content {
@@ -326,24 +326,24 @@
 
 @media only screen and (max-width: 431px) {
     .elite-doctor-section {
-        width: 100% !important;
+        width : 100% !important;
         height: 340px;
 
         .elite-doctor-section-contents {
-            width       : 100% !important;
-            padding-left: 30px;
+            width        : 100% !important;
+            padding-left : 30px;
             padding-right: 30px;
 
             .elite-doctor-section-section-title {
-                display:flex;
+                display    : flex;
                 align-items: center;
-                margin: 0 !important;
-                height: unset !important;
+                margin     : 0 !important;
+                height     : unset !important;
 
                 .title-text {
-                    font-size : 20px !important;
-                    margin: 20px 20px 20px 0;
-                    height: unset !important;
+                    font-size: 20px !important;
+                    margin   : 25px 20px 25px 0;
+                    height   : unset !important;
                 }
 
                 .more-detail-button {
@@ -363,23 +363,37 @@
 
             .slider-button-next::before {
                 right: 10px;
+                top  : -40px;
+            }
+
+            .slider-button-prev::before {
+                top: -40px;
             }
 
             .item-content {
-                display: -webkit-box;              /* Sử dụng flexbox để hiển thị nội dung */
-                -webkit-line-clamp: 2;             /* Giới hạn tối đa số dòng là 2 */
-                -webkit-box-orient: vertical;      /* Định dạng các dòng theo chiều dọc */
-                overflow: hidden;                  /* Ẩn phần văn bản vượt quá chiều cao */
-                text-overflow: ellipsis;           /* Hiển thị '...' khi văn bản bị cắt */
-                width: 100%;                       /* Đảm bảo chiếm toàn bộ chiều rộng của phần tử cha */
-                line-height: 1.5;    
+                display           : -webkit-box;
+                /* Sử dụng flexbox để hiển thị nội dung */
+                -webkit-line-clamp: 2;
+                /* Giới hạn tối đa số dòng là 2 */
+                -webkit-box-orient: vertical;
+                /* Định dạng các dòng theo chiều dọc */
+                overflow          : hidden;
+                /* Ẩn phần văn bản vượt quá chiều cao */
+                text-overflow     : ellipsis;
+                /* Hiển thị '...' khi văn bản bị cắt */
+                width             : 100%;
+                /* Đảm bảo chiếm toàn bộ chiều rộng của phần tử cha */
+                line-height       : 1.5;
+
                 .item-of-slider {
                     width: 170px;
-                    .image-css{
+
+                    .image-css {
                         height: 140px;
-    width: 140px;
-    margin: 10px 0 0 0;
+                        width : 140px;
+                        margin: 10px 0 0 0;
                     }
+
                     .item-content {
                         width: unset !important;
                     }
