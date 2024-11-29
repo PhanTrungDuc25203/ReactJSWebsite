@@ -42,8 +42,9 @@ class MentalHealthSection extends Component {
     }
 
     render() {
+        const isMobile = window.innerWidth <= 430;
         const settings = {
-            dots: true,
+            dots: isMobile ? false : true,
             infinite: true,
             slidesToShow: 3,
             slidesToScroll: 3,
@@ -58,6 +59,15 @@ class MentalHealthSection extends Component {
             // fade: true,
             // focusOnSelect: true,
             pauseOnDotsHover: true,
+            responsive: [
+                {
+                    breakpoint: 430,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                }
+            ],
         };
 
         return (

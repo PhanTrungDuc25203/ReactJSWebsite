@@ -78,12 +78,21 @@ class MedicalFacilitiesSection extends Component {
             // fade: true,
             // focusOnSelect: true,
             pauseOnDotsHover: true,
+            responsive: [
+                {
+                    breakpoint: 430,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                }
+            ],
         };
 
         return (
             <div className="medical-facilities-section">
                 <div className="medical-facilities-section-contents">
-                    <div className="medical-facilities-section-section-title">
+                    <div className="medical-facilities-section-title-section">
                         <div className="title-text">
                             <FormattedMessage id="medical-facilities-section.medical-facilities-section-title" />
                         </div>

@@ -34,8 +34,9 @@ class RemoteExamSection extends Component {
     }
 
     render() {
+        const isMobile = window.innerWidth <= 430;
         const settings = {
-            dots: true,
+            dots: isMobile ? false : true,
             infinite: true,
             slidesToShow: 3,
             slidesToScroll: 3,
@@ -50,12 +51,21 @@ class RemoteExamSection extends Component {
             // fade: true,
             // focusOnSelect: true,
             pauseOnDotsHover: true,
+            responsive: [
+                {
+                    breakpoint: 430,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                }
+            ],
         };
 
         return (
             <div className="remote-exam-section">
                 <div className="remote-exam-section-contents">
-                    <div className="remote-exam-section-section-title">
+                    <div className="remote-exam-section-title-section">
                         <div className="title-text">
                             <FormattedMessage id="remote-exam-section.remote-exam-section-title" />
                         </div>

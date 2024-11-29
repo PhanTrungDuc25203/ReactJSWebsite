@@ -34,8 +34,9 @@ class StayAHealthyLifeSection extends Component {
     }
 
     render() {
+        const isMobile = window.innerWidth <= 430;
         const settings = {
-            dots: true,
+            dots: isMobile ? false : true,
             infinite: true,
             slidesToShow: 4,
             slidesToScroll: 4,
@@ -55,7 +56,7 @@ class StayAHealthyLifeSection extends Component {
         return (
             <div className="stay-a-healthy-life-section">
                 <div className="stay-a-healthy-life-section-contents">
-                    <div className="stay-a-healthy-life-section-section-title">
+                    <div className="stay-a-healthy-life-section-title-section">
                         <div className="title-text">
                             <FormattedMessage id="stay-a-healthy-life-section.stay-a-healthy-life-section-title" />
                         </div>
