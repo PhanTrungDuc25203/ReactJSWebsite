@@ -12,6 +12,7 @@ export const path = {
     CONFIRM_BOOKING_APPOINTMENT: '/confirm-booking',
     SPECIALTY_ARTICLE: '/detail-specialty-article/:id',
     ALL_SPECIALTIES: '/all-specialties/',
+    ALL_MEDICAL_FACILITIES: '/all-medical-facilities/',
     MEDICAL_FACILITY_ARTICLE: '/detail-medical-facility/:id',
     USER_PROFILE: '/user-profile/:email',
 };

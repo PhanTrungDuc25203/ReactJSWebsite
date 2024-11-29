@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FormattedMessage } from 'react-intl';
 import * as actions from "../../../../store/actions";
-import { LANGUAGES } from "../../../../utils";
+import { LANGUAGES, path } from "../../../../utils";
 import { switchLanguageOfWebsite } from "../../../../store/actions";
 
 class MedicalFacilitiesSection extends Component {
@@ -28,7 +28,7 @@ class MedicalFacilitiesSection extends Component {
     }
 
     componentDidMount() {
-        this.props.loadMedicalFacilities('ALLANDIMAGE');
+        this.props.loadMedicalFacilities('ALLANDIMAGEANDLIMITED');
     }
 
     SampleNextArrow(props) {
@@ -97,7 +97,7 @@ class MedicalFacilitiesSection extends Component {
                             <FormattedMessage id="medical-facilities-section.medical-facilities-section-title" />
                         </div>
                         <div className="spacing"></div>
-                        <div className="more-detail-button"><a href="#" className="button">
+                        <div className="more-detail-button"><a href={path.ALL_MEDICAL_FACILITIES} className="button">
                             <FormattedMessage id="medical-facilities-section.button-more-detail" />
                         </a></div>
                     </div>

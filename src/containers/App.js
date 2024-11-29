@@ -26,6 +26,7 @@ import DefaultRegister from './Authenticate/DefaultRegister.js';
 import DetailMedicalFacility from './ForPatient/DetailMedicalFacility/DetailMedicalFacility.js';
 import AllSpecialties from './ForPatient/DetailSpecialty/AllSpecialties/AllSpecialties.js';
 import BookingAExamPackagePage from './ForPatient/DetailMedicalFacility/BookingAExamPackagePage/BookingAExamPackagePage.js';
+import AllMedicalFacilities from './ForPatient/DetailMedicalFacility/AllMedicalFacilities/AllMedicalFacilities.js';
 
 class App extends Component {
 
@@ -80,6 +81,8 @@ class App extends Component {
                                 <Route path={path.USER_PROFILE} component={UserProfile} />
                                 {/* trang xem chi tiết tất cả các chuyên khoa */}
                                 <Route path={path.ALL_SPECIALTIES} component={AllSpecialties} />
+                                {/* trang xem chi tiết tất cả bệnh viện, cơ sở y tế */}
+                                <Route path={path.ALL_MEDICAL_FACILITIES} component={AllMedicalFacilities} />
                                 {/* path for doctor*/}
                                 <Route path={'/doctor'} component={userIsNotPatient(userIsAuthenticated(Doctor))} />
                             </Switch>
