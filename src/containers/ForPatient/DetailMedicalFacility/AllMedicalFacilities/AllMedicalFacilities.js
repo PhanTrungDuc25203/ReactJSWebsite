@@ -5,7 +5,7 @@ import './AllMedicalFacilities.scss';
 import HomeFooter from '../../../HomePage/HomeFooter/HomeFooter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
-import { getInforAndArticleForADoctor, getAllSpecialtyDetailsById, getAllCodesService } from '../../../../services/userService';
+import { getInfoOfMedicalFacility } from '../../../../services/userService';
 import { LANGUAGES } from '../../../../utils';
 import CustomScrollbars from '../../../../components/CustomScrollbars';
 import DoctorScheduleComponent from '../../DoctorScheduleComponent/DoctorScheduleComponent';
@@ -17,12 +17,17 @@ class AllMedicalFacilities extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            allMedicalFacilityData: [],
         }
     }
 
     async componentDidMount() {
-
+        let res = await getInfoOfMedicalFacility('ALLANDIMAGEBUTSHORT');
+        if (res.errCode === 0) {
+            this.setState({
+                allMedicalFacilityData: res.infor,
+            })
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -44,13 +49,34 @@ class AllMedicalFacilities extends Component {
     render() {
 
         let { language } = this.props;
+        let { allMedicalFacilityData } = this.state;
 
         return (
             <React.Fragment>
                 <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
                     <HomePageHeader isShowBanner={false} />
                     <div className="all-medical-facilities-container">
-                        this is all medical facilities page
+                        <div className="all-medical-facilities-container-title">
+                            Bệnh viện & Cơ sở y tế
+                        </div>
+                        {allMedicalFacilityData && allMedicalFacilityData.length > 0 &&
+                            allMedicalFacilityData.map((item, index) => {
+                                return (
+                                    <div className="medical-facility-item-container" key={index}
+                                    // onClick={() => this.handleViewDetailArticleOfAFacility(item.id)}
+                                    >
+                                        <div className="medical-facility-item">
+                                            <div className="image image-css">
+
+                                            </div>
+                                            <div className="medical-facility-name">
+                                                {item.name}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                     <HomeFooter />
                 </CustomScrollbars>
