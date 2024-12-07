@@ -1,0 +1,21 @@
+.specialty-article-container{
+    .specialty-item-container{
+        .specialty-item{
+            display: flex;
+            text-align: center;
+            align-items: center;
+            flex-direction: column;
+            .image{
+
+            }
+            .image-css{
+                background-size    : contain;
+                height             : 200px;
+                width              : 400px;
+                background-position: center;
+                border-radius      : 15px;
+                background-repeat  : no-repeat;
+            }
+        }
+    }
+}
