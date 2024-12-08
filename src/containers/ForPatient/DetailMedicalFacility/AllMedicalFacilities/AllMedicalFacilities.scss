@@ -2,7 +2,7 @@
     display  : flex;
     flex-wrap: wrap; // Cho phép các item xuống dòng nếu không đủ chỗ
     gap      : 24px; // Khoảng cách giữa các item
-    padding  : 50px 26px 50px 50px;
+    padding  : 50px 26px 25px 50px;
 
     &-title {
         width        : 100%; // Đảm bảo tiêu đề chiếm toàn bộ chiều ngang
@@ -58,6 +58,7 @@
                 white-space  : nowrap; // Chỉ hiển thị trên một dòng
                 overflow     : hidden; // Ẩn phần nội dung vượt quá kích thước
                 text-overflow: ellipsis; // Thêm dấu "..." khi nội dung bị cắt
+                cursor       : pointer;
             }
         }
     }
@@ -67,7 +68,7 @@
     display        : flex;
     justify-content: center;
     align-items    : center;
-    margin-top     : 20px;
+    margin-bottom  : 25px;
 
     .pagination-button {
         padding         : 8px 12px;

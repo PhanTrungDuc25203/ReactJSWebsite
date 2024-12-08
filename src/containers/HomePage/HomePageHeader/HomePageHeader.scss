@@ -340,6 +340,10 @@ body {
         background   : #50b8db !important;
         text-align   : center;
         cursor       : pointer;
+        
+        .nav-link{
+            border-left: none;
+        }
     }
 
     #marker {

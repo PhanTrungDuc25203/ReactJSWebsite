@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './HomePageHeader.scss';
+import { Link } from 'react-router-dom';
 import * as actions from "../../../store/actions";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { } from '@fortawesome/free-brands-svg-icons';
@@ -66,7 +67,7 @@ class HomePageHeader extends Component {
                         <div className="center-contents">
                             <div className="child-content">
                                 <div className="header-option-title">
-                                    <a href="#"><b><FormattedMessage id="home-page-header.specialty" /></b></a>
+                                    <a href="/all-specialties/"><b><FormattedMessage id="home-page-header.specialty" /></b></a>
                                     {/* <a href="#"><b>Chuyên khoa</b></a> */}
                                 </div>
                                 {/* <div className="header-option-detail">
@@ -132,13 +133,23 @@ class HomePageHeader extends Component {
                         <nav>
                             <ul id="home-top-navigator">
                                 <li><FormattedMessage id="home-top-navigator.option-home" /></li>
-                                <li><i className="far fa-hospital nav-icon"></i><FormattedMessage id="home-top-navigator.option-specialty-exam" /></li>
+                                <li>
+                                    <Link to="/all-specialties/" className="nav-link">
+                                        <i className="far fa-hospital nav-icon"></i>
+                                        <FormattedMessage id="home-top-navigator.option-specialty-exam" />
+                                    </Link>
+                                </li>
                                 <li><i className="fas fa-phone-volume nav-icon"></i><FormattedMessage id="home-top-navigator.option-remote-exam" /></li>
                                 <li><i className="fas fa-child nav-icon"></i><FormattedMessage id="home-top-navigator.option-general-exam" /></li>
                                 <li><i className="fas fa-vial nav-icon"></i><FormattedMessage id="home-top-navigator.option-medical-testing" /></li>
                                 <li><FontAwesomeIcon icon={faHeartPulse} className="nav-icon fontawesome-icon" /><FormattedMessage id="home-top-navigator.option-mental-health" /></li>
                                 {/* <li><i className="fas fa-tablets nav-icon"></i>Khám nha khoa</li> */}
-                                <li><FontAwesomeIcon icon={faTooth} className="nav-icon fontawesome-icon" /><FormattedMessage id="home-top-navigator.option-dental-exam" /></li>
+                                <li>
+                                    <Link to="/detail-specialty-article/9" className="nav-link">
+                                        <FontAwesomeIcon icon={faTooth} className="nav-icon fontawesome-icon" />
+                                        <FormattedMessage id="home-top-navigator.option-dental-exam" />
+                                    </Link>
+                                </li>
 
                                 <div id="marker"></div>
                             </ul>

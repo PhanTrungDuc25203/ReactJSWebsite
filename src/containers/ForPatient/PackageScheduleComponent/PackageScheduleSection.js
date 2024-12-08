@@ -102,7 +102,7 @@ class PackageScheduleSection extends Component {
     }
 
     handleChoosingATimeframeForPeriodicExam = (pack) => {
-        // console.log("Check this doctor: ", doctor);
+        console.log("Check this package: ", pack);
         let formattedDate;
         if (this.props.language === LANGUAGES.VI) {
             formattedDate = this.capitalizeFirstLetter(moment(pack.date).format('dddd, DD-MM-YYYY'));
@@ -112,7 +112,7 @@ class PackageScheduleSection extends Component {
         }
 
         // Sau đó truyền formattedDate thay vì package.date
-        this.props.history.push(`/booking-a-exam-package/${pack.packageId}/${formattedDate}/${pack.timeType}`);
+        this.props.history.push(`/booking-a-exam-package/${pack.id}/${formattedDate}/${pack.timeType}`);
     }
 
     render() {
