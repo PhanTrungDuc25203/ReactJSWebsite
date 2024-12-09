@@ -15,6 +15,8 @@ export const path = {
     ALL_MEDICAL_FACILITIES: '/all-medical-facilities/',
     MEDICAL_FACILITY_ARTICLE: '/detail-medical-facility/:id',
     USER_PROFILE: '/user-profile/:email',
+    GENERAL_EXAM_PAGE: '/general-exam',
+    HEALTH_CHECK_PAGE: '/health-check',
 };
 
 export const LANGUAGES = {

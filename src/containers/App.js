@@ -27,6 +27,8 @@ import DetailMedicalFacility from './ForPatient/DetailMedicalFacility/DetailMedi
 import AllSpecialties from './ForPatient/DetailSpecialty/AllSpecialties/AllSpecialties.js';
 import BookingAExamPackagePage from './ForPatient/DetailMedicalFacility/BookingAExamPackagePage/BookingAExamPackagePage.js';
 import AllMedicalFacilities from './ForPatient/DetailMedicalFacility/AllMedicalFacilities/AllMedicalFacilities.js';
+import HealthCheck from './ForPatient/HealthCheck/HealthCheck.js';
+import GeneralExam from './ForPatient/GeneralExam/GeneralExam.js';
 
 class App extends Component {
 
@@ -83,6 +85,8 @@ class App extends Component {
                                 <Route path={path.ALL_SPECIALTIES} component={AllSpecialties} />
                                 {/* trang xem chi tiết tất cả bệnh viện, cơ sở y tế */}
                                 <Route path={path.ALL_MEDICAL_FACILITIES} component={AllMedicalFacilities} />
+                                <Route path={path.HEALTH_CHECK_PAGE} component={HealthCheck} />
+                                <Route path={path.GENERAL_EXAM_PAGE} component={GeneralExam} />
                                 {/* path for doctor*/}
                                 <Route path={'/doctor'} component={userIsNotPatient(userIsAuthenticated(Doctor))} />
                             </Switch>

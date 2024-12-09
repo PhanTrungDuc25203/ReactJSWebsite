@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './ComprehensiveServiceSection.scss';
+import { path } from '../utils'
+import { withRouter } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { } from '@fortawesome/free-brands-svg-icons';
 import { } from '@fortawesome/fontawesome-free-webfonts';
@@ -15,13 +17,23 @@ import { switchLanguageOfWebsite } from "../../../../store/actions";
 
 class ComprehensiveServiceSection extends Component {
 
+    handleClickToGeneralExamPage = () => {
+        this.props.history.push(`/general-exam`);
+    }
+
+    handleClickToHealthCheckPage = () => {
+        this.props.history.push(`/health-check`);
+    }
+
     render() {
         return (
             <div className="comprehensive-service-section">
                 <div className="section-title"><FormattedMessage id="comprehensive-service-section.section-title" /></div>
                 <div className="service-contents">
                     <div className="left-contents">
-                        <div className="specialty-exam content-background ">
+                        <div className="specialty-exam content-background "
+                            onClick={() => this.handleClickToGeneralExamPage()}
+                        >
                             <div className="service-icon-container"><div className="specialty-icon"></div></div>
                             <FormattedMessage id="comprehensive-service-section.option-specialty-exam" />
                         </div>
@@ -37,7 +49,9 @@ class ComprehensiveServiceSection extends Component {
                             <div className="service-icon-container"><div className="surgery-icon"></div></div>
                             <FormattedMessage id="comprehensive-service-section.option-surgery-pack" />
                         </div>
-                        <div className="health-checkup content-background">
+                        <div className="health-checkup content-background"
+                            onClick={() => this.handleClickToHealthCheckPage()}
+                        >
                             <div className="service-icon-container"><div className="health-checkup-icon"></div></div>
                             <FormattedMessage id="comprehensive-service-section.option-health-exam" />
                         </div>
@@ -65,11 +79,9 @@ class ComprehensiveServiceSection extends Component {
                         </div>
                     </div>
                 </div>
-
             </div>
         );
     }
-
 }
 
 const mapStateToProps = state => {
@@ -85,4 +97,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ComprehensiveServiceSection);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ComprehensiveServiceSection));
