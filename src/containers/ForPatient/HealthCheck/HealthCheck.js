@@ -1,7 +1,7 @@
 import React from 'react';
-import '../HealthCheck.scss'
-import HomePageHeader from '../../../src/containers/HomePage/HomePageHeader/HomePageHeader'; // Import Header
-import HomeFooter from '../../../src/containers/HomePage/HomeFooter/HomeFooter'; // Import Footer
+import './HealthCheck.scss'
+import HomePageHeader from '../../../containers/HomePage/HomePageHeader/HomePageHeader'; // Import Header
+import HomeFooter from '../../../containers/HomePage/HomeFooter/HomeFooter'; // Import Footer
 import CustomScrollbars from '../../../components/CustomScrollbars'; // Import CustomScrollbars
 
 // Dữ liệu các gói khám
@@ -56,7 +56,7 @@ const HealthCheck = () => {
             {/* Header */}
             <HomePageHeader isShowBanner={false} />
             {/* Nội dung chính */}
-            <div className="container">
+            <div className="health-check-container">
                 <h2 className="highlighted-title">Gói Khám Nổi Bật</h2>
                 {data.map((item) => (
                     <div key={item.id} className={`card ${item.imageClass}`}>

@@ -64,7 +64,7 @@ const GeneralExam = () => {
             <HomePageHeader isShowBanner={false} />
 
             {/* Nội dung chính */}
-            <div className="container">
+            <div className="general-exam-container">
                 <h2 className="highlighted-title">Gói Khám Nổi Bật</h2>
                 {data.map((item) => (
                     <div key={item.id} className={`card ${item.imageClass}`}>

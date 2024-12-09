@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './ComprehensiveServiceSection.scss';
-import { path } from '../utils'
+import { path } from '../../../../utils'
 import { withRouter } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { } from '@fortawesome/free-brands-svg-icons';
@@ -31,13 +31,13 @@ class ComprehensiveServiceSection extends Component {
                 <div className="section-title"><FormattedMessage id="comprehensive-service-section.section-title" /></div>
                 <div className="service-contents">
                     <div className="left-contents">
-                        <div className="specialty-exam content-background "
-                            onClick={() => this.handleClickToGeneralExamPage()}
-                        >
+                        <div className="specialty-exam content-background ">
                             <div className="service-icon-container"><div className="specialty-icon"></div></div>
                             <FormattedMessage id="comprehensive-service-section.option-specialty-exam" />
                         </div>
-                        <div className="general-exam content-background">
+                        <div className="general-exam content-background"
+                            onClick={() => this.handleClickToGeneralExamPage()}
+                        >
                             <div className="service-icon-container"><div className="check-list-icon"></div></div>
                             <FormattedMessage id="comprehensive-service-section.option-general-exam" />
                         </div>
