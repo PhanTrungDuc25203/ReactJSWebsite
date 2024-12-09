@@ -2,7 +2,7 @@ import React from 'react';
 import '../HealthCheck.scss'
 import HomePageHeader from '../../../src/containers/HomePage/HomePageHeader/HomePageHeader'; // Import Header
 import HomeFooter from '../../../src/containers/HomePage/HomeFooter/HomeFooter'; // Import Footer
-import CustomScrollbars from '../../components/CustomScrollbars'; // Import CustomScrollbars
+import CustomScrollbars from '../../../components/CustomScrollbars'; // Import CustomScrollbars
 
 // Dữ liệu các gói khám
 const data = [

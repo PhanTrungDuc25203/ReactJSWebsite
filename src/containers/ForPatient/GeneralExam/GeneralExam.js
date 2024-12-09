@@ -1,8 +1,8 @@
 import React from 'react';
 import './GeneralExam.scss'; // Import file SCSS chứa hình ảnh và style
-import HomePageHeader from '../../../src/containers/HomePage/HomePageHeader/HomePageHeader'; // Import Header
-import HomeFooter from '../../../src/containers/HomePage/HomeFooter/HomeFooter'; // Import Footer
-import CustomScrollbars from '../../components/CustomScrollbars'; // Import CustomScrollbars
+import HomePageHeader from '../../../containers/HomePage/HomePageHeader/HomePageHeader'; // Import Header
+import HomeFooter from '../../../containers/HomePage/HomeFooter/HomeFooter'; // Import Footer
+import CustomScrollbars from '../../../components/CustomScrollbars'; // Import CustomScrollbars
 
 // Dữ liệu các gói khám
 const data = [
