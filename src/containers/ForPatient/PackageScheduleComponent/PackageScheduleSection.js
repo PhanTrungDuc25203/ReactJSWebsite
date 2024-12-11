@@ -112,7 +112,7 @@ class PackageScheduleSection extends Component {
         }
 
         // Sau đó truyền formattedDate thay vì package.date
-        this.props.history.push(`/booking-a-exam-package/${pack.id}/${formattedDate}/${pack.timeType}`);
+        this.props.history.push(`/booking-a-exam-package/${pack.examPackageId}/${formattedDate}/${pack.timeType}`);
     }
 
     render() {

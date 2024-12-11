@@ -292,6 +292,7 @@
             "page-title": "Booking Appointment",
             "specialty": "Obstetrics and Gynecology Doctor",
             "exam-price": "Obstetrics and Gynecology Examination Price",
+            "exam-package-price":"Examination Price of the Package ",
             "payment-method": "Pay Later at the Medical Facility",
             "receipt": "Total Payment (Free Booking Fee):"
         }

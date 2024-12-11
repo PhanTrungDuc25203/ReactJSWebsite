@@ -91,6 +91,10 @@ const patientInforWhenBookingAppointment = (data) => {
     return axios.post('/api/patient-infor-when-booking-time', data);
 }
 
+const patientInforWhenBookingExamPackage = (data) => {
+    return axios.post('/api/patient-infor-when-booking-exam-package', data);
+}
+
 const confirmBookingAppointmentService = (data) => {
     return axios.post('/api/confirm-booking-appointment', data);
 }
@@ -182,4 +186,5 @@ export {
     getAllExamPackageService,
     createTimeframeForPackage,
     getPackageScheduleByDateService,
+    patientInforWhenBookingExamPackage,
 };

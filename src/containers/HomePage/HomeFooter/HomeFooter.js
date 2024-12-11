@@ -67,10 +67,10 @@ class HomeFooter extends Component {
                         </div>
                     </div>
                     <div className="home-footer">
-                        <p>&copy; 2024-Phan Piscean.
+                        <p>&copy; 2024-Medical care.
 
                         </p>
-                        <a href="https://github.com/PhanTrungDuc25203" target="_blank">
+                        <a href="#" target="_blank">
                             &#8594; <FormattedMessage id="footer.check-out-me" />
                         </a>
                     </div>

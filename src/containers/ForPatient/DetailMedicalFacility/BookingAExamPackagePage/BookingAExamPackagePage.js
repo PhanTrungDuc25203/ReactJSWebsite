@@ -4,7 +4,6 @@ import HomePageHeader from '../../../HomePage/HomePageHeader/HomePageHeader';
 import './BookingAExamPackagePage.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoneyCheckDollar, faCashRegister, faUser, faCalendar, faLocationDot, faMobileScreenButton, faEnvelope, faPeopleArrows } from '@fortawesome/free-solid-svg-icons';
-import { getInforAndArticleForADoctor } from '../../../../services/userService';
 import { LANGUAGES } from '../../../../utils';
 import defaultAvatar from '../../../../assets/images/default-avatar-circle.png';
 import DatePicker from '../../../../components/Input/DatePicker';
@@ -12,7 +11,7 @@ import { getAllCodesService } from "../../../../services/userService";
 import { NumericFormat } from 'react-number-format';
 import { FormattedMessage } from 'react-intl';
 import * as actions from '../../../../store/actions';
-import { patientInforWhenBookingAppointment } from '../../../../services/userService';
+import { patientInforWhenBookingExamPackage, getAllExamPackageService } from '../../../../services/userService';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 import CustomScrollbars from '../../../../components/CustomScrollbars';
@@ -23,7 +22,7 @@ class BookingAExamPackagePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            doctorDetails: {},
+            packageDetails: {},
             timeframe: {},
             genderList: [],
 
@@ -34,7 +33,7 @@ class BookingAExamPackagePage extends Component {
             reason: '',
             birthday: '',
             selectedGender: '',
-            doctorId: '',
+            packageId: '',
             timeType: '',
             currentSystemUser: {},
         }
@@ -43,11 +42,11 @@ class BookingAExamPackagePage extends Component {
     async componentDidMount() {
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
             let id = this.props.match.params.id;
-            let res = await getInforAndArticleForADoctor(id);
+            let res = await getAllExamPackageService(id);
             // console.log("Check doctor infor: ", res);
             if (res && res.errCode === 0) {
                 this.setState({
-                    doctorDetails: res.data,
+                    packageDetails: res.infor[0],
                 })
             }
 
@@ -162,17 +161,16 @@ class BookingAExamPackagePage extends Component {
             appointmentMoment = moment(appointmentMoment, 'ddd, DD-MM-YYYY', 'en').toDate();
         }
 
-        let res = await patientInforWhenBookingAppointment({
+        let res = await patientInforWhenBookingExamPackage({
             fullname: this.state.fullname,
             phoneNumber: this.state.phoneNumber,
             email: this.state.email,
             address: this.state.address,
-            reason: this.state.reason,
             date: appointmentMoment, //ngày để lưu vào DB
             birthday: this.state.birthday,
             selectedGender: this.state.selectedGender,
             appointmentMoment: this.props.match.params.date,  //ngày để hiển thị dẽ dàng hơn
-            doctorId: this.state.doctorDetails.id,
+            packageId: this.state.packageDetails.id,
             timeType: this.state.timeframe.keyMap,
             language: this.props.language,
         });
@@ -186,17 +184,15 @@ class BookingAExamPackagePage extends Component {
 
     render() {
 
-        let { doctorDetails, currentSystemUser } = this.state;
+        let { packageDetails, currentSystemUser } = this.state;
+        console.log("check packageDetail: ", packageDetails);
         let { language } = this.props;
-        let nameInVie = '';
-        let nameInEng = '';
-        if (doctorDetails && doctorDetails.positionData) {
-            nameInVie = `${doctorDetails.positionData.value_Vie}, ${doctorDetails.lastName} ${doctorDetails.firstName}`;
-            nameInEng = `${doctorDetails.positionData.value_Eng}, ${doctorDetails.firstName} ${doctorDetails.lastName}`;
+        let imageByBase64 = '';
+        if (packageDetails.image) {
+            imageByBase64 = Buffer.from(packageDetails.image, 'base64').toString('binary');
         }
 
         let appointmentDate = this.appointmentDateFormat(language);
-        // console.log("check state current patient: ", this.state.currentSystemUser);
 
         return (
             <React.Fragment>
@@ -210,8 +206,8 @@ class BookingAExamPackagePage extends Component {
                             <div className="doctor-relative">
                                 <div className="doctor-avatar avatar-css"
                                     style={{
-                                        backgroundImage: `url(${doctorDetails.image
-                                            ? doctorDetails.image
+                                        backgroundImage: `url(${imageByBase64
+                                            ? imageByBase64
                                             : defaultAvatar
                                             })`
                                     }}
@@ -220,10 +216,7 @@ class BookingAExamPackagePage extends Component {
                                 </div>
                                 <div className="text-content">
                                     <div className="doctor-general-infor">
-                                        {language === LANGUAGES.VI ? nameInVie : nameInEng}
-                                    </div>
-                                    <div className="specialty">
-                                        <FormattedMessage id="make-appointment-page.left-content.specialty" />
+                                        {packageDetails && packageDetails.name}
                                     </div>
                                     <div className="appointment-time">
                                         {appointmentDate}
@@ -234,22 +227,22 @@ class BookingAExamPackagePage extends Component {
                                 <div className="exam-price">
                                     <div className="exam-specialty">
                                         <FontAwesomeIcon icon={faMoneyCheckDollar} className="price-icon" />
-                                        <FormattedMessage id="make-appointment-page.left-content.exam-price" />
+                                        <FormattedMessage id="make-appointment-page.left-content.exam-package-price" />
                                         {/* {doctorDetails.Doctor_infor.belongToSpecialty ? doctorDetails.Doctor_infor.belongToSpecialty.name : ''} */}
-                                        {doctorDetails && doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.belongToSpecialty ? doctorDetails.Doctor_infor.belongToSpecialty.name : ''}
+                                        {/* {doctorDetails && doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.belongToSpecialty ? doctorDetails.Doctor_infor.belongToSpecialty.name : ''} */}
                                     </div>
                                     <div className="price">
-                                        {doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.priceTypeData && language === LANGUAGES.EN &&
+                                        {packageDetails && packageDetails.priceDataForPackage && language === LANGUAGES.EN &&
                                             <NumericFormat
-                                                value={doctorDetails.Doctor_infor.priceTypeData.value_Eng}
+                                                value={packageDetails.priceDataForPackage.value_Eng}
                                                 displayType='text'
                                                 thousandSeparator=","
                                                 suffix='$'
                                             />
                                         }
-                                        {doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.priceTypeData && language === LANGUAGES.VI &&
+                                        {packageDetails && packageDetails.priceDataForPackage && language === LANGUAGES.VI &&
                                             <NumericFormat
-                                                value={doctorDetails.Doctor_infor.priceTypeData.value_Vie}
+                                                value={packageDetails.priceDataForPackage.value_Vie}
                                                 displayType='text'
                                                 thousandSeparator=","
                                                 suffix='đ'
@@ -264,17 +257,17 @@ class BookingAExamPackagePage extends Component {
                                     </div>
                                     <div className="receipt">
                                         <span><FormattedMessage id="make-appointment-page.left-content.receipt" /> </span>
-                                        {doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.priceTypeData && language === LANGUAGES.EN &&
+                                        {packageDetails && packageDetails.priceDataForPackage && language === LANGUAGES.EN &&
                                             <NumericFormat
-                                                value={doctorDetails.Doctor_infor.priceTypeData.value_Eng}
+                                                value={packageDetails.priceDataForPackage.value_Eng}
                                                 displayType='text'
                                                 thousandSeparator=","
                                                 suffix='$'
                                             />
                                         }
-                                        {doctorDetails.Doctor_infor && doctorDetails.Doctor_infor.priceTypeData && language === LANGUAGES.VI &&
+                                        {packageDetails && packageDetails.priceDataForPackage && language === LANGUAGES.VI &&
                                             <NumericFormat
-                                                value={doctorDetails.Doctor_infor.priceTypeData.value_Vie}
+                                                value={packageDetails.priceDataForPackage.value_Vie}
                                                 displayType='text'
                                                 thousandSeparator=","
                                                 suffix='đ'
@@ -409,16 +402,6 @@ class BookingAExamPackagePage extends Component {
                                         // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.booking-for" />}
                                         ></input>
                                     </div>
-                                </div>
-                                <div className="reason">
-                                    <label><FormattedMessage id="make-appointment-page.right-content.reason" /></label>
-                                    <textarea
-                                        value={this.state.reason}
-                                        onChange={(event) => this.handleOnchangeInput(event, 'reason')}
-                                    // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.reason" />}
-                                    >
-
-                                    </textarea>
                                 </div>
                                 <div className="attention">
 
