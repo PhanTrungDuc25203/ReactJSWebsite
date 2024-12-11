@@ -55,7 +55,7 @@ class AllSpecialties extends Component {
             <React.Fragment>
                 <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
                     <HomePageHeader isShowBanner={false} />
-                    <div className="specialty-article-container">
+                    <div className="all-specialty-container">
                         {allSpecialty && allSpecialty.length > 0 &&
                             allSpecialty.map((item, index) => {
                                 let imageByBase64 = '';
