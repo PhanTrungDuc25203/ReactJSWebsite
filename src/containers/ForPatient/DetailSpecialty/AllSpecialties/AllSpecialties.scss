@@ -2,7 +2,7 @@
     display  : flex;
     flex-wrap: wrap; // Cho phép các item xuống dòng nếu không đủ chỗ
     gap      : 24px; // Khoảng cách giữa các item
-    // padding  : 50px 26px 50px 50px;
+    margin   : 60px;
 
     &-title {
         width        : 100%; // Đảm bảo tiêu đề chiếm toàn bộ chiều ngang
