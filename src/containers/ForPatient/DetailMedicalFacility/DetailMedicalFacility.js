@@ -13,6 +13,8 @@ import { MoonLoader } from 'react-spinners';
 import defaultMedicalFacility from '../../../assets/images/default-medical-facility-avatar-lite-1.jpg';
 import DoctorScheduleComponent from '../../ForPatient/DoctorScheduleComponent/DoctorScheduleComponent';
 import PackageScheduleComponent from '../../ForPatient/PackageScheduleComponent/PackageScheduleComponent';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 class DetailMedicalFacility extends Component {
 
@@ -35,7 +37,7 @@ class DetailMedicalFacility extends Component {
             if (res && res.infor && res.infor[0]) {
                 this.setState({
                     medicalFacility: res.infor[0],
-                });
+                }, this.initializeMap);
             }
         }
 
@@ -59,6 +61,40 @@ class DetailMedicalFacility extends Component {
     componentWillUnmount() {
         this.observer.disconnect();
     }
+
+    initializeMap = async () => {
+        const { medicalFacility } = this.state;
+        console.log("Check location data: ", medicalFacility.address);
+        const address = medicalFacility && medicalFacility.address;
+        if (!address) return;
+
+        // tạo săn ảnh của map là Trung tâm Hà Nội
+        this.map = L.map('map-container').setView([21.028511, 105.804817], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(this.map);
+
+        try {
+            // Sử dụng Nominatim API để chuyển đổi địa chỉ thành tọa độ
+            const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
+            const data = await response.json();
+
+            if (data && data.length > 0) {
+                const { lat, lon } = data[0];
+                // Di chuyển bản đồ đến tọa độ tìm được
+                this.map.setView([lat, lon], 15);
+                // Thêm marker vào bản đồ
+                L.marker([lat, lon]).addTo(this.map)
+                    .bindPopup(`<b>${medicalFacility.name}</b><br>${address}`).openPopup();
+            } else {
+                console.warn('Không tìm thấy vị trí cho địa chỉ này.');
+            }
+        } catch (error) {
+            console.error('Lỗi khi tìm kiếm vị trí:', error);
+        }
+    }
+
 
     handleSpinnerTypeChange = (event) => {
         this.setState({ spinnerType: event.target.value });
@@ -183,6 +219,12 @@ class DetailMedicalFacility extends Component {
                             ) : (
                                 <p>Không có thông tin thế mạnh chuyên môn.</p>
                             )}
+                        </div>
+                        <div id="location" className="medical-facility-map-section">
+                            <label className="section-label">Bản đồ & Vị trí</label>
+                            <div className="map-frame">
+                                <div id="map-container" style={{ height: '400px', width: '100%' }}></div>
+                            </div>
                         </div>
                     </div>
                     <HomeFooter />

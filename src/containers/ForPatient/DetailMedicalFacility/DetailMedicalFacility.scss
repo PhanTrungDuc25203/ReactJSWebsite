@@ -1,5 +1,5 @@
 .medical-facility-article-container {
-    width: 100%;
+    width        : 100%;
     margin-bottom: 10px;
 
     .medical-facility-background-and-avatar-image {
@@ -13,7 +13,7 @@
             margin         : 60px 0;
 
             .medical-facility-background {
-                background-image   : url('../../../assets/images/ac84096a00c812843372bd9f5489d15e350dfe57_s2_n3_y1.jpg');
+                background-image   : url("../../../assets/images/ac84096a00c812843372bd9f5489d15e350dfe57_s2_n3_y1.jpg");
                 width              : 87.5%;
                 height             : 430px;
                 border-radius      : 20px;
@@ -64,7 +64,7 @@
 
                 .medical-facility-name {
                     font-size: 24px;
-                    color    : #49BCE2;
+                    color    : #49bce2;
                 }
 
                 .medical-facility-address {
@@ -72,7 +72,7 @@
 
                     .location-icon {
                         font-size   : 20px;
-                        color       : #49BCE2;
+                        color       : #49bce2;
                         margin-right: 10px;
                     }
                 }
@@ -89,7 +89,7 @@
         }
     }
 
-    .medical-facility-booking-with-package-section{
+    .medical-facility-booking-with-package-section {
         // border-bottom: 1px solid red;
     }
 
@@ -102,6 +102,20 @@
             li {
                 margin   : 0px 6.25% 0px 6.25%;
                 font-size: 17px;
+            }
+        }
+    }
+
+    .medical-facility-map-section {
+        z-index      : 0;
+        .map-frame {
+            position: relative;
+            margin       : 10px 205px 30px 205px;
+            border       : 2px solid #49bce2;
+            border-radius: 10px;
+            z-index      : 0;
+            .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+                border-radius: 10px;
             }
         }
     }
@@ -218,6 +232,7 @@
         position  : sticky;
         top       : 70px;
         transition: all 0.3s ease;
+        z-index   : 20;
 
         &.sticky {
             width      : 70%;
@@ -232,7 +247,6 @@
             // border-radius  : 10px;
             justify-content   : center;
             align-items       : center;
-            z-index           : 20;
 
             .facility-scrollspy-menu-navigation a {
                 font-size      : 15px;
@@ -241,27 +255,26 @@
                 text-align     : center;
                 color          : white;
                 text-decoration: none;
-                border: 1px solid transparent;
-                border-radius: 5px;
+                border         : 1px solid transparent;
+                border-radius  : 5px;
                 font-weight    : 600;
                 transition     : 0.2s;
                 cursor         : pointer;
             }
 
             .facility-scrollspy-menu-navigation a.active {
-                border: 1px solid white;
-                background  : #78d2ff;
+                border       : 1px solid white;
+                background   : #78d2ff;
                 border-radius: 5px;
             }
 
             .facility-scrollspy-menu-navigation a:hover {
-                border: 1px solid white;
-                background  : #78d2ff;
+                border       : 1px solid white;
+                background   : #78d2ff;
                 border-radius: 5px;
             }
         }
     }
-
 
     #booking-appointment,
     #general-introduction,
