@@ -16,6 +16,7 @@
     .specialty-item-container {
         width     : calc(25% - 24px); // Chia làm 4 cột, điều chỉnh giá trị này nếu cần
         box-sizing: border-box;
+        cursor    : pointer;
 
         .specialty-item {
             display         : flex;

@@ -34,6 +34,10 @@ class AllSpecialties extends Component {
 
     }
 
+    handleViewDetailArticleOfASpecialty = (specialty) => {
+        this.props.history.push(`/detail-specialty-article/${specialty.id}`);
+    }
+
     handleSpinnerTypeChange = (event) => {
         this.setState({ spinnerType: event.target.value });
     };
@@ -64,7 +68,7 @@ class AllSpecialties extends Component {
                                 }
                                 return (
                                     <div className="specialty-item-container" key={index}
-                                    // onClick={() => this.handleViewDetailArticleOfAFacility(item.id)}
+                                        onClick={() => this.handleViewDetailArticleOfASpecialty(item)}
                                     >
                                         <div className="specialty-item">
                                             <div className="image image-css"

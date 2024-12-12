@@ -25,13 +25,23 @@ class ComprehensiveServiceSection extends Component {
         this.props.history.push(`/health-check`);
     }
 
+    handleClickToAllSpecialties = () => {
+        this.props.history.push(`/all-specialties`);
+    }
+
+    handleClickToDentalExam = () => {
+        this.props.history.push(`/detail-specialty-article/9`);
+    }
+
     render() {
         return (
             <div className="comprehensive-service-section">
                 <div className="section-title"><FormattedMessage id="comprehensive-service-section.section-title" /></div>
                 <div className="service-contents">
                     <div className="left-contents">
-                        <div className="specialty-exam content-background ">
+                        <div className="specialty-exam content-background "
+                            onClick={() => this.handleClickToAllSpecialties()}
+                        >
                             <div className="service-icon-container"><div className="specialty-icon"></div></div>
                             <FormattedMessage id="comprehensive-service-section.option-specialty-exam" />
                         </div>
@@ -65,7 +75,9 @@ class ComprehensiveServiceSection extends Component {
                             <div className="service-icon-container"><div className="medical-tube-icon"></div></div>
                             <FormattedMessage id="comprehensive-service-section.option-medical-testing" />
                         </div>
-                        <div className="dental-health content-background">
+                        <div className="dental-health content-background"
+                            onClick={() => this.handleClickToDentalExam()}
+                        >
                             <div className="service-icon-container"><div className="tooth-icon"></div></div>
                             <FormattedMessage id="comprehensive-service-section.option-dental-exam" />
                         </div>

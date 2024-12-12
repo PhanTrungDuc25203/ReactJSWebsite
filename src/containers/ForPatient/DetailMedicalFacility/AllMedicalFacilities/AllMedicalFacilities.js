@@ -26,6 +26,10 @@ class AllMedicalFacilities extends Component {
         }
     }
 
+    handleViewDetailArticleOfAFacility = (facility) => {
+        this.props.history.push(`/detail-medical-facility/${facility}`);
+    }
+
     handlePageChange = (pageNumber) => {
         this.setState({ currentPage: pageNumber });
     };
@@ -86,7 +90,9 @@ class AllMedicalFacilities extends Component {
                                     imageByBase64 = Buffer.from(item.image, 'base64').toString('binary');
                                 }
                                 return (
-                                    <div className="medical-facility-item-container" key={index}>
+                                    <div className="medical-facility-item-container" key={index}
+                                        onClick={() => this.handleViewDetailArticleOfAFacility(item.id)}
+                                    >
                                         <div className="medical-facility-item">
                                             <div
                                                 className="image-css"
