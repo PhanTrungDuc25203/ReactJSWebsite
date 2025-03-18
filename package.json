@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "14.x"
+  },
   "name": "react-website-FirstPj",
   "version": "0.1.0",
   "private": true,
