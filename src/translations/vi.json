@@ -1,300 +1,300 @@
 {
-    "home-page-header": {
-        "specialty": "Chuyên khoa",
-        "find-doctor-by-their-specialty": "Tìm bác sĩ theo chuyên khoa",
-        "facilities": "Cơ sở y tế",
-        "find-hospital-or-clinic": "Chọn bệnh viện, phòng khám",
-        "doctor": "Bác sĩ",
-        "find-elite-doctor": "Chọn những bác sĩ ưu tú",
-        "examination-pack": "Gói khám",
-        "general-examination": "Khám sức khỏe tổng quát",
-        "appointment": "Đặt lịch",
-        "support": "Hỗ trợ",
-        "login": "Đăng nhập"
-    },
-    "home-top-navigator": {
-        "option-home": "Trang chủ",
-        "option-specialty-exam": "Khám chuyên khoa",
-        "option-remote-exam": "Khám từ xa",
-        "option-general-exam": "Khám tổng quát",
-        "option-medical-testing": "Xét nghiệm y học",
-        "option-mental-health": "Sức khỏe tinh thần",
-        "option-dental-exam": "Khám nha khoa"
-    },
-    "home-banner": {
-        "search-area-search-box-placeholder": "Tìm kiếm...",
-        "search-area-search-box-title": "Nền tảng chăm sóc sức khỏe toàn diện",
-        "search-area-search-box-content": "Hãy để chúng tôi chăm sóc cho bạn",
-        "search-area-quick-search-content-1": "Con tôi bị dị ứng lâu dài, làm thế nào để chữa trị dứt điểm?",
-        "search-area-quick-search-content-2": "Dạo này xảy ra rất nhiều những trường hợp mắc bệnh, bạch hầu, bác sĩ có lời khuyên gì cho mọi người để phòng tránh?"
-    },
-    "side-bar": {
-        "side-bar-menu": "Kính chào",
-        "side-bar-item": {
-            "managepage": "Trang quản lý",
-            "homepage": "Trang chủ",
-            "handbook": "Cẩm nang",
-            "cooperate": "Hợp tác",
-            "question": "Câu hỏi thường gặp",
-            "contact": "Liên hệ",
-            "service": "Dịch vụ",
-            "term": "Điều khoản sử dụng",
-            "regulation": "Quy chế hoạt động",
-            "about-us": "Về chúng tôi"
-        }
-    },
-    "comprehensive-service-section": {
-        "section-title": "Dịch vụ toàn diện",
-        "option-specialty-exam": "Khám chuyên khoa",
-        "option-general-exam": "Khám tổng quát",
-        "option-mental-health": "Sức khỏe tinh thần",
-        "option-surgery-pack": "Gói phẫu thuật",
-        "option-health-exam": "Kiểm tra sức khỏe",
-        "option-remote-exam": "Khám từ xa",
-        "option-medical-testing": "Xét nghiệm y học",
-        "option-dental-exam": "Khám nha khoa",
-        "option-diabetes": "Sống khỏe với tiểu đường",
-        "option-near-clinic": "Cơ sở y tế gần bạn"
-    },
-    "specialty-section": {
-        "specialty-section-title": "Chuyên khoa",
-        "button-more-detail": "Xem thêm",
-        "hepatitis": "Bệnh viêm gan",
-        "acupuncture": "Châm cứu",
-        "bone-and-joint-disease": "Bệnh xương khớp",
-        "immune-system": "Hệ miễn dịch",
-        "spine": "Cột sống",
-        "dermatology": "Da liễu",
-        "pediatrics": "Nhi khoa",
-        "obstetrics-and-gynecology": "Sản phụ khoa",
-        "fetal-ultrasound": "Siêu âm thai",
-        "mental-health": "Sức khỏe tinh thần",
-        "ent": "Tai mũi họng",
-        "gastric-disease": "Bệnh dạ dày",
-        "cardiology": "Tim mạch",
-        "neurology": "Thần kinh khoa",
-        "traditional-medicine": "Y học cổ truyền"
-    },
-    "medical-facilities-section": {
-        "medical-facilities-section-title": "Cơ sở y tế",
-        "button-more-detail": "Xem thêm",
-        "hospital-1": "Bệnh viên quân đội trung ương",
-        "hospital-2": "Phòng khám Meditec",
-        "hospital-3": "Phòng khám Doctor check",
-        "hospital-4": "Phòng khám bác sĩ gia đình Med247",
-        "hospital-5": "Phòng khám sức khỏe Saigon",
-        "hospital-6": "Hệ thống y tế Thu Cúc",
-        "hospital-7": "Phòng khám quốc tế EXSON",
-        "hospital-8": "Phòng khám mắt quốc tế DND",
-        "hospital-9": "Bệnh viện Chợ Rẫy",
-        "hospital-10": "Phòng khám đa khoa Hưng Việt",
-        "hospital-11": "Bệnh viện đại học Y dược 1 TP.HCM",
-        "hospital-12": "Trung tâm xét nghiệm DIAG",
-        "hospital-13": "Bệnh viện nam học và sinh sản",
-        "hospital-14": "Bệnh  viện y học cổ truyền quốc gia",
-        "hospital-15": "Phòng khám Hồng Phát"
-    },
-    "elite-doctor-section": {
-        "elite-doctor-section-title": "Bác sĩ nổi bật",
-        "more-detail-button": "Xem thêm"
-    },
-    "remote-exam-section": {
-        "remote-exam-section-title": "Khám từ xa",
-        "button-more-detail": "Xem thêm",
-        "option-1": "Sức khỏe tinh thần",
-        "option-2": "Cơ-Xương-Khớp",
-        "option-3": "Da liễu",
-        "option-4": "Bác sĩ Nhi khoa",
-        "option-5": "Bác sĩ Nội khoa",
-        "option-6": "Bác sĩ Sản phụ khoa",
-        "option-7": "Tai-Mũi-họng",
-        "option-8": "Bác sĩ Thần kinh",
-        "option-9": "Dạ dày",
-        "option-10": "Tim mạch",
-        "option-11": "Tư vấn Mùa dịch",
-        "option-12": "Tư vấn Tâm lý"
-    },
-    "mental-health-section": {
-        "mental-health-section-title": "Sức khỏe tâm lý",
-        "button-more-detail": "Xem thêm",
-        "option-1": "Bài test sức khỏe",
-        "option-2": "Sức khỏe tâm thần",
-        "option-3": "Tư vấn Tâm lý",
-        "option-4": "Sức khỏe tâm thần từ xa",
-        "option-5": "Tư vấn tâm lý từ xa"
-    },
-    "recent-disease-section": {
-        "recent-disease-section-title": "Những dịch bệnh gần đây",
-        "button-more-detail": "Xem thêm",
-        "guaranty-text-1": "Thông tin, số liệu đã được Cục thống kê và Bộ y tế xác nhận.",
-        "guaranty-text-2": "Được trích dẫn từ những nguồn thông tin uy tín.",
-        "guaranty-text-3": "Cung cấp cho người dân để người dân có thể sớm nắm bắt tình hình và có cách thức phòng tránh."
-    },
-    "stay-a-healthy-life-section": {
-        "stay-a-healthy-life-section-title": "Sống khỏe mỗi ngày",
-        "button-more-detail": "Xem thêm",
-        "article-1": "Béo phì cấp độ 1: nguyên nhân, triệu chứng và cách điều trị.",
-        "article-2": "Điều trị viêm răng an toàn và hiệu quả.",
-        "article-3": "Top 5 bệnh thường gặp trong mùa mưa.",
-        "article-4": "Giải đáp: chèn ép tủy sống có nguy hiểm không?",
-        "article-5": "Chèn ép tủy sống: nguyên nhân, triệu chứng, phương pháp chuẩn đoán và điều trị",
-        "article-6": "Giải pháp: trồng răng Implant có đau không?",
-        "article-7": "Tổng hợp các thông tin về trồng răng Implant.",
-        "article-8": "Hướng dẫn cách chăm sóc răng miệng khi cắm Implant.",
-        "article-9": "Viêm răng và những điều bạn cần biết.",
-        "article-10": "Ung thư tuyến giáp thể không biệt hóa: triệu chứng, nguyên nhân và cách điều trị.",
-        "article-11": "Dấu hiệu nhiễm trùng sau khi nhổ răng khôn.",
-        "article-12": "Ung thư tuyến giáp thể tủy: nguyên nhân và cách điều trị.",
-        "article-13": "Mắt mờ như có màng che: dấu hiệu cảnh báo bệnh lý nguy hiểm về mắt.",
-        "article-14": "Mách bạn nhận biết các triệu chứng viêm răng.",
-        "article-15": "Viêm răng nguy hiểm hơn bạn nghĩ."
-    },
-    "footer": {
-        "company": "Công ty TNHH Grp-7",
-        "infor": "Thông tin",
-        "service": "Dịch vụ",
-        "security-term": "Chính sách bảo mật",
-        "branch": "Chi nhánh",
-        "used-technology": "Công nghệ sử dụng",
-        "tech-1": "NodeJS",
-        "tech-2": "Express",
-        "tech-3": "React",
-        "library": "Và các thư viện hỗ trợ khác",
-        "title": "Xin chào!",
-        "present-1": "Mình là ",
-        "my-nick-name": "Phan Trung Đức",
-        "present-2": ", mình học IT-E6 ở Đại học Bách Khoa Hà Nội. Với khả năng thuận tiện khi sử dụng, giao diện sạch sẽ, dễ tiếp cận, chúng mình mong rằng Project này sẽ được điểm cao ở học phần Công nghệ Web",
-        "follow": "Theo dõi",
-        "check-out-me": "Ghé thăm Github để biết thêm thông tin"
-    },
-    "menu": {
-        "system": {
-            "header": "Hệ thống",
-            "system-administrator": {
-                "header": "Quản trị hệ thống",
-                "user-manage": "Quản lý người sử dụng",
-                "user-manage-by-redux": "Quản lý người sử dụng bằng Redux",
-                "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
-            },
-            "system-parameter": {
-                "header": "Tham số hệ thống"
-            }
-        },
-        "content": {
-            "welcome-text": "Xin chào"
-        },
-        "admin": {
-            "menu-title-1": "Người dùng",
-            "menu-title-2": "Cơ sở y tế",
-            "menu-title-3": "Chuyên khoa",
-            "menu-title-4": "Bài đăng, cẩm nang",
-            "menu-title-5": "Trang chủ",
-            "user-CRUD": "CRUD người dùng",
-            "user-CRUD-by-redux": "CRUD người dùng bởi Redux",
-            "doctor-manage": "Quản lý Bác sĩ",
-            "admin-manage": "Quản lý quản trị viên",
-            "clinic-manage": "Quản lý Cơ sở y tế",
-            "exam-package-manage": "Quản lý Gói khám bệnh",
-            "exam-package-schedule-manage": "Kế hoạch khám của Gói khám",
-            "specialty-manage": "Quản lý chuyên khoa",
-            "article-handbook-manage": "Quản lý bài đăng, cẩm nang",
-            "user-manage-by-redux-form": {
-                "title": "Quản lý người dùng bằng Redux",
-                "email": "Thư điện tử (Email)",
-                "password": "Mật khẩu",
-                "firstName": "Tên",
-                "lastName": "Họ và tên đệm",
-                "address": "Địa chỉ",
-                "phoneNumber": "Số điện thoại",
-                "gender": "Giới tính",
-                "gender-value": {
-                    "male": "Nam",
-                    "female": "Nữ",
-                    "femboy": "trai cong",
-                    "tomboy": "nữ cong",
-                    "bisexual": "lưỡng tính"
-                },
-                "role": "Vai trò",
-                "role-value": {
-                    "patient": "Bệnh nhân",
-                    "admin": "Quản trị viên",
-                    "doctor": "Bác sĩ"
-                },
-                "position": "Vị trí",
-                "position-value": {},
-                "avatar-image": "Ảnh đại diện",
-                "image-preview": "Xem trước",
-                "image-upload": "Tải ảnh",
-                "image-delete": "Xóa ảnh",
-                "update-data-column": "Cập nhật",
-                "add-new-button": "Lưu người dùng",
-                "save-changes-button": "Lưu thay đổi"
-            }
-        },
-        "doctor": {
-            "manage-schedule-and-timetable": "Quản lý kế hoạch khám bệnh",
-            "schedule-and-timetable": "Kế hoạch khám bệnh",
-            "all-information-manage": "Quản lý thông tin"
-        }
-    },
-    "schedule-and-timetable-manage-page": {
-        "title": "Quản lý thời gian biểu và lịch khám",
-        "choose-dotor": "Chọn bác sĩ",
-        "choose-day": "Chọn ngày hẹn và khung giờ",
-        "save-button": "Lưu ngày hẹn"
-    },
-    "doctor-detail-page-for-patient": {
-        "schedule-section": {
-            "available-timeframe-section-title": "Thời gian khám:",
-            "sorry-text": "Xin lỗi quý khách, bác sĩ hiện không còn trống lịch hôm nay! Vui lòng chọn một hôm khác."
-        },
-            "extra-infor-section":{
-                "exam-address": "Địa chỉ khám",
-                "exam-price":"Giá khám",
-                "attention": "Chưa bao gồm phí siêu âm, xét nghiệm, chụp chiếu",
-                "no-note":"Bác sĩ không có chú thích gì thêm",
-                "payment-method-1":"Phòng khám nhận thanh toán bằng hình thức qua thẻ ngân hàng và tiền mặt",
-                "payment-method-2":"Phòng khám chỉ nhận thanh toán bằng hình thức qua thẻ ngân hàng",
-                "payment-method-3":"Phòng khám chỉ nhận thanh toán bằng hình thức tiền mặt",
-                "more-button":"Xem thêm",
-                "less-button":"Thu gọn"
-            }
-    },
-    "doctor-manage-page-for-admin": {
-        "page-title": "Tạo thông tin, bài báo cho bác sĩ",
-        "description-placeholder": "Thông tin giới thiệu:...",
-        "select-doctor-placeholder": "Chọn bác sĩ...",
-        "save-article-button": "Lưu bài báo",
-        "save-changes-button": "Lưu thay đổi"
-    },
-    "make-appointment-page":{
-        "right-content":{
-            "title":"Hồ sơ khám bệnh",
-            "name":"Họ và tên",
-            "gender":"Giới tính",
-            "dob":"Ngày sinh",
-            "address":"Địa chỉ (Nơi ở)",
-            "phonenum":"Số điện thoại",
-            "email":"Hòm thư điện tử (Email)",
-            "booking-for":"Đặt cho ai",
-            "reason":"Lý do khám bệnh",
-            "placeholder":{
-                "name": "Phan Piscean",
-                "dob": "Choose or input follow formatting: dd/mm/yyy",
-                "address": "1234 Main St",
-                "phonenum": "01234566789",
-                "email": "abc@gmail.com",
-                "booking-for": "Phan Piscean or relative",
-                "reason": "I have a suddenly headache"
-            }
-        },
-        "left-content":{
-            "page-title":"Đặt lịch hẹn",
-            "specialty":"Bác sĩ khoa phụ sản",
-            "exam-price":"Giá khám khoa ",
-            "exam-package-price":"Giá khám của Gói khám ",
-            "payment-method":"Thanh toán sau tại cơ sở y tế",
-            "receipt":"Tổng thanh toán (phí đặt lịch miễn phí): "
-        }
+  "home-page-header": {
+    "specialty": "Chuyên khoa",
+    "find-doctor-by-their-specialty": "Tìm bác sĩ theo chuyên khoa",
+    "facilities": "Cơ sở y tế",
+    "find-hospital-or-clinic": "Chọn bệnh viện, phòng khám",
+    "doctor": "Bác sĩ",
+    "find-elite-doctor": "Chọn những bác sĩ ưu tú",
+    "examination-pack": "Gói khám",
+    "general-examination": "Khám sức khỏe tổng quát",
+    "appointment": "Đặt lịch",
+    "support": "Hỗ trợ",
+    "login": "Đăng nhập"
+  },
+  "home-top-navigator": {
+    "option-home": "Trang chủ",
+    "option-specialty-exam": "Khám chuyên khoa",
+    "option-remote-exam": "Khám từ xa",
+    "option-general-exam": "Khám tổng quát",
+    "option-medical-testing": "Xét nghiệm y học",
+    "option-mental-health": "Sức khỏe tinh thần",
+    "option-dental-exam": "Khám nha khoa"
+  },
+  "home-banner": {
+    "search-area-search-box-placeholder": "Tìm kiếm...",
+    "search-area-search-box-title": "Nền tảng chăm sóc sức khỏe toàn diện",
+    "search-area-search-box-content": "Hãy để chúng tôi chăm sóc cho bạn",
+    "search-area-quick-search-content-1": "Con tôi bị dị ứng lâu dài, làm thế nào để chữa trị dứt điểm?",
+    "search-area-quick-search-content-2": "Dạo này xảy ra rất nhiều những trường hợp mắc bệnh, bạch hầu, bác sĩ có lời khuyên gì cho mọi người để phòng tránh?"
+  },
+  "side-bar": {
+    "side-bar-menu": "Kính chào",
+    "side-bar-item": {
+      "managepage": "Trang quản lý",
+      "homepage": "Trang chủ",
+      "handbook": "Cẩm nang",
+      "cooperate": "Hợp tác",
+      "question": "Câu hỏi thường gặp",
+      "contact": "Liên hệ",
+      "service": "Dịch vụ",
+      "term": "Điều khoản sử dụng",
+      "regulation": "Quy chế hoạt động",
+      "about-us": "Về chúng tôi"
     }
+  },
+  "comprehensive-service-section": {
+    "section-title": "Dịch vụ toàn diện",
+    "option-specialty-exam": "Khám chuyên khoa",
+    "option-general-exam": "Khám tổng quát",
+    "option-mental-health": "Sức khỏe tinh thần",
+    "option-surgery-pack": "Gói phẫu thuật",
+    "option-health-exam": "Kiểm tra sức khỏe",
+    "option-remote-exam": "Khám từ xa",
+    "option-medical-testing": "Xét nghiệm y học",
+    "option-dental-exam": "Khám nha khoa",
+    "option-diabetes": "Sống khỏe với tiểu đường",
+    "option-near-clinic": "Cơ sở y tế gần bạn"
+  },
+  "specialty-section": {
+    "specialty-section-title": "Chuyên khoa",
+    "button-more-detail": "Xem thêm",
+    "hepatitis": "Bệnh viêm gan",
+    "acupuncture": "Châm cứu",
+    "bone-and-joint-disease": "Bệnh xương khớp",
+    "immune-system": "Hệ miễn dịch",
+    "spine": "Cột sống",
+    "dermatology": "Da liễu",
+    "pediatrics": "Nhi khoa",
+    "obstetrics-and-gynecology": "Sản phụ khoa",
+    "fetal-ultrasound": "Siêu âm thai",
+    "mental-health": "Sức khỏe tinh thần",
+    "ent": "Tai mũi họng",
+    "gastric-disease": "Bệnh dạ dày",
+    "cardiology": "Tim mạch",
+    "neurology": "Thần kinh khoa",
+    "traditional-medicine": "Y học cổ truyền"
+  },
+  "medical-facilities-section": {
+    "medical-facilities-section-title": "Cơ sở y tế",
+    "button-more-detail": "Xem thêm",
+    "hospital-1": "Bệnh viên quân đội trung ương",
+    "hospital-2": "Phòng khám Meditec",
+    "hospital-3": "Phòng khám Doctor check",
+    "hospital-4": "Phòng khám bác sĩ gia đình Med247",
+    "hospital-5": "Phòng khám sức khỏe Saigon",
+    "hospital-6": "Hệ thống y tế Thu Cúc",
+    "hospital-7": "Phòng khám quốc tế EXSON",
+    "hospital-8": "Phòng khám mắt quốc tế DND",
+    "hospital-9": "Bệnh viện Chợ Rẫy",
+    "hospital-10": "Phòng khám đa khoa Hưng Việt",
+    "hospital-11": "Bệnh viện đại học Y dược 1 TP.HCM",
+    "hospital-12": "Trung tâm xét nghiệm DIAG",
+    "hospital-13": "Bệnh viện nam học và sinh sản",
+    "hospital-14": "Bệnh  viện y học cổ truyền quốc gia",
+    "hospital-15": "Phòng khám Hồng Phát"
+  },
+  "elite-doctor-section": {
+    "elite-doctor-section-title": "Bác sĩ nổi bật",
+    "more-detail-button": "Xem thêm"
+  },
+  "remote-exam-section": {
+    "remote-exam-section-title": "Khám từ xa",
+    "button-more-detail": "Xem thêm",
+    "option-1": "Sức khỏe tinh thần",
+    "option-2": "Cơ-Xương-Khớp",
+    "option-3": "Da liễu",
+    "option-4": "Bác sĩ Nhi khoa",
+    "option-5": "Bác sĩ Nội khoa",
+    "option-6": "Bác sĩ Sản phụ khoa",
+    "option-7": "Tai-Mũi-họng",
+    "option-8": "Bác sĩ Thần kinh",
+    "option-9": "Dạ dày",
+    "option-10": "Tim mạch",
+    "option-11": "Tư vấn Mùa dịch",
+    "option-12": "Tư vấn Tâm lý"
+  },
+  "mental-health-section": {
+    "mental-health-section-title": "Sức khỏe tâm lý",
+    "button-more-detail": "Xem thêm",
+    "option-1": "Bài test sức khỏe",
+    "option-2": "Sức khỏe tâm thần",
+    "option-3": "Tư vấn Tâm lý",
+    "option-4": "Sức khỏe tâm thần từ xa",
+    "option-5": "Tư vấn tâm lý từ xa"
+  },
+  "recent-disease-section": {
+    "recent-disease-section-title": "Những dịch bệnh gần đây",
+    "button-more-detail": "Xem thêm",
+    "guaranty-text-1": "Thông tin, số liệu đã được Cục thống kê và Bộ y tế xác nhận.",
+    "guaranty-text-2": "Được trích dẫn từ những nguồn thông tin uy tín.",
+    "guaranty-text-3": "Cung cấp cho người dân để người dân có thể sớm nắm bắt tình hình và có cách thức phòng tránh."
+  },
+  "stay-a-healthy-life-section": {
+    "stay-a-healthy-life-section-title": "Sống khỏe mỗi ngày",
+    "button-more-detail": "Xem thêm",
+    "article-1": "Béo phì cấp độ 1: nguyên nhân, triệu chứng và cách điều trị.",
+    "article-2": "Điều trị viêm răng an toàn và hiệu quả.",
+    "article-3": "Top 5 bệnh thường gặp trong mùa mưa.",
+    "article-4": "Giải đáp: chèn ép tủy sống có nguy hiểm không?",
+    "article-5": "Chèn ép tủy sống: nguyên nhân, triệu chứng, phương pháp chuẩn đoán và điều trị",
+    "article-6": "Giải pháp: trồng răng Implant có đau không?",
+    "article-7": "Tổng hợp các thông tin về trồng răng Implant.",
+    "article-8": "Hướng dẫn cách chăm sóc răng miệng khi cắm Implant.",
+    "article-9": "Viêm răng và những điều bạn cần biết.",
+    "article-10": "Ung thư tuyến giáp thể không biệt hóa: triệu chứng, nguyên nhân và cách điều trị.",
+    "article-11": "Dấu hiệu nhiễm trùng sau khi nhổ răng khôn.",
+    "article-12": "Ung thư tuyến giáp thể tủy: nguyên nhân và cách điều trị.",
+    "article-13": "Mắt mờ như có màng che: dấu hiệu cảnh báo bệnh lý nguy hiểm về mắt.",
+    "article-14": "Mách bạn nhận biết các triệu chứng viêm răng.",
+    "article-15": "Viêm răng nguy hiểm hơn bạn nghĩ."
+  },
+  "footer": {
+    "company": "Công ty TNHH Grp-7",
+    "infor": "Thông tin",
+    "service": "Dịch vụ",
+    "security-term": "Chính sách bảo mật",
+    "branch": "Chi nhánh",
+    "used-technology": "Công nghệ sử dụng",
+    "tech-1": "NodeJS",
+    "tech-2": "Express",
+    "tech-3": "React",
+    "library": "Và các thư viện hỗ trợ khác",
+    "title": "Xin chào!",
+    "present-1": "Mình là ",
+    "my-nick-name": "Phan Trung Đức",
+    "present-2": ", mình học IT-E6 ở Đại học Bách Khoa Hà Nội. Với những kiến thức mình đã học, mình đã thực hiện Project này với mong muốn không chỉ đáp ứng yêu cầu về môn học mà còn mang đến sản phẩm có tính thực tế. Mình tập trung vào giao diện sạch sẽ, dễ sử dụng để bất kỳ ai mới dùng cũng có thể làm quen nhanh chóng. Kết hợp với đó là các tính năng hợp lý và giúp giải quyết vấn đề người dùng một cách thuận lợi nhất. Rất mong các bạn đánh giá cao sản phẩm này!",
+    "follow": "Theo dõi",
+    "check-out-me": "Ghé thăm Github để biết thêm thông tin"
+  },
+  "menu": {
+    "system": {
+      "header": "Hệ thống",
+      "system-administrator": {
+        "header": "Quản trị hệ thống",
+        "user-manage": "Quản lý người sử dụng",
+        "user-manage-by-redux": "Quản lý người sử dụng bằng Redux",
+        "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
+      },
+      "system-parameter": {
+        "header": "Tham số hệ thống"
+      }
+    },
+    "content": {
+      "welcome-text": "Xin chào"
+    },
+    "admin": {
+      "menu-title-1": "Người dùng",
+      "menu-title-2": "Cơ sở y tế",
+      "menu-title-3": "Chuyên khoa",
+      "menu-title-4": "Bài đăng, cẩm nang",
+      "menu-title-5": "Trang chủ",
+      "user-CRUD": "CRUD người dùng",
+      "user-CRUD-by-redux": "CRUD người dùng bởi Redux",
+      "doctor-manage": "Quản lý Bác sĩ",
+      "admin-manage": "Quản lý quản trị viên",
+      "clinic-manage": "Quản lý Cơ sở y tế",
+      "exam-package-manage": "Quản lý Gói khám bệnh",
+      "exam-package-schedule-manage": "Kế hoạch khám của Gói khám",
+      "specialty-manage": "Quản lý chuyên khoa",
+      "article-handbook-manage": "Quản lý bài đăng, cẩm nang",
+      "user-manage-by-redux-form": {
+        "title": "Quản lý người dùng bằng Redux",
+        "email": "Thư điện tử (Email)",
+        "password": "Mật khẩu",
+        "firstName": "Tên",
+        "lastName": "Họ và tên đệm",
+        "address": "Địa chỉ",
+        "phoneNumber": "Số điện thoại",
+        "gender": "Giới tính",
+        "gender-value": {
+          "male": "Nam",
+          "female": "Nữ",
+          "femboy": "trai cong",
+          "tomboy": "nữ cong",
+          "bisexual": "lưỡng tính"
+        },
+        "role": "Vai trò",
+        "role-value": {
+          "patient": "Bệnh nhân",
+          "admin": "Quản trị viên",
+          "doctor": "Bác sĩ"
+        },
+        "position": "Vị trí",
+        "position-value": {},
+        "avatar-image": "Ảnh đại diện",
+        "image-preview": "Xem trước",
+        "image-upload": "Tải ảnh",
+        "image-delete": "Xóa ảnh",
+        "update-data-column": "Cập nhật",
+        "add-new-button": "Lưu người dùng",
+        "save-changes-button": "Lưu thay đổi"
+      }
+    },
+    "doctor": {
+      "manage-schedule-and-timetable": "Quản lý kế hoạch khám bệnh",
+      "schedule-and-timetable": "Kế hoạch khám bệnh",
+      "all-information-manage": "Quản lý thông tin"
+    }
+  },
+  "schedule-and-timetable-manage-page": {
+    "title": "Quản lý thời gian biểu và lịch khám",
+    "choose-dotor": "Chọn bác sĩ",
+    "choose-day": "Chọn ngày hẹn và khung giờ",
+    "save-button": "Lưu ngày hẹn"
+  },
+  "doctor-detail-page-for-patient": {
+    "schedule-section": {
+      "available-timeframe-section-title": "Thời gian khám:",
+      "sorry-text": "Xin lỗi quý khách, bác sĩ hiện không còn trống lịch hôm nay! Vui lòng chọn một hôm khác."
+    },
+    "extra-infor-section": {
+      "exam-address": "Địa chỉ khám",
+      "exam-price": "Giá khám",
+      "attention": "Chưa bao gồm phí siêu âm, xét nghiệm, chụp chiếu",
+      "no-note": "Bác sĩ không có chú thích gì thêm",
+      "payment-method-1": "Phòng khám nhận thanh toán bằng hình thức qua thẻ ngân hàng và tiền mặt",
+      "payment-method-2": "Phòng khám chỉ nhận thanh toán bằng hình thức qua thẻ ngân hàng",
+      "payment-method-3": "Phòng khám chỉ nhận thanh toán bằng hình thức tiền mặt",
+      "more-button": "Xem thêm",
+      "less-button": "Thu gọn"
+    }
+  },
+  "doctor-manage-page-for-admin": {
+    "page-title": "Tạo thông tin, bài báo cho bác sĩ",
+    "description-placeholder": "Thông tin giới thiệu:...",
+    "select-doctor-placeholder": "Chọn bác sĩ...",
+    "save-article-button": "Lưu bài báo",
+    "save-changes-button": "Lưu thay đổi"
+  },
+  "make-appointment-page": {
+    "right-content": {
+      "title": "Hồ sơ khám bệnh",
+      "name": "Họ và tên",
+      "gender": "Giới tính",
+      "dob": "Ngày sinh",
+      "address": "Địa chỉ (Nơi ở)",
+      "phonenum": "Số điện thoại",
+      "email": "Hòm thư điện tử (Email)",
+      "booking-for": "Đặt cho ai",
+      "reason": "Lý do khám bệnh",
+      "placeholder": {
+        "name": "Phan Piscean",
+        "dob": "Choose or input follow formatting: dd/mm/yyy",
+        "address": "1234 Main St",
+        "phonenum": "01234566789",
+        "email": "abc@gmail.com",
+        "booking-for": "Phan Piscean or relative",
+        "reason": "I have a suddenly headache"
+      }
+    },
+    "left-content": {
+      "page-title": "Đặt lịch hẹn",
+      "specialty": "Bác sĩ khoa phụ sản",
+      "exam-price": "Giá khám khoa ",
+      "exam-package-price": "Giá khám của Gói khám ",
+      "payment-method": "Thanh toán sau tại cơ sở y tế",
+      "receipt": "Tổng thanh toán (phí đặt lịch miễn phí): "
+    }
+  }
 }

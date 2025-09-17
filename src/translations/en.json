@@ -1,300 +1,300 @@
 {
-    "home-page-header": {
-        "specialty": "Medical specialty",
-        "find-doctor-by-their-specialty": "Find doctor by their specialty",
-        "facilities": "Medical facilities",
-        "find-hospital-or-clinic": "Find hospital or clinic",
-        "doctor": "Doctor",
-        "find-elite-doctor": "Find elite and good doctor",
-        "examination-pack": "Examination pack",
-        "general-examination": "General health examination",
-        "appointment": "Appointment",
-        "support": "Support",
-        "login": "Login"
+  "home-page-header": {
+    "specialty": "Medical specialty",
+    "find-doctor-by-their-specialty": "Find doctor by their specialty",
+    "facilities": "Medical facilities",
+    "find-hospital-or-clinic": "Find hospital or clinic",
+    "doctor": "Doctor",
+    "find-elite-doctor": "Find elite and good doctor",
+    "examination-pack": "Examination pack",
+    "general-examination": "General health examination",
+    "appointment": "Appointment",
+    "support": "Support",
+    "login": "Login"
+  },
+  "home-top-navigator": {
+    "option-home": "Home",
+    "option-specialty-exam": "Specialty exam",
+    "option-remote-exam": "Remote exam",
+    "option-general-exam": "General exam",
+    "option-medical-testing": "Medical testing",
+    "option-mental-health": "Mental health",
+    "option-dental-exam": "Dental exam"
+  },
+  "home-banner": {
+    "search-area-search-box-placeholder": "Search...",
+    "search-area-search-box-title": "Comprehensive healthcare platform",
+    "search-area-search-box-content": "Let us take care of you",
+    "search-area-quick-search-content-1": "My child has a long-term allergy. How can it be permanently cured?",
+    "search-area-quick-search-content-2": "Recently, there have been many cases of diseases, including diphtheria. Do you have any advice for people on how to prevent them?"
+  },
+  "side-bar": {
+    "side-bar-menu": "Sincerely",
+    "side-bar-item": {
+      "managepage": "Manage page",
+      "homepage": "Home page",
+      "handbook": "Handbook",
+      "cooperate": "Cooperate",
+      "question": "Question",
+      "contact": "Contact",
+      "service": "Services",
+      "term": "Term",
+      "regulation": "Regulations",
+      "about-us": "About us"
+    }
+  },
+  "comprehensive-service-section": {
+    "section-title": "Comprehensive services",
+    "option-specialty-exam": "Specialty exam",
+    "option-general-exam": "General exam",
+    "option-mental-health": "Mental health",
+    "option-surgery-pack": "Surgery pack",
+    "option-health-exam": "Health exam",
+    "option-remote-exam": "Remote exam",
+    "option-medical-testing": "Medical testing",
+    "option-dental-exam": "Dental exam",
+    "option-diabetes": "Live healthy with diabetes",
+    "option-near-clinic": "Near clinic"
+  },
+  "specialty-section": {
+    "specialty-section-title": "Specialty",
+    "button-more-detail": "More",
+    "hepatitis": "Hepatitis",
+    "acupuncture": "Acupuncture",
+    "bone-and-joint-disease": "Bone and Joint",
+    "immune-system": "Immune System",
+    "spine": "Spine",
+    "dermatology": "Dermatology",
+    "pediatrics": "Pediatrics",
+    "obstetrics-and-gynecology": "Obstetrics and Gynecology",
+    "fetal-ultrasound": "Fetal Ultrasound",
+    "mental-health": "Mental Health",
+    "ent": "Ear, Nose, and Throat (ENT)",
+    "gastric-disease": "Gastric Disease",
+    "cardiology": "Cardiology",
+    "neurology": "Neurology",
+    "traditional-medicine": "Traditional Medicine"
+  },
+  "medical-facilities-section": {
+    "medical-facilities-section-title": "Medical facilities",
+    "button-more-detail": "More",
+    "hospital-1": "Military central hospital",
+    "hospital-2": "Meditec clinic",
+    "hospital-3": "Doctor check clinic",
+    "hospital-4": "Family doctor med247 clinic",
+    "hospital-5": "Saigon healthcare clinic",
+    "hospital-6": "Thucuc medical system",
+    "hospital-7": "International EXSON clinic",
+    "hospital-8": "International eye-care DND clinic ",
+    "hospital-9": "Cho Ray hospital",
+    "hospital-10": "Hung Viet general clinic",
+    "hospital-11": "HCM City's UMP hospital",
+    "hospital-12": "Testing central DIAG",
+    "hospital-13": "Andrology and fertility hospital",
+    "hospital-14": "National hospital of traditional medicine",
+    "hospital-15": "Hong Phat clinic"
+  },
+  "elite-doctor-section": {
+    "elite-doctor-section-title": "Outstanding doctor",
+    "more-detail-button": "More"
+  },
+  "remote-exam-section": {
+    "remote-exam-section-title": "Remote exam",
+    "button-more-detail": "More",
+    "option-1": "Mental health",
+    "option-2": "Bone and Joint",
+    "option-3": "Dermatology",
+    "option-4": "Pediatrician",
+    "option-5": "Internal Medicine Doctor",
+    "option-6": "Obstetrician-Gynecologist",
+    "option-7": "Otolaryngology",
+    "option-8": "Neurologist",
+    "option-9": "Gastroenterology",
+    "option-10": "Cardiology",
+    "option-11": "Pandemic Consultation",
+    "option-12": "Psychological Counseling"
+  },
+  "mental-health-section": {
+    "mental-health-section-title": "Mental health",
+    "button-more-detail": "More",
+    "option-1": "Mental health Test",
+    "option-2": "Mental health",
+    "option-3": "Psychological counseling",
+    "option-4": "Remote mental health",
+    "option-5": "Remote counseling"
+  },
+  "recent-disease-section": {
+    "recent-disease-section-title": "Recent diseases",
+    "button-more-detail": "More",
+    "guaranty-text-1": "Verified by the Statistics Office and the Ministry of Health.",
+    "guaranty-text-2": "Cited from reliable sources.",
+    "guaranty-text-3": "Provided to the public so that they can quickly grasp the situation and take preventive measures."
+  },
+  "stay-a-healthy-life-section": {
+    "stay-a-healthy-life-section-title": "Stay a healthy life",
+    "button-more-detail": "More",
+    "article-1": "Obesity Level 1: Causes, Symptoms, and Treatment.",
+    "article-2": "Safe and Effective Tooth Inflammation Treatment.",
+    "article-3": "Top 5 Common Diseases During the Rainy Season.",
+    "article-4": "Explained: Is Spinal Cord Compression Dangerous?",
+    "article-5": "Spinal Cord Compression: Causes, Symptoms, Diagnosis, and Treatment.",
+    "article-6": "Solution: Does Implant Placement Hurt?",
+    "article-7": "Comprehensive Information on Dental Implants.",
+    "article-8": "Guide to Oral Care After Implant Placement.",
+    "article-9": "Tooth Inflammation and What You Need to Know.",
+    "article-10": "Anaplastic Thyroid Cancer: Symptoms, Causes, and Treatment.",
+    "article-11": "Signs of Infection After Wisdom Tooth Extraction.",
+    "article-12": "Medullary Thyroid Cancer: Causes and Treatment.",
+    "article-13": "Blurred Vision Like a Veil: A Warning Sign of Dangerous Eye Diseases.",
+    "article-14": "Tips to Recognize Symptoms of Tooth Inflammation.",
+    "article-15": "Tooth Inflammation Is More Dangerous Than You Think."
+  },
+  "footer": {
+    "company": "Grp-7 Company",
+    "infor": "Information",
+    "service": "Services",
+    "security-term": "Privacy Policy",
+    "branch": "Branch",
+    "used-technology": "Technologies Used",
+    "tech-1": "NodeJS",
+    "tech-2": "Express",
+    "tech-3": "React",
+    "library": "And other supporting libraries",
+    "title": "Hello!",
+    "present-1": "I am ",
+    "my-nick-name": "Phan Trung Đức",
+    "present-2": ", i study IT-E6 at Hanoi University of Science and Technology. With the knowledge I have learned, I developed this project with the aim of not only meeting the course requirements but also creating a product with practical value. I focused on building a clean and user-friendly interface so that anyone new to the system can quickly get familiar with it. Along with that, I combined well-designed features to help solve users’ problems in the most convenient way. I sincerely hope this product will be appreciated!",
+    "follow": "Follow me",
+    "check-out-me": "Check out my github for more information"
+  },
+  "menu": {
+    "system": {
+      "header": "System",
+      "system-administrator": {
+        "header": "System Administrator",
+        "user-manage": "User manage",
+        "user-manage-by-redux": "User manage by Redux",
+        "register-package-group-or-account": "Register service package for group/account"
+      },
+      "system-parameter": {
+        "header": "System-parameter"
+      }
     },
-    "home-top-navigator": {
-        "option-home": "Home",
-        "option-specialty-exam": "Specialty exam",
-        "option-remote-exam": "Remote exam",
-        "option-general-exam": "General exam",
-        "option-medical-testing": "Medical testing",
-        "option-mental-health": "Mental health",
-        "option-dental-exam": "Dental exam"
+    "content": {
+      "welcome-text": "Welcome"
     },
-    "home-banner": {
-        "search-area-search-box-placeholder": "Search...",
-        "search-area-search-box-title": "Comprehensive healthcare platform",
-        "search-area-search-box-content": "Let us take care of you",
-        "search-area-quick-search-content-1": "My child has a long-term allergy. How can it be permanently cured?",
-        "search-area-quick-search-content-2": "Recently, there have been many cases of diseases, including diphtheria. Do you have any advice for people on how to prevent them?"
-    },
-    "side-bar": {
-        "side-bar-menu": "Sincerely",
-        "side-bar-item": {
-            "managepage": "Manage page",
-            "homepage": "Home page",
-            "handbook": "Handbook",
-            "cooperate": "Cooperate",
-            "question": "Question",
-            "contact": "Contact",
-            "service": "Services",
-            "term": "Term",
-            "regulation": "Regulations",
-            "about-us": "About us"
-        }
-    },
-    "comprehensive-service-section": {
-        "section-title": "Comprehensive services",
-        "option-specialty-exam": "Specialty exam",
-        "option-general-exam": "General exam",
-        "option-mental-health": "Mental health",
-        "option-surgery-pack": "Surgery pack",
-        "option-health-exam": "Health exam",
-        "option-remote-exam": "Remote exam",
-        "option-medical-testing": "Medical testing",
-        "option-dental-exam": "Dental exam",
-        "option-diabetes": "Live healthy with diabetes",
-        "option-near-clinic": "Near clinic"
-    },
-    "specialty-section": {
-        "specialty-section-title": "Specialty",
-        "button-more-detail": "More",
-        "hepatitis": "Hepatitis",
-        "acupuncture": "Acupuncture",
-        "bone-and-joint-disease": "Bone and Joint",
-        "immune-system": "Immune System",
-        "spine": "Spine",
-        "dermatology": "Dermatology",
-        "pediatrics": "Pediatrics",
-        "obstetrics-and-gynecology": "Obstetrics and Gynecology",
-        "fetal-ultrasound": "Fetal Ultrasound",
-        "mental-health": "Mental Health",
-        "ent": "Ear, Nose, and Throat (ENT)",
-        "gastric-disease": "Gastric Disease",
-        "cardiology": "Cardiology",
-        "neurology": "Neurology",
-        "traditional-medicine": "Traditional Medicine"
-    },
-    "medical-facilities-section": {
-        "medical-facilities-section-title": "Medical facilities",
-        "button-more-detail": "More",
-        "hospital-1": "Military central hospital",
-        "hospital-2": "Meditec clinic",
-        "hospital-3": "Doctor check clinic",
-        "hospital-4": "Family doctor med247 clinic",
-        "hospital-5": "Saigon healthcare clinic",
-        "hospital-6": "Thucuc medical system",
-        "hospital-7": "International EXSON clinic",
-        "hospital-8": "International eye-care DND clinic ",
-        "hospital-9": "Cho Ray hospital",
-        "hospital-10": "Hung Viet general clinic",
-        "hospital-11": "HCM City's UMP hospital",
-        "hospital-12": "Testing central DIAG",
-        "hospital-13": "Andrology and fertility hospital",
-        "hospital-14": "National hospital of traditional medicine",
-        "hospital-15": "Hong Phat clinic"
-    },
-    "elite-doctor-section": {
-        "elite-doctor-section-title": "Outstanding doctor",
-        "more-detail-button": "More"
-    },
-    "remote-exam-section": {
-        "remote-exam-section-title": "Remote exam",
-        "button-more-detail": "More",
-        "option-1": "Mental health",
-        "option-2": "Bone and Joint",
-        "option-3": "Dermatology",
-        "option-4": "Pediatrician",
-        "option-5": "Internal Medicine Doctor",
-        "option-6": "Obstetrician-Gynecologist",
-        "option-7": "Otolaryngology",
-        "option-8": "Neurologist",
-        "option-9": "Gastroenterology",
-        "option-10": "Cardiology",
-        "option-11": "Pandemic Consultation",
-        "option-12": "Psychological Counseling"
-    },
-    "mental-health-section": {
-        "mental-health-section-title": "Mental health",
-        "button-more-detail": "More",
-        "option-1": "Mental health Test",
-        "option-2": "Mental health",
-        "option-3": "Psychological counseling",
-        "option-4": "Remote mental health",
-        "option-5": "Remote counseling"
-    },
-    "recent-disease-section": {
-        "recent-disease-section-title": "Recent diseases",
-        "button-more-detail": "More",
-        "guaranty-text-1": "Verified by the Statistics Office and the Ministry of Health.",
-        "guaranty-text-2": "Cited from reliable sources.",
-        "guaranty-text-3": "Provided to the public so that they can quickly grasp the situation and take preventive measures."
-    },
-    "stay-a-healthy-life-section": {
-        "stay-a-healthy-life-section-title": "Stay a healthy life",
-        "button-more-detail": "More",
-        "article-1": "Obesity Level 1: Causes, Symptoms, and Treatment.",
-        "article-2": "Safe and Effective Tooth Inflammation Treatment.",
-        "article-3": "Top 5 Common Diseases During the Rainy Season.",
-        "article-4": "Explained: Is Spinal Cord Compression Dangerous?",
-        "article-5": "Spinal Cord Compression: Causes, Symptoms, Diagnosis, and Treatment.",
-        "article-6": "Solution: Does Implant Placement Hurt?",
-        "article-7": "Comprehensive Information on Dental Implants.",
-        "article-8": "Guide to Oral Care After Implant Placement.",
-        "article-9": "Tooth Inflammation and What You Need to Know.",
-        "article-10": "Anaplastic Thyroid Cancer: Symptoms, Causes, and Treatment.",
-        "article-11": "Signs of Infection After Wisdom Tooth Extraction.",
-        "article-12": "Medullary Thyroid Cancer: Causes and Treatment.",
-        "article-13": "Blurred Vision Like a Veil: A Warning Sign of Dangerous Eye Diseases.",
-        "article-14": "Tips to Recognize Symptoms of Tooth Inflammation.",
-        "article-15": "Tooth Inflammation Is More Dangerous Than You Think."
-    },
-    "footer": {
-        "company": "Grp-7 Company",
-        "infor": "Information",
-        "service": "Services",
-        "security-term": "Privacy Policy",
-        "branch": "Branch",
-        "used-technology": "Technologies Used",
-        "tech-1": "NodeJS",
-        "tech-2": "Express",
-        "tech-3": "React",
-        "library": "And other supporting libraries",
-        "title": "Hello!",
-        "present-1": "I am ",
-        "my-nick-name": "Phan Trung Đức",
-        "present-2": ", i study IT-E6 at Hanoi University of Science and Technology. With the convenience of use, clean interface, easy to access, we hope that this Project will get high score in Web Technology subject.",
-        "follow": "Follow me",
-        "check-out-me": "Check out my github for more information"
-    },
-    "menu": {
-        "system": {
-            "header": "System",
-            "system-administrator": {
-                "header": "System Administrator",
-                "user-manage": "User manage",
-                "user-manage-by-redux": "User manage by Redux",
-                "register-package-group-or-account": "Register service package for group/account"
-            },
-            "system-parameter": {
-                "header": "System-parameter"
-            }
+    "admin": {
+      "menu-title-1": "User",
+      "menu-title-2": "Medical Facilities",
+      "menu-title-3": "Specialty",
+      "menu-title-4": "Article/handbook",
+      "menu-title-5": "Home page",
+      "user-CRUD": "User CRUD",
+      "user-CRUD-by-redux": "User CRUD by Redux",
+      "doctor-manage": "Doctor manage",
+      "admin-manage": "Admin manage",
+      "clinic-manage": "Medical facilities manage",
+      "exam-package-manage": "Exam package manager",
+      "exam-package-schedule-manage": "Exam package schedule manage",
+      "specialty-manage": "Specialty manage",
+      "article-handbook-manage": "Article/handbook manage",
+      "user-manage-by-redux-form": {
+        "title": "User manage by Redux",
+        "email": "Email",
+        "password": "Password",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "address": "Address",
+        "phoneNumber": "Phone number",
+        "gender": "Gender",
+        "gender-value": {
+          "male": "Male",
+          "female": "Female",
+          "femboy": "Femboy",
+          "tomboy": "Tomboy",
+          "bisexual": "Futanari"
         },
-        "content": {
-            "welcome-text": "Welcome"
+        "role": "Role",
+        "role-value": {
+          "patient": "Patient",
+          "admin": "Admin",
+          "doctor": "Doctor"
         },
-        "admin": {
-            "menu-title-1": "User",
-            "menu-title-2": "Medical Facilities",
-            "menu-title-3": "Specialty",
-            "menu-title-4": "Article/handbook",
-            "menu-title-5": "Home page",
-            "user-CRUD": "User CRUD",
-            "user-CRUD-by-redux": "User CRUD by Redux",
-            "doctor-manage": "Doctor manage",
-            "admin-manage": "Admin manage",
-            "clinic-manage": "Medical facilities manage",
-            "exam-package-manage": "Exam package manager",
-            "exam-package-schedule-manage": "Exam package schedule manage",
-            "specialty-manage": "Specialty manage",
-            "article-handbook-manage": "Article/handbook manage",
-            "user-manage-by-redux-form": {
-                "title": "User manage by Redux",
-                "email": "Email",
-                "password": "Password",
-                "firstName": "First name",
-                "lastName": "Last name",
-                "address": "Address",
-                "phoneNumber": "Phone number",
-                "gender": "Gender",
-                "gender-value": {
-                    "male": "Male",
-                    "female": "Female",
-                    "femboy": "Femboy",
-                    "tomboy": "Tomboy",
-                    "bisexual": "Futanari"
-                },
-                "role": "Role",
-                "role-value": {
-                    "patient": "Patient",
-                    "admin": "Admin",
-                    "doctor": "Doctor"
-                },
-                "position": "Position",
-                "position-value": {},
-                "avatar-image": "Avatar",
-                "image-preview": "Image preview",
-                "image-upload": "Upload image",
-                "image-delete": "Delete image",
-                "update-data-column": "Update data",
-                "add-new-button": "Save new user",
-                "save-changes-button": "Save changes"
-            }
-        },
-        "doctor": {
-            "manage-schedule-and-timetable": "Manage exam schedule",
-            "schedule-and-timetable": "Exam schedule",
-            "all-information-manage": "All information manage"
-        }
-    },
-    "schedule-and-timetable-manage-page": {
-        "title": "Schedule and timetable manage",
-        "choose-dotor": "Choose doctor",
-        "choose-day": "Choose appointment day and time frame",
-        "save-button": "Save appointment day"
-    },
-    "doctor-detail-page-for-patient": {
-        "schedule-section": {
-            "available-timeframe-section-title": "Arrange your time:",
-            "sorry-text": "Sorry, the doctor is currently busy today! Please choose another day!"
-        },
-        "extra-infor-section":{
-            "exam-address": "Examination address",
-            "exam-price":"Examination price",
-            "attention": "The cost of ultrasound, tests, and scans is not included",
-            "no-note":"The doctor did not have any further comments",
-            "payment-method-1":"The clinic accepts payment via bank card and cash",
-            "payment-method-2":"The clinic only accepts payment via bank card",
-            "payment-method-3":"The clinic accepts payment via cash",
-            "more-button":"More",
-            "less-button":"Less"
-        }
-    },
-    "doctor-manage-page-for-admin": {
-        "page-title": "Create information, article for doctor",
-        "description-placeholder": "Introduction information...",
-        "select-doctor-placeholder": "Choose doctor...",
-        "save-article-button": "Save article",
+        "position": "Position",
+        "position-value": {},
+        "avatar-image": "Avatar",
+        "image-preview": "Image preview",
+        "image-upload": "Upload image",
+        "image-delete": "Delete image",
+        "update-data-column": "Update data",
+        "add-new-button": "Save new user",
         "save-changes-button": "Save changes"
+      }
     },
-    "make-appointment-page":{
-        "right-content": {
-            "title": "Medical Records",
-            "name": "Full Name",
-            "gender": "Gender",
-            "dob": "Date of Birth",
-            "address": "Address",
-            "phonenum": "Phone Number",
-            "email": "Email",
-            "booking-for": "Booking For",
-            "reason": "Reason for Appointment",
-            "placeholder":{
-                "name": "Phan Piscean",
-                "dob": "Choose or input follow formatting: dd/mm/yyy",
-                "address": "1234 Main St",
-                "phonenum": "01234566789",
-                "email": "abc@gmail.com",
-                "booking-for": "Phan Piscean or relative",
-                "reason": "I have a suddenly headache"
-            }
-        },
-        "left-content": {
-            "page-title": "Booking Appointment",
-            "specialty": "Obstetrics and Gynecology Doctor",
-            "exam-price": "Obstetrics and Gynecology Examination Price",
-            "exam-package-price":"Examination Price of the Package ",
-            "payment-method": "Pay Later at the Medical Facility",
-            "receipt": "Total Payment (Free Booking Fee):"
-        }
-    }     
+    "doctor": {
+      "manage-schedule-and-timetable": "Manage exam schedule",
+      "schedule-and-timetable": "Exam schedule",
+      "all-information-manage": "All information manage"
+    }
+  },
+  "schedule-and-timetable-manage-page": {
+    "title": "Schedule and timetable manage",
+    "choose-dotor": "Choose doctor",
+    "choose-day": "Choose appointment day and time frame",
+    "save-button": "Save appointment day"
+  },
+  "doctor-detail-page-for-patient": {
+    "schedule-section": {
+      "available-timeframe-section-title": "Arrange your time:",
+      "sorry-text": "Sorry, the doctor is currently busy today! Please choose another day!"
+    },
+    "extra-infor-section": {
+      "exam-address": "Examination address",
+      "exam-price": "Examination price",
+      "attention": "The cost of ultrasound, tests, and scans is not included",
+      "no-note": "The doctor did not have any further comments",
+      "payment-method-1": "The clinic accepts payment via bank card and cash",
+      "payment-method-2": "The clinic only accepts payment via bank card",
+      "payment-method-3": "The clinic accepts payment via cash",
+      "more-button": "More",
+      "less-button": "Less"
+    }
+  },
+  "doctor-manage-page-for-admin": {
+    "page-title": "Create information, article for doctor",
+    "description-placeholder": "Introduction information...",
+    "select-doctor-placeholder": "Choose doctor...",
+    "save-article-button": "Save article",
+    "save-changes-button": "Save changes"
+  },
+  "make-appointment-page": {
+    "right-content": {
+      "title": "Medical Records",
+      "name": "Full Name",
+      "gender": "Gender",
+      "dob": "Date of Birth",
+      "address": "Address",
+      "phonenum": "Phone Number",
+      "email": "Email",
+      "booking-for": "Booking For",
+      "reason": "Reason for Appointment",
+      "placeholder": {
+        "name": "Phan Piscean",
+        "dob": "Choose or input follow formatting: dd/mm/yyy",
+        "address": "1234 Main St",
+        "phonenum": "01234566789",
+        "email": "abc@gmail.com",
+        "booking-for": "Phan Piscean or relative",
+        "reason": "I have a suddenly headache"
+      }
+    },
+    "left-content": {
+      "page-title": "Booking Appointment",
+      "specialty": "Obstetrics and Gynecology Doctor",
+      "exam-price": "Obstetrics and Gynecology Examination Price",
+      "exam-package-price": "Examination Price of the Package ",
+      "payment-method": "Pay Later at the Medical Facility",
+      "receipt": "Total Payment (Free Booking Fee):"
+    }
+  }
 }
