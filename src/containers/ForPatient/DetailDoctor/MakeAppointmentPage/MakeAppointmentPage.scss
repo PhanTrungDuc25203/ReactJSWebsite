@@ -1,326 +1,320 @@
 .making-appointment-container {
-    // padding: 0 5.5% 20px 5.5%;
-    margin    : 60px 0 60px 0;
-    // border : 1px solid red;
-    display   : flex;
-    height    : auto;
-    width     : 100%;
+  // padding: 0 5.5% 20px 5.5%;
+  margin: 60px 0 60px 0;
+  // border : 1px solid red;
+  display: flex;
+  height: auto;
+  width: 100%;
 
-    .content-left {
-        height             : fit-content;
-        width              : 45%;
-        // border          : 1px solid green;
-        padding            : 0 0 20px 0;
+  .content-left {
+    height: fit-content;
+    width: 45%;
+    // border          : 1px solid green;
+    padding: 0 0 20px 0;
 
-        .page-title {
-            font-size              : 27px;
-            font-weight            : bold;
-            color                  : #0fbcf6;
-            background-color       : #dff3ff;
-            padding                : 20px 0 20px 12.23%;
-            border-top             : 2px solid #0fbcf6;
-            border-right           : 2px solid #0fbcf6;
-            border-top-right-radius: 20px;
-        }
-
-        .doctor-relative {
-            display                   : flex;
-            background-color          : #dff3ff;
-            align-items               : center;
-            gap                       : 20px;
-            padding                   : 0 0 20px 12.23%;
-            border-bottom             : 2px solid #0fbcf6;
-            border-right              : 2px solid #0fbcf6;
-            border-bottom-right-radius: 20px;
-
-            .doctor-avatar {
-                height      : 120px;
-                aspect-ratio: 1 / 1;
-            }
-
-            .avatar-css {
-                background-size    : contain;
-                background-position: center;
-                border             : 3px solid #0fbcf6;
-                border-radius      : 50%;
-                background-repeat  : no-repeat;
-            }
-
-            .text-content {
-                height: fit-content;
-
-                .doctor-general-infor {
-                    font-size: 20px;
-                    color    : #0fbcf6;
-
-                }
-
-                .appointment-time {
-                    font-size: 18px;
-                    color    : black;
-                }
-
-                .specialty {
-                    font-size: 20px;
-                    color    : #0fbcf6;
-                }
-            }
-        }
-
-        .patient-relative {
-            padding: 0 0 20px 12.23%;
-            margin : 20px 0 20px 0;
-
-            .price-icon {
-                margin   : 0 8px 2px 0;
-                font-size: 18px;
-            }
-
-            .receipt-icon {
-                margin   : 0 10px 2px 0;
-                font-size: 18px;
-            }
-
-            .exam-price {
-                .exam-specialty {
-                    font-size: 23px;
-                    color    : #0fbcf6;
-                }
-
-                .price {
-                    font-size  : 18px;
-                    margin-left: 28px;
-                }
-            }
-
-            .payment {
-                .payment-method {
-                    font-size: 23px;
-                    color    : #0fbcf6;
-                }
-
-                .receipt {
-                    font-size  : 18px;
-                    margin-left: 28px;
-                }
-            }
-        }
+    .page-title {
+      font-size: 27px;
+      font-weight: bold;
+      color: #0fbcf6;
+      background-color: #dff3ff;
+      padding: 20px 0 20px 12.23%;
+      border-top: 2px solid #0fbcf6;
+      border-right: 2px solid #0fbcf6;
+      border-top-right-radius: 20px;
     }
 
-    .content-right {
-        height : 100%;
-        width  : 55%;
-        padding: 0 0 20px 0;
+    .doctor-relative {
+      display: flex;
+      background-color: #dff3ff;
+      align-items: center;
+      gap: 20px;
+      padding: 0 0 20px 12.23%;
+      border-bottom: 2px solid #0fbcf6;
+      border-right: 2px solid #0fbcf6;
+      border-bottom-right-radius: 20px;
 
+      .doctor-avatar {
+        height: 120px;
+        aspect-ratio: 1 / 1;
+      }
 
+      .avatar-css {
+        background-size: contain;
+        background-position: center;
+        border: 3px solid #0fbcf6;
+        border-radius: 50%;
+        background-repeat: no-repeat;
+      }
 
-        /* General styling for the form */
-        .medical-records {
-            width           : 100%;
-            max-width       : 620px;
-            /* Set a maximum width for the form */
-            margin          : 0 auto;
-            /* Center the form horizontally */
-            padding         : 0 25px 10px 25px;
-            background-color: #f8f9fa;
-            /* Light gray background for the form */
-            border          : 1px solid #e0e0e0;
-            border-radius   : 20px;
+      .text-content {
+        height: fit-content;
+
+        .doctor-general-infor {
+          font-size: 20px;
+          color: #0fbcf6;
         }
 
-        .content-right-title {
-            font-size  : 27px;
-            font-weight: bold;
-            color      : #0fbcf6;
-            padding    : 20px 0 20px 0;
+        .appointment-time {
+          font-size: 18px;
+          color: black;
         }
 
-        /* Style for each form section */
-        .name-gender,
-        .dob,
-        .contact-address,
-        .reason {
-            margin-bottom: 0px;
+        .specialty {
+          font-size: 20px;
+          color: #0fbcf6;
+        }
+      }
+    }
+
+    .patient-relative {
+      padding: 0 0 20px 12.23%;
+      margin: 20px 0 20px 0;
+
+      .price-icon {
+        margin: 0 8px 2px 0;
+        font-size: 18px;
+      }
+
+      .receipt-icon {
+        margin: 0 10px 2px 0;
+        font-size: 18px;
+      }
+
+      .exam-price {
+        .exam-specialty {
+          font-size: 23px;
+          color: #0fbcf6;
         }
 
-        .reason {
-            margin-top: 20px;
+        .price {
+          font-size: 18px;
+          margin-left: 28px;
+        }
+      }
+
+      .payment {
+        .payment-method {
+          font-size: 23px;
+          color: #0fbcf6;
         }
 
-        /* Container for each field */
-        .name-section,
-        .gender-section,
-        .address,
-        .phone-number,
-        .email,
-        .reason,
-        .dob {
-            display       : flex;
-            flex-direction: column;
-            margin-bottom : 15px;
-            /* Add spacing between each field */
+        .receipt {
+          font-size: 18px;
+          margin-left: 28px;
+        }
+      }
+    }
+  }
+
+  .content-right {
+    height: 100%;
+    width: 55%;
+    padding: 0 0 20px 0;
+
+    /* General styling for the form */
+    .medical-records {
+      width: 100%;
+      max-width: 620px;
+      /* Set a maximum width for the form */
+      margin: 0 auto;
+      /* Center the form horizontally */
+      padding: 0 25px 10px 25px;
+      background-color: #f8f9fa;
+      /* Light gray background for the form */
+      border: 1px solid #e0e0e0;
+      border-radius: 20px;
+    }
+
+    .content-right-title {
+      font-size: 27px;
+      font-weight: bold;
+      color: #0fbcf6;
+      padding: 20px 0 20px 0;
+    }
+
+    /* Style for each form section */
+    .name-gender,
+    .dob,
+    .contact-address,
+    .reason {
+      margin-bottom: 0px;
+    }
+
+    .reason {
+      margin-top: 20px;
+    }
+
+    /* Container for each field */
+    .name-section,
+    .gender-section,
+    .address,
+    .phone-number,
+    .email,
+    .reason,
+    .dob {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+      /* Add spacing between each field */
+    }
+
+    /* Label styling */
+    label {
+      font-weight: bold;
+      margin-bottom: 8px;
+      /* Space between label and input */
+      color: #495057;
+      font-size: 16px;
+      /* Dark text color */
+    }
+
+    /* Input styling */
+    input[type="text"],
+    input[type="email"],
+    input[type="date"] {
+      width: 100%;
+      padding: 5px;
+      font-size: 14px;
+      color: #495057;
+      background-color: #fff;
+      border-top: 2px solid #ced4da;
+      border-bottom: 2px solid #ced4da;
+      border-right: 2px solid #ced4da;
+      border-left: none;
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      outline: none;
+      margin-bottom: 5px;
+      /* Ensure space between input and the next label */
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="date"]:focus {
+      border-color: #60adff;
+      /* Blue border on focus */
+      outline: none;
+      // box-shadow  : 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      /* Add focus shadow */
+    }
+
+    .icon-and-input {
+      display: flex;
+      height: 39px;
+
+      .input-icon {
+        padding: 10px;
+        background: #60adff;
+        color: white;
+        min-width: 20px;
+        aspect-ratio: 1/1;
+        text-align: center;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+      }
+    }
+
+    .gender-section {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .gender-section input[type="radio"] {
+      width: auto;
+      margin-right: 5px;
+      margin-left: 25px;
+    }
+
+    .gender-section label {
+      margin-bottom: 0;
+      /* Prevent margin under the radio button labels */
+    }
+
+    /* Date Picker styling */
+    .date-picker-section {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-top: 2px solid #ced4da;
+      border-bottom: 2px solid #ced4da;
+      border-right: 2px solid #ced4da;
+      border-left: none;
+      outline: none;
+      margin-bottom: 8px;
+    }
+
+    /* Add margin to form sections */
+    .contact-address {
+      margin-bottom: 20px;
+    }
+
+    .reason input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    /* Button layout */
+    .confirm-and-send {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+
+      .term {
+        width: 300px;
+
+        a {
+          border: none;
+          color: #0fbcf6;
+          text-decoration: none;
         }
 
-        /* Label styling */
-        label {
-            font-weight  : bold;
-            margin-bottom: 8px;
-            /* Space between label and input */
-            color        : #495057;
-            font-size    : 16px;
-            /* Dark text color */
+        a:hover {
+          color: #007bff;
         }
+      }
 
-        /* Input styling */
-        input[type="text"],
-        input[type="email"],
-        input[type="date"] {
-            width                     : 100%;
-            padding                   : 5px;
-            font-size                 : 14px;
-            color                     : #495057;
-            background-color          : #fff;
-            border-top                : 2px solid #ced4da;
-            border-bottom             : 2px solid #ced4da;
-            border-right              : 2px solid #ced4da;
-            border-left               : none;
-            border-top-right-radius   : 4px;
-            border-bottom-right-radius: 4px;
-            outline                   : none;
-            margin-bottom             : 5px;
-            /* Ensure space between input and the next label */
-        }
-
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="date"]:focus {
-            border-color   : #60adff;
-            /* Blue border on focus */
-            outline        : none;
-            // box-shadow  : 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-            /* Add focus shadow */
-        }
-
-        .icon-and-input {
-            display: flex;
-            height : 39px;
-
-            .input-icon {
-                padding                  : 10px;
-                background               : #60adff;
-                color                    : white;
-                min-width                : 20px;
-                aspect-ratio             : 1/1;
-                text-align               : center;
-                border-top-left-radius   : 4px;
-                border-bottom-left-radius: 4px;
-            }
-        }
-
-        .gender-section {
-            display       : flex;
-            flex-direction: row;
-            align-items   : center;
-            gap           : 10px;
-            margin-bottom : 20px;
-        }
-
-        .gender-section input[type="radio"] {
-            width       : auto;
-            margin-right: 5px;
-            margin-left : 25px;
-        }
-
-
-        .gender-section label {
-            margin-bottom: 0;
-            /* Prevent margin under the radio button labels */
-        }
-
-        /* Date Picker styling */
-        .date-picker-section {
-            width        : 100%;
-            padding      : 10px;
-            font-size    : 16px;
-            border-top   : 2px solid #ced4da;
-            border-bottom: 2px solid #ced4da;
-            border-right : 2px solid #ced4da;
-            border-left  : none;
-            outline      : none;
-            margin-bottom: 8px;
-        }
-
-        /* Add margin to form sections */
-        .contact-address {
-            margin-bottom: 20px;
-        }
-
-        .reason input {
-            width        : 100%;
-            padding      : 10px;
-            border       : 1px solid #ced4da;
-            border-radius: 4px;
-            margin-bottom: 8px;
-        }
-
-        /* Button layout */
-        .confirm-and-send {
-            display        : flex;
-            justify-content: space-between;
-            margin-top     : 30px;
-
-            .term {
-                width: 300px;
-
-                a {
-                    border         : none;
-                    color          : #0fbcf6;
-                    text-decoration: none;
-                }
-
-                a:hover {
-                    color: #007bff;
-                }
-            }
-
-            .button {
-                button {
-                    background-color: #0fbcf6;
-                    transition      : background-color 0.2s;
-                }
-
-                button:hover {
-                    background-color: #007bff;
-                }
-            }
-
-
-        }
-
+      .button {
         button {
-            padding         : 10px 20px;
-            background-color: #007bff;
-            color           : white;
-            border          : none;
-            border-radius   : 4px;
-            cursor          : pointer;
-            font-size       : 16px;
+          background-color: #0fbcf6;
+          transition: background-color 0.2s;
         }
 
         button:hover {
-            background-color: #0056b3;
+          background-color: #007bff;
         }
-
-        textarea {
-            width           : 100%;
-            height          : 100px;
-            padding         : 12px 20px;
-            box-sizing      : border-box;
-            border          : 2px solid #ccc;
-            border-radius   : 4px;
-            background-color: #ffffff;
-            font-size       : 16px;
-            resize          : none;
-        }
+      }
     }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 12px 20px;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      background-color: #ffffff;
+      font-size: 16px;
+      resize: none;
+    }
+  }
 }

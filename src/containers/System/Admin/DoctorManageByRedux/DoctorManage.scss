@@ -1,119 +1,116 @@
 .doctor-manage-container {
-    padding: 15px 30px;
-    width  : 100%;
+  padding: 15px 30px;
+  width: 100%;
 
-    .doctor-manage-page-title {
-        text-align    : center;
-        text-transform: uppercase;
-        font-weight   : bold;
-        font-size     : 20px;
-        color         : #0071ba;
+  .doctor-manage-page-title {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+    color: #0071ba;
+  }
+
+  .header-article-container {
+    display: flex;
+    flex-direction: row;
+    // justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 150px;
+    margin-top: 20px;
+    // margin-bottom: 20px;
+    width: 100%;
+    gap: 20px;
+
+    .more-info-for-a-doctor {
+      width: 100%;
+
+      textarea {
+        width: 867px;
+        height: 120px;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        font-size: 16px;
+        resize: none;
+      }
     }
 
-    .header-article-container {
-        display           : flex;
-        flex-direction    : row;
-        // justify-content: center;
-        align-items       : center;
-        width             : 100%;
-        height            : 150px;
-        margin-top        : 20px;
-        // margin-bottom: 20px;
-        width             : 100%;
-        gap               : 20px;
+    .option-section {
+      margin-bottom: 7px;
 
-        .more-info-for-a-doctor {
-            width: 100%;
+      .save-doctor-article-button {
+        margin-left: 299px;
+        font-size: 15px;
+        background-color: #fff;
+        color: rgb(11, 180, 11);
+        height: 50px;
+        border: 2px solid rgb(11, 180, 11);
+        width: 125px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+      }
 
-            textarea {
-                width           : 867px;
-                height          : 120px;
-                padding         : 12px 20px;
-                box-sizing      : border-box;
-                border          : 2px solid #ccc;
-                border-radius   : 4px;
-                background-color: #f8f8f8;
-                font-size       : 16px;
-                resize          : none;
-            }
-        }
+      .save-doctor-article-button:hover {
+        color: white;
+        background-color: rgb(11, 180, 11);
+      }
 
-        .option-section {
-            margin-bottom: 7px;
+      .save-changes-of-doctor-article-button {
+        margin-left: 299px;
+        font-size: 15px;
+        background-color: #fff;
+        color: #0071ba;
+        height: 50px;
+        border: 2px solid #0071ba;
+        width: 125px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+      }
 
-            .save-doctor-article-button {
-                margin-left     : 299px;
-                font-size       : 15px;
-                background-color: #fff;
-                color           : rgb(11, 180, 11);
-                height          : 50px;
-                border          : 2px solid rgb(11, 180, 11);
-                width           : 125px;
-                display         : inline-flex;
-                justify-content : center;
-                align-items     : center;
-                padding         : 10px;
-                border-radius   : 5px;
-                transition      : background-color 0.3s, color 0.3s;
-            }
+      .save-changes-of-doctor-article-button:hover {
+        color: white;
+        background-color: #0071ba;
+      }
 
-            .save-doctor-article-button:hover {
-                color           : white;
-                background-color: rgb(11, 180, 11);
-            }
+      .doctor-option {
+        height: 40px;
+        width: 422px;
+        margin-top: 36px;
+        margin-left: 2px;
+      }
+    }
+  }
 
-            .save-changes-of-doctor-article-button {
-                margin-left     : 299px;
-                font-size       : 15px;
-                background-color: #fff;
-                color           : #0071ba;
-                height          : 50px;
-                border          : 2px solid #0071ba;
-                width           : 125px;
-                display         : inline-flex;
-                justify-content : center;
-                align-items     : center;
-                padding         : 10px;
-                border-radius   : 5px;
-                transition      : background-color 0.3s, color 0.3s;
-            }
+  .editor-lite-for-doctor-article {
+  }
 
-            .save-changes-of-doctor-article-button:hover {
-                color           : white;
-                background-color: #0071ba;
-            }
-
-            .doctor-option {
-                height     : 40px;
-                width      : 422px;
-                margin-top : 36px;
-                margin-left: 2px;
-            }
-        }
-
+  .extra-infor-container {
+    label {
+      font-weight: 600;
     }
 
+    margin-bottom: 20px;
 
-    .editor-lite-for-doctor-article {}
-
-    .extra-infor-container {
-
-        label {
-            font-weight: 600;
-        }
-
-        margin-bottom: 20px;
-
-        .form-control {
-            height: 38px;
-        }
-
-        .row-in-form {
-
-            label {
-                font-size: 16px;
-                margin   : 10px 0 10px 0;
-            }
-        }
+    .form-control {
+      height: 38px;
     }
+
+    .row-in-form {
+      label {
+        font-size: 16px;
+        margin: 10px 0 10px 0;
+      }
+    }
+  }
 }

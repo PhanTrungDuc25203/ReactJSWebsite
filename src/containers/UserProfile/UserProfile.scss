@@ -1,67 +1,67 @@
 .user-profile-container {
-    width: 100%;
+  width: 100%;
 
-    .content-container {
-        margin   : 0 150px 40px 150px;
-        height   : auto;
-        // border: 1px solid red;
+  .content-container {
+    margin: 0 150px 40px 150px;
+    height: auto;
+    // border: 1px solid red;
 
-        .nav-bar {
-            overflow        : hidden;
-            background-color: white;
+    .nav-bar {
+      overflow: hidden;
+      background-color: white;
 
-            a {
-                float          : left;
-                color          : #49BCE2;
-                text-align     : center;
-                padding        : 10px 10px 6px 10px;
-                border-bottom  : 4px solid white;
-                text-decoration: none;
-                font-size      : 18px;
-                border-left    : none;
-                transition     : all 0.2s;
-                cursor         : pointer;
+      a {
+        float: left;
+        color: #49bce2;
+        text-align: center;
+        padding: 10px 10px 6px 10px;
+        border-bottom: 4px solid white;
+        text-decoration: none;
+        font-size: 18px;
+        border-left: none;
+        transition: all 0.2s;
+        cursor: pointer;
 
-                &.active {
-                    border-bottom: 4px solid rgb(78, 116, 181);
-                    color        : rgb(78, 116, 181);
-                }
-            }
-
-            a:hover {
-                background-color: #e9faff;
-                border-bottom   : 4px solid #8de3ff;
-            }
-
-            a.active:hover {
-                background-color: #daf6ff;
-                border-bottom   : 4px solid rgb(78, 116, 181);
-            }
+        &.active {
+          border-bottom: 4px solid rgb(78, 116, 181);
+          color: rgb(78, 116, 181);
         }
+      }
 
-        .logout-button-container {
-            height: 40px;
-            width : 100%;
+      a:hover {
+        background-color: #e9faff;
+        border-bottom: 4px solid #8de3ff;
+      }
 
-            .log-out-button-of-profile-page {
-                padding         : 10px;
-                font-size       : 18px;
-                color           : #D9534F;
-                border          : 2px solid #D9534F;
-                border-radius   : 10px;
-                background-color: white;
-                transition      : all 0.2s;
-                float           : inline-end;
-            }
-
-            .log-out-button-of-profile-page:hover {
-                color           : white;
-                background-color: #D9534F;
-            }
-        }
-
-        .loading-circle {
-            margin: 30px 0 0 30px;
-        }
+      a.active:hover {
+        background-color: #daf6ff;
+        border-bottom: 4px solid rgb(78, 116, 181);
+      }
     }
+
+    .logout-button-container {
+      height: 40px;
+      width: 100%;
+
+      .log-out-button-of-profile-page {
+        padding: 10px;
+        font-size: 18px;
+        color: #d9534f;
+        border: 2px solid #d9534f;
+        border-radius: 10px;
+        background-color: white;
+        transition: all 0.2s;
+        float: inline-end;
+      }
+
+      .log-out-button-of-profile-page:hover {
+        color: white;
+        background-color: #d9534f;
+      }
+    }
+
+    .loading-circle {
+      margin: 30px 0 0 30px;
+    }
+  }
 }

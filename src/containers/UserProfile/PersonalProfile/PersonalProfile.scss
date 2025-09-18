@@ -1,44 +1,44 @@
 .personal-profile-for-profile-page-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #95caff;
+  border-radius: 5px;
+
+  .phone-number,
+  .gender,
+  .address,
+  .role,
+  .level,
+  .clinic-name,
+  .clinic-address,
+  .doctor-specialty {
+    margin-bottom: 12px;
+  }
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #495057;
+    font-size: 17px;
+  }
+
+  input {
     width: 100%;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border: 1px solid #95caff;
+    padding: 10px;
+    border: 1px solid #b5daff;
     border-radius: 5px;
+    font-size: 16px;
+    color: #495057;
 
-    .phone-number,
-    .gender,
-    .address,
-    .role,
-    .level,
-    .clinic-name,
-    .clinic-address,
-    .doctor-specialty {
-        margin-bottom: 12px;
+    &:focus {
+      border-color: #80bdff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
     }
-
-    label {
-        display: block;
-        font-weight: 600;
-        margin-bottom: 10px;
-        color: #495057;
-        font-size: 17px;
-    }
-
-    input {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #b5daff;
-        border-radius: 5px;
-        font-size: 16px;
-        color: #495057;
-
-        &:focus {
-            border-color: #80bdff;
-            outline: none;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
-        }
-    }
+  }
 }

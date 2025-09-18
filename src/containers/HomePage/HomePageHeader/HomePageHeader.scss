@@ -503,19 +503,31 @@ body {
       height: 438px;
 
       .search-box-title {
-        font-size: 45px;
-        padding-left: 20px;
+        font-size: 3em;
+        padding-left: 30px;
         padding-right: 10px;
         padding-top: 20px;
         color: #3494b5;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* chỉ hiển thị 2 dòng */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis; /* hiện dấu "..." khi bị cắt */
+        word-wrap: break-word;
       }
 
       .search-box-content {
-        font-size: 25px;
-        padding-left: 20px;
+        font-size: 1.75rem;
+        padding-left: 30px;
         padding-right: 10px;
         padding-top: 5px;
         color: #50b8db;
+        display: -webkit-box;
+        -webkit-line-clamp: 1; /* chỉ hiển thị 2 dòng */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis; /* hiện dấu "..." khi bị cắt */
+        word-wrap: break-word;
       }
 
       .search {
@@ -650,7 +662,7 @@ body {
         flex-direction: column;
         top: 260px;
         bottom: 0;
-        left: 45px;
+        left: 40px;
         right: 0;
 
         .quick-search {
