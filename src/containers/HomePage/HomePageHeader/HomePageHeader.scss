@@ -504,8 +504,8 @@ body {
 
       .search-box-title {
         font-size: 3em;
-        padding-left: 30px;
-        padding-right: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
         padding-top: 20px;
         color: #3494b5;
         display: -webkit-box;
@@ -518,12 +518,12 @@ body {
 
       .search-box-content {
         font-size: 1.75rem;
-        padding-left: 30px;
-        padding-right: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
         padding-top: 5px;
         color: #50b8db;
         display: -webkit-box;
-        -webkit-line-clamp: 1; /* chỉ hiển thị 2 dòng */
+        -webkit-line-clamp: 2; /* chỉ hiển thị 2 dòng */
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis; /* hiện dấu "..." khi bị cắt */

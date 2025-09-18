@@ -23,9 +23,12 @@
         margin: 10px;
         border-radius: 10px;
         cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
 
         .image-item {
-          // position: relative;
           height: auto;
           width: 240px;
           margin: 15px;
@@ -33,18 +36,14 @@
         }
 
         .item-content {
-          margin-top: 10px;
-          margin-bottom: 10px;
-          margin-left: 15px;
-          margin-right: 15px;
-          width: 360px;
+          width: auto;
           height: 50px;
         }
 
         .image-css {
-          background-size: contain;
+          background-size: cover;
           height: 180px;
-          width: 360px;
+          width: 90%;
           background-position: center;
           border: 1px solid rgb(193, 233, 255);
           border-radius: 15px;
