@@ -1,0 +1,124 @@
+.search-page-container {
+  .search-bar-container {
+    display: flex;
+    justify-content: center;
+    padding: 60px 0px;
+    .search-bar {
+      display: flex;
+      align-items: center;
+      height: 50px;
+      width: 70%;
+      background: #f1faff;
+      border: 1px solid #9cd7ff;
+      border-radius: 30px;
+      overflow: hidden;
+      padding-right: 3px;
+
+      input {
+        flex: 1;
+        padding: 10px 30px;
+        border: none;
+        outline: none;
+        font-size: 15px;
+        background: transparent;
+      }
+
+      select {
+        appearance: none;
+        @supports (appearance: base-select) {
+          @media (hover: hover) {
+            &,
+            &::picker(select) {
+              appearance: base-select;
+            }
+          }
+        }
+      }
+
+      select {
+        display: flex;
+        justify-content: space-between;
+        min-width: 100px;
+        align-items: center;
+        color: white;
+        padding-block: 10px;
+        padding-inline: 30px 40px;
+        border-radius: 25px;
+        border: 1px solid #b3e1ff;
+        cursor: pointer;
+        font-size: 15px;
+        background: #4db8ff
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23FFF' class='size-6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='m19.5 8.25-7.5 7.5-7.5-7.5' /%3E%3C/svg%3E%0A")
+          right 10px center / 20px no-repeat;
+        @media (hover: hover) {
+          @supports (appearance: base-select) {
+            padding-inline: 20px;
+            background-image: none;
+            &::picker-icon {
+              content: "";
+              width: 20px;
+              height: 20px;
+              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23FFF' class='size-6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='m19.5 8.25-7.5 7.5-7.5-7.5' /%3E%3C/svg%3E%0A");
+              transition: rotate 0.2s ease-out;
+            }
+            &:open::picker-icon {
+              rotate: 180deg;
+            }
+            &::picker(select) {
+              padding: 0;
+              margin-top: 5px;
+              border: 2px solid #75c8ff;
+              background: white;
+              border-radius: 20px;
+              font-weight: 400;
+
+              opacity: 0;
+              height: 0;
+              overflow: clip;
+              transition: height 0.5s ease-out, opacity 0.5s ease-out,
+                overlay 0.5s, display 0.5s;
+
+              transition-behavior: allow-discrete;
+            }
+            &:open::picker(select) {
+              opacity: 1;
+              height: calc-size(auto, size);
+              overflow-y: auto;
+              scrollbar-width: none;
+              &::-webkit-scrollbar {
+                display: none;
+              }
+              @starting-style {
+                opacity: 0;
+                height: 0;
+              }
+            }
+            option {
+              position: relative;
+              padding: 10px 20px;
+              border-top: 1px solid #85c2ee;
+              cursor: pointer;
+              transition-property: color, background;
+              transition-duration: 0.2s;
+              transition-timing-function: ease-out;
+              z-index: 2;
+              &:where(:hover, :focus, :active) {
+                background: rgb(228, 228, 228);
+              }
+              &:checked {
+                background: #4db8ff;
+                color: white;
+              }
+              &::checkmark {
+                display: none;
+              }
+              &:first-child {
+                border: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
