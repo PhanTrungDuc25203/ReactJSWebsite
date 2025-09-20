@@ -66,12 +66,12 @@ class HomePageHeader extends Component {
     });
   };
 
-  handleEnterKeyPressed = (event) => {
+  handleEnterKeyPressed = async (event) => {
     let { searchTerm, searchFilter } = this.state;
 
     if (event.key === "Enter" || event.keyCode === 13) {
       this.props.history.push(
-        `${path.SEARCH_PAGE}?search-term=${encodeURIComponent(
+        `${path.SEARCH_PAGE}?searchterm=${encodeURIComponent(
           searchTerm
         )}&filter=${encodeURIComponent(searchFilter)}`
       );
