@@ -32,14 +32,16 @@ class SpecialtyResult extends Component {
           }
 
           return (
-            <div key={item.id} className="specialty-item">
+            <div key={item.id} className="result-item">
               <div
-                className="specialty-image"
+                className="result-image"
                 style={{
                   backgroundImage: `url(${imageByBase64})`,
                 }}
               ></div>
-              <div className="specialty-name">{item.name}</div>
+              <div className="text-container">
+                <div className="result-name">{item.name}</div>
+              </div>
             </div>
           );
         })}

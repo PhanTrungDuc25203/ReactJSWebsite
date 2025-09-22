@@ -32,14 +32,29 @@ class DoctorResult extends Component {
           }
 
           return (
-            <div key={item.id} className="doctor-item">
+            <div key={item.id} className="result-item">
               <div
-                className="doctor-image"
+                className="result-image"
                 style={{
                   backgroundImage: `url(${imageByBase64})`,
                 }}
               ></div>
-              <div className="doctor-name">{item.User.firstName}</div>
+              <div className="text-container">
+                <div className="result-name">
+                  {item.User.positionData.value_Vie +
+                    ", " +
+                    item.User.lastName +
+                    " " +
+                    item.User.firstName}
+                </div>
+                <div className="result-content">
+                  {item.User.Doctor_specialty_medicalFacility
+                    ?.medicalFacilityDoctorAndSpecialty?.name || ""}
+                  {" - "}
+                  {item.User.Doctor_specialty_medicalFacility?.Specialty
+                    ?.name || ""}
+                </div>
+              </div>
             </div>
           );
         })}

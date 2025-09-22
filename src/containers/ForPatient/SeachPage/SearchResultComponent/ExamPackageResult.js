@@ -13,7 +13,7 @@ class ExamPackageResult extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {}
 
   render() {
-    console.log("Check exampackage props: ", this.props.examPackageResult);
+    // console.log("Check exampackage props: ", this.props.examPackageResult);
     let { examPackageResult } = this.props;
 
     if (!examPackageResult || !examPackageResult.data) {
@@ -32,14 +32,16 @@ class ExamPackageResult extends Component {
           }
 
           return (
-            <div key={item.id} className="specialty-item">
+            <div key={item.id} className="result-item">
               <div
-                className="specialty-image"
+                className="result-image square-image-css"
                 style={{
                   backgroundImage: `url(${imageByBase64})`,
                 }}
               ></div>
-              <div className="specialty-name">{item.name}</div>
+              <div className="text-container">
+                <div className="result-name">{item.name}</div>
+              </div>
             </div>
           );
         })}

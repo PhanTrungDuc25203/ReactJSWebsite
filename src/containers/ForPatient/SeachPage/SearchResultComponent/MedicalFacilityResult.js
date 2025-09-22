@@ -13,7 +13,7 @@ class MedicalFacilityResult extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {}
 
   render() {
-    console.log("Check exampackage props: ", this.props.facilityResult);
+    // console.log("Check exampackage props: ", this.props.facilityResult);
     let { facilityResult } = this.props;
 
     if (!facilityResult || !facilityResult.data) {
@@ -22,7 +22,7 @@ class MedicalFacilityResult extends Component {
 
     return (
       <div className="specialty-result-container">
-        <p className="result-section-title">Gói khám</p>
+        <p className="result-section-title">Cơ sở ý tế</p>
         {facilityResult.data.map((item) => {
           let imageByBase64 = "";
           if (item.image && item.image.data) {
@@ -32,14 +32,16 @@ class MedicalFacilityResult extends Component {
           }
 
           return (
-            <div key={item.id} className="specialty-item">
+            <div key={item.id} className="result-item">
               <div
-                className="specialty-image"
+                className="result-image square-image-css"
                 style={{
                   backgroundImage: `url(${imageByBase64})`,
                 }}
               ></div>
-              <div className="specialty-name">{item.name}</div>
+              <div className="text-container">
+                <div className="result-name">{item.name}</div>
+              </div>
             </div>
           );
         })}
