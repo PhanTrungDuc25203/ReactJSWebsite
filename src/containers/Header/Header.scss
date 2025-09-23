@@ -9,6 +9,15 @@
   height: 50px;
   position: relative;
 
+  .header-tabs-container ul li a {
+    border: 0px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .header-tabs-container ul li a:hover {
+    border-left: 6px solid transparent;
+  }
+
   .switch-languages-and-logout {
     display: flex;
     justify-content: space-between;

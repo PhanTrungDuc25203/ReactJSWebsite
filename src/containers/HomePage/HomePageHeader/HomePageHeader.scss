@@ -504,7 +504,7 @@ body {
 
       .search-box-title {
         font-size: 3em;
-        padding-left: 20px;
+        padding-left: 30px;
         padding-right: 20px;
         padding-top: 20px;
         color: #3494b5;
@@ -518,7 +518,7 @@ body {
 
       .search-box-content {
         font-size: 1.75rem;
-        padding-left: 20px;
+        padding-left: 30px;
         padding-right: 20px;
         padding-top: 5px;
         color: #50b8db;
@@ -534,7 +534,7 @@ body {
         position: absolute;
         margin: auto;
         top: 50px;
-        right: 0;
+        right: 20px;
         bottom: 0;
         left: 0;
         width: 60px;
@@ -586,7 +586,7 @@ body {
         position: absolute;
         margin: auto;
         top: 50px;
-        right: 0;
+        right: 20px;
         bottom: 0;
         left: 0;
         width: 50px;
@@ -618,7 +618,7 @@ body {
         }
 
         &:focus ~ .search {
-          right: -280px;
+          right: -260px;
           background: #151515;
           z-index: 6;
 
@@ -662,7 +662,7 @@ body {
         flex-direction: column;
         top: 260px;
         bottom: 0;
-        left: 40px;
+        left: 30px;
         right: 0;
 
         .quick-search {
