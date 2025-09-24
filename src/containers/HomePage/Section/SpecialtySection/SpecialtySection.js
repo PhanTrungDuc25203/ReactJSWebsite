@@ -22,7 +22,7 @@ class SpecialtySection extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.specialtiesData !== this.props.specialtiesData) {
       this.setState({
-        arrSpecialty: this.props.arrSpecialty,
+        arrSpecialty: this.props.specialtiesData,
       });
     }
   }
@@ -60,7 +60,7 @@ class SpecialtySection extends Component {
   }
 
   render() {
-    let arrSpecialty = this.props.specialtiesData;
+    let arrSpecialty = this.state.arrSpecialty;
     let { language } = this.props;
     const isMobile = window.innerWidth <= 430;
     const settings = {
@@ -144,7 +144,6 @@ const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
     language: state.app.language,
-    // specialtiesData: state.admin.specialties,
     specialtiesData: state.admin?.specialties || [],
   };
 };

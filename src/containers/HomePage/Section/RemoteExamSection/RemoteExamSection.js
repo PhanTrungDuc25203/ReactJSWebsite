@@ -1,14 +1,41 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./RemoteExamSection.scss";
+import { withRouter } from "react-router";
+import * as actions from "../../../../store/actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FormattedMessage } from "react-intl";
-import { LANGUAGES } from "../../../../utils";
+import { LANGUAGES, path } from "../../../../utils";
 import { switchLanguageOfWebsite } from "../../../../store/actions";
 
 class RemoteExamSection extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      arrRemoteSpecialty: [],
+    };
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.remoteSpecialtiesData !== this.props.remoteSpecialtiesData) {
+      this.setState({
+        arrRemoteSpecialty: this.props.remoteSpecialtiesData,
+      });
+    }
+  }
+
+  componentDidMount() {
+    this.props.loadRemoteSpecialties();
+  }
+
+  handleViewDetailArticleOfASpecialty = (specialty) => {
+    // console.log("Check this doctor: ", doctor);
+    this.props.history.push(`/detail-specialty-article/${specialty.id}`);
+  };
+
   SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -33,6 +60,8 @@ class RemoteExamSection extends Component {
   }
 
   render() {
+    let arrRemoteSpecialty = this.state.arrRemoteSpecialty;
+    let { language } = this.props;
     const isMobile = window.innerWidth <= 430;
     const settings = {
       dots: isMobile ? false : true,
@@ -43,12 +72,9 @@ class RemoteExamSection extends Component {
       prevArrow: <this.SamplePrevArrow />, // Sử dụng SamplePrevArrow
       autoplay: true,
       className: "remote-exam-section-slider",
-      // dotsClass: 'remote-exam-section-dots-of-slider',
       autoplaySpeed: 10000,
       speed: 1000,
       pauseOnHover: true,
-      // fade: true,
-      // focusOnSelect: true,
       pauseOnDotsHover: true,
       responsive: [
         {
@@ -76,103 +102,38 @@ class RemoteExamSection extends Component {
           </div>
 
           <Slider {...settings}>
-            <div className="item-content">
-              <div className="item-of-slider">
-                <div className="image-of-item-1 image-css"></div>
-                <div className="item-content">
-                  <FormattedMessage id="remote-exam-section.option-1" />
-                </div>
-              </div>
-            </div>
-
-            <div className="item-content">
-              <div className="item-of-slider">
-                <div className="image-of-item-2 image-css"></div>
-                <div className="item-content">
-                  <FormattedMessage id="remote-exam-section.option-2" />
-                </div>
-              </div>
-            </div>
-            <div className="item-content">
-              <div className="item-of-slider">
-                <div className="image-of-item-3 image-css"></div>
-                <div className="item-content">
-                  <FormattedMessage id="remote-exam-section.option-3" />
-                </div>
-              </div>
-            </div>
-            <div className="item-content">
-              <div className="item-of-slider">
-                <div className="image-of-item-4 image-css"></div>
-                <div className="item-content">
-                  <FormattedMessage id="remote-exam-section.option-4" />
-                </div>
-              </div>
-            </div>
-            <div className="item-content">
-              <div className="item-of-slider">
-                <div className="image-of-item-5 image-css"></div>
-                <div className="item-content">
-                  <FormattedMessage id="remote-exam-section.option-5" />
-                </div>
-              </div>
-            </div>
-            <div className="item-content">
-              <div className="item-of-slider">
-                <div className="image-of-item-6 image-css"></div>
-                <div className="item-content">
-                  <FormattedMessage id="remote-exam-section.option-6" />
-                </div>
-              </div>
-            </div>
-            <div className="item-content">
-              <div className="item-of-slider">
-                <div className="image-of-item-7 image-css"></div>
-                <div className="item-content">
-                  <FormattedMessage id="remote-exam-section.option-7" />
-                </div>
-              </div>
-            </div>
-            <div className="item-content">
-              <div className="item-of-slider">
-                <div className="image-of-item-8 image-css"></div>
-                <div className="item-content">
-                  <FormattedMessage id="remote-exam-section.option-8" />
-                </div>
-              </div>
-            </div>
-            <div className="item-content">
-              <div className="item-of-slider">
-                <div className="image-of-item-9 image-css"></div>
-                <div className="item-content">
-                  <FormattedMessage id="remote-exam-section.option-9" />
-                </div>
-              </div>
-            </div>
-            <div className="item-content">
-              <div className="item-of-slider">
-                <div className="image-of-item-10 image-css"></div>
-                <div className="item-content">
-                  <FormattedMessage id="remote-exam-section.option-10" />
-                </div>
-              </div>
-            </div>
-            <div className="item-content">
-              <div className="item-of-slider">
-                <div className="image-of-item-11 image-css"></div>
-                <div className="item-content">
-                  <FormattedMessage id="remote-exam-section.option-11" />
-                </div>
-              </div>
-            </div>
-            <div className="item-content">
-              <div className="item-of-slider">
-                <div className="image-of-item-12 image-css"></div>
-                <div className="item-content">
-                  <FormattedMessage id="remote-exam-section.option-12" />
-                </div>
-              </div>
-            </div>
+            {arrRemoteSpecialty &&
+              arrRemoteSpecialty.length > 0 &&
+              arrRemoteSpecialty.slice(0, 15).map((item, index) => {
+                let imageByBase64 = "";
+                if (item.specialtyImage) {
+                  imageByBase64 = Buffer.from(
+                    item.specialtyImage,
+                    "base64"
+                  ).toString("binary");
+                }
+                let nameInVie = `${item.name}`;
+                let nameInEng = `${item.name}`;
+                return (
+                  <div
+                    className="item-content"
+                    key={index}
+                    onClick={() =>
+                      this.handleViewDetailArticleOfASpecialty(item)
+                    }
+                  >
+                    <div className="item-of-slider">
+                      <div
+                        className="image-css"
+                        style={{ backgroundImage: `url(${imageByBase64})` }}
+                      ></div>
+                      <div className="item-content">
+                        {language === LANGUAGES.VI ? nameInVie : nameInEng}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
           </Slider>
         </div>
       </div>
@@ -184,11 +145,16 @@ const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
     language: state.app.language,
+    remoteSpecialtiesData: state.admin?.remoteSpecialties || [],
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    loadRemoteSpecialties: () => dispatch(actions.fetchRemoteSpecialties()),
+  };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RemoteExamSection);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(RemoteExamSection)
+);
