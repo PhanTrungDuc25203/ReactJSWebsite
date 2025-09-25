@@ -133,6 +133,7 @@ class SearchPage extends Component {
                 <option value="exam_package">Gói khám</option>
                 <option value="complex_facility">Cơ sở y tế</option>
                 <option value="specialty">Chuyên khoa</option>
+                {/* <option value="chatbot">Trợ lý AI</option> */}
               </select>
             </div>
           </div>
@@ -156,7 +157,7 @@ class SearchPage extends Component {
                 {/* TH2: Chỉ có resemble, không có exact */}
                 {!hasExact && hasResemble && (
                   <p className="no-exact-text">
-                    Không tìm thấy kết quả chính xác.
+                    Không tìm thấy kết quả chính xác. Kết quả gần tương đồng:
                   </p>
                 )}
 
