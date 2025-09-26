@@ -1,113 +1,113 @@
 .specialty-manage-container {
-  height: auto;
-  display: flex;
-  justify-content: center;
-  padding: 15px 15px;
-  margin: 0px 20px 0px 20px;
-  flex-direction: column;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    padding: 15px 15px;
+    margin: 0px 20px 0px 20px;
+    flex-direction: column;
 
-  .specialty-manage-title {
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 20px;
-    color: #0071ba;
-    margin: 20px 0 0 0;
-  }
-
-  .required-information {
-    margin-top: 20px;
-
-    .specialty-name-section {
-      label {
-        margin: 10px 0 10px 0;
-        font-size: 16px;
-        font-weight: 600;
-      }
-
-      input {
-        margin: 0 0 10px 0;
-        height: 40px;
-        font-size: 14px;
-      }
-    }
-
-    .specialty-image-section {
-      display: flex;
-      flex-direction: column;
-
-      label {
-        font-size: 16px;
-        font-weight: 600;
-      }
-
-      .name {
-        margin: 10px 0 10px 0;
-        font-size: 16px;
-      }
-
-      input {
-        margin: 0 0 10px 0;
-      }
-
-      input[type="file"] {
-        display: none;
-      }
-
-      .custom-file-label {
-        display: inline-block;
-        background-color: white;
-        padding: 7px 10px;
-        color: #51a3fb;
-        height: 40px;
-        cursor: pointer;
-        border: 2px solid #51a3fb;
-        border-radius: 5px;
-        font-size: 16px;
+    .specialty-manage-title {
         text-align: center;
-        transition: all 0.2s;
-      }
-
-      .custom-file-label:hover {
-        background-color: #51a3fb;
-        color: white;
-      }
-
-      .image-preview {
-        height: auto;
-        border: 1px solid black;
-        margin: 0px 0 20px 0;
-      }
-
-      .image-css {
-        aspect-ratio: 2 / 1;
-        border: 2px solid rgb(81, 163, 251);
-        border-radius: 5px;
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 20px;
+        color: #0071ba;
+        margin: 20px 0 0 0;
     }
 
-    .specialty-description-section {
-      margin: 20px 0 20px 0;
-    }
+    .required-information {
+        margin-top: 20px;
 
-    .save-button {
-      width: 96%;
-      color: rgb(11, 180, 11);
-      border: 2px solid rgb(11, 180, 11);
-      background-color: white;
-      border-radius: 5px;
-      height: 40px;
-      font-size: 16px;
-      margin: 10px 10px 10px 10px;
-      transition: all 0.2s;
-    }
+        .specialty-name-section {
+            label {
+                margin: 10px 0 10px 0;
+                font-size: 16px;
+                font-weight: 600;
+            }
 
-    .save-button:hover {
-      color: white;
-      background-color: rgb(11, 180, 11);
+            input {
+                margin: 0 0 10px 0;
+                height: 40px;
+                font-size: 14px;
+            }
+        }
+
+        .specialty-image-section {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                font-size: 16px;
+                font-weight: 600;
+            }
+
+            .name {
+                margin: 10px 0 10px 0;
+                font-size: 16px;
+            }
+
+            input {
+                margin: 0 0 10px 0;
+            }
+
+            input[type="file"] {
+                display: none;
+            }
+
+            .custom-file-label {
+                display: inline-block;
+                background-color: white;
+                padding: 7px 10px;
+                color: #51a3fb;
+                height: 40px;
+                cursor: pointer;
+                border: 2px solid #51a3fb;
+                border-radius: 5px;
+                font-size: 16px;
+                text-align: center;
+                transition: all 0.2s;
+            }
+
+            .custom-file-label:hover {
+                background-color: #51a3fb;
+                color: white;
+            }
+
+            .image-preview {
+                height: auto;
+                border: 1px solid black;
+                margin: 0px 0 20px 0;
+            }
+
+            .image-css {
+                aspect-ratio: 2 / 1;
+                border: 2px solid rgb(81, 163, 251);
+                border-radius: 5px;
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        .specialty-description-section {
+            margin: 20px 0 20px 0;
+        }
+
+        .save-button {
+            width: 96%;
+            color: rgb(11, 180, 11);
+            border: 2px solid rgb(11, 180, 11);
+            background-color: white;
+            border-radius: 5px;
+            height: 40px;
+            font-size: 16px;
+            margin: 10px 10px 10px 10px;
+            transition: all 0.2s;
+        }
+
+        .save-button:hover {
+            color: white;
+            background-color: rgb(11, 180, 11);
+        }
     }
-  }
 }

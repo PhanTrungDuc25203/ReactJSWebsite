@@ -1,394 +1,394 @@
 .elite-doctor-section {
-  width: 100%;
-  height: auto;
-  background-image: url("../../../../assets/images/140311-background5.png");
-  // border: 1px solid red;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  padding-bottom: 50px;
-
-  .elite-doctor-section-contents {
+    width: 100%;
+    height: auto;
+    background-image: url("../../../../assets/images/140311-background5.png");
+    // border: 1px solid red;
+    display: flex;
+    justify-content: center;
     position: relative;
-    width: 89%;
+    padding-bottom: 50px;
 
-    //thêm class này để khi ở cuối hay đầu slide thì nút bấm sẽ biến mất, nhớ set infinity=false ở phần settings
-    .slick-disabled {
-      display: none !important;
-    }
+    .elite-doctor-section-contents {
+        position: relative;
+        width: 89%;
 
-    .item-content {
-      border-radius: 10px;
-      font-size: 18px;
-      color: #3494b5;
-      width: 350px;
-      text-align: center;
-      height: 286px;
-
-      .item-of-slider {
-        border: 2px solid #3494b5;
-        margin: 10px;
-        padding-bottom: 10px;
-        height: fit-content;
-        border-radius: 10px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
-
-        .image-item {
-          height: auto;
-          width: 180px;
-          margin: 15px;
-          border-radius: 10px !important;
+        //thêm class này để khi ở cuối hay đầu slide thì nút bấm sẽ biến mất, nhớ set infinity=false ở phần settings
+        .slick-disabled {
+            display: none !important;
         }
 
         .item-content {
-          width: 90%;
-          max-width: 250px;
-          height: 50px;
-        }
+            border-radius: 10px;
+            font-size: 18px;
+            color: #3494b5;
+            width: 350px;
+            text-align: center;
+            height: 286px;
 
-        .image-css {
-          background-size: 110% 110%;
-          width: 60%;
-          aspect-ratio: 1 / 1;
-          background-position: center;
-          border: 1px solid rgb(193, 233, 255);
-          border-radius: 500px;
-          margin: 15px auto;
-          background-repeat: no-repeat;
-        }
+            .item-of-slider {
+                border: 2px solid #3494b5;
+                margin: 10px;
+                padding-bottom: 10px;
+                height: fit-content;
+                border-radius: 10px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                justify-content: center;
 
-        .image-of-item-1 {
-          background-image: url("../../../../assets/elite-doctor-image/Screenshot\ 2024-06-28\ 120111.png");
-        }
+                .image-item {
+                    height: auto;
+                    width: 180px;
+                    margin: 15px;
+                    border-radius: 10px !important;
+                }
 
-        .image-of-item-2 {
-          background-image: url("../../../../assets/medical-facilities-image/181208mediteclogo.jpeg");
-        }
+                .item-content {
+                    width: 90%;
+                    max-width: 250px;
+                    height: 50px;
+                }
 
-        .image-of-item-3 {
-          background-image: url("../../../../assets/medical-facilities-image/092249-doctor-check.jpg");
-        }
+                .image-css {
+                    background-size: 110% 110%;
+                    width: 60%;
+                    aspect-ratio: 1 / 1;
+                    background-position: center;
+                    border: 1px solid rgb(193, 233, 255);
+                    border-radius: 500px;
+                    margin: 15px auto;
+                    background-repeat: no-repeat;
+                }
 
-        .image-of-item-4 {
-          background-image: url("../../../../assets/medical-facilities-image/100649-med247.jpg");
-        }
+                .image-of-item-1 {
+                    background-image: url("../../../../assets/elite-doctor-image/Screenshot\ 2024-06-28\ 120111.png");
+                }
 
-        .image-of-item-5 {
-          background-image: url("../../../../assets/medical-facilities-image/101707-logo-sg.png");
-        }
+                .image-of-item-2 {
+                    background-image: url("../../../../assets/medical-facilities-image/181208mediteclogo.jpeg");
+                }
 
-        .image-of-item-6 {
-          background-image: url("../../../../assets/medical-facilities-image/103904-logo-thucuc.png");
-        }
+                .image-of-item-3 {
+                    background-image: url("../../../../assets/medical-facilities-image/092249-doctor-check.jpg");
+                }
 
-        .image-of-item-7 {
-          background-image: url("../../../../assets/medical-facilities-image/112054logo-phong-kham-da-khoa-quoc-te-exson1.jpg");
-        }
+                .image-of-item-4 {
+                    background-image: url("../../../../assets/medical-facilities-image/100649-med247.jpg");
+                }
 
-        .image-of-item-8 {
-          background-image: url("../../../../assets/medical-facilities-image/143306logp-bv-mat-dnd.jpg");
-        }
+                .image-of-item-5 {
+                    background-image: url("../../../../assets/medical-facilities-image/101707-logo-sg.png");
+                }
 
-        .image-of-item-9 {
-          background-image: url("../../../../assets/medical-facilities-image/152704logo-bvcr-moi.jpg");
-        }
+                .image-of-item-6 {
+                    background-image: url("../../../../assets/medical-facilities-image/103904-logo-thucuc.png");
+                }
 
-        .image-of-item-10 {
-          background-image: url("../../../../assets/medical-facilities-image/153236-logo-hung-viet.jpg");
-        }
+                .image-of-item-7 {
+                    background-image: url("../../../../assets/medical-facilities-image/112054logo-phong-kham-da-khoa-quoc-te-exson1.jpg");
+                }
 
-        .image-of-item-11 {
-          background-image: url("../../../../assets/medical-facilities-image/155206-logo-y-duoc-1.jpg");
-        }
+                .image-of-item-8 {
+                    background-image: url("../../../../assets/medical-facilities-image/143306logp-bv-mat-dnd.jpg");
+                }
 
-        .image-of-item-12 {
-          background-image: url("../../../../assets/medical-facilities-image/160340-logo-diag.png");
-        }
+                .image-of-item-9 {
+                    background-image: url("../../../../assets/medical-facilities-image/152704logo-bvcr-moi.jpg");
+                }
 
-        .image-of-item-13 {
-          background-image: url("../../../../assets/medical-facilities-image/160343logo-nam-hoc-hn.jpg");
-        }
+                .image-of-item-10 {
+                    background-image: url("../../../../assets/medical-facilities-image/153236-logo-hung-viet.jpg");
+                }
 
-        .image-of-item-14 {
-          background-image: url("../../../../assets/medical-facilities-image/160857-791310225786250729637925205413557167980544o.jpg");
-        }
+                .image-of-item-11 {
+                    background-image: url("../../../../assets/medical-facilities-image/155206-logo-y-duoc-1.jpg");
+                }
 
-        .image-of-item-15 {
-          background-image: url("../../../../assets/medical-facilities-image/165735-logo-hong-phat.png");
-        }
-      }
-    }
+                .image-of-item-12 {
+                    background-image: url("../../../../assets/medical-facilities-image/160340-logo-diag.png");
+                }
 
-    .elite-doctor-section-section-title {
-      position: relative;
-      height: 60px;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      padding: 0 10px;
-      margin-top: 40px;
-      margin-bottom: 30px;
+                .image-of-item-13 {
+                    background-image: url("../../../../assets/medical-facilities-image/160343logo-nam-hoc-hn.jpg");
+                }
 
-      .title-text {
-        height: 60px;
-        width: 800px;
-        font-size: 40px;
-        color: #3494b5;
-        font-weight: 500;
+                .image-of-item-14 {
+                    background-image: url("../../../../assets/medical-facilities-image/160857-791310225786250729637925205413557167980544o.jpg");
+                }
 
-        text-decoration: none;
-      }
-
-      .more-detail-button {
-        $color: rgb(54, 215, 255);
-        text-align: center;
-
-        .button {
-          position: absolute;
-          display: inline-block;
-          padding: 15px;
-          height: 60px;
-          width: 121.15px;
-          border-radius: 15px;
-          color: #fff;
-          font-size: 20px;
-          transition: all 0.3s;
-          border: 2px solid #3494b5;
-          position: relative;
-          overflow: hidden;
-          z-index: 1;
-          border: 0px;
-          text-decoration: none;
-
-          &:after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: $color;
-            border-radius: 15px;
-            z-index: -2;
-          }
-
-          &:before {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            background-color: darken($color, 15%);
-            transition: all 0.3s;
-            border-radius: 15px;
-            z-index: -1;
-          }
-
-          &:hover {
-            color: #fff;
-
-            &:before {
-              width: 100%;
+                .image-of-item-15 {
+                    background-image: url("../../../../assets/medical-facilities-image/165735-logo-hong-phat.png");
+                }
             }
-          }
         }
-      }
+
+        .elite-doctor-section-section-title {
+            position: relative;
+            height: 60px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+            margin-top: 40px;
+            margin-bottom: 30px;
+
+            .title-text {
+                height: 60px;
+                width: 800px;
+                font-size: 40px;
+                color: #3494b5;
+                font-weight: 500;
+
+                text-decoration: none;
+            }
+
+            .more-detail-button {
+                $color: rgb(54, 215, 255);
+                text-align: center;
+
+                .button {
+                    position: absolute;
+                    display: inline-block;
+                    padding: 15px;
+                    height: 60px;
+                    width: 121.15px;
+                    border-radius: 15px;
+                    color: #fff;
+                    font-size: 20px;
+                    transition: all 0.3s;
+                    border: 2px solid #3494b5;
+                    position: relative;
+                    overflow: hidden;
+                    z-index: 1;
+                    border: 0px;
+                    text-decoration: none;
+
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: $color;
+                        border-radius: 15px;
+                        z-index: -2;
+                    }
+
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 0%;
+                        height: 100%;
+                        background-color: darken($color, 15%);
+                        transition: all 0.3s;
+                        border-radius: 15px;
+                        z-index: -1;
+                    }
+
+                    &:hover {
+                        color: #fff;
+
+                        &:before {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+
+        .slider-button-next::before {
+            position: absolute;
+            color: rgb(114, 192, 255) !important;
+            background: rgb(232, 250, 255);
+            border: 1px solid rgb(86, 191, 239);
+            opacity: 1;
+            border-radius: 15px;
+            padding: 13px;
+            right: 1px;
+            top: -15px;
+        }
+
+        .override {
+            // position: relative;
+            height: 15px;
+            width: 15px;
+        }
+
+        .slider-button-prev::before {
+            position: absolute;
+            color: rgb(114, 192, 255) !important;
+            background: rgb(232, 250, 255);
+            border: 1px solid rgb(86, 191, 239);
+            border-radius: 15px;
+            opacity: 1;
+            padding: 13px;
+            top: -15px;
+            left: 7px;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            50% {
+                transform: translateX(5px);
+            }
+
+            75% {
+                transform: translateX(10px);
+            }
+
+            100% {
+                transform: translateX(15px);
+            }
+        }
+
+        .slider-button-prev {
+            z-index: 2 !important;
+        }
     }
-
-    .slider-button-next::before {
-      position: absolute;
-      color: rgb(114, 192, 255) !important;
-      background: rgb(232, 250, 255);
-      border: 1px solid rgb(86, 191, 239);
-      opacity: 1;
-      border-radius: 15px;
-      padding: 13px;
-      right: 1px;
-      top: -15px;
-    }
-
-    .override {
-      // position: relative;
-      height: 15px;
-      width: 15px;
-    }
-
-    .slider-button-prev::before {
-      position: absolute;
-      color: rgb(114, 192, 255) !important;
-      background: rgb(232, 250, 255);
-      border: 1px solid rgb(86, 191, 239);
-      border-radius: 15px;
-      opacity: 1;
-      padding: 13px;
-      top: -15px;
-      left: 7px;
-    }
-
-    @keyframes shake {
-      0% {
-        transform: translateX(0);
-      }
-
-      25% {
-        transform: translateX(-5px);
-      }
-
-      50% {
-        transform: translateX(5px);
-      }
-
-      75% {
-        transform: translateX(10px);
-      }
-
-      100% {
-        transform: translateX(15px);
-      }
-    }
-
-    .slider-button-prev {
-      z-index: 2 !important;
-    }
-  }
 }
 
 .elite-doctor-section-slider {
-  .slick-dots {
-    margin-left: 7px;
-  }
-
-  .slick-dots li button:before {
-    border: 1px solid #3494b5;
-    font-family: "slick";
-    font-size: 8px;
-    line-height: 20px;
-    position: absolute;
-    top: 5px;
-    // left: 0px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50px;
-    display: flex;
-    content: "•";
-    text-align: center;
-    opacity: 0.25;
-    color: rgb(173, 218, 255);
-    -webkit-font-smoothing: antialiased;
-    align-items: center;
-    padding-left: 0px;
-    padding-top: 1px;
-  }
-
-  .slick-dots li.slick-active button:before {
-    opacity: 0.75;
-    color: #5182c7;
-  }
-
-  @media only screen and (max-width: 431px) {
-    .item-of-slider {
-      display: flex !important;
-      flex-direction: column !important;
-      height: 225px;
-      width: 170px;
-      margin: 0 !important;
+    .slick-dots {
+        margin-left: 7px;
     }
 
-    .slick-slide {
-      width: 183px !important;
-      margin-right: 4px !important;
+    .slick-dots li button:before {
+        border: 1px solid #3494b5;
+        font-family: "slick";
+        font-size: 8px;
+        line-height: 20px;
+        position: absolute;
+        top: 5px;
+        // left: 0px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50px;
+        display: flex;
+        content: "•";
+        text-align: center;
+        opacity: 0.25;
+        color: rgb(173, 218, 255);
+        -webkit-font-smoothing: antialiased;
+        align-items: center;
+        padding-left: 0px;
+        padding-top: 1px;
     }
 
-    .slick-track {
-      width: max-content !important;
+    .slick-dots li.slick-active button:before {
+        opacity: 0.75;
+        color: #5182c7;
     }
 
-    .item-content {
-      width: unset !important;
+    @media only screen and (max-width: 431px) {
+        .item-of-slider {
+            display: flex !important;
+            flex-direction: column !important;
+            height: 225px;
+            width: 170px;
+            margin: 0 !important;
+        }
+
+        .slick-slide {
+            width: 183px !important;
+            margin-right: 4px !important;
+        }
+
+        .slick-track {
+            width: max-content !important;
+        }
+
+        .item-content {
+            width: unset !important;
+        }
     }
-  }
 }
 
 @media only screen and (max-width: 431px) {
-  .elite-doctor-section {
-    width: 100% !important;
-    height: 340px;
+    .elite-doctor-section {
+        width: 100% !important;
+        height: 340px;
 
-    .elite-doctor-section-contents {
-      width: 100% !important;
-      padding-left: 30px;
-      padding-right: 30px;
+        .elite-doctor-section-contents {
+            width: 100% !important;
+            padding-left: 30px;
+            padding-right: 30px;
 
-      .elite-doctor-section-section-title {
-        display: flex;
-        align-items: center;
-        margin: 0 !important;
-        height: unset !important;
+            .elite-doctor-section-section-title {
+                display: flex;
+                align-items: center;
+                margin: 0 !important;
+                height: unset !important;
 
-        .title-text {
-          font-size: 20px !important;
-          margin: 25px 20px 25px 0;
-          height: unset !important;
+                .title-text {
+                    font-size: 20px !important;
+                    margin: 25px 20px 25px 0;
+                    height: unset !important;
+                }
+
+                .more-detail-button {
+                    .button {
+                        font-size: 15px !important;
+                        padding: 10px 20px !important;
+                        text-align: center !important;
+                        vertical-align: middle !important;
+                        height: unset !important;
+                    }
+                }
+
+                .spacing {
+                    width: 10px !important;
+                }
+            }
+
+            .slider-button-next::before {
+                right: 10px;
+                top: -40px;
+            }
+
+            .slider-button-prev::before {
+                top: -40px;
+            }
+
+            .item-content {
+                display: -webkit-box;
+                /* Sử dụng flexbox để hiển thị nội dung */
+                -webkit-line-clamp: 2;
+                /* Giới hạn tối đa số dòng là 2 */
+                -webkit-box-orient: vertical;
+                /* Định dạng các dòng theo chiều dọc */
+                overflow: hidden;
+                /* Ẩn phần văn bản vượt quá chiều cao */
+                text-overflow: ellipsis;
+                /* Hiển thị '...' khi văn bản bị cắt */
+                width: 100%;
+                /* Đảm bảo chiếm toàn bộ chiều rộng của phần tử cha */
+                line-height: 1.5;
+
+                .item-of-slider {
+                    width: 170px;
+
+                    .image-css {
+                        height: 140px;
+                        width: 140px;
+                        margin: 10px 0 0 0;
+                    }
+
+                    .item-content {
+                        width: unset !important;
+                    }
+                }
+            }
         }
-
-        .more-detail-button {
-          .button {
-            font-size: 15px !important;
-            padding: 10px 20px !important;
-            text-align: center !important;
-            vertical-align: middle !important;
-            height: unset !important;
-          }
-        }
-
-        .spacing {
-          width: 10px !important;
-        }
-      }
-
-      .slider-button-next::before {
-        right: 10px;
-        top: -40px;
-      }
-
-      .slider-button-prev::before {
-        top: -40px;
-      }
-
-      .item-content {
-        display: -webkit-box;
-        /* Sử dụng flexbox để hiển thị nội dung */
-        -webkit-line-clamp: 2;
-        /* Giới hạn tối đa số dòng là 2 */
-        -webkit-box-orient: vertical;
-        /* Định dạng các dòng theo chiều dọc */
-        overflow: hidden;
-        /* Ẩn phần văn bản vượt quá chiều cao */
-        text-overflow: ellipsis;
-        /* Hiển thị '...' khi văn bản bị cắt */
-        width: 100%;
-        /* Đảm bảo chiếm toàn bộ chiều rộng của phần tử cha */
-        line-height: 1.5;
-
-        .item-of-slider {
-          width: 170px;
-
-          .image-css {
-            height: 140px;
-            width: 140px;
-            margin: 10px 0 0 0;
-          }
-
-          .item-content {
-            width: unset !important;
-          }
-        }
-      }
     }
-  }
 }

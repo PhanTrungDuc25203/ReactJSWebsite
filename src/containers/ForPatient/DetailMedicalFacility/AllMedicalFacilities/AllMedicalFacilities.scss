@@ -1,100 +1,99 @@
 .all-medical-facilities-container {
-  display: flex;
-  flex-wrap: wrap; // Cho phép các item xuống dòng nếu không đủ chỗ
-  gap: 24px; // Khoảng cách giữa các item
-  padding: 50px 26px 25px 50px;
+    display: flex;
+    flex-wrap: wrap; // Cho phép các item xuống dòng nếu không đủ chỗ
+    gap: 24px; // Khoảng cách giữa các item
+    padding: 50px 26px 25px 50px;
 
-  &-title {
-    width: 100%; // Đảm bảo tiêu đề chiếm toàn bộ chiều ngang
-    font-size: 2rem;
-    font-weight: bold;
-    color: #49bce2;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-
-  .medical-facility-item-container {
-    width: calc(25% - 24px); // Chia làm 4 cột, điều chỉnh giá trị này nếu cần
-    box-sizing: border-box;
-    cursor: pointer;
-
-    .medical-facility-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      border: 1px solid #6dd2f4;
-      border-radius: 8px;
-      overflow: hidden;
-      background-color: white;
-      padding: 12px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease,
-        border-color 0.3s ease, color 0.3s ease; // Hiệu ứng mượt mà khi hover
-
-      &:hover {
-        transform: scale(1.05); // Phóng to item
-        box-shadow: 0 4px 10px #dff3ff; // Màu bóng xanh nhạt
-        border-color: #49bce2; // Thay đổi màu viền
-        color: #49bce2; // Thay đổi màu chữ
-      }
-
-      .image-css {
-        width: 100%;
-        height: 140px; // Chiều cao của hình ảnh
-        background-size: contain;
-        background-position: center;
-        object-fit: cover; // Đảm bảo ảnh hiển thị hết chiều cao
-        border-radius: 10px;
-        // border: 1px solid #6dd2f4;
-        background-repeat: no-repeat;
-      }
-
-      .medical-facility-name {
-        width: 270px;
-        margin-top: 8px;
-        font-size: 18px;
-        font-weight: 500;
-        color: #6dd2f4;
-        padding: 0 8px; // Thêm khoảng cách 8px ở hai bên trái và phải
-        transition: font-size 0.3s ease, color 0.3s ease; // Hiệu ứng mượt mà cho chữ
-        white-space: nowrap; // Chỉ hiển thị trên một dòng
-        overflow: hidden; // Ẩn phần nội dung vượt quá kích thước
-        text-overflow: ellipsis; // Thêm dấu "..." khi nội dung bị cắt
-        cursor: pointer;
-      }
+    &-title {
+        width: 100%; // Đảm bảo tiêu đề chiếm toàn bộ chiều ngang
+        font-size: 2rem;
+        font-weight: bold;
+        color: #49bce2;
+        margin-bottom: 20px;
+        text-align: center;
     }
-  }
+
+    .medical-facility-item-container {
+        width: calc(25% - 24px); // Chia làm 4 cột, điều chỉnh giá trị này nếu cần
+        box-sizing: border-box;
+        cursor: pointer;
+
+        .medical-facility-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid #6dd2f4;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: white;
+            padding: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease; // Hiệu ứng mượt mà khi hover
+
+            &:hover {
+                transform: scale(1.05); // Phóng to item
+                box-shadow: 0 4px 10px #dff3ff; // Màu bóng xanh nhạt
+                border-color: #49bce2; // Thay đổi màu viền
+                color: #49bce2; // Thay đổi màu chữ
+            }
+
+            .image-css {
+                width: 100%;
+                height: 140px; // Chiều cao của hình ảnh
+                background-size: contain;
+                background-position: center;
+                object-fit: cover; // Đảm bảo ảnh hiển thị hết chiều cao
+                border-radius: 10px;
+                // border: 1px solid #6dd2f4;
+                background-repeat: no-repeat;
+            }
+
+            .medical-facility-name {
+                width: 270px;
+                margin-top: 8px;
+                font-size: 18px;
+                font-weight: 500;
+                color: #6dd2f4;
+                padding: 0 8px; // Thêm khoảng cách 8px ở hai bên trái và phải
+                transition: font-size 0.3s ease, color 0.3s ease; // Hiệu ứng mượt mà cho chữ
+                white-space: nowrap; // Chỉ hiển thị trên một dòng
+                overflow: hidden; // Ẩn phần nội dung vượt quá kích thước
+                text-overflow: ellipsis; // Thêm dấu "..." khi nội dung bị cắt
+                cursor: pointer;
+            }
+        }
+    }
 }
 
 .pagination-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
 
-  .pagination-button {
-    padding: 8px 12px;
-    margin: 0 4px;
-    border: 1px solid #49bce2;
-    background-color: white;
-    color: #49bce2;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 5px;
+    .pagination-button {
+        padding: 8px 12px;
+        margin: 0 4px;
+        border: 1px solid #49bce2;
+        background-color: white;
+        color: #49bce2;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: 5px;
 
-    &:hover {
-      background-color: #dff3ff;
+        &:hover {
+            background-color: #dff3ff;
+        }
+
+        &.active {
+            background-color: #49bce2;
+            color: white;
+        }
+
+        &:disabled {
+            background-color: #f0f0f0;
+            color: #ccc;
+            cursor: not-allowed;
+        }
     }
-
-    &.active {
-      background-color: #49bce2;
-      color: white;
-    }
-
-    &:disabled {
-      background-color: #f0f0f0;
-      color: #ccc;
-      cursor: not-allowed;
-    }
-  }
 }

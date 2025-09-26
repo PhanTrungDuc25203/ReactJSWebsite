@@ -1,156 +1,152 @@
 .register-background {
-  height: auto;
-  width: 100%;
-  background: linear-gradient(
-    135deg,
-    rgb(117, 97, 244) 0%,
-    rgb(214, 152, 233) 100%
-  );
-  //chiều cao tràn nguyên màn hình
-  height: 100vh;
-
-  //làm <div> con hiển thị ở chính giữa theo cả chiều dài lẫn chiều dọc của <div> cha
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Arial, Helvetica, sans-serif;
-
-  .register-container {
     height: auto;
-    width: 500px;
-    border-radius: 20px;
-    background-color: white;
-    padding: 40px;
+    width: 100%;
+    background: linear-gradient(135deg, rgb(117, 97, 244) 0%, rgb(214, 152, 233) 100%);
+    //chiều cao tràn nguyên màn hình
+    height: 100vh;
 
-    .register-contents {
-      .register-text {
-        color: #60067b;
-        font-weight: 700;
-        font-size: 25px;
-        margin-top: -10px !important;
-      }
+    //làm <div> con hiển thị ở chính giữa theo cả chiều dài lẫn chiều dọc của <div> cha
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
 
-      .register-input {
-        margin: 5px 0;
+    .register-container {
+        height: auto;
+        width: 500px;
+        border-radius: 20px;
+        background-color: white;
+        padding: 40px;
 
-        .password-input-and-eye {
-          position: relative;
+        .register-contents {
+            .register-text {
+                color: #60067b;
+                font-weight: 700;
+                font-size: 25px;
+                margin-top: -10px !important;
+            }
 
-          i {
-            font-size: 18px;
-            opacity: 0.7;
-          }
+            .register-input {
+                margin: 5px 0;
 
-          i.far.fa-eye {
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            // để khi di chuột vào đối tượng eye thì con chuột sẽ chuyển thành
-            //bàn tay có ngón tay trỏ chỉ tới đối tượng thì sử dụng câu lệnh dươis đây
-            cursor: pointer;
-          }
+                .password-input-and-eye {
+                    position: relative;
 
-          i.far.fa-eye-slash {
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            // để khi di chuột vào đối tượng eye thì con chuột sẽ chuyển thành
-            //bàn tay có ngón tay trỏ chỉ tới đối tượng thì sử dụng câu lệnh dươis đây
-            cursor: pointer;
-          }
+                    i {
+                        font-size: 18px;
+                        opacity: 0.7;
+                    }
 
-          .announce-text-with-password {
-            margin-top: 10px;
-            margin-bottom: -30px;
-          }
+                    i.far.fa-eye {
+                        position: absolute;
+                        right: 15px;
+                        top: 15px;
+                        // để khi di chuột vào đối tượng eye thì con chuột sẽ chuyển thành
+                        //bàn tay có ngón tay trỏ chỉ tới đối tượng thì sử dụng câu lệnh dươis đây
+                        cursor: pointer;
+                    }
+
+                    i.far.fa-eye-slash {
+                        position: absolute;
+                        right: 15px;
+                        top: 15px;
+                        // để khi di chuột vào đối tượng eye thì con chuột sẽ chuyển thành
+                        //bàn tay có ngón tay trỏ chỉ tới đối tượng thì sử dụng câu lệnh dươis đây
+                        cursor: pointer;
+                    }
+
+                    .announce-text-with-password {
+                        margin-top: 10px;
+                        margin-bottom: -30px;
+                    }
+                }
+
+                input {
+                    height: 45px;
+                }
+
+                label {
+                    color: #60067b;
+                    font-size: 18px;
+                }
+
+                .input-place {
+                    margin: 10px 0 0 0;
+                }
+
+                .announce-text-with-email {
+                    margin-top: 20px;
+                }
+            }
+
+            .back-or-next-button {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .login-link {
+                    color: #60067b;
+                    border-bottom: 2px solid white;
+                    transition: border 0.2s;
+                    cursor: pointer;
+                    margin-top: 30px;
+                }
+
+                .login-link:hover {
+                    border-bottom: 2px solid #60067b;
+                }
+
+                .wrapper-for-next-button {
+                    // transform: translate(-50%, -50%);
+                    margin: 30px 0 0px 0px !important;
+                    cursor: pointer;
+
+                    a {
+                        display: block;
+                        width: 100px;
+                        height: 45px;
+                        line-height: 45px;
+                        font-size: 18px;
+                        font-family: sans-serif;
+                        text-decoration: none;
+                        color: #60067b;
+                        border: 2px solid #60067b;
+                        border-radius: 5px;
+                        letter-spacing: 2px;
+                        text-align: center;
+                        position: relative;
+                        transition: all 0.35s;
+                        text-align: center;
+                    }
+
+                    a span {
+                        position: relative;
+                        z-index: 2;
+                        border-radius: 5px;
+                    }
+
+                    a:after {
+                        position: absolute;
+                        content: "";
+                        top: 0;
+                        left: 0;
+                        width: 0;
+                        height: 100%;
+                        background: rgb(184, 126, 226);
+                        transition: all 0.35s;
+                        border-radius: 5px;
+                    }
+
+                    a:hover {
+                        color: #fff;
+                    }
+
+                    a:hover:after {
+                        width: 100%;
+                        border-radius: 3px;
+                    }
+                }
+            }
         }
-
-        input {
-          height: 45px;
-        }
-
-        label {
-          color: #60067b;
-          font-size: 18px;
-        }
-
-        .input-place {
-          margin: 10px 0 0 0;
-        }
-
-        .announce-text-with-email {
-          margin-top: 20px;
-        }
-      }
-
-      .back-or-next-button {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        .login-link {
-          color: #60067b;
-          border-bottom: 2px solid white;
-          transition: border 0.2s;
-          cursor: pointer;
-          margin-top: 30px;
-        }
-
-        .login-link:hover {
-          border-bottom: 2px solid #60067b;
-        }
-
-        .wrapper-for-next-button {
-          // transform: translate(-50%, -50%);
-          margin: 30px 0 0px 0px !important;
-          cursor: pointer;
-
-          a {
-            display: block;
-            width: 100px;
-            height: 45px;
-            line-height: 45px;
-            font-size: 18px;
-            font-family: sans-serif;
-            text-decoration: none;
-            color: #60067b;
-            border: 2px solid #60067b;
-            border-radius: 5px;
-            letter-spacing: 2px;
-            text-align: center;
-            position: relative;
-            transition: all 0.35s;
-            text-align: center;
-          }
-
-          a span {
-            position: relative;
-            z-index: 2;
-            border-radius: 5px;
-          }
-
-          a:after {
-            position: absolute;
-            content: "";
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 100%;
-            background: rgb(184, 126, 226);
-            transition: all 0.35s;
-            border-radius: 5px;
-          }
-
-          a:hover {
-            color: #fff;
-          }
-
-          a:hover:after {
-            width: 100%;
-            border-radius: 3px;
-          }
-        }
-      }
     }
-  }
 }

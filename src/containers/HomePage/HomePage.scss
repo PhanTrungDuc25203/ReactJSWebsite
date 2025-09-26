@@ -1,27 +1,27 @@
 .home-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 50px;
-  padding-top: 40px;
-  text-align: center;
-  background-color: rgb(44, 185, 255);
-  color: white;
-
-  p {
-    padding: 5px 20px;
-    margin-top: 5px;
-  }
-
-  a {
-    padding: 5px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding-top: 40px;
+    text-align: center;
+    background-color: rgb(44, 185, 255);
     color: white;
-    margin-top: 5px;
-    transition: all 0.2s;
-  }
 
-  a:hover {
-    font-size: 15px;
-    color: white;
-  }
+    p {
+        padding: 5px 20px;
+        margin-top: 5px;
+    }
+
+    a {
+        padding: 5px 20px;
+        color: white;
+        margin-top: 5px;
+        transition: all 0.2s;
+    }
+
+    a:hover {
+        font-size: 15px;
+        color: white;
+    }
 }

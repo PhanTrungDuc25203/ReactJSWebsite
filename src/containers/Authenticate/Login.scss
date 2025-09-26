@@ -1,227 +1,223 @@
 .login-background {
-  background: linear-gradient(
-    135deg,
-    rgb(117, 97, 244) 0%,
-    rgb(214, 152, 233) 100%
-  );
-  //chiều cao tràn nguyên màn hình
-  height: 100vh;
+    background: linear-gradient(135deg, rgb(117, 97, 244) 0%, rgb(214, 152, 233) 100%);
+    //chiều cao tràn nguyên màn hình
+    height: 100vh;
 
-  //làm <div> con hiển thị ở chính giữa theo cả chiều dài lẫn chiều dọc của <div> cha
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Arial, Helvetica, sans-serif;
+    //làm <div> con hiển thị ở chính giữa theo cả chiều dài lẫn chiều dọc của <div> cha
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
 
-  input::placeholder {
-    color: #60067b;
-    /* Thay đổi màu chữ của placeholder thành màu đỏ */
-    opacity: 40%;
-    /* Đặt độ trong suốt nếu cần */
-  }
-
-  input:focus {
-    box-shadow: 0 0 5px #60067b;
-    /* Thay đổi màu vầng sáng xung quanh input khi nhấn vào nó*/
-  }
-
-  .login-container {
-    width: 500px;
-    // height: 100px;
-    border-radius: 20px;
-    background-color: rgb(255, 255, 255);
-
-    // các cách viết margin margin: 1px 2px 3px 4px: top right bottom left
-    // margin: 3px 5px: vertical horizontal
-    //câu lệnh dưới để <div> hiển thị ở giữa theo chiều ngang
-    // margin: 0 auto; nhưng có câu lệnh ở tk cha rồi nên không càn căn cho tk con nữa
-    .login-contents {
-      padding: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .login-text {
+    input::placeholder {
         color: #60067b;
-        font-weight: 700;
-        font-size: 35px;
-        margin-top: -10px !important;
-      }
-
-      .login-input {
-        margin: 5px 0;
-
-        .password-input-and-eye {
-          position: relative;
-
-          i {
-            font-size: 18px;
-            opacity: 0.7;
-          }
-
-          i.far.fa-eye {
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            // để khi di chuột vào đối tượng eye thì con chuột sẽ chuyển thành
-            //bàn tay có ngón tay trỏ chỉ tới đối tượng thì sử dụng câu lệnh dươis đây
-            cursor: pointer;
-          }
-
-          i.far.fa-eye-slash {
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            // để khi di chuột vào đối tượng eye thì con chuột sẽ chuyển thành
-            //bàn tay có ngón tay trỏ chỉ tới đối tượng thì sử dụng câu lệnh dươis đây
-            cursor: pointer;
-          }
-        }
-
-        input {
-          height: 45px;
-        }
-
-        label {
-          color: #60067b;
-          font-size: 18px;
-        }
-
-        .input-place {
-          margin: 10px 0 0 0;
-        }
-      }
-
-      .wrapper {
-        transform: translate(-50%, -50%);
-        margin: 50px -20px 0px 0 !important;
-
-        a {
-          display: block;
-          width: 420px;
-          height: 50px;
-          line-height: 50px;
-          font-size: 18px;
-          font-family: sans-serif;
-          text-decoration: none;
-          color: #60067b;
-          border: 2px solid #60067b;
-          border-radius: 5px;
-          letter-spacing: 2px;
-          text-align: center;
-          position: relative;
-          transition: all 0.35s;
-        }
-
-        a span {
-          position: relative;
-          z-index: 2;
-          border-radius: 5px;
-        }
-
-        a:after {
-          position: absolute;
-          content: "";
-          top: 0;
-          left: 0;
-          width: 0;
-          height: 100%;
-          background: rgb(184, 126, 226);
-          transition: all 0.35s;
-          border-radius: 5px;
-        }
-
-        a:hover {
-          color: #fff;
-        }
-
-        a:hover:after {
-          width: 100%;
-          border-radius: 3px;
-        }
-      }
-
-      .account-operation {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-
-        .forgot-password {
-          color: #60067b;
-          border-bottom: 2px solid white;
-          transition: border 0.2s;
-          cursor: pointer;
-        }
-
-        .forgot-password:hover {
-          border-bottom: 2px solid #60067b;
-        }
-
-        .register-link {
-          color: #60067b;
-          border-bottom: 2px solid white;
-          transition: border 0.2s;
-          cursor: pointer;
-        }
-
-        .register-link:hover {
-          border-bottom: 2px solid #60067b;
-        }
-      }
-
-      .or-login-with-options {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 5px;
-        color: #60067b;
-        font-weight: 700;
-      }
-
-      .more-login-options {
-        margin-top: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .icon-container {
-          display: inline-flex;
-          justify-content: center;
-          align-items: center;
-          width: 50px;
-          margin: 0 20px;
-          /* Đặt chiều rộng và chiều cao bằng nhau */
-          height: 50px;
-          border: 2px solid #60067b;
-          /* Thêm viền */
-          border-radius: 10px;
-          /* Bo góc */
-        }
-
-        .icon-container i.fab.fa-google-plus-g {
-          font-size: 30px;
-          color: #60067b;
-          /* Đặt kích thước cho biểu tượng bên trong */
-        }
-
-        .icon-container i.fab.fa-facebook-f {
-          font-size: 25px;
-          color: #60067b;
-          /* Đặt kích thước cho biểu tượng bên trong */
-        }
-
-        .icon-container i.fab.fa-apple {
-          font-size: 30px;
-          color: #60067b;
-          /* Đặt kích thước cho biểu tượng bên trong */
-        }
-      }
-
-      .error-message-while-login {
-        color: red;
-        // margin-top: 20px;
-        margin-bottom: -18px;
-      }
+        /* Thay đổi màu chữ của placeholder thành màu đỏ */
+        opacity: 40%;
+        /* Đặt độ trong suốt nếu cần */
     }
-  }
+
+    input:focus {
+        box-shadow: 0 0 5px #60067b;
+        /* Thay đổi màu vầng sáng xung quanh input khi nhấn vào nó*/
+    }
+
+    .login-container {
+        width: 500px;
+        // height: 100px;
+        border-radius: 20px;
+        background-color: rgb(255, 255, 255);
+
+        // các cách viết margin margin: 1px 2px 3px 4px: top right bottom left
+        // margin: 3px 5px: vertical horizontal
+        //câu lệnh dưới để <div> hiển thị ở giữa theo chiều ngang
+        // margin: 0 auto; nhưng có câu lệnh ở tk cha rồi nên không càn căn cho tk con nữa
+        .login-contents {
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .login-text {
+                color: #60067b;
+                font-weight: 700;
+                font-size: 35px;
+                margin-top: -10px !important;
+            }
+
+            .login-input {
+                margin: 5px 0;
+
+                .password-input-and-eye {
+                    position: relative;
+
+                    i {
+                        font-size: 18px;
+                        opacity: 0.7;
+                    }
+
+                    i.far.fa-eye {
+                        position: absolute;
+                        right: 15px;
+                        top: 15px;
+                        // để khi di chuột vào đối tượng eye thì con chuột sẽ chuyển thành
+                        //bàn tay có ngón tay trỏ chỉ tới đối tượng thì sử dụng câu lệnh dươis đây
+                        cursor: pointer;
+                    }
+
+                    i.far.fa-eye-slash {
+                        position: absolute;
+                        right: 15px;
+                        top: 15px;
+                        // để khi di chuột vào đối tượng eye thì con chuột sẽ chuyển thành
+                        //bàn tay có ngón tay trỏ chỉ tới đối tượng thì sử dụng câu lệnh dươis đây
+                        cursor: pointer;
+                    }
+                }
+
+                input {
+                    height: 45px;
+                }
+
+                label {
+                    color: #60067b;
+                    font-size: 18px;
+                }
+
+                .input-place {
+                    margin: 10px 0 0 0;
+                }
+            }
+
+            .wrapper {
+                transform: translate(-50%, -50%);
+                margin: 50px -20px 0px 0 !important;
+
+                a {
+                    display: block;
+                    width: 420px;
+                    height: 50px;
+                    line-height: 50px;
+                    font-size: 18px;
+                    font-family: sans-serif;
+                    text-decoration: none;
+                    color: #60067b;
+                    border: 2px solid #60067b;
+                    border-radius: 5px;
+                    letter-spacing: 2px;
+                    text-align: center;
+                    position: relative;
+                    transition: all 0.35s;
+                }
+
+                a span {
+                    position: relative;
+                    z-index: 2;
+                    border-radius: 5px;
+                }
+
+                a:after {
+                    position: absolute;
+                    content: "";
+                    top: 0;
+                    left: 0;
+                    width: 0;
+                    height: 100%;
+                    background: rgb(184, 126, 226);
+                    transition: all 0.35s;
+                    border-radius: 5px;
+                }
+
+                a:hover {
+                    color: #fff;
+                }
+
+                a:hover:after {
+                    width: 100%;
+                    border-radius: 3px;
+                }
+            }
+
+            .account-operation {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10px;
+
+                .forgot-password {
+                    color: #60067b;
+                    border-bottom: 2px solid white;
+                    transition: border 0.2s;
+                    cursor: pointer;
+                }
+
+                .forgot-password:hover {
+                    border-bottom: 2px solid #60067b;
+                }
+
+                .register-link {
+                    color: #60067b;
+                    border-bottom: 2px solid white;
+                    transition: border 0.2s;
+                    cursor: pointer;
+                }
+
+                .register-link:hover {
+                    border-bottom: 2px solid #60067b;
+                }
+            }
+
+            .or-login-with-options {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 5px;
+                color: #60067b;
+                font-weight: 700;
+            }
+
+            .more-login-options {
+                margin-top: 15px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .icon-container {
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 50px;
+                    margin: 0 20px;
+                    /* Đặt chiều rộng và chiều cao bằng nhau */
+                    height: 50px;
+                    border: 2px solid #60067b;
+                    /* Thêm viền */
+                    border-radius: 10px;
+                    /* Bo góc */
+                }
+
+                .icon-container i.fab.fa-google-plus-g {
+                    font-size: 30px;
+                    color: #60067b;
+                    /* Đặt kích thước cho biểu tượng bên trong */
+                }
+
+                .icon-container i.fab.fa-facebook-f {
+                    font-size: 25px;
+                    color: #60067b;
+                    /* Đặt kích thước cho biểu tượng bên trong */
+                }
+
+                .icon-container i.fab.fa-apple {
+                    font-size: 30px;
+                    color: #60067b;
+                    /* Đặt kích thước cho biểu tượng bên trong */
+                }
+            }
+
+            .error-message-while-login {
+                color: red;
+                // margin-top: 20px;
+                margin-bottom: -18px;
+            }
+        }
+    }
 }

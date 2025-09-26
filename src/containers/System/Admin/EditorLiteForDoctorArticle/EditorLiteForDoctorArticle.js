@@ -13,43 +13,40 @@ import * as actions from "../../../../store/actions";
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 class EditorLiteForDoctorArticle extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  // Finish!
-  handleEditorChange({ html, text }) {
-    console.log("handleEditorChange", html, text);
-    if (html) {
-      this.props.onChangeDoctorArticle(html, text);
+    constructor(props) {
+        super(props);
+        this.state = {};
     }
-  }
 
-  render() {
-    return (
-      <MdEditor
-        style={{ height: "500px" }}
-        renderHTML={(text) => mdParser.render(text)}
-        //nếu dùng () => ở function này thì sẽ không thể bắt được sự kiện onChange vì đây là
-        //truyền props cho MdEditor
-        onChange={this.handleEditorChange}
-      />
-    );
-  }
+    // Finish!
+    handleEditorChange({ html, text }) {
+        console.log("handleEditorChange", html, text);
+        if (html) {
+            this.props.onChangeDoctorArticle(html, text);
+        }
+    }
+
+    render() {
+        return (
+            <MdEditor
+                style={{ height: "500px" }}
+                renderHTML={(text) => mdParser.render(text)}
+                //nếu dùng () => ở function này thì sẽ không thể bắt được sự kiện onChange vì đây là
+                //truyền props cho MdEditor
+                onChange={this.handleEditorChange}
+            />
+        );
+    }
 }
 
 const mapStateToProps = (state) => {
-  return {
-    language: state.app.language,
-  };
+    return {
+        language: state.app.language,
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+    return {};
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditorLiteForDoctorArticle);
+export default connect(mapStateToProps, mapDispatchToProps)(EditorLiteForDoctorArticle);

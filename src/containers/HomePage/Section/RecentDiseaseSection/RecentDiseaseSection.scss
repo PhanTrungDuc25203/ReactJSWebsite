@@ -1,211 +1,208 @@
 .recent-disease-section {
-  width: 100%;
-  height: 534px;
-
-  .recent-disease-section-title {
-    font-size: 40px;
-    color: #3494b5;
-    font-weight: 500;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    margin-left: 81px;
-  }
-
-  .recent-disease-section-contents {
-    display: flex;
+    width: 100%;
     height: 534px;
 
-    .left-contents {
-      width: 45%;
-      height: 394px;
-      margin-top: 0px;
-      margin-left: 85px;
-      margin-bottom: 0px;
-      margin-right: 0;
-      display: flex;
-      // align-items: center;
-      // text-align: center;
-      // justify-content: center;
-
-      iframe {
-        margin-top: 0;
-        scale: 100%;
-        border: 1px solid rgb(194, 194, 194);
-        border-radius: 20px;
-      }
-    }
-
-    .right-contents {
-      margin-top: 0px;
-      margin-left: 0;
-      height: 394px;
-      margin-bottom: 0px;
-      margin-right: 85px;
-      width: 45%;
-
-      .information-source {
-        margin-left: 30px;
-        font-size: 19px;
+    .recent-disease-section-title {
+        font-size: 40px;
         color: #3494b5;
-        max-height: 50%;
-
-        .ensurance-text {
-          margin-bottom: 10px;
-          margin-left: 10px;
-        }
-
-        .fontawesome-icon {
-          color: rgb(80, 215, 80);
-          padding: 0 10px 0 0;
-        }
-      }
-
-      .source-image {
-        margin-top: 20px;
-        display: grid;
-        grid-template-columns: 1fr 1fr; // 2 cột
-        grid-template-rows: 1fr 1fr; // 2 hàng luôn bằng nhau
-        gap: 20px;
-        height: 197px;
-        max-height: 50%;
-
-        .image-css {
-          background-size: contain;
-          background-position: center;
-          background-repeat: no-repeat;
-          border: 1px solid #c1e9ff;
-          border-radius: 10px;
-          cursor: pointer;
-          transition: border 0.1s;
-
-          width: 100%;
-          height: 100%;
-        }
-
-        .image-css:hover {
-          border: 3px solid rgb(141, 210, 247);
-        }
-
-        .special-image-css {
-          background-size: 100% 170% !important;
-        }
-
-        .source-1 {
-          background-image: url("../../../../assets/images/disease-information-source/images.png");
-        }
-
-        .source-2 {
-          background-image: url("../../../../assets/images/disease-information-source/tải\ xuống.png");
-        }
-
-        .source-3 {
-          background-image: url("../../../../assets/images/disease-information-source/tải\ xuống\ \(1\).png");
-        }
-
-        .source-4 {
-          background-image: url("../../../../assets/images/disease-information-source/tải\ xuống\ \(2\).png");
-        }
-      }
+        font-weight: 500;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        margin-left: 81px;
     }
-  }
+
+    .recent-disease-section-contents {
+        display: flex;
+        height: 534px;
+
+        .left-contents {
+            width: 45%;
+            height: 394px;
+            margin-top: 0px;
+            margin-left: 85px;
+            margin-bottom: 0px;
+            margin-right: 0;
+            display: flex;
+            // align-items: center;
+            // text-align: center;
+            // justify-content: center;
+
+            iframe {
+                margin-top: 0;
+                scale: 100%;
+                border: 1px solid rgb(194, 194, 194);
+                border-radius: 20px;
+            }
+        }
+
+        .right-contents {
+            margin-top: 0px;
+            margin-left: 0;
+            height: 394px;
+            margin-bottom: 0px;
+            margin-right: 85px;
+            width: 45%;
+
+            .information-source {
+                margin-left: 30px;
+                font-size: 19px;
+                color: #3494b5;
+                max-height: 50%;
+
+                .ensurance-text {
+                    margin-bottom: 10px;
+                    margin-left: 10px;
+                }
+
+                .fontawesome-icon {
+                    color: rgb(80, 215, 80);
+                    padding: 0 10px 0 0;
+                }
+            }
+
+            .source-image {
+                margin-top: 20px;
+                display: grid;
+                grid-template-columns: 1fr 1fr; // 2 cột
+                grid-template-rows: 1fr 1fr; // 2 hàng luôn bằng nhau
+                gap: 20px;
+                height: 197px;
+                max-height: 50%;
+
+                .image-css {
+                    background-size: contain;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    border: 1px solid #c1e9ff;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    transition: border 0.1s;
+
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .image-css:hover {
+                    border: 3px solid rgb(141, 210, 247);
+                }
+
+                .special-image-css {
+                    background-size: 100% 170% !important;
+                }
+
+                .source-1 {
+                    background-image: url("../../../../assets/images/disease-information-source/images.png");
+                }
+
+                .source-2 {
+                    background-image: url("../../../../assets/images/disease-information-source/tải\ xuống.png");
+                }
+
+                .source-3 {
+                    background-image: url("../../../../assets/images/disease-information-source/tải\ xuống\ \(1\).png");
+                }
+
+                .source-4 {
+                    background-image: url("../../../../assets/images/disease-information-source/tải\ xuống\ \(2\).png");
+                }
+            }
+        }
+    }
 }
 
 @media only screen and (max-width: 431px) {
-  .recent-disease-section .recent-disease-section-title {
-    margin: 30px 0 30px 0;
-    width: 100% !important;
-    padding-left: 30px;
-    text-wrap: wrap !important;
-    font-size: 20px !important;
-  }
+    .recent-disease-section .recent-disease-section-title {
+        margin: 30px 0 30px 0;
+        width: 100% !important;
+        padding-left: 30px;
+        text-wrap: wrap !important;
+        font-size: 20px !important;
+    }
 
-  .recent-disease-section .recent-disease-section-contents {
-    flex-direction: column;
-    height: unset !important;
-    align-items: center;
-  }
+    .recent-disease-section .recent-disease-section-contents {
+        flex-direction: column;
+        height: unset !important;
+        align-items: center;
+    }
 
-  .recent-disease-section .left-contents {
-    margin: 0 !important;
-    width: 90% !important;
-    height: unset !important;
-    object-fit: contain;
-  }
+    .recent-disease-section .left-contents {
+        margin: 0 !important;
+        width: 90% !important;
+        height: unset !important;
+        object-fit: contain;
+    }
 
-  .recent-disease-section .right-contents {
-    height: unset !important;
-  }
+    .recent-disease-section .right-contents {
+        height: unset !important;
+    }
 
-  .recent-disease-section .information-source {
-    width: 100% !important;
-  }
+    .recent-disease-section .information-source {
+        width: 100% !important;
+    }
 
-  .recent-disease-section .right-contents {
-    /* width: 100% !important; */
-  }
+    .recent-disease-section .right-contents {
+        /* width: 100% !important; */
+    }
 
-  .recent-disease-section .recent-disease-section-contents .right-contents {
-    width: 100% !important;
-    margin-right: 0 !important;
-  }
+    .recent-disease-section .recent-disease-section-contents .right-contents {
+        width: 100% !important;
+        margin-right: 0 !important;
+    }
 
-  .recent-disease-section .information-source {
-    width: 100% !important;
-    margin-left: 0 !important;
-    padding-left: 30px;
-    margin-top: 20px;
-    padding-right: 30px !important;
-  }
+    .recent-disease-section .information-source {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding-left: 30px;
+        margin-top: 20px;
+        padding-right: 30px !important;
+    }
 
-  .source-image {
-    gap: 10px;
-    width: 100% !important;
-  }
+    .source-image {
+        gap: 10px;
+        width: 100% !important;
+    }
 
-  .source-1 {
-    width: 48% !important;
-    margin: 0 !important;
-    height: 60px !important;
-    padding: 25px 0;
-  }
+    .source-1 {
+        width: 48% !important;
+        margin: 0 !important;
+        height: 60px !important;
+        padding: 25px 0;
+    }
 
-  .source-2 {
-    width: 48% !important;
-    margin: 0 !important;
-    height: 60px !important;
-    padding: 25px 0;
-  }
+    .source-2 {
+        width: 48% !important;
+        margin: 0 !important;
+        height: 60px !important;
+        padding: 25px 0;
+    }
 
-  .source-3 {
-    width: 48% !important;
-    margin: 0 !important;
-    height: 60px !important;
-    padding: 25px 0;
-  }
+    .source-3 {
+        width: 48% !important;
+        margin: 0 !important;
+        height: 60px !important;
+        padding: 25px 0;
+    }
 
-  .source-4 {
-    width: 48% !important;
-    margin: 0 !important;
-    height: 60px !important;
-    padding: 25px 0;
-  }
+    .source-4 {
+        width: 48% !important;
+        margin: 0 !important;
+        height: 60px !important;
+        padding: 25px 0;
+    }
 
-  .recent-disease-section
-    .recent-disease-section-contents
-    .left-contents
-    iframe {
-    scale: 100% !important;
-    height: 200px !important;
-    border-radius: 10px;
-  }
+    .recent-disease-section .recent-disease-section-contents .left-contents iframe {
+        scale: 100% !important;
+        height: 200px !important;
+        border-radius: 10px;
+    }
 }
 
 @media only screen and (max-width: 431px) {
-  .recent-disease-section {
-    height: unset;
-  }
+    .recent-disease-section {
+        height: unset;
+    }
 
-  // .header-side-bar {
-  //     display: none;
-  // }
+    // .header-side-bar {
+    //     display: none;
+    // }
 }

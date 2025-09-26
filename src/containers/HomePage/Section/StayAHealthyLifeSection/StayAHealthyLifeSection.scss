@@ -1,398 +1,398 @@
 .stay-a-healthy-life-section {
-  width: 100%;
-  height: 475px;
-  // background-image: url('../../../../assets/images/140311-background5.png');
-  // border: 1px solid red;
-  display: flex;
-  justify-content: center;
-  position: relative;
-
-  .stay-a-healthy-life-section-contents {
+    width: 100%;
+    height: 475px;
+    // background-image: url('../../../../assets/images/140311-background5.png');
+    // border: 1px solid red;
+    display: flex;
+    justify-content: center;
     position: relative;
-    width: 89%;
 
-    .item-content {
-      border-radius: 10px;
-      font-size: 18px;
-      color: #3494b5;
-      width: 350px;
-      text-align: center;
-      height: 286px;
-
-      .item-of-slider {
-        border: 2px solid #3494b5;
-        margin: 10px;
-        border-radius: 10px;
-        cursor: pointer;
-        align-items: center;
-
-        .image-item {
-          // position: relative;
-          height: auto;
-          width: 180px;
-          margin: 15px;
-          border-radius: 10px !important;
-        }
+    .stay-a-healthy-life-section-contents {
+        position: relative;
+        width: 89%;
 
         .item-content {
-          margin-top: 10px;
-          margin-bottom: 10px;
-          margin-left: 15px;
-          margin-right: 15px;
-          text-align: left;
-          font-size: 20px;
-          width: 88%;
-          height: 90px;
-          overflow: hidden;
-          /* Ẩn phần văn bản vượt quá giới hạn của div */
-          text-overflow: ellipsis;
-          /* Hiển thị dấu "..." khi văn bản quá dài */
-          display: -webkit-box;
-          /* Thiết lập hiển thị dưới dạng khung hộp */
-          -webkit-box-orient: vertical;
-          /* Định hướng các hộp con theo chiều dọc */
-          -webkit-line-clamp: 3;
-          /* Giới hạn số dòng văn bản hiển thị */
-          line-clamp: 3;
-          line-height: 30px;
-          /* Chiều cao dòng */
-          overflow: hidden;
-        }
+            border-radius: 10px;
+            font-size: 18px;
+            color: #3494b5;
+            width: 350px;
+            text-align: center;
+            height: 286px;
 
-        .image-css {
-          background-size: cover;
-          height: 149px;
-          width: 100%;
-          background-position: center;
-          border-bottom: 1px solid #c1e9ff;
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
-          /* margin-top          : 13px; */
-          /* margin-bottom       : 13px; */
-          /* margin-left         : 13px; */
-          //   margin-right: 13px;
-          background-repeat: no-repeat;
-        }
+            .item-of-slider {
+                border: 2px solid #3494b5;
+                margin: 10px;
+                border-radius: 10px;
+                cursor: pointer;
+                align-items: center;
 
-        .image-of-item-1 {
-          background-image: url("../../../../assets/stay-a-healthy-life-image/050941-beo-phi-do-1.jpg");
-        }
+                .image-item {
+                    // position: relative;
+                    height: auto;
+                    width: 180px;
+                    margin: 15px;
+                    border-radius: 10px !important;
+                }
 
-        .image-of-item-2 {
-          background-image: url("../../../../assets/stay-a-healthy-life-image/084307-viem-nha-chu-dieu-tri.png");
-        }
+                .item-content {
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    margin-left: 15px;
+                    margin-right: 15px;
+                    text-align: left;
+                    font-size: 20px;
+                    width: 88%;
+                    height: 90px;
+                    overflow: hidden;
+                    /* Ẩn phần văn bản vượt quá giới hạn của div */
+                    text-overflow: ellipsis;
+                    /* Hiển thị dấu "..." khi văn bản quá dài */
+                    display: -webkit-box;
+                    /* Thiết lập hiển thị dưới dạng khung hộp */
+                    -webkit-box-orient: vertical;
+                    /* Định hướng các hộp con theo chiều dọc */
+                    -webkit-line-clamp: 3;
+                    /* Giới hạn số dòng văn bản hiển thị */
+                    line-clamp: 3;
+                    line-height: 30px;
+                    /* Chiều cao dòng */
+                    overflow: hidden;
+                }
 
-        .image-of-item-3 {
-          background-image: url("../../../../assets/stay-a-healthy-life-image/094906-benh-mua-mua.png");
-        }
+                .image-css {
+                    background-size: cover;
+                    height: 149px;
+                    width: 100%;
+                    background-position: center;
+                    border-bottom: 1px solid #c1e9ff;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                    /* margin-top          : 13px; */
+                    /* margin-bottom       : 13px; */
+                    /* margin-left         : 13px; */
+                    //   margin-right: 13px;
+                    background-repeat: no-repeat;
+                }
 
-        .image-of-item-4 {
-          background-image: url("../../../../assets/stay-a-healthy-life-image/103551-chen-ep-tuy-song-nguy-co-tiem-an-va-phong-ngua-hieu-qua.jpg");
-        }
+                .image-of-item-1 {
+                    background-image: url("../../../../assets/stay-a-healthy-life-image/050941-beo-phi-do-1.jpg");
+                }
 
-        .image-of-item-5 {
-          background-image: url("../../../../assets/stay-a-healthy-life-image/103551-chen-ep-tuy-song.jpg");
-        }
+                .image-of-item-2 {
+                    background-image: url("../../../../assets/stay-a-healthy-life-image/084307-viem-nha-chu-dieu-tri.png");
+                }
 
-        .image-of-item-6 {
-          background-image: url("../../../../assets/stay-a-healthy-life-image/145356-rang--khon-dang-moc-2.png");
-        }
+                .image-of-item-3 {
+                    background-image: url("../../../../assets/stay-a-healthy-life-image/094906-benh-mua-mua.png");
+                }
 
-        .image-of-item-7 {
-          background-image: url("../../../../assets/stay-a-healthy-life-image/145400-rang--khon-dang-moc-3.png");
-        }
+                .image-of-item-4 {
+                    background-image: url("../../../../assets/stay-a-healthy-life-image/103551-chen-ep-tuy-song-nguy-co-tiem-an-va-phong-ngua-hieu-qua.jpg");
+                }
 
-        .image-of-item-8 {
-          background-image: url("../../../../assets/stay-a-healthy-life-image/145406-rang--khon-dang-moc-4.png");
-        }
+                .image-of-item-5 {
+                    background-image: url("../../../../assets/stay-a-healthy-life-image/103551-chen-ep-tuy-song.jpg");
+                }
 
-        .image-of-item-9 {
-          background-image: url("../../../../assets/stay-a-healthy-life-image/171713-viem-nha-chu.png");
-        }
+                .image-of-item-6 {
+                    background-image: url("../../../../assets/stay-a-healthy-life-image/145356-rang--khon-dang-moc-2.png");
+                }
 
-        .image-of-item-10 {
-          background-image: url("../../../../assets/stay-a-healthy-life-image/175145-ung-thu-tuyen-giap-the-khong-biet-hoa-1.png");
-        }
+                .image-of-item-7 {
+                    background-image: url("../../../../assets/stay-a-healthy-life-image/145400-rang--khon-dang-moc-3.png");
+                }
 
-        .image-of-item-11 {
-          background-image: url("../../../../assets/stay-a-healthy-life-image/204258-dieu-can-biet-ve-rang-khon.png");
-        }
+                .image-of-item-8 {
+                    background-image: url("../../../../assets/stay-a-healthy-life-image/145406-rang--khon-dang-moc-4.png");
+                }
 
-        .image-of-item-12 {
-          background-image: url("../../../../assets/stay-a-healthy-life-image/205820-ung-thu-tuyen-giap-the-tuy-1.png");
-        }
+                .image-of-item-9 {
+                    background-image: url("../../../../assets/stay-a-healthy-life-image/171713-viem-nha-chu.png");
+                }
 
-        .image-of-item-13 {
-          background-image: url("../../../../assets/stay-a-healthy-life-image/211811-mat-bi-mo-nhu-co-mang-che.png");
-        }
+                .image-of-item-10 {
+                    background-image: url("../../../../assets/stay-a-healthy-life-image/175145-ung-thu-tuyen-giap-the-khong-biet-hoa-1.png");
+                }
 
-        .image-of-item-14 {
-          background-image: url("../../../../assets/stay-a-healthy-life-image/212639-viem-nha-chu-trieu-chung.png");
-        }
+                .image-of-item-11 {
+                    background-image: url("../../../../assets/stay-a-healthy-life-image/204258-dieu-can-biet-ve-rang-khon.png");
+                }
 
-        .image-of-item-15 {
-          background-image: url("../../../../assets/stay-a-healthy-life-image/213032-viem-nha-chu-trieu-chung-1.png");
-        }
-      }
-    }
+                .image-of-item-12 {
+                    background-image: url("../../../../assets/stay-a-healthy-life-image/205820-ung-thu-tuyen-giap-the-tuy-1.png");
+                }
 
-    .stay-a-healthy-life-section-title-section {
-      position: relative;
-      height: 60px;
-      width: 100%;
-      display: flex;
-      margin-top: 20px;
-      margin-bottom: 50px;
-      justify-content: space-between;
-      padding: 0 10px;
+                .image-of-item-13 {
+                    background-image: url("../../../../assets/stay-a-healthy-life-image/211811-mat-bi-mo-nhu-co-mang-che.png");
+                }
 
-      .title-text {
-        height: 60px;
-        width: 800px;
-        font-size: 40px;
-        color: #3494b5;
-        font-weight: 500;
+                .image-of-item-14 {
+                    background-image: url("../../../../assets/stay-a-healthy-life-image/212639-viem-nha-chu-trieu-chung.png");
+                }
 
-        text-decoration: none;
-      }
-
-      .more-detail-button {
-        $color: rgb(54, 215, 255);
-        text-align: center;
-
-        .button {
-          position: absolute;
-          display: inline-block;
-          padding: 15px;
-          height: 60px;
-          width: 121.15px;
-          border-radius: 15px;
-          color: #fff;
-          font-size: 20px;
-          transition: all 0.3s;
-          border: 2px solid #3494b5;
-          position: relative;
-          overflow: hidden;
-          z-index: 1;
-          border: 0px;
-          text-decoration: none;
-
-          &:after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: $color;
-            border-radius: 15px;
-            z-index: -2;
-          }
-
-          &:before {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            background-color: darken($color, 15%);
-            transition: all 0.3s;
-            border-radius: 15px;
-            z-index: -1;
-          }
-
-          &:hover {
-            color: #fff;
-
-            &:before {
-              width: 100%;
+                .image-of-item-15 {
+                    background-image: url("../../../../assets/stay-a-healthy-life-image/213032-viem-nha-chu-trieu-chung-1.png");
+                }
             }
-          }
         }
-      }
+
+        .stay-a-healthy-life-section-title-section {
+            position: relative;
+            height: 60px;
+            width: 100%;
+            display: flex;
+            margin-top: 20px;
+            margin-bottom: 50px;
+            justify-content: space-between;
+            padding: 0 10px;
+
+            .title-text {
+                height: 60px;
+                width: 800px;
+                font-size: 40px;
+                color: #3494b5;
+                font-weight: 500;
+
+                text-decoration: none;
+            }
+
+            .more-detail-button {
+                $color: rgb(54, 215, 255);
+                text-align: center;
+
+                .button {
+                    position: absolute;
+                    display: inline-block;
+                    padding: 15px;
+                    height: 60px;
+                    width: 121.15px;
+                    border-radius: 15px;
+                    color: #fff;
+                    font-size: 20px;
+                    transition: all 0.3s;
+                    border: 2px solid #3494b5;
+                    position: relative;
+                    overflow: hidden;
+                    z-index: 1;
+                    border: 0px;
+                    text-decoration: none;
+
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: $color;
+                        border-radius: 15px;
+                        z-index: -2;
+                    }
+
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 0%;
+                        height: 100%;
+                        background-color: darken($color, 15%);
+                        transition: all 0.3s;
+                        border-radius: 15px;
+                        z-index: -1;
+                    }
+
+                    &:hover {
+                        color: #fff;
+
+                        &:before {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+
+        .slider-button-next::before {
+            position: absolute;
+            color: rgb(114, 192, 255) !important;
+            background: rgb(232, 250, 255);
+            border: 1px solid rgb(86, 191, 239);
+            opacity: 1;
+            border-radius: 15px;
+            padding: 13px;
+            right: 1px;
+            top: -15px;
+        }
+
+        .override {
+            // position: relative;
+            height: 15px;
+            width: 15px;
+        }
+
+        .slider-button-prev::before {
+            position: absolute;
+            color: rgb(114, 192, 255) !important;
+            background: rgb(232, 250, 255);
+            border: 1px solid rgb(86, 191, 239);
+            border-radius: 15px;
+            opacity: 1;
+            padding: 13px;
+            top: -15px;
+            left: 7px;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            50% {
+                transform: translateX(5px);
+            }
+
+            75% {
+                transform: translateX(10px);
+            }
+
+            100% {
+                transform: translateX(15px);
+            }
+        }
+
+        .slider-button-prev {
+            z-index: 2 !important;
+        }
     }
-
-    .slider-button-next::before {
-      position: absolute;
-      color: rgb(114, 192, 255) !important;
-      background: rgb(232, 250, 255);
-      border: 1px solid rgb(86, 191, 239);
-      opacity: 1;
-      border-radius: 15px;
-      padding: 13px;
-      right: 1px;
-      top: -15px;
-    }
-
-    .override {
-      // position: relative;
-      height: 15px;
-      width: 15px;
-    }
-
-    .slider-button-prev::before {
-      position: absolute;
-      color: rgb(114, 192, 255) !important;
-      background: rgb(232, 250, 255);
-      border: 1px solid rgb(86, 191, 239);
-      border-radius: 15px;
-      opacity: 1;
-      padding: 13px;
-      top: -15px;
-      left: 7px;
-    }
-
-    @keyframes shake {
-      0% {
-        transform: translateX(0);
-      }
-
-      25% {
-        transform: translateX(-5px);
-      }
-
-      50% {
-        transform: translateX(5px);
-      }
-
-      75% {
-        transform: translateX(10px);
-      }
-
-      100% {
-        transform: translateX(15px);
-      }
-    }
-
-    .slider-button-prev {
-      z-index: 2 !important;
-    }
-  }
 }
 
 .stay-a-healthy-life-section-slider {
-  .slick-dots {
-    margin-left: 7px;
-  }
-
-  .slick-dots li button:before {
-    border: 1px solid #3494b5;
-    font-family: "slick";
-    font-size: 8px;
-    line-height: 20px;
-    position: absolute;
-    top: 5px;
-    // left: 0px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50px;
-    display: flex;
-    content: "•";
-    text-align: center;
-    opacity: 0.25;
-    color: rgb(173, 218, 255);
-    -webkit-font-smoothing: antialiased;
-    align-items: center;
-    padding-left: 0px;
-    padding-top: 1px;
-  }
-
-  .slick-dots li.slick-active button:before {
-    opacity: 0.75;
-    color: #5182c7;
-  }
-
-  @media only screen and (max-width: 431px) {
-    .item-of-slider {
-      display: flex !important;
-      flex-direction: column !important;
-      width: 190px !important;
-      margin: 0 !important;
+    .slick-dots {
+        margin-left: 7px;
     }
 
-    .slick-slide {
-      width: 190px !important;
-      margin-right: 10px !important;
+    .slick-dots li button:before {
+        border: 1px solid #3494b5;
+        font-family: "slick";
+        font-size: 8px;
+        line-height: 20px;
+        position: absolute;
+        top: 5px;
+        // left: 0px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50px;
+        display: flex;
+        content: "•";
+        text-align: center;
+        opacity: 0.25;
+        color: rgb(173, 218, 255);
+        -webkit-font-smoothing: antialiased;
+        align-items: center;
+        padding-left: 0px;
+        padding-top: 1px;
     }
 
-    .slick-track {
-      width: max-content !important;
+    .slick-dots li.slick-active button:before {
+        opacity: 0.75;
+        color: #5182c7;
     }
 
-    .item-content {
-      width: unset !important;
-      height: 50px;
+    @media only screen and (max-width: 431px) {
+        .item-of-slider {
+            display: flex !important;
+            flex-direction: column !important;
+            width: 190px !important;
+            margin: 0 !important;
+        }
+
+        .slick-slide {
+            width: 190px !important;
+            margin-right: 10px !important;
+        }
+
+        .slick-track {
+            width: max-content !important;
+        }
+
+        .item-content {
+            width: unset !important;
+            height: 50px;
+        }
     }
-  }
 }
 
 @media only screen and (max-width: 431px) {
-  .stay-a-healthy-life-section {
-    width: 100% !important;
-    height: 340px;
-    margin-bottom: 40px;
+    .stay-a-healthy-life-section {
+        width: 100% !important;
+        height: 340px;
+        margin-bottom: 40px;
 
-    .stay-a-healthy-life-section-contents {
-      width: 100% !important;
-      padding-left: 30px;
-      padding-right: 30px;
+        .stay-a-healthy-life-section-contents {
+            width: 100% !important;
+            padding-left: 30px;
+            padding-right: 30px;
 
-      .stay-a-healthy-life-section-title-section {
-        margin: 0 !important;
-        height: unset !important;
-        display: flex;
-        align-items: center;
+            .stay-a-healthy-life-section-title-section {
+                margin: 0 !important;
+                height: unset !important;
+                display: flex;
+                align-items: center;
 
-        .title-text {
-          margin: 20px 0 20px 0;
-          display: flex;
-          align-items: center;
-          font-size: 20px !important;
+                .title-text {
+                    margin: 20px 0 20px 0;
+                    display: flex;
+                    align-items: center;
+                    font-size: 20px !important;
+                }
+
+                .more-detail-button {
+                    .button {
+                        font-size: 15px !important;
+                        padding: 10px 20px !important;
+                        text-align: center !important;
+                        vertical-align: middle !important;
+                        height: unset !important;
+                    }
+                }
+
+                .spacing {
+                    width: 10px !important;
+                }
+            }
+
+            .slider-button-next::before {
+                right: 10px;
+                top: -40px;
+            }
+
+            .slider-button-prev::before {
+                top: -40px;
+            }
+
+            .item-content {
+                .item-of-slider {
+                    .item-content {
+                        width: unset !important;
+                        height: 50px;
+                        font-size: 20px !important;
+                        align-items: center;
+                        margin: 5px 15px 15px 15px;
+                    }
+
+                    .image-css {
+                        background-size: cover;
+                        height: 150px;
+                        width: 90%;
+                        margin: 5%;
+                    }
+                }
+            }
         }
-
-        .more-detail-button {
-          .button {
-            font-size: 15px !important;
-            padding: 10px 20px !important;
-            text-align: center !important;
-            vertical-align: middle !important;
-            height: unset !important;
-          }
-        }
-
-        .spacing {
-          width: 10px !important;
-        }
-      }
-
-      .slider-button-next::before {
-        right: 10px;
-        top: -40px;
-      }
-
-      .slider-button-prev::before {
-        top: -40px;
-      }
-
-      .item-content {
-        .item-of-slider {
-          .item-content {
-            width: unset !important;
-            height: 50px;
-            font-size: 20px !important;
-            align-items: center;
-            margin: 5px 15px 15px 15px;
-          }
-
-          .image-css {
-            background-size: cover;
-            height: 150px;
-            width: 90%;
-            margin: 5%;
-          }
-        }
-      }
     }
-  }
 }

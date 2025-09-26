@@ -10,80 +10,62 @@ import { LANGUAGES } from "../../../utils";
 import { confirmBookingAppointmentService } from "../../../services/userService";
 
 class ConfirmBookingAppointment extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      confirmStatus: false,
-      confirmFail: 0,
-    };
-  }
-
-  async componentDidMount() {
-    if (this.props.location && this.props.location.search) {
-      let urlParams = new URLSearchParams(this.props.location.search);
-      let token = urlParams.get("token");
-      let doctorId = urlParams.get("doctorId");
-      console.log("check param: ", token, doctorId);
-      //cal api
-      let res = await confirmBookingAppointmentService({
-        token: token,
-        doctorId: doctorId,
-      });
-
-      if (res && res.errCode === 0) {
-        this.setState({
-          confirmStatus: true,
-          confirmFail: res.errCode,
-        });
-      } else {
-        this.setState({
-          confirmStatus: true,
-          confirmFail: res && res.errCode ? res.errCode : -1,
-        });
-      }
+    constructor(props) {
+        super(props);
+        this.state = {
+            confirmStatus: false,
+            confirmFail: 0,
+        };
     }
-  }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {}
+    async componentDidMount() {
+        if (this.props.location && this.props.location.search) {
+            let urlParams = new URLSearchParams(this.props.location.search);
+            let token = urlParams.get("token");
+            let doctorId = urlParams.get("doctorId");
+            console.log("check param: ", token, doctorId);
+            //cal api
+            let res = await confirmBookingAppointmentService({
+                token: token,
+                doctorId: doctorId,
+            });
 
-  render() {
-    let { confirmStatus, confirmFail } = this.state;
-    return (
-      <React.Fragment>
-        <div>
-          {confirmStatus === false ? (
-            <div>Loading data...</div>
-          ) : (
-            <div>
-              {confirmFail === 0 ? (
-                <div>Xác nhận thành công</div>
-              ) : (
-                <div>
-                  Lịch hẹn đã tồn tại, bạn chỉ có thể đặt một lịch hẹn với bác
-                  sĩ
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      </React.Fragment>
-    );
-  }
+            if (res && res.errCode === 0) {
+                this.setState({
+                    confirmStatus: true,
+                    confirmFail: res.errCode,
+                });
+            } else {
+                this.setState({
+                    confirmStatus: true,
+                    confirmFail: res && res.errCode ? res.errCode : -1,
+                });
+            }
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {}
+
+    render() {
+        let { confirmStatus, confirmFail } = this.state;
+        return (
+            <React.Fragment>
+                <div>{confirmStatus === false ? <div>Loading data...</div> : <div>{confirmFail === 0 ? <div>Xác nhận thành công</div> : <div>Lịch hẹn đã tồn tại, bạn chỉ có thể đặt một lịch hẹn với bác sĩ</div>}</div>}</div>
+            </React.Fragment>
+        );
+    }
 }
 
 const mapStateToProps = (state) => {
-  return {
-    // systemMenuPath: state.app.systemMenuPath,
-    // isLoggedIn: state.user.isLoggedIn,
-    language: state.app.language,
-  };
+    return {
+        // systemMenuPath: state.app.systemMenuPath,
+        // isLoggedIn: state.user.isLoggedIn,
+        language: state.app.language,
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+    return {};
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ConfirmBookingAppointment);
+export default connect(mapStateToProps, mapDispatchToProps)(ConfirmBookingAppointment);

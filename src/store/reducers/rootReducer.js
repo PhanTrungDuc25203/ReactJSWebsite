@@ -14,37 +14,37 @@ import { persistReducer } from "redux-persist";
 //chính là file rootReducer, ở hàm export cuối cóchuwx combine
 
 const persistCommonConfig = {
-  storage: storage,
-  stateReconciler: autoMergeLevel2,
+    storage: storage,
+    stateReconciler: autoMergeLevel2,
 };
 
 const userPersistConfig = {
-  ...persistCommonConfig,
-  key: "user",
-  whitelist: ["isLoggedIn", "userInfo"],
+    ...persistCommonConfig,
+    key: "user",
+    whitelist: ["isLoggedIn", "userInfo"],
 };
 
 //để khi chuyển đổi ngôn ngữ thì toàn bộ dự án cũng dược đổi
 const appPersistConfig = {
-  ...persistCommonConfig,
-  key: "app",
-  whitelist: ["language"],
+    ...persistCommonConfig,
+    key: "app",
+    whitelist: ["language"],
 };
 
 export default (history) =>
-  combineReducers({
-    //key: reducer
-    //để truy cập vào userReducer thì dùng key là user, truy cập vào appReducer thì dùng key là app
-    //ví dụ ở những hàm máptateToProps trong mỗi component ta có sử dụng:
-    //language: state.app.language,
-    // thì từ app đây chính là để sử dụng reducer appReducer
-    //còn language trong state.app.language thì là mộtt thuộc tính của initialState được khai báo trong reducer tương ứng, ở đây là appReducer
-    router: connectRouter(history),
-    user: persistReducer(userPersistConfig, userReducer),
-    app: persistReducer(appPersistConfig, appReducer),
-    // Redux-getGender-(10):tạo key
-    admin: adminReducer,
-    search: searchReducer,
-    // Redux-getGender-(11): đến đây thì cấu hình thành công
-    // Redux-getGender-(12): trở lại adminReducer để viết code
-  });
+    combineReducers({
+        //key: reducer
+        //để truy cập vào userReducer thì dùng key là user, truy cập vào appReducer thì dùng key là app
+        //ví dụ ở những hàm máptateToProps trong mỗi component ta có sử dụng:
+        //language: state.app.language,
+        // thì từ app đây chính là để sử dụng reducer appReducer
+        //còn language trong state.app.language thì là mộtt thuộc tính của initialState được khai báo trong reducer tương ứng, ở đây là appReducer
+        router: connectRouter(history),
+        user: persistReducer(userPersistConfig, userReducer),
+        app: persistReducer(appPersistConfig, appReducer),
+        // Redux-getGender-(10):tạo key
+        admin: adminReducer,
+        search: searchReducer,
+        // Redux-getGender-(11): đến đây thì cấu hình thành công
+        // Redux-getGender-(12): trở lại adminReducer để viết code
+    });

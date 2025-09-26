@@ -1,70 +1,70 @@
 @import "../../styles/common.scss";
 
 .header-container {
-  z-index: 99;
-  display: flex;
-  justify-content: space-between;
-  background-color: $colormain;
-  color: $common-text-color;
-  height: 50px;
-  position: relative;
-
-  .header-tabs-container ul li a {
-    border: 0px solid transparent;
-    transition: all 0.2s;
-  }
-
-  .header-tabs-container ul li a:hover {
-    border-left: 6px solid transparent;
-  }
-
-  .switch-languages-and-logout {
+    z-index: 99;
     display: flex;
     justify-content: space-between;
-    text-align: center;
-    align-items: center;
-    margin-right: 15px;
+    background-color: $colormain;
+    color: $common-text-color;
+    height: 50px;
+    position: relative;
 
-    .welcome {
-      margin-right: 15px;
+    .header-tabs-container ul li a {
+        border: 0px solid transparent;
+        transition: all 0.2s;
     }
 
-    .vietnamese {
-      margin: 8px;
-      cursor: pointer;
-
-      &.active {
-        border-bottom: 2.5px solid rgb(181, 213, 255);
-      }
+    .header-tabs-container ul li a:hover {
+        border-left: 6px solid transparent;
     }
 
-    .english {
-      margin: 8px;
-      cursor: pointer;
+    .switch-languages-and-logout {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+        align-items: center;
+        margin-right: 15px;
 
-      &.active {
-        border-bottom: 2.5px solid rgb(181, 213, 255);
-      }
+        .welcome {
+            margin-right: 15px;
+        }
+
+        .vietnamese {
+            margin: 8px;
+            cursor: pointer;
+
+            &.active {
+                border-bottom: 2.5px solid rgb(181, 213, 255);
+            }
+        }
+
+        .english {
+            margin: 8px;
+            cursor: pointer;
+
+            &.active {
+                border-bottom: 2.5px solid rgb(181, 213, 255);
+            }
+        }
+
+        .btn-logout {
+            color: $common-text-color;
+            line-height: 50px;
+            height: 50px;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            /* Căn giữa theo chiều ngang (nếu cần) */
+            align-items: center;
+            /* Căn giữa theo chiều dọc */
+
+            &:hover {
+                background-color: darken($colormain, 5);
+            }
+
+            i {
+                font-size: $base-size + 1px;
+            }
+        }
     }
-
-    .btn-logout {
-      color: $common-text-color;
-      line-height: 50px;
-      height: 50px;
-      padding: 0 20px;
-      display: flex;
-      justify-content: center;
-      /* Căn giữa theo chiều ngang (nếu cần) */
-      align-items: center;
-      /* Căn giữa theo chiều dọc */
-
-      &:hover {
-        background-color: darken($colormain, 5);
-      }
-
-      i {
-        font-size: $base-size + 1px;
-      }
-    }
-  }
 }

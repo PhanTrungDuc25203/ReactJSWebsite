@@ -1,357 +1,357 @@
 .user-display-container {
-  .table-title {
-    margin-top: 20px;
-    margin-bottom: 0px;
-    margin-left: 20px;
-    margin-right: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    .table-title {
+        margin-top: 20px;
+        margin-bottom: 0px;
+        margin-left: 20px;
+        margin-right: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-    .add-new-user-button {
-      font-size: 15px;
-      background-color: #fff !important;
-      color: #0071ba;
-      margin-right: -2px;
-      height: 50px;
-      border: 2px solid #0071ba;
-      width: 125px;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px;
-      border-radius: 5px;
-      transition: background-color 0.3s, color 0.3s;
+        .add-new-user-button {
+            font-size: 15px;
+            background-color: #fff !important;
+            color: #0071ba;
+            margin-right: -2px;
+            height: 50px;
+            border: 2px solid #0071ba;
+            width: 125px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .add-new-user-button i {
+            margin-left: 10px;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        /* Hover effect */
+        .add-new-user-button:hover {
+            background-color: #0071ba !important;
+            /* Đổi nền thành màu xanh khi hover */
+            color: #fff;
+            /* Đổi chữ thành màu trắng khi hover */
+        }
+
+        .add-new-user-button:hover i {
+            color: #fff;
+            /* Đổi màu icon thành trắng khi hover */
+        }
     }
 
-    .add-new-user-button i {
-      margin-left: 10px;
-      font-size: 20px;
-      transition: color 0.3s;
+    .users-display-table {
+        padding: 20px;
+
+        #users {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #users td,
+        #users th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #users tr:nth-child(even) {
+            background-color: #d9d9d9;
+        }
+
+        #users tr:hover {
+            background-color: #a9d6f4;
+        }
+
+        #users th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #0071ba;
+            color: white;
+        }
+
+        .modify-data-button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            // height: 100px;
+            margin: 0 10px;
+            /* Đặt chiều rộng và chiều cao bằng nhau */
+            height: 40px;
+
+            border-radius: 5px;
+        }
+
+        .edit-button {
+            font-size: 20px;
+            border: 2px solid #0071ba;
+            color: #0071ba;
+            transition: background-color 0.3s, color 0.3s;
+            /* Hiệu ứng chuyển đổi màu */
+        }
+
+        .modify-data-button.edit-button:hover {
+            background-color: #0071ba;
+            /* Đổi nền thành màu xanh */
+            color: #fff;
+            /* Đổi chữ thành màu trắng */
+        }
+
+        .delete-button {
+            font-size: 20px;
+            border: 2px solid red;
+            color: red;
+            transition: background-color 0.3s, color 0.3s;
+            /* Hiệu ứng chuyển đổi màu */
+        }
+
+        .modify-data-button.delete-button:hover {
+            background-color: red;
+            /* Đổi nền thành màu xanh */
+            color: #fff;
+            /* Đổi chữ thành màu trắng */
+        }
+
+        .action-column {
+            width: 160px;
+            white-space: nowrap;
+            /* Giữ cho các nút không bị ngắt dòng */
+            text-align: center;
+            /* Căn giữa nội dung bên trong cột */
+            padding: 5px;
+            /* Thêm khoảng cách giữa các nút và biên của cột */
+        }
     }
-
-    /* Hover effect */
-    .add-new-user-button:hover {
-      background-color: #0071ba !important;
-      /* Đổi nền thành màu xanh khi hover */
-      color: #fff;
-      /* Đổi chữ thành màu trắng khi hover */
-    }
-
-    .add-new-user-button:hover i {
-      color: #fff;
-      /* Đổi màu icon thành trắng khi hover */
-    }
-  }
-
-  .users-display-table {
-    padding: 20px;
-
-    #users {
-      font-family: Arial, Helvetica, sans-serif;
-      border-collapse: collapse;
-      width: 100%;
-    }
-
-    #users td,
-    #users th {
-      border: 1px solid #ddd;
-      padding: 8px;
-    }
-
-    #users tr:nth-child(even) {
-      background-color: #d9d9d9;
-    }
-
-    #users tr:hover {
-      background-color: #a9d6f4;
-    }
-
-    #users th {
-      padding-top: 12px;
-      padding-bottom: 12px;
-      text-align: left;
-      background-color: #0071ba;
-      color: white;
-    }
-
-    .modify-data-button {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      width: 60px;
-      // height: 100px;
-      margin: 0 10px;
-      /* Đặt chiều rộng và chiều cao bằng nhau */
-      height: 40px;
-
-      border-radius: 5px;
-    }
-
-    .edit-button {
-      font-size: 20px;
-      border: 2px solid #0071ba;
-      color: #0071ba;
-      transition: background-color 0.3s, color 0.3s;
-      /* Hiệu ứng chuyển đổi màu */
-    }
-
-    .modify-data-button.edit-button:hover {
-      background-color: #0071ba;
-      /* Đổi nền thành màu xanh */
-      color: #fff;
-      /* Đổi chữ thành màu trắng */
-    }
-
-    .delete-button {
-      font-size: 20px;
-      border: 2px solid red;
-      color: red;
-      transition: background-color 0.3s, color 0.3s;
-      /* Hiệu ứng chuyển đổi màu */
-    }
-
-    .modify-data-button.delete-button:hover {
-      background-color: red;
-      /* Đổi nền thành màu xanh */
-      color: #fff;
-      /* Đổi chữ thành màu trắng */
-    }
-
-    .action-column {
-      width: 160px;
-      white-space: nowrap;
-      /* Giữ cho các nút không bị ngắt dòng */
-      text-align: center;
-      /* Căn giữa nội dung bên trong cột */
-      padding: 5px;
-      /* Thêm khoảng cách giữa các nút và biên của cột */
-    }
-  }
 }
 
 .add-new-user-modal {
-  #exampleSelect {
-    cursor: pointer;
-  }
-
-  .modal-header-customize {
-    height: 50px !important;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px !important;
-  }
-
-  .modal-contents-container {
-    padding: 20px;
-    background-color: #f9f9f9;
-    /* Màu nền nhẹ */
-    border-radius: 8px;
-    /* Bo góc cho form */
-    max-width: 850px;
-    /* Giới hạn chiều rộng tối đa */
-    margin: 0 auto;
-
-    /* Căn giữa form */
-    .form-group {
-      margin-bottom: 10px;
-      /* Khoảng cách giữa các form group */
-    }
-
-    .form-group label {
-      font-weight: bold;
-      margin-bottom: 10px;
-      display: block;
-      /* Để nhãn nằm riêng trên dòng */
-    }
-
-    .form-group input {
-      // padding: 10px;
-      // border-radius: 5px;
-      // border: 1px solid #ccc;
-      width: 100%;
-      height: 35px !important;
-    }
-
     #exampleSelect {
-      width: 100%;
+        cursor: pointer;
     }
 
-    .row > [class*="col-"] {
-      padding: 0 15px;
-      /* Khoảng cách giữa các cột */
-    }
-  }
-
-  .custom-modal-footer {
-    margin-left: 38px;
-    margin-right: 38px;
-
-    .buttons-container {
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-end;
-      gap: 15px;
-      padding-bottom: 20px;
-
-      .add-new-user-btn {
+    .modal-header-customize {
+        height: 50px !important;
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        background-color: #fff;
-        color: #0071ba;
-        width: 80px;
-        /* Đặt chiều rộng và chiều cao bằng nhau */
-        height: 40px;
-        border: 2px solid #0071ba;
-        border-radius: 5px;
-        transition: background-color 0.3s, color 0.3s;
-      }
-
-      /* Hover effect */
-      .add-new-user-btn:hover {
-        background-color: #0071ba !important;
-        /* Đổi nền thành màu xanh khi hover */
-        color: #fff;
-        /* Đổi chữ thành màu trắng khi hover */
-      }
-
-      .cancel-btn {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        width: 80px;
-        background-color: white;
-        /* Đặt chiều rộng và chiều cao bằng nhau */
-        height: 40px;
-        border: 2px solid red;
-        color: red;
-        border-radius: 5px;
-        transition: background-color 0.3s, color 0.3s;
-      }
-
-      /* Hover effect */
-      .cancel-btn:hover {
-        background-color: red !important;
-        /* Đổi nền thành màu xanh khi hover */
-        color: #fff;
-        /* Đổi chữ thành màu trắng khi hover */
-      }
+        font-size: 30px !important;
     }
-  }
+
+    .modal-contents-container {
+        padding: 20px;
+        background-color: #f9f9f9;
+        /* Màu nền nhẹ */
+        border-radius: 8px;
+        /* Bo góc cho form */
+        max-width: 850px;
+        /* Giới hạn chiều rộng tối đa */
+        margin: 0 auto;
+
+        /* Căn giữa form */
+        .form-group {
+            margin-bottom: 10px;
+            /* Khoảng cách giữa các form group */
+        }
+
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+            /* Để nhãn nằm riêng trên dòng */
+        }
+
+        .form-group input {
+            // padding: 10px;
+            // border-radius: 5px;
+            // border: 1px solid #ccc;
+            width: 100%;
+            height: 35px !important;
+        }
+
+        #exampleSelect {
+            width: 100%;
+        }
+
+        .row > [class*="col-"] {
+            padding: 0 15px;
+            /* Khoảng cách giữa các cột */
+        }
+    }
+
+    .custom-modal-footer {
+        margin-left: 38px;
+        margin-right: 38px;
+
+        .buttons-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            gap: 15px;
+            padding-bottom: 20px;
+
+            .add-new-user-btn {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #fff;
+                color: #0071ba;
+                width: 80px;
+                /* Đặt chiều rộng và chiều cao bằng nhau */
+                height: 40px;
+                border: 2px solid #0071ba;
+                border-radius: 5px;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+            /* Hover effect */
+            .add-new-user-btn:hover {
+                background-color: #0071ba !important;
+                /* Đổi nền thành màu xanh khi hover */
+                color: #fff;
+                /* Đổi chữ thành màu trắng khi hover */
+            }
+
+            .cancel-btn {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                width: 80px;
+                background-color: white;
+                /* Đặt chiều rộng và chiều cao bằng nhau */
+                height: 40px;
+                border: 2px solid red;
+                color: red;
+                border-radius: 5px;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+            /* Hover effect */
+            .cancel-btn:hover {
+                background-color: red !important;
+                /* Đổi nền thành màu xanh khi hover */
+                color: #fff;
+                /* Đổi chữ thành màu trắng khi hover */
+            }
+        }
+    }
 }
 
 .edit-user-modal {
-  #exampleSelect {
-    cursor: pointer;
-  }
-
-  .modal-header-customize {
-    height: 50px !important;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px !important;
-  }
-
-  .modal-contents-container {
-    padding: 20px;
-    background-color: #f9f9f9;
-    /* Màu nền nhẹ */
-    border-radius: 8px;
-    /* Bo góc cho form */
-    max-width: 850px;
-    /* Giới hạn chiều rộng tối đa */
-    margin: 0 auto;
-
-    /* Căn giữa form */
-    .form-group {
-      margin-bottom: 10px;
-      /* Khoảng cách giữa các form group */
-    }
-
-    .form-group label {
-      font-weight: bold;
-      margin-bottom: 10px;
-      display: block;
-      /* Để nhãn nằm riêng trên dòng */
-    }
-
-    .form-group input {
-      // padding: 10px;
-      // border-radius: 5px;
-      // border: 1px solid #ccc;
-      width: 100%;
-      height: 35px !important;
-    }
-
     #exampleSelect {
-      width: 100%;
+        cursor: pointer;
     }
 
-    .row > [class*="col-"] {
-      padding: 0 15px;
-      /* Khoảng cách giữa các cột */
-    }
-  }
-
-  .custom-modal-footer {
-    margin-left: 38px;
-    margin-right: 38px;
-
-    .buttons-container {
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-end;
-      gap: 15px;
-      padding-bottom: 20px;
-
-      .save-user-btn {
-        font-size: 15px;
-        background-color: #fff !important;
-        color: #0071ba;
-        margin-right: -2px;
-        height: 40px;
-        border: 2px solid #0071ba;
-        width: 120px;
+    .modal-header-customize {
+        height: 50px !important;
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        padding: 10px;
-        border-radius: 5px;
-        transition: background-color 0.3s, color 0.3s;
-      }
-
-      /* Hover effect */
-      .save-user-btn:hover {
-        background-color: #0071ba !important;
-        /* Đổi nền thành màu xanh khi hover */
-        color: #fff;
-        /* Đổi chữ thành màu trắng khi hover */
-      }
-
-      .cancel-btn {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        width: 80px;
-        background-color: white;
-        /* Đặt chiều rộng và chiều cao bằng nhau */
-        height: 40px;
-        border: 2px solid red;
-        color: red;
-        border-radius: 5px;
-        transition: background-color 0.3s, color 0.3s;
-      }
-
-      /* Hover effect */
-      .cancel-btn:hover {
-        background-color: red !important;
-        /* Đổi nền thành màu xanh khi hover */
-        color: #fff;
-        /* Đổi chữ thành màu trắng khi hover */
-      }
+        font-size: 30px !important;
     }
-  }
+
+    .modal-contents-container {
+        padding: 20px;
+        background-color: #f9f9f9;
+        /* Màu nền nhẹ */
+        border-radius: 8px;
+        /* Bo góc cho form */
+        max-width: 850px;
+        /* Giới hạn chiều rộng tối đa */
+        margin: 0 auto;
+
+        /* Căn giữa form */
+        .form-group {
+            margin-bottom: 10px;
+            /* Khoảng cách giữa các form group */
+        }
+
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+            /* Để nhãn nằm riêng trên dòng */
+        }
+
+        .form-group input {
+            // padding: 10px;
+            // border-radius: 5px;
+            // border: 1px solid #ccc;
+            width: 100%;
+            height: 35px !important;
+        }
+
+        #exampleSelect {
+            width: 100%;
+        }
+
+        .row > [class*="col-"] {
+            padding: 0 15px;
+            /* Khoảng cách giữa các cột */
+        }
+    }
+
+    .custom-modal-footer {
+        margin-left: 38px;
+        margin-right: 38px;
+
+        .buttons-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            gap: 15px;
+            padding-bottom: 20px;
+
+            .save-user-btn {
+                font-size: 15px;
+                background-color: #fff !important;
+                color: #0071ba;
+                margin-right: -2px;
+                height: 40px;
+                border: 2px solid #0071ba;
+                width: 120px;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                padding: 10px;
+                border-radius: 5px;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+            /* Hover effect */
+            .save-user-btn:hover {
+                background-color: #0071ba !important;
+                /* Đổi nền thành màu xanh khi hover */
+                color: #fff;
+                /* Đổi chữ thành màu trắng khi hover */
+            }
+
+            .cancel-btn {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                width: 80px;
+                background-color: white;
+                /* Đặt chiều rộng và chiều cao bằng nhau */
+                height: 40px;
+                border: 2px solid red;
+                color: red;
+                border-radius: 5px;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+            /* Hover effect */
+            .cancel-btn:hover {
+                background-color: red !important;
+                /* Đổi nền thành màu xanh khi hover */
+                color: #fff;
+                /* Đổi chữ thành màu trắng khi hover */
+            }
+        }
+    }
 }

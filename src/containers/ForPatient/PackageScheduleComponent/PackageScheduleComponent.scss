@@ -1,317 +1,317 @@
 .package-schedule-component {
-  padding: 20px 85px;
-  border-bottom: 1px solid #0fbcf6;
+    padding: 20px 85px;
+    border-bottom: 1px solid #0fbcf6;
 
-  .avatar-name-and-description {
-    display: flex;
-    gap: 2rem;
-
-    .avatar-css {
-      background-size: cover;
-      height: 100px;
-      aspect-ratio: 1/1;
-      background-position: center;
-      border: 5px solid #c1e9ff;
-      border-radius: 50%;
-      background-repeat: no-repeat;
-    }
-
-    .package-name-and-description {
-      p {
-        strong {
-          color: #0fbcf6;
-          font-weight: 500 !important;
-          font-size: 20px;
-        }
-      }
-
-      ul {
-        li {
-          font-size: 16px;
-        }
-      }
-    }
-  }
-
-  .schedule-and-insurance {
-    .detail-informations {
-      display: flex;
-
-      .price {
-        width: 50%;
-      }
-
-      .insurance {
-        width: 50%;
-      }
-    }
-
-    .schedule {
-      width: 100%;
-
-      .available-day {
-        .available-day-selection {
-          border: none;
-          border-bottom: 2px solid #0fbcf6;
-          color: #0fbcf6;
-          font-weight: bold;
-          font-size: 17px;
-          background-color: transparent;
-          padding: 10px 0 10px 0;
-          cursor: pointer;
-        }
-
-        .available-day-selection:focus {
-          outline: none;
-          border-bottom: 2px solid #0fbcf6;
-        }
-
-        .available-day-selection:hover {
-          border-bottom: 4px solid #0fbcf6;
-          padding: 10px 0 8px 0;
-        }
-      }
-
-      .available-timeframe {
-        margin: 10px 0 10px 0;
-
-        .section-title {
-          font-size: 17px;
-
-          .calendar-icon {
-            margin: 0 8px 0 0;
-            color: #0fbcf6;
-          }
-        }
-
-        .timeframe-selection {
-          .timeframe-button {
-            font-size: 14px;
-            height: 40px;
-            width: 145px;
-            margin: 10px 12px 10px 0;
-            background-color: white;
-            border: 2px solid #0fbcf6;
-            color: #0fbcf6;
-            transition: all 0.3s;
-            border-radius: 7px;
-          }
-
-          .timeframe-button:hover {
-            color: white;
-            background-color: #0fbcf6;
-          }
-
-          .sorry-text-because-noavailable-timeframe {
-            font-size: 17px;
-            margin: 20px 20px 20px 0;
-            font-style: italic;
-          }
-        }
-      }
-    }
-
-    .examination-price-sct2 {
-      margin-top: 14px;
-      padding-bottom: 12px;
-
-      &.css-for-less-content {
+    .avatar-name-and-description {
         display: flex;
-        text-align: center;
-        align-items: center;
-      }
+        gap: 2rem;
 
-      .sct2-title {
-        color: #0fbcf6;
-        font-size: 17px;
-        background-color: transparent;
-
-        .money-check-icon {
-          font-size: 18px;
-          margin-right: 5px;
-        }
-      }
-
-      .examination-price {
-        font-size: 17px;
-        margin-left: 5px;
-      }
-
-      .price-detail {
-        width: 524px;
-        margin: 5px 0 0 25px;
-        font-size: 16px;
-
-        .price-in-detail {
-          border: 1px solid rgb(224, 238, 255);
-          background-color: rgb(245, 250, 255);
-          height: auto;
-          width: 100%;
-          display: flex;
-          justify-content: space-between;
-          text-align: center;
-          align-items: center;
-          padding: 10px 5px;
+        .avatar-css {
+            background-size: cover;
+            height: 100px;
+            aspect-ratio: 1/1;
+            background-position: center;
+            border: 5px solid #c1e9ff;
+            border-radius: 50%;
+            background-repeat: no-repeat;
         }
 
-        .sale-method {
-          border: 1px solid rgb(224, 238, 255);
-          background-color: rgb(251, 253, 255);
-          height: auto;
-          width: 100%;
-          padding: 10px 5px;
+        .package-name-and-description {
+            p {
+                strong {
+                    color: #0fbcf6;
+                    font-weight: 500 !important;
+                    font-size: 20px;
+                }
+            }
+
+            ul {
+                li {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+
+    .schedule-and-insurance {
+        .detail-informations {
+            display: flex;
+
+            .price {
+                width: 50%;
+            }
+
+            .insurance {
+                width: 50%;
+            }
         }
 
-        .payment-method {
-          border: 1px solid rgb(224, 238, 255);
-          background-color: rgb(245, 250, 255);
-          height: auto;
-          width: 100%;
-          padding: 10px 5px;
-        }
-      }
+        .schedule {
+            width: 100%;
 
-      .less-button {
-        // position        : absolute;
-        // right           : 0;
-        // bottom          : 0;
-        width: fit-content;
-        float: right;
-        height: 30px;
-        text-decoration: none;
-        background-color: white;
-        border: none;
-        color: black;
-        font-size: 16px;
-        padding: 5px 0;
-        transition: color 0.2s;
-      }
+            .available-day {
+                .available-day-selection {
+                    border: none;
+                    border-bottom: 2px solid #0fbcf6;
+                    color: #0fbcf6;
+                    font-weight: bold;
+                    font-size: 17px;
+                    background-color: transparent;
+                    padding: 10px 0 10px 0;
+                    cursor: pointer;
+                }
 
-      .less-button:hover {
-        color: #0fbcf6;
-      }
-    }
+                .available-day-selection:focus {
+                    outline: none;
+                    border-bottom: 2px solid #0fbcf6;
+                }
 
-    .more-button {
-      text-decoration: none;
-      background-color: white;
-      border: none;
-      color: black;
-      font-size: 17px;
-      margin: 0 0 2px 10px;
-      padding: 0px;
-      height: 23px;
-      transition: color 0.2s;
-      z-index: none;
-    }
+                .available-day-selection:hover {
+                    border-bottom: 4px solid #0fbcf6;
+                    padding: 10px 0 8px 0;
+                }
+            }
 
-    .more-button:hover {
-      color: #0fbcf6;
-    }
-  }
+            .available-timeframe {
+                margin: 10px 0 10px 0;
 
-  .insurance-sct3 {
-    margin-top: 14px;
-    padding-bottom: 10px;
+                .section-title {
+                    font-size: 17px;
 
-    &.css-for-less-content {
-      display: flex;
-      text-align: center;
-      align-items: center;
-    }
+                    .calendar-icon {
+                        margin: 0 8px 0 0;
+                        color: #0fbcf6;
+                    }
+                }
 
-    .sct3-title {
-      color: #0fbcf6;
-      font-size: 17px;
-      background-color: transparent;
+                .timeframe-selection {
+                    .timeframe-button {
+                        font-size: 14px;
+                        height: 40px;
+                        width: 145px;
+                        margin: 10px 12px 10px 0;
+                        background-color: white;
+                        border: 2px solid #0fbcf6;
+                        color: #0fbcf6;
+                        transition: all 0.3s;
+                        border-radius: 7px;
+                    }
 
-      .insurance-icon {
-        font-size: 18px;
-        margin-right: 3px;
-      }
-    }
+                    .timeframe-button:hover {
+                        color: white;
+                        background-color: #0fbcf6;
+                    }
 
-    .insurance-detail {
-      width: 524px;
-      margin: 5px 0 0 25px;
-      font-size: 16px;
-
-      .insurance-type-1 {
-        border: 1px solid rgb(224, 238, 255);
-        background-color: rgb(245, 250, 255);
-        height: auto;
-        width: 100%;
-        padding: 10px 5px;
-
-        .section-content {
-          font-size: 13px;
-        }
-      }
-
-      .insurance-type-2 {
-        border: 1px solid rgb(224, 238, 255);
-        background-color: rgb(251, 253, 255);
-        height: auto;
-        width: 100%;
-        padding: 10px 5px;
-
-        .section-content {
-          font-size: 13px;
-        }
-      }
-
-      .more-insurance-type {
-        border: 1px solid rgb(224, 238, 255);
-        background-color: rgb(245, 250, 255);
-        height: auto;
-        width: 100%;
-        padding: 10px 5px;
-
-        a {
-          border: none;
-          cursor: pointer;
-          color: black;
-          transition: color 0.3s;
+                    .sorry-text-because-noavailable-timeframe {
+                        font-size: 17px;
+                        margin: 20px 20px 20px 0;
+                        font-style: italic;
+                    }
+                }
+            }
         }
 
-        a:hover {
-          color: #0fbcf6;
+        .examination-price-sct2 {
+            margin-top: 14px;
+            padding-bottom: 12px;
+
+            &.css-for-less-content {
+                display: flex;
+                text-align: center;
+                align-items: center;
+            }
+
+            .sct2-title {
+                color: #0fbcf6;
+                font-size: 17px;
+                background-color: transparent;
+
+                .money-check-icon {
+                    font-size: 18px;
+                    margin-right: 5px;
+                }
+            }
+
+            .examination-price {
+                font-size: 17px;
+                margin-left: 5px;
+            }
+
+            .price-detail {
+                width: 524px;
+                margin: 5px 0 0 25px;
+                font-size: 16px;
+
+                .price-in-detail {
+                    border: 1px solid rgb(224, 238, 255);
+                    background-color: rgb(245, 250, 255);
+                    height: auto;
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    text-align: center;
+                    align-items: center;
+                    padding: 10px 5px;
+                }
+
+                .sale-method {
+                    border: 1px solid rgb(224, 238, 255);
+                    background-color: rgb(251, 253, 255);
+                    height: auto;
+                    width: 100%;
+                    padding: 10px 5px;
+                }
+
+                .payment-method {
+                    border: 1px solid rgb(224, 238, 255);
+                    background-color: rgb(245, 250, 255);
+                    height: auto;
+                    width: 100%;
+                    padding: 10px 5px;
+                }
+            }
+
+            .less-button {
+                // position        : absolute;
+                // right           : 0;
+                // bottom          : 0;
+                width: fit-content;
+                float: right;
+                height: 30px;
+                text-decoration: none;
+                background-color: white;
+                border: none;
+                color: black;
+                font-size: 16px;
+                padding: 5px 0;
+                transition: color 0.2s;
+            }
+
+            .less-button:hover {
+                color: #0fbcf6;
+            }
         }
-      }
 
-      .less-button {
-        width: fit-content;
-        float: right;
-        height: 30px;
-        text-decoration: none;
-        background-color: white;
-        border: none;
-        color: black;
-        font-size: 16px;
-        padding: 5px 0;
-        margin: 5px 0 5px 0;
-        transition: color 0.2s;
-      }
+        .more-button {
+            text-decoration: none;
+            background-color: white;
+            border: none;
+            color: black;
+            font-size: 17px;
+            margin: 0 0 2px 10px;
+            padding: 0px;
+            height: 23px;
+            transition: color 0.2s;
+            z-index: none;
+        }
 
-      .less-button:hover {
-        color: #0fbcf6;
-      }
+        .more-button:hover {
+            color: #0fbcf6;
+        }
     }
 
-    .more-button {
-      text-decoration: none;
-      background-color: white;
-      border: none;
-      color: black;
-      font-size: 17px;
-      margin: 0 0 2px 10px;
-      padding: 0px;
-      height: 23px;
-      transition: color 0.2s;
-    }
+    .insurance-sct3 {
+        margin-top: 14px;
+        padding-bottom: 10px;
 
-    .more-button:hover {
-      color: #0fbcf6;
+        &.css-for-less-content {
+            display: flex;
+            text-align: center;
+            align-items: center;
+        }
+
+        .sct3-title {
+            color: #0fbcf6;
+            font-size: 17px;
+            background-color: transparent;
+
+            .insurance-icon {
+                font-size: 18px;
+                margin-right: 3px;
+            }
+        }
+
+        .insurance-detail {
+            width: 524px;
+            margin: 5px 0 0 25px;
+            font-size: 16px;
+
+            .insurance-type-1 {
+                border: 1px solid rgb(224, 238, 255);
+                background-color: rgb(245, 250, 255);
+                height: auto;
+                width: 100%;
+                padding: 10px 5px;
+
+                .section-content {
+                    font-size: 13px;
+                }
+            }
+
+            .insurance-type-2 {
+                border: 1px solid rgb(224, 238, 255);
+                background-color: rgb(251, 253, 255);
+                height: auto;
+                width: 100%;
+                padding: 10px 5px;
+
+                .section-content {
+                    font-size: 13px;
+                }
+            }
+
+            .more-insurance-type {
+                border: 1px solid rgb(224, 238, 255);
+                background-color: rgb(245, 250, 255);
+                height: auto;
+                width: 100%;
+                padding: 10px 5px;
+
+                a {
+                    border: none;
+                    cursor: pointer;
+                    color: black;
+                    transition: color 0.3s;
+                }
+
+                a:hover {
+                    color: #0fbcf6;
+                }
+            }
+
+            .less-button {
+                width: fit-content;
+                float: right;
+                height: 30px;
+                text-decoration: none;
+                background-color: white;
+                border: none;
+                color: black;
+                font-size: 16px;
+                padding: 5px 0;
+                margin: 5px 0 5px 0;
+                transition: color 0.2s;
+            }
+
+            .less-button:hover {
+                color: #0fbcf6;
+            }
+        }
+
+        .more-button {
+            text-decoration: none;
+            background-color: white;
+            border: none;
+            color: black;
+            font-size: 17px;
+            margin: 0 0 2px 10px;
+            padding: 0px;
+            height: 23px;
+            transition: color 0.2s;
+        }
+
+        .more-button:hover {
+            color: #0fbcf6;
+        }
     }
-  }
 }
