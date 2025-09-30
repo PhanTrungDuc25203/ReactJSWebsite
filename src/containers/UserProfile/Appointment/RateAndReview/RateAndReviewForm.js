@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { saveRateAndReviewAboutDoctorOrPackageService } from "../../../../services/userService";
+import { saveRateAndReviewAboutDoctorOrPackageService, getRateAndReviewAboutDoctorService } from "../../../../services/userService";
 
 class RateAndReviewModal extends Component {
     constructor(props) {
@@ -10,8 +10,50 @@ class RateAndReviewModal extends Component {
             appointmentId: props.appointmentData?.appointmentId || "",
             rating: 5,
             content: "",
-            images: [], // array of File
+            images: [],
         };
+    }
+
+    async componentDidMount() {
+        const appointmentId = this.props.appointmentData?.appointmentId;
+        if (!appointmentId) return;
+
+        try {
+            const res = await getRateAndReviewAboutDoctorService(appointmentId);
+
+            if (res?.errCode === 0 && res.data) {
+                let { userEmail, doctorEmail, appointmentId, rating, content, images } = res.data;
+
+                // Parse images nếu nó là string
+                let parsedImages = [];
+                try {
+                    if (typeof images === "string") {
+                        parsedImages = JSON.parse(images); // parse thành array
+                    } else if (Array.isArray(images)) {
+                        parsedImages = images;
+                    }
+                } catch (e) {
+                    console.error("Error parsing images:", e);
+                    parsedImages = [];
+                }
+
+                this.setState({
+                    userEmail: userEmail || "",
+                    doctorEmail: doctorEmail || "",
+                    appointmentId: appointmentId || "",
+                    rating: rating || 5,
+                    content: content || "",
+                    images: parsedImages.map((img) => ({
+                        previewUrl: img.image, // base64 hoặc link
+                        file: null,
+                        name: img.name || "",
+                        mimeType: img.mimeType || "image/png",
+                    })),
+                });
+            }
+        } catch (error) {
+            console.error("Error in componentDidMount:", error);
+        }
     }
 
     handleInputChange = (event, field) => {
@@ -25,7 +67,16 @@ class RateAndReviewModal extends Component {
     handleImageChange = (e) => {
         const files = Array.from(e.target.files);
         this.setState((prevState) => {
-            const newImages = [...prevState.images, ...files].slice(0, 4);
+            const newImages = [
+                ...prevState.images,
+                ...files.map((file) => ({
+                    previewUrl: URL.createObjectURL(file),
+                    file,
+                    name: file.name,
+                    mimeType: file.type,
+                })),
+            ].slice(0, 4);
+
             return { images: newImages };
         });
     };
@@ -49,12 +100,19 @@ class RateAndReviewModal extends Component {
 
     handleSubmit = async () => {
         const imageData = await Promise.all(
-            this.state.images.map(async (file) => {
-                const base64 = await this.fileToBase64(file);
+            this.state.images.map(async (img) => {
+                if (img.file) {
+                    const base64 = await this.fileToBase64(img.file);
+                    return {
+                        image: base64,
+                        mimeType: img.file.type,
+                        name: img.file.name,
+                    };
+                }
                 return {
-                    image: base64, // gửi base64 string
-                    mimeType: file.type,
-                    name: file.name,
+                    image: img.previewUrl,
+                    mimeType: img.mimeType,
+                    name: img.name,
                 };
             })
         );
@@ -65,21 +123,18 @@ class RateAndReviewModal extends Component {
             appointmentId: this.state.appointmentId,
             rating: this.state.rating,
             content: this.state.content,
-            images: imageData, // mảng ảnh
+            images: imageData,
         };
 
-        console.log("Review data to save DB:", rateAndReviewData);
-        // TODO: fetch POST API gửi reviewData
         try {
             let response = await saveRateAndReviewAboutDoctorOrPackageService(rateAndReviewData);
-
             if (response && response.errCode === 0) {
-                // toast.success("Schedule saved successfully!");
+                // toast.success("Lưu đánh giá thành công!");
             } else {
-                // toast.error(response.errMessage || "Failed to save schedule!");
+                // toast.error(response.errMessage || "Không thể lưu đánh giá!");
             }
         } catch (error) {
-            // toast.error("An error occurred while saving the schedule!");
+            // toast.error("Có lỗi khi lưu đánh giá!");
         }
 
         this.props.toggleUserModal();
@@ -92,7 +147,7 @@ class RateAndReviewModal extends Component {
             <div className="custom-modal-overlay">
                 <div className="custom-modal">
                     <div className="custom-modal-body">
-                        {/* Rating */}
+                        {/* Rating giữ nguyên kiểu dài */}
                         <div className="form-group rating">
                             <div className="feedback">
                                 <label className="angry">
@@ -153,13 +208,13 @@ class RateAndReviewModal extends Component {
                                     </div>
                                 </label>
 
-                                {/* SVG symbol definitions */}
+                                {/* SVG symbol defs */}
                                 <svg xmlns="http://www.w3.org/2000/svg" style={{ display: "none" }}>
                                     <symbol viewBox="0 0 7 4" id="eye">
-                                        <path d="M1,1 C1.83333333,2.16666667 2.66666667,2.75 3.5,2.75 C4.33333333,2.75 5.16666667,2.16666667 6,1"></path>
+                                        <path d="M1,1 C1.8333,2.1667 2.6667,2.75 3.5,2.75 C4.3333,2.75 5.1667,2.1667 6,1"></path>
                                     </symbol>
                                     <symbol viewBox="0 0 18 7" id="mouth">
-                                        <path d="M1,5.5 C3.66666667,2.5 6.33333333,1 9,1 C11.6666667,1 14.3333333,2.5 17,5.5"></path>
+                                        <path d="M1,5.5 C3.6667,2.5 6.3333,1 9,1 C11.6667,1 14.3333,2.5 17,5.5"></path>
                                     </symbol>
                                 </svg>
                             </div>
@@ -173,11 +228,11 @@ class RateAndReviewModal extends Component {
 
                         {/* Upload ảnh */}
                         <div className="form-group image-upload">
-                            <label>Hình ảnh (tùy chọn, tối đa 3 ảnh)</label>
+                            <label>Hình ảnh (tùy chọn, tối đa 4 ảnh)</label>
                             <div className="image-preview-container">
                                 {this.state.images.map((img, index) => (
                                     <div key={index} className="image-preview">
-                                        <img src={URL.createObjectURL(img)} alt={`preview-${index}`} />
+                                        <img src={img.previewUrl} alt={`preview-${index}`} />
                                         <button type="button" className="remove-btn" onClick={() => this.handleRemoveImage(index)}>
                                             &times;
                                         </button>

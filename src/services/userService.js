@@ -167,6 +167,10 @@ const saveRateAndReviewAboutDoctorOrPackageService = (rateAndReviewData) => {
     return axios.post(`/api/save-rate-and-review-about-doctor`, rateAndReviewData);
 };
 
+const getRateAndReviewAboutDoctorService = (appointmentId) => {
+    return axios.get(`/api/get-rate-and-review-about-doctor?appointmentId=${appointmentId}`);
+};
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -202,4 +206,5 @@ export {
     patientInforWhenBookingExamPackage,
     getAppointmentHistoriesByPatientEmail,
     saveRateAndReviewAboutDoctorOrPackageService,
+    getRateAndReviewAboutDoctorService,
 };
