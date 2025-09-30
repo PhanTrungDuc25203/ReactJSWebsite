@@ -163,6 +163,10 @@ const getPackageScheduleByDateService = (packageId, date) => {
     return axios.get(`/api/get-package-schedule-by-date?packageId=${packageId}&date=${date}`);
 };
 
+const saveRateAndReviewAboutDoctorOrPackageService = (rateAndReviewData) => {
+    return axios.post(`/api/save-rate-and-review-about-doctor`, rateAndReviewData);
+};
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -197,4 +201,5 @@ export {
     getPackageScheduleByDateService,
     patientInforWhenBookingExamPackage,
     getAppointmentHistoriesByPatientEmail,
+    saveRateAndReviewAboutDoctorOrPackageService,
 };

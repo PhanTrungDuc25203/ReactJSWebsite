@@ -59,8 +59,6 @@ class HistoryOfPatientAppointment extends Component {
 
     render() {
         let { appointmentHistory, isOpenReviewModal, selectedAppointment } = this.state;
-        console.log("Check state: ", appointmentHistory);
-        console.log("Check props: ", this.props);
         return (
             <div className="patient-appointment-history-container">
                 {appointmentHistory && appointmentHistory.length > 0 ? (
@@ -90,14 +88,7 @@ class HistoryOfPatientAppointment extends Component {
                                         <FontAwesomeIcon icon={faCommentDots} className="edit-icon" /> Nhận xét về dịch vụ
                                     </button>
                                 )}
-                                {isOpenReviewModal && (
-                                    <RateAndReviewForm
-                                        isOpen={isOpenReviewModal}
-                                        toggleUserModal={this.toggleReviewModal}
-                                        appointmentData={selectedAppointment}
-                                        currentUserId={this.props.currentUserId} // truyền userId từ redux/props
-                                    />
-                                )}
+                                {isOpenReviewModal && <RateAndReviewForm isOpen={isOpenReviewModal} toggleUserModal={this.toggleReviewModal} appointmentData={selectedAppointment} userEmail={this.props.userEmail} doctorEmail={appointment.doctorEmail} />}
                             </div>
                         </div>
                     ))
@@ -112,6 +103,7 @@ class HistoryOfPatientAppointment extends Component {
 const mapStateToProps = (state) => {
     return {
         language: state.app.language,
+        userEmail: state.user.userInfo.email,
     };
 };
 

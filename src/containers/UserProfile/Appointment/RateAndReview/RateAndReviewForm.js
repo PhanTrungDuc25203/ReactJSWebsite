@@ -1,16 +1,16 @@
 import React, { Component } from "react";
+import { saveRateAndReviewAboutDoctorOrPackageService } from "../../../../services/userService";
 
 class RateAndReviewModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userId: props.currentUserId || "",
-            doctorId: props.appointmentData?.doctorId || "",
-            packageId: props.appointmentData?.packageId || "",
+            userEmail: props.userEmail || "",
+            doctorEmail: props.doctorEmail || "",
             appointmentId: props.appointmentData?.appointmentId || "",
             rating: 5,
             content: "",
-            images: [], // chỉ dùng mảng images, không tách image/mimeType nữa
+            images: [], // array of File
         };
     }
 
@@ -18,11 +18,16 @@ class RateAndReviewModal extends Component {
         this.setState({ [field]: event.target.value });
     };
 
+    handleRatingChange = (event) => {
+        this.setState({ rating: parseInt(event.target.value, 10) });
+    };
+
     handleImageChange = (e) => {
         const files = Array.from(e.target.files);
-        this.setState((prevState) => ({
-            images: [...prevState.images, ...files],
-        }));
+        this.setState((prevState) => {
+            const newImages = [...prevState.images, ...files].slice(0, 4);
+            return { images: newImages };
+        });
     };
 
     handleRemoveImage = (index) => {
@@ -33,14 +38,55 @@ class RateAndReviewModal extends Component {
         });
     };
 
-    handleSubmit = () => {
-        console.log("Review data:", this.state);
-        // TODO: Gọi API lưu review
+    fileToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (err) => reject(err);
+        });
+    };
+
+    handleSubmit = async () => {
+        const imageData = await Promise.all(
+            this.state.images.map(async (file) => {
+                const base64 = await this.fileToBase64(file);
+                return {
+                    image: base64, // gửi base64 string
+                    mimeType: file.type,
+                    name: file.name,
+                };
+            })
+        );
+
+        const rateAndReviewData = {
+            userEmail: this.state.userEmail,
+            doctorEmail: this.state.doctorEmail,
+            appointmentId: this.state.appointmentId,
+            rating: this.state.rating,
+            content: this.state.content,
+            images: imageData, // mảng ảnh
+        };
+
+        console.log("Review data to save DB:", rateAndReviewData);
+        // TODO: fetch POST API gửi reviewData
+        try {
+            let response = await saveRateAndReviewAboutDoctorOrPackageService(rateAndReviewData);
+
+            if (response && response.errCode === 0) {
+                // toast.success("Schedule saved successfully!");
+            } else {
+                // toast.error(response.errMessage || "Failed to save schedule!");
+            }
+        } catch (error) {
+            // toast.error("An error occurred while saving the schedule!");
+        }
+
         this.props.toggleUserModal();
     };
 
     render() {
-        if (!this.props.isOpen) return null; // nếu modal đóng thì không render
+        if (!this.props.isOpen) return null;
 
         return (
             <div className="custom-modal-overlay">
@@ -50,7 +96,7 @@ class RateAndReviewModal extends Component {
                         <div className="form-group rating">
                             <div className="feedback">
                                 <label className="angry">
-                                    <input type="radio" value="1" name="feedback" />
+                                    <input type="radio" value="1" name="feedback" checked={this.state.rating === 1} onChange={this.handleRatingChange} />
                                     <div>
                                         <svg className="eye left">
                                             <use xlinkHref="#eye" />
@@ -64,7 +110,7 @@ class RateAndReviewModal extends Component {
                                     </div>
                                 </label>
                                 <label className="sad">
-                                    <input type="radio" value="2" name="feedback" />
+                                    <input type="radio" value="2" name="feedback" checked={this.state.rating === 2} onChange={this.handleRatingChange} />
                                     <div>
                                         <svg className="eye left">
                                             <use xlinkHref="#eye" />
@@ -78,11 +124,11 @@ class RateAndReviewModal extends Component {
                                     </div>
                                 </label>
                                 <label className="ok">
-                                    <input type="radio" value="3" name="feedback" />
+                                    <input type="radio" value="3" name="feedback" checked={this.state.rating === 3} onChange={this.handleRatingChange} />
                                     <div></div>
                                 </label>
                                 <label className="good">
-                                    <input type="radio" value="4" name="feedback" defaultChecked />
+                                    <input type="radio" value="4" name="feedback" checked={this.state.rating === 4} onChange={this.handleRatingChange} />
                                     <div>
                                         <svg className="eye left">
                                             <use xlinkHref="#eye" />
@@ -96,7 +142,7 @@ class RateAndReviewModal extends Component {
                                     </div>
                                 </label>
                                 <label className="happy">
-                                    <input type="radio" value="5" name="feedback" />
+                                    <input type="radio" value="5" name="feedback" checked={this.state.rating === 5} onChange={this.handleRatingChange} />
                                     <div>
                                         <svg className="eye left">
                                             <use xlinkHref="#eye" />
@@ -129,9 +175,6 @@ class RateAndReviewModal extends Component {
                         <div className="form-group image-upload">
                             <label>Hình ảnh (tùy chọn, tối đa 3 ảnh)</label>
                             <div className="image-preview-container">
-                                {/* Ô add hình ảnh */}
-
-                                {/* Hiển thị preview các hình ảnh */}
                                 {this.state.images.map((img, index) => (
                                     <div key={index} className="image-preview">
                                         <img src={URL.createObjectURL(img)} alt={`preview-${index}`} />
@@ -140,10 +183,12 @@ class RateAndReviewModal extends Component {
                                         </button>
                                     </div>
                                 ))}
-                                <label className="image-upload-box">
-                                    <input type="file" accept="image/*" multiple onChange={this.handleImageChange} style={{ display: "none" }} />
-                                    <i className="fa fa-camera" aria-hidden="true"></i>
-                                </label>
+                                {this.state.images.length < 4 && (
+                                    <label className="image-upload-box">
+                                        <input type="file" accept="image/*" multiple onChange={this.handleImageChange} style={{ display: "none" }} />
+                                        <i className="fa fa-camera" aria-hidden="true"></i>
+                                    </label>
+                                )}
                             </div>
                         </div>
                     </div>
