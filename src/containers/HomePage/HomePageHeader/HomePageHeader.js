@@ -55,6 +55,14 @@ class HomePageHeader extends Component {
         }
     };
 
+    handleAppointmentSheduleClicked = (loginState) => {
+        if (!this.props.userInfo || !this.props.userInfo.email) {
+            this.props.history.push(`/login`);
+        } else {
+            this.props.history.push(`${path.APPOINTMENT_SCHEDULE_PAGE}`);
+        }
+    };
+
     handleOnChangeSearchInput = (event) => {
         this.setState({
             searchTerm: event.target.value,
@@ -137,7 +145,7 @@ class HomePageHeader extends Component {
                             </div>
                         </div>
                         <div className="right-contents">
-                            <div className="header-booking-section">
+                            <div className="header-booking-section" onClick={(isLoggedIn) => this.handleAppointmentSheduleClicked(this.props.isLoggedIn)}>
                                 <i className="far fa-clock"></i>
                                 <div className="header-right-section-title title-1">
                                     <FormattedMessage id="home-page-header.appointment" />

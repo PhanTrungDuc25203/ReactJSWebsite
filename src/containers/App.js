@@ -30,6 +30,7 @@ import AllMedicalFacilities from "./ForPatient/DetailMedicalFacility/AllMedicalF
 import HealthCheck from "./ForPatient/HealthCheck/HealthCheck.js";
 import GeneralExam from "./ForPatient/GeneralExam/GeneralExam.js";
 import SearchPage from "./ForPatient/SeachPage/SearchPage.js";
+import SchedulePage from "./SchedulePage/SchedulePage.js";
 
 class App extends Component {
     handlePersistorState = () => {
@@ -85,6 +86,8 @@ class App extends Component {
                                 <Route path={path.ALL_SPECIALTIES} component={AllSpecialties} />
                                 {/* trang tim kiem */}
                                 <Route path={path.SEARCH_PAGE} component={SearchPage} />
+                                {/* Trang xem lịch khám bằng thời gian biểu */}
+                                <Route path={path.APPOINTMENT_SCHEDULE_PAGE} component={SchedulePage} />
                                 {/* trang xem chi tiết tất cả bệnh viện, cơ sở y tế */}
                                 <Route path={path.ALL_MEDICAL_FACILITIES} component={AllMedicalFacilities} />
                                 <Route path={path.HEALTH_CHECK_PAGE} component={HealthCheck} />
