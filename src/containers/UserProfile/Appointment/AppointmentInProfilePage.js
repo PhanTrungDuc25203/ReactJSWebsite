@@ -71,6 +71,7 @@ class AppointmentInProfilePage extends PureComponent {
                                                 meetPatientId={item.patientId}
                                                 appointmentDate={moment(item.date).format("DD-MM-YYYY")}
                                                 appointmentTimeFrame={item.appointmentTimeTypeData?.value_Vie}
+                                                examReason={item.examReason}
                                                 patientBirthday={moment(item.patientBirthday).format("DD-MM-YYYY")}
                                             />
                                         ) : (

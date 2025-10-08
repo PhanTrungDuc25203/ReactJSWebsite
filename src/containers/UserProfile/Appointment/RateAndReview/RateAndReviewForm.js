@@ -24,11 +24,10 @@ class RateAndReviewModal extends Component {
             if (res?.errCode === 0 && res.data) {
                 let { userEmail, doctorEmail, appointmentId, rating, content, images } = res.data;
 
-                // Parse images nếu nó là string
                 let parsedImages = [];
                 try {
                     if (typeof images === "string") {
-                        parsedImages = JSON.parse(images); // parse thành array
+                        parsedImages = JSON.parse(images);
                     } else if (Array.isArray(images)) {
                         parsedImages = images;
                     }
@@ -44,7 +43,7 @@ class RateAndReviewModal extends Component {
                     rating: rating || 5,
                     content: content || "",
                     images: parsedImages.map((img) => ({
-                        previewUrl: img.image, // base64 hoặc link
+                        previewUrl: img.image,
                         file: null,
                         name: img.name || "",
                         mimeType: img.mimeType || "image/png",
