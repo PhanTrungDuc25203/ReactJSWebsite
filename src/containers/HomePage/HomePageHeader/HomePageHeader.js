@@ -333,6 +333,7 @@ class HomePageHeader extends Component {
                             <div className={language === LANGUAGES.EN ? "english-option active" : "english-option"} onClick={() => this.switchLanguageOfWebsite(LANGUAGES.EN)}></div>
                         </div>
                     </div>
+                    <div className="overlay"></div>
                 </div>
             </React.Fragment>
         );
