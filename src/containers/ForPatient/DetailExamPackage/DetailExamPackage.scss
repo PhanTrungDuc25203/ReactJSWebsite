@@ -1,11 +1,9 @@
-.package-schedule-component {
-    padding: 20px 85px;
-    border-bottom: 1px solid #0fbcf6;
-
+.detail-exam-package-container {
+    padding: 60px 5.5% 20px 5.5%;
     .avatar-name-and-description {
         display: flex;
         gap: 2rem;
-
+        margin-bottom: 30px;
         .avatar-css {
             background-size: cover;
             height: 100px;
@@ -17,7 +15,6 @@
         }
 
         .package-name-and-description {
-            cursor: pointer;
             p {
                 strong {
                     color: #0fbcf6;
@@ -28,6 +25,17 @@
 
             ul {
                 li {
+                    font-size: 16px;
+                }
+            }
+            .exam-package-location {
+                display: flex;
+                .location-icon {
+                    color: #0fbcf6;
+                    margin: 0 10px 0 0;
+                    font-size: 20px;
+                }
+                .location {
                     font-size: 16px;
                 }
             }
@@ -313,6 +321,133 @@
 
         .more-button:hover {
             color: #0fbcf6;
+        }
+    }
+
+    .exam-package-description {
+        margin: 40px 0;
+        p {
+            font-size: 17px;
+
+            strong {
+                color: #0fbcf6;
+                font-size: 20px;
+                border-bottom: 1.5px solid #0fbcf6;
+                border-left: 1.5px solid #0fbcf6;
+                border-right: 1.5px solid #e6f9ff;
+                border-top: 1.5px solid #e6f9ff;
+                background-color: #e6f9ff;
+                // margin: 0;
+                padding: 0 10px 0 10px;
+                display: inline-block;
+                border-radius: 10px;
+            }
+
+            strong::before {
+                content: "\f48e";
+                font-family: "Font Awesome 5 Free";
+                font-size: 18px;
+                margin: 0 7px 0 0;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+                overflow: hidden;
+                margin: 20px 0 0 0;
+                border-radius: 20px;
+            }
+        }
+
+        ul {
+            li {
+                font-size: 16px;
+            }
+        }
+    }
+    .exam-package-category {
+        margin: 40px 0;
+        border: 1px solid #dcdcdc;
+        border-radius: 6px;
+        overflow: hidden;
+        font-family: "Roboto", sans-serif;
+
+        p {
+            margin-bottom: 0 !important;
+        }
+
+        .section-title {
+            background-color: #5dc3da;
+            color: #fff;
+            font-weight: 700;
+            text-align: center;
+            padding: 10px;
+            font-size: 20px;
+            border-bottom: 2px solid #adf0f9;
+        }
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            counter-reset: section; // reset counter mỗi danh mục
+
+            li {
+                margin: 0;
+                padding: 0;
+
+                // các <li> có <strong> là tiêu đề con
+                p > strong {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    font-size: 16px;
+                    padding: 6px 10px;
+                    font-weight: 600;
+                    background-color: rgb(226, 252, 255);
+                    counter-increment: section;
+
+                    &::before {
+                        content: counter(section) ".";
+                        font-weight: 700;
+                        min-width: 20px;
+                    }
+
+                    // xen kẽ màu nền theo thứ tự số
+                    &:nth-of-type(odd) {
+                        background-color: rgb(246, 254, 255);
+                    }
+                    &:nth-of-type(even) {
+                        background-color: white;
+                    }
+                }
+
+                p {
+                    margin-bottom: 0 !important;
+                }
+
+                // đoạn mô tả sau tiêu đề
+                p:not(:has(strong)) {
+                    margin-left: 34px; // lùi để căn thẳng với text tiêu đề
+                    padding: 4px 10px;
+                    font-size: 16px;
+                    background-color: white;
+                    border-left: 2px solid #c8edef;
+                }
+            }
+        }
+
+        // tiêu đề lớn (ví dụ Khám lâm sàng, Cận lâm sàng...)
+        p > strong {
+            display: block;
+            background-color: #c1f7fe;
+            padding: 8px 10px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .exam-package-introduction-html {
+            padding: 0;
+            margin: 0;
         }
     }
 }

@@ -167,7 +167,6 @@ const adminReducer = (state = initialState, action) => {
             };
         //lấy dữ liệu remote specialties cho trang home
         case actionTypes.FETCH_REMOTE_SPECIALTIES_VALUE_SUCCESSFULLY:
-            console.log("check in reducer: ", action.remoteSpecialtiesData);
             state.remoteSpecialties = action.remoteSpecialtiesData;
             return {
                 ...state,

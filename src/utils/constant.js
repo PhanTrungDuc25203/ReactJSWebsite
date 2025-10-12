@@ -7,6 +7,7 @@ export const path = {
     LOG_OUT: "/logout",
     SYSTEM: "/system",
     DETAIL_DOCTOR_ARTICLE: "/detail-doctor-article/doctor/:id",
+    DETAIL_EXAM_PACKAGE_ARTICLE: "/detail-exam-package-article/package/:id",
     MAKE_APPOINTMENT_WITH_DOCTOR: "/make-appointment/:id/:date/:timeframe",
     BOOKING_A_EXAM_PACKAGE: "/booking-a-exam-package/:id/:date/:timeframe",
     CONFIRM_BOOKING_APPOINTMENT: "/confirm-booking",

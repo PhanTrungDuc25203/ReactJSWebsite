@@ -31,6 +31,7 @@ import HealthCheck from "./ForPatient/HealthCheck/HealthCheck.js";
 import GeneralExam from "./ForPatient/GeneralExam/GeneralExam.js";
 import SearchPage from "./ForPatient/SeachPage/SearchPage.js";
 import SchedulePage from "./SchedulePage/SchedulePage.js";
+import DetailExamPackage from "./ForPatient/DetailExamPackage/DetailExamPackage.js";
 
 class App extends Component {
     handlePersistorState = () => {
@@ -80,6 +81,7 @@ class App extends Component {
                                 <Route path={path.SPECIALTY_ARTICLE} component={DetailSpecialty} />
                                 {/* trang xem thông tin của một cơ sở y tế */}
                                 <Route path={path.MEDICAL_FACILITY_ARTICLE} component={DetailMedicalFacility} />
+                                <Route path={path.DETAIL_EXAM_PACKAGE_ARTICLE} component={DetailExamPackage} />
                                 {/* trang hồ sơ người dùng */}
                                 <Route path={path.USER_PROFILE} component={UserProfile} />
                                 {/* trang xem chi tiết tất cả các chuyên khoa */}

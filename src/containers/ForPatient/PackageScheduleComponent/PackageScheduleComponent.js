@@ -11,12 +11,14 @@ import { getAllExamPackageService } from "../../../services/userService";
 import defaultAvatar from "../../../assets/images/default-avatar-circle.png";
 import PackageScheduleSection from "./PackageScheduleSection";
 import { NumericFormat } from "react-number-format";
+import { path } from "../../../utils";
+import { withRouter } from "react-router";
 
 class PackageScheduleComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            packagerDetails: {},
+            packageDetails: {},
             isShowInsurenceDetail: false,
             isShowPriceDetail: false,
         };
@@ -26,13 +28,13 @@ class PackageScheduleComponent extends Component {
         let res = await getAllExamPackageService(this.props.packageId);
         if (res && res.errCode === 0) {
             this.setState({
-                packagerDetails: res.infor[0],
+                packageDetails: res.infor[0],
             });
         }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log("check package data: ", this.state.packagerDetails);
+        console.log("check package data: ", this.state.packageDetails);
     }
 
     extractFirstSection(htmlString) {
@@ -76,19 +78,24 @@ class PackageScheduleComponent extends Component {
         }
     };
 
+    handleViewDetailExamPackage = (packageId) => {
+        const detailPath = path.DETAIL_EXAM_PACKAGE_ARTICLE.replace(":id", packageId);
+        this.props.history.push(detailPath);
+    };
+
     render() {
-        let { packagerDetails, isShowPriceDetail, isShowInsurenceDetail } = this.state;
-        let htmlDescription = packagerDetails.htmlDescription ? this.extractFirstSection(packagerDetails.htmlDescription) : "";
+        let { packageDetails, isShowPriceDetail, isShowInsurenceDetail } = this.state;
+        let htmlDescription = packageDetails.htmlDescription ? this.extractFirstSection(packageDetails.htmlDescription) : "";
         let imageByBase64 = "";
-        if (packagerDetails && packagerDetails.image) {
-            imageByBase64 = Buffer.from(packagerDetails.image, "base64").toString("binary");
+        if (packageDetails && packageDetails.image) {
+            imageByBase64 = Buffer.from(packageDetails.image, "base64").toString("binary");
         }
         let { language } = this.props;
 
         return (
             <div className="package-schedule-component">
-                {/* {packagerDetails.name} */}
-                <div className="avatar-name-and-description">
+                {/* {packageDetails.name} */}
+                <div className="avatar-name-and-description" onClick={() => this.handleViewDetailExamPackage(packageDetails.id)}>
                     <div
                         className="avatar avatar-css"
                         style={{
@@ -101,7 +108,7 @@ class PackageScheduleComponent extends Component {
                 </div>
                 <div className="schedule-and-insurance">
                     <div className="schedule">
-                        <PackageScheduleSection selectedPackageId={packagerDetails.id || -1} />
+                        <PackageScheduleSection selectedPackageId={packageDetails.id || -1} />
                     </div>
                     <div className="detail-informations">
                         <div className="price">
@@ -113,8 +120,8 @@ class PackageScheduleComponent extends Component {
                                 {isShowPriceDetail === false ? (
                                     <React.Fragment>
                                         <div className="examination-price">
-                                            {packagerDetails && packagerDetails.priceDataForPackage && language === LANGUAGES.EN && <NumericFormat value={packagerDetails.priceDataForPackage.value_Eng} displayType="text" thousandSeparator="," suffix="$" />}
-                                            {packagerDetails && packagerDetails.priceDataForPackage && language === LANGUAGES.VI && <NumericFormat value={packagerDetails.priceDataForPackage.value_Vie} displayType="text" thousandSeparator="," suffix="đ" />}
+                                            {packageDetails && packageDetails.priceDataForPackage && language === LANGUAGES.EN && <NumericFormat value={packageDetails.priceDataForPackage.value_Eng} displayType="text" thousandSeparator="," suffix="$" />}
+                                            {packageDetails && packageDetails.priceDataForPackage && language === LANGUAGES.VI && <NumericFormat value={packageDetails.priceDataForPackage.value_Vie} displayType="text" thousandSeparator="," suffix="đ" />}
                                         </div>
                                         <button className="more-button" onClick={() => this.handleMoreButtonClicked(true, "price")}>
                                             <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.more-button" />
@@ -125,8 +132,8 @@ class PackageScheduleComponent extends Component {
                                         <div className="price-in-detail">
                                             <div className="section-content">Giá của gói khám</div>
                                             <div className="price-number">
-                                                {packagerDetails && packagerDetails.priceDataForPackage && language === LANGUAGES.EN && <NumericFormat value={packagerDetails.priceDataForPackage.value_Eng} displayType="text" thousandSeparator="," suffix="$" />}
-                                                {packagerDetails && packagerDetails.priceDataForPackage && language === LANGUAGES.VI && <NumericFormat value={packagerDetails.priceDataForPackage.value_Vie} displayType="text" thousandSeparator="," suffix="đ" />}
+                                                {packageDetails && packageDetails.priceDataForPackage && language === LANGUAGES.EN && <NumericFormat value={packageDetails.priceDataForPackage.value_Eng} displayType="text" thousandSeparator="," suffix="$" />}
+                                                {packageDetails && packageDetails.priceDataForPackage && language === LANGUAGES.VI && <NumericFormat value={packageDetails.priceDataForPackage.value_Vie} displayType="text" thousandSeparator="," suffix="đ" />}
                                             </div>
                                         </div>
                                         <div className="sale-method">Phòng khám hỗ trợ cách hình thức: Chuyển khoản, quẹt thẻ và tiền mặt</div>
@@ -195,4 +202,4 @@ const mapDispatchToProps = (dispatch) => {
     return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PackageScheduleComponent);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PackageScheduleComponent));
