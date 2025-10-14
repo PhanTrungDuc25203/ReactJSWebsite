@@ -59,7 +59,8 @@ class HomePageHeader extends Component {
         if (!this.props.userInfo || !this.props.userInfo.email) {
             this.props.history.push(`/login`);
         } else {
-            this.props.history.push(`${path.APPOINTMENT_SCHEDULE_PAGE}`);
+            const detailPath = path.APPOINTMENT_SCHEDULE_PAGE.replace(":email", this.props.userInfo.email);
+            this.props.history.push(detailPath);
         }
     };
 

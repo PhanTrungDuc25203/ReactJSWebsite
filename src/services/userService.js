@@ -123,6 +123,10 @@ const getAllRelativeBookingsOfCurrentSystemUserService = (email) => {
     return axios.get(`/api/get-all-relative-bookings-of-current-system-user?email=${email}`);
 };
 
+const getAllRelativeBookingsOfCurrentSystemUser2Service = (email) => {
+    return axios.get(`/api/get-all-relative-bookings-of-current-system-user-2?email=${email}`);
+};
+
 const saveAppointmentHistory = (appointmentHistory) => {
     return axios.post(`/api/save-appointment-history`, appointmentHistory);
 };
@@ -196,6 +200,7 @@ export {
     saveAppointmentHistory,
     getAppointmentHistoriesByDoctorEmail,
     getAllRelativeBookingsOfCurrentSystemUserService,
+    getAllRelativeBookingsOfCurrentSystemUser2Service,
     getAllSpecialtyAndProvinceForMedicalFacilityManagePage,
     createMedicalFacility,
     getInfoOfMedicalFacility,

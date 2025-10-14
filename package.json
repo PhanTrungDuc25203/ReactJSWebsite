@@ -17,6 +17,7 @@
     "@preact/signals": "^2.3.2",
     "@preact/signals-react": "^3.3.1",
     "@schedule-x/calendar": "^3.2.0",
+    "@schedule-x/calendar-controls": "^3.3.0",
     "@schedule-x/events-service": "^3.2.0",
     "@schedule-x/react": "^3.2.0",
     "@schedule-x/theme-default": "^3.2.0",

@@ -19,7 +19,7 @@ export const path = {
     GENERAL_EXAM_PAGE: "/general-exam",
     HEALTH_CHECK_PAGE: "/health-check",
     SEARCH_PAGE: "/search",
-    APPOINTMENT_SCHEDULE_PAGE: "/appointment-schedule-page",
+    APPOINTMENT_SCHEDULE_PAGE: "/appointment-schedule-page/:email",
 };
 
 export const LANGUAGES = {

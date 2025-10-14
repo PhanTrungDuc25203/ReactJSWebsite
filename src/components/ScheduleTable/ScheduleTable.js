@@ -1,38 +1,78 @@
-import React, { useEffect, useState } from "react";
+/* global Temporal */
+import React, { useEffect, useState, useImperativeHandle, forwardRef } from "react";
 import { useCalendarApp, ScheduleXCalendar } from "@schedule-x/react";
 import { createViewDay, createViewMonthAgenda, createViewMonthGrid, createViewWeek } from "@schedule-x/calendar";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
+import { createCalendarControlsPlugin } from "@schedule-x/calendar-controls";
 import "temporal-polyfill/global";
 import "@schedule-x/theme-default/dist/index.css";
 import "./ScheduleTable.scss";
 
-function ScheduleTable({ events = [], defaultView = "week" }) {
-    const [selectedEvent, setSelectedEvent] = useState(null); // event đang được chọn
+const ScheduleTable = forwardRef(({ events = [], defaultView = "week" }, ref) => {
+    const [selectedEvent, setSelectedEvent] = useState(null);
     const [eventsService] = useState(() => createEventsServicePlugin());
+    const [calendarControls] = useState(() => createCalendarControlsPlugin());
 
-    // Tạo lịch
     const calendar = useCalendarApp({
         views: [createViewDay(), createViewWeek(), createViewMonthGrid(), createViewMonthAgenda()],
-        events,
         defaultView,
-        plugins: [eventsService],
-        callbacks: {
-            onEventClick: (event) => {
-                setSelectedEvent(event);
+        plugins: [eventsService, calendarControls],
+        events,
+        calendars: {
+            past: {
+                colorName: "past",
+                lightColors: {
+                    main: "#c0c0c0",
+                    container: "#eeeeee",
+                    onContainer: "#333333",
+                },
             },
+            soon: {
+                colorName: "soon",
+                lightColors: {
+                    main: "#ff9800",
+                    container: "#ffe0b2",
+                    onContainer: "#4a2500",
+                },
+            },
+            future: {
+                colorName: "future",
+                lightColors: {
+                    main: "#2196f3",
+                    container: "#bbdefb",
+                    onContainer: "#002f6c",
+                },
+            },
+        },
+        callbacks: {
+            onEventClick: (event) => setSelectedEvent(event),
         },
     });
 
-    // In ra event để debug
+    // Truyền method ra ngoài cho parent dùng
+    useImperativeHandle(ref, () => ({
+        goToDate(dateStr) {
+            try {
+                const plainDate = Temporal.PlainDate.from(dateStr);
+                calendarControls.setDate(plainDate);
+            } catch (err) {
+                console.error("Invalid date for calendarControls.setDate:", err);
+            }
+        },
+    }));
+
     useEffect(() => {
-        console.log("📅 Tất cả lịch:", eventsService.getAll());
-    }, [eventsService]);
+        if (!events) return;
+        if (Array.isArray(events) && events.length > 0) {
+            eventsService.set(events);
+        } else {
+            eventsService.set([]);
+        }
+    }, [events, eventsService]);
 
     return (
         <div className="schedule-table-container">
             <ScheduleXCalendar calendarApp={calendar} />
-
-            {/* Modal chi tiết event */}
             {selectedEvent && (
                 <div className="event-modal-overlay" onClick={() => setSelectedEvent(null)}>
                     <div className="event-modal" onClick={(e) => e.stopPropagation()}>
@@ -56,6 +96,6 @@ function ScheduleTable({ events = [], defaultView = "week" }) {
             )}
         </div>
     );
-}
+});
 
 export default ScheduleTable;
