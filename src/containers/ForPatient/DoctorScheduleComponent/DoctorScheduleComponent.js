@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./DoctorScheduleComponent.scss";
+import { withRouter } from "react-router";
 import { getAllUsersToDisplayInReact, createNewUserService, deleteUserService, editUserService } from "../../../services/userService";
 import { emitter } from "../../../utils/emitter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +11,7 @@ import { LANGUAGES } from "../../../utils";
 import DoctorScheduleSection from "../DetailDoctor/DoctorScheduleSection";
 import { getInforAndArticleForADoctor } from "../../../services/userService";
 import DoctorExtraInforSection from "../DetailDoctor/DoctorExtraInforSection";
-// import doctorAvatar from '../../../assets/elite-doctor-image/WIN_20240627_15_03_06_Pro.jpg';
+import { path } from "../../../utils";
 import defaultAvatar from "../../../assets/images/default-avatar-circle.png";
 
 class DoctorScheduleComponent extends Component {
@@ -33,6 +34,11 @@ class DoctorScheduleComponent extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {}
 
+    handleViewDetailDoctor = (doctorId) => {
+        const detailPath = path.DETAIL_DOCTOR_ARTICLE.replace(":id", doctorId);
+        this.props.history.push(detailPath);
+    };
+
     render() {
         let { doctorDetails } = this.state;
         // console.log("Check doctor data: ", doctorDetails);
@@ -54,7 +60,9 @@ class DoctorScheduleComponent extends Component {
                         }}
                     ></div>
                     <div className="doctor-information">
-                        <div className="name">{language === LANGUAGES.VI ? nameInVie : nameInEng}</div>
+                        <div className="name" onClick={() => this.handleViewDetailDoctor(doctorDetails.id)}>
+                            {language === LANGUAGES.VI ? nameInVie : nameInEng}
+                        </div>
                         <div className="description">
                             {doctorDetails && doctorDetails.ArticleMarkdown && doctorDetails.ArticleMarkdown.description && (
                                 <span>
@@ -92,4 +100,4 @@ const mapDispatchToProps = (dispatch) => {
     return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DoctorScheduleComponent);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DoctorScheduleComponent));

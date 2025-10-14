@@ -135,7 +135,6 @@
         display: flex;
         flex-direction: column;
         scrollbar-gutter: stable;
-
         h3 {
             margin-bottom: 16px;
             font-size: 18px;
@@ -182,64 +181,64 @@
     }
 }
 
-// /* Áp dụng cho toàn trang lịch */
-// .schedule-page-container,
-// .schedule-table-container,
-// .sx-react-calendar-wrapper,
-// .appointment-list {
-//     scrollbar-width: thin; /* Firefox: mảnh hơn */
-//     scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
-// }
+/* Áp dụng cho toàn trang lịch */
+.schedule-page-container,
+.schedule-table-container,
+.sx-react-calendar-wrapper,
+.appointment-list {
+    scrollbar-width: thin; /* Firefox: mảnh hơn */
+    scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
+}
 
-// /* WebKit browsers (Chrome, Edge, Safari) */
-// .schedule-page-container::-webkit-scrollbar,
-// .schedule-table-container::-webkit-scrollbar,
-// .sx-react-calendar-wrapper::-webkit-scrollbar,
-// .appointment-list::-webkit-scrollbar {
-//     width: 5px; /* Mảnh */
-//     height: 5px;
-// }
+/* WebKit browsers (Chrome, Edge, Safari) */
+.schedule-page-container::-webkit-scrollbar,
+.schedule-table-container::-webkit-scrollbar,
+.sx-react-calendar-wrapper::-webkit-scrollbar,
+.appointment-list::-webkit-scrollbar {
+    width: 5px; /* Mảnh */
+    height: 5px;
+}
 
-// /* Ẩn hoàn toàn các nút mũi tên */
-// .schedule-page-container::-webkit-scrollbar-button,
-// .schedule-table-container::-webkit-scrollbar-button,
-// .sx-react-calendar-wrapper::-webkit-scrollbar-button,
-// .appointment-list::-webkit-scrollbar-button {
-//     display: none;
-//     width: 0;
-//     height: 0;
-// }
+/* Ẩn hoàn toàn các nút mũi tên */
+.schedule-page-container::-webkit-scrollbar-button,
+.schedule-table-container::-webkit-scrollbar-button,
+.sx-react-calendar-wrapper::-webkit-scrollbar-button,
+.appointment-list::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+}
 
-// /* Phần "tay nắm" của scrollbar */
-// .schedule-page-container::-webkit-scrollbar-thumb,
-// .schedule-table-container::-webkit-scrollbar-thumb,
-// .sx-react-calendar-wrapper::-webkit-scrollbar-thumb,
-// .appointment-list::-webkit-scrollbar-thumb {
-//     background: rgba(0, 0, 0, 0.25);
-//     border-radius: 8px;
-//     transition: background 0.25s ease;
-// }
+/* Phần "tay nắm" của scrollbar */
+.schedule-page-container::-webkit-scrollbar-thumb,
+.schedule-table-container::-webkit-scrollbar-thumb,
+.sx-react-calendar-wrapper::-webkit-scrollbar-thumb,
+.appointment-list::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    transition: background 0.25s ease;
+}
 
-// /* Khi hover thì đậm hơn */
-// .schedule-page-container::-webkit-scrollbar-thumb:hover,
-// .schedule-table-container::-webkit-scrollbar-thumb:hover,
-// .sx-react-calendar-wrapper::-webkit-scrollbar-thumb:hover,
-// .appointment-list::-webkit-scrollbar-thumb:hover {
-//     background: rgba(0, 0, 0, 0.4);
-// }
+/* Khi hover thì đậm hơn */
+.schedule-page-container::-webkit-scrollbar-thumb:hover,
+.schedule-table-container::-webkit-scrollbar-thumb:hover,
+.sx-react-calendar-wrapper::-webkit-scrollbar-thumb:hover,
+.appointment-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
 
-// /* Track trong suốt */
-// .schedule-page-container::-webkit-scrollbar-track,
-// .schedule-table-container::-webkit-scrollbar-track,
-// .sx-react-calendar-wrapper::-webkit-scrollbar-track,
-// .appointment-list::-webkit-scrollbar-track {
-//     background: transparent;
-// }
+/* Track trong suốt */
+.schedule-page-container::-webkit-scrollbar-track,
+.schedule-table-container::-webkit-scrollbar-track,
+.sx-react-calendar-wrapper::-webkit-scrollbar-track,
+.appointment-list::-webkit-scrollbar-track {
+    background: transparent;
+}
 
-// /* Ẩn góc vuông nơi hai scrollbar giao nhau (Chrome fix) */
-// .schedule-page-container::-webkit-scrollbar-corner,
-// .schedule-table-container::-webkit-scrollbar-corner,
-// .sx-react-calendar-wrapper::-webkit-scrollbar-corner,
-// .appointment-list::-webkit-scrollbar-corner {
-//     background: transparent;
-// }
+/* Ẩn góc vuông nơi hai scrollbar giao nhau (Chrome fix) */
+.schedule-page-container::-webkit-scrollbar-corner,
+.schedule-table-container::-webkit-scrollbar-corner,
+.sx-react-calendar-wrapper::-webkit-scrollbar-corner,
+.appointment-list::-webkit-scrollbar-corner {
+    background: transparent;
+}
