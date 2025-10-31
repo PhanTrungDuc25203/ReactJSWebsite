@@ -6,7 +6,7 @@ import "./SchedulePage.scss";
 import HomePageHeader from "../HomePage/HomePageHeader/HomePageHeader";
 import CustomScrollbars from "../../components/CustomScrollbars";
 import HomeFooter from "../../containers/HomePage/HomeFooter/HomeFooter";
-import { getAllRelativeBookingsOfCurrentSystemUser2Service } from "../../services/userService";
+import { getAllRelativeBookingsOfCurrentSystemUserService } from "../../services/userService";
 /* global Temporal */
 
 class SchedulePage extends Component {
@@ -22,7 +22,7 @@ class SchedulePage extends Component {
     async componentDidMount() {
         if (this.props.match?.params?.email) {
             const userEmail = this.props.match.params.email;
-            const bookingRes = await getAllRelativeBookingsOfCurrentSystemUser2Service(userEmail);
+            const bookingRes = await getAllRelativeBookingsOfCurrentSystemUserService(userEmail, true);
 
             if (bookingRes && bookingRes.errCode === 0) {
                 const doctorAppointments = bookingRes.data.doctorHasAppointmentWithPatients || [];

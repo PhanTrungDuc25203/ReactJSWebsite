@@ -119,12 +119,17 @@ const getAllRelativeInforsOfCurrentSystemUserService = (email) => {
     return axios.get(`/api/get-all-relative-infors-of-current-system-user?email=${email}`);
 };
 
-const getAllRelativeBookingsOfCurrentSystemUserService = (email) => {
-    return axios.get(`/api/get-all-relative-bookings-of-current-system-user?email=${email}`);
-};
+// const getAllRelativeBookingsOfCurrentSystemUserService = (email) => {
+//     return axios.get(`/api/get-all-relative-bookings-of-current-system-user?email=${email}`);
+// };
 
-const getAllRelativeBookingsOfCurrentSystemUser2Service = (email) => {
-    return axios.get(`/api/get-all-relative-bookings-of-current-system-user-2?email=${email}`);
+// const getAllRelativeBookingsOfCurrentSystemUser2Service = (email) => {
+//     return axios.get(`/api/get-all-relative-bookings-of-current-system-user-2?email=${email}`);
+// };
+
+const getAllRelativeBookingsOfCurrentSystemUserService = (email, appointmentWithUser = false) => {
+    const url = appointmentWithUser ? `/api/get-all-relative-bookings-of-current-system-user?email=${email}&appointmentWithUser=true` : `/api/get-all-relative-bookings-of-current-system-user?email=${email}`;
+    return axios.get(url);
 };
 
 const saveAppointmentHistory = (appointmentHistory) => {
@@ -200,7 +205,7 @@ export {
     saveAppointmentHistory,
     getAppointmentHistoriesByDoctorEmail,
     getAllRelativeBookingsOfCurrentSystemUserService,
-    getAllRelativeBookingsOfCurrentSystemUser2Service,
+    // getAllRelativeBookingsOfCurrentSystemUser2Service,
     getAllSpecialtyAndProvinceForMedicalFacilityManagePage,
     createMedicalFacility,
     getInfoOfMedicalFacility,
