@@ -61,6 +61,7 @@ class Login extends Component {
             }
             if (data && data.errCode === 0) {
                 //đăng nhập thành công thì cần làm gì đó ở đây
+                localStorage.setItem("accessToken", data.token);
                 //cần sử dụng tới redux
                 this.props.userLoginSuccess(data.user);
                 this.props.currentSystemUserInfo(data.user.email);

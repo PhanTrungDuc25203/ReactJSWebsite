@@ -131,7 +131,7 @@ class DoctorScheduleSection extends Component {
                     </div>
                 </div>
 
-                <style jsx>{`
+                <style>{`
                     .timeframe-button {
                         position: relative;
                         margin: 6px;
@@ -154,7 +154,7 @@ class DoctorScheduleSection extends Component {
                         visibility: hidden;
                         opacity: 0;
                         width: max-content;
-                        background-color: rgba(0, 0, 0, 0.8);
+                        background-color: rgba(0, 0, 0, 0.95);
                         color: #fff;
                         text-align: center;
                         border-radius: 6px;
