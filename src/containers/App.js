@@ -20,6 +20,7 @@ import DetailArticleForADoctor from "./ForPatient/DetailDoctor/DetailArticleForA
 import Doctor from "../routes/Doctor.js";
 import MakeAppointmentPage from "./ForPatient/DetailDoctor/MakeAppointmentPage/MakeAppointmentPage.js";
 import ConfirmBookingAppointment from "./ForPatient/ConfirmBookingAppointment/ConfirmBookingAppointment.js";
+import BookingPayment from "./ForPatient/ConfirmBookingAppointment/BookingPayment.js";
 import DetailSpecialty from "./ForPatient/DetailSpecialty/DetailSpecialty.js";
 import UserProfile from "./UserProfile/UserProfile.js";
 import DefaultRegister from "./Authenticate/DefaultRegister.js";
@@ -77,6 +78,8 @@ class App extends Component {
                                 <Route path={path.BOOKING_A_EXAM_PACKAGE} component={BookingAExamPackagePage} />
                                 {/* route xác nhận đặt hẹn với bác sĩ */}
                                 <Route path={path.CONFIRM_BOOKING_APPOINTMENT} component={ConfirmBookingAppointment} />
+                                {/* trang thanh toán */}
+                                <Route path={path.BOOKING_PAYMENT} component={BookingPayment} />
                                 {/* route trang chi tiết một chuyên khoa và các bac sĩ thuộc chuyên khoa đó */}
                                 <Route path={path.SPECIALTY_ARTICLE} component={DetailSpecialty} />
                                 {/* trang xem thông tin của một cơ sở y tế */}

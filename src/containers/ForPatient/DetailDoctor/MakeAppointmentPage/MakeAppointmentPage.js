@@ -25,6 +25,7 @@ class MakeAppointmentPage extends Component {
             doctorDetails: {},
             timeframe: {},
             genderList: [],
+            paymentMethodList: [],
 
             fullname: "",
             phoneNumber: "",
@@ -33,6 +34,7 @@ class MakeAppointmentPage extends Component {
             reason: "",
             birthday: "",
             selectedGender: "",
+            selectedPaymentMethod: "",
             doctorId: "",
             timeType: "",
             currentSystemUser: {},
@@ -59,12 +61,13 @@ class MakeAppointmentPage extends Component {
                     });
                 }
             }
-            // let genderList = await getAllCodesService('gender');
-            // if (genderList && genderList.data.length > 0) {
-            //     this.setState({
-            //         genderList: genderList.data,
-            //     })
-            // }
+
+            let paymentMethodArrRes = await getAllCodesService("paymentmethod");
+            if (paymentMethodArrRes && paymentMethodArrRes.data.length > 0) {
+                this.setState({
+                    paymentMethodList: paymentMethodArrRes.data,
+                });
+            }
             this.props.getGenderList();
             if (this.props.userInfo) {
                 this.props.currentSystemUserInfo(this.props.userInfo.email);
@@ -139,9 +142,15 @@ class MakeAppointmentPage extends Component {
     };
 
     handleGenderChange = (event) => {
-        console.log("check gender value: ", event.target.value);
+        // console.log("check gender value: ", event.target.value);
         this.setState({
-            selectedGender: event.target.value, // Cập nhật selectedGender theo giá trị của radio button đã chọn
+            selectedGender: event.target.value,
+        });
+    };
+
+    handlePaymentMethodChange = (event) => {
+        this.setState({
+            selectedPaymentMethod: event.target.value,
         });
     };
 
@@ -167,6 +176,7 @@ class MakeAppointmentPage extends Component {
             date: appointmentMoment, //ngày để lưu vào DB
             birthday: this.state.birthday,
             selectedGender: this.state.selectedGender,
+            selectedPaymentMethod: this.state.selectedPaymentMethod,
             appointmentMoment: this.props.match.params.date, //ngày để hiển thị dẽ dàng hơn
             doctorId: this.state.doctorDetails.id,
             timeType: this.state.timeframe.keyMap,
@@ -191,7 +201,7 @@ class MakeAppointmentPage extends Component {
         }
 
         let appointmentDate = this.appointmentDateFormat(language);
-        // console.log("check state current patient: ", this.state.currentSystemUser);
+        // console.log("check state paymentmethod: ", this.state.paymentMethodList);
 
         return (
             <React.Fragment>
@@ -389,6 +399,28 @@ class MakeAppointmentPage extends Component {
                                         onChange={(event) => this.handleOnchangeInput(event, "reason")}
                                         // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.reason" />}
                                     ></textarea>
+                                </div>
+                                <div className="payment-method-section">
+                                    <label>Chọn hình thức thanh toán</label>
+                                    {this.state.paymentMethodList &&
+                                        this.state.paymentMethodList.length > 0 &&
+                                        language === LANGUAGES.VI &&
+                                        this.state.paymentMethodList.map((paymentMethod) => (
+                                            <div key={paymentMethod.id}>
+                                                <input className="radio-button-for-payment-method" type="radio" id={paymentMethod.keyMap} name="paymentMethod" value={paymentMethod.keyMap} onChange={this.handlePaymentMethodChange} />
+                                                <label htmlFor={paymentMethod.keyMap}>{paymentMethod.value_Vie}</label>
+                                            </div>
+                                        ))}
+
+                                    {this.state.paymentMethodList &&
+                                        this.state.paymentMethodList.length > 0 &&
+                                        language === LANGUAGES.EN &&
+                                        this.state.paymentMethodList.map((paymentMethod) => (
+                                            <div key={paymentMethod.id}>
+                                                <input className="radio-button-for-payment-method" type="radio" id={paymentMethod.keyMap} name="paymentMethod" value={paymentMethod.keyMap} onChange={this.handlePaymentMethodChange} />
+                                                <label htmlFor={paymentMethod.keyMap}>{paymentMethod.value_Eng}</label>
+                                            </div>
+                                        ))}
                                 </div>
                                 <div className="attention"></div>
                                 <div className="confirm-and-send">

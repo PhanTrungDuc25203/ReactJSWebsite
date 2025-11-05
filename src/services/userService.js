@@ -180,6 +180,10 @@ const getRateAndReviewAboutDoctorService = (appointmentId) => {
     return axios.get(`/api/get-rate-and-review-about-doctor?appointmentId=${appointmentId}`);
 };
 
+const createPaymentUrlService = (data) => {
+    return axios.post("/api/create_payment_url", data);
+};
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -217,4 +221,5 @@ export {
     getAppointmentHistoriesByPatientEmail,
     saveRateAndReviewAboutDoctorOrPackageService,
     getRateAndReviewAboutDoctorService,
+    createPaymentUrlService,
 };

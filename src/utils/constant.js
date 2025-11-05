@@ -11,6 +11,7 @@ export const path = {
     MAKE_APPOINTMENT_WITH_DOCTOR: "/make-appointment/:id/:date/:timeframe",
     BOOKING_A_EXAM_PACKAGE: "/booking-a-exam-package/:id/:date/:timeframe",
     CONFIRM_BOOKING_APPOINTMENT: "/confirm-booking",
+    BOOKING_PAYMENT: "/booking-payment",
     SPECIALTY_ARTICLE: "/detail-specialty-article/:id",
     ALL_SPECIALTIES: "/all-specialties/",
     ALL_MEDICAL_FACILITIES: "/all-medical-facilities/",
