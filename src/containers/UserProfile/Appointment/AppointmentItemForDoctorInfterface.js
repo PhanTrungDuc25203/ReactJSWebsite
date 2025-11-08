@@ -2,7 +2,8 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import "./AppointmentItemForDoctorInfterface.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
+import { faClock } from "@fortawesome/free-regular-svg-icons";
 import { LANGUAGES, CommonUtils } from "../../../utils";
 import _ from "lodash";
 import { withRouter } from "react-router";
@@ -28,55 +29,66 @@ class AppointmentItemForDoctorInfterface extends Component {
             appointmentDate: "",
             appointmentTimeFrame: "",
             patientBirthday: "",
+            patientAddress: "",
+            paymentMethod: "",
+            paymentStatus: "",
+            paidAmount: "",
             patientInfor: {},
-            buttonState: "",
+            statusId: "",
+            isAppointmentDoneButtonState: "",
+            isPaymentDoneButtonState: "",
             isModalOpen: false,
             fileContent: "",
             examReason: "",
         };
     }
 
-    async componentDidMount() {
-        if (this.props && this.props.meetPatientId && this.props.appointmentDate && this.props.appointmentTimeFrame && this.props.appointmentId && this.props.scheduleStatus) {
-            let patientInfor = await getAllUsersToDisplayInReact(this.props.meetPatientId);
+    async fetchPatientInfo() {
+        const { meetPatientId, appointmentDate, appointmentTimeFrame, appointmentId, scheduleStatus, examReason, patientAddress, paymentMethod, paymentStatus, paidAmount, patientBirthday, statusId } = this.props;
+
+        if (meetPatientId && appointmentDate && appointmentTimeFrame && appointmentId && scheduleStatus) {
+            let patientInfor = await getAllUsersToDisplayInReact(meetPatientId);
             if (patientInfor && patientInfor.errCode === 0) {
                 this.setState({
-                    scheduleStatus: this.props.scheduleStatus,
-                    appointmentId: this.props.appointmentId,
-                    meetPatientId: this.props.meetPatientId,
-                    appointmentDate: this.props.appointmentDate,
-                    appointmentTimeFrame: this.props.appointmentTimeFrame,
-                    patientBirthday: this.props.patientBirthday,
-                    examReason: this.props.examReason,
+                    scheduleStatus,
+                    appointmentId,
+                    meetPatientId,
+                    appointmentDate,
+                    appointmentTimeFrame,
+                    patientAddress,
+                    paymentMethod,
+                    paymentStatus,
+                    paidAmount,
+                    patientBirthday,
+                    statusId,
+                    examReason,
                     patientInfor: patientInfor.users,
+                    // ✅ cập nhật lại trạng thái nút theo dữ liệu mới nhất
+                    isAppointmentDoneButtonState: statusId === "S3" ? "validate" : "",
+                    isPaymentDoneButtonState: paymentStatus === "PT3" ? "validate" : "",
                 });
             }
         }
+    }
+
+    async componentDidMount() {
+        await this.fetchPatientInfo();
         this.generatePatientReport("anotherFunction");
     }
 
-    async componentDidUpdate(prevProps, prevState, snapshot) {
+    async componentDidUpdate(prevProps) {
+        // Khi props thay đổi (ví dụ refresh trang hoặc cha load lại dữ liệu)
         if (
-            prevProps.meetPatientId !== this.props.meetPatientId &&
-            prevProps.appointmentDate !== this.props.appointmentDate &&
-            prevProps.appointmentTimeFrame !== this.props.appointmentTimeFrame &&
-            prevProps.appointmentId !== this.props.appointmentId &&
-            prevProps.scheduleStatus !== this.props.scheduleStatus &&
-            prevProps.examReason !== this.props.examReason
+            prevProps.meetPatientId !== this.props.meetPatientId ||
+            prevProps.appointmentDate !== this.props.appointmentDate ||
+            prevProps.appointmentTimeFrame !== this.props.appointmentTimeFrame ||
+            prevProps.appointmentId !== this.props.appointmentId ||
+            prevProps.scheduleStatus !== this.props.scheduleStatus ||
+            prevProps.examReason !== this.props.examReason ||
+            prevProps.paymentStatus !== this.props.paymentStatus ||
+            prevProps.statusId !== this.props.statusId
         ) {
-            let patientInfor = await getAllUsersToDisplayInReact(this.props.meetPatientId);
-            if (patientInfor && patientInfor.errCode === 0) {
-                this.setState({
-                    scheduleStatus: this.props.scheduleStatus,
-                    appointmentId: this.props.appointmentId,
-                    meetPatientId: this.props.meetPatientId,
-                    appointmentDate: this.props.appointmentDate,
-                    appointmentTimeFrame: this.props.appointmentTimeFrame,
-                    patientBirthday: this.props.patientBirthday,
-                    examReason: this.props.examReason,
-                    patientInfor: patientInfor.users,
-                });
-            }
+            await this.fetchPatientInfo();
         }
     }
 
@@ -105,11 +117,11 @@ class AppointmentItemForDoctorInfterface extends Component {
         this.setState({ isModalOpen: false });
     };
 
-    handleConfirmButtonClick = async () => {
+    handleIsAppointmentDoneButtonClick = async () => {
         try {
             this.generatePatientReport("anotherFunction");
 
-            const { appointmentId, meetPatientId, appointmentDate, appointmentTimeFrame, patientInfor, fileContent } = this.state;
+            const { appointmentId, meetPatientId, appointmentDate, appointmentTimeFrame, patientInfor, fileContent, paymentStatus, statusId } = this.state;
             const doctorEmail = this.props.match.params.email;
             const patientEmail = patientInfor.email;
             const description = "S3";
@@ -124,14 +136,21 @@ class AppointmentItemForDoctorInfterface extends Component {
                     doctorEmail,
                     appointmentDate,
                     appointmentTimeFrame,
+                    paymentStatus,
                     description,
+                    statusId,
                     files: base64File,
+                    type: "done-confirm",
                 };
                 // Gọi API lưu lịch sử cuộc hẹn
                 let response = await saveAppointmentHistory(historyData);
 
                 if (response && response.errCode === 0) {
                     toast.success(`Xác nhận bệnh nhân ${patientInfor.email} đã khám`);
+                    this.setState({
+                        isAppointmentDoneButtonState: "validate",
+                        statusId: "S3",
+                    });
                 } else {
                     toast.error(`Lỗi! Không thể lưu lịch sử khám bệnh này!`);
                 }
@@ -141,19 +160,72 @@ class AppointmentItemForDoctorInfterface extends Component {
 
             // Đổi class cho nút xác nhận lịch khám
             this.setState({
-                buttonState: "onclic",
+                isAppointmentDoneButtonState: "onclic",
             });
 
             setTimeout(() => {
                 this.setState({
-                    buttonState: "",
+                    isAppointmentDoneButtonState: "",
                 });
                 this.setState({
-                    buttonState: "validate",
+                    isAppointmentDoneButtonState: "validate",
                 });
-            }, 2250);
+            }, 100);
         } catch (error) {
             console.error("Có lỗi xảy ra khi xử lý:", error);
+        }
+    };
+
+    handleIsPaymentDoneButtonClick = async () => {
+        try {
+            const { appointmentId, meetPatientId, appointmentDate, appointmentTimeFrame, patientInfor, fileContent, paymentStatus, paymentMethod, statusId } = this.state;
+            const doctorEmail = this.props.match.params.email;
+            const patientEmail = patientInfor.email;
+            const description = "S3";
+
+            const base64File = Buffer.from(fileContent, "utf-8").toString("base64");
+
+            if (paymentMethod !== "PM3") {
+                toast.warn("Phương thức thanh toán này không thể xác nhận thủ công!");
+                return;
+            }
+
+            if (paymentStatus === "PT3") {
+                toast.info("Cuộc hẹn này đã được thanh toán rồi!");
+                return;
+            }
+
+            // 👉 bắt đầu loading thật
+            this.setState({ isPaymentDoneButtonState: "onclic" });
+            if (doctorEmail && patientEmail && description && base64File) {
+                const historyData = {
+                    appointmentId,
+                    patientEmail,
+                    doctorEmail,
+                    appointmentDate,
+                    appointmentTimeFrame,
+                    paymentStatus,
+                    description,
+                    statusId,
+                    files: base64File,
+                    type: "cash-confirm",
+                };
+                let response = await saveAppointmentHistory(historyData);
+                if (response && response.errCode === 0) {
+                    toast.success(`Đã xác nhận thanh toán cho bệnh nhân ${patientInfor.email}`);
+                    this.setState({
+                        isPaymentDoneButtonState: "validate",
+                        paymentStatus: "PT3",
+                    });
+                } else {
+                    toast.error("Lỗi! Không thể cập nhật trạng thái thanh toán!");
+                    this.setState({ isPaymentDoneButtonState: "" });
+                }
+            }
+        } catch (error) {
+            console.error("Lỗi khi xác nhận thanh toán:", error);
+            toast.error("Có lỗi xảy ra!");
+            this.setState({ isPaymentDoneButtonState: "" });
         }
     };
 
@@ -193,21 +265,32 @@ class AppointmentItemForDoctorInfterface extends Component {
     };
 
     render() {
-        let { scheduleStatus, appointmentId, meetPatientId, patientInfor, appointmentDate, appointmentTimeFrame, patientBirthday } = this.state;
+        let { scheduleStatus, appointmentId, meetPatientId, patientInfor, appointmentDate, appointmentTimeFrame, patientBirthday, patientAddress, paymentStatus, statusId } = this.state;
         let patientImageByBase64 = "";
         if (patientInfor && patientInfor.image) {
             patientImageByBase64 = Buffer.from(patientInfor.image, "base64").toString("binary");
         }
 
+        console.log("Check status state: ", appointmentId, paymentStatus, statusId);
+
         return (
             <div className="appointment-item-for-doctor-interface">
-                <div className="patient-avatar-container">
+                <div className="patient-avatar-and-appointment-time-container">
                     <div
                         className="patient-avatar-section"
                         style={{
                             backgroundImage: `url(${patientImageByBase64 ? patientImageByBase64 : defaultAvatar})`,
                         }}
                     ></div>
+                    <label className="appointment-time-label">Thời gian hẹn: </label>
+                    <div className="patient-date">
+                        <FontAwesomeIcon icon={faCalendarDays} className="appointment-time-icon" />
+                        <span className="appointment-item-for-doctor-content">{appointmentDate && appointmentDate}</span>
+                    </div>
+                    <div className="patient-timeframe">
+                        <FontAwesomeIcon icon={faClock} className="appointment-time-icon" />
+                        <span className="appointment-item-for-doctor-content">{appointmentTimeFrame && appointmentTimeFrame}</span>
+                    </div>
                 </div>
                 <div className="appointment-item-for-doctor-info">
                     <div className="appointment-id">
@@ -224,31 +307,38 @@ class AppointmentItemForDoctorInfterface extends Component {
                         <label>ID:</label> {meetPatientId && meetPatientId}
                     </div>
                     <div className="patient-phone-number">
-                        <label className="appointment-item-for-doctor-label">Số điện thoại của bệnh nhân: </label>
+                        <label className="appointment-item-for-doctor-label">Số điện thoại: </label>
                         <span className="appointment-item-for-doctor-content">{patientInfor && patientInfor.phoneNumber && patientInfor.phoneNumber}</span>
                     </div>
                     <div className="patient-email">
-                        <label className="appointment-item-for-doctor-label">Địa chỉ email của bệnh nhân: </label>
+                        <label className="appointment-item-for-doctor-label">Địa chỉ email: </label>
                         <span className="appointment-item-for-doctor-content">{patientInfor && patientInfor.email && patientInfor.email}</span>
                     </div>
                     <div className="patient-birthday">
-                        <label className="appointment-item-for-doctor-label">Ngày sinh của bệnh nhân: </label>
+                        <label className="appointment-item-for-doctor-label">Ngày sinh: </label>
                         <span className="appointment-item-for-doctor-content">{patientBirthday && patientBirthday}</span>
                     </div>
-                    <div className="patient-date">
-                        <label className="appointment-item-for-doctor-label">Ngày hẹn: </label>
-                        <span className="appointment-item-for-doctor-content">{appointmentDate && appointmentDate}</span>
-                    </div>
-                    <div className="patient-timeframe">
-                        <label className="appointment-item-for-doctor-label">Khung giờ hẹn: </label>
-                        <span className="appointment-item-for-doctor-content">{appointmentTimeFrame && appointmentTimeFrame}</span>
+                    <div className="patient-address">
+                        <label className="appointment-item-for-doctor-label">Địa chỉ: </label>
+                        <span className="appointment-item-for-doctor-content">{patientAddress && patientAddress}</span>
                     </div>
                     <div className="file-icon" onClick={this.generatePatientReport}>
-                        <i className="fas fa-file-alt"></i> Báo cáo khám bệnh
+                        <label className="appointment-item-for-doctor-label">Bệnh án: </label>
+                        <i className="fas fa-file-alt"></i> Chỉnh sửa bệnh án
                     </div>
-                </div>
-                <div className="done-button-container-for-doctor">
-                    <button className={`done-button ${this.state.buttonState}`} onClick={this.handleConfirmButtonClick}></button>
+
+                    <div className="done-button-container-for-doctor">
+                        <div className="button-wrapper-1">
+                            <button className={`done-button ${this.state.isAppointmentDoneButtonState}`} onClick={this.handleIsAppointmentDoneButtonClick}>
+                                {/* <FontAwesomeIcon icon={faClipboardList} /> */}
+                            </button>
+                        </div>
+                        <div className="button-wrapper-2">
+                            <button className={`paid-button ${this.state.isPaymentDoneButtonState}`} onClick={this.handleIsPaymentDoneButtonClick} disabled={this.state.paymentMethod !== "PM3"}>
+                                {/* <FontAwesomeIcon icon={faCircleExclamation} /> */}
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
                 <ModalPatientReport

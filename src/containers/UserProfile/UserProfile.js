@@ -64,6 +64,21 @@ class UserProfile extends Component {
         }
     }
 
+    refreshUserAppointments = async () => {
+        const { currentUser } = this.state;
+        if (!currentUser?.email) return;
+
+        let bookingRes = await getAllRelativeBookingsOfCurrentSystemUserService(currentUser.email);
+        if (bookingRes && bookingRes.errCode === 0) {
+            this.setState({
+                combinedAppointments: {
+                    doctorAppointments: bookingRes.data.doctorHasAppointmentWithPatients,
+                    patientAppointments: bookingRes.data.patientHasAppointmentWithDoctors,
+                },
+            });
+        }
+    };
+
     handleTabChange = (tab) => {
         this.props.history.push({
             pathname: this.props.location.pathname,
@@ -108,7 +123,7 @@ class UserProfile extends Component {
                     }
                 >
                     <div className="appointment-of-current-user">
-                        <AppointmentInProfilePage currentUserEmail={currentUser.email} userRole={currentUser.roleId} combinedAppointments={combinedAppointments} />
+                        <AppointmentInProfilePage currentUserEmail={currentUser.email} userRole={currentUser.roleId} combinedAppointments={combinedAppointments} onRefreshAppointments={this.refreshUserAppointments}/>
                     </div>
                 </Suspense>
             );

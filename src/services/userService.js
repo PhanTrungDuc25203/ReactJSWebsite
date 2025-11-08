@@ -184,6 +184,10 @@ const createPaymentUrlService = (data) => {
     return axios.post("/api/create_payment_url", data);
 };
 
+const postVisitPaymentService = (data) => {
+    return axios.post("/api/handle-post-visit-payment-method", data);
+};
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -222,4 +226,5 @@ export {
     saveRateAndReviewAboutDoctorOrPackageService,
     getRateAndReviewAboutDoctorService,
     createPaymentUrlService,
+    postVisitPaymentService,
 };

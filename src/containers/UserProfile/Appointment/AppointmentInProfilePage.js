@@ -38,8 +38,8 @@ class AppointmentInProfilePage extends PureComponent {
         }
     }
 
-    handleHistoryOrHandlingButtonClicked = () => {
-        const { history, location } = this.props;
+    handleHistoryOrHandlingButtonClicked = async () => {
+        const { history, location, onRefreshAppointments } = this.props;
         const parsed = queryString.parse(location.search);
         const currentView = parsed.view || "handling";
         const newView = currentView === "history" ? "handling" : "history";
@@ -49,6 +49,11 @@ class AppointmentInProfilePage extends PureComponent {
             pathname: location.pathname,
             search: `?tab=appointment&view=${newView}`,
         });
+
+        // ✅ Chỉ gọi refresh khi quay TRỞ LẠI tab handling
+        if (newView === "handling" && typeof onRefreshAppointments === "function") {
+            await onRefreshAppointments();
+        }
     };
 
     renderAppointmentItems = (appointments, isDoctor) => {
@@ -62,7 +67,7 @@ class AppointmentInProfilePage extends PureComponent {
                     <Suspense fallback={<div>Loading...</div>}>
                         {appointments.map(
                             (item, index) =>
-                                item.statusId !== "S3" && (
+                                (item.statusId !== "S3" || item.paymentStatus !== "PT3") && (
                                     <div className="appointment-item" key={index}>
                                         {isDoctor ? (
                                             <AppointmentItemForDoctorInfterface
@@ -73,6 +78,11 @@ class AppointmentInProfilePage extends PureComponent {
                                                 appointmentTimeFrame={item.appointmentTimeTypeData?.value_Vie}
                                                 examReason={item.examReason}
                                                 patientBirthday={moment(item.patientBirthday).format("DD-MM-YYYY")}
+                                                patientAddress={item.patientAddress}
+                                                paymentMethod={item.paymentMethod}
+                                                paymentStatus={item.paymentStatus}
+                                                paidAmount={item.paidAmount}
+                                                statusId={item.statusId}
                                             />
                                         ) : (
                                             <AppointmentItemForPatientInfterface scheduleStatus={item.statusId} appointmentId={item.id} meetDoctorId={item.doctorId} appointmentDate={moment(item.date).format("DD-MM-YYYY")} appointmentTimeFrame={item.appointmentTimeTypeData?.value_Vie} />

@@ -1,266 +1,392 @@
 .appointment-item-for-doctor-interface {
-  height: 230px;
-  width: 100%;
-  border: 2px solid #b5daff;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px 0 15px 0;
-  display: flex;
-  justify-content: space-between;
-
-  .done-button-container-for-doctor {
-    height: 100%;
-    border-left: 1px solid #95caff;
-    width: 140px;
+    padding: 10px 0 10px 0;
+    height: auto;
+    width: 100%;
+    border: 2px solid #b5daff;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0 15px 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    // justify-content: space-between;
 
-    $aqua: #7dbcfc;
-    $green: #1ecd97;
-    $gray: #bbbbbb;
+    .patient-avatar-and-appointment-time-container {
+        margin: 0 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 3px;
 
-    .done-button {
-      outline: none;
-      height: 40px;
-      text-align: center;
-      width: 80px;
-      border-radius: 5px;
-      background: #fff;
-      border: 2px solid $aqua;
-      color: $aqua;
-      letter-spacing: 1px;
-      text-shadow: 0;
-      font-size: 12px;
-      margin-left: 10px;
+        .patient-avatar-section {
+            position: relative;
+            height: 120px;
+            aspect-ratio: 1 / 1;
+            border: 5px solid #c3e8ff;
+            border-radius: 50%;
+            background-size: 105% 105%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
-      cursor: pointer;
-      transition: all 0.25s ease;
-
-      &:hover {
-        color: white;
-        background: $aqua;
-      }
-
-      &:active {
-        //letter-spacing: 2px;
-        letter-spacing: 2px;
-        border-radius: 40px;
-      }
-
-      &:after {
-        content: "Xác nhận";
-      }
+        .appointment-time-label {
+            font-size: 16px;
+            height: auto;
+            color: #49bce2;
+        }
+        .appointment-time-icon {
+            font-size: 16px;
+            margin-right: 5px;
+            color: #ffc096;
+        }
     }
 
-    .onclic {
-      width: 40px;
-      border-color: $gray;
-      border-width: 3px;
-      border-radius: 40px;
-      font-size: 0;
-      border-left-color: $aqua;
-      animation: rotating 2s 0.25s linear infinite;
-
-      &:after {
-        border-radius: 40px;
-        content: "";
-      }
-
-      &:hover {
-        border-radius: 40px;
-        color: $green;
-        background: white;
-      }
-    }
-
-    .validate {
-      border-radius: 40px;
-      border-color: $green;
-      font-size: 13px;
-      color: white;
-      background: $green;
-
-      &:after {
-        border-radius: 40px;
-        content: "Đã khám";
-      }
-    }
-
-    @keyframes rotating {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-  }
-
-  .appointment-item-for-doctor-info {
-    min-width: 650px;
-
-    .appointment-id {
-      font-size: 16px;
-      .appointment-item-for-doctor-label {
-        width: 215px;
-        height: auto;
-        color: #49bce2;
-      }
-      .appointment-item-for-doctor-content {
+    .done-button-container-for-doctor {
+        display: flex;
+        gap: 12px; /* khoảng cách giữa các div con */
         width: fit-content;
-        height: auto;
-      }
+        align-items: center;
+
+        $aqua: #7dbcfc;
+        $green: #50e386;
+        $gray: #bbbbbb;
+        $red: rgb(255, 97, 97);
+
+        .button-wrapper-2 {
+            width: 170px;
+            display: flex;
+            justify-content: center;
+            .paid-button {
+                padding: 0 10px;
+                outline: none;
+                height: 30px;
+                text-align: center;
+                width: 100%;
+                border-radius: 5px;
+                background: #fff;
+                border: 2px solid $red;
+                color: $red;
+                letter-spacing: 1px;
+                font-size: 12px;
+                cursor: pointer;
+                transition: all 0.25s ease;
+
+                &:hover {
+                    color: white;
+                    background: $red;
+                }
+
+                &:active {
+                    letter-spacing: 2px;
+                    border-radius: 30px;
+                }
+                &::before {
+                    font-family: "Font Awesome 5 Free";
+                    content: "\f06a";
+                    font-weight: 900;
+                    font-size: 13px;
+                    margin-right: 5px;
+                }
+                &:after {
+                    content: "Chưa thanh toán";
+                }
+
+                &.onclic {
+                    width: 30px;
+                    border-color: $gray;
+                    border-width: 3px;
+                    border-radius: 30px;
+                    font-size: 0;
+                    border-left-color: $aqua;
+                    animation: rotating 2s 0.25s linear infinite; // ⚙ chạy xoay vô hạn khi đang loading
+
+                    &:after {
+                        content: "";
+                    }
+
+                    &:hover {
+                        border-radius: 30px;
+                        color: $green;
+                        background: white;
+                    }
+                }
+
+                &.validate {
+                    border-radius: 30px;
+                    border-color: $green;
+                    font-size: 13px;
+                    color: white;
+                    background: $green;
+                    &::before {
+                        font-family: "Font Awesome 5 Free";
+                        content: "\f058";
+                        font-weight: 900;
+                        font-size: 13px;
+                        margin-right: 5px;
+                    }
+                    &:after {
+                        content: "Đã thanh toán";
+                    }
+                }
+            }
+        }
+        .button-wrapper-1 {
+            width: 120px;
+            display: flex;
+            justify-content: center;
+            .done-button {
+                padding: 0 10px;
+                outline: none;
+                height: 30px;
+                text-align: center;
+                width: 100%;
+                border-radius: 5px;
+                background: #fff;
+                border: 2px solid $aqua;
+                color: $aqua;
+                letter-spacing: 1px;
+                font-size: 12px;
+                cursor: pointer;
+                transition: all 0.25s ease;
+                &:hover {
+                    color: white;
+                    background: $aqua;
+                }
+
+                &:active {
+                    letter-spacing: 2px;
+                    border-radius: 30px;
+                }
+                &::before {
+                    font-family: "Font Awesome 5 Free";
+                    content: "\f46d";
+                    font-weight: 900;
+                    font-size: 13px;
+                    margin-right: 5px;
+                }
+                &:after {
+                    content: "Chờ khám";
+                }
+
+                &.onclic {
+                    width: 30px;
+                    border-color: $gray;
+                    border-width: 3px;
+                    border-radius: 30px;
+                    font-size: 0;
+                    border-left-color: $aqua;
+                    animation: rotating 2s 0.25s linear infinite; // ⚙ chạy xoay vô hạn khi đang loading
+
+                    &:after {
+                        content: "";
+                    }
+
+                    &:hover {
+                        border-radius: 30px;
+                        color: $green;
+                        background: white;
+                    }
+                }
+
+                &.validate {
+                    border-radius: 30px;
+                    border-color: $green;
+                    font-size: 13px;
+                    color: white;
+                    background: $green;
+
+                    &::before {
+                        font-family: "Font Awesome 5 Free";
+                        content: "\f058";
+                        font-weight: 900;
+                        font-size: 13px;
+                        margin-right: 5px;
+                    }
+
+                    &:after {
+                        content: "Đã khám";
+                    }
+                }
+            }
+        }
+
+        @keyframes rotating {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
     }
-
-    .patient-name {
-      font-size: 16px;
-
-      .appointment-item-for-doctor-label {
-        width: 215px;
-        height: auto;
-        color: #49bce2;
-      }
-      .appointment-item-for-doctor-content {
-        width: fit-content;
-        height: auto;
-      }
-    }
-
-    .patient-phone-number {
-      font-size: 16px;
-
-      .appointment-item-for-doctor-label {
-        width: 215px;
-        height: auto;
-        color: #49bce2;
-      }
-      .appointment-item-for-doctor-content {
-        width: fit-content;
-        height: auto;
-      }
-    }
-
-    .patient-email {
-      font-size: 16px;
-
-      .appointment-item-for-doctor-label {
-        width: 215px;
-        height: auto;
-        color: #49bce2;
-      }
-      .appointment-item-for-doctor-content {
-        width: fit-content;
-        height: auto;
-      }
-    }
-
-    .patient-birthday {
-      font-size: 16px;
-
-      .appointment-item-for-doctor-label {
-        width: 215px;
-        height: auto;
-        color: #49bce2;
-      }
-      .appointment-item-for-doctor-content {
-        width: fit-content;
-        height: auto;
-      }
-    }
-
-    .patient-date {
-      font-size: 16px;
-
-      .appointment-item-for-doctor-label {
-        width: 215px;
-        height: auto;
-        color: #49bce2;
-      }
-      .appointment-item-for-doctor-content {
-        width: fit-content;
-        height: auto;
-      }
-    }
-
-    .patient-timeframe {
-      font-size: 16px;
-
-      .appointment-item-for-doctor-label {
-        width: 215px;
-        height: auto;
-        color: #49bce2;
-      }
-      .appointment-item-for-doctor-content {
-        width: fit-content;
-        height: auto;
-      }
-    }
-
     .file-icon {
-      margin: 10px 0 10px 0;
-      height: 25px;
-      width: fit-content;
-      padding-bottom: 15px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: all 0.3s;
-
-      .fas.fa-file-alt {
-        font-size: 25px;
-        color: rgb(44, 185, 255);
-      }
+        margin: 5px 0 15px 0;
+        height: 25px;
+        font-size: 16px;
+        width: 300px;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center; /* Căn giữa theo chiều dọc */
+        gap: 5px;
+        .appointment-item-for-doctor-label {
+            width: 129px;
+            height: auto;
+            color: #49bce2;
+        }
+        i {
+            font-size: 18px;
+        }
+        .fas.fa-file-alt {
+            font-size: 20px;
+            color: rgb(44, 185, 255);
+        }
     }
 
     .file-icon:hover {
-      color: rgb(44, 185, 255);
-      margin-left: 10px;
+        color: rgb(44, 185, 255);
     }
-  }
+    .appointment-item-for-doctor-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .appointment-id {
+            font-size: 16px;
 
-  .download-report-container {
-    margin-top: 20px;
-    text-align: right;
+            .appointment-item-for-doctor-label {
+                width: 133px;
+                height: auto;
+                color: #49bce2;
+            }
+            .appointment-item-for-doctor-content {
+                width: fit-content;
+                height: auto;
+            }
+        }
 
-    .download-report-button {
-      padding: 8px 16px;
-      background-color: #4caf50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background-color 0.3s ease;
+        .patient-name {
+            font-size: 16px;
 
-      &:hover {
-        background-color: #45a049;
-      }
+            .appointment-item-for-doctor-label {
+                width: 133px;
+                height: auto;
+                color: #49bce2;
+            }
+            .appointment-item-for-doctor-content {
+                width: fit-content;
+                height: auto;
+            }
+        }
+
+        .patient-phone-number {
+            font-size: 16px;
+
+            .appointment-item-for-doctor-label {
+                width: 133px;
+                height: auto;
+                color: #49bce2;
+            }
+            .appointment-item-for-doctor-content {
+                width: fit-content;
+                height: auto;
+            }
+        }
+
+        .patient-email {
+            font-size: 16px;
+
+            .appointment-item-for-doctor-label {
+                width: 133px;
+                height: auto;
+                color: #49bce2;
+            }
+            .appointment-item-for-doctor-content {
+                width: fit-content;
+                height: auto;
+            }
+        }
+
+        .patient-birthday {
+            font-size: 16px;
+
+            .appointment-item-for-doctor-label {
+                width: 133px;
+                height: auto;
+                color: #49bce2;
+            }
+            .appointment-item-for-doctor-content {
+                width: fit-content;
+                height: auto;
+            }
+        }
+
+        .patient-date {
+            font-size: 16px;
+
+            .appointment-item-for-doctor-label {
+                width: 133px;
+                height: auto;
+                color: #49bce2;
+            }
+            .appointment-item-for-doctor-content {
+                width: fit-content;
+                height: auto;
+            }
+        }
+
+        .patient-timeframe {
+            font-size: 16px;
+
+            .appointment-item-for-doctor-label {
+                width: 133px;
+                height: auto;
+                color: #49bce2;
+            }
+            .appointment-item-for-doctor-content {
+                width: fit-content;
+                height: auto;
+            }
+        }
+        .patient-address {
+            font-size: 16px;
+
+            .appointment-item-for-doctor-label {
+                width: 133px;
+                height: auto;
+                color: #49bce2;
+            }
+            .appointment-item-for-doctor-content {
+                width: fit-content;
+                height: auto;
+            }
+        }
     }
-  }
 
-  .modal-title {
-    line-height: 50px;
-    font-weight: 500;
-    font-size: 20px;
-  }
+    .download-report-container {
+        margin-top: 20px;
+        text-align: right;
 
-  .patient-avatar-container {
-    margin-left: 25px;
-    display: flex;
-    align-items: center;
+        .download-report-button {
+            padding: 8px 16px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
 
-    .patient-avatar-section {
-      position: relative;
-      height: 120px;
-      aspect-ratio: 1 / 1;
-      border: 5px solid #c3e8ff;
-      border-radius: 50%;
-      background-size: 105% 105%;
-      background-position: center;
-      background-repeat: no-repeat;
+            &:hover {
+                background-color: #45a049;
+            }
+        }
     }
-  }
+
+    .modal-title {
+        line-height: 50px;
+        font-weight: 500;
+        font-size: 20px;
+    }
 }
 
 // .appointment-item-for-doctor-interface:hover {
@@ -269,163 +395,163 @@
 
 /* Tùy chỉnh header của modal */
 .edit-patient-report-modal {
-  padding: 10px;
+    padding: 10px;
 
-  .modal-header-customize {
-    height: 50px !important;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .report-content-label {
-    font-size: 20px;
-    margin: 0 0 10px 0;
-  }
-
-  /* Tùy chỉnh container chính của modal */
-  .report-modal-contents-container {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-  }
-
-  /* Tùy chỉnh textarea trong modal */
-  .modal-textarea {
-    width: 100%;
-    // padding      : 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    transition: border-color 0.3s ease;
-  }
-
-  /* Khi textarea được focus */
-  .modal-textarea:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  }
-
-  /* Tùy chỉnh footer của modal */
-  .custom-modal-footer {
-    padding: 15px;
-    // background-color: #f1f1f1;
-    // border-top         : 1px solid #ddd;
-    text-align: right;
-  }
-
-  /* Tùy chỉnh container chứa các nút */
-  .buttons-container {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-  }
-
-  /* Nút hủy */
-  .cancel-btn {
-    background-color: #f44336;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .cancel-btn:hover {
-    background-color: #d32f2f;
-  }
-
-  /* Nút lưu và tải về */
-  .save-new-appointment-history {
-    background-color: #3697ff;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .save-new-appointment-history:hover {
-    background-color: #007bff;
-  }
-
-  .save-and-download-new-appointment-history {
-    background-color: #007bff;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-
-    .download-icon-in-modal {
-      font-size: 16px;
-      margin-left: 10px;
+    .modal-header-customize {
+        height: 50px !important;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
     }
-  }
 
-  .save-and-download-new-appointment-history:hover {
-    background-color: #0056b3;
-  }
+    .report-content-label {
+        font-size: 20px;
+        margin: 0 0 10px 0;
+    }
 
-  /* Tùy chỉnh modal kích thước lớn */
-  .modal-lg {
-    max-width: 90%;
-  }
+    /* Tùy chỉnh container chính của modal */
+    .report-modal-contents-container {
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+    }
 
-  /* Đảm bảo modal được căn giữa theo chiều dọc */
-  .modal-content {
-    margin: auto;
-    border-radius: 10px;
-  }
+    /* Tùy chỉnh textarea trong modal */
+    .modal-textarea {
+        width: 100%;
+        // padding      : 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        transition: border-color 0.3s ease;
+    }
 
-  /* Căn giữa nội dung modal */
-  .modal-body {
-    text-align: left;
-  }
+    /* Khi textarea được focus */
+    .modal-textarea:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
 
-  /* Tùy chỉnh thanh cuộn (scrollbar) của textarea */
-  .modal-textarea::-webkit-scrollbar {
-    width: 8px;
-    /* Giảm độ rộng của thanh cuộn */
-  }
+    /* Tùy chỉnh footer của modal */
+    .custom-modal-footer {
+        padding: 15px;
+        // background-color: #f1f1f1;
+        // border-top         : 1px solid #ddd;
+        text-align: right;
+    }
 
-  /* Tùy chỉnh phần thumb (kéo di chuyển) của thanh cuộn */
-  .modal-textarea::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 123, 255, 0.3);
-    /* Màu xanh nhạt */
-    border-radius: 10px;
-    /* Làm thanh cuộn tròn hơn */
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    /* Tạo không gian nhỏ xung quanh thanh cuộn */
-    transition: background-color 0.3s ease;
-    /* Tạo hiệu ứng chuyển màu mượt */
-  }
+    /* Tùy chỉnh container chứa các nút */
+    .buttons-container {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
 
-  /* Khi hover vào thanh cuộn */
-  .modal-textarea::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 123, 255, 0.6);
-    /* Màu đậm hơn khi hover */
-  }
+    /* Nút hủy */
+    .cancel-btn {
+        background-color: #f44336;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
-  /* Tùy chỉnh phần track (nền phía sau thanh cuộn) */
-  .modal-textarea::-webkit-scrollbar-track {
-    background-color: rgba(0, 0, 0, 0.1);
-    /* Màu nền nhạt hơn */
-    border-radius: 10px;
-  }
+    .cancel-btn:hover {
+        background-color: #d32f2f;
+    }
 
-  /* Tùy chỉnh cho các trình duyệt khác không hỗ trợ webkit */
-  .modal-textarea {
-    scrollbar-width: thin;
-    /* Firefox     : làm thanh cuộn mỏng */
-    scrollbar-color: rgba(0, 123, 255, 0.3) rgba(0, 0, 0, 0.1);
-    /* Màu cho Firefox */
-  }
+    /* Nút lưu và tải về */
+    .save-new-appointment-history {
+        background-color: #3697ff;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .save-new-appointment-history:hover {
+        background-color: #007bff;
+    }
+
+    .save-and-download-new-appointment-history {
+        background-color: #007bff;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        .download-icon-in-modal {
+            font-size: 16px;
+            margin-left: 10px;
+        }
+    }
+
+    .save-and-download-new-appointment-history:hover {
+        background-color: #0056b3;
+    }
+
+    /* Tùy chỉnh modal kích thước lớn */
+    .modal-lg {
+        max-width: 90%;
+    }
+
+    /* Đảm bảo modal được căn giữa theo chiều dọc */
+    .modal-content {
+        margin: auto;
+        border-radius: 10px;
+    }
+
+    /* Căn giữa nội dung modal */
+    .modal-body {
+        text-align: left;
+    }
+
+    /* Tùy chỉnh thanh cuộn (scrollbar) của textarea */
+    .modal-textarea::-webkit-scrollbar {
+        width: 8px;
+        /* Giảm độ rộng của thanh cuộn */
+    }
+
+    /* Tùy chỉnh phần thumb (kéo di chuyển) của thanh cuộn */
+    .modal-textarea::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 123, 255, 0.3);
+        /* Màu xanh nhạt */
+        border-radius: 10px;
+        /* Làm thanh cuộn tròn hơn */
+        border: 2px solid rgba(255, 255, 255, 0.7);
+        /* Tạo không gian nhỏ xung quanh thanh cuộn */
+        transition: background-color 0.3s ease;
+        /* Tạo hiệu ứng chuyển màu mượt */
+    }
+
+    /* Khi hover vào thanh cuộn */
+    .modal-textarea::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(0, 123, 255, 0.6);
+        /* Màu đậm hơn khi hover */
+    }
+
+    /* Tùy chỉnh phần track (nền phía sau thanh cuộn) */
+    .modal-textarea::-webkit-scrollbar-track {
+        background-color: rgba(0, 0, 0, 0.1);
+        /* Màu nền nhạt hơn */
+        border-radius: 10px;
+    }
+
+    /* Tùy chỉnh cho các trình duyệt khác không hỗ trợ webkit */
+    .modal-textarea {
+        scrollbar-width: thin;
+        /* Firefox     : làm thanh cuộn mỏng */
+        scrollbar-color: rgba(0, 123, 255, 0.3) rgba(0, 0, 0, 0.1);
+        /* Màu cho Firefox */
+    }
 }

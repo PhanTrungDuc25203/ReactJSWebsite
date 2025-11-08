@@ -1,160 +1,160 @@
 .appointment-in-profile-page {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 30px auto;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border: 1px solid #95caff;
-  border-radius: 5px;
-
-  .appointment-in-profile-page-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-
-    .appointment-in-profile-page-title {
-      font-size: 20px;
-      color: #49bce2;
-    }
-
-    .history-or-handling-switch-button {
-      width: 100px;
-      font-size: 16px;
-      padding: 5px 0;
-      color: #49bce2;
-    }
-
-    $speed: 0.5s;
-
-    .btn-flip {
-      border-left: none;
-      opacity: 1;
-      outline: 0;
-      color: white;
-      line-height: 40px;
-      position: relative;
-      text-align: center;
-      letter-spacing: 1px;
-      display: inline-block;
-      text-decoration: none;
-      cursor: pointer;
-
-      &:hover {
-        &:after {
-          opacity: 1;
-          transform: translateY(0) rotateX(0);
-        }
-
-        &:before {
-          opacity: 0;
-          transform: translateY(50%) rotateX(90deg);
-        }
-      }
-
-      &:after {
-        top: 0;
-        left: 0;
-        opacity: 0;
-        width: 100%;
-        color: #5a5a5a;
-        border: 2px solid #5a5a5a;
-        border-radius: 5px;
-        display: block;
-        transition: $speed;
-        position: absolute;
-        background: white;
-        content: attr(data-back);
-        transform: translateY(-50%) rotateX(90deg);
-      }
-
-      &:before {
-        top: 0;
-        left: 0;
-        opacity: 1;
-        color: #49bce2;
-        border: 2px solid #49bce2;
-        border-radius: 5px;
-        display: block;
-        // padding      : 0 15px;
-        width: 115px;
-        line-height: 40px;
-        transition: $speed;
-        position: relative;
-        background: white;
-        content: attr(data-front);
-        transform: translateY(0) rotateX(0);
-      }
-    }
-
-    .btn-flip-backward {
-      border-left: none;
-      opacity: 1;
-      outline: 0;
-      color: white;
-      line-height: 40px;
-      position: relative;
-      text-align: center;
-      letter-spacing: 1px;
-      display: inline-block;
-      text-decoration: none;
-      cursor: pointer;
-
-      &:hover {
-        &:after {
-          opacity: 1;
-          transform: translateY(0) rotateX(0);
-        }
-
-        &:before {
-          opacity: 0;
-          transform: translateY(-50%) rotateX(-90deg);
-        }
-      }
-
-      &:after {
-        top: 0;
-        left: 0;
-        opacity: 0;
-        width: 100%;
-        color: #49bce2;
-        border: 2px solid #49bce2;
-        border-radius: 5px;
-        display: block;
-        transition: $speed;
-        position: absolute;
-        background: white;
-        content: attr(data-back);
-        transform: translateY(50%) rotateX(90deg);
-      }
-
-      &:before {
-        top: 0;
-        left: 0;
-        opacity: 1;
-        color: #5a5a5a;
-        border: 2px solid #5a5a5a;
-        border-radius: 5px;
-        display: block;
-        // padding      : 0 30px;
-        width: 115px;
-        line-height: 40px;
-        transition: $speed;
-        position: relative;
-        background: white;
-        content: attr(data-front);
-        transform: translateY(0) rotateX(0);
-      }
-    }
-  }
-
-  .appointment-container {
-    height: auto;
+    flex-direction: column;
     width: 100%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f8f9fa82;
+    border: 1px solid #95caff;
+    border-radius: 5px;
 
-    .appointment-item {
-      position: relative;
+    .appointment-in-profile-page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+
+        .appointment-in-profile-page-title {
+            font-size: 20px;
+            color: #49bce2;
+        }
+
+        .history-or-handling-switch-button {
+            width: 100px;
+            font-size: 16px;
+            padding: 5px 0;
+            color: #49bce2;
+        }
+
+        $speed: 0.5s;
+
+        .btn-flip {
+            border-left: none;
+            opacity: 1;
+            outline: 0;
+            color: white;
+            line-height: 40px;
+            position: relative;
+            text-align: center;
+            letter-spacing: 1px;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+
+            &:hover {
+                &:after {
+                    opacity: 1;
+                    transform: translateY(0) rotateX(0);
+                }
+
+                &:before {
+                    opacity: 0;
+                    transform: translateY(50%) rotateX(90deg);
+                }
+            }
+
+            &:after {
+                top: 0;
+                left: 0;
+                opacity: 0;
+                width: 100%;
+                color: #5a5a5a;
+                border: 2px solid #5a5a5a;
+                border-radius: 5px;
+                display: block;
+                transition: $speed;
+                position: absolute;
+                background: white;
+                content: attr(data-back);
+                transform: translateY(-50%) rotateX(90deg);
+            }
+
+            &:before {
+                top: 0;
+                left: 0;
+                opacity: 1;
+                color: #49bce2;
+                border: 2px solid #49bce2;
+                border-radius: 5px;
+                display: block;
+                // padding      : 0 15px;
+                width: 115px;
+                line-height: 40px;
+                transition: $speed;
+                position: relative;
+                background: white;
+                content: attr(data-front);
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        .btn-flip-backward {
+            border-left: none;
+            opacity: 1;
+            outline: 0;
+            color: white;
+            line-height: 40px;
+            position: relative;
+            text-align: center;
+            letter-spacing: 1px;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+
+            &:hover {
+                &:after {
+                    opacity: 1;
+                    transform: translateY(0) rotateX(0);
+                }
+
+                &:before {
+                    opacity: 0;
+                    transform: translateY(-50%) rotateX(-90deg);
+                }
+            }
+
+            &:after {
+                top: 0;
+                left: 0;
+                opacity: 0;
+                width: 100%;
+                color: #49bce2;
+                border: 2px solid #49bce2;
+                border-radius: 5px;
+                display: block;
+                transition: $speed;
+                position: absolute;
+                background: white;
+                content: attr(data-back);
+                transform: translateY(50%) rotateX(90deg);
+            }
+
+            &:before {
+                top: 0;
+                left: 0;
+                opacity: 1;
+                color: #5a5a5a;
+                border: 2px solid #5a5a5a;
+                border-radius: 5px;
+                display: block;
+                // padding      : 0 30px;
+                width: 115px;
+                line-height: 40px;
+                transition: $speed;
+                position: relative;
+                background: white;
+                content: attr(data-front);
+                transform: translateY(0) rotateX(0);
+            }
+        }
     }
-  }
+
+    .appointment-container {
+        height: auto;
+        width: 100%;
+
+        .appointment-item {
+            position: relative;
+        }
+    }
 }
