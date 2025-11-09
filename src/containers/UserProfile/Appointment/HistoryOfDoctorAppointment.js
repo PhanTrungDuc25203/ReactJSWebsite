@@ -57,19 +57,19 @@ class HistoryOfDoctorAppointment extends Component {
                         <div key={index} className="doctor-appointment-history-item">
                             <div className="doctor-appointment-history-item-id">
                                 <label className="doctor-appointment-history-label">Mã số cuộc hẹn:</label>
-                                <span className="doctor-appointment-history-content">{appointment && appointment.appointmentId && appointment.appointmentId}</span>
+                                <span className="doctor-appointment-history-content">{appointment && appointment.id}</span>
                             </div>
                             <div className="doctor-appointment-history-item-patient-email">
                                 <label className="doctor-appointment-history-label">Địa chỉ email của bệnh nhân:</label>
-                                <span className="doctor-appointment-history-content">{appointment && appointment.patientEmail && appointment.patientEmail}</span>
+                                <span className="doctor-appointment-history-content">{appointment && appointment.patientHasAppointmentWithDoctors && appointment.patientHasAppointmentWithDoctors.email}</span>
                             </div>
                             <div className="doctor-appointment-history-item-date">
                                 <label className="doctor-appointment-history-label">Ngày đã hẹn:</label>
-                                <span className="doctor-appointment-history-content">{appointment && appointment.appointmentDate && moment(appointment.appointmentDate).format("DD-MM-YYYY")}</span>
+                                <span className="doctor-appointment-history-content">{appointment && appointment.date && moment(appointment.date).format("DD-MM-YYYY")}</span>
                             </div>
                             <div className="doctor-appointment-history-item-timeframe">
                                 <label className="doctor-appointment-history-label">Khung giờ đã hẹn:</label>
-                                <span className="doctor-appointment-history-content">{appointment && appointment.appointmentTimeFrameData && appointment.appointmentTimeFrameData.value_Vie && appointment.appointmentTimeFrameData.value_Vie}</span>
+                                <span className="doctor-appointment-history-content">{appointment && appointment.appointmentTimeTypeData && appointment.appointmentTimeTypeData.value_Vie && appointment.appointmentTimeTypeData.value_Vie}</span>
                             </div>
                         </div>
                     ))

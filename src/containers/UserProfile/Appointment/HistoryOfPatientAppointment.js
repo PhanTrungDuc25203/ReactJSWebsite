@@ -33,6 +33,7 @@ class HistoryOfPatientAppointment extends Component {
     }
 
     openReviewModal = (appointment) => {
+        console.log("check patient appointment: ", appointment);
         this.setState({
             isOpenReviewModal: true,
             selectedAppointment: appointment,
@@ -67,19 +68,19 @@ class HistoryOfPatientAppointment extends Component {
                             <div className="patient-appointment-history-item">
                                 <div className="patient-appointment-history-item-id">
                                     <label className="patient-appointment-history-label">Mã số cuộc hẹn:</label>
-                                    <span className="patient-appointment-history-content">{appointment && appointment.appointmentId && appointment.appointmentId}</span>
+                                    <span className="patient-appointment-history-content">{appointment && appointment.id}</span>
                                 </div>
                                 <div className="patient-appointment-history-item-patient-email">
                                     <label className="patient-appointment-history-label">Địa chỉ email của bác sĩ:</label>
-                                    <span className="patient-appointment-history-content">{appointment && appointment.doctorEmail && appointment.doctorEmail}</span>
+                                    <span className="patient-appointment-history-content">{appointment && appointment.doctorHasAppointmentWithPatients && appointment.doctorHasAppointmentWithPatients.email && appointment.doctorHasAppointmentWithPatients.email}</span>
                                 </div>
                                 <div className="patient-appointment-history-item-date">
                                     <label className="patient-appointment-history-label">Ngày đã hẹn:</label>
-                                    <span className="patient-appointment-history-content">{appointment && appointment.appointmentDate && moment(appointment.appointmentDate).format("DD-MM-YYYY")}</span>
+                                    <span className="patient-appointment-history-content">{appointment && appointment.date && moment(appointment.date).format("DD-MM-YYYY")}</span>
                                 </div>
                                 <div className="patient-appointment-history-item-timeframe">
                                     <label className="patient-appointment-history-label">Khung giờ đã hẹn:</label>
-                                    <span className="patient-appointment-history-content">{appointment && appointment.appointmentTimeFrameData && appointment.appointmentTimeFrameData.value_Vie && appointment.appointmentTimeFrameData.value_Vie}</span>
+                                    <span className="patient-appointment-history-content">{appointment && appointment.appointmentTimeTypeData && appointment.appointmentTimeTypeData.value_Vie && appointment.appointmentTimeTypeData.value_Vie}</span>
                                 </div>
                             </div>
                             <div className="review-and-rate">
@@ -88,7 +89,7 @@ class HistoryOfPatientAppointment extends Component {
                                         <FontAwesomeIcon icon={faCommentDots} className="edit-icon" /> Nhận xét về dịch vụ
                                     </button>
                                 )}
-                                {isOpenReviewModal && <RateAndReviewForm isOpen={isOpenReviewModal} toggleUserModal={this.toggleReviewModal} appointmentData={selectedAppointment} userEmail={this.props.userEmail} doctorEmail={appointment.doctorEmail} />}
+                                {isOpenReviewModal && <RateAndReviewForm isOpen={isOpenReviewModal} toggleUserModal={this.toggleReviewModal} appointmentData={selectedAppointment} userEmail={this.props.userEmail} doctorEmail={appointment.doctorHasAppointmentWithPatients.email} />}
                             </div>
                         </div>
                     ))

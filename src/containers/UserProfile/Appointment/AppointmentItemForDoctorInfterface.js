@@ -16,7 +16,7 @@ import fileDownload from "js-file-download";
 import { saveAs } from "file-saver"; // để lưu file
 import ModalPatientReport from "./ModalPatientReport";
 import { toast } from "react-toastify";
-import { saveAppointmentHistory } from "../../../services/userService";
+import { saveAppointmentHistory, saveClinicalReportContentToDatabase } from "../../../services/userService";
 import defaultAvatar from "../../../assets/images/default-avatar-circle.png";
 
 class AppointmentItemForDoctorInfterface extends Component {
@@ -73,11 +73,18 @@ class AppointmentItemForDoctorInfterface extends Component {
 
     async componentDidMount() {
         await this.fetchPatientInfo();
-        this.generatePatientReport("anotherFunction");
+
+        // Nếu props.files có dữ liệu, decode base64 và set vào state
+        if (this.props.files && this.props.files.data) {
+            const buffer = Buffer.from(this.props.files.data);
+            const decodedContent = buffer.toString("utf-8"); // ← giải mã
+            this.setState({ fileContent: decodedContent });
+        } else {
+            this.generatePatientReport("anotherFunction");
+        }
     }
 
     async componentDidUpdate(prevProps) {
-        // Khi props thay đổi (ví dụ refresh trang hoặc cha load lại dữ liệu)
         if (
             prevProps.meetPatientId !== this.props.meetPatientId ||
             prevProps.appointmentDate !== this.props.appointmentDate ||
@@ -85,10 +92,18 @@ class AppointmentItemForDoctorInfterface extends Component {
             prevProps.appointmentId !== this.props.appointmentId ||
             prevProps.scheduleStatus !== this.props.scheduleStatus ||
             prevProps.examReason !== this.props.examReason ||
-            prevProps.paymentStatus !== this.props.paymentStatus ||
-            prevProps.statusId !== this.props.statusId
+            prevProps.files !== this.props.files
         ) {
             await this.fetchPatientInfo();
+
+            // Nếu props.files thay đổi
+            if (this.props.files && this.props.files.data) {
+                const buffer = Buffer.from(this.props.files.data);
+                const decodedContent = buffer.toString("utf-8"); // ← giải mã
+                this.setState({ fileContent: decodedContent });
+            } else {
+                this.generatePatientReport("anotherFunction");
+            }
         }
     }
 
@@ -104,17 +119,54 @@ class AppointmentItemForDoctorInfterface extends Component {
         this.setState({ fileContent: event.target.value });
     };
 
-    saveFile = () => {
-        const { fileContent } = this.state;
-        this.setState({ fileContent });
-        fileDownload(fileContent, "Updated_Patient_Report.txt");
-        this.setState({ isModalOpen: false });
+    saveFile = async () => {
+        try {
+            const { fileContent, appointmentId } = this.state;
+
+            // 🔹 Mã hóa sang base64 trước khi gửi
+            const base64File = Buffer.from(fileContent, "utf-8").toString("base64");
+
+            // 📤 Gửi lên server
+            const response = await saveClinicalReportContentToDatabase({ appointmentId, base64File });
+
+            if (response && response.errCode === 0) {
+                // ✅ Thành công → tải file xuống
+                fileDownload(fileContent, "Updated_Patient_Report.txt");
+                toast.success("Đã lưu và tải xuống bệnh án thành công!");
+            } else {
+                toast.error("Lưu bệnh án thất bại!");
+                console.error("API error:", response);
+            }
+
+            this.setState({ isModalOpen: false });
+        } catch (error) {
+            console.error("Lỗi khi lưu file:", error);
+            toast.error("Không thể lưu bệnh án!");
+        }
     };
 
-    saveFileButNotDownload = () => {
-        const { fileContent } = this.state;
-        this.setState({ fileContent });
-        this.setState({ isModalOpen: false });
+    saveFileButNotDownload = async () => {
+        try {
+            const { fileContent, appointmentId } = this.state;
+
+            // 🔹 Mã hóa sang base64
+            const base64File = Buffer.from(fileContent, "utf-8").toString("base64");
+
+            // 📤 Gửi lên server
+            const response = await saveClinicalReportContentToDatabase({ appointmentId, base64File });
+
+            if (response && response.errCode === 0) {
+                toast.success("Đã lưu bệnh án thành công!");
+            } else {
+                toast.error("Lưu bệnh án thất bại!");
+                console.error("API error:", response);
+            }
+
+            this.setState({ isModalOpen: false });
+        } catch (error) {
+            console.error("Lỗi khi lưu file:", error);
+            toast.error("Không thể lưu bệnh án!");
+        }
     };
 
     handleIsAppointmentDoneButtonClick = async () => {
@@ -232,31 +284,36 @@ class AppointmentItemForDoctorInfterface extends Component {
     generatePatientReport = (actionFrom) => {
         const { fileContent, appointmentId, meetPatientId, patientInfor, appointmentDate, appointmentTimeFrame, patientBirthday, examReason } = this.state;
 
-        // Tạo nội dung cho file báo cáo
-        let reportContent = fileContent
-            ? fileContent
-            : `
-    Thông tin bệnh nhân:
-        - Mã số cuộc hẹn: ${appointmentId || "Không có"}
-        - Bệnh nhân: ${patientInfor ? patientInfor.lastName + " " + patientInfor.firstName : "Không có"}
-        - ID Bệnh nhân: ${meetPatientId || "Không có"}
-        - Số điện thoại bệnh nhân: ${patientInfor.phoneNumber || "Không có"}
-        - Email bệnh nhân: ${patientInfor.email || "Không có"}
-        - Ngày sinh: ${patientBirthday || "Không có"}
-        - Lý do khám bệnh: ${examReason || ""}
-        - Ngày hẹn: ${appointmentDate || "Không có"}
-        - Khung giờ hẹn: ${appointmentTimeFrame || "Không có"}
-    Thông tin bác sĩ: (Bác sĩ tự điền thông tin nếu cần thiết)
-        - Thanh toán (VND):
-                     ( $ ):
-        - Khám với bác sĩ:
-        - Chuyên khoa Bác sĩ:
-        - Địa chỉ Bác sĩ:
-    Kết quả khám bênh (đã khám): (Bác sĩ tự điền thông tin nếu cần thiết)
-        - Chuẩn đoán: 
-                    
-        - Phương pháp điều trị:
-        `;
+        // Nếu fileContent đã có (props.files), dùng luôn
+        if (fileContent) {
+            if (actionFrom !== "anotherFunction") {
+                this.setState({ isModalOpen: true });
+            }
+            return;
+        }
+
+        // Nếu chưa có fileContent, tạo hardcode
+        let reportContent = `
+            Thông tin bệnh nhân:
+                - Mã số cuộc hẹn: ${appointmentId || "Không có"}
+                - Bệnh nhân: ${patientInfor ? patientInfor.lastName + " " + patientInfor.firstName : "Không có"}
+                - ID Bệnh nhân: ${meetPatientId || "Không có"}
+                - Số điện thoại bệnh nhân: ${patientInfor.phoneNumber || "Không có"}
+                - Email bệnh nhân: ${patientInfor.email || "Không có"}
+                - Ngày sinh: ${patientBirthday || "Không có"}
+                - Lý do khám bệnh: ${examReason || ""}
+                - Ngày hẹn: ${appointmentDate || "Không có"}
+                - Khung giờ hẹn: ${appointmentTimeFrame || "Không có"}
+            Thông tin bác sĩ: (Bác sĩ tự điền thông tin nếu cần thiết)
+                - Thanh toán (VND):
+                - Khám với bác sĩ:
+                - Chuyên khoa Bác sĩ:
+                - Địa chỉ Bác sĩ:
+            Kết quả khám bệnh (đã khám): (Bác sĩ tự điền thông tin nếu cần thiết)
+                - Chuẩn đoán:
+                - Phương pháp điều trị:
+            `;
+
         if (actionFrom === "anotherFunction") {
             this.setState({ fileContent: reportContent });
         } else {
@@ -270,8 +327,6 @@ class AppointmentItemForDoctorInfterface extends Component {
         if (patientInfor && patientInfor.image) {
             patientImageByBase64 = Buffer.from(patientInfor.image, "base64").toString("binary");
         }
-
-        console.log("Check status state: ", appointmentId, paymentStatus, statusId);
 
         return (
             <div className="appointment-item-for-doctor-interface">

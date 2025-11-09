@@ -59,7 +59,6 @@ class AppointmentInProfilePage extends PureComponent {
     renderAppointmentItems = (appointments, isDoctor) => {
         const { historyOrHandling } = this.state;
         const { currentUserEmail } = this.props;
-        console.log("check appointment: ", appointments);
 
         return (
             <div className="appointment-container">
@@ -82,6 +81,7 @@ class AppointmentInProfilePage extends PureComponent {
                                                 paymentMethod={item.paymentMethod}
                                                 paymentStatus={item.paymentStatus}
                                                 paidAmount={item.paidAmount}
+                                                files={item.files}
                                                 statusId={item.statusId}
                                             />
                                         ) : (

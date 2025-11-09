@@ -7,7 +7,7 @@ class RateAndReviewModal extends Component {
         this.state = {
             userEmail: props.userEmail || "",
             doctorEmail: props.doctorEmail || "",
-            appointmentId: props.appointmentData?.appointmentId || "",
+            appointmentId: props.appointmentData?.id || "",
             rating: 5,
             content: "",
             images: [],
@@ -15,7 +15,7 @@ class RateAndReviewModal extends Component {
     }
 
     async componentDidMount() {
-        const appointmentId = this.props.appointmentData?.appointmentId;
+        const appointmentId = this.props.appointmentData?.id;
         if (!appointmentId) return;
 
         try {

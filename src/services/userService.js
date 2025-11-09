@@ -188,6 +188,10 @@ const postVisitPaymentService = (data) => {
     return axios.post("/api/handle-post-visit-payment-method", data);
 };
 
+const saveClinicalReportContentToDatabase = (data) => {
+    return axios.post("/api/save-clinical-report-content-to-database", data);
+};
+
 export {
     handleLoginAPI,
     getAllUsersToDisplayInReact,
@@ -227,4 +231,5 @@ export {
     getRateAndReviewAboutDoctorService,
     createPaymentUrlService,
     postVisitPaymentService,
+    saveClinicalReportContentToDatabase,
 };
