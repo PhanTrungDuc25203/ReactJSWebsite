@@ -23,7 +23,7 @@ class DoctorScheduleComponent extends Component {
     }
 
     async componentDidMount() {
-        console.log("Check props from parent: ", this.props);
+        // console.log("Check props from parent: ", this.props);
         let res = await getInforAndArticleForADoctor(this.props.doctorId);
         if (res && res.errCode === 0) {
             this.setState({

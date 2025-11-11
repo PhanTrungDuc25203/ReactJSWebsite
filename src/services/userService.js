@@ -30,6 +30,10 @@ const handleLoginAPI = (userEmail, userPassword) => {
     return axios.post("/api/login", { email: userEmail, password: userPassword });
 };
 
+let handleGoogleLoginService = (token) => {
+    return axios.post("/api/auth/google/verify", { token });
+};
+
 const getAllUsersToDisplayInReact = (userInputId) => {
     //nếu truyền vào userInputId bằng ALL thì lấy hết không thì lấy một user có id = userInpiuId
     return axios.get(`/api/get-all-users-for-react?id=${userInputId}`);
@@ -194,6 +198,7 @@ const saveClinicalReportContentToDatabase = (data) => {
 
 export {
     handleLoginAPI,
+    handleGoogleLoginService,
     getAllUsersToDisplayInReact,
     createNewUserService,
     deleteUserService,

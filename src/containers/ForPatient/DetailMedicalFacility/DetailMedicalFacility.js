@@ -67,7 +67,7 @@ class DetailMedicalFacility extends Component {
 
     initializeMap = async () => {
         const { medicalFacility } = this.state;
-        console.log("Check location data: ", medicalFacility.address);
+        // console.log("Check location data: ", medicalFacility.address);
         const address = medicalFacility && medicalFacility.address;
         if (!address) return;
 

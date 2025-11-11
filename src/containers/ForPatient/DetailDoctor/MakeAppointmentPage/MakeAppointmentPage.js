@@ -328,12 +328,7 @@ class MakeAppointmentPage extends Component {
                                         </label>
                                         <div className="icon-and-input">
                                             <FontAwesomeIcon icon={faLocationDot} className="input-icon" />
-                                            <input
-                                                type="text"
-                                                value={currentSystemUser && currentSystemUser.address ? currentSystemUser.address : this.state.address}
-                                                onChange={(event) => this.handleOnchangeInput(event, "address")}
-                                                readOnly={currentSystemUser && currentSystemUser.address ? true : false}
-                                            ></input>
+                                            <input type="text" value={currentSystemUser?.address ?? this.state.address ?? ""} onChange={(event) => this.handleOnchangeInput(event, "address")} readOnly={currentSystemUser && currentSystemUser.address ? true : false}></input>
                                         </div>
                                     </div>
                                     <div className="phone-number">
@@ -344,7 +339,7 @@ class MakeAppointmentPage extends Component {
                                             <FontAwesomeIcon icon={faMobileScreenButton} className="input-icon" />
                                             <input
                                                 type="text"
-                                                value={currentSystemUser && currentSystemUser.phoneNumber ? currentSystemUser.phoneNumber : this.state.phoneNumber}
+                                                value={currentSystemUser?.phoneNumber ?? this.state.phoneNumber ?? ""}
                                                 onChange={(event) => this.handleOnchangeInput(event, "phoneNumber")}
                                                 readOnly={currentSystemUser && currentSystemUser.phoneNumber ? true : false}
                                                 // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.phonenum" />}

@@ -5,9 +5,10 @@ import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 import "./Login.scss";
 import { FormattedMessage } from "react-intl";
-import { handleLoginAPI } from "../../services/userService";
+import { handleLoginAPI, handleGoogleLoginService } from "../../services/userService";
 import CustomScrollbars from "../../components/CustomScrollbars";
 import { withRouter } from "react-router";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
 class Login extends Component {
     constructor(props) {
@@ -163,15 +164,37 @@ class Login extends Component {
                             <span>Or login with:</span>
                         </div>
                         <div className="more-login-options">
-                            <div className="icon-container">
-                                <i className="fab fa-google-plus-g"></i>
-                            </div>
-                            <div className="icon-container">
+                            <GoogleOAuthProvider clientId="954224611627-dp26tne3s0g03jb0hti8qgfdtj3uet6i.apps.googleusercontent.com">
+                                <GoogleLogin
+                                    onSuccess={async (credentialResponse) => {
+                                        try {
+                                            const googleToken = credentialResponse.credential;
+                                            let res = await handleGoogleLoginService(googleToken);
+                                            console.log("check google login: ", res);
+
+                                            if (res?.errCode === 0) {
+                                                localStorage.setItem("accessToken", res.token);
+                                                this.props.userLoginSuccess(res.user);
+                                                this.props.currentSystemUserInfo(res.user.email);
+                                            } else {
+                                                console.log("Google login failed:", res?.data?.message || "Unknown error");
+                                            }
+                                        } catch (err) {
+                                            console.error("Error verifying Google login:", err);
+                                        }
+                                    }}
+                                    onError={() => {
+                                        console.log("Google Login Failed");
+                                    }}
+                                />
+                            </GoogleOAuthProvider>
+
+                            {/* <div className="icon-container">
                                 <i className="fab fa-facebook-f"></i>
                             </div>
                             <div className="icon-container">
                                 <i className="fab fa-apple"></i>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
