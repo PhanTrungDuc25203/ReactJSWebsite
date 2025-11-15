@@ -18,6 +18,7 @@ import ModalPatientReport from "./ModalPatientReport";
 import { toast } from "react-toastify";
 import { saveAppointmentHistory, saveClinicalReportContentToDatabase } from "../../../services/userService";
 import defaultAvatar from "../../../assets/images/default-avatar-circle.png";
+import Swal from "sweetalert2";
 
 class AppointmentItemForDoctorInfterface extends Component {
     constructor(props) {
@@ -171,16 +172,25 @@ class AppointmentItemForDoctorInfterface extends Component {
 
     handleIsAppointmentDoneButtonClick = async () => {
         try {
+            const { appointmentDate, appointmentTimeFrame } = this.state;
+
+            const canContinue = await this.checkAppointmentTime(appointmentDate, appointmentTimeFrame);
+
+            if (!canContinue) {
+                return; // bác sĩ không đồng ý -> không làm gì
+            }
+
+            // --- BẮT ĐẦU CODE XÁC NHẬN NHƯ CŨ ---
             this.generatePatientReport("anotherFunction");
 
-            const { appointmentId, meetPatientId, appointmentDate, appointmentTimeFrame, patientInfor, fileContent, paymentStatus, statusId } = this.state;
+            const { appointmentId, meetPatientId, patientInfor, fileContent, paymentStatus, statusId } = this.state;
+
             const doctorEmail = this.props.match.params.email;
             const patientEmail = patientInfor.email;
             const description = "S3";
 
             const base64File = Buffer.from(fileContent, "utf-8").toString("base64");
 
-            // Chuẩn bị dữ liệu để gửi tới API
             if (doctorEmail && patientEmail && description && base64File) {
                 const historyData = {
                     appointmentId,
@@ -194,7 +204,7 @@ class AppointmentItemForDoctorInfterface extends Component {
                     files: base64File,
                     type: "done-confirm",
                 };
-                // Gọi API lưu lịch sử cuộc hẹn
+
                 let response = await saveAppointmentHistory(historyData);
 
                 if (response && response.errCode === 0) {
@@ -210,22 +220,85 @@ class AppointmentItemForDoctorInfterface extends Component {
                 toast.error(`Lỗi! Thiếu thông tin cần lưu!`);
             }
 
-            // Đổi class cho nút xác nhận lịch khám
-            this.setState({
-                isAppointmentDoneButtonState: "onclic",
-            });
+            this.setState({ isAppointmentDoneButtonState: "onclic" });
 
             setTimeout(() => {
-                this.setState({
-                    isAppointmentDoneButtonState: "",
-                });
-                this.setState({
-                    isAppointmentDoneButtonState: "validate",
-                });
+                this.setState({ isAppointmentDoneButtonState: "" });
+                this.setState({ isAppointmentDoneButtonState: "validate" });
             }, 100);
         } catch (error) {
             console.error("Có lỗi xảy ra khi xử lý:", error);
         }
+    };
+
+    checkAppointmentTime = async (appointmentDate, appointmentTimeFrame) => {
+        const [day, month, year] = appointmentDate.split("-");
+        const startTimeStr = appointmentTimeFrame.split(" - ")[0];
+        const [hour, minute] = startTimeStr.split(":");
+
+        // Tạo object date chuẩn
+        const appointmentStart = new Date(year, Number(month) - 1, day, hour, minute, 0);
+        const now = new Date();
+
+        // Nếu đã đến giờ khám → cho qua luôn
+        if (now >= appointmentStart) return true;
+
+        // Hàm format thời gian còn lại
+        const formatCountdown = (secondsLeft) => {
+            let d = Math.floor(secondsLeft / 86400);
+            let h = Math.floor((secondsLeft % 86400) / 3600);
+            let m = Math.floor((secondsLeft % 3600) / 60);
+            let s = Math.floor(secondsLeft % 60);
+
+            if (d > 0) return `${d} ngày ${h} giờ ${m} phút ${s} giây`;
+            if (h > 0) return `${h} giờ ${m} phút ${s} giây`;
+            if (m > 0) return `${m} phút ${s} giây`;
+            return `${s} giây`;
+        };
+
+        let diffSeconds = Math.floor((appointmentStart - now) / 1000);
+
+        // Hiển thị popup lần đầu
+        await Swal.fire({
+            title: "Chưa tới giờ khám",
+            html: `
+            Ca khám này của bạn sẽ bắt đầu sau:<br>
+            <b id="countdown-text">${formatCountdown(diffSeconds)}</b><br><br>
+            Bạn có chắc muốn xác nhận đã khám bệnh nhân này ngay bây giờ không?
+        `,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Vẫn xác nhận",
+            cancelButtonText: "Hủy",
+            didOpen: () => {
+                const countdownEl = Swal.getPopup().querySelector("#countdown-text");
+
+                // Bắt đầu countdown realtime
+                const timer = setInterval(() => {
+                    diffSeconds--;
+
+                    if (diffSeconds <= 0) {
+                        countdownEl.innerHTML = "Đã đến giờ khám!";
+                        clearInterval(timer);
+                        return;
+                    }
+
+                    countdownEl.innerHTML = formatCountdown(diffSeconds);
+                }, 1000);
+
+                // Dọn interval khi popup đóng
+                Swal.getPopup().addEventListener("swal:close", () => {
+                    clearInterval(timer);
+                });
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                return true;
+            }
+            return false;
+        });
+
+        return Swal.getResult()?.isConfirmed || false;
     };
 
     handleIsPaymentDoneButtonClick = async () => {
