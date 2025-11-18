@@ -183,10 +183,18 @@ class MakeAppointmentPage extends Component {
             language: this.props.language,
         });
 
-        if (res && res.errCode === 0) {
-            toast.success(`Record has been sent, wait for doctor's verification!`);
+        if (res) {
+            if (res.errCode === 0) {
+                toast.success("Đặt lịch thành công!");
+            } else if (res.errCode === 2) {
+                toast.error("Bạn đã có lịch với bác sĩ này trong ngày này!");
+            } else if (res.errCode === 3) {
+                toast.error("Bạn đã có lịch khác trong cùng thời điểm hẹn!");
+            } else {
+                toast.error("Gửi yêu cầu thất bại!");
+            }
         } else {
-            toast.error(`Send record fail!`);
+            toast.error("Mạng bị lỗi! Hãy thử lại sau.");
         }
     };
 
