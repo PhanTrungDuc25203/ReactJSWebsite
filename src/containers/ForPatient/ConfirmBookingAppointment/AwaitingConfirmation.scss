@@ -1,0 +1,29 @@
+.awaiting-confirmation-container {
+    height: 100vh;
+    // width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    .remind-title {
+        font-weight: 700;
+        font-size: 50px;
+        background: linear-gradient(90deg, #4c99f2, #50d4e3);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .remind-content {
+        background: linear-gradient(90deg, #50a1fe, #76c6ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 25px;
+    }
+    .remind-notice {
+        font-size: 18px;
+        background: linear-gradient(90deg, #50b9e3, #4c99f2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}

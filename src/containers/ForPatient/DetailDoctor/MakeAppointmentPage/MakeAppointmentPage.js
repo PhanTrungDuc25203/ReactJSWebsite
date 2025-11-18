@@ -186,6 +186,10 @@ class MakeAppointmentPage extends Component {
         if (res) {
             if (res.errCode === 0) {
                 toast.success("Đặt lịch thành công!");
+                window.open("/make-appointment/awaiting-confirmation", "_blank");
+                setTimeout(() => {
+                    this.props.history.push(`/home`);
+                }, 2000);
             } else if (res.errCode === 2) {
                 toast.error("Bạn đã có lịch với bác sĩ này trong ngày này!");
             } else if (res.errCode === 3) {

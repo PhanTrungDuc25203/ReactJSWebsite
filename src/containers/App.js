@@ -34,6 +34,7 @@ import GeneralExam from "./ForPatient/GeneralExam/GeneralExam.js";
 import SearchPage from "./ForPatient/SeachPage/SearchPage.js";
 import SchedulePage from "./SchedulePage/SchedulePage.js";
 import DetailExamPackage from "./ForPatient/DetailExamPackage/DetailExamPackage.js";
+import AwaitingConfirmation from "./ForPatient/ConfirmBookingAppointment/AwaitingConfirmation.js";
 
 class App extends Component {
     handlePersistorState = () => {
@@ -77,6 +78,8 @@ class App extends Component {
                                 <Route path={path.MAKE_APPOINTMENT_WITH_DOCTOR} component={MakeAppointmentPage} />
                                 {/* trang dăng kí Gói khám cho bệnh nhân */}
                                 <Route path={path.BOOKING_A_EXAM_PACKAGE} component={BookingAExamPackagePage} />
+                                {/* route nhắc nhở người dùng vào hòm thư của mình để xác nhận đặt lịch */}
+                                <Route path={path.AWAITING_CONFIRMATION} component={AwaitingConfirmation} />
                                 {/* route xác nhận đặt hẹn với bác sĩ */}
                                 <Route path={path.CONFIRM_BOOKING_APPOINTMENT} component={ConfirmBookingAppointment} />
                                 {/* trang thanh toán */}

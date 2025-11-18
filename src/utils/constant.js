@@ -9,6 +9,7 @@ export const path = {
     DETAIL_DOCTOR_ARTICLE: "/detail-doctor-article/doctor/:id",
     DETAIL_EXAM_PACKAGE_ARTICLE: "/detail-exam-package-article/package/:id",
     MAKE_APPOINTMENT_WITH_DOCTOR: "/make-appointment/:id/:date/:timeframe",
+    AWAITING_CONFIRMATION: "/make-appointment/awaiting-confirmation",
     BOOKING_A_EXAM_PACKAGE: "/booking-a-exam-package/:id/:date/:timeframe",
     CONFIRM_BOOKING_APPOINTMENT: "/confirm-booking",
     BOOKING_PAYMENT: "/booking-payment",
