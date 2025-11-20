@@ -49,7 +49,6 @@ const ScheduleTable = forwardRef(({ events = [], defaultView = "week" }, ref) =>
         },
     });
 
-    // Truyền method ra ngoài cho parent dùng
     useImperativeHandle(ref, () => ({
         goToDate(dateStr) {
             try {

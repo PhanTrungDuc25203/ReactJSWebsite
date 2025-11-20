@@ -1,58 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Lottie from "lottie-react";
 import assistantChatbot from "../../assets/AssistantGreenRobot.json";
 import "./Chatbot.scss";
 
 const Chatbot = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [messages, setMessages] = useState([]);
-    const [input, setInput] = useState("");
-
-    const toggleChat = () => {
-        setIsOpen(!isOpen);
+    const [iframeUrl, setIframeUrl] = useState("");
+    const toggleChat = () => setIsOpen(!isOpen);
+    const fetchAydSession = async () => {
+        try {
+            const res = await fetch("http://localhost:8080/api/ayd/session", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name: "Guest", email: "guest@example.com" }),
+            });
+            const data = await res.json();
+            setIframeUrl(data.url);
+        } catch (err) {
+            console.error("Lỗi khi tạo session AYD:", err);
+        }
     };
 
-    const sendMessage = () => {
-        if (!input.trim()) return;
+    useEffect(() => {
+        setIframeUrl(`https://www.askyourdatabase.com/chatbot/f7fbd201a6d6a7fcbcf843c18a6646bb`);
+        const handleMessage = (event) => {
+            if (event.data.type === "LOGIN_SUCCESS") {
+                setIframeUrl(event.data.url);
+            } else if (event.data.type === "LOGIN_REQUIRED") {
+                fetchAydSession();
+            }
+        };
 
-        setMessages([...messages, { sender: "user", text: input }]);
-        setInput("");
-
-        // sau này bạn sẽ call API AskYourDatabase tại đây
-        setTimeout(() => {
-            setMessages(prev => [...prev, { sender: "bot", text: "Đang xử lý câu hỏi..." }]);
-        }, 400);
-    };
+        window.addEventListener("message", handleMessage);
+        return () => window.removeEventListener("message", handleMessage);
+    }, []);
 
     return (
         <div className="chatbot-wrapper">
-            {/* ICON ROBOT */}
             <div className="chatbot-icon" onClick={toggleChat}>
                 <Lottie animationData={assistantChatbot} loop={true} />
             </div>
-
-            {/* KHUNG CHAT */}
             <div className={`chat-window ${isOpen ? "open" : ""}`}>
                 <div className="chat-header">
                     <span>Chat hỗ trợ</span>
-                    <button className="close-btn" onClick={toggleChat}>×</button>
+                    <button className="close-btn" onClick={toggleChat}>
+                        ×
+                    </button>
                 </div>
 
                 <div className="chat-body">
-                    {messages.map((msg, i) => (
-                        <div key={i} className={`message ${msg.sender}`}>
-                            {msg.text}
-                        </div>
-                    ))}
-                </div>
-
-                <div className="chat-input">
-                    <input
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        placeholder="Nhập câu hỏi..."
-                    />
-                    <button onClick={sendMessage}>Gửi</button>
+                    <iframe allow="clipboard-read; clipboard-write" src={iframeUrl} style={{ width: "100%", height: "100%", border: "none" }}></iframe>
                 </div>
             </div>
         </div>

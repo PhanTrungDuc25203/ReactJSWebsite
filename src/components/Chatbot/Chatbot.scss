@@ -5,7 +5,6 @@
     z-index: 999999;
 }
 
-/* ICON ROBOT */
 .chatbot-icon {
     width: 60px;
     height: 60px;
@@ -30,21 +29,20 @@
     }
 }
 
-/* KHUNG CHAT */
 .chat-window {
     position: absolute;
-    bottom: 80px;
+    bottom: 80px; // cách đáy 80px để không chạm icon
     right: 0;
-    width: 320px;
-    height: 420px;
+    width: 400px;
+    height: 70vh; // chiều cao tối đa 70% màn hình, không bị tràn
+    max-height: 600px; // cố định tối đa
+    min-height: 400px; // chiều cao tối thiểu cho chat
     background: #ffffff;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-
-    /* Animation slide */
     transform: translateX(120%);
     opacity: 0;
     transition: transform 0.35s ease, opacity 0.3s ease;
@@ -55,7 +53,6 @@
     }
 }
 
-/* HEADER */
 .chat-header {
     background: #0aa06a;
     padding: 12px;
@@ -80,57 +77,13 @@
     }
 }
 
-/* BODY */
 .chat-body {
     flex: 1;
-    padding: 12px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    overflow: hidden;
 
-    .message {
-        padding: 8px 12px;
-        border-radius: 10px;
-        max-width: 80%;
-        font-size: 14px;
-        line-height: 1.4;
-
-        &.user {
-            background: #e8f8ef;
-            align-self: flex-end;
-            color: #0d7a4a;
-        }
-
-        &.bot {
-            background: #f1f1f1;
-            align-self: flex-start;
-        }
-    }
-}
-
-/* INPUT */
-.chat-input {
-    display: flex;
-    border-top: 1px solid #ddd;
-
-    input {
-        flex: 1;
+    iframe {
+        width: 100%;
+        height: 100%;
         border: none;
-        padding: 12px;
-        outline: none;
-        font-size: 14px;
-    }
-
-    button {
-        background: #0aa06a;
-        color: white;
-        border: none;
-        padding: 0 16px;
-        cursor: pointer;
-
-        &:hover {
-            background: #088b5a;
-        }
     }
 }
