@@ -19,7 +19,7 @@ class RateAndReviewModal extends Component {
         if (!appointmentId) return;
 
         try {
-            const res = await getRateAndReviewAboutDoctorService(appointmentId);
+            const res = await getRateAndReviewAboutDoctorService({ appointmentId });
 
             if (res?.errCode === 0 && res.data) {
                 let { userEmail, doctorEmail, appointmentId, rating, content, images } = res.data;

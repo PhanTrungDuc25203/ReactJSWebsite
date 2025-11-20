@@ -1,0 +1,136 @@
+.chatbot-wrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999999;
+}
+
+/* ICON ROBOT */
+.chatbot-icon {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    border-radius: 50%;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.25s ease;
+
+    &:hover {
+        transform: scale(1.08);
+    }
+
+    canvas,
+    svg {
+        width: 60px !important;
+        height: 60px !important;
+    }
+}
+
+/* KHUNG CHAT */
+.chat-window {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 320px;
+    height: 420px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    /* Animation slide */
+    transform: translateX(120%);
+    opacity: 0;
+    transition: transform 0.35s ease, opacity 0.3s ease;
+
+    &.open {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* HEADER */
+.chat-header {
+    background: #0aa06a;
+    padding: 12px;
+    color: white;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .close-btn {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 22px;
+        cursor: pointer;
+        line-height: 0;
+        padding: 0 5px;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+}
+
+/* BODY */
+.chat-body {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .message {
+        padding: 8px 12px;
+        border-radius: 10px;
+        max-width: 80%;
+        font-size: 14px;
+        line-height: 1.4;
+
+        &.user {
+            background: #e8f8ef;
+            align-self: flex-end;
+            color: #0d7a4a;
+        }
+
+        &.bot {
+            background: #f1f1f1;
+            align-self: flex-start;
+        }
+    }
+}
+
+/* INPUT */
+.chat-input {
+    display: flex;
+    border-top: 1px solid #ddd;
+
+    input {
+        flex: 1;
+        border: none;
+        padding: 12px;
+        outline: none;
+        font-size: 14px;
+    }
+
+    button {
+        background: #0aa06a;
+        color: white;
+        border: none;
+        padding: 0 16px;
+        cursor: pointer;
+
+        &:hover {
+            background: #088b5a;
+        }
+    }
+}

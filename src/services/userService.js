@@ -180,8 +180,13 @@ const saveRateAndReviewAboutDoctorOrPackageService = (rateAndReviewData) => {
     return axios.post(`/api/save-rate-and-review-about-doctor`, rateAndReviewData);
 };
 
-const getRateAndReviewAboutDoctorService = (appointmentId) => {
-    return axios.get(`/api/get-rate-and-review-about-doctor?appointmentId=${appointmentId}`);
+const getRateAndReviewAboutDoctorService = ({ appointmentId, doctorId }) => {
+    const query = new URLSearchParams();
+
+    if (appointmentId) query.append("appointmentId", appointmentId);
+    if (doctorId) query.append("doctorId", doctorId);
+
+    return axios.get(`/api/get-rate-and-review-about-doctor?${query.toString()}`);
 };
 
 const createPaymentUrlService = (data) => {

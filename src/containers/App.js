@@ -35,6 +35,7 @@ import SearchPage from "./ForPatient/SeachPage/SearchPage.js";
 import SchedulePage from "./SchedulePage/SchedulePage.js";
 import DetailExamPackage from "./ForPatient/DetailExamPackage/DetailExamPackage.js";
 import AwaitingConfirmation from "./ForPatient/ConfirmBookingAppointment/AwaitingConfirmation.js";
+import Chatbot from "../components/Chatbot/Chatbot.js";
 
 class App extends Component {
     handlePersistorState = () => {
@@ -107,6 +108,7 @@ class App extends Component {
                                 <Route path={"/doctor"} component={userIsNotPatient(userIsAuthenticated(Doctor))} />
                             </Switch>
                             {/* </CustomScrollbars> */}
+                            <Chatbot />
                         </div>
 
                         <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
