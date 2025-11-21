@@ -17,6 +17,9 @@
     justify-content: center;
     align-items: center;
     transition: transform 0.25s ease;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 
     &:hover {
         transform: scale(1.08);
@@ -54,7 +57,8 @@
 }
 
 .chat-header {
-    background: #0aa06a;
+    background: linear-gradient(135deg, #0cb8bb 0%, #0bbcc0 50%, #12d8dc 100%);
+
     padding: 12px;
     color: white;
     font-weight: 600;

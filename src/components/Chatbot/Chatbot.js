@@ -42,7 +42,7 @@ const Chatbot = () => {
             </div>
             <div className={`chat-window ${isOpen ? "open" : ""}`}>
                 <div className="chat-header">
-                    <span>Chat hỗ trợ</span>
+                    <span>Trợ lý AI hỗ trợ</span>
                     <button className="close-btn" onClick={toggleChat}>
                         ×
                     </button>
