@@ -127,14 +127,7 @@ class RateAndReviewModal extends Component {
 
         try {
             let response = await saveRateAndReviewAboutDoctorOrPackageService(rateAndReviewData);
-            if (response && response.errCode === 0) {
-                // toast.success("Lưu đánh giá thành công!");
-            } else {
-                // toast.error(response.errMessage || "Không thể lưu đánh giá!");
-            }
-        } catch (error) {
-            // toast.error("Có lỗi khi lưu đánh giá!");
-        }
+        } catch (error) {}
 
         this.props.toggleUserModal();
     };
@@ -142,15 +135,18 @@ class RateAndReviewModal extends Component {
     render() {
         if (!this.props.isOpen) return null;
 
+        // 🔥 FIX: tạo group name riêng cho từng appointment
+        const radioGroupName = `feedback-${this.state.appointmentId}`;
+
         return (
             <div className="custom-modal-overlay">
                 <div className="custom-modal">
                     <div className="custom-modal-body">
-                        {/* Rating giữ nguyên kiểu dài */}
+                        {/* Rating */}
                         <div className="form-group rating">
                             <div className="feedback">
                                 <label className="angry">
-                                    <input type="radio" value="1" name="feedback" checked={this.state.rating === 1} onChange={this.handleRatingChange} />
+                                    <input type="radio" value="1" name={radioGroupName} checked={this.state.rating === 1} onChange={this.handleRatingChange} />
                                     <div>
                                         <svg className="eye left">
                                             <use xlinkHref="#eye" />
@@ -163,8 +159,9 @@ class RateAndReviewModal extends Component {
                                         </svg>
                                     </div>
                                 </label>
+
                                 <label className="sad">
-                                    <input type="radio" value="2" name="feedback" checked={this.state.rating === 2} onChange={this.handleRatingChange} />
+                                    <input type="radio" value="2" name={radioGroupName} checked={this.state.rating === 2} onChange={this.handleRatingChange} />
                                     <div>
                                         <svg className="eye left">
                                             <use xlinkHref="#eye" />
@@ -177,12 +174,14 @@ class RateAndReviewModal extends Component {
                                         </svg>
                                     </div>
                                 </label>
+
                                 <label className="ok">
-                                    <input type="radio" value="3" name="feedback" checked={this.state.rating === 3} onChange={this.handleRatingChange} />
+                                    <input type="radio" value="3" name={radioGroupName} checked={this.state.rating === 3} onChange={this.handleRatingChange} />
                                     <div></div>
                                 </label>
+
                                 <label className="good">
-                                    <input type="radio" value="4" name="feedback" checked={this.state.rating === 4} onChange={this.handleRatingChange} />
+                                    <input type="radio" value="4" name={radioGroupName} checked={this.state.rating === 4} onChange={this.handleRatingChange} />
                                     <div>
                                         <svg className="eye left">
                                             <use xlinkHref="#eye" />
@@ -195,8 +194,9 @@ class RateAndReviewModal extends Component {
                                         </svg>
                                     </div>
                                 </label>
+
                                 <label className="happy">
-                                    <input type="radio" value="5" name="feedback" checked={this.state.rating === 5} onChange={this.handleRatingChange} />
+                                    <input type="radio" value="5" name={radioGroupName} checked={this.state.rating === 5} onChange={this.handleRatingChange} />
                                     <div>
                                         <svg className="eye left">
                                             <use xlinkHref="#eye" />
@@ -207,7 +207,7 @@ class RateAndReviewModal extends Component {
                                     </div>
                                 </label>
 
-                                {/* SVG symbol defs */}
+                                {/* SVG */}
                                 <svg xmlns="http://www.w3.org/2000/svg" style={{ display: "none" }}>
                                     <symbol viewBox="0 0 7 4" id="eye">
                                         <path d="M1,1 C1.8333,2.1667 2.6667,2.75 3.5,2.75 C4.3333,2.75 5.1667,2.1667 6,1"></path>
@@ -247,7 +247,6 @@ class RateAndReviewModal extends Component {
                         </div>
                     </div>
 
-                    {/* Footer */}
                     <div className="custom-modal-footer">
                         <button className="submit-btn" onClick={this.handleSubmit}>
                             Gửi nhận xét

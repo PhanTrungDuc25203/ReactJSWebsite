@@ -9,6 +9,7 @@ import { getInforAndArticleForADoctor } from "../../../services/userService";
 import defaultAvatar from "../../../assets/images/default-avatar-circle.png";
 import { LANGUAGES } from "../../../utils";
 import CustomScrollbars from "../../../components/CustomScrollbars";
+import FeedbackAndComment from "./FeedbackAndComment";
 
 // Lazy load for sections
 const DoctorScheduleSection = React.lazy(() => import("./DoctorScheduleSection"));
@@ -108,7 +109,9 @@ const DetailArticleForADoctor = (props) => {
                             ></div>
                         )}
                     </div>
-                    <div className="feedback-and-comment">comment</div>
+                    <div className="feedback-and-comment">
+                        <FeedbackAndComment doctorId={doctorDetails.id || -1}/>
+                    </div>
                 </div>
                 <HomeFooter />
             </CustomScrollbars>
