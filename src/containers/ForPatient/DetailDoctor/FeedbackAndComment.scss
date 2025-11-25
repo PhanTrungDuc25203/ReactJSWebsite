@@ -41,6 +41,10 @@
                 flex-direction: column;
                 .patient-name {
                     font-weight: bold;
+                    .appointment-date {
+                        font-weight: 500;
+                        color: #44c5d4f7;
+                    }
                 }
                 .patient-email {
                     font-size: 15px;

@@ -317,4 +317,99 @@
             resize: none;
         }
     }
+    /* Overlay mờ toàn màn hình */
+    .custom-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* nền mờ */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000; /* đảm bảo nổi trên tất cả */
+    }
+
+    /* Box modal */
+    .custom-modal-content {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 20px 30px;
+        max-width: 600px;
+        width: 90%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        position: relative;
+        animation: fadeIn 0.2s ease-in-out;
+        .missing-item-section {
+            margin-bottom: 10px;
+            .missing-item {
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    /* Tiêu đề */
+    .custom-modal-content h5 {
+        margin-bottom: 15px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    /* Nội dung */
+    .custom-modal-content p {
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #333;
+    }
+
+    /* Nút bấm */
+    .modal-buttons {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .modal-buttons button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.2s;
+    }
+
+    /* Nút Hủy */
+    .modal-buttons button:first-child {
+        background-color: #eee;
+        color: #333;
+        width: 40%;
+    }
+
+    .modal-buttons button:first-child:hover {
+        background-color: #ddd;
+    }
+
+    /* Nút Đồng ý */
+    .modal-buttons button:last-child {
+        background-color: #007bff; /* xanh dương */
+        color: #fff;
+        width: 50%;
+    }
+
+    .modal-buttons button:last-child:hover {
+        background-color: #0056b3;
+    }
+
+    /* Animation mờ dần */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
 }

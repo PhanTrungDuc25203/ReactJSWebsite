@@ -38,6 +38,10 @@ class MakeAppointmentPage extends Component {
             doctorId: "",
             timeType: "",
             currentSystemUser: {},
+
+            showConfirmModal: false,
+            missingInfoFields: [],
+            needUpdateProfileInfo: true,
         };
     }
 
@@ -121,7 +125,7 @@ class MakeAppointmentPage extends Component {
                 phoneNumber: this.props.currentSystemUser.phoneNumber && this.props.currentSystemUser.phoneNumber,
                 email: this.props.currentSystemUser.email && this.props.currentSystemUser.email,
                 address: this.props.currentSystemUser.address && this.props.currentSystemUser.address,
-                birthday: this.props.currentSystemUser?.patientHasAppointmentWithDoctors?.[0]?.patientBirthday ? moment(this.props.currentSystemUser.patientHasAppointmentWithDoctors[0].patientBirthday).format("YYYY-MM-DD 00:00:00") : "",
+                birthday: this.props.currentSystemUser?.birthday ? moment(this.props.currentSystemUser.birthday, "DD/MM/YYYY").format("YYYY-MM-DD 00:00:00") : "",
             });
         }
     }
@@ -154,12 +158,28 @@ class MakeAppointmentPage extends Component {
         });
     };
 
-    handleSubmitForm = async () => {
-        //validate input
+    checkMissingUserInfo = () => {
+        const missingFields = [];
+        const { currentSystemUser, selectedGender, phoneNumber, address } = this.state;
 
-        //call api
+        if (!currentSystemUser.gender && selectedGender) missingFields.push("Giới tính");
+        if (!currentSystemUser.phoneNumber && phoneNumber) missingFields.push("Số điện thoại");
+        if (!currentSystemUser.address && address) missingFields.push("Địa chỉ");
+
+        return missingFields;
+    };
+
+    handleBeforeSubmit = () => {
+        const missingFields = this.checkMissingUserInfo();
+        if (missingFields.length > 0) {
+            this.setState({ showConfirmModal: true, missingInfoFields: missingFields });
+        } else {
+            this.submitBooking(); // không thiếu gì → submit luôn
+        }
+    };
+
+    submitBooking = async () => {
         let appointmentMoment = this.props.match.params.date;
-        //chuyển dạng date về loại db có thể lưu được
         if (this.props.language === LANGUAGES.VI) {
             appointmentMoment = moment(appointmentMoment, "dddd, DD-MM-YYYY", "vi").toDate();
         }
@@ -173,32 +193,29 @@ class MakeAppointmentPage extends Component {
             email: this.state.email,
             address: this.state.address,
             reason: this.state.reason,
-            date: appointmentMoment, //ngày để lưu vào DB
+            date: appointmentMoment,
             birthday: this.state.birthday,
             selectedGender: this.state.selectedGender,
             selectedPaymentMethod: this.state.selectedPaymentMethod,
-            appointmentMoment: this.props.match.params.date, //ngày để hiển thị dẽ dàng hơn
+            appointmentMoment: this.props.match.params.date,
             doctorId: this.state.doctorDetails.id,
             timeType: this.state.timeframe.keyMap,
+            needUpdateProfileInfo: this.state.needUpdateProfileInfo,
             language: this.props.language,
         });
 
-        if (res) {
-            if (res.errCode === 0) {
-                toast.success("Đặt lịch thành công!");
-                window.open("/make-appointment/awaiting-confirmation", "_blank");
-                setTimeout(() => {
-                    this.props.history.push(`/home`);
-                }, 2000);
-            } else if (res.errCode === 2) {
-                toast.error("Bạn đã có lịch với bác sĩ này trong ngày này!");
-            } else if (res.errCode === 3) {
-                toast.error("Bạn đã có lịch khác trong cùng thời điểm hẹn!");
-            } else {
-                toast.error("Gửi yêu cầu thất bại!");
-            }
+        if (res && res.errCode === 0) {
+            toast.success("Đặt lịch thành công!");
+            window.open("/make-appointment/awaiting-confirmation", "_blank");
+            setTimeout(() => {
+                this.props.history.push(`/home`);
+            }, 2000);
+        } else if (res && res.errCode === 2) {
+            toast.error("Bạn đã có lịch với bác sĩ này trong ngày này!");
+        } else if (res && res.errCode === 3) {
+            toast.error("Bạn đã có lịch khác trong cùng thời điểm hẹn!");
         } else {
-            toast.error("Mạng bị lỗi! Hãy thử lại sau.");
+            toast.error("Gửi yêu cầu thất bại!");
         }
     };
 
@@ -328,7 +345,7 @@ class MakeAppointmentPage extends Component {
                                             onChange={this.handleDatePickerChanged}
                                             className="date-picker-section"
                                             // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.dob" />}
-                                            value={currentSystemUser?.patientHasAppointmentWithDoctors?.[0]?.patientBirthday || this.state.birthday}
+                                            value={currentSystemUser?.birthday || this.state.birthday}
                                             // minDate={new Date().setHours(0, 0, 0, 0)}
                                         />
                                     </div>
@@ -437,11 +454,59 @@ class MakeAppointmentPage extends Component {
                                         <span> của chúng tôi</span>
                                     </div>
                                     <div className="button">
-                                        <button onClick={() => this.handleSubmitForm()}>Xác nhận đặt khám</button>
+                                        <button onClick={() => this.handleBeforeSubmit()}>Xác nhận đặt khám</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        {this.state.showConfirmModal && (
+                            <div className="custom-modal">
+                                <div className="custom-modal-content">
+                                    <h5>Xác nhận thông tin</h5>
+                                    <p>Thông tin cá nhân của bạn chưa đầy đủ!</p>
+                                    <div>
+                                        <p>Bạn có muốn cập nhật các trường sau trong thông tin cá nhân của bạn không?</p>
+                                        <div className="missing-item-section">
+                                            {this.state.missingInfoFields.includes("Địa chỉ") && (
+                                                <div className="missing-item">
+                                                    <b>Địa chỉ:</b> {this.state.address || "(chưa điền)"}
+                                                </div>
+                                            )}
+                                            {this.state.missingInfoFields.includes("Số điện thoại") && (
+                                                <div className="missing-item">
+                                                    <b>Số điện thoại:</b> {this.state.phoneNumber || "(chưa điền)"}
+                                                </div>
+                                            )}
+                                            {this.state.missingInfoFields.includes("Giới tính") && (
+                                                <div className="missing-item">
+                                                    <b>Giới tính:</b> {this.state.selectedGender || "(chưa chọn)"}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="modal-buttons">
+                                        <button
+                                            onClick={async () => {
+                                                this.setState({ showConfirmModal: false, needUpdateProfileInfo: false }, async () => {
+                                                    await this.submitBooking();
+                                                });
+                                            }}
+                                        >
+                                            Không cần và đặt lịch
+                                        </button>
+                                        <button
+                                            onClick={async () => {
+                                                this.setState({ showConfirmModal: false, needUpdateProfileInfo: true }, async () => {
+                                                    await this.submitBooking();
+                                                });
+                                            }}
+                                        >
+                                            Đồng ý và đặt lịch
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                     <FooterLite />
                 </CustomScrollbars>

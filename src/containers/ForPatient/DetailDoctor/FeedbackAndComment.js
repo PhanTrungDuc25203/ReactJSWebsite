@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { getRateAndReviewAboutDoctorService } from "../../../services/userService";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import "./FeedbackAndComment.scss";
 import defaultAvatar from "../../../assets/images/default-avatar-circle.png";
+import moment from "moment";
 
 class FeedbackAndComment extends Component {
     constructor(props) {
@@ -144,7 +147,14 @@ class FeedbackAndComment extends Component {
                                         }}
                                     ></div>
                                     <div className="patient-info">
-                                        <div className="patient-name">{this.getPatientName(item.patientData)}</div>
+                                        <div className="patient-name">
+                                            {this.getPatientName(item.patientData)}{" "}
+                                            <span className="appointment-date">
+                                                <FontAwesomeIcon icon={faCircleCheck} />
+                                                <span> </span>
+                                                Đã khám ngày {moment(item.appointmentData.date).format("DD/MM/YYYY")}
+                                            </span>
+                                        </div>
                                         {item.patientData?.email && <div className="patient-email">{item.patientData.email}</div>}
                                     </div>
                                     <div className="rating-box">
