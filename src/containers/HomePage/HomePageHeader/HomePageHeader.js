@@ -9,7 +9,7 @@ import {} from "@fortawesome/fontawesome-free-webfonts";
 import {} from "@fortawesome/fontawesome-svg-core";
 import {} from "@fortawesome/free-regular-svg-icons";
 import { faTooth, faHeartPulse, faSuitcaseMedical, faStethoscope } from "@fortawesome/free-solid-svg-icons";
-import {} from "@fortawesome/free-solid-svg-icons";
+import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/react-fontawesome";
 import Login from "../../Authenticate/Login";
 import { FormattedMessage } from "react-intl";
@@ -160,7 +160,16 @@ class HomePageHeader extends Component {
                             </div>
                             <div className="header-user-account-section" onClick={(isLoggedIn) => this.handleLoginForUser(this.props.isLoggedIn)}>
                                 <i className="far fa-user"></i>
-                                <div className="header-right-section-title title-3">{this.props.isLoggedIn ? userInfo.firstName : <FormattedMessage id="home-page-header.login" />}</div>
+                                <div className="header-right-section-title title-3">
+                                    {this.props.isLoggedIn ? (
+                                        <>
+                                            {userInfo.firstName}
+                                            {this.props.isProfileIncomplete && <FontAwesomeIcon icon={faCircle} style={{ color: "red", fontSize: "8px", margin: "0 0 0 5px" }} />}
+                                        </>
+                                    ) : (
+                                        <FormattedMessage id="home-page-header.login" />
+                                    )}
+                                </div>
                             </div>
                             <div className="header-user-language-option">
                                 <div className={language === LANGUAGES.VI ? "header-user-nation-icon" : "header-user-nation-icon active"}></div>
@@ -350,6 +359,7 @@ const mapStateToProps = (state) => {
         // và khi muốn sử dụng chúng trong component thì ta cần sử dụng tới hàm mapStateToProps
         language: state.app.language,
         userInfo: state.user.userInfo,
+        isProfileIncomplete: state.user.isProfileIncomplete,
     };
 };
 

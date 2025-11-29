@@ -5,15 +5,21 @@ const initialState = {
     userInfo: null,
     temporaryEmail: "",
     temporaryPassword: "",
+    isProfileIncomplete: false,
 };
 
 const appReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.USER_LOGIN_SUCCESS:
+            const user = action.userInfo;
+
+            const isMissingInfo = !user.address || !user.phoneNumber || !user.gender;
+
             return {
                 ...state,
                 isLoggedIn: true,
-                userInfo: action.userInfo,
+                userInfo: user,
+                isProfileIncomplete: isMissingInfo,
             };
         case actionTypes.USER_LOGIN_FAIL:
             return {
