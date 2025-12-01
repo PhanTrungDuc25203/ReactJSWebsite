@@ -4,7 +4,7 @@ import HomePageHeader from "../../HomePage/HomePageHeader/HomePageHeader";
 import "./DetailMedicalFacility.scss";
 import HomeFooter from "../../HomePage/HomeFooter/HomeFooter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faMapLocationDot, faRoute } from "@fortawesome/free-solid-svg-icons";
 import { getInfoOfMedicalFacility } from "../../../services/userService";
 import { LANGUAGES } from "../../../utils";
 import CustomScrollbars from "../../../components/CustomScrollbars";
@@ -15,6 +15,8 @@ import DoctorScheduleComponent from "../../ForPatient/DoctorScheduleComponent/Do
 import PackageScheduleComponent from "../../ForPatient/PackageScheduleComponent/PackageScheduleComponent";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import "leaflet-routing-machine";
+import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 
 class DetailMedicalFacility extends Component {
     constructor(props) {
@@ -67,34 +69,118 @@ class DetailMedicalFacility extends Component {
 
     initializeMap = async () => {
         const { medicalFacility } = this.state;
-        // console.log("Check location data: ", medicalFacility.address);
-        const address = medicalFacility && medicalFacility.address;
-        if (!address) return;
+        const name = medicalFacility.name;
+        if (!name) return;
 
-        // tạo săn ảnh của map là Trung tâm Hà Nội
+        // 1. Khởi tạo map
         this.map = L.map("map-container").setView([21.028511, 105.804817], 13);
 
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            attribution: "&copy; OpenStreetMap contributors",
         }).addTo(this.map);
 
-        try {
-            // Sử dụng Nominatim API để chuyển đổi địa chỉ thành tọa độ
-            const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
-            const data = await response.json();
+        // 2. Fix marker default icon
+        const defaultIcon = L.icon({
+            iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+            iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+            shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+        });
+        L.Marker.prototype.options.icon = defaultIcon;
 
-            if (data && data.length > 0) {
-                const { lat, lon } = data[0];
-                // Di chuyển bản đồ đến tọa độ tìm được
-                this.map.setView([lat, lon], 15);
-                // Thêm marker vào bản đồ
-                L.marker([lat, lon]).addTo(this.map).bindPopup(`<b>${medicalFacility.name}</b><br>${address}`).openPopup();
-            } else {
-                console.warn("Không tìm thấy vị trí cho địa chỉ này.");
+        // 3. Geocode địa chỉ cơ sở y tế
+        try {
+            const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(name)}`);
+            const data = await res.json();
+            if (!data || data.length === 0) {
+                console.warn("Không tìm thấy vị trí cơ sở y tế");
+                return;
             }
+
+            const lat = parseFloat(data[0].lat);
+            const lon = parseFloat(data[0].lon);
+
+            // Marker cơ sở y tế
+            L.marker([lat, lon]).addTo(this.map).bindPopup(`<b>${medicalFacility.name}</b><br>${name}`);
+
+            // Center map
+            this.map.setView([lat, lon], 15);
+
+            // 4. Hiển thị vị trí người dùng (icon mũi tên)
+            if (navigator.geolocation) {
+                navigator.geolocation.watchPosition(
+                    (pos) => {
+                        const userLat = pos.coords.latitude;
+                        const userLon = pos.coords.longitude;
+
+                        // Custom arrow icon
+                        const userIcon = L.icon({
+                            iconUrl: "https://cdn-icons-png.flaticon.com/512/60/60525.png", // mũi tên
+                            iconSize: [30, 30],
+                            iconAnchor: [15, 15],
+                        });
+
+                        // Marker vị trí người dùng
+                        this.userMarker = L.marker([userLat, userLon], { icon: userIcon }).addTo(this.map);
+                    },
+                    (err) => console.warn("Không lấy được vị trí người dùng", err),
+                    { enableHighAccuracy: true }
+                );
+            }
+
+            // 5. Thêm nút "Dẫn đường"
+            const routeBtn = L.control({ position: "topleft" });
+            routeBtn.onAdd = () => {
+                const btn = L.DomUtil.create("button", "route-btn");
+                btn.innerHTML = `➤`;
+                btn.style.padding = "8px 12px";
+                btn.style.background = "#007bff";
+                btn.style.color = "#fff";
+                btn.style.border = "none";
+                btn.style.borderRadius = "6px";
+                btn.style.cursor = "pointer";
+                const icon = btn.querySelector("i");
+                btn.onclick = () => this.startRouting(lat, lon);
+                return btn;
+            };
+            routeBtn.addTo(this.map);
         } catch (error) {
-            console.error("Lỗi khi tìm kiếm vị trí:", error);
+            console.error("Lỗi khi tìm kiếm địa chỉ cơ sở y tế", error);
         }
+    };
+
+    // ==========================
+    // Hàm startRouting: chỉ chạy khi user bấm nút
+    // ==========================
+    startRouting = (destLat, destLon) => {
+        if (!navigator.geolocation) {
+            alert("Trình duyệt không hỗ trợ GPS");
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                const userLat = pos.coords.latitude;
+                const userLon = pos.coords.longitude;
+
+                // Xóa routing cũ nếu đã có
+                if (this.routingControl) {
+                    this.map.removeControl(this.routingControl);
+                }
+
+                // Thêm routing mới
+                this.routingControl = L.Routing.control({
+                    waypoints: [L.latLng(userLat, userLon), L.latLng(destLat, destLon)],
+                    lineOptions: { styles: [{ color: "blue", weight: 5 }] },
+                    addWaypoints: false,
+                    draggableWaypoints: false,
+                    routeWhileDragging: false,
+                    showAlternatives: false,
+                }).addTo(this.map);
+            },
+            () => alert("Không lấy được vị trí hiện tại.")
+        );
     };
 
     handleSpinnerTypeChange = (event) => {

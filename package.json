@@ -30,6 +30,7 @@
     "js-file-download": "^0.4.12",
     "jwt-decode": "^4.0.0",
     "leaflet": "^1.7.1",
+    "leaflet-routing-machine": "^3.2.12",
     "lodash": "^4.17.21",
     "lottie-react": "^2.4.1",
     "markdown-it": "^12.1.0",
