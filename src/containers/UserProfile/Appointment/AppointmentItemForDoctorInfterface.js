@@ -232,18 +232,19 @@ class AppointmentItemForDoctorInfterface extends Component {
     };
 
     checkAppointmentTime = async (appointmentDate, appointmentTimeFrame) => {
-        const [day, month, year] = appointmentDate.split("-");
+        // Parse ngày: DD-MM-YYYY
+        const [day, month, year] = appointmentDate.split("-").map(Number);
         const startTimeStr = appointmentTimeFrame.split(" - ")[0];
-        const [hour, minute] = startTimeStr.split(":");
+        const [hour, minute] = startTimeStr.split(":").map(Number);
 
-        // Tạo object date chuẩn
-        const appointmentStart = new Date(year, Number(month) - 1, day, hour, minute, 0);
+        // Tạo thời gian lịch hẹn (local time, KHÔNG lệch giờ)
+        const appointmentStart = new Date(year, month - 1, day, hour, minute, 0);
         const now = new Date();
 
-        // Nếu đã đến giờ khám → cho qua luôn
+        // Nếu đã đến giờ → cho qua
         if (now >= appointmentStart) return true;
 
-        // Hàm format thời gian còn lại
+        // Format thời gian còn lại
         const formatCountdown = (secondsLeft) => {
             let d = Math.floor(secondsLeft / 86400);
             let h = Math.floor((secondsLeft % 86400) / 3600);
@@ -258,8 +259,8 @@ class AppointmentItemForDoctorInfterface extends Component {
 
         let diffSeconds = Math.floor((appointmentStart - now) / 1000);
 
-        // Hiển thị popup lần đầu
-        await Swal.fire({
+        // Show popup
+        const result = await Swal.fire({
             title: "Chưa tới giờ khám",
             html: `
             Ca khám này của bạn sẽ bắt đầu sau:<br>
@@ -273,7 +274,6 @@ class AppointmentItemForDoctorInfterface extends Component {
             didOpen: () => {
                 const countdownEl = Swal.getPopup().querySelector("#countdown-text");
 
-                // Bắt đầu countdown realtime
                 const timer = setInterval(() => {
                     diffSeconds--;
 
@@ -286,19 +286,14 @@ class AppointmentItemForDoctorInfterface extends Component {
                     countdownEl.innerHTML = formatCountdown(diffSeconds);
                 }, 1000);
 
-                // Dọn interval khi popup đóng
                 Swal.getPopup().addEventListener("swal:close", () => {
                     clearInterval(timer);
                 });
             },
-        }).then((result) => {
-            if (result.isConfirmed) {
-                return true;
-            }
-            return false;
         });
 
-        return Swal.getResult()?.isConfirmed || false;
+        // Trả kết quả đúng
+        return result.isConfirmed;
     };
 
     handleIsPaymentDoneButtonClick = async () => {

@@ -24,6 +24,7 @@ class HomePageHeader extends Component {
         this.state = {
             searchTerm: "",
             searchFilter: "",
+            isProfileIncomplete: "",
         };
     }
 
@@ -39,6 +40,11 @@ class HomePageHeader extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.isLoggedIn !== this.props.isLoggedIn) {
+        }
+        if (prevProps.isProfileIncomplete !== this.props.isProfileIncomplete) {
+            this.setState({
+                isProfileIncomplete: this.props.isProfileIncomplete,
+            });
         }
     }
 
@@ -164,7 +170,7 @@ class HomePageHeader extends Component {
                                     {this.props.isLoggedIn ? (
                                         <>
                                             {userInfo.firstName}
-                                            {this.props.isProfileIncomplete && <FontAwesomeIcon icon={faCircle} style={{ color: "red", fontSize: "8px", margin: "0 0 0 5px" }} />}
+                                            {this.state.isProfileIncomplete && <FontAwesomeIcon icon={faCircle} style={{ color: "red", fontSize: "8px", margin: "0 0 0 5px" }} />}
                                         </>
                                     ) : (
                                         <FormattedMessage id="home-page-header.login" />
