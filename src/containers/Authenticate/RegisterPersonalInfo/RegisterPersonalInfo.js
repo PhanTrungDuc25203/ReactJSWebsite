@@ -8,8 +8,11 @@ import { LANGUAGES, CommonUtils } from "../../../utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCameraRetro, faCameraRotate } from "@fortawesome/free-solid-svg-icons";
 import { Input } from "reactstrap";
+import { createNewUserService, sendPhoneOTP, verifyPhoneOTP } from "../../../services/userService";
 import { FormattedMessage } from "react-intl";
 import { withRouter } from "react-router";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 import defaultAvatar from "../../../assets/images/default-avatar-circle.png";
 
 class RegisterPersonalInfo extends Component {
@@ -67,22 +70,57 @@ class RegisterPersonalInfo extends Component {
         });
     };
 
+    formatPhoneNumberVN = (phoneNumber) => {
+        // Nếu bắt đầu bằng '0' → đổi thành +84
+        if (phoneNumber.startsWith("0")) {
+            return "+84" + phoneNumber.slice(1);
+        }
+        return phoneNumber;
+    };
+
     handleRegisterButtonClicked = async () => {
-        // console.log("check state before save: ", this.state);
-        // console.log("check props before save: ", this.props);
-        this.props.addNewUserByRedux({
-            email: this.props.userTemporaryEmail,
-            password: this.props.userTemporaryPassword,
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            address: this.state.address,
-            phoneNumber: this.state.phoneNumber,
-            gender: this.state.gender,
-            image: this.state.avatarImage,
-            roleId: this.state.roleId,
-            positionId: this.state.positionId,
-        });
-        this.props.history.push(`/login`);
+        const phoneNumber = this.formatPhoneNumberVN(this.state.phoneNumber);
+
+        try {
+            await sendPhoneOTP(phoneNumber);
+
+            Swal.fire({
+                title: "Nhập mã OTP vừa được gửi tới số điện thoại của bạn",
+                input: "text",
+                inputPlaceholder: "Nhập OTP",
+                showCancelButton: true,
+                confirmButtonText: "Xác nhận",
+            }).then(async (result) => {
+                if (!result.value) return;
+
+                const otp = result.value;
+
+                const verifyRes = await verifyPhoneOTP(phoneNumber, otp);
+
+                if (verifyRes.res.status === "approved") {
+                    await createNewUserService({
+                        email: this.props.userTemporaryEmail,
+                        password: this.props.userTemporaryPassword,
+                        firstName: this.state.firstName,
+                        lastName: this.state.lastName,
+                        address: this.state.address,
+                        phoneNumber: this.state.phoneNumber,
+                        gender: this.state.gender,
+                        image: this.state.avatarImage,
+                        roleId: this.state.roleId,
+                        positionId: this.state.positionId,
+                    });
+
+                    toast.success("Register successfully!");
+                    this.props.history.push(`/login`);
+                } else {
+                    toast.error("OTP incorrect, please try again!");
+                }
+            });
+        } catch (error) {
+            console.log(error);
+            toast.error("Failed to send OTP. Please try again.");
+        }
     };
 
     handleBackToLoginButtonClicked = () => {

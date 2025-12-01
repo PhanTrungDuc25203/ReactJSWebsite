@@ -6,11 +6,12 @@ import * as actions from "../../store/actions";
 import "./Register.scss";
 import { path } from "../../utils";
 import { FormattedMessage } from "react-intl";
-import { handleLoginAPI } from "../../services/userService";
+import { handleLoginAPI, sendEmailOTPAPI, verifyEmailOTPAPI } from "../../services/userService";
 import CustomScrollbars from "../../components/CustomScrollbars";
 import { withRouter } from "react-router";
 import RegisterPersonalInfo from "./RegisterPersonalInfo/RegisterPersonalInfo";
 import { checkUserEmailIsAlreadyExist } from "../../services/userService";
+import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 
 class Register extends Component {
@@ -107,17 +108,37 @@ class Register extends Component {
     };
 
     nextStepToCreateAccount = async () => {
-        let isAlreadyExist = true;
-        if (this.state.email && this.state.password) {
-            isAlreadyExist = await checkUserEmailIsAlreadyExist(this.state.email);
-            if (!isAlreadyExist) {
-                this.props.saveUserEmailAndPasswordTemporarily(this.state.email, this.state.password);
-            } else {
-                toast.error("User is already exist, try another email!");
-            }
+        const { email, password, isPasswordMatch, isEmailValid } = this.state;
+
+        if (!isPasswordMatch || !isEmailValid) return;
+
+        let isAlreadyExist = await checkUserEmailIsAlreadyExist(email);
+        if (isAlreadyExist) {
+            toast.error("User is already exist, try another email!");
+            return;
         }
-        if (this.state.isPasswordMatch && !isAlreadyExist && this.state.isEmailValid) {
-            this.props.history.push(`/register/personal-info`);
+
+        const res = await sendEmailOTPAPI(email);
+
+        if (res.errCode === 0) {
+            Swal.fire({
+                title: "Verify your Email",
+                input: "text",
+                inputPlaceholder: "Enter OTP",
+                showCancelButton: true,
+                confirmButtonText: "Verify",
+            }).then(async (result) => {
+                if (!result.value) return;
+
+                let verify = await verifyEmailOTPAPI(email, result.value);
+
+                if (verify.errCode === 0) {
+                    this.props.saveUserEmailAndPasswordTemporarily(email, password);
+                    this.props.history.push(`/register/personal-info`);
+                } else {
+                    toast.error("OTP incorrect!");
+                }
+            });
         }
     };
 

@@ -201,6 +201,22 @@ const saveClinicalReportContentToDatabase = (data) => {
     return axios.post("/api/save-clinical-report-content-to-database", data);
 };
 
+const sendEmailOTPAPI = async (email) => {
+    return axios.post("/api/send-email-otp", { email });
+};
+
+const verifyEmailOTPAPI = async (email, otp) => {
+    return axios.post("/api/verify-email-otp", { email, otp });
+};
+
+const sendPhoneOTP = async (phoneNumber) => {
+    return axios.post("/api/send-phone-otp", { phoneNumber });
+};
+
+const verifyPhoneOTP = async (phoneNumber, otp) => {
+    return axios.post("/api/verify-phone-otp", { phoneNumber, otp });
+};
+
 export {
     handleLoginAPI,
     handleGoogleLoginService,
@@ -242,4 +258,8 @@ export {
     createPaymentUrlService,
     postVisitPaymentService,
     saveClinicalReportContentToDatabase,
+    sendEmailOTPAPI,
+    verifyEmailOTPAPI,
+    sendPhoneOTP,
+    verifyPhoneOTP,
 };
