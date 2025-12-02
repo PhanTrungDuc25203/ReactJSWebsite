@@ -69,23 +69,33 @@ class AppointmentInProfilePage extends PureComponent {
                                 (item.statusId !== "S3" || item.paymentStatus !== "PT3") && (
                                     <div className="appointment-item" key={index}>
                                         {isDoctor ? (
-                                            <AppointmentItemForDoctorInfterface
+                                            item.statusId !== "S1" && (
+                                                <AppointmentItemForDoctorInfterface
+                                                    scheduleStatus={item.statusId}
+                                                    appointmentId={item.id}
+                                                    meetPatientId={item.patientId}
+                                                    appointmentDate={moment(item.date).format("DD-MM-YYYY")}
+                                                    appointmentTimeFrame={item.appointmentTimeTypeData?.value_Vie}
+                                                    examReason={item.examReason}
+                                                    patientBirthday={moment(item.patientBirthday).format("DD-MM-YYYY")}
+                                                    patientAddress={item.patientAddress}
+                                                    paymentMethod={item.paymentMethod}
+                                                    paymentStatus={item.paymentStatus}
+                                                    paidAmount={item.paidAmount}
+                                                    files={item.files}
+                                                    statusId={item.statusId}
+                                                />
+                                            )
+                                        ) : (
+                                            <AppointmentItemForPatientInfterface
                                                 scheduleStatus={item.statusId}
+                                                paymentStatus={item.paymentStatus}
                                                 appointmentId={item.id}
-                                                meetPatientId={item.patientId}
+                                                meetDoctorId={item.doctorId}
                                                 appointmentDate={moment(item.date).format("DD-MM-YYYY")}
                                                 appointmentTimeFrame={item.appointmentTimeTypeData?.value_Vie}
-                                                examReason={item.examReason}
-                                                patientBirthday={moment(item.patientBirthday).format("DD-MM-YYYY")}
-                                                patientAddress={item.patientAddress}
-                                                paymentMethod={item.paymentMethod}
-                                                paymentStatus={item.paymentStatus}
-                                                paidAmount={item.paidAmount}
-                                                files={item.files}
-                                                statusId={item.statusId}
+                                                medicalReport={item.files}
                                             />
-                                        ) : (
-                                            <AppointmentItemForPatientInfterface scheduleStatus={item.statusId} appointmentId={item.id} meetDoctorId={item.doctorId} appointmentDate={moment(item.date).format("DD-MM-YYYY")} appointmentTimeFrame={item.appointmentTimeTypeData?.value_Vie} />
                                         )}
                                     </div>
                                 )
