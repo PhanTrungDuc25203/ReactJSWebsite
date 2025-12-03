@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import "./FeedbackAndComment.scss";
 import defaultAvatar from "../../../assets/images/default-avatar-circle.png";
+import Lightbox from "react-image-lightbox";
 import moment from "moment";
 
 class FeedbackAndComment extends Component {
@@ -14,6 +15,9 @@ class FeedbackAndComment extends Component {
         this.state = {
             feedbackAndComments: [],
             averageRating: null,
+            isLightBoxOpen: false,
+            lightboxImages: [],
+            photoIndex: 0,
         };
     }
 
@@ -65,6 +69,15 @@ class FeedbackAndComment extends Component {
         } catch (e) {
             console.log("Error fetch feedback: ", e);
         }
+    };
+
+    openLightbox = (images, index) => {
+        const formatted = images.map((img) => this.getImageSrc(img));
+        this.setState({
+            isOpen: true,
+            lightboxImages: formatted,
+            photoIndex: index,
+        });
     };
 
     // Convert ảnh review
@@ -168,7 +181,7 @@ class FeedbackAndComment extends Component {
                                 {item.images && item.images.length > 0 && (
                                     <div className="patient-uploaded-img">
                                         {item.images.map((img, idx) => (
-                                            <img key={idx} src={this.getImageSrc(img)} alt="review-img" />
+                                            <img key={idx} src={this.getImageSrc(img)} alt="review-img" onClick={() => this.openLightbox(item.images, idx)} className="clickable-img" />
                                         ))}
                                     </div>
                                 )}
@@ -177,6 +190,24 @@ class FeedbackAndComment extends Component {
                             </div>
                         );
                     })
+                )}
+                {this.state.isOpen && (
+                    <Lightbox
+                        mainSrc={this.state.lightboxImages[this.state.photoIndex]}
+                        nextSrc={this.state.lightboxImages[(this.state.photoIndex + 1) % this.state.lightboxImages.length]}
+                        prevSrc={this.state.lightboxImages[(this.state.photoIndex + this.state.lightboxImages.length - 1) % this.state.lightboxImages.length]}
+                        onCloseRequest={() => this.setState({ isOpen: false })}
+                        onMovePrevRequest={() =>
+                            this.setState({
+                                photoIndex: (this.state.photoIndex + this.state.lightboxImages.length - 1) % this.state.lightboxImages.length,
+                            })
+                        }
+                        onMoveNextRequest={() =>
+                            this.setState({
+                                photoIndex: (this.state.photoIndex + 1) % this.state.lightboxImages.length,
+                            })
+                        }
+                    />
                 )}
             </div>
         );
