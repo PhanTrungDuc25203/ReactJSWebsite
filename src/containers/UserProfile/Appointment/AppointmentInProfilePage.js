@@ -16,6 +16,9 @@ class AppointmentInProfilePage extends PureComponent {
         super(props);
         this.state = {
             historyOrHandling: "handling",
+            filterOption: "",
+            fromDate: "",
+            toDate: "",
         };
     }
 
@@ -44,16 +47,50 @@ class AppointmentInProfilePage extends PureComponent {
         const currentView = parsed.view || "handling";
         const newView = currentView === "history" ? "handling" : "history";
 
-        // push lên URL
         history.push({
             pathname: location.pathname,
             search: `?tab=appointment&view=${newView}`,
         });
 
-        // ✅ Chỉ gọi refresh khi quay TRỞ LẠI tab handling
         if (newView === "handling" && typeof onRefreshAppointments === "function") {
             await onRefreshAppointments();
         }
+    };
+
+    getFilteredAppointments = (appointments) => {
+        const { filterOption, fromDate, toDate } = this.state;
+
+        let updated = [...appointments];
+
+        if (fromDate) {
+            updated = updated.filter((item) => moment(item.date).isSameOrAfter(fromDate, "day"));
+        }
+        if (toDate) {
+            updated = updated.filter((item) => moment(item.date).isSameOrBefore(toDate, "day"));
+        }
+
+        switch (filterOption) {
+            case "date_asc":
+                updated.sort((a, b) => new Date(a.date) - new Date(b.date));
+                break;
+
+            case "date_desc":
+                updated.sort((a, b) => new Date(b.date) - new Date(a.date));
+                break;
+
+            case "pending":
+                updated = updated.filter((item) => item.statusId === "S2");
+                break;
+
+            case "completed":
+                updated = updated.filter((item) => item.statusId === "S3");
+                break;
+
+            default:
+                break;
+        }
+
+        return updated;
     };
 
     renderAppointmentItems = (appointments, isDoctor) => {
@@ -115,13 +152,33 @@ class AppointmentInProfilePage extends PureComponent {
         return (
             <div className="appointment-in-profile-page">
                 <div className="appointment-in-profile-page-header">
-                    <div className="appointment-in-profile-page-title">Danh sách lịch hẹn đã đặt</div>
+                    <div className="left-section">
+                        <div className="appointment-in-profile-page-title">Danh sách lịch hẹn đã đặt</div>
+                        <div className="appointment-filter">
+                            <select className="form-select" value={this.state.filterOption} onChange={(e) => this.setState({ filterOption: e.target.value })}>
+                                <option value="">-- Lọc / Sắp xếp lịch hẹn --</option>
+                                <option value="date_asc">Ngày khám (sớm → muộn)</option>
+                                <option value="date_desc">Ngày khám (muộn → sớm)</option>
+                                <option value="pending">Chưa khám</option>
+                                <option value="completed">Đã khám</option>
+                                {}
+                                <option value="">-- Clear -- </option>
+                            </select>
+                            <div className="date-range">
+                                <input type="date" value={this.state.fromDate} onChange={(e) => this.setState({ fromDate: e.target.value })} />
+
+                                <span className="dash">—</span>
+
+                                <input type="date" value={this.state.toDate} onChange={(e) => this.setState({ toDate: e.target.value })} />
+                            </div>
+                        </div>
+                    </div>
                     <a className={historyOrHandling === "history" ? "btn-flip-backward" : "btn-flip"} data-back={historyOrHandling === "history" ? "Chưa khám" : "Lịch sử"} data-front={historyOrHandling === "history" ? "Lịch sử" : "Chưa khám"} onClick={this.handleHistoryOrHandlingButtonClicked} />
                 </div>
                 <div className="appointment-container">
-                    {combinedAppointments.patientAppointments && combinedAppointments.patientAppointments.length > 0 ? this.renderAppointmentItems(combinedAppointments.patientAppointments, false) : userRole === "R3" && "Bạn chưa có lịch hẹn nào với bác sĩ"}
+                    {combinedAppointments.patientAppointments && combinedAppointments.patientAppointments.length > 0 ? this.renderAppointmentItems(this.getFilteredAppointments(combinedAppointments.patientAppointments), false) : userRole === "R3" && "Bạn chưa có lịch hẹn nào với bác sĩ"}
 
-                    {combinedAppointments.doctorAppointments && combinedAppointments.doctorAppointments.length > 0 ? this.renderAppointmentItems(combinedAppointments.doctorAppointments, true) : userRole === "R2" && "Bạn chưa có lịch hẹn nào với bệnh nhân"}
+                    {combinedAppointments.doctorAppointments && combinedAppointments.doctorAppointments.length > 0 ? this.renderAppointmentItems(this.getFilteredAppointments(combinedAppointments.doctorAppointments), true) : userRole === "R2" && "Bạn chưa có lịch hẹn nào với bệnh nhân"}
 
                     {userRole === "R1" && "Bạn là admin nên không có gì trong này đâu:))"}
                 </div>
