@@ -35,7 +35,7 @@
                 SELECT FILTER
                 ---------------------------- */
                 .form-select {
-                    width: 230px;
+                    width: 220px;
                     height: 35px;
                     border: 1px solid #dfe5ec;
                     border-radius: 12px;
@@ -46,7 +46,6 @@
                     transition: all 0.2s ease;
                     appearance: none;
                     outline: none;
-                    font-weight: 700;
                     color: #3b82f6;
 
                     /* icon mũi tên custom */
@@ -81,7 +80,7 @@
                     /* input date */
                     input[type="date"] {
                         height: 35px;
-                        width: 140px;
+                        width: 130px;
                         padding: 10px 14px;
                         border: 1px solid #dfe5ec;
                         border-radius: 12px;
@@ -91,7 +90,6 @@
                         cursor: pointer;
                         transition: all 0.2s ease;
                         outline: none;
-                        font-weight: 700;
 
                         &:hover {
                             border-color: #c5ceda;

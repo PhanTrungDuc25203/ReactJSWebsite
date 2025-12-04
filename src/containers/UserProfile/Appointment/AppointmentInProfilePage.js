@@ -139,7 +139,13 @@ class AppointmentInProfilePage extends PureComponent {
                         )}
                     </Suspense>
                 ) : (
-                    <Suspense fallback={<div>Loading...</div>}>{isDoctor ? <HistoryOfDoctorAppointment currentUserEmail={currentUserEmail} /> : <HistoryOfPatientAppointment currentUserEmail={currentUserEmail} />}</Suspense>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        {isDoctor ? (
+                            <HistoryOfDoctorAppointment currentUserEmail={currentUserEmail} filterOption={this.state.filterOption} fromDate={this.state.fromDate} toDate={this.state.toDate} />
+                        ) : (
+                            <HistoryOfPatientAppointment currentUserEmail={currentUserEmail} filterOption={this.state.filterOption} fromDate={this.state.fromDate} toDate={this.state.toDate} />
+                        )}
+                    </Suspense>
                 )}
             </div>
         );
@@ -167,7 +173,7 @@ class AppointmentInProfilePage extends PureComponent {
                             <div className="date-range">
                                 <input type="date" value={this.state.fromDate} onChange={(e) => this.setState({ fromDate: e.target.value })} />
 
-                                <span className="dash">—</span>
+                                <span className="dash">~</span>
 
                                 <input type="date" value={this.state.toDate} onChange={(e) => this.setState({ toDate: e.target.value })} />
                             </div>

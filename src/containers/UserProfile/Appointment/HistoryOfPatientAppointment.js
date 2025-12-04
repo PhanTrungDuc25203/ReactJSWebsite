@@ -4,7 +4,7 @@ import "./HistoryOfAppointment.scss";
 import moment from "moment";
 import { getAppointmentHistoriesByPatientEmail } from "../../../services/userService";
 import * as actions from "../../../store/actions";
-import HistoryAppointmentItem from "./HistoryAppointmentItem ";
+import HistoryAppointmentItem from "./HistoryAppointmentItem";
 
 class HistoryOfPatientAppointment extends Component {
     constructor(props) {
@@ -44,12 +44,43 @@ class HistoryOfPatientAppointment extends Component {
         }
     };
 
-    render() {
-        const { appointmentHistory } = this.state;
+    applyFilter = () => {
+        const { filterOption, fromDate, toDate } = this.props;
+        let updated = [...this.state.appointmentHistory];
 
-        return (
-            <div className="patient-appointment-history-container">{appointmentHistory.length > 0 ? appointmentHistory.map((appointment, index) => <HistoryAppointmentItem key={index} appointment={appointment} userEmail={this.props.userEmail} />) : <p>Bạn không có lịch sử khám bệnh nào.</p>}</div>
-        );
+        if (fromDate) {
+            updated = updated.filter((a) => moment(a.date).isSameOrAfter(fromDate, "day"));
+        }
+
+        if (toDate) {
+            updated = updated.filter((a) => moment(a.date).isSameOrBefore(toDate, "day"));
+        }
+
+        switch (filterOption) {
+            case "date_asc":
+                updated.sort((a, b) => new Date(a.date) - new Date(b.date));
+                break;
+
+            case "date_desc":
+                updated.sort((a, b) => new Date(b.date) - new Date(a.date));
+                break;
+
+            case "pending": // chưa khám
+                updated = updated.filter((a) => a.statusId === "S2");
+                break;
+
+            case "completed": // đã khám
+                updated = updated.filter((a) => a.statusId === "S3");
+                break;
+        }
+
+        return updated;
+    };
+
+    render() {
+        const filtered = this.applyFilter();
+
+        return <div className="patient-appointment-history-container">{filtered.length > 0 ? filtered.map((appointment, index) => <HistoryAppointmentItem key={index} appointment={appointment} userEmail={this.props.userEmail} />) : <p>Bạn không có lịch sử khám bệnh nào.</p>}</div>;
     }
 }
 

@@ -16,6 +16,7 @@ class HistoryOfDoctorAppointment extends Component {
         this.state = {
             currentUserEmail: "",
             appointmentHistory: [],
+            reportText: "",
             loading: false,
         };
     }
@@ -39,7 +40,9 @@ class HistoryOfDoctorAppointment extends Component {
         try {
             const response = await getAppointmentHistoriesByDoctorEmail(email);
             if (response && response.data) {
-                this.setState({ appointmentHistory: response.data });
+                this.setState({
+                    appointmentHistory: response.data,
+                });
             }
         } catch (error) {
             console.error("Error fetching appointment history:", error);
@@ -48,8 +51,70 @@ class HistoryOfDoctorAppointment extends Component {
         }
     };
 
+    filterAppointments = (appointments) => {
+        const { filterOption, fromDate, toDate } = this.props;
+        let updated = [...appointments];
+
+        if (fromDate) {
+            updated = updated.filter((item) => moment(item.date).isSameOrAfter(fromDate, "day"));
+        }
+
+        if (toDate) {
+            updated = updated.filter((item) => moment(item.date).isSameOrBefore(toDate, "day"));
+        }
+
+        switch (filterOption) {
+            case "date_asc":
+                updated.sort((a, b) => new Date(a.date) - new Date(b.date));
+                break;
+            case "date_desc":
+                updated.sort((a, b) => new Date(b.date) - new Date(a.date));
+                break;
+
+            case "completed":
+                updated = updated.filter((item) => item.statusId === "S3");
+                break;
+
+            case "pending":
+                updated = updated.filter((item) => item.statusId === "S2");
+                break;
+
+            default:
+                break;
+        }
+
+        return updated;
+    };
+
+    convertBufferToText = (bufferObj) => {
+        if (!bufferObj || !bufferObj.data) {
+            return "Không có dữ liệu file";
+        }
+
+        try {
+            let buffer = Buffer.from(bufferObj.data);
+            return buffer.toString("utf-8");
+        } catch (err) {
+            return "Không thể đọc file. Có thể file không phải dạng text.";
+        }
+    };
+
+    openReportModal = (appointment) => {
+        const text = this.convertBufferToText(appointment.files);
+
+        this.setState({
+            showReportModal: true,
+            reportText: text,
+        });
+    };
+
+    closeReportModal = () => {
+        this.setState({ showReportModal: false });
+    };
+
     render() {
-        let { appointmentHistory } = this.state;
+        let appointmentHistory = this.filterAppointments(this.state.appointmentHistory);
+
         return (
             <div className="doctor-appointment-history-container">
                 {appointmentHistory && appointmentHistory.length > 0 ? (
@@ -60,7 +125,7 @@ class HistoryOfDoctorAppointment extends Component {
                                 <span className="doctor-appointment-history-content">{appointment && appointment.id}</span>
                             </div>
                             <div className="doctor-appointment-history-item-patient-email">
-                                <label className="doctor-appointment-history-label">Địa chỉ email của bệnh nhân:</label>
+                                <label className="doctor-appointment-history-label">Email của bệnh nhân:</label>
                                 <span className="doctor-appointment-history-content">{appointment && appointment.patientHasAppointmentWithDoctors && appointment.patientHasAppointmentWithDoctors.email}</span>
                             </div>
                             <div className="doctor-appointment-history-item-date">
@@ -71,6 +136,33 @@ class HistoryOfDoctorAppointment extends Component {
                                 <label className="doctor-appointment-history-label">Khung giờ đã hẹn:</label>
                                 <span className="doctor-appointment-history-content">{appointment && appointment.appointmentTimeTypeData && appointment.appointmentTimeTypeData.value_Vie && appointment.appointmentTimeTypeData.value_Vie}</span>
                             </div>
+                            <div className="doctor-appointment-history-item-medical-report" onClick={() => this.openReportModal(appointment)}>
+                                <label className="doctor-appointment-history-label">Bệnh án:</label>
+                                <i className="fas fa-file-alt file-icon"></i>
+                                Xem bệnh án tại đây
+                            </div>
+                            {this.state.showReportModal && (
+                                <div className="modal-overlay">
+                                    <div className="modal-container">
+                                        <div className="modal-header">
+                                            <h3>Kết quả khám bệnh</h3>
+                                            <span className="close-btn" onClick={this.closeReportModal}>
+                                                ×
+                                            </span>
+                                        </div>
+
+                                        <div className="modal-body">
+                                            <pre className="report-content">{this.state.reportText}</pre>
+                                        </div>
+
+                                        <div className="modal-footer">
+                                            <button className="close-button" onClick={this.closeReportModal}>
+                                                Đóng
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     ))
                 ) : (
