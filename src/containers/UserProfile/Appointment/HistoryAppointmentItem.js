@@ -92,8 +92,10 @@ class HistoryAppointmentItem extends Component {
                     </div>
                     <div className="medical-report" onClick={this.openReportModal}>
                         <label className="patient-appointment-history-item-label">Kết quả khám bệnh:</label>
-                        <i className="fas fa-file-alt file-icon"></i>
-                        Xem kết quả khám bệnh tại đây
+                        <span>
+                            <i className="fas fa-file-alt file-icon"></i>
+                            Xem kết quả khám bệnh tại đây
+                        </span>
                     </div>
                 </div>
 

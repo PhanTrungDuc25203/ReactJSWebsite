@@ -1,104 +1,104 @@
 .background-and-avatar-container {
-  height: 460px;
-  margin: 0 85px 0 85px;
+    height: 450px;
+    margin: 0 85px 0 85px;
 
-  .background-section {
-    background-image: url("../../../assets/images/user-background.jpg");
-    background-size: cover;
-    height: 320px;
-    width: auto;
-    background-position: center;
-    border: 1px solid rgb(193, 233, 255);
-    background-repeat: no-repeat;
-    background-position: bottom center;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-  }
-
-  .avatar-and-name {
-    position: relative;
-    left: 60px;
-    top: -30px;
-    height: 150px;
-    margin-left: 0;
-    margin-right: 120px;
-    display: flex;
-    align-items: center;
-
-    .avatar-section {
-      position: relative;
-      height: 150px;
-      aspect-ratio: 1 / 1;
-      border: 5px solid white;
-      border-radius: 50%;
-      background-size: 105% 105%;
-      background-position: center;
-      background-repeat: no-repeat;
+    .background-section {
+        background-image: url("../../../assets/images/user-background.jpg");
+        background-size: cover;
+        height: 320px;
+        width: auto;
+        background-position: center;
+        border: 1px solid rgb(193, 233, 255);
+        background-repeat: no-repeat;
+        background-position: bottom center;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
     }
 
-    .infor-section {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      /* Cột đầu chiếm không gian còn lại, cột thứ 2 auto */
-      // padding: 10px;
-      width: 100%;
-
-      .name {
-        color: #49bce2;
-        grid-column: 1;
-        /* Đặt ở cột 1 */
-        grid-row: 1;
-        margin: 0 0 0 20px;
-        font-size: 24px;
-        justify-self: start;
-        /* Đẩy sang trái */
-      }
-
-      .email {
-        grid-column: 1;
-        /* Đặt ở cột 1 */
-        grid-row: 2;
-        margin: 0 0 0 20px;
-        font-size: 18px;
-        justify-self: start;
-
-        /* Đẩy sang trái */
-        .envelope-icon {
-          font-size: 20px;
-          color: #49bce2;
-          margin: 0 5px -3px 0;
-        }
-      }
-
-      .edit-profile {
-        grid-column: 2;
-        grid-row: 1 / span 2;
+    .avatar-and-name {
+        position: relative;
+        left: 60px;
+        top: -30px;
+        height: 150px;
+        margin-left: 0;
+        margin-right: 120px;
         display: flex;
-        align-items: flex-end;
-        justify-self: flex-end;
-        /* Đẩy nút về phía phải */
-        margin-right: 5px;
+        align-items: center;
 
-        button {
-          font-size: 16px;
-          padding: 10px;
-          background-color: white;
-          color: #49bce2;
-          border: 2px solid #49bce2;
-          border-radius: 10px;
-          transition: color 0.2s, background-color 0.2s;
-
-          .edit-icon {
-            font-size: 18px;
-            margin-right: 5px;
-          }
+        .avatar-section {
+            position: relative;
+            height: 150px;
+            aspect-ratio: 1 / 1;
+            border: 5px solid white;
+            border-radius: 50%;
+            background-size: 105% 105%;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        button:hover {
-          background-color: #49bce2;
-          color: white;
+        .infor-section {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            /* Cột đầu chiếm không gian còn lại, cột thứ 2 auto */
+            // padding: 10px;
+            width: 100%;
+
+            .name {
+                color: #49bce2;
+                grid-column: 1;
+                /* Đặt ở cột 1 */
+                grid-row: 1;
+                margin: 0 0 0 20px;
+                font-size: 24px;
+                justify-self: start;
+                /* Đẩy sang trái */
+            }
+
+            .email {
+                grid-column: 1;
+                /* Đặt ở cột 1 */
+                grid-row: 2;
+                margin: 0 0 0 20px;
+                font-size: 18px;
+                justify-self: start;
+
+                /* Đẩy sang trái */
+                .envelope-icon {
+                    font-size: 20px;
+                    color: #49bce2;
+                    margin: 0 5px -3px 0;
+                }
+            }
+
+            .edit-profile {
+                grid-column: 2;
+                grid-row: 1 / span 2;
+                display: flex;
+                align-items: flex-end;
+                justify-self: flex-end;
+                /* Đẩy nút về phía phải */
+                margin-right: 5px;
+
+                button {
+                    font-size: 16px;
+                    padding: 10px;
+                    background-color: white;
+                    color: #49bce2;
+                    border: 2px solid #49bce2;
+                    border-radius: 10px;
+                    transition: color 0.2s, background-color 0.2s;
+
+                    .edit-icon {
+                        font-size: 18px;
+                        margin-right: 5px;
+                    }
+                }
+
+                button:hover {
+                    background-color: #49bce2;
+                    color: white;
+                }
+            }
         }
-      }
     }
-  }
 }

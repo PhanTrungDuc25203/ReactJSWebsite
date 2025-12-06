@@ -159,7 +159,7 @@ class HomePageHeader extends Component {
                                 </div>
                             </div>
                             <div className="header-support-section">
-                                <i className="far fa-question-circle"></i>
+                                <i className="far fa-chart-bar"></i>
                                 <div className="header-right-section-title title-2">
                                     <FormattedMessage id="home-page-header.support" />
                                 </div>

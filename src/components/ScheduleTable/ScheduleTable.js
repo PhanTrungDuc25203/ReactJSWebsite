@@ -58,6 +58,30 @@ const ScheduleTable = forwardRef(({ events = [], defaultView = "week" }, ref) =>
                 console.error("Invalid date for calendarControls.setDate:", err);
             }
         },
+
+        // ⭐ MỚI: đi đến đúng giờ của event
+        goToEvent(event, dateStr) {
+            try {
+                const plainDate = Temporal.PlainDate.from(dateStr);
+                calendarControls.setDate(plainDate);
+
+                // đợi lịch render
+                setTimeout(() => {
+                    const hour = event.start.hour;
+
+                    const timeGrid = document.querySelector(".sx__view-container ");
+                    console.log("Check component: ", timeGrid);
+                    if (!timeGrid) return;
+
+                    const cellHeight = 60; // mỗi giờ cao ~60px (tuỳ theme)
+                    const scrollY = hour * cellHeight - 80; // cuộn lên chút cho dễ nhìn
+
+                    timeGrid.scrollTop = scrollY;
+                }, 150);
+            } catch (err) {
+                console.error("Error goToEvent:", err);
+            }
+        },
     }));
 
     useEffect(() => {
@@ -85,6 +109,11 @@ const ScheduleTable = forwardRef(({ events = [], defaultView = "week" }, ref) =>
                         {selectedEvent.description && (
                             <p>
                                 <strong>Ghi chú:</strong> {selectedEvent.description}
+                            </p>
+                        )}
+                        {selectedEvent.location && (
+                            <p>
+                                <strong>Địa chỉ khám:</strong> {selectedEvent.location}
                             </p>
                         )}
                         <button className="close-btn" onClick={() => setSelectedEvent(null)}>

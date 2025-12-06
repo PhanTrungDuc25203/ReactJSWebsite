@@ -125,6 +125,7 @@ body {
             .header-right-section-title {
                 color: #49bce2;
                 display: flex;
+                font-size: 13px;
                 align-items: center;
             }
 
@@ -182,7 +183,7 @@ body {
                     transition: opacity 0.3s;
                 }
 
-                .far.fa-question-circle {
+                .far.fa-chart-bar {
                     color: #49bce2;
                     font-size: 20px;
                     transition: font-size 0.3s ease, transform 0.3s ease;
@@ -193,7 +194,7 @@ body {
                 // background-color: white;
                 border-bottom: 3px solid #49bce2;
 
-                .far.fa-question-circle {
+                .far.fa-chart-bar {
                     color: #49bce2;
                     font-size: 30px;
                     transform: translateY(8px);
@@ -1076,7 +1077,7 @@ body {
                 .header-support-section {
                     margin-bottom: 5px;
 
-                    .far.fa-question-circle {
+                    .far.fa-chart-bar {
                         font-size: 19px;
                     }
 

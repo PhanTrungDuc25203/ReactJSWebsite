@@ -80,6 +80,7 @@ class SchedulePage extends Component {
                                     start: startZoned,
                                     end: endZoned,
                                     description: item.examReason,
+                                    location: item?.doctorHasAppointmentWithPatients?.address,
                                     calendarId, // màu sự kiện
                                 };
                             } else if (roleId === "R3") {
@@ -113,8 +114,8 @@ class SchedulePage extends Component {
     }
 
     handleGoToEvent = (event) => {
-        const dateStr = event.start.toPlainDate().toString(); // Lấy yyyy-mm-dd
-        this.scheduleRef.current?.goToDate(dateStr);
+        const dateStr = event.start.toPlainDate().toString();
+        this.scheduleRef.current?.goToEvent(event, dateStr);
     };
 
     render() {
@@ -131,18 +132,20 @@ class SchedulePage extends Component {
 
                         <div className="appointment-list">
                             <h3>Danh sách lịch hẹn</h3>
-                            {events.length === 0 && <p>Không có lịch hẹn</p>}
-                            {events.map((event) => (
-                                <div key={event.id} className={`appointment-item ${event.calendarId}`} onClick={() => this.handleGoToEvent(event)}>
-                                    <p>
-                                        <strong>{event.title}</strong>
-                                    </p>
-                                    <p>{event.start.toPlainDate().toString()}</p>
-                                    <p>
-                                        {event.start.toPlainTime().toString().slice(0, 5)} - {event.end.toPlainTime().toString().slice(0, 5)}
-                                    </p>
-                                </div>
-                            ))}
+                            <div className="appointment-items">
+                                {events.length === 0 && <p>Không có lịch hẹn</p>}
+                                {events.map((event) => (
+                                    <div key={event.id} className={`appointment-item ${event.calendarId}`} onClick={() => this.handleGoToEvent(event)}>
+                                        <p>
+                                            <strong>{event.title}</strong>
+                                        </p>
+                                        <p>{event.start.toPlainDate().toString()}</p>
+                                        <p>
+                                            {event.start.toPlainTime().toString().slice(0, 5)} - {event.end.toPlainTime().toString().slice(0, 5)}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

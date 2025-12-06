@@ -115,10 +115,13 @@
     }
 
     .report-content {
-        white-space: pre-wrap; // << TỰ ĐỘNG XUỐNG DÒNG
+        // white-space: pre-wrap; // << TỰ ĐỘNG XUỐNG DÒNG
         word-break: break-word; // << BẮT BUỘC NGẮT DÒNG KHI QUÁ DÀI
         margin: 0; // << XÓA KHOẢNG TRỐNG MẶC ĐỊNH
         padding: 0;
+        // letter-spacing: 2px;
+        overflow-x: auto;
+        scrollbar-width: none;
     }
 
     .modal-footer {
@@ -790,16 +793,18 @@
             }
         }
         .medical-report {
-            .file-icon {
-                font-size: 20px;
-                color: #2cb9ff;
-                margin-right: 5px;
+            span {
+                .file-icon {
+                    font-size: 20px;
+                    color: #2cb9ff;
+                    margin-right: 5px;
+                }
+                cursor: pointer;
+                transition: all 0.25s;
             }
-            cursor: pointer;
-            transition: all 0.25s;
-        }
-        .medical-report:hover {
-            color: #2cb9ff;
+            span:hover {
+                color: #2cb9ff;
+            }
         }
     }
     .modal-overlay {
@@ -841,10 +846,13 @@
     }
 
     .report-content {
-        white-space: pre-wrap; // << TỰ ĐỘNG XUỐNG DÒNG
+        // white-space: pre-wrap; // << TỰ ĐỘNG XUỐNG DÒNG
         word-break: break-word; // << BẮT BUỘC NGẮT DÒNG KHI QUÁ DÀI
         margin: 0; // << XÓA KHOẢNG TRỐNG MẶC ĐỊNH
         padding: 0;
+        // letter-spacing: 2px;
+        overflow-x: auto;
+        scrollbar-width: none;
     }
 
     .modal-footer {
