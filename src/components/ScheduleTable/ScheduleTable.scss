@@ -175,57 +175,36 @@
     }
 }
 
-.schedule-page-container,
-.schedule-table-container,
-.sx-react-calendar-wrapper,
 .appointment-list {
     scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
-.schedule-page-container::-webkit-scrollbar,
-.schedule-table-container::-webkit-scrollbar,
-.sx-react-calendar-wrapper::-webkit-scrollbar,
 .appointment-list::-webkit-scrollbar {
     width: 5px;
     height: 5px;
 }
 
-.schedule-page-container::-webkit-scrollbar-button,
-.schedule-table-container::-webkit-scrollbar-button,
-.sx-react-calendar-wrapper::-webkit-scrollbar-button,
 .appointment-list::-webkit-scrollbar-button {
     display: none;
     width: 0;
     height: 0;
 }
 
-.schedule-page-container::-webkit-scrollbar-thumb,
-.schedule-table-container::-webkit-scrollbar-thumb,
-.sx-react-calendar-wrapper::-webkit-scrollbar-thumb,
 .appointment-list::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     transition: background 0.25s ease;
 }
 
-.schedule-page-container::-webkit-scrollbar-thumb:hover,
-.schedule-table-container::-webkit-scrollbar-thumb:hover,
-.sx-react-calendar-wrapper::-webkit-scrollbar-thumb:hover,
 .appointment-list::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.2);
 }
 
-.schedule-page-container::-webkit-scrollbar-track,
-.schedule-table-container::-webkit-scrollbar-track,
-.sx-react-calendar-wrapper::-webkit-scrollbar-track,
 .appointment-list::-webkit-scrollbar-track {
     background: transparent;
 }
 
-.schedule-page-container::-webkit-scrollbar-corner,
-.schedule-table-container::-webkit-scrollbar-corner,
-.sx-react-calendar-wrapper::-webkit-scrollbar-corner,
 .appointment-list::-webkit-scrollbar-corner {
     background: transparent;
 }

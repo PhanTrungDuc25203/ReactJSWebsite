@@ -159,7 +159,7 @@ class AppointmentInProfilePage extends PureComponent {
             <div className="appointment-in-profile-page">
                 <div className="appointment-in-profile-page-header">
                     <div className="left-section">
-                        <div className="appointment-in-profile-page-title">Danh sách lịch hẹn đã đặt</div>
+                        <div className="appointment-in-profile-page-title">Danh sách lịch hẹn</div>
                         <div className="appointment-filter">
                             <select className="form-select" value={this.state.filterOption} onChange={(e) => this.setState({ filterOption: e.target.value })}>
                                 <option value="">-- Lọc / Sắp xếp lịch hẹn --</option>

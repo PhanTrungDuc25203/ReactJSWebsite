@@ -1,7 +1,38 @@
 .schedule-page-container {
     width: 1200px;
     max-width: 100vw;
-    height: 800px;
+    height: 90vh;
     max-height: 90vh;
     overflow-y: auto;
+}
+
+/* ---- universal override: target mọi scrollbar trong schedule-table-container ---- */
+.schedule-table-container,
+.schedule-table-container * {
+    scrollbar-width: thin !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE 10+ */
+}
+
+/* Webkit: cho mọi phần tử con */
+.schedule-table-container *::-webkit-scrollbar {
+    width: 6px !important;
+    height: 6px !important;
+}
+
+.schedule-table-container *::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border-radius: 999px !important;
+    min-height: 24px !important;
+    border: 2px solid transparent !important; /* tạo khoảng cách cạnh */
+    background-clip: padding-box !important;
+}
+
+/* hover */
+.schedule-table-container *::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* track trong suốt */
+.schedule-table-container *::-webkit-scrollbar-track {
+    background: transparent !important;
 }
