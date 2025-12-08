@@ -70,6 +70,15 @@ class HomePageHeader extends Component {
         }
     };
 
+    handleDashboardClicked = (loginState) => {
+        if (!this.props.userInfo || !this.props.userInfo.email) {
+            this.props.history.push(`/login`);
+        } else {
+            const detailPath = path.DASHBOARD_PAGE.replace(":email", this.props.userInfo.email);
+            this.props.history.push(detailPath);
+        }
+    };
+
     handleOnChangeSearchInput = (event) => {
         this.setState({
             searchTerm: event.target.value,
@@ -158,7 +167,7 @@ class HomePageHeader extends Component {
                                     <FormattedMessage id="home-page-header.appointment" />
                                 </div>
                             </div>
-                            <div className="header-support-section">
+                            <div className="header-support-section" onClick={(isLoggedIn) => this.handleDashboardClicked(this.props.isLoggedIn)}>
                                 <i className="far fa-chart-bar"></i>
                                 <div className="header-right-section-title title-2">
                                     <FormattedMessage id="home-page-header.support" />

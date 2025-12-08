@@ -11,6 +11,11 @@ import { MoonLoader } from "react-spinners";
 import defaultAvatar from "../../../assets/images/default-avatar-circle.png";
 import { getInforAndArticleForADoctor } from "../../../services/userService";
 import moment from "moment";
+import ReactDOM from "react-dom";
+
+const Portal = ({ children }) => {
+    return ReactDOM.createPortal(children, document.body);
+};
 
 class AppointmentItemForPatientInfterface extends Component {
     constructor(props) {
@@ -115,7 +120,7 @@ class AppointmentItemForPatientInfterface extends Component {
                             backgroundImage: `url(${doctorInfor?.image ? doctorInfor.image : defaultAvatar})`,
                         }}
                     ></div>
-                    <div className="appointment-date">
+                    <div className="appointment-date-and-timeframe">
                         <label className="appointment-item-for-patient-label">Thời gian hẹn: </label>
                         <div className="appointment-date">
                             <FontAwesomeIcon icon={faCalendarDays} className="appointment-time-icon" />
@@ -180,26 +185,28 @@ class AppointmentItemForPatientInfterface extends Component {
                     </div>
                 </div>
                 {this.state.showReportModal && (
-                    <div className="modal-overlay">
-                        <div className="modal-container">
-                            <div className="modal-header">
-                                <h3>Kết quả khám bệnh</h3>
-                                <span className="close-btn" onClick={this.closeReportModal}>
-                                    ×
-                                </span>
-                            </div>
+                    <Portal>
+                        <div className="modal-overlay" onClick={this.closeReportModal}>
+                            <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+                                <div className="modal-header">
+                                    <h3>Kết quả khám bệnh</h3>
+                                    <span className="close-btn" onClick={this.closeReportModal}>
+                                        ×
+                                    </span>
+                                </div>
 
-                            <div className="modal-body">
-                                <pre className="report-content">{this.state.reportText}</pre>
-                            </div>
+                                <div className="modal-body">
+                                    <pre className="report-content">{this.state.reportText}</pre>
+                                </div>
 
-                            <div className="modal-footer">
-                                <button className="close-button" onClick={this.closeReportModal}>
-                                    Đóng
-                                </button>
+                                <div className="modal-footer">
+                                    <button className="close-button" onClick={this.closeReportModal}>
+                                        Đóng
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </Portal>
                 )}
             </div>
         );

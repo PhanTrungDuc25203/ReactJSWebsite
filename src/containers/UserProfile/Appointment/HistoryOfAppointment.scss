@@ -209,7 +209,6 @@
             $primary: #0d6efd;
             display: flex;
             align-items: center;
-            width: 45%;
             justify-content: flex-end;
 
             .review-and-comment-button {
@@ -246,7 +245,7 @@
             }
         }
         .custom-modal-overlay {
-            width: 100%;
+            width: 50%;
             .custom-modal {
                 .custom-modal-body {
                     display: flex;

@@ -36,6 +36,7 @@ import SchedulePage from "./SchedulePage/SchedulePage.js";
 import DetailExamPackage from "./ForPatient/DetailExamPackage/DetailExamPackage.js";
 import AwaitingConfirmation from "./ForPatient/ConfirmBookingAppointment/AwaitingConfirmation.js";
 import Chatbot from "../components/Chatbot/Chatbot.js";
+import Dashboard from "../containers/Dashboard/Dashboard.js";
 
 class App extends Component {
     handlePersistorState = () => {
@@ -100,6 +101,8 @@ class App extends Component {
                                 <Route path={path.SEARCH_PAGE} component={SearchPage} />
                                 {/* Trang xem lịch khám bằng thời gian biểu */}
                                 <Route path={path.APPOINTMENT_SCHEDULE_PAGE} component={SchedulePage} />
+                                {/* Trang xem thông tin tổng quan */}
+                                <Route path={path.DASHBOARD_PAGE} component={Dashboard} />
                                 {/* trang xem chi tiết tất cả bệnh viện, cơ sở y tế */}
                                 <Route path={path.ALL_MEDICAL_FACILITIES} component={AllMedicalFacilities} />
                                 <Route path={path.HEALTH_CHECK_PAGE} component={HealthCheck} />

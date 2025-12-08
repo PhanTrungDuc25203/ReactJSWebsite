@@ -23,6 +23,7 @@ export const path = {
     HEALTH_CHECK_PAGE: "/health-check",
     SEARCH_PAGE: "/search",
     APPOINTMENT_SCHEDULE_PAGE: "/appointment-schedule-page/:email",
+    DASHBOARD_PAGE: "/dashboard/:email",
 };
 
 export const LANGUAGES = {
