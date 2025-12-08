@@ -217,6 +217,22 @@ const verifyPhoneOTP = async (phoneNumber, otp) => {
     return axios.post("/api/verify-phone-otp", { phoneNumber, otp });
 };
 
+const getPatientAppointmentsOverviewStatisticsService = async (patientId) => {
+    return axios.get(`/api/patient/appointments/overview-statistics?patientId=${patientId}`);
+};
+
+const getPatientAppointmentsNearestService = async (patientId) => {
+    return axios.get(`/api/patient/appointments/nearest?patientId=${patientId}`);
+};
+
+const getPatientAppointmentsMonthlyVisitsService = async (patientId) => {
+    return axios.get(`/api/patient/appointments/monthly-visits?patientId=${patientId}`);
+};
+
+const getPatientFrequentVisitsMedicalFacilitiesAndDoctorsService = async (patientId) => {
+    return axios.get(`/api/patient/${patientId}/stats/frequent-visits-medical-facilities-doctors`);
+};
+
 export {
     handleLoginAPI,
     handleGoogleLoginService,
@@ -262,4 +278,8 @@ export {
     verifyEmailOTPAPI,
     sendPhoneOTP,
     verifyPhoneOTP,
+    getPatientAppointmentsOverviewStatisticsService,
+    getPatientAppointmentsNearestService,
+    getPatientAppointmentsMonthlyVisitsService,
+    getPatientFrequentVisitsMedicalFacilitiesAndDoctorsService,
 };
