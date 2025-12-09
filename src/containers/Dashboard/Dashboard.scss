@@ -142,6 +142,7 @@
         padding: 2rem;
         border-radius: 12px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        max-height: 600px;
     }
 
     .section-header {
@@ -520,6 +521,52 @@
         border: 2px solid #e2e8f0;
     }
 
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 2px solid #f1f5f9;
+    }
+
+    .pagination-btn {
+        padding: 0.5rem 1rem;
+        background: white;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #64748b;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .pagination-btn:hover:not(:disabled) {
+        border-color: #50b8db;
+        color: #50b8db;
+        background: #f0f9ff;
+    }
+
+    .pagination-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    .pagination-btn.active {
+        background: linear-gradient(135deg, #50b8db, #3b9bb8);
+        color: white;
+        border-color: #50b8db;
+    }
+
+    .pagination-info {
+        font-size: 0.9rem;
+        color: #64748b;
+        padding: 0 0.5rem;
+    }
+
     @media (max-width: 1400px) {
         .stats-content {
             grid-template-columns: 1fr;
@@ -644,10 +691,28 @@
     .stat-card {
         background: white;
         padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         border-radius: 12px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         border-left: 4px solid #50b8db;
         transition: all 0.3s;
+
+        .right-content {
+            .normal {
+                color: #0c5460;
+            }
+            .pending {
+                color: #856404;
+            }
+            .done {
+                color: #155724;
+            }
+            .cancel {
+                color: #721c24;
+            }
+        }
     }
 
     .stat-card:hover {
@@ -656,7 +721,7 @@
     }
 
     .stat-card h4 {
-        font-size: 0.85rem;
+        font-size: 1rem;
         color: #64748b;
         margin-bottom: 0.5rem;
         font-weight: 500;

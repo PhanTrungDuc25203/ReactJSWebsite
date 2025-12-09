@@ -233,6 +233,14 @@ const getPatientFrequentVisitsMedicalFacilitiesAndDoctorsService = async (patien
     return axios.get(`/api/patient/${patientId}/stats/frequent-visits-medical-facilities-doctors`);
 };
 
+const getDoctorAppointmentsTodayOverviewStatisticsService = async (doctorId) => {
+    return axios.get(`/api/doctor/appointments/today/overview-statistics?doctorId=${doctorId}`);
+};
+
+const getDoctorStatisticMonthlyPatientsService = async (doctorId) => {
+    return axios.get(`/api/doctor/statistics/monthly/patients?doctorId=${doctorId}`);
+};
+
 export {
     handleLoginAPI,
     handleGoogleLoginService,
@@ -282,4 +290,6 @@ export {
     getPatientAppointmentsNearestService,
     getPatientAppointmentsMonthlyVisitsService,
     getPatientFrequentVisitsMedicalFacilitiesAndDoctorsService,
+    getDoctorAppointmentsTodayOverviewStatisticsService,
+    getDoctorStatisticMonthlyPatientsService,
 };

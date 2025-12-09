@@ -12,6 +12,7 @@ import defaultAvatar from "../../../assets/images/default-avatar-circle.png";
 import { getInforAndArticleForADoctor } from "../../../services/userService";
 import moment from "moment";
 import ReactDOM from "react-dom";
+import { Calendar, Clock, MapPin, Phone, Mail, Stethoscope, FileText, CreditCard, User, BookMarked } from "lucide-react";
 
 const Portal = ({ children }) => {
     return ReactDOM.createPortal(children, document.body);
@@ -110,62 +111,71 @@ class AppointmentItemForPatientInfterface extends Component {
 
     render() {
         let { scheduleStatus, appointmentId, doctorInfor, appointmentDate, appointmentTimeFrame } = this.state;
-        // console.log("check state: ", this.state);
+        console.log("check state: ", this.state);
         return (
             <div className="appointment-item-for-patient-interface">
-                <div className="doctor-avatar-and-appointment-time-container">
+                <div className="doctor-profile-lite-container">
                     <div
                         className="doctor-avatar-section"
                         style={{
                             backgroundImage: `url(${doctorInfor?.image ? doctorInfor.image : defaultAvatar})`,
                         }}
                     ></div>
-                    <div className="appointment-date-and-timeframe">
-                        <label className="appointment-item-for-patient-label">Thời gian hẹn: </label>
-                        <div className="appointment-date">
-                            <FontAwesomeIcon icon={faCalendarDays} className="appointment-time-icon" />
-                            <span>{appointmentDate && appointmentDate}</span>
+                    <div className="doctor-info-lite">
+                        <div className="doctor-name">
+                            {doctorInfor && doctorInfor.positionData && doctorInfor.positionData.value_Vie}. {doctorInfor && doctorInfor.lastName && doctorInfor.lastName} {doctorInfor && doctorInfor.firstName && doctorInfor.firstName}
                         </div>
-                        <div className="appointment-timeframe">
-                            <FontAwesomeIcon icon={faClock} className="appointment-time-icon" />
-                            <span className="appointment-item-for-patient-content">{appointmentTimeFrame && appointmentTimeFrame}</span>
+
+                        <div className="doctor-specialty">
+                            <Stethoscope size={14} />
+                            {doctorInfor?.Doctor_infor?.belongToSpecialty?.name}
                         </div>
                     </div>
                 </div>
                 <div className="appointment-details-section">
                     <div className="appointment-id">
-                        <label className="appointment-item-for-patient-label">Mã số cuộc hẹn:</label>
+                        <label className="appointment-item-for-patient-label">
+                            <BookMarked size={18} />
+                            Mã số:
+                        </label>
                         <span className="appointment-item-for-patient-content">{appointmentId && appointmentId}</span>
                     </div>
-
-                    <div className="doctor-name">
-                        <label className="appointment-item-for-patient-label">Bác sĩ: </label>
-                        <span className="appointment-item-for-patient-content">
-                            {doctorInfor && doctorInfor.positionData && doctorInfor.positionData.value_Vie}. {doctorInfor && doctorInfor.lastName && doctorInfor.lastName} {doctorInfor && doctorInfor.firstName && doctorInfor.firstName}
-                        </span>
-                    </div>
                     <div className="doctor-phone-number">
-                        <label className="appointment-item-for-patient-label">Số điện thoại của bác sĩ: </label>
+                        <label className="appointment-item-for-patient-label">
+                            <Phone size={18} />
+                            SĐT:
+                        </label>
                         <span className="appointment-item-for-patient-content">{doctorInfor && doctorInfor.phoneNumber && doctorInfor.phoneNumber}</span>
                     </div>
                     <div className="doctor-email">
-                        <label className="appointment-item-for-patient-label">Địa chỉ email của bác sĩ: </label>
+                        <label className="appointment-item-for-patient-label">
+                            <Mail size={18} />
+                            Email:
+                        </label>
                         <span className="appointment-item-for-patient-content">{doctorInfor && doctorInfor.email && doctorInfor.email}</span>
                     </div>
-                    <div className="doctor-specialty">
-                        <label className="appointment-item-for-patient-label">Chuyên ngành bác sĩ: </label>
-                        <span className="appointment-item-for-patient-content">{doctorInfor.Doctor_infor && doctorInfor.Doctor_infor.belongToSpecialty && doctorInfor.Doctor_infor.belongToSpecialty.name}</span>
+                    <div className="doctor-location">
+                        <label className="appointment-item-for-patient-label">
+                            <MapPin size={18} />
+                            Địa chỉ khám:
+                        </label>
+                        <div className="location">{doctorInfor?.Doctor_specialty_medicalFacility?.medicalFacilityDoctorAndSpecialty?.name}</div>
                     </div>
+                    <span className="sublocation">
+                        {" ~ "} {doctorInfor?.Doctor_specialty_medicalFacility?.medicalFacilityDoctorAndSpecialty?.address}
+                    </span>
                     <div className="medical-report">
-                        <label className="appointment-item-for-patient-label">Kết quả khám bệnh: </label>
+                        <label className="appointment-item-for-patient-label">
+                            <FileText size={18} />
+                            Kết quả khám:{" "}
+                        </label>
                         {scheduleStatus === "S3" ? (
                             <span className="medical-report-available" onClick={this.openReportModal}>
-                                <i className="fas fa-file-alt file-icon"></i>
                                 Xem kết quả khám bệnh tại đây
                             </span>
                         ) : (
                             <span className="medical-report-unavailable">
-                                <i>Chưa có kết quả khám bệnh</i>
+                                <i>Chưa có kết quả</i>
                             </span>
                         )}
                     </div>
@@ -182,6 +192,16 @@ class AppointmentItemForPatientInfterface extends Component {
                         <div className="button-wrapper-2">
                             <button className={this.state.paymentStatus === "PT3" ? "paid-button validate" : "paid-button"} disabled={this.state.paymentMethod !== "PM3"}></button>
                         </div>
+                    </div>
+                </div>
+                <div className="appointment-time">
+                    <div className="appointment-date">
+                        📅
+                        <span>{appointmentDate && appointmentDate}</span>
+                    </div>
+                    <div className="appointment-timeframe">
+                        🕐
+                        <span className="appointment-item-for-patient-content">{appointmentTimeFrame && appointmentTimeFrame}</span>
                     </div>
                 </div>
                 {this.state.showReportModal && (

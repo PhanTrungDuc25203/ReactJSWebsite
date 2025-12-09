@@ -15,6 +15,7 @@ class SchedulePage extends Component {
         this.state = {
             combinedAppointments: {},
             events: [],
+            highlightEventId: null,
         };
         this.scheduleRef = createRef();
     }
@@ -115,7 +116,13 @@ class SchedulePage extends Component {
 
     handleGoToEvent = (event) => {
         const dateStr = event.start.toPlainDate().toString();
-        this.scheduleRef.current?.goToEvent(event, dateStr);
+        this.setState({ highlightEventId: event.id }, () => {
+            this.scheduleRef.current?.goToEvent(event, dateStr);
+        });
+
+        setTimeout(() => {
+            this.setState({ highlightEventId: null });
+        }, 2000);
     };
 
     render() {
@@ -127,7 +134,7 @@ class SchedulePage extends Component {
                 <div className="schedule-page-container">
                     <div className="schedule-content">
                         <div className="calendar-section">
-                            <ScheduleTable ref={this.scheduleRef} events={events} defaultView="week" />
+                            <ScheduleTable ref={this.scheduleRef} events={events} defaultView="week" highlightEventId={this.state.highlightEventId} />
                         </div>
 
                         <div className="appointment-list">

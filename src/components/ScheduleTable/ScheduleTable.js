@@ -1,14 +1,14 @@
 /* global Temporal */
 import React, { useEffect, useState, useImperativeHandle, forwardRef } from "react";
 import { useCalendarApp, ScheduleXCalendar } from "@schedule-x/react";
-import { createViewDay, createViewMonthAgenda, createViewMonthGrid, createViewWeek } from "@schedule-x/calendar";
+import { createViewDay, createViewMonthAgenda, createViewMonthGrid, createViewWeek, createViewList } from "@schedule-x/calendar";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
 import { createCalendarControlsPlugin } from "@schedule-x/calendar-controls";
 import "temporal-polyfill/global";
 import "@schedule-x/theme-default/dist/index.css";
 import "./ScheduleTable.scss";
 
-const ScheduleTable = forwardRef(({ events = [], defaultView = "week" }, ref) => {
+const ScheduleTable = forwardRef(({ events = [], defaultView = "week", highlightEventId }, ref) => {
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [eventsService] = useState(() => createEventsServicePlugin());
     const [calendarControls] = useState(() => createCalendarControlsPlugin());
@@ -92,6 +92,35 @@ const ScheduleTable = forwardRef(({ events = [], defaultView = "week" }, ref) =>
             eventsService.set([]);
         }
     }, [events, eventsService]);
+
+    useEffect(() => {
+        if (!highlightEventId) return;
+
+        const selector = `[data-event-id="${highlightEventId}"]`;
+        const eventNode = document.querySelector(selector);
+
+        if (eventNode) {
+            eventNode.classList.add("highlight-animate");
+
+            setTimeout(() => {
+                eventNode.classList.remove("highlight-animate");
+            }, 1500);
+        }
+    }, [highlightEventId]);
+
+    // Bọc event-inner để disable layout shift
+    useEffect(() => {
+        const interval = setInterval(() => {
+            document.querySelectorAll(".sx__event").forEach((ev) => {
+                if (!ev.querySelector(".event-inner")) {
+                    const html = ev.innerHTML;
+                    ev.innerHTML = `<div class="event-inner">${html}</div>`;
+                }
+            });
+        }, 100);
+
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <div className="schedule-table-container">

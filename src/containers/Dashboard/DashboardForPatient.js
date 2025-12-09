@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Calendar, Clock, MapPin, Bell, User, Activity, TrendingUp, AlertCircle, CheckCircle } from "lucide-react";
+import { Calendar, Clock, MapPin, Bell, CalendarArrowDown, CalendarX, User, Activity, TrendingUp, AlertCircle, CheckCircle, CalendarCheck } from "lucide-react";
 import "./Dashboard.scss";
 import moment from "moment";
 import { withRouter } from "react-router";
@@ -45,7 +45,6 @@ class DashboardForPatient extends Component {
     }
 
     async componentDidMount() {
-        console.log("check current user: ", this.props.userInfo);
         if (this.props?.userInfo?.id) {
             try {
                 let overviewStatisticResponse = await getPatientAppointmentsOverviewStatisticsService(this.props.userInfo.id);
@@ -214,20 +213,40 @@ class DashboardForPatient extends Component {
                 {/* Stats */}
                 <div className="stats-grid">
                     <div className="stat-card">
-                        <h4>Tổng lịch hẹn</h4>
-                        <div className="value">{stats?.totalAppointments}</div>
+                        <div className="left-content">
+                            <h4>Tổng lịch hẹn</h4>
+                            <div className="value">{stats?.totalAppointments}</div>
+                        </div>
+                        <div className="right-content">
+                            <Calendar size={30} className="normal" />
+                        </div>
                     </div>
                     <div className="stat-card">
-                        <h4>Chờ khám</h4>
-                        <div className="value">{stats?.upcomingAppointments}</div>
+                        <div className="left-content">
+                            <h4>Chờ khám</h4>
+                            <div className="value">{stats?.upcomingAppointments}</div>
+                        </div>
+                        <div className="right-content">
+                            <CalendarArrowDown size={30} className="pending" />
+                        </div>
                     </div>
                     <div className="stat-card">
-                        <h4>Đã hoàn thành</h4>
-                        <div className="value">{stats?.completedAppointments}</div>
+                        <div className="left-content">
+                            <h4>Đã hoàn thành</h4>
+                            <div className="value">{stats?.completedAppointments}</div>
+                        </div>
+                        <div className="right-content">
+                            <CalendarCheck size={30} className="done" />
+                        </div>
                     </div>
                     <div className="stat-card">
-                        <h4>Đã hủy</h4>
-                        <div className="value">{stats?.cancelledAppointments}</div>
+                        <div className="left-content">
+                            <h4>Đã hủy</h4>
+                            <div className="value">{stats?.cancelledAppointments}</div>
+                        </div>
+                        <div className="right-content">
+                            <CalendarX size={30} className="cancel" />
+                        </div>
                     </div>
                 </div>
 
