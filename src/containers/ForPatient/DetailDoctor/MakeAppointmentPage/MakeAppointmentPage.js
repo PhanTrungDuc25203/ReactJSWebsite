@@ -219,6 +219,28 @@ class MakeAppointmentPage extends Component {
         }
     };
 
+    getAllowedPaymentMethods = () => {
+        const paymentId = this.state.doctorDetails?.Doctor_infor?.paymentId;
+        const { paymentMethodList } = this.state;
+
+        if (!paymentMethodList || paymentMethodList.length === 0) {
+            console.log("paymentMethodList empty");
+            return [];
+        }
+
+        // mapping theo yêu cầu
+        const map = {
+            PAY1: ["PM3"],
+            PAY2: ["PM1", "PM2"],
+            PAY3: ["PM1", "PM2", "PM3"],
+        };
+
+        const allowed = map[paymentId] || []; // nếu không có paymentId -> không cho phép
+        console.log("doctor paymentId:", paymentId, "allowed:", allowed);
+
+        return paymentMethodList.filter((pm) => allowed.includes(pm.keyMap));
+    };
+
     render() {
         let { doctorDetails, currentSystemUser } = this.state;
         let { language } = this.props;
@@ -426,20 +448,17 @@ class MakeAppointmentPage extends Component {
                                 </div>
                                 <div className="payment-method-section">
                                     <label>Chọn hình thức thanh toán</label>
-                                    {this.state.paymentMethodList &&
-                                        this.state.paymentMethodList.length > 0 &&
-                                        language === LANGUAGES.VI &&
-                                        this.state.paymentMethodList.map((paymentMethod) => (
+
+                                    {language === LANGUAGES.VI &&
+                                        this.getAllowedPaymentMethods().map((paymentMethod) => (
                                             <div key={paymentMethod.id}>
                                                 <input className="radio-button-for-payment-method" type="radio" id={paymentMethod.keyMap} name="paymentMethod" value={paymentMethod.keyMap} onChange={this.handlePaymentMethodChange} />
                                                 <label htmlFor={paymentMethod.keyMap}>{paymentMethod.value_Vie}</label>
                                             </div>
                                         ))}
 
-                                    {this.state.paymentMethodList &&
-                                        this.state.paymentMethodList.length > 0 &&
-                                        language === LANGUAGES.EN &&
-                                        this.state.paymentMethodList.map((paymentMethod) => (
+                                    {language === LANGUAGES.EN &&
+                                        this.getAllowedPaymentMethods().map((paymentMethod) => (
                                             <div key={paymentMethod.id}>
                                                 <input className="radio-button-for-payment-method" type="radio" id={paymentMethod.keyMap} name="paymentMethod" value={paymentMethod.keyMap} onChange={this.handlePaymentMethodChange} />
                                                 <label htmlFor={paymentMethod.keyMap}>{paymentMethod.value_Eng}</label>

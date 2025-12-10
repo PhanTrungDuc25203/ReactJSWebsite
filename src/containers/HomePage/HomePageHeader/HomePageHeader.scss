@@ -741,11 +741,11 @@ body {
 .header-side-bar {
     @import url("https://fonts.googleapis.com/css?family=Montserrat:600|Open+Sans:600&display=swap");
 
-    * {
-        margin: 0;
-        padding: 0;
-        text-decoration: none;
-    }
+    // * {
+    //     margin: 0;
+    //     padding: 0;
+    //     text-decoration: none;
+    // }
 
     .side-bar-toggle {
         z-index: 5001;
@@ -767,6 +767,8 @@ body {
         transition: all 0.3s ease;
         overflow-y: scroll;
 
+        border-right: 2px solid #2b49a1;
+
         .home-page-side-bar-language-option {
             // position: absolute;
             width: 100%;
@@ -782,7 +784,7 @@ body {
             /* Căn giữa theo chiều ngang */
             align-items: center;
             gap: 20px;
-            border-right: 2px solid #2b49a1;
+            // border-right: 2px solid #2b49a1;
 
             .vietnamese-option {
                 background: url("../../../assets/homePageIcon/vietnam.png");
@@ -872,7 +874,7 @@ body {
         border-bottom: 1px solid black;
         border-top: 1px solid rgba(50, 54, 255, 0.1);
         border-left: 5px solid transparent;
-        border-right: 2px solid #2b49a1;
+        // border-right: 2px solid #2b49a1;
         font-family: "Open Sans", sans-serif;
         transition: all 0.3s ease;
     }

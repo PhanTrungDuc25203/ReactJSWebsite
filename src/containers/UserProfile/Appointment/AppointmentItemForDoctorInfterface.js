@@ -469,7 +469,11 @@ class AppointmentItemForDoctorInfterface extends Component {
 
                     <div className="done-button-container-for-doctor">
                         <div className="button-wrapper-1">
-                            <button className={`done-button ${this.state.isAppointmentDoneButtonState}`} onClick={this.handleIsAppointmentDoneButtonClick}>
+                            <button
+                                className={`done-button ${this.state.isAppointmentDoneButtonState}`}
+                                onClick={this.handleIsAppointmentDoneButtonClick}
+                                disabled={this.state.isAppointmentDoneButtonState === "validate"} // ⬅ THÊM DÒNG NÀY
+                            >
                                 {/* <FontAwesomeIcon icon={faClipboardList} /> */}
                             </button>
                         </div>
