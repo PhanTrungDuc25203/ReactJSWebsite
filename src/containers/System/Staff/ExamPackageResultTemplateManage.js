@@ -5,7 +5,7 @@ import { LANGUAGES } from "../../../utils";
 import * as actions from "../../../store/actions";
 import { toast } from "react-toastify";
 // import "./ExamPackageResultTemplateManage.scss";
-// import { createResultTemplateService } from "../../services/userService"; // bạn cần tạo API này
+import { createResultTemplateService } from "../../../services/userService";
 
 class ExamPackageResultTemplateManage extends Component {
     constructor(props) {
@@ -119,12 +119,12 @@ class ExamPackageResultTemplateManage extends Component {
         };
         console.log("check payload: ", payload);
 
-        // const res = await createResultTemplateService(payload);
-        // if (res && res.errCode === 0) {
-        //     toast.success("Lưu biểu mẫu thành công!");
-        // } else {
-        //     toast.error("Có lỗi xảy ra!");
-        // }
+        const res = await createResultTemplateService(payload);
+        if (res && res.errCode === 0) {
+            toast.success("Lưu biểu mẫu thành công!");
+        } else {
+            toast.error("Có lỗi xảy ra!");
+        }
     };
 
     render() {

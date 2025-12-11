@@ -241,6 +241,10 @@ const getDoctorStatisticMonthlyPatientsService = async (doctorId) => {
     return axios.get(`/api/doctor/statistics/monthly/patients?doctorId=${doctorId}`);
 };
 
+const createResultTemplateService = async (payload) => {
+    return axios.post(`/api/exam-package/result-template`, payload);
+};
+
 export {
     handleLoginAPI,
     handleGoogleLoginService,
@@ -292,4 +296,5 @@ export {
     getPatientFrequentVisitsMedicalFacilitiesAndDoctorsService,
     getDoctorAppointmentsTodayOverviewStatisticsService,
     getDoctorStatisticMonthlyPatientsService,
+    createResultTemplateService,
 };
