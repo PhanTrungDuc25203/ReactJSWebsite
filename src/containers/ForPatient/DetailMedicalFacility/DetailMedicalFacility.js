@@ -69,11 +69,21 @@ class DetailMedicalFacility extends Component {
 
     initializeMap = async () => {
         const { medicalFacility } = this.state;
-        const name = medicalFacility.name;
-        if (!name) return;
+        if (!medicalFacility) return;
 
-        // 1. Khởi tạo map
-        this.map = L.map("map-container").setView([21.028511, 105.804817], 13);
+        const { latitude, longitude, name, address } = medicalFacility;
+
+        // Nếu thiếu lat/lon thì không load map
+        if (!latitude || !longitude) {
+            console.warn("Thiếu tọa độ lat/lon của cơ sở y tế");
+            return;
+        }
+
+        const lat = parseFloat(latitude);
+        const lon = parseFloat(longitude);
+
+        // 1. Khởi tạo map (center tạm thời)
+        this.map = L.map("map-container").setView([lat, lon], 15);
 
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
             attribution: "&copy; OpenStreetMap contributors",
@@ -89,65 +99,54 @@ class DetailMedicalFacility extends Component {
         });
         L.Marker.prototype.options.icon = defaultIcon;
 
-        // 3. Geocode địa chỉ cơ sở y tế
-        try {
-            const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(name)}`);
-            const data = await res.json();
-            if (!data || data.length === 0) {
-                console.warn("Không tìm thấy vị trí cơ sở y tế");
-                return;
-            }
+        // 3. Marker cơ sở y tế
+        L.marker([lat, lon]).addTo(this.map).bindPopup(`
+        <b>${name}</b><br>${address || ""}
+    `);
 
-            const lat = parseFloat(data[0].lat);
-            const lon = parseFloat(data[0].lon);
+        // Center map
+        this.map.setView([lat, lon], 15);
 
-            // Marker cơ sở y tế
-            L.marker([lat, lon]).addTo(this.map).bindPopup(`<b>${medicalFacility.name}</b><br>${name}`);
+        // 4. Vị trí người dùng (icon mũi tên)
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(
+                (pos) => {
+                    const userLat = pos.coords.latitude;
+                    const userLon = pos.coords.longitude;
 
-            // Center map
-            this.map.setView([lat, lon], 15);
+                    const userIcon = L.icon({
+                        iconUrl: "https://cdn-icons-png.flaticon.com/512/60/60525.png",
+                        iconSize: [30, 30],
+                        iconAnchor: [15, 15],
+                    });
 
-            // 4. Hiển thị vị trí người dùng (icon mũi tên)
-            if (navigator.geolocation) {
-                navigator.geolocation.watchPosition(
-                    (pos) => {
-                        const userLat = pos.coords.latitude;
-                        const userLon = pos.coords.longitude;
-
-                        // Custom arrow icon
-                        const userIcon = L.icon({
-                            iconUrl: "https://cdn-icons-png.flaticon.com/512/60/60525.png", // mũi tên
-                            iconSize: [30, 30],
-                            iconAnchor: [15, 15],
-                        });
-
-                        // Marker vị trí người dùng
+                    if (!this.userMarker) {
                         this.userMarker = L.marker([userLat, userLon], { icon: userIcon }).addTo(this.map);
-                    },
-                    (err) => console.warn("Không lấy được vị trí người dùng", err),
-                    { enableHighAccuracy: true }
-                );
-            }
-
-            // 5. Thêm nút "Dẫn đường"
-            const routeBtn = L.control({ position: "topleft" });
-            routeBtn.onAdd = () => {
-                const btn = L.DomUtil.create("button", "route-btn");
-                btn.innerHTML = `➤`;
-                btn.style.padding = "8px 12px";
-                btn.style.background = "#007bff";
-                btn.style.color = "#fff";
-                btn.style.border = "none";
-                btn.style.borderRadius = "6px";
-                btn.style.cursor = "pointer";
-                const icon = btn.querySelector("i");
-                btn.onclick = () => this.startRouting(lat, lon);
-                return btn;
-            };
-            routeBtn.addTo(this.map);
-        } catch (error) {
-            console.error("Lỗi khi tìm kiếm địa chỉ cơ sở y tế", error);
+                    } else {
+                        this.userMarker.setLatLng([userLat, userLon]);
+                    }
+                },
+                (err) => console.warn("Không lấy được vị trí người dùng", err),
+                { enableHighAccuracy: true }
+            );
         }
+
+        // 5. Nút "Dẫn đường"
+        const routeBtn = L.control({ position: "topleft" });
+        routeBtn.onAdd = () => {
+            const btn = L.DomUtil.create("button", "route-btn");
+            btn.innerHTML = `➤`;
+            btn.style.padding = "8px 12px";
+            btn.style.background = "#007bff";
+            btn.style.color = "#fff";
+            btn.style.border = "none";
+            btn.style.borderRadius = "6px";
+            btn.style.cursor = "pointer";
+
+            btn.onclick = () => this.startRouting(lat, lon);
+            return btn;
+        };
+        routeBtn.addTo(this.map);
     };
 
     // ==========================
