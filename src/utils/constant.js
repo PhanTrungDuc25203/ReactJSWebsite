@@ -1,6 +1,6 @@
 export const path = {
     HOME: "/",
-    HOMEPAGE: "/home", //dự án booking care: chưa cần đăng nhập nhưng vẫn có thể vào Homepage
+    HOMEPAGE: "/home", //dự án medical care: chưa cần đăng nhập nhưng vẫn có thể vào Homepage
     LOGIN: "/login",
     REGISTER: "/register",
     REGISTER_PERSONAL_INFO: "/register/personal-info",

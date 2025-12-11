@@ -130,7 +130,7 @@ export const staffMenu = [
         name: "Nhập kết quả gói khám",
         menus: [
             {
-                name: "Nhập biểu mẫu kết quả gói khám",
+                name: "Biểu mẫu kết quả gói khám",
                 link: "/staff/exampackage-result-template-manage",
             },
             {

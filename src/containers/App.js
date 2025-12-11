@@ -21,7 +21,7 @@ import Doctor from "../routes/Doctor.js";
 import Staff from "../routes/Staff.js";
 import MakeAppointmentPage from "./ForPatient/DetailDoctor/MakeAppointmentPage/MakeAppointmentPage.js";
 import ConfirmBookingAppointment from "./ForPatient/ConfirmBookingAppointment/ConfirmBookingAppointment.js";
-import ConfirmBookingExamPackage from "./ForPatient/ConfirmBookingExamPackage/ConfirmBookingExamPackage.js"
+import ConfirmBookingExamPackage from "./ForPatient/ConfirmBookingExamPackage/ConfirmBookingExamPackage.js";
 import BookingPayment from "./ForPatient/ConfirmBookingAppointment/BookingPayment.js";
 import PostVisitPayment from "./ForPatient/Payment/PostVisitPayment.js";
 import DetailSpecialty from "./ForPatient/DetailSpecialty/DetailSpecialty.js";
@@ -75,7 +75,7 @@ class App extends Component {
                                 <Route path={path.REGISTER} component={userIsNotAuthenticated(DefaultRegister)} />
                                 {/* dành cho admin  */}
                                 <Route path={path.SYSTEM} component={userIsNotPatientAndDoctor(userIsNotPatient(userIsAuthenticated(System)))} />
-                                {/* booking care cho bác sĩ và bệnh nhân*/}
+                                {/* medical care cho bác sĩ và bệnh nhân*/}
                                 <Route path={path.HOMEPAGE} component={HomePage} />
                                 <Route path={path.DETAIL_DOCTOR_ARTICLE} component={DetailArticleForADoctor} />
                                 {/* trang dăng kí khám bệnh theo khung giờ của từng bác sĩ cho bệnh nhân */}

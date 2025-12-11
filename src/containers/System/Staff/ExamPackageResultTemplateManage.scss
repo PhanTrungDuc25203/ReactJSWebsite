@@ -1,0 +1,71 @@
+.exam-package-result-template-manage-container {
+    padding: 20px;
+
+    .title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .content-container {
+        background: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        .exam-package-select {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            padding: none !important;
+            gap: 20px;
+            .selector {
+                width: 50%;
+            }
+        }
+
+        .container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+    }
+
+    .section-box {
+        border: 1px solid #e0e0e0;
+        padding: 20px;
+        border-radius: 8px;
+        background: #fafafa;
+        width: 100%;
+    }
+
+    .section-header {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .section-title-input {
+        flex: 1;
+    }
+
+    .save-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        max-width: 500px;
+    }
+    .btn-success {
+        cursor: pointer;
+        background-color: #11a911;
+        border: none;
+    }
+    .btn-secondary {
+        padding: 10px 20px;
+        margin-top: 21px;
+    }
+}

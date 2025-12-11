@@ -4,7 +4,7 @@ import Select from "react-select";
 import { LANGUAGES } from "../../../utils";
 import * as actions from "../../../store/actions";
 import { toast } from "react-toastify";
-// import "./ExamPackageResultTemplateManage.scss";
+import "./ExamPackageResultTemplateManage.scss";
 import { createResultTemplateService } from "../../../services/userService";
 
 class ExamPackageResultTemplateManage extends Component {
@@ -137,14 +137,10 @@ class ExamPackageResultTemplateManage extends Component {
                 <div className="content-container">
                     <div className="container">
                         {/* Chọn gói khám */}
-                        <div className="row">
-                            <div className="col-md-6 form-group">
-                                <label>Chọn Gói khám</label>
-                                <Select value={this.state.selectedPackage} onChange={this.handleChangeOnSelectBox} options={this.state.listPackages} placeholder="Chọn gói khám..." />
-                            </div>
+                        <div className="exam-package-select">
+                            <label>Chọn Gói khám</label>
+                            <Select className="selector" value={this.state.selectedPackage} onChange={this.handleChangeOnSelectBox} options={this.state.listPackages} placeholder="Chọn gói khám..." />
                         </div>
-
-                        <hr />
 
                         {/* Danh sách sections */}
                         {sections.map((section, sectionIndex) => (
@@ -190,15 +186,14 @@ class ExamPackageResultTemplateManage extends Component {
                         ))}
 
                         {/* Nút thêm section */}
-                        <button className="btn btn-secondary mt-3" onClick={this.handleAddSection}>
+                        <button className="btn btn-secondary mt-4 mr-4" onClick={this.handleAddSection}>
                             + Thêm mục (Section)
                         </button>
-
-                        {/* Nút Lưu */}
-                        <button className="save-button btn btn-primary mt-4" onClick={this.handleSaveTemplate}>
-                            Lưu biểu mẫu
-                        </button>
                     </div>
+                    {/* Nút Lưu */}
+                    <button className="save-button btn btn-primary mt-4" onClick={this.handleSaveTemplate}>
+                        Lưu biểu mẫu
+                    </button>
                 </div>
             </div>
         );
