@@ -236,7 +236,6 @@ class MakeAppointmentPage extends Component {
         };
 
         const allowed = map[paymentId] || []; // nếu không có paymentId -> không cho phép
-        console.log("doctor paymentId:", paymentId, "allowed:", allowed);
 
         return paymentMethodList.filter((pm) => allowed.includes(pm.keyMap));
     };

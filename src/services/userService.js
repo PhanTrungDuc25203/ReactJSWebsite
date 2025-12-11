@@ -103,6 +103,10 @@ const confirmBookingAppointmentService = (data) => {
     return axios.post("/api/confirm-booking-appointment", data);
 };
 
+const confirmBookingExamPackageService = (data) => {
+    return axios.post("/api/confirm-booking-exam-package", data);
+};
+
 const createNewSpecialtyService = (data) => {
     return axios.post("/api/create-new-specialty", data);
 };
@@ -297,4 +301,5 @@ export {
     getDoctorAppointmentsTodayOverviewStatisticsService,
     getDoctorStatisticMonthlyPatientsService,
     createResultTemplateService,
+    confirmBookingExamPackageService,
 };

@@ -117,7 +117,7 @@ class BookingAExamPackagePage extends Component {
                 phoneNumber: this.props.currentSystemUser.phoneNumber && this.props.currentSystemUser.phoneNumber,
                 email: this.props.currentSystemUser.email && this.props.currentSystemUser.email,
                 address: this.props.currentSystemUser.address && this.props.currentSystemUser.address,
-                birthday: this.props.currentSystemUser?.patientHasAppointmentWithDoctors?.[0]?.patientBirthday ? moment(this.props.currentSystemUser.patientHasAppointmentWithDoctors[0].patientBirthday).format("YYYY-MM-DD 00:00:00") : "",
+                birthday: this.props.currentSystemUser?.birthday ? moment(this.props.currentSystemUser.birthday, "DD/MM/YYYY").toDate() : null,
             });
         }
     }
@@ -180,7 +180,6 @@ class BookingAExamPackagePage extends Component {
 
     render() {
         let { packageDetails, currentSystemUser } = this.state;
-        console.log("check packageDetail: ", packageDetails);
         let { language } = this.props;
         let imageByBase64 = "";
         if (packageDetails.image) {
@@ -299,7 +298,7 @@ class BookingAExamPackagePage extends Component {
                                             onChange={this.handleDatePickerChanged}
                                             className="date-picker-section"
                                             // placeholder={<FormattedMessage id="make-appointment-page.right-content.placeholder.dob" />}
-                                            value={currentSystemUser?.patientHasAppointmentWithDoctors?.[0]?.patientBirthday || this.state.birthday}
+                                            value={this.state.birthday}
                                             // minDate={new Date().setHours(0, 0, 0, 0)}
                                         />
                                     </div>

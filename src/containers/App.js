@@ -21,6 +21,7 @@ import Doctor from "../routes/Doctor.js";
 import Staff from "../routes/Staff.js";
 import MakeAppointmentPage from "./ForPatient/DetailDoctor/MakeAppointmentPage/MakeAppointmentPage.js";
 import ConfirmBookingAppointment from "./ForPatient/ConfirmBookingAppointment/ConfirmBookingAppointment.js";
+import ConfirmBookingExamPackage from "./ForPatient/ConfirmBookingExamPackage/ConfirmBookingExamPackage.js"
 import BookingPayment from "./ForPatient/ConfirmBookingAppointment/BookingPayment.js";
 import PostVisitPayment from "./ForPatient/Payment/PostVisitPayment.js";
 import DetailSpecialty from "./ForPatient/DetailSpecialty/DetailSpecialty.js";
@@ -85,6 +86,8 @@ class App extends Component {
                                 <Route path={path.AWAITING_CONFIRMATION} component={AwaitingConfirmation} />
                                 {/* route xác nhận đặt hẹn với bác sĩ */}
                                 <Route path={path.CONFIRM_BOOKING_APPOINTMENT} component={ConfirmBookingAppointment} />
+                                {/* route xác nhận đặt lịch Gói khám */}
+                                <Route path={path.CONFIRM_BOOKING_EXAMPACKAGE} component={ConfirmBookingExamPackage} />
                                 {/* trang thanh toán */}
                                 <Route path={path.BOOKING_PAYMENT} component={BookingPayment} />
                                 {/* xử lý trường hợp thanh toán sau khi khám */}

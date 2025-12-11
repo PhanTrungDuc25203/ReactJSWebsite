@@ -33,9 +33,7 @@ class PackageScheduleComponent extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log("check package data: ", this.state.packageDetails);
-    }
+    componentDidUpdate(prevProps, prevState, snapshot) {}
 
     extractFirstSection(htmlString) {
         // Tạo một element DOM tạm thời để phân tích HTML

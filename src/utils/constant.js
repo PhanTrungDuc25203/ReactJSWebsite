@@ -12,6 +12,7 @@ export const path = {
     AWAITING_CONFIRMATION: "/make-appointment/awaiting-confirmation",
     BOOKING_A_EXAM_PACKAGE: "/booking-a-exam-package/:id/:date/:timeframe",
     CONFIRM_BOOKING_APPOINTMENT: "/confirm-booking",
+    CONFIRM_BOOKING_EXAMPACKAGE: "/confirm-booking-exam-package",
     BOOKING_PAYMENT: "/booking-payment",
     POST_VISIT_PAYMENT: "/post-visit-payment",
     SPECIALTY_ARTICLE: "/detail-specialty-article/:id",
