@@ -1,0 +1,65 @@
+.schedule-for-packagemanage-page-container {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 30px;
+    flex-direction: column;
+
+    .schedule-for-packagepage-title {
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 20px;
+        color: #0071ba;
+        margin: 20px 0 0 0;
+    }
+
+    .content-container {
+        height: auto;
+        width: 100%;
+        margin: 20px 0 0 0;
+
+        label {
+            margin: 10px 0 10px 0;
+            font-weight: 600;
+        }
+
+        .choose-time-frame {
+            height: auto;
+            display: block;
+            margin-top: 10px;
+
+            .time-frame-button {
+                height: 30px;
+                width: 160px;
+                margin: 10px 20px 10px 0;
+                border: 2px solid #0071ba;
+                border-radius: 10px;
+                background-color: white;
+                color: #0071ba;
+                transition: background-color 0.3s, height 0.3s;
+
+                &.active {
+                    color: white;
+                    background-color: #0071ba;
+                }
+            }
+
+            .time-frame-button:hover {
+                color: white;
+                background-color: #0071ba;
+            }
+        }
+    }
+
+    .save-button {
+        margin: 0 10px 0 auto;
+        width: 200px;
+    }
+
+    .flatpickr-input {
+        padding: 8px 10px 8px 10px;
+        margin: 0;
+    }
+}

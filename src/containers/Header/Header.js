@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import * as actions from "../../store/actions";
 import Navigator from "../../components/Navigator";
-import { adminMenu, doctorMenu, nurseMenu } from "./menuApp";
+import { adminMenu, doctorMenu, staffMenu } from "./menuApp";
 import "./Header.scss";
 import { FormattedMessage } from "react-intl";
 import { LANGUAGES, REGISTERED_ROLE, REGISTERED_POSITION } from "../../utils";
@@ -35,7 +35,7 @@ class Header extends Component {
                 menu = doctorMenu;
             }
             if (registeredRole === REGISTERED_ROLE.DOCTOR && registeredPosition === REGISTERED_POSITION.NURSE) {
-                menu = nurseMenu;
+                menu = staffMenu;
             }
         }
 

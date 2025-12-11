@@ -110,10 +110,15 @@ export const doctorMenu = [
     },
 ];
 
-export const nurseMenu = [
+export const staffMenu = [
     {
-        name: "Quản lý kế hoạch gói khám",
+        name: "Quản lý gói khám",
         menus: [
+            {
+                //quản lý kế hoạch khám bệnh của bác sĩ
+                name: "Quản lý gói khám",
+                link: "/staff/exampackage-manage",
+            },
             {
                 //quản lý kế hoạch khám bệnh của bác sĩ
                 name: "Quản lý kế hoạch gói khám",
@@ -124,6 +129,10 @@ export const nurseMenu = [
     {
         name: "Nhập kết quả gói khám",
         menus: [
+            {
+                name: "Nhập biểu mẫu kết quả gói khám",
+                link: "/staff/exampackage-result-template-manage",
+            },
             {
                 name: "Nhập kết quả gói khám",
                 link: "/staff/exampackage-result-manage",

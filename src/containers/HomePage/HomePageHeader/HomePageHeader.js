@@ -293,7 +293,7 @@ class HomePageHeader extends Component {
                         </header>
 
                         {this.props.isLoggedIn && userInfo.roleId !== "R3" && (
-                            <a href={userInfo.roleId === "R2" ? (userInfo.positionId === "P5" ? "/staff/exampackage-schedule-manage" : "/doctor") : "/system/user-manage"}>
+                            <a href={userInfo.roleId === "R2" ? (userInfo.positionId === "P5" ? "/staff/exampackage-manage" : "/doctor") : "/system/user-manage"}>
                                 <i className="fas fa-screwdriver"></i>
                                 <span>
                                     <FormattedMessage id="side-bar.side-bar-item.managepage" />
