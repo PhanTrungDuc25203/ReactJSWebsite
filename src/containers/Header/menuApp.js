@@ -109,3 +109,35 @@ export const doctorMenu = [
         ],
     },
 ];
+
+export const nurseMenu = [
+    {
+        name: "Quản lý kế hoạch gói khám",
+        menus: [
+            {
+                //quản lý kế hoạch khám bệnh của bác sĩ
+                name: "Quản lý kế hoạch gói khám",
+                link: "/staff/exampackage-schedule-manage",
+            },
+        ],
+    },
+    {
+        name: "Nhập kết quả gói khám",
+        menus: [
+            {
+                name: "Nhập kết quả gói khám",
+                link: "/staff/exampackage-result-manage",
+            },
+        ],
+    },
+    {
+        name: "menu.admin.menu-title-5",
+        menus: [
+            {
+                //quản lý kế hoạch khám bệnh của bác sĩ
+                name: "menu.admin.menu-title-5",
+                link: "/home",
+            },
+        ],
+    },
+];

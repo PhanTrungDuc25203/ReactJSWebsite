@@ -18,6 +18,7 @@ import HomePage from "./HomePage/HomePage.js";
 import CustomScrollbars from "../components/CustomScrollbars.js";
 import DetailArticleForADoctor from "./ForPatient/DetailDoctor/DetailArticleForADoctor.js";
 import Doctor from "../routes/Doctor.js";
+import Staff from "../routes/Staff.js";
 import MakeAppointmentPage from "./ForPatient/DetailDoctor/MakeAppointmentPage/MakeAppointmentPage.js";
 import ConfirmBookingAppointment from "./ForPatient/ConfirmBookingAppointment/ConfirmBookingAppointment.js";
 import BookingPayment from "./ForPatient/ConfirmBookingAppointment/BookingPayment.js";
@@ -109,6 +110,8 @@ class App extends Component {
                                 <Route path={path.GENERAL_EXAM_PAGE} component={GeneralExam} />
                                 {/* path for doctor*/}
                                 <Route path={"/doctor"} component={userIsNotPatient(userIsAuthenticated(Doctor))} />
+                                {/* path for doctor, staff position */}
+                                <Route path={"/staff"} component={userIsNotPatient(userIsAuthenticated(Staff))} />
                             </Switch>
                             {/* </CustomScrollbars> */}
                             <Chatbot />

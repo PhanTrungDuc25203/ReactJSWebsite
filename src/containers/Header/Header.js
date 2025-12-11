@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 
 import * as actions from "../../store/actions";
 import Navigator from "../../components/Navigator";
-import { adminMenu, doctorMenu } from "./menuApp";
+import { adminMenu, doctorMenu, nurseMenu } from "./menuApp";
 import "./Header.scss";
 import { FormattedMessage } from "react-intl";
-import { LANGUAGES, REGISTERED_ROLE } from "../../utils";
+import { LANGUAGES, REGISTERED_ROLE, REGISTERED_POSITION } from "../../utils";
 import { switchLanguageOfWebsite } from "../../store/actions";
 import _ from "lodash";
 
@@ -27,11 +27,15 @@ class Header extends Component {
         let menu = [];
         if (userInfo && !_.isEmpty(userInfo)) {
             let registeredRole = userInfo.roleId;
+            let registeredPosition = userInfo.positionId;
             if (registeredRole === REGISTERED_ROLE.ADMIN) {
                 menu = adminMenu;
             }
-            if (registeredRole === REGISTERED_ROLE.DOCTOR) {
+            if (registeredRole === REGISTERED_ROLE.DOCTOR && registeredPosition !== REGISTERED_POSITION.NURSE) {
                 menu = doctorMenu;
+            }
+            if (registeredRole === REGISTERED_ROLE.DOCTOR && registeredPosition === REGISTERED_POSITION.NURSE) {
+                menu = nurseMenu;
             }
         }
 

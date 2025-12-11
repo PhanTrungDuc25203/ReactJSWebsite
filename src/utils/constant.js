@@ -52,3 +52,11 @@ export const REGISTERED_ROLE = {
     DOCTOR: "R2",
     PATIENT: "R3",
 };
+
+export const REGISTERED_POSITION = {
+    MASTER: "P1",
+    DOCTOR: "P2",
+    ASSOCIATE_PROFESSOR: "P3",
+    PROFESSSOR: "P4",
+    NURSE: "P5",
+};

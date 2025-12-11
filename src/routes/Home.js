@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
 class Home extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -25,13 +24,27 @@ class Home extends Component {
     redirectUser = () => {
         const { isLoggedIn, userInfo } = this.props;
 
-        if (isLoggedIn) {
-            // Kiểm tra vai trò người dùng và thiết lập liên kết điều hướng
-            const linkToRedirect = userInfo.roleId === 'R3' ? '/home' : userInfo.roleId === 'R2' ? '/doctor/schedule-manage' : '/system/user-manage';
-            this.setState({ redirectTo: linkToRedirect });
-        } else {
-            this.setState({ redirectTo: '/home' });
+        if (!isLoggedIn) {
+            this.setState({ redirectTo: "/home" });
+            return;
         }
+
+        let linkToRedirect = "/home"; // default
+
+        // Rule mới: Điều dưỡng nhập kết quả xét nghiệm
+        if (userInfo.roleId === "R2" && userInfo.positionId === "P5") {
+            linkToRedirect = "/staff/exampackage-manage";
+        }
+        // Quy tắc cũ
+        else if (userInfo.roleId === "R3") {
+            linkToRedirect = "/home";
+        } else if (userInfo.roleId === "R2") {
+            linkToRedirect = "/doctor/schedule-manage";
+        } else {
+            linkToRedirect = "/system/user-manage";
+        }
+
+        this.setState({ redirectTo: linkToRedirect });
     };
 
     render() {
@@ -45,16 +58,15 @@ class Home extends Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
         isLoggedIn: state.user.isLoggedIn,
         userInfo: state.user.userInfo,
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-    };
+const mapDispatchToProps = (dispatch) => {
+    return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
