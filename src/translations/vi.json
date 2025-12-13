@@ -235,6 +235,12 @@
             "manage-schedule-and-timetable": "Quản lý kế hoạch khám bệnh",
             "schedule-and-timetable": "Kế hoạch khám bệnh",
             "all-information-manage": "Quản lý thông tin"
+        },
+        "staff": {
+            "exam-package-manage": "Quản lý Gói khám bệnh",
+            "exam-package-schedule-manage": "Kế hoạch khám của Gói khám",
+            "exam-package-result-template": "Biểu mẫu kết quả Gói khám",
+            "exam-package-result": "Kết quả Gói khám"
         }
     },
     "schedule-and-timetable-manage-page": {

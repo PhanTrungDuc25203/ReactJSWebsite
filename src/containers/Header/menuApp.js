@@ -112,29 +112,29 @@ export const doctorMenu = [
 
 export const staffMenu = [
     {
-        name: "Quản lý gói khám",
+        name: "menu.staff.exam-package-manage",
         menus: [
             {
                 //quản lý kế hoạch khám bệnh của bác sĩ
-                name: "Quản lý gói khám",
+                name: "menu.staff.exam-package-manage",
                 link: "/staff/exampackage-manage",
             },
             {
                 //quản lý kế hoạch khám bệnh của bác sĩ
-                name: "Quản lý kế hoạch gói khám",
+                name: "menu.staff.exam-package-schedule-manage",
                 link: "/staff/exampackage-schedule-manage",
             },
         ],
     },
     {
-        name: "Nhập kết quả gói khám",
+        name: "menu.staff.exam-package-result",
         menus: [
             {
-                name: "Biểu mẫu kết quả gói khám",
+                name: "menu.staff.exam-package-result-template",
                 link: "/staff/exampackage-result-template-manage",
             },
             {
-                name: "Nhập kết quả gói khám",
+                name: "menu.staff.exam-package-result",
                 link: "/staff/exampackage-result-manage",
             },
         ],

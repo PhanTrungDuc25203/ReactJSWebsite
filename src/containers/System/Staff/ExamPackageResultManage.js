@@ -1,193 +1,229 @@
 import React from "react";
 import "./ExamPackageResultManage.scss";
 import { Search, Save, CheckCircle, AlertCircle, User, Calendar, Clock, ArrowLeft, ChevronRight, Mail, Phone } from "lucide-react";
+import { getResultPendingExamPackageService } from "../../../services/userService";
+import moment from "moment";
 
 class ExamPackageResultManage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentView: "packages", // packages, patients, form
-            selectedPackage: null,
-            selectedPatient: null,
+            currentView: "packages", // "packages" | "patients" | "form"
+            selectedPackage: null, // package object from packages[]
+            selectedPatient: null, // patient object from patients[packageId]
             searchQuery: "",
             testResults: {},
             savedStatus: "",
-            packages: [
-                {
-                    id: "PKG001",
-                    name: "Khám tổng quát cơ bản",
-                    specialty: "Khám sức khỏe tổng quát",
-                    image: "🏥",
-                    pendingCount: 5,
-                },
-                {
-                    id: "PKG002",
-                    name: "Khám tim mạch chuyên sâu",
-                    specialty: "Tim mạch",
-                    image: "❤️",
-                    pendingCount: 3,
-                },
-                {
-                    id: "PKG003",
-                    name: "Khám nội tiết - Đái tháo đường",
-                    specialty: "Nội tiết",
-                    image: "💉",
-                    pendingCount: 4,
-                },
-                {
-                    id: "PKG004",
-                    name: "Khám tiêu hóa",
-                    specialty: "Tiêu hóa",
-                    image: "🫁",
-                    pendingCount: 2,
-                },
-                {
-                    id: "PKG005",
-                    name: "Khám tiêu hóa",
-                    specialty: "Tiêu hóa",
-                    image: "🫁",
-                    pendingCount: 2,
-                },
-            ],
-            patients: {
-                PKG001: [
-                    {
-                        id: "PT001",
-                        name: "Nguyễn Văn An",
-                        email: "nguyenvanan@email.com",
-                        phoneNumber: "0912345678",
-                        gender: "Nam",
-                        examDate: "2024-12-11 09:00",
-                        statusId: "S2",
-                    },
-                    {
-                        id: "PT002",
-                        name: "Trần Thị Bình",
-                        email: "tranthib@email.com",
-                        phoneNumber: "0987654321",
-                        gender: "Nữ",
-                        examDate: "2024-12-11 09:30",
-                        statusId: "S2",
-                    },
-                    {
-                        id: "PT003",
-                        name: "Lê Văn Cường",
-                        email: "levanc@email.com",
-                        phoneNumber: "0901234567",
-                        gender: "Nam",
-                        examDate: "2024-12-11 10:00",
-                        statusId: "S3",
-                    },
-                    {
-                        id: "PT004",
-                        name: "Phạm Thị Dung",
-                        email: "phamthid@email.com",
-                        phoneNumber: "0923456789",
-                        gender: "Nữ",
-                        examDate: "2024-12-11 10:30",
-                        statusId: "S2",
-                    },
-                    {
-                        id: "PT005",
-                        name: "Hoàng Văn Em",
-                        email: "hoangvane@email.com",
-                        phoneNumber: "0934567890",
-                        gender: "Nam",
-                        examDate: "2024-12-11 11:00",
-                        statusId: "S2",
-                    },
-                ],
-                PKG002: [
-                    {
-                        id: "PT006",
-                        name: "Đỗ Thị Phương",
-                        email: "dothip@email.com",
-                        phoneNumber: "0945678901",
-                        gender: "Nữ",
-                        examDate: "2024-12-11 14:00",
-                        statusId: "S2",
-                    },
-                    {
-                        id: "PT007",
-                        name: "Vũ Văn Giang",
-                        email: "vuvang@email.com",
-                        phoneNumber: "0956789012",
-                        gender: "Nam",
-                        examDate: "2024-12-11 14:30",
-                        statusId: "S2",
-                    },
-                    {
-                        id: "PT008",
-                        name: "Bùi Thị Hà",
-                        email: "buithih@email.com",
-                        phoneNumber: "0967890123",
-                        gender: "Nữ",
-                        examDate: "2024-12-11 15:00",
-                        statusId: "S2",
-                    },
-                ],
-            },
-            testTemplate: {
-                sections: [
-                    {
-                        title: "Huyết học (CBC)",
-                        fields: [
-                            { code: "WBC", label: "Bạch cầu (WBC)", unit: "10^9/L", normal_range: "4.0 - 11.0", value: null },
-                            { code: "RBC", label: "Hồng cầu (RBC)", unit: "10^12/L", normal_range: "Nam: 4.5–6.0 / Nữ: 4.0–5.4", value: null },
-                            { code: "HGB", label: "Hemoglobin (HGB)", unit: "g/dL", normal_range: "Nam: 13–17 / Nữ: 12–15", value: null },
-                            { code: "HCT", label: "Hematocrit (HCT)", unit: "%", normal_range: "Nam: 40–52 / Nữ: 36–48", value: null },
-                            { code: "PLT", label: "Tiểu cầu (PLT)", unit: "10^9/L", normal_range: "150 – 450", value: null },
-                        ],
-                    },
-                    {
-                        title: "Sinh hóa máu",
-                        fields: [
-                            { code: "GLU", label: "Đường huyết (Glucose)", unit: "mmol/L", normal_range: "3.9 – 6.4", value: null },
-                            { code: "URE", label: "Urea", unit: "mmol/L", normal_range: "2.5 – 7.1", value: null },
-                            { code: "CRE", label: "Creatinine", unit: "µmol/L", normal_range: "Nam: 62–115 / Nữ: 53–97", value: null },
-                            { code: "CHOL", label: "Cholesterol toàn phần", unit: "mmol/L", normal_range: "< 5.2", value: null },
-                            { code: "TRIG", label: "Triglyceride", unit: "mmol/L", normal_range: "< 1.7", value: null },
-                        ],
-                    },
-                ],
-            },
+            packages: [],
+            patients: {}, // { [packageId]: [patient,...] }
+            templatesMap: {}, // { [packageId]: templateObject }
+            testTemplate: null, // currently selected template object (mirror of templatesMap[selectedPackage.id])
+            loading: true,
         };
     }
 
+    async componentDidMount() {
+        // restore minimal ui state (ids only)
+        const savedStateRaw = localStorage.getItem("EXAM_RESULT_VIEW");
+        let savedState = null;
+        try {
+            if (savedStateRaw) savedState = JSON.parse(savedStateRaw);
+        } catch (e) {
+            console.warn("Invalid EXAM_RESULT_VIEW in localStorage, ignoring.");
+            savedState = null;
+        }
+
+        try {
+            const res = await getResultPendingExamPackageService(17);
+            if (res && res.errCode === 0) {
+                const raw = res.examPackageData || [];
+
+                // build packages array
+                const packages = raw.map((pkg) => ({
+                    id: pkg.id,
+                    name: pkg.name,
+                    specialty: pkg.medicalFacilityPackage?.name || "Chưa rõ",
+                    image: "🏥",
+                    pendingCount: (pkg.bookings || []).filter((b) => b.statusId === "S2").length,
+                }));
+
+                // build patients map and templates map
+                const patients = {};
+                const templatesMap = {};
+
+                raw.forEach((pkg) => {
+                    // patients for this package
+                    patients[pkg.id] = (pkg.bookings || []).map((b) => ({
+                        id: b.patientId,
+                        bookingId: b.id,
+                        name: `${b.patientBookingExamPackageData?.firstName || ""} ${b.patientBookingExamPackageData?.lastName || ""}`.trim(),
+                        email: b.patientBookingExamPackageData?.email || "",
+                        phoneNumber: b.patientBookingExamPackageData?.phoneNumber || "",
+                        gender: b.patientBookingExamPackageData?.gender === "M" ? "Nam" : "Nữ",
+                        examDate: b.date,
+                        statusId: b.statusId,
+                        rawBooking: b,
+                    }));
+
+                    // parse template safely
+                    const t = pkg.resultTemplates?.[0]?.template;
+                    if (t) {
+                        try {
+                            const parsed = JSON.parse(t);
+                            // minimal validation: must have sections array
+                            if (parsed && Array.isArray(parsed.sections)) {
+                                templatesMap[pkg.id] = parsed;
+                            } else {
+                                templatesMap[pkg.id] = null;
+                                console.warn(`Template for package ${pkg.id} parsed but missing sections`);
+                            }
+                        } catch (err) {
+                            templatesMap[pkg.id] = null;
+                            console.error(`Error parsing template for package ${pkg.id}:`, err);
+                        }
+                    } else {
+                        templatesMap[pkg.id] = null;
+                    }
+                });
+
+                // Now restore UI state safely (only IDs stored)
+                let restoredState = {
+                    currentView: "packages",
+                    selectedPackage: null,
+                    selectedPatient: null,
+                    testTemplate: null,
+                };
+
+                if (savedState && savedState.packageId) {
+                    const pkgObj = packages.find((p) => p.id === savedState.packageId) || null;
+                    const tpl = pkgObj ? templatesMap[pkgObj.id] || null : null;
+
+                    if (pkgObj && tpl) {
+                        // package exists and has valid template
+                        restoredState.selectedPackage = pkgObj;
+                        restoredState.testTemplate = tpl;
+
+                        // try restore patient if present and valid
+                        if (savedState.patientId) {
+                            const pList = patients[pkgObj.id] || [];
+                            const patientObj = pList.find((pt) => pt.id === savedState.patientId) || null;
+                            if (patientObj) {
+                                restoredState.selectedPatient = patientObj;
+                                // respect saved view if it's 'form' else open patients list
+                                restoredState.currentView = savedState.currentView === "form" ? "form" : "patients";
+                            } else {
+                                // patient not found -> open patients list
+                                restoredState.currentView = "patients";
+                                restoredState.selectedPatient = null;
+                            }
+                        } else {
+                            // no patient id saved -> open patients list
+                            restoredState.currentView = "patients";
+                        }
+                    } else {
+                        // Either package missing or template missing -> go to packages list
+                        restoredState.currentView = "packages";
+                    }
+                }
+
+                this.setState({
+                    packages,
+                    patients,
+                    templatesMap,
+                    loading: false,
+                    currentView: restoredState.currentView,
+                    selectedPackage: restoredState.selectedPackage,
+                    selectedPatient: restoredState.selectedPatient,
+                    testTemplate: restoredState.testTemplate,
+                });
+            } else {
+                // API returned non-ok
+                this.setState({ loading: false });
+            }
+        } catch (err) {
+            console.error("API error:", err);
+            this.setState({ loading: false });
+        }
+    }
+
+    // Save only ids to localStorage
+    saveUIState = () => {
+        const { currentView, selectedPackage, selectedPatient } = this.state;
+        const uiState = {
+            currentView,
+            packageId: selectedPackage?.id || null,
+            patientId: selectedPatient?.id || null,
+        };
+        try {
+            localStorage.setItem("EXAM_RESULT_VIEW", JSON.stringify(uiState));
+        } catch (e) {
+            console.warn("Unable to save UI state to localStorage", e);
+        }
+    };
+
     handleSelectPackage = (pkg) => {
-        this.setState({
-            selectedPackage: pkg,
-            currentView: "patients",
-            searchQuery: "",
-        });
+        const template = this.state.templatesMap[pkg.id] || null;
+        this.setState(
+            {
+                selectedPackage: pkg,
+                currentView: "patients",
+                searchQuery: "",
+                testTemplate: template,
+                selectedPatient: null,
+                testResults: {},
+            },
+            this.saveUIState
+        );
     };
 
     handleSelectPatient = (patient) => {
-        this.setState({
-            selectedPatient: patient,
-            currentView: "form",
-            testResults: {},
-        });
+        // ensure template exists before going to form; if not, show patients list
+        const { selectedPackage, templatesMap } = this.state;
+        const tpl = selectedPackage ? templatesMap[selectedPackage.id] || null : null;
+
+        if (!tpl) {
+            // template missing; keep user in patients view and warn
+            this.setState({ savedStatus: "no-template" });
+            setTimeout(() => this.setState({ savedStatus: "" }), 2500);
+            return;
+        }
+
+        this.setState(
+            {
+                selectedPatient: patient,
+                currentView: "form",
+                testResults: {},
+                testTemplate: tpl,
+            },
+            this.saveUIState
+        );
     };
 
     handleBackToPackages = () => {
-        this.setState({
-            currentView: "packages",
-            selectedPackage: null,
-            selectedPatient: null,
-            searchQuery: "",
-            testResults: {},
-            savedStatus: "",
-        });
+        this.setState(
+            {
+                currentView: "packages",
+                selectedPackage: null,
+                selectedPatient: null,
+                searchQuery: "",
+                testResults: {},
+                savedStatus: "",
+                testTemplate: null,
+            },
+            this.saveUIState
+        );
     };
 
     handleBackToPatients = () => {
-        this.setState({
-            currentView: "patients",
-            selectedPatient: null,
-            testResults: {},
-            savedStatus: "",
-        });
+        this.setState(
+            {
+                currentView: "patients",
+                selectedPatient: null,
+                testResults: {},
+                savedStatus: "",
+            },
+            this.saveUIState
+        );
     };
 
     handleValueChange = (sectionIndex, fieldIndex, value) => {
@@ -199,53 +235,84 @@ class ExamPackageResultManage extends React.Component {
         }));
     };
 
-    handleSave = () => {
-        this.setState({ savedStatus: "saved" });
-        setTimeout(() => {
-            this.setState({ savedStatus: "" });
-        }, 2000);
-    };
-
     handleComplete = () => {
-        const { selectedPatient } = this.state;
-        if (window.confirm(`Xác nhận hoàn thành khám và gửi kết quả cho bệnh nhân ${selectedPatient.name}?`)) {
-            this.setState({ savedStatus: "completed" });
-            setTimeout(() => {
-                this.handleBackToPatients();
-            }, 1500);
+        const { selectedPackage, selectedPatient, testResults, testTemplate } = this.state;
+
+        if (!selectedPackage || !selectedPatient) {
+            alert("Thiếu thông tin gói hoặc bệnh nhân.");
+            return;
         }
+
+        const payload = {
+            packageId: selectedPackage.id,
+            patientId: selectedPatient.id,
+            bookingId: selectedPatient.bookingId,
+            results: testResults,
+            template: testTemplate,
+        };
+
+        console.log("Dữ liệu gửi BE:", payload);
+        alert("Đã in payload vào console. Bạn tự gọi API BE nhé.");
+        this.setState({ savedStatus: "completed" });
+        this.saveUIState();
     };
 
+    // Simplified abnormal detection; safe against weird normal_range strings
     isValueAbnormal = (value, normalRange) => {
-        if (!value || !normalRange) return false;
-        const numValue = parseFloat(value);
+        if (value === null || value === undefined || value === "") return false;
+        if (!normalRange || typeof normalRange !== "string") return false;
+        const numValue = parseFloat(String(value).replace(",", "."));
         if (isNaN(numValue)) return false;
 
-        if (normalRange.includes("–")) {
-            const ranges = normalRange.split("/").map((r) => r.trim());
-            for (let range of ranges) {
-                const match = range.match(/([\d.]+)\s*–\s*([\d.]+)/);
-                if (match) {
-                    const [, min, max] = match;
-                    if (numValue >= parseFloat(min) && numValue <= parseFloat(max)) {
-                        return false;
+        // range formats we try to handle:
+        // "min - max" or "min – max" or "min–max" or "Nam: x – y / Nữ: a – b"
+        // "< x"
+        // If parsing fails, return false (not consider abnormal)
+        try {
+            // handle "< max"
+            const trimmed = normalRange.trim();
+            if (trimmed.startsWith("<")) {
+                const max = parseFloat(trimmed.replace("<", "").trim());
+                if (!isNaN(max)) return numValue >= max;
+                return false;
+            }
+
+            // if contains '/', split choices (e.g., "Nam: ... / Nữ: ...")
+            const parts = trimmed.split("/").map((p) => p.trim());
+            for (let p of parts) {
+                // find first range "number - number" or "number – number"
+                const m = p.match(/([\d.]+)\s*[–-]\s*([\d.]+)/);
+                if (m) {
+                    const min = parseFloat(m[1]);
+                    const max = parseFloat(m[2]);
+                    if (!isNaN(min) && !isNaN(max)) {
+                        if (numValue < min || numValue > max) {
+                            // if outside any found range, keep checking other parts; only when one part matches we return false
+                            // we'll return true (abnormal) only if none of the range parts contain the value
+                        } else {
+                            return false; // inside a valid range -> not abnormal
+                        }
                     }
+                } else {
+                    // try single numeric comparators? ignore for now
                 }
             }
+            // if we reach here, no matching range contained the value => mark abnormal
             return true;
+        } catch (e) {
+            return false;
         }
-
-        if (normalRange.startsWith("<")) {
-            const max = parseFloat(normalRange.replace("<", "").trim());
-            return numValue >= max;
-        }
-
-        return false;
     };
 
+    // Views
     renderPackagesView() {
-        const { packages, searchQuery } = this.state;
-        const filteredPackages = packages.filter((pkg) => pkg.name.toLowerCase().includes(searchQuery.toLowerCase()) || pkg.specialty.toLowerCase().includes(searchQuery.toLowerCase()));
+        const { packages, searchQuery, loading } = this.state;
+        if (loading) {
+            return <div style={{ padding: 20 }}>Đang tải danh sách gói khám...</div>;
+        }
+
+        const q = (searchQuery || "").toLowerCase();
+        const filteredPackages = packages.filter((pkg) => pkg.name.toLowerCase().includes(q) || (pkg.specialty || "").toLowerCase().includes(q));
 
         return (
             <div className="packages-view">
@@ -265,15 +332,15 @@ class ExamPackageResultManage extends React.Component {
                     {filteredPackages.map((pkg) => (
                         <div key={pkg.id} onClick={() => this.handleSelectPackage(pkg)} className="package-card">
                             <div className="card-header">
-                                <div className="card-image">{pkg.image}</div>
+                                <div className="card-image">{pkg?.image}</div>
                                 <div className="card-info">
-                                    <h3 className="package-name">{pkg.name}</h3>
-                                    <p className="package-specialty">{pkg.specialty}</p>
+                                    <h3 className="package-name">{pkg?.name}</h3>
+                                    <p className="package-specialty">{pkg?.specialty}</p>
 
                                     <div className="card-row">
                                         <div className="pending-badge">
                                             <Clock className="clock-icon" />
-                                            {pkg.pendingCount} bệnh nhân chờ
+                                            {pkg?.pendingCount} bệnh nhân chờ
                                         </div>
                                         <ChevronRight className="arrow-icon" />
                                     </div>
@@ -281,6 +348,8 @@ class ExamPackageResultManage extends React.Component {
                             </div>
                         </div>
                     ))}
+
+                    {filteredPackages.length === 0 && <div style={{ padding: 16 }}>Không có gói khám phù hợp.</div>}
                 </div>
             </div>
         );
@@ -288,8 +357,18 @@ class ExamPackageResultManage extends React.Component {
 
     renderPatientsView() {
         const { selectedPackage, patients, searchQuery } = this.state;
+        if (!selectedPackage) {
+            // safety: if user somehow landed here without package, go back to packages
+            return (
+                <div style={{ padding: 20 }}>
+                    Gói khám không hợp lệ. <button onClick={this.handleBackToPackages}>Quay lại danh sách gói khám</button>
+                </div>
+            );
+        }
+
         const packagePatients = patients[selectedPackage.id] || [];
-        const filteredPatients = packagePatients.filter((patient) => patient.name.toLowerCase().includes(searchQuery.toLowerCase()) || patient.email.toLowerCase().includes(searchQuery.toLowerCase()) || patient.phoneNumber.includes(searchQuery));
+        const q = (searchQuery || "").toLowerCase();
+        const filteredPatients = packagePatients.filter((patient) => (patient.name || "").toLowerCase().includes(q) || (patient.email || "").toLowerCase().includes(q) || (patient.phoneNumber || "").includes(searchQuery || ""));
 
         return (
             <div className="patients-view">
@@ -300,10 +379,10 @@ class ExamPackageResultManage extends React.Component {
 
                 <div className="selected-package-card">
                     <div className="package-header">
-                        <div className="package-image">{selectedPackage.image}</div>
+                        <div className="package-image">{selectedPackage?.image}</div>
                         <div className="package-info">
-                            <h2 className="package-title">{selectedPackage.name}</h2>
-                            <p className="package-subtitle">{selectedPackage.specialty}</p>
+                            <h2 className="package-title">{selectedPackage?.name}</h2>
+                            <p className="package-subtitle">{selectedPackage?.specialty}</p>
                         </div>
                     </div>
                 </div>
@@ -325,40 +404,41 @@ class ExamPackageResultManage extends React.Component {
                                     </div>
 
                                     <div className="patient-info">
-                                        <h3 className="patient-name">{patient.name}</h3>
+                                        <h3 className="patient-name">{patient?.name}</h3>
 
                                         <div className="patient-details-grid">
                                             <div className="detail-row">
                                                 <Mail className="detail-icon" />
-                                                {patient.email}
+                                                {patient?.email}
                                             </div>
 
                                             <div className="detail-row">
                                                 <Phone className="detail-icon" />
-                                                {patient.phoneNumber}
+                                                {patient?.phoneNumber}
                                             </div>
 
                                             <div className="detail-row">
                                                 <User className="detail-icon" />
-                                                {patient.gender}
+                                                {patient?.gender}
                                             </div>
 
                                             <div className="detail-row">
                                                 <Calendar className="detail-icon" />
-                                                {patient.examDate}
+                                                {patient?.examDate ? moment(patient.examDate).format("DD-MM-YYYY") : ""}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="patient-status">
-                                    {patient.statusId === "S3" ? <span className="status-done">Đã hoàn thành</span> : <span className="status-pending">Chờ kết quả</span>}
-
+                                    {patient?.statusId === "S3" ? <span className="status-done">Đã hoàn thành</span> : <span className="status-pending">Chờ kết quả</span>}
                                     <ChevronRight className="arrow-icon" />
                                 </div>
                             </div>
                         </div>
                     ))}
+
+                    {filteredPatients.length === 0 && <div style={{ padding: 16 }}>Không có bệnh nhân phù hợp.</div>}
                 </div>
             </div>
         );
@@ -366,6 +446,29 @@ class ExamPackageResultManage extends React.Component {
 
     renderFormView() {
         const { selectedPatient, testTemplate, testResults, savedStatus } = this.state;
+
+        // Guard: nếu template chưa sẵn sàng hoặc patient null, show message (không crash)
+        if (!testTemplate) {
+            return (
+                <div style={{ padding: 20 }}>
+                    Mẫu kết quả chưa sẵn sàng cho gói khám này.
+                    <div style={{ marginTop: 12 }}>
+                        <button onClick={this.handleBackToPatients}>Quay lại danh sách bệnh nhân</button>
+                    </div>
+                </div>
+            );
+        }
+
+        if (!selectedPatient) {
+            return (
+                <div style={{ padding: 20 }}>
+                    Bệnh nhân không hợp lệ.
+                    <div style={{ marginTop: 12 }}>
+                        <button onClick={this.handleBackToPatients}>Quay lại danh sách bệnh nhân</button>
+                    </div>
+                </div>
+            );
+        }
 
         return (
             <div className="form-container">
@@ -381,27 +484,27 @@ class ExamPackageResultManage extends React.Component {
                         <div className="form-header-grid">
                             <div className="form-header-item">
                                 <span className="label">Họ tên:</span>
-                                <div className="value">{selectedPatient.name}</div>
+                                <div className="value">{selectedPatient?.name}</div>
                             </div>
 
                             <div className="form-header-item">
                                 <span className="label">Giới tính:</span>
-                                <div className="value">{selectedPatient.gender}</div>
+                                <div className="value">{selectedPatient?.gender}</div>
                             </div>
 
                             <div className="form-header-item">
                                 <span className="label">Ngày khám:</span>
-                                <div className="value">{selectedPatient.examDate}</div>
+                                <div className="value">{selectedPatient?.examDate ? moment(selectedPatient.examDate).format("DD-MM-YYYY") : ""}</div>
                             </div>
 
                             <div className="form-header-item">
                                 <span className="label">Email:</span>
-                                <div className="value">{selectedPatient.email}</div>
+                                <div className="value">{selectedPatient?.email}</div>
                             </div>
 
                             <div className="form-header-item">
                                 <span className="label">Số điện thoại:</span>
-                                <div className="value">{selectedPatient.phoneNumber}</div>
+                                <div className="value">{selectedPatient?.phoneNumber}</div>
                             </div>
                         </div>
                     </div>
@@ -409,30 +512,31 @@ class ExamPackageResultManage extends React.Component {
                     <div className="form-body">
                         {testTemplate.sections.map((section, sIdx) => (
                             <div key={sIdx} className="form-section">
-                                <h3 className="form-section-title">{section.title}</h3>
+                                <h3 className="form-section-title">{section?.title}</h3>
 
                                 <div className="form-section-fields">
-                                    {section.fields.map((field, fIdx) => {
-                                        const key = `${sIdx}-${fIdx}`;
-                                        const val = testResults[key] || "";
-                                        const abnormal = this.isValueAbnormal(val, field.normal_range);
+                                    {Array.isArray(section.fields) &&
+                                        section.fields.map((field, fIdx) => {
+                                            const key = `${sIdx}-${fIdx}`;
+                                            const val = testResults[key] || "";
+                                            const abnormal = this.isValueAbnormal(val, field?.normal_range);
 
-                                        return (
-                                            <div key={fIdx} className={`form-field ${abnormal ? "abnormal" : ""}`}>
-                                                <div className="field-info">
-                                                    <label className="field-label">{field.label}</label>
-                                                    <div className="field-normal-range">Bình thường: {field.normal_range}</div>
+                                            return (
+                                                <div key={fIdx} className={`form-field ${abnormal ? "abnormal" : ""}`}>
+                                                    <div className="field-info">
+                                                        <label className="field-label">{field?.label}</label>
+                                                        <div className="field-normal-range">Bình thường: {field?.normal_range}</div>
+                                                    </div>
+
+                                                    <div className="field-input-wrapper">
+                                                        <input type="text" value={val} onChange={(e) => this.handleValueChange(sIdx, fIdx, e.target.value)} className="field-input" placeholder="Giá trị" />
+                                                        {abnormal && <AlertCircle className="field-warning-icon" />}
+                                                    </div>
+
+                                                    <div className="field-unit">{field?.unit}</div>
                                                 </div>
-
-                                                <div className="field-input-wrapper">
-                                                    <input type="text" value={val} onChange={(e) => this.handleValueChange(sIdx, fIdx, e.target.value)} className="field-input" placeholder="Giá trị" />
-                                                    {abnormal && <AlertCircle className="field-warning-icon" />}
-                                                </div>
-
-                                                <div className="field-unit">{field.unit}</div>
-                                            </div>
-                                        );
-                                    })}
+                                            );
+                                        })}
                                 </div>
                             </div>
                         ))}
@@ -453,14 +557,11 @@ class ExamPackageResultManage extends React.Component {
                                     Đã hoàn thành và gửi kết quả cho bệnh nhân
                                 </span>
                             )}
+
+                            {savedStatus === "no-template" && <span className="status warning">Mẫu kết quả chưa có hoặc không hợp lệ.</span>}
                         </div>
 
                         <div className="form-footer-actions">
-                            <button onClick={this.handleSave} className="btn-save">
-                                <Save className="btn-icon" />
-                                Lưu tạm
-                            </button>
-
                             <button onClick={this.handleComplete} className="btn-complete">
                                 <CheckCircle className="btn-icon" />
                                 Hoàn thành khám
@@ -474,6 +575,7 @@ class ExamPackageResultManage extends React.Component {
 
     render() {
         const { currentView } = this.state;
+        console.log("DEBUG STATE:", this.state);
 
         return (
             <div className="exam-package-result-manage-layout-wrapper">

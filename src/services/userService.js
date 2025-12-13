@@ -249,6 +249,10 @@ const createResultTemplateService = async (payload) => {
     return axios.post(`/api/exam-package/result-template`, payload);
 };
 
+const getResultPendingExamPackageService = async (medicalFacilityId) => {
+    return axios.get(`/api/exam-package/pending-result?medicalFacilityId=${medicalFacilityId}`);
+};
+
 export {
     handleLoginAPI,
     handleGoogleLoginService,
@@ -302,4 +306,5 @@ export {
     getDoctorStatisticMonthlyPatientsService,
     createResultTemplateService,
     confirmBookingExamPackageService,
+    getResultPendingExamPackageService,
 };

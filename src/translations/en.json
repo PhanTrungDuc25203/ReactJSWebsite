@@ -235,6 +235,12 @@
             "manage-schedule-and-timetable": "Manage exam schedule",
             "schedule-and-timetable": "Exam schedule",
             "all-information-manage": "All information manage"
+        },
+        "staff": {
+            "exam-package-manage": "Exam package manage",
+            "exam-package-schedule-manage": "Exam package schedule",
+            "exam-package-result-template": "Exam package result template",
+            "exam-package-result": "Exam package result"
         }
     },
     "schedule-and-timetable-manage-page": {
