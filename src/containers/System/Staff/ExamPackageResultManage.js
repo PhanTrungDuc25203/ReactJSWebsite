@@ -1,8 +1,11 @@
 import React from "react";
 import "./ExamPackageResultManage.scss";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
 import { Search, Save, CheckCircle, AlertCircle, User, Calendar, Clock, ArrowLeft, ChevronRight, Mail, Phone } from "lucide-react";
-import { getResultPendingExamPackageService } from "../../../services/userService";
+import { getResultPendingExamPackageService, getExamPackageResultDetailService, saveExamPackageResultService, getInforAndArticleForAStaff } from "../../../services/userService";
 import moment from "moment";
+import { toast } from "react-toastify";
 
 class ExamPackageResultManage extends React.Component {
     constructor(props) {
@@ -19,129 +22,181 @@ class ExamPackageResultManage extends React.Component {
             templatesMap: {}, // { [packageId]: templateObject }
             testTemplate: null, // currently selected template object (mirror of templatesMap[selectedPackage.id])
             loading: true,
+            isReadOnly: false, // 👈 form chỉ xem hay được nhập
+            viewingResult: null,
         };
     }
 
+    refreshPackagesData = async () => {
+        const currentUser = this.props?.userInfo;
+        if (!currentUser?.id) return null;
+
+        const doctorInfo = await getInforAndArticleForAStaff(currentUser.id);
+        const medicalFacilityDoctorSpecialtyId = doctorInfo?.data?.medicalFacilityStaffAndSpecialty?.id;
+
+        if (!medicalFacilityDoctorSpecialtyId) return null;
+
+        const res = await getResultPendingExamPackageService(medicalFacilityDoctorSpecialtyId);
+        if (!res || res.errCode !== 0) return null;
+
+        const raw = Array.isArray(res.examPackageData) ? res.examPackageData : [];
+
+        const packages = raw.map((pkg) => ({
+            id: pkg.id,
+            name: pkg.name,
+            specialty: pkg.medicalFacilityPackage?.name || "Chưa rõ",
+            image: "🏥",
+            pendingCount: (pkg.bookings || []).filter((b) => b.statusId === "S2").length,
+        }));
+
+        const patients = {};
+        raw.forEach((pkg) => {
+            patients[pkg.id] = (pkg.bookings || [])
+                .filter((b) => b.statusId === "S2")
+                .map((b) => ({
+                    id: b.patientId,
+                    bookingId: b.id,
+                    name: `${b.patientBookingExamPackageData?.firstName || ""} ${b.patientBookingExamPackageData?.lastName || ""}`.trim(),
+                    email: b.patientBookingExamPackageData?.email || "",
+                    phoneNumber: b.patientBookingExamPackageData?.phoneNumber || "",
+                    gender: b.patientBookingExamPackageData?.gender === "M" ? "Nam" : "Nữ",
+                    examDate: b.date,
+                    statusId: b.statusId,
+                    rawBooking: b,
+                }));
+        });
+
+        return { packages, patients };
+    };
+
     async componentDidMount() {
-        // restore minimal ui state (ids only)
-        const savedStateRaw = localStorage.getItem("EXAM_RESULT_VIEW");
+        this.setState({ loading: true });
+
+        // 1. Restore state tối thiểu từ localStorage
         let savedState = null;
         try {
-            if (savedStateRaw) savedState = JSON.parse(savedStateRaw);
-        } catch (e) {
-            console.warn("Invalid EXAM_RESULT_VIEW in localStorage, ignoring.");
+            const raw = localStorage.getItem("EXAM_RESULT_VIEW");
+            if (raw) savedState = JSON.parse(raw);
+        } catch {
             savedState = null;
         }
 
-        try {
-            const res = await getResultPendingExamPackageService(17);
-            if (res && res.errCode === 0) {
-                const raw = res.examPackageData || [];
+        // 2. Validate user
+        const currentUser = this.props?.userInfo;
+        if (!currentUser?.id) {
+            console.warn("No current user");
+            this.setState({ loading: false });
+            return;
+        }
 
-                // build packages array
-                const packages = raw.map((pkg) => ({
-                    id: pkg.id,
-                    name: pkg.name,
-                    specialty: pkg.medicalFacilityPackage?.name || "Chưa rõ",
-                    image: "🏥",
-                    pendingCount: (pkg.bookings || []).filter((b) => b.statusId === "S2").length,
+        try {
+            // 3. LẤY THÔNG TIN BÁC SĨ – PHẢI await
+            const doctorInfo = await getInforAndArticleForAStaff(currentUser.id);
+
+            console.log("FULL doctorInfo:", doctorInfo);
+            console.log("DSM:", doctorInfo?.Doctor_specialty_medicalFacility);
+            console.log("MFDS:", doctorInfo?.Doctor_specialty_medicalFacility?.medicalFacilityDoctorAndSpecialty);
+
+            const medicalFacilityDoctorSpecialtyId = doctorInfo?.data?.medicalFacilityStaffAndSpecialty?.id;
+
+            if (!medicalFacilityDoctorSpecialtyId) {
+                console.warn("Doctor chưa được gán cơ sở y tế / chuyên khoa");
+                this.setState({ loading: false });
+                return;
+            }
+
+            // 4. GỌI API LẤY GÓI KHÁM
+            const res = await getResultPendingExamPackageService(medicalFacilityDoctorSpecialtyId);
+
+            if (!res || res.errCode !== 0) {
+                console.warn("API getResultPendingExamPackageService failed", res);
+                this.setState({ loading: false });
+                return;
+            }
+
+            const raw = Array.isArray(res.examPackageData) ? res.examPackageData : [];
+
+            // 5. BUILD PACKAGES
+            const packages = raw.map((pkg) => ({
+                id: pkg.id,
+                name: pkg.name,
+                specialty: pkg.medicalFacilityPackage?.name || "Chưa rõ",
+                image: "🏥",
+                pendingCount: (pkg.bookings || []).filter((b) => b.statusId === "S2").length,
+            }));
+
+            // 6. BUILD PATIENTS & TEMPLATES
+            const patients = {};
+            const templatesMap = {};
+
+            raw.forEach((pkg) => {
+                // patients
+                patients[pkg.id] = (pkg.bookings || []).map((b) => ({
+                    id: b.patientId,
+                    bookingId: b.id,
+                    name: `${b.patientBookingExamPackageData?.firstName || ""} ${b.patientBookingExamPackageData?.lastName || ""}`.trim(),
+                    email: b.patientBookingExamPackageData?.email || "",
+                    phoneNumber: b.patientBookingExamPackageData?.phoneNumber || "",
+                    gender: b.patientBookingExamPackageData?.gender === "M" ? "Nam" : "Nữ",
+                    examDate: b.date,
+                    statusId: b.statusId,
+                    rawBooking: b,
                 }));
 
-                // build patients map and templates map
-                const patients = {};
-                const templatesMap = {};
-
-                raw.forEach((pkg) => {
-                    // patients for this package
-                    patients[pkg.id] = (pkg.bookings || []).map((b) => ({
-                        id: b.patientId,
-                        bookingId: b.id,
-                        name: `${b.patientBookingExamPackageData?.firstName || ""} ${b.patientBookingExamPackageData?.lastName || ""}`.trim(),
-                        email: b.patientBookingExamPackageData?.email || "",
-                        phoneNumber: b.patientBookingExamPackageData?.phoneNumber || "",
-                        gender: b.patientBookingExamPackageData?.gender === "M" ? "Nam" : "Nữ",
-                        examDate: b.date,
-                        statusId: b.statusId,
-                        rawBooking: b,
-                    }));
-
-                    // parse template safely
-                    const t = pkg.resultTemplates?.[0]?.template;
-                    if (t) {
-                        try {
-                            const parsed = JSON.parse(t);
-                            // minimal validation: must have sections array
-                            if (parsed && Array.isArray(parsed.sections)) {
-                                templatesMap[pkg.id] = parsed;
-                            } else {
-                                templatesMap[pkg.id] = null;
-                                console.warn(`Template for package ${pkg.id} parsed but missing sections`);
-                            }
-                        } catch (err) {
-                            templatesMap[pkg.id] = null;
-                            console.error(`Error parsing template for package ${pkg.id}:`, err);
-                        }
-                    } else {
+                // template
+                const t = pkg.resultTemplates?.[0]?.template;
+                if (t) {
+                    try {
+                        const parsed = JSON.parse(t);
+                        templatesMap[pkg.id] = parsed && Array.isArray(parsed.sections) ? parsed : null;
+                    } catch {
                         templatesMap[pkg.id] = null;
                     }
-                });
+                } else {
+                    templatesMap[pkg.id] = null;
+                }
+            });
 
-                // Now restore UI state safely (only IDs stored)
-                let restoredState = {
-                    currentView: "packages",
-                    selectedPackage: null,
-                    selectedPatient: null,
-                    testTemplate: null,
-                };
+            // 7. RESTORE UI STATE (AN TOÀN)
+            let restoredState = {
+                currentView: "packages",
+                selectedPackage: null,
+                selectedPatient: null,
+                testTemplate: null,
+            };
 
-                if (savedState && savedState.packageId) {
-                    const pkgObj = packages.find((p) => p.id === savedState.packageId) || null;
-                    const tpl = pkgObj ? templatesMap[pkgObj.id] || null : null;
+            if (savedState?.packageId) {
+                const pkgObj = packages.find((p) => p.id === savedState.packageId) || null;
 
-                    if (pkgObj && tpl) {
-                        // package exists and has valid template
-                        restoredState.selectedPackage = pkgObj;
-                        restoredState.testTemplate = tpl;
+                if (pkgObj && templatesMap[pkgObj.id]) {
+                    restoredState.selectedPackage = pkgObj;
+                    restoredState.testTemplate = templatesMap[pkgObj.id];
+                    restoredState.currentView = "patients";
 
-                        // try restore patient if present and valid
-                        if (savedState.patientId) {
-                            const pList = patients[pkgObj.id] || [];
-                            const patientObj = pList.find((pt) => pt.id === savedState.patientId) || null;
-                            if (patientObj) {
-                                restoredState.selectedPatient = patientObj;
-                                // respect saved view if it's 'form' else open patients list
-                                restoredState.currentView = savedState.currentView === "form" ? "form" : "patients";
-                            } else {
-                                // patient not found -> open patients list
-                                restoredState.currentView = "patients";
-                                restoredState.selectedPatient = null;
-                            }
-                        } else {
-                            // no patient id saved -> open patients list
-                            restoredState.currentView = "patients";
+                    if (savedState.patientId) {
+                        const p = (patients[pkgObj.id] || []).find((pt) => pt.id === savedState.patientId) || null;
+
+                        if (p) {
+                            restoredState.selectedPatient = p;
+                            restoredState.currentView = savedState.currentView === "form" ? "form" : "patients";
                         }
-                    } else {
-                        // Either package missing or template missing -> go to packages list
-                        restoredState.currentView = "packages";
                     }
                 }
-
-                this.setState({
-                    packages,
-                    patients,
-                    templatesMap,
-                    loading: false,
-                    currentView: restoredState.currentView,
-                    selectedPackage: restoredState.selectedPackage,
-                    selectedPatient: restoredState.selectedPatient,
-                    testTemplate: restoredState.testTemplate,
-                });
-            } else {
-                // API returned non-ok
-                this.setState({ loading: false });
             }
+
+            // 8. SET STATE CUỐI
+            this.setState({
+                loading: false,
+                packages,
+                patients,
+                templatesMap,
+                currentView: restoredState.currentView,
+                selectedPackage: restoredState.selectedPackage,
+                selectedPatient: restoredState.selectedPatient,
+                testTemplate: restoredState.testTemplate,
+            });
         } catch (err) {
-            console.error("API error:", err);
+            console.error("componentDidMount error:", err);
             this.setState({ loading: false });
         }
     }
@@ -176,13 +231,52 @@ class ExamPackageResultManage extends React.Component {
         );
     };
 
-    handleSelectPatient = (patient) => {
-        // ensure template exists before going to form; if not, show patients list
+    handleSelectPatient = async (patient) => {
         const { selectedPackage, templatesMap } = this.state;
-        const tpl = selectedPackage ? templatesMap[selectedPackage.id] || null : null;
+        if (!selectedPackage) return;
 
+        // CASE 1: ĐÃ HOÀN THÀNH → VIEW RESULT
+        if (patient.statusId === "S3") {
+            try {
+                // giả định API tồn tại
+                const res = await getExamPackageResultDetailService(patient.bookingId);
+
+                if (!res || res.errCode !== 0) {
+                    toast.error("Không thể tải kết quả khám");
+                    return;
+                }
+
+                let parsedTemplate = res.data.template;
+                let parsedResults = res.data.result;
+
+                try {
+                    if (typeof parsedTemplate === "string") {
+                        parsedTemplate = JSON.parse(parsedTemplate);
+                    }
+                    if (typeof parsedResults === "string") {
+                        parsedResults = JSON.parse(parsedResults);
+                    }
+                } catch (e) {
+                    toast.error("Dữ liệu kết quả bị lỗi định dạng");
+                    return;
+                }
+
+                this.setState({
+                    selectedPatient: patient,
+                    currentView: "form",
+                    testTemplate: parsedTemplate,
+                    testResults: parsedResults,
+                    isReadOnly: true,
+                });
+            } catch (e) {
+                toast.error("Lỗi khi tải kết quả khám");
+            }
+            return;
+        }
+
+        // CASE 2: CHƯA HOÀN THÀNH → NHẬP KẾT QUẢ
+        const tpl = templatesMap[selectedPackage.id] || null;
         if (!tpl) {
-            // template missing; keep user in patients view and warn
             this.setState({ savedStatus: "no-template" });
             setTimeout(() => this.setState({ savedStatus: "" }), 2500);
             return;
@@ -194,6 +288,8 @@ class ExamPackageResultManage extends React.Component {
                 currentView: "form",
                 testResults: {},
                 testTemplate: tpl,
+                isReadOnly: false,
+                viewingResult: null,
             },
             this.saveUIState
         );
@@ -221,6 +317,8 @@ class ExamPackageResultManage extends React.Component {
                 selectedPatient: null,
                 testResults: {},
                 savedStatus: "",
+                isReadOnly: false,
+                viewingResult: null,
             },
             this.saveUIState
         );
@@ -235,7 +333,7 @@ class ExamPackageResultManage extends React.Component {
         }));
     };
 
-    handleComplete = () => {
+    handleComplete = async () => {
         const { selectedPackage, selectedPatient, testResults, testTemplate } = this.state;
 
         if (!selectedPackage || !selectedPatient) {
@@ -244,17 +342,60 @@ class ExamPackageResultManage extends React.Component {
         }
 
         const payload = {
+            staffId: this.props.userInfo.id,
             packageId: selectedPackage.id,
-            patientId: selectedPatient.id,
             bookingId: selectedPatient.bookingId,
             results: testResults,
             template: testTemplate,
         };
 
-        console.log("Dữ liệu gửi BE:", payload);
-        alert("Đã in payload vào console. Bạn tự gọi API BE nhé.");
-        this.setState({ savedStatus: "completed" });
-        this.saveUIState();
+        const response = await saveExamPackageResultService(payload);
+
+        if (!response || response.errCode !== 0) {
+            toast.error("Lưu kết quả cho gói khám thất bại");
+            return;
+        }
+
+        toast.success("Lưu kết quả cho gói khám thành công!");
+
+        // 1. Lấy dữ liệu mới nhất từ backend
+        const refreshed = await this.refreshPackagesData();
+        if (!refreshed) return;
+
+        const { packages, patients } = refreshed;
+
+        // 2. Kiểm tra còn bệnh nhân chờ trong gói hiện tại không
+        const remainingPatients = patients[selectedPackage.id] || [];
+
+        if (remainingPatients.length === 0) {
+            // 👉 Không còn bệnh nhân → về danh sách gói khám
+            this.setState(
+                {
+                    packages,
+                    patients,
+                    currentView: "packages",
+                    selectedPackage: null,
+                    selectedPatient: null,
+                    testResults: {},
+                    testTemplate: null,
+                    savedStatus: "completed",
+                },
+                this.saveUIState
+            );
+        } else {
+            // 👉 Còn bệnh nhân → về danh sách bệnh nhân
+            this.setState(
+                {
+                    packages,
+                    patients,
+                    currentView: "patients",
+                    selectedPatient: null,
+                    testResults: {},
+                    savedStatus: "completed",
+                },
+                this.saveUIState
+            );
+        }
     };
 
     // Simplified abnormal detection; safe against weird normal_range strings
@@ -479,7 +620,7 @@ class ExamPackageResultManage extends React.Component {
 
                 <div className="form-card">
                     <div className="form-header">
-                        <h2 className="form-header-title">Nhập kết quả xét nghiệm</h2>
+                        <h2 className="form-header-title">{this.state.isReadOnly ? "Kết quả xét nghiệm (Xem lại)" : "Nhập kết quả xét nghiệm"}</h2>
 
                         <div className="form-header-grid">
                             <div className="form-header-item">
@@ -529,7 +670,7 @@ class ExamPackageResultManage extends React.Component {
                                                     </div>
 
                                                     <div className="field-input-wrapper">
-                                                        <input type="text" value={val} onChange={(e) => this.handleValueChange(sIdx, fIdx, e.target.value)} className="field-input" placeholder="Giá trị" />
+                                                        <input type="text" value={val} disabled={this.state.isReadOnly} onChange={(e) => this.handleValueChange(sIdx, fIdx, e.target.value)} className="field-input" />
                                                         {abnormal && <AlertCircle className="field-warning-icon" />}
                                                     </div>
 
@@ -562,10 +703,12 @@ class ExamPackageResultManage extends React.Component {
                         </div>
 
                         <div className="form-footer-actions">
-                            <button onClick={this.handleComplete} className="btn-complete">
-                                <CheckCircle className="btn-icon" />
-                                Hoàn thành khám
-                            </button>
+                            {!this.state.isReadOnly && (
+                                <button onClick={this.handleComplete} className="btn-complete">
+                                    <CheckCircle className="btn-icon" />
+                                    Hoàn thành khám
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -596,4 +739,11 @@ class ExamPackageResultManage extends React.Component {
     }
 }
 
-export default ExamPackageResultManage;
+const mapStateToProps = (state) => ({
+    language: state.app.language,
+    userInfo: state.user.userInfo,
+});
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ExamPackageResultManage));

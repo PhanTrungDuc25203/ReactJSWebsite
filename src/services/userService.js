@@ -253,6 +253,18 @@ const getResultPendingExamPackageService = async (medicalFacilityId) => {
     return axios.get(`/api/exam-package/pending-result?medicalFacilityId=${medicalFacilityId}`);
 };
 
+const getInforAndArticleForAStaff = async (id) => {
+    return axios.get(`/api/get-a-particular-staff-infor?id=${id}`);
+};
+
+const saveExamPackageResultService = async (resultData) => {
+    return axios.post("/api/exam-package/exam-result", resultData);
+};
+
+const getExamPackageResultDetailService = async (bookingId) => {
+    return axios.get(`/api/exam-package/exam-result?bookingId=${bookingId}`);
+};
+
 export {
     handleLoginAPI,
     handleGoogleLoginService,
@@ -307,4 +319,7 @@ export {
     createResultTemplateService,
     confirmBookingExamPackageService,
     getResultPendingExamPackageService,
+    saveExamPackageResultService,
+    getExamPackageResultDetailService,
+    getInforAndArticleForAStaff,
 };
