@@ -269,6 +269,10 @@ const getPatientExamPackageTimeService = async (patientId) => {
     return axios.get(`/api/patient/exam-package?patientId=${patientId}`);
 };
 
+const confirmExamBookingDoneService = (bookingId) => {
+    return axios.patch(`/api/exam-package/booking-done?bookingId=${bookingId}`);
+};
+
 export {
     handleLoginAPI,
     handleGoogleLoginService,
@@ -327,4 +331,5 @@ export {
     getExamPackageResultDetailService,
     getInforAndArticleForAStaff,
     getPatientExamPackageTimeService,
+    confirmExamBookingDoneService,
 };

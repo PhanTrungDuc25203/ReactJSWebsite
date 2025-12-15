@@ -120,7 +120,7 @@ class App extends Component {
                             <Chatbot />
                         </div>
 
-                        <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
+                        <ToastContainer limit={3} position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
                     </div>
                 </Router>
             </Fragment>

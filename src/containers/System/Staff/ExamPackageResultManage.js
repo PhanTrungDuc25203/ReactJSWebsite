@@ -3,7 +3,7 @@ import "./ExamPackageResultManage.scss";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { Search, Save, CheckCircle, AlertCircle, User, Calendar, Clock, ArrowLeft, ChevronRight, Mail, Phone } from "lucide-react";
-import { getResultPendingExamPackageService, getExamPackageResultDetailService, saveExamPackageResultService, getInforAndArticleForAStaff } from "../../../services/userService";
+import { getResultPendingExamPackageService, confirmExamBookingDoneService, getExamPackageResultDetailService, saveExamPackageResultService, getInforAndArticleForAStaff } from "../../../services/userService";
 import moment from "moment";
 import { toast } from "react-toastify";
 
@@ -22,7 +22,7 @@ class ExamPackageResultManage extends React.Component {
             templatesMap: {}, // { [packageId]: templateObject }
             testTemplate: null, // currently selected template object (mirror of templatesMap[selectedPackage.id])
             loading: true,
-            isReadOnly: false, // 👈 form chỉ xem hay được nhập
+            isReadOnly: false,
             viewingResult: null,
         };
     }
@@ -51,9 +51,11 @@ class ExamPackageResultManage extends React.Component {
 
         const patients = {};
         raw.forEach((pkg) => {
-            patients[pkg.id] = (pkg.bookings || [])
-                .filter((b) => b.statusId === "S2")
-                .map((b) => ({
+            patients[pkg.id] = (pkg.bookings || []).map((b) => {
+                const examConfirmed = b.statusId === "S3";
+                const resultDone = b.examPackageResult?.status === "DONE";
+
+                return {
                     id: b.patientId,
                     bookingId: b.id,
                     name: `${b.patientBookingExamPackageData?.firstName || ""} ${b.patientBookingExamPackageData?.lastName || ""}`.trim(),
@@ -61,9 +63,15 @@ class ExamPackageResultManage extends React.Component {
                     phoneNumber: b.patientBookingExamPackageData?.phoneNumber || "",
                     gender: b.patientBookingExamPackageData?.gender === "M" ? "Nam" : "Nữ",
                     examDate: b.date,
-                    statusId: b.statusId,
+
+                    // 👇 FLAGS NGHIỆP VỤ
+                    examConfirmed,
+                    resultDone,
+                    fullyCompleted: examConfirmed && resultDone,
+
                     rawBooking: b,
-                }));
+                };
+            });
         });
 
         return { packages, patients };
@@ -93,10 +101,6 @@ class ExamPackageResultManage extends React.Component {
             // 3. LẤY THÔNG TIN BÁC SĨ – PHẢI await
             const doctorInfo = await getInforAndArticleForAStaff(currentUser.id);
 
-            console.log("FULL doctorInfo:", doctorInfo);
-            console.log("DSM:", doctorInfo?.Doctor_specialty_medicalFacility);
-            console.log("MFDS:", doctorInfo?.Doctor_specialty_medicalFacility?.medicalFacilityDoctorAndSpecialty);
-
             const medicalFacilityDoctorSpecialtyId = doctorInfo?.data?.medicalFacilityStaffAndSpecialty?.id;
 
             if (!medicalFacilityDoctorSpecialtyId) {
@@ -115,6 +119,7 @@ class ExamPackageResultManage extends React.Component {
             }
 
             const raw = Array.isArray(res.examPackageData) ? res.examPackageData : [];
+            console.log("list package in staff page: ", raw);
 
             // 5. BUILD PACKAGES
             const packages = raw.map((pkg) => ({
@@ -122,7 +127,11 @@ class ExamPackageResultManage extends React.Component {
                 name: pkg.name,
                 specialty: pkg.medicalFacilityPackage?.name || "Chưa rõ",
                 image: "🏥",
-                pendingCount: (pkg.bookings || []).filter((b) => b.statusId === "S2").length,
+                pendingCount: (pkg.bookings || []).filter((b) => {
+                    const examDone = b.statusId === "S3";
+                    const resultDone = b.examPackageResult?.status === "DONE";
+                    return !(examDone && resultDone);
+                }).length,
             }));
 
             // 6. BUILD PATIENTS & TEMPLATES
@@ -131,17 +140,27 @@ class ExamPackageResultManage extends React.Component {
 
             raw.forEach((pkg) => {
                 // patients
-                patients[pkg.id] = (pkg.bookings || []).map((b) => ({
-                    id: b.patientId,
-                    bookingId: b.id,
-                    name: `${b.patientBookingExamPackageData?.firstName || ""} ${b.patientBookingExamPackageData?.lastName || ""}`.trim(),
-                    email: b.patientBookingExamPackageData?.email || "",
-                    phoneNumber: b.patientBookingExamPackageData?.phoneNumber || "",
-                    gender: b.patientBookingExamPackageData?.gender === "M" ? "Nam" : "Nữ",
-                    examDate: b.date,
-                    statusId: b.statusId,
-                    rawBooking: b,
-                }));
+                patients[pkg.id] = (pkg.bookings || []).map((b) => {
+                    const examConfirmed = b.statusId === "S3";
+                    const resultDone = b.examPackageResult?.status === "DONE";
+
+                    return {
+                        id: b.patientId,
+                        bookingId: b.id,
+                        name: `${b.patientBookingExamPackageData?.firstName || ""} ${b.patientBookingExamPackageData?.lastName || ""}`.trim(),
+                        email: b.patientBookingExamPackageData?.email || "",
+                        phoneNumber: b.patientBookingExamPackageData?.phoneNumber || "",
+                        gender: b.patientBookingExamPackageData?.gender === "M" ? "Nam" : "Nữ",
+                        examDate: b.date,
+
+                        // 👇 FLAGS NGHIỆP VỤ
+                        examConfirmed,
+                        resultDone,
+                        fullyCompleted: examConfirmed && resultDone,
+
+                        rawBooking: b,
+                    };
+                });
 
                 // template
                 const t = pkg.resultTemplates?.[0]?.template;
@@ -235,10 +254,9 @@ class ExamPackageResultManage extends React.Component {
         const { selectedPackage, templatesMap } = this.state;
         if (!selectedPackage) return;
 
-        // CASE 1: ĐÃ HOÀN THÀNH → VIEW RESULT
-        if (patient.statusId === "S3") {
+        // ✅ CASE 1: ĐÃ KHÁM + ĐÃ CÓ KẾT QUẢ → CHỈ XEM
+        if (patient.examConfirmed && patient.resultDone) {
             try {
-                // giả định API tồn tại
                 const res = await getExamPackageResultDetailService(patient.bookingId);
 
                 if (!res || res.errCode !== 0) {
@@ -256,7 +274,7 @@ class ExamPackageResultManage extends React.Component {
                     if (typeof parsedResults === "string") {
                         parsedResults = JSON.parse(parsedResults);
                     }
-                } catch (e) {
+                } catch {
                     toast.error("Dữ liệu kết quả bị lỗi định dạng");
                     return;
                 }
@@ -266,7 +284,7 @@ class ExamPackageResultManage extends React.Component {
                     currentView: "form",
                     testTemplate: parsedTemplate,
                     testResults: parsedResults,
-                    isReadOnly: true,
+                    isReadOnly: true, // 🔒 READ ONLY
                 });
             } catch (e) {
                 toast.error("Lỗi khi tải kết quả khám");
@@ -274,7 +292,13 @@ class ExamPackageResultManage extends React.Component {
             return;
         }
 
-        // CASE 2: CHƯA HOÀN THÀNH → NHẬP KẾT QUẢ
+        // ❌ CASE 2: CHƯA XÁC NHẬN KHÁM → KHÔNG CHO LÀM GÌ
+        if (!patient.examConfirmed) {
+            toast.info("Bệnh nhân chưa được xác nhận đã khám");
+            return;
+        }
+
+        // ✅ CASE 3: ĐÃ KHÁM, CHƯA CÓ KẾT QUẢ → NHẬP
         const tpl = templatesMap[selectedPackage.id] || null;
         if (!tpl) {
             this.setState({ savedStatus: "no-template" });
@@ -289,7 +313,6 @@ class ExamPackageResultManage extends React.Component {
                 testResults: {},
                 testTemplate: tpl,
                 isReadOnly: false,
-                viewingResult: null,
             },
             this.saveUIState
         );
@@ -398,6 +421,60 @@ class ExamPackageResultManage extends React.Component {
         }
     };
 
+    handleConfirmExam = async (patient) => {
+        try {
+            const res = await confirmExamBookingDoneService(patient.bookingId);
+            if (res?.errCode !== 0) {
+                toast.error("Xác nhận đã khám thất bại");
+                return;
+            }
+
+            toast.success("Đã xác nhận bệnh nhân đã khám");
+
+            const refreshed = await this.refreshPackagesData();
+            if (!refreshed) return;
+
+            this.setState({
+                packages: refreshed.packages,
+                patients: refreshed.patients,
+            });
+        } catch {
+            toast.error("Có lỗi khi xác nhận đã khám");
+        }
+    };
+
+    handleSendResult = async () => {
+        const { selectedPatient, selectedPackage, testResults, testTemplate } = this.state;
+
+        const payload = {
+            bookingId: selectedPatient.bookingId,
+            staffId: this.props.userInfo.id,
+            template: testTemplate,
+            results: testResults,
+            status: "DONE",
+        };
+
+        const res = await saveExamPackageResultService(payload);
+        if (res?.errCode !== 0) {
+            toast.error("Gửi kết quả thất bại");
+            return;
+        }
+
+        toast.success("Đã gửi kết quả khám cho bệnh nhân");
+
+        const refreshed = await this.refreshPackagesData();
+        if (!refreshed) return;
+
+        this.setState({
+            packages: refreshed.packages,
+            patients: refreshed.patients,
+            currentView: "patients",
+            selectedPatient: null,
+            testResults: {},
+            isReadOnly: false,
+        });
+    };
+
     // Simplified abnormal detection; safe against weird normal_range strings
     isValueAbnormal = (value, normalRange) => {
         if (value === null || value === undefined || value === "") return false;
@@ -481,7 +558,7 @@ class ExamPackageResultManage extends React.Component {
                                     <div className="card-row">
                                         <div className="pending-badge">
                                             <Clock className="clock-icon" />
-                                            {pkg?.pendingCount} bệnh nhân chờ
+                                            {pkg?.pendingCount} lịch khám chưa hoàn thành
                                         </div>
                                         <ChevronRight className="arrow-icon" />
                                     </div>
@@ -572,7 +649,22 @@ class ExamPackageResultManage extends React.Component {
                                 </div>
 
                                 <div className="patient-status">
-                                    {patient?.statusId === "S3" ? <span className="status-done">Đã hoàn thành</span> : <span className="status-pending">Chờ kết quả</span>}
+                                    {!patient.examConfirmed && (
+                                        <button
+                                            className="btn-confirm-exam"
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                this.handleConfirmExam(patient);
+                                            }}
+                                        >
+                                            Xác nhận đã khám
+                                        </button>
+                                    )}
+
+                                    {patient.examConfirmed && !patient.resultDone && <span className="status-pending">Chờ nhập kết quả</span>}
+
+                                    {patient.fullyCompleted && <span className="status-done">Hoàn thành</span>}
+
                                     <ChevronRight className="arrow-icon" />
                                 </div>
                             </div>
@@ -704,9 +796,9 @@ class ExamPackageResultManage extends React.Component {
 
                         <div className="form-footer-actions">
                             {!this.state.isReadOnly && (
-                                <button onClick={this.handleComplete} className="btn-complete">
+                                <button onClick={this.handleSendResult} className="btn-complete">
                                     <CheckCircle className="btn-icon" />
-                                    Hoàn thành khám
+                                    Gửi kết quả khám
                                 </button>
                             )}
                         </div>
@@ -718,7 +810,6 @@ class ExamPackageResultManage extends React.Component {
 
     render() {
         const { currentView } = this.state;
-        console.log("DEBUG STATE:", this.state);
 
         return (
             <div className="exam-package-result-manage-layout-wrapper">
