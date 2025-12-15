@@ -7,6 +7,8 @@ import { getResultPendingExamPackageService, confirmExamBookingDoneService, getE
 import moment from "moment";
 import { toast } from "react-toastify";
 
+const CONFIRM_DONE_TOAST_ID = "confirm-done-toast-notification";
+
 class ExamPackageResultManage extends React.Component {
     constructor(props) {
         super(props);
@@ -294,7 +296,9 @@ class ExamPackageResultManage extends React.Component {
 
         // ❌ CASE 2: CHƯA XÁC NHẬN KHÁM → KHÔNG CHO LÀM GÌ
         if (!patient.examConfirmed) {
-            toast.info("Bệnh nhân chưa được xác nhận đã khám");
+            toast.info("Bệnh nhân chưa được xác nhận đã khám", {
+                toastId: CONFIRM_DONE_TOAST_ID,
+            });
             return;
         }
 
