@@ -1,0 +1,572 @@
+.exam-package-time-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f8f9fa82;
+    border: 1px solid #95caff;
+    border-radius: 5px;
+
+    .schedule-header-section {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .exam-package-time-title {
+            font-size: 20px;
+            color: #49bce2;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666;
+            margin: 0;
+        }
+
+        $speed: 0.5s;
+
+        .btn-flip {
+            border-left: none;
+            opacity: 1;
+            outline: 0;
+            color: white;
+            line-height: 40px;
+            position: relative;
+            text-align: center;
+            letter-spacing: 1px;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+
+            &:hover {
+                &:after {
+                    opacity: 1;
+                    transform: translateY(0) rotateX(0);
+                }
+
+                &:before {
+                    opacity: 0;
+                    transform: translateY(50%) rotateX(90deg);
+                }
+            }
+
+            &:after {
+                top: 0;
+                left: 0;
+                opacity: 0;
+                width: 100%;
+                color: #5a5a5a;
+                border: 2px solid #5a5a5a;
+                border-radius: 5px;
+                display: block;
+                transition: $speed;
+                position: absolute;
+                background: white;
+                content: attr(data-back);
+                transform: translateY(-50%) rotateX(90deg);
+            }
+
+            &:before {
+                top: 0;
+                left: 0;
+                opacity: 1;
+                color: #49bce2;
+                border: 2px solid #49bce2;
+                border-radius: 5px;
+                display: block;
+                // padding      : 0 15px;
+                width: 115px;
+                line-height: 40px;
+                transition: $speed;
+                position: relative;
+                background: white;
+                content: attr(data-front);
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        .btn-flip-backward {
+            border-left: none;
+            opacity: 1;
+            outline: 0;
+            color: white;
+            line-height: 40px;
+            position: relative;
+            text-align: center;
+            letter-spacing: 1px;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+
+            &:hover {
+                &:after {
+                    opacity: 1;
+                    transform: translateY(0) rotateX(0);
+                }
+
+                &:before {
+                    opacity: 0;
+                    transform: translateY(-50%) rotateX(-90deg);
+                }
+            }
+
+            &:after {
+                top: 0;
+                left: 0;
+                opacity: 0;
+                width: 100%;
+                color: #49bce2;
+                border: 2px solid #49bce2;
+                border-radius: 5px;
+                display: block;
+                transition: $speed;
+                position: absolute;
+                background: white;
+                content: attr(data-back);
+                transform: translateY(50%) rotateX(90deg);
+            }
+
+            &:before {
+                top: 0;
+                left: 0;
+                opacity: 1;
+                color: #5a5a5a;
+                border: 2px solid #5a5a5a;
+                border-radius: 5px;
+                display: block;
+                // padding      : 0 30px;
+                width: 115px;
+                line-height: 40px;
+                transition: $speed;
+                position: relative;
+                background: white;
+                content: attr(data-front);
+                transform: translateY(0) rotateX(0);
+            }
+        }
+    }
+
+    .loading-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 20px;
+        color: #666;
+
+        i {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #45c3d2;
+        }
+
+        span {
+            font-size: 16px;
+        }
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        background: #f8f9fa;
+        border-radius: 12px;
+        border: 2px dashed #ddd;
+
+        i {
+            font-size: 60px;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 14px;
+            color: #999;
+            margin: 0;
+        }
+    }
+
+    .schedules-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .schedule-item {
+        height: auto;
+        background-color: white;
+        border: 2px solid #b5daff;
+        border-radius: 5px;
+        padding: 25px 30px 25px 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+        margin: 10px 0 15px 0;
+
+        &:hover {
+            transform: translateX(5px); /* dịch sang phải 5px */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .schedule-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #f0f0f0;
+
+            .package-name {
+                font-size: 20px;
+                font-weight: 600;
+                color: #333;
+                margin: 0;
+            }
+
+            .status-badge {
+                padding: 6px 16px;
+                border-radius: 20px;
+                font-size: 13px;
+                font-weight: 500;
+
+                &.completed {
+                    background: #d4edda;
+                    color: #155724;
+                }
+
+                &.pending {
+                    background: #7dbcfc;
+                    color: white;
+                }
+            }
+        }
+
+        .schedule-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 20px;
+
+            .info-row {
+                display: flex;
+                align-items: flex-start;
+                gap: 12px;
+
+                i {
+                    font-size: 18px;
+                    color: #45c3d2;
+                    margin-top: 2px;
+                    min-width: 20px;
+                }
+
+                .info-text {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+                    flex: 1;
+
+                    strong {
+                        font-size: 14px;
+                        color: #666;
+                        font-weight: 500;
+                    }
+
+                    span {
+                        font-size: 15px;
+                        color: #333;
+
+                        &.address {
+                            color: #666;
+                            font-size: 14px;
+                        }
+
+                        &.highlight-today {
+                            color: #dc3545;
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+        }
+
+        .schedule-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+
+            .btn {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                i {
+                    font-size: 14px;
+                }
+
+                &:hover {
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                }
+
+                &:active {
+                    transform: translateY(0);
+                }
+
+                &.btn-confirm {
+                    background: #28a745;
+                    color: #fff;
+
+                    &:hover {
+                        background: #218838;
+                    }
+                }
+
+                &.btn-result {
+                    background: #007bff;
+                    color: #fff;
+
+                    &:hover {
+                        background: #0056b3;
+                    }
+                }
+            }
+
+            .result-pending {
+                padding: 10px 20px;
+                background: #f8f9fa;
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+                font-size: 14px;
+                color: #666;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                i {
+                    color: #ffc107;
+                    animation: pulse 2s infinite;
+                }
+            }
+        }
+    }
+
+    @keyframes pulse {
+        0%,
+        100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+    // Responsive
+    @media (max-width: 768px) {
+        padding: 15px;
+
+        .schedule-header-section {
+            h2 {
+                font-size: 24px;
+            }
+        }
+
+        .schedule-item {
+            padding: 16px;
+
+            .schedule-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+
+                .package-name {
+                    font-size: 18px;
+                }
+            }
+
+            .schedule-content {
+                .info-row {
+                    i {
+                        font-size: 16px;
+                    }
+
+                    .info-text {
+                        strong {
+                            font-size: 13px;
+                        }
+
+                        span {
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+
+            .schedule-actions {
+                flex-direction: column;
+
+                .btn,
+                .result-pending {
+                    width: 100%;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+
+    .exam-result-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .exam-result-modal {
+        background: #ffffff;
+        width: 90%;
+        max-width: 1100px;
+        max-height: 85vh;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        animation: fadeInScale 0.25s ease-out;
+
+        .modal-header {
+            padding: 18px 24px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f5f5f5;
+            border-radius: 12px 12px 0 0;
+
+            h3 {
+                margin: 0;
+                font-size: 18px;
+                font-weight: 600;
+                color: #333;
+            }
+
+            button {
+                border: none;
+                background: transparent;
+                font-size: 24px;
+                cursor: pointer;
+                color: #666;
+
+                &:hover {
+                    color: #000;
+                }
+            }
+        }
+
+        .modal-body {
+            padding: 20px 24px;
+            overflow-y: auto;
+        }
+    }
+
+    @keyframes fadeInScale {
+        from {
+            opacity: 0;
+            transform: scale(0.96);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* ===== RESULT TABLE ===== */
+
+    .exam-section {
+        margin-bottom: 30px;
+
+        .section-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #0056b3;
+            margin-bottom: 12px;
+        }
+    }
+
+    .result-table {
+        width: 100%;
+        border-collapse: collapse;
+
+        .result-row {
+            &.normal {
+                background: #e9f7ef;
+                td {
+                    color: #155724;
+                    font-weight: 500;
+                }
+            }
+
+            &.low {
+                background: #fff3cd;
+                td {
+                    color: #856404;
+                    font-weight: 500;
+                }
+            }
+
+            &.high {
+                background: #f8d7da;
+                td {
+                    color: #721c24;
+                    font-weight: 500;
+                }
+            }
+
+            &.danger {
+                background: #dc3545;
+                td {
+                    color: #fff;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        th {
+            background: #f1f3f5;
+            font-size: 13px;
+            font-weight: 600;
+            color: #555;
+            padding: 10px;
+            border-bottom: 2px solid #dee2e6;
+            text-align: left;
+        }
+
+        td {
+            padding: 10px;
+            font-size: 14px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #fafafa;
+        }
+    }
+}

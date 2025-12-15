@@ -15,6 +15,7 @@ import queryString from "query-string";
 
 const PersonalProfile = lazy(() => import("./PersonalProfile/PersonalProfile"));
 const AppointmentInProfilePage = lazy(() => import("./Appointment/AppointmentInProfilePage"));
+const ExamPackageTime = lazy(() => import("./ExamPackageTime/ExamPackageTime"));
 
 class UserProfile extends Component {
     constructor(props) {
@@ -123,7 +124,7 @@ class UserProfile extends Component {
                     }
                 >
                     <div className="appointment-of-current-user">
-                        <AppointmentInProfilePage currentUserEmail={currentUser.email} userRole={currentUser.roleId} combinedAppointments={combinedAppointments} onRefreshAppointments={this.refreshUserAppointments}/>
+                        <AppointmentInProfilePage currentUserEmail={currentUser.email} userRole={currentUser.roleId} combinedAppointments={combinedAppointments} onRefreshAppointments={this.refreshUserAppointments} />
                     </div>
                 </Suspense>
             );
@@ -135,6 +136,26 @@ class UserProfile extends Component {
         const { activeTab } = this.state;
         if (activeTab === "comment") {
             return <div className="personal-profile">Your comments about doctors</div>;
+        }
+        return null;
+    };
+
+    renderExamPackageTime = () => {
+        const { activeTab, currentUser } = this.state;
+        if (activeTab === "exampackage-time") {
+            return (
+                <Suspense
+                    fallback={
+                        <div className="loading-circle">
+                            <MoonLoader color="#123abc" size={25} />
+                        </div>
+                    }
+                >
+                    <div className="exampackage-time">
+                        <ExamPackageTime currentUser={currentUser} />
+                    </div>
+                </Suspense>
+            );
         }
         return null;
     };
@@ -155,6 +176,11 @@ class UserProfile extends Component {
                             <a onClick={() => this.handleTabChange("appointment")} className={activeTab === "appointment" ? "active" : ""}>
                                 Lịch hẹn bác sĩ
                             </a>
+                            {currentUser && currentUser.roleId === "R3" && (
+                                <a onClick={() => this.handleTabChange("exampackage-time")} className={activeTab === "exampackage-time" ? "active" : ""}>
+                                    Lịch khám Gói khám
+                                </a>
+                            )}
                             <a onClick={() => this.handleTabChange("comment")} className={activeTab === "comment" ? "active" : ""}>
                                 Nhận xét về bác sĩ
                             </a>
@@ -166,6 +192,7 @@ class UserProfile extends Component {
                         {this.renderProfileSection()}
                         {this.renderAppointmentSection()}
                         {this.renderCommentSection()}
+                        {this.renderExamPackageTime()}
 
                         <div className="logout-button-container">
                             <button onClick={this.handleLoginForUser} className="log-out-button-of-profile-page">

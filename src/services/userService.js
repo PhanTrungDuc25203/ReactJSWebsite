@@ -265,6 +265,10 @@ const getExamPackageResultDetailService = async (bookingId) => {
     return axios.get(`/api/exam-package/exam-result?bookingId=${bookingId}`);
 };
 
+const getPatientExamPackageTimeService = async (patientId) => {
+    return axios.get(`/api/patient/exam-package?patientId=${patientId}`);
+};
+
 export {
     handleLoginAPI,
     handleGoogleLoginService,
@@ -322,4 +326,5 @@ export {
     saveExamPackageResultService,
     getExamPackageResultDetailService,
     getInforAndArticleForAStaff,
+    getPatientExamPackageTimeService,
 };
