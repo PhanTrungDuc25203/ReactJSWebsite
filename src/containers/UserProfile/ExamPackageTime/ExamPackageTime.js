@@ -6,6 +6,7 @@ import * as actions from "../../../store/actions";
 import moment from "moment";
 import queryString from "query-string";
 import { getPatientExamPackageTimeService } from "../../../services/userService";
+import { Calendar, Hospital, Clock, MapPin, Phone, Mail, Stethoscope, FileText, CreditCard, User, BookMarked } from "lucide-react";
 
 class ExamPackageTime extends Component {
     constructor(props) {
@@ -154,8 +155,17 @@ class ExamPackageTime extends Component {
 
         const statusClass = isExamDone ? "completed" : "pending";
 
+        const examPackageImageByBase64 = Buffer.from(schedule?.examPackage?.image, "base64").toString("binary");
+
         return (
-            <div key={id} className="schedule-item">
+            <div
+                key={id}
+                className="schedule-item background-image-css"
+                style={{
+                    backgroundImage: `linear-gradient(to left, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.99),
+                            rgba(255, 255, 255, 1), rgb(255, 255, 255, 1)), url(${examPackageImageByBase64})`,
+                }}
+            >
                 <div className="schedule-header">
                     <h3 className="package-name">{schedule?.examPackage?.name}</h3>
 
@@ -164,16 +174,25 @@ class ExamPackageTime extends Component {
 
                 <div className="schedule-content">
                     <div className="info-row">
-                        <i className="fas fa-hospital"></i>
+                        <Hospital size={24} className="imported-lucide-icons" />
+                        {/* <i className="fas fa-hospital"></i> */}
                         <div className="info-text">
                             <strong>Cơ sở y tế</strong>
                             <span>{schedule?.examPackage?.medicalFacilityPackage?.name}</span>
-                            <span className="address">{schedule?.examPackage?.medicalFacilityPackage?.address}</span>
+                            <span className="address">
+                                <MapPin size={16} />
+                                {schedule?.examPackage?.medicalFacilityPackage?.address}
+                            </span>
+                        </div>
+                        <Stethoscope size={24} className="imported-lucide-icons" />
+                        <div className="info-text">
+                            <strong>Chuyên khoa</strong>
+                            <span>{schedule?.examPackage?.examPackageHaveSpecialty?.name}</span>
                         </div>
                     </div>
 
                     <div className="info-row">
-                        <i className="fas fa-calendar-alt"></i>
+                        <Calendar size={24} className="imported-lucide-icons" />
                         <div className="info-text">
                             <strong>Ngày khám</strong>
                             <span className={moment(schedule?.date).isSame(moment(), "day") ? "highlight-today" : ""}>{this.formatDate(schedule?.date)}</span>
@@ -181,7 +200,7 @@ class ExamPackageTime extends Component {
                     </div>
 
                     <div className="info-row">
-                        <i className="fas fa-clock"></i>
+                        <Clock size={24} className="imported-lucide-icons" />
                         <div className="info-text">
                             <strong>Khung giờ</strong>
                             <span>{schedule?.examPackageTimeTypeData?.value_Vie}</span>
@@ -192,7 +211,7 @@ class ExamPackageTime extends Component {
                 <div className="schedule-actions">
                     {canViewResult && (
                         <button className="btn btn-result" onClick={() => this.handleViewResult(schedule)}>
-                            <i className="fas fa-file-medical"></i>
+                            <FileText size={16} />
                             Xem kết quả
                         </button>
                     )}

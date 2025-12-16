@@ -6,7 +6,7 @@ import "./SchedulePage.scss";
 import HomePageHeader from "../HomePage/HomePageHeader/HomePageHeader";
 import CustomScrollbars from "../../components/CustomScrollbars";
 import HomeFooter from "../../containers/HomePage/HomeFooter/HomeFooter";
-import { getAllRelativeBookingsOfCurrentSystemUserService } from "../../services/userService";
+import { getAllRelativeBookingsOfCurrentSystemUserService, getPatientExamPackageTimeService } from "../../services/userService";
 /* global Temporal */
 
 class SchedulePage extends Component {
@@ -24,6 +24,7 @@ class SchedulePage extends Component {
         if (this.props.match?.params?.email) {
             const userEmail = this.props.match.params.email;
             const bookingRes = await getAllRelativeBookingsOfCurrentSystemUserService(userEmail, true);
+            const examPackageBookingRes = await getPatientExamPackageTimeService(this.props?.userInfo?.id);
 
             if (bookingRes && bookingRes.errCode === 0) {
                 const doctorAppointments = bookingRes.data.doctorHasAppointmentWithPatients || [];
@@ -106,9 +107,56 @@ class SchedulePage extends Component {
                     })
                     .filter(Boolean);
 
+                let examPackageEvents = [];
+
+                if (roleId === "R3" && examPackageBookingRes && examPackageBookingRes.errCode === 0) {
+                    const examPackageBookings = examPackageBookingRes.bookingData || [];
+
+                    examPackageEvents = examPackageBookings
+                        .map((item, index) => {
+                            const timeRange = item.examPackageTimeTypeData?.value_Vie || "";
+                            const [startTime, endTime] = timeRange.split(" - ");
+                            if (!startTime || !endTime) return null;
+
+                            const startBase = combineDateTime(item.date, startTime);
+                            const endBase = combineDateTime(item.date, endTime);
+                            if (!startBase || !endBase) return null;
+
+                            try {
+                                const startZoned = Temporal.ZonedDateTime.from(`${startBase}+00:00[UTC]`);
+                                const endZoned = Temporal.ZonedDateTime.from(`${endBase}+00:00[UTC]`);
+
+                                // xác định màu theo thời gian
+                                const diffHours = (startZoned.epochMilliseconds - now.epochMilliseconds) / (1000 * 60 * 60);
+
+                                let calendarId = "future";
+                                if (endZoned.epochMilliseconds < now.epochMilliseconds) {
+                                    calendarId = "past";
+                                } else if (diffHours <= 24 && diffHours > 0) {
+                                    calendarId = "soon";
+                                }
+
+                                return {
+                                    id: `exam-package-${item.id || index}`,
+                                    title: `Gói khám: ${item.examPackage?.name || "Không xác định"}`,
+                                    start: startZoned,
+                                    end: endZoned,
+                                    location: item.examPackage?.medicalFacilityPackage?.address || "Không có địa chỉ",
+                                    calendarId,
+                                    isExamPackage: true,
+                                    rawData: item, // giữ lại nếu cần dùng sau
+                                };
+                            } catch (error) {
+                                console.error("Lỗi chuyển đổi exam package:", error);
+                                return null;
+                            }
+                        })
+                        .filter(Boolean);
+                }
+
                 this.setState({
                     combinedAppointments: { doctorAppointments, patientAppointments },
-                    events: mappedEvents,
+                    events: roleId === "R3" ? [...mappedEvents, ...examPackageEvents] : mappedEvents,
                 });
             }
         }

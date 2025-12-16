@@ -111,7 +111,6 @@ class AppointmentItemForPatientInfterface extends Component {
 
     render() {
         let { scheduleStatus, appointmentId, doctorInfor, appointmentDate, appointmentTimeFrame } = this.state;
-        console.log("check state: ", this.state);
         return (
             <div className="appointment-item-for-patient-interface">
                 <div className="doctor-profile-lite-container">

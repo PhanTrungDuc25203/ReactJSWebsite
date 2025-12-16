@@ -181,7 +181,7 @@ class DetailSpecialty extends Component {
     render() {
         let { language } = this.props;
         let { arrDoctorId, specialtyDetailData, provinceList, isLoading, spinnerType, color, size, selectedProvince, isMobile, truncatedSpecialtyDetailsContent } = this.state;
-        console.log("check mobile: ", isMobile, truncatedSpecialtyDetailsContent);
+
         return (
             <React.Fragment>
                 <CustomScrollbars style={{ height: "100vh", width: "100%" }}>

@@ -62,32 +62,33 @@ class AppointmentInProfilePage extends PureComponent {
 
         let updated = [...appointments];
 
+        // 1. Filter theo ngày
         if (fromDate) {
             updated = updated.filter((item) => moment(item.date).isSameOrAfter(fromDate, "day"));
         }
+
         if (toDate) {
             updated = updated.filter((item) => moment(item.date).isSameOrBefore(toDate, "day"));
         }
 
-        switch (filterOption) {
-            case "date_asc":
-                updated.sort((a, b) => new Date(a.date) - new Date(b.date));
-                break;
+        // 2. Filter theo trạng thái
+        if (filterOption === "pending") {
+            // CHƯA KHÁM: chỉ S1, S2
+            updated = updated.filter((item) => ["S1", "S2"].includes(item.statusId));
+        }
 
-            case "date_desc":
-                updated.sort((a, b) => new Date(b.date) - new Date(a.date));
-                break;
+        if (filterOption === "completed") {
+            // ĐÃ KHÁM
+            updated = updated.filter((item) => item.statusId === "S3");
+        }
 
-            case "pending":
-                updated = updated.filter((item) => item.statusId === "S2");
-                break;
+        // 3. Sort theo ngày
+        if (filterOption === "date_asc") {
+            updated.sort((a, b) => new Date(a.date) - new Date(b.date));
+        }
 
-            case "completed":
-                updated = updated.filter((item) => item.statusId === "S3");
-                break;
-
-            default:
-                break;
+        if (filterOption === "date_desc") {
+            updated.sort((a, b) => new Date(b.date) - new Date(a.date));
         }
 
         return updated;
@@ -101,42 +102,39 @@ class AppointmentInProfilePage extends PureComponent {
             <div className="appointment-container">
                 {historyOrHandling === "handling" ? (
                     <Suspense fallback={<div>Loading...</div>}>
-                        {appointments.map(
-                            (item, index) =>
-                                (item.statusId !== "S3" || item.paymentStatus !== "PT3") && (
-                                    <div className="appointment-item" key={index}>
-                                        {isDoctor ? (
-                                            item.statusId !== "S1" && (
-                                                <AppointmentItemForDoctorInfterface
-                                                    scheduleStatus={item.statusId}
-                                                    appointmentId={item.id}
-                                                    meetPatientId={item.patientId}
-                                                    appointmentDate={moment(item.date).format("DD-MM-YYYY")}
-                                                    appointmentTimeFrame={item.appointmentTimeTypeData?.value_Vie}
-                                                    examReason={item.examReason}
-                                                    patientBirthday={moment(item.patientBirthday).format("DD-MM-YYYY")}
-                                                    patientAddress={item.patientAddress}
-                                                    paymentMethod={item.paymentMethod}
-                                                    paymentStatus={item.paymentStatus}
-                                                    paidAmount={item.paidAmount}
-                                                    files={item.files}
-                                                    statusId={item.statusId}
-                                                />
-                                            )
-                                        ) : (
-                                            <AppointmentItemForPatientInfterface
-                                                scheduleStatus={item.statusId}
-                                                paymentStatus={item.paymentStatus}
-                                                appointmentId={item.id}
-                                                meetDoctorId={item.doctorId}
-                                                appointmentDate={moment(item.date).format("DD-MM-YYYY")}
-                                                appointmentTimeFrame={item.appointmentTimeTypeData?.value_Vie}
-                                                medicalReport={item.files}
-                                            />
-                                        )}
-                                    </div>
-                                )
-                        )}
+                        {appointments.map((item) => (
+                            <div className="appointment-item" key={item.id}>
+                                {isDoctor ? (
+                                    item.statusId !== "S1" && (
+                                        <AppointmentItemForDoctorInfterface
+                                            scheduleStatus={item.statusId}
+                                            appointmentId={item.id}
+                                            meetPatientId={item.patientId}
+                                            appointmentDate={moment(item.date).format("DD-MM-YYYY")}
+                                            appointmentTimeFrame={item.appointmentTimeTypeData?.value_Vie}
+                                            examReason={item.examReason}
+                                            patientBirthday={moment(item.patientBirthday).format("DD-MM-YYYY")}
+                                            patientAddress={item.patientAddress}
+                                            paymentMethod={item.paymentMethod}
+                                            paymentStatus={item.paymentStatus}
+                                            paidAmount={item.paidAmount}
+                                            files={item.files}
+                                            statusId={item.statusId}
+                                        />
+                                    )
+                                ) : (
+                                    <AppointmentItemForPatientInfterface
+                                        scheduleStatus={item.statusId}
+                                        paymentStatus={item.paymentStatus}
+                                        appointmentId={item.id}
+                                        meetDoctorId={item.doctorId}
+                                        appointmentDate={moment(item.date).format("DD-MM-YYYY")}
+                                        appointmentTimeFrame={item.appointmentTimeTypeData?.value_Vie}
+                                        medicalReport={item.files}
+                                    />
+                                )}
+                            </div>
+                        ))}
                     </Suspense>
                 ) : (
                     <Suspense fallback={<div>Loading...</div>}>
@@ -179,7 +177,7 @@ class AppointmentInProfilePage extends PureComponent {
                             </div>
                         </div>
                     </div>
-                    <a className={historyOrHandling === "history" ? "btn-flip-backward" : "btn-flip"} data-back={historyOrHandling === "history" ? "Chưa khám" : "Lịch sử"} data-front={historyOrHandling === "history" ? "Lịch sử" : "Chưa khám"} onClick={this.handleHistoryOrHandlingButtonClicked} />
+                    <a className={historyOrHandling === "history" ? "btn-flip-backward" : "btn-flip"} data-back={historyOrHandling === "history" ? "Tất cả" : "Lịch sử"} data-front={historyOrHandling === "history" ? "Lịch sử" : "Tất cả"} onClick={this.handleHistoryOrHandlingButtonClicked} />
                 </div>
                 <div className="appointment-container">
                     {combinedAppointments.patientAppointments && combinedAppointments.patientAppointments.length > 0 ? this.renderAppointmentItems(this.getFilteredAppointments(combinedAppointments.patientAppointments), false) : userRole === "R3" && "Bạn chưa có lịch hẹn nào với bác sĩ"}

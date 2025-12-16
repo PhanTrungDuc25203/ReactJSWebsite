@@ -81,7 +81,6 @@ class DetailExamPackage extends Component {
     }
 
     render() {
-        console.log("check state: ", this.state.packageDetails);
         let { packageDetails, isShowPriceDetail, isShowInsurenceDetail } = this.state;
         let htmlDescription = packageDetails.htmlDescription ? this.extractFirstSection(packageDetails.htmlDescription) : "";
         let imageByBase64 = "";
