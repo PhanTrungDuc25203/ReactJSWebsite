@@ -1,6 +1,8 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import "../SearchPage.scss";
+import { path } from "../../../../utils";
+import { withRouter } from "react-router";
 
 class SpecialtyResult extends Component {
     constructor(props) {
@@ -11,6 +13,11 @@ class SpecialtyResult extends Component {
     componentDidMount() {}
 
     componentDidUpdate(prevProps, prevState, snapshot) {}
+
+    handleViewDetailSpecialty = (specialtyId) => {
+        const detailPath = path.SPECIALTY_ARTICLE.replace(":id", specialtyId);
+        this.props.history.push(detailPath);
+    };
 
     render() {
         // console.log("Check specialty props: ", this.props.specialtyResult);
@@ -30,7 +37,7 @@ class SpecialtyResult extends Component {
                     }
 
                     return (
-                        <div key={item.id} className="result-item">
+                        <div key={item.id} className="result-item" onClick={() => this.handleViewDetailSpecialty(item.id)}>
                             <div
                                 className="result-image"
                                 style={{
@@ -58,4 +65,4 @@ const mapDispatchToProps = (dispatch) => {
     return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SpecialtyResult);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SpecialtyResult));

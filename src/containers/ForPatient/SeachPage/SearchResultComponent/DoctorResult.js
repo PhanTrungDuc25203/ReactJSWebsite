@@ -1,6 +1,8 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import "../SearchPage.scss";
+import { path } from "../../../../utils";
+import { withRouter } from "react-router";
 
 class DoctorResult extends Component {
     constructor(props) {
@@ -12,8 +14,12 @@ class DoctorResult extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {}
 
+    handleViewDetailDoctor = (doctorId) => {
+        const detailPath = path.DETAIL_DOCTOR_ARTICLE.replace(":id", doctorId);
+        this.props.history.push(detailPath);
+    };
+
     render() {
-        // console.log("Check doctor props: ", this.props.doctorResult);
         let { doctorResult } = this.props;
 
         if (!doctorResult || !doctorResult.data) {
@@ -30,7 +36,7 @@ class DoctorResult extends Component {
                     }
 
                     return (
-                        <div key={item.id} className="result-item">
+                        <div key={item.id} className="result-item" onClick={() => this.handleViewDetailDoctor(item.id)}>
                             <div
                                 className="result-image"
                                 style={{
@@ -63,4 +69,4 @@ const mapDispatchToProps = (dispatch) => {
     return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DoctorResult);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DoctorResult));

@@ -1,6 +1,8 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import "../SearchPage.scss";
+import { path } from "../../../../utils";
+import { withRouter } from "react-router";
 
 class MedicalFacilityResult extends Component {
     constructor(props) {
@@ -11,6 +13,11 @@ class MedicalFacilityResult extends Component {
     componentDidMount() {}
 
     componentDidUpdate(prevProps, prevState, snapshot) {}
+
+    handleViewDetailMedicalFacility = (medicalFacilityId) => {
+        const detailPath = path.MEDICAL_FACILITY_ARTICLE.replace(":id", medicalFacilityId);
+        this.props.history.push(detailPath);
+    };
 
     render() {
         // console.log("Check exampackage props: ", this.props.facilityResult);
@@ -30,7 +37,7 @@ class MedicalFacilityResult extends Component {
                     }
 
                     return (
-                        <div key={item.id} className="result-item">
+                        <div key={item.id} className="result-item" onClick={() => this.handleViewDetailMedicalFacility(item.id)}>
                             <div
                                 className="result-image square-image-css"
                                 style={{
@@ -58,4 +65,4 @@ const mapDispatchToProps = (dispatch) => {
     return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacilityResult);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MedicalFacilityResult));
