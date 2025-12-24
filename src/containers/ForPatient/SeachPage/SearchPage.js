@@ -10,6 +10,7 @@ import DoctorResult from "./SearchResultComponent/DoctorResult";
 import ExamPackageResult from "./SearchResultComponent/ExamPackageResult";
 import MedicalFacilityResult from "./SearchResultComponent/MedicalFacilityResult";
 import { MoonLoader } from "react-spinners";
+import { FormattedMessage } from "react-intl";
 
 class SearchPage extends Component {
     constructor(props) {
@@ -113,11 +114,12 @@ class SearchPage extends Component {
                         <div className="search-bar">
                             <input type="text" placeholder="Tìm kiếm..." value={this.state.searchterm} onChange={this.handleOnChangeSearchInput} id="search-term" />
                             <select id="basic-select" value={filter} onChange={this.handleOnChangeFilter}>
-                                <option value="">Tất cả</option>
-                                <option value="doctor">Bác sĩ</option>
-                                <option value="exam_package">Gói khám</option>
-                                <option value="complex_facility">Cơ sở y tế</option>
-                                <option value="specialty">Chuyên khoa</option>
+                                <FormattedMessage id="search-page.search-bar.filter-title">{(text) => <option value="">{text}</option>}</FormattedMessage>
+                                <FormattedMessage id="search-page.search-bar.filter-opt-1">{(text) => <option value="doctor">{text}</option>}</FormattedMessage>
+                                <FormattedMessage id="search-page.search-bar.filter-opt-2">{(text) => <option value="exam_package">{text}</option>}</FormattedMessage>
+                                <FormattedMessage id="search-page.search-bar.filter-opt-3">{(text) => <option value="complex_facility">{text}</option>}</FormattedMessage>
+                                <FormattedMessage id="search-page.search-bar.filter-opt-4">{(text) => <option value="specialty">{text}</option>}</FormattedMessage>
+
                                 {/* <option value="chatbot">Trợ lý AI</option> */}
                             </select>
                         </div>
@@ -130,10 +132,18 @@ class SearchPage extends Component {
                             </div>
                         ) : (
                             <>
-                                {allNone && <p className="no-result-text">Không tìm thấy kết quả.</p>}
+                                {allNone && (
+                                    <p className="no-result-text">
+                                        <FormattedMessage id="search-page.result.result-not-found" />
+                                    </p>
+                                )}
 
                                 {/* TH2: Chỉ có resemble, không có exact */}
-                                {!hasExact && hasResemble && <p className="no-exact-text">Không tìm thấy kết quả chính xác. Kết quả gần tương đồng:</p>}
+                                {!hasExact && hasResemble && (
+                                    <p className="no-exact-text">
+                                        <FormattedMessage id="search-page.result.exact-result-not-found" />
+                                    </p>
+                                )}
 
                                 {/* Hiển thị kết quả theo filter */}
                                 {(filter === "" || filter === "specialty") && specialty.tag !== "none" && <SpecialtyResult specialtyResult={specialty} />}

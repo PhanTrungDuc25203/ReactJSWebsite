@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "../SearchPage.scss";
 import { path } from "../../../../utils";
 import { withRouter } from "react-router";
+import { FormattedMessage } from "react-intl";
 
 class ExamPackageResult extends Component {
     constructor(props) {
@@ -29,7 +30,9 @@ class ExamPackageResult extends Component {
 
         return (
             <div className="specialty-result-container">
-                <p className="result-section-title">Gói khám</p>
+                <p className="result-section-title">
+                    <FormattedMessage id="search-page.result.result-grp-2" />
+                </p>
                 {examPackageResult.data.map((item) => {
                     let imageByBase64 = "";
                     if (item.image && item.image.data) {

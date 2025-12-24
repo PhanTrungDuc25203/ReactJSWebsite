@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import "../SearchPage.scss";
 import { path } from "../../../../utils";
 import { withRouter } from "react-router";
+import { FormattedMessage } from "react-intl";
+import { LANGUAGES } from "../../../../utils";
 
 class DoctorResult extends Component {
     constructor(props) {
@@ -20,7 +22,7 @@ class DoctorResult extends Component {
     };
 
     render() {
-        let { doctorResult } = this.props;
+        let { doctorResult, language } = this.props;
 
         if (!doctorResult || !doctorResult.data) {
             return null;
@@ -28,7 +30,9 @@ class DoctorResult extends Component {
 
         return (
             <div className="doctor-result-container">
-                <p className="result-section-title">Bác sĩ</p>
+                <p className="result-section-title">
+                    <FormattedMessage id="search-page.result.result-grp-1" />
+                </p>
                 {doctorResult.data.map((item) => {
                     let imageByBase64 = "";
                     if (item.User.image && item.User.image.data) {
@@ -44,7 +48,7 @@ class DoctorResult extends Component {
                                 }}
                             ></div>
                             <div className="text-container">
-                                <div className="result-name">{item.User.positionData.value_Vie + ", " + item.User.lastName + " " + item.User.firstName}</div>
+                                <div className="result-name">{(language === LANGUAGES.VI ? item.User.positionData.value_Vie : item.User.positionData.value_Eng) + ", " + item.User.lastName + " " + item.User.firstName}</div>
                                 <div className="result-content">
                                     {item.User.Doctor_specialty_medicalFacility?.medicalFacilityDoctorAndSpecialty?.name || ""}
                                     {" - "}

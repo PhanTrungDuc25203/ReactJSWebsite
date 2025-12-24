@@ -302,5 +302,23 @@
             "payment-method": "Thanh toán sau tại cơ sở y tế",
             "receipt": "Tổng thanh toán (phí đặt lịch miễn phí): "
         }
+    },
+    "search-page": {
+        "search-bar": {
+            "place-holder": "Tìm kiếm...",
+            "filter-title": "Tất cả",
+            "filter-opt-1": "Bác sĩ",
+            "filter-opt-2": "Gói khám",
+            "filter-opt-3": "Cơ sở y tế",
+            "filter-opt-4": "Chuyên khoa"
+        },
+        "result": {
+            "result-not-found": "Không tìm thấy kết quả!",
+            "exact-result-not-found": "Không tìm thấy kết quả chính xác! Kết quả tương đồng:",
+            "result-grp-1": "Bác sĩ",
+            "result-grp-2": "Gói khám",
+            "result-grp-3": "Cơ sở y tế",
+            "result-grp-4": "Chuyên khoa"
+        }
     }
 }

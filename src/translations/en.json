@@ -302,5 +302,23 @@
             "payment-method": "Pay Later at the Medical Facility",
             "receipt": "Total Payment (Free Booking Fee):"
         }
+    },
+    "search-page": {
+        "search-bar": {
+            "place-holder": "Search...",
+            "filter-title": "All",
+            "filter-opt-1": "Doctor",
+            "filter-opt-2": "Exam package",
+            "filter-opt-3": "Medical facility",
+            "filter-opt-4": "Specialty"
+        },
+        "result": {
+            "result-not-found": "Result not found!",
+            "exact-result-not-found": "No exact matches found. Similar results:",
+            "result-grp-1": "Doctor",
+            "result-grp-2": "Exam package",
+            "result-grp-3": "Medical facility",
+            "result-grp-4": "Specialty"
+        }
     }
 }
