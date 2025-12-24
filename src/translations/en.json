@@ -305,7 +305,7 @@
     },
     "search-page": {
         "search-bar": {
-            "place-holder": "Search...",
+            "placeholder": "Search...",
             "filter-title": "All",
             "filter-opt-1": "Doctor",
             "filter-opt-2": "Exam package",
@@ -320,5 +320,47 @@
             "result-grp-3": "Medical facility",
             "result-grp-4": "Specialty"
         }
+    },
+    "register": {
+        "default": {
+            "page-title": "Create account",
+            "username": "Email",
+            "username-placeholder": "phanpiscean@gmail.com",
+            "invalid-username-notificate": "Your email syntax is not valid!",
+            "password": "Password",
+            "password-placeholder": "Enter your password",
+            "repeat-password": "Repeat your password",
+            "repeat-password-placeholder": "Enter your password one more time",
+            "password-matching": "Password is matching!",
+            "password-not-matching": "Password is not matching!",
+            "already-have-account": "Already have account? Login here",
+            "next-btn": "Next"
+        },
+        "personal-info-page": {
+            "page-title": "Give us more information",
+            "first-name": "First name",
+            "first-name-placeholder": "Phan",
+            "last-name": "Last name",
+            "last-name-placeholder": "Piscean",
+            "gender": "Gender",
+            "gender-loading": "Loading...",
+            "phonenumber": "Phone number",
+            "phonenumber-placeholder": "Your phone number",
+            "address": "Address",
+            "address-placeholder": "123 Main Street",
+            "back-btn": "Back",
+            "register-btn": "Register"
+        }
+    },
+    "login": {
+        "page-title": "Login",
+        "username": "Email",
+        "username-placeholder": "phanpiscean@gmail.com",
+        "password": "Password",
+        "password-placeholder": "Your password",
+        "login-btn": "Login",
+        "forgot-password": "Forgot your password?",
+        "register": "No account? Register here",
+        "another-opt": "Or login with:"
     }
 }

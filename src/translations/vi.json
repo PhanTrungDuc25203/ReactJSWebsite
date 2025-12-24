@@ -305,7 +305,7 @@
     },
     "search-page": {
         "search-bar": {
-            "place-holder": "Tìm kiếm...",
+            "placeholder": "Tìm kiếm...",
             "filter-title": "Tất cả",
             "filter-opt-1": "Bác sĩ",
             "filter-opt-2": "Gói khám",
@@ -320,5 +320,47 @@
             "result-grp-3": "Cơ sở y tế",
             "result-grp-4": "Chuyên khoa"
         }
+    },
+    "register": {
+        "default": {
+            "page-title": "Tạo tài khoản",
+            "username": "Email",
+            "username-placeholder": "phanpiscean@gmail.com",
+            "invalid-username-notificate": "Cú pháp email không đúng yêu cầu!",
+            "password": "Mật khẩu",
+            "password-placeholder": "Nhập mật khẩu của bạn",
+            "repeat-password": "Nhập lại mật khẩu",
+            "repeat-password-placeholder": "Nhập lại mật khẩu của bạn một lần nữa",
+            "password-matching": "Mật khẩu khớp!",
+            "password-not-matching": "Mật khẩu không khớp!",
+            "already-have-account": "Đã có tài khoản? Đăng nhập",
+            "next-btn": "Tiếp theo"
+        },
+        "personal-info-page": {
+            "page-title": "Hãy điền thông tin cá nhân của bạn",
+            "first-name": "Tên họ và tên đệm",
+            "first-name-placeholder": "Phan Trung",
+            "last-name": "Tên",
+            "last-name-placeholder": "Piscean",
+            "gender": "Giới tính",
+            "gender-loading": "Đang tải...",
+            "phonenumber": "Số điện thoại",
+            "phonenumber-placeholder": "Số điện thoại của bạn",
+            "address": "Địa chỉ",
+            "address-placeholder": "Khu 2 Hoàng Cương Thanh Ba Phú Thọ",
+            "back-btn": "Trở về",
+            "register-btn": "Đăng ký"
+        }
+    },
+    "login": {
+        "page-title": "Đăng nhập",
+        "username": "Email",
+        "username-placeholder": "phanpiscean@gmail.com",
+        "password": "Mật khẩu",
+        "password-placeholder": "Nhập mật khẩu của bạn",
+        "login-btn": "Đăng nhập",
+        "forgot-password": "Quên mật khẩu?",
+        "register": "Chưa có tài khoản? Đăng ký ngay",
+        "another-opt": "Hoặc đăng nhập bằng:"
     }
 }

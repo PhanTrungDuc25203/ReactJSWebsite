@@ -149,16 +149,28 @@ class Register extends Component {
             <div className="register-background">
                 <div className="register-container">
                     <div className="register-contents row">
-                        <div className="col-12 text-center register-text">Create your account</div>
-                        <div className="col-12 form-group register-input">
-                            <label>Email</label>
-                            <input type="email" className="form-control input-place" placeholder="Piscean" value={this.state.username} onChange={(event) => this.handleOnChangeEmailInput(event)} />
-                            {!this.state.isEmailValid && this.state.email && <div className="text-danger announce-text-with-email">Your email syntax is not valid!</div>}
+                        <div className="col-12 text-center register-text">
+                            <FormattedMessage id="register.default.page-title" />
                         </div>
                         <div className="col-12 form-group register-input">
-                            <label>Password</label>
+                            <label>
+                                <FormattedMessage id="register.default.username" />
+                            </label>
+                            <FormattedMessage id="register.default.username-placeholder">{(text) => <input type="email" className="form-control input-place" placeholder={text} value={this.state.username} onChange={(event) => this.handleOnChangeEmailInput(event)} />}</FormattedMessage>
+                            {!this.state.isEmailValid && this.state.email && (
+                                <div className="text-danger announce-text-with-email">
+                                    <FormattedMessage id="register.default.invalid-username-notificate" />
+                                </div>
+                            )}
+                        </div>
+                        <div className="col-12 form-group register-input">
+                            <label>
+                                <FormattedMessage id="register.default.password" />
+                            </label>
                             <div className="password-input-and-eye">
-                                <input type={this.state.passwordShown ? "text" : "password"} className="form-control input-place" placeholder="Enter your password" value={this.state.password} onChange={(event) => this.handleOnChangePasswordInput(event)} />
+                                <FormattedMessage id="register.default.password-placeholder">
+                                    {(text) => <input type={this.state.passwordShown ? "text" : "password"} className="form-control input-place" placeholder={text} value={this.state.password} onChange={(event) => this.handleOnChangePasswordInput(event)} />}
+                                </FormattedMessage>
                                 <span
                                     onClick={(event) => {
                                         this.handleShowAndHidePassword();
@@ -169,9 +181,13 @@ class Register extends Component {
                             </div>
                         </div>
                         <div className="col-12 form-group register-input">
-                            <label>Repeat your password</label>
+                            <label>
+                                <FormattedMessage id="register.default.repeat-password" />
+                            </label>
                             <div className="password-input-and-eye">
-                                <input type={this.state.passwordShown ? "text" : "password"} className="form-control input-place" placeholder="Re-input your password" value={this.state.verifyPassword} onChange={(event) => this.handleOnChangeInputPasswordAgainInput(event)} />
+                                <FormattedMessage id="register.default.repeat-password-placeholder">
+                                    {(text) => <input type={this.state.passwordShown ? "text" : "password"} className="form-control input-place" placeholder={text} value={this.state.verifyPassword} onChange={(event) => this.handleOnChangeInputPasswordAgainInput(event)} />}
+                                </FormattedMessage>
                                 <span
                                     onClick={(event) => {
                                         this.handleShowAndHidePassword();
@@ -180,14 +196,22 @@ class Register extends Component {
                                     <i className={this.state.passwordShown ? "far fa-eye" : "far fa-eye-slash"}></i>
                                 </span>
                                 {/* Hiển thị thông báo dưới ô input của mật khẩu xác nhận */}
-                                {!isPasswordMatch && this.state.verifyPassword && <div className="text-danger announce-text-with-password">Password is not matching!</div>}
-                                {isPasswordMatch && this.state.verifyPassword && <div className="text-success announce-text-with-password">Password is matching!</div>}
+                                {!isPasswordMatch && this.state.verifyPassword && (
+                                    <div className="text-danger announce-text-with-password">
+                                        <FormattedMessage id="register.default.password-not-matching" />
+                                    </div>
+                                )}
+                                {isPasswordMatch && this.state.verifyPassword && (
+                                    <div className="text-success announce-text-with-password">
+                                        <FormattedMessage id="register.default.password-matching" />
+                                    </div>
+                                )}
                             </div>
                         </div>
                         <div className="col-12">
                             <div className="back-or-next-button">
                                 <span className="login-link" onClick={() => this.handleBackClicked()}>
-                                    Already have account? Login here
+                                    <FormattedMessage id="register.default.already-have-account" />
                                 </span>
                                 <div className="wrapper-for-next-button">
                                     <a
@@ -196,7 +220,9 @@ class Register extends Component {
                                         }}
                                         disabled={!isPasswordMatch}
                                     >
-                                        <span>Next</span>
+                                        <span>
+                                            <FormattedMessage id="register.default.next-btn" />
+                                        </span>
                                     </a>
                                 </div>
                             </div>

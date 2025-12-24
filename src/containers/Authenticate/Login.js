@@ -109,34 +109,44 @@ class Login extends Component {
             <div className="login-background">
                 <div className="login-container">
                     <div className="login-contents row">
-                        <div className="col-12 text-center login-text">Login</div>
+                        <div className="col-12 text-center login-text">
+                            <FormattedMessage id="login.page-title" />
+                        </div>
                         <div className="col-12 form-group login-input">
-                            <label>Username</label>
-                            <input type="text" className="form-control input-place" placeholder="Piscean" value={this.state.username} onChange={(event) => this.handleOnChangeUsernameInput(event)} />
+                            <label>
+                                <FormattedMessage id="login.username" />
+                            </label>
+                            <FormattedMessage id="login.username-placeholder">{(text) => <input type="text" className="form-control input-place" placeholder={text} value={this.state.username} onChange={(event) => this.handleOnChangeUsernameInput(event)} />}</FormattedMessage>
                             {/* value khiến cho ô input username luôn hiện gia trị của
                             biến username của state và không thể bị thay đổi
                             - onChange xử lý sự kiện */}
                         </div>
 
                         <div className="col-12 form-group login-input">
-                            <label>Password</label>
-                            <div className="password-input-and-eye">
-                                <input
-                                    type={this.state.passwordShown ? "text" : "password"}
-                                    className="form-control input-place"
-                                    placeholder="Enter your password"
-                                    value={this.state.password}
-                                    onChange={(event) => this.handleOnChangePasswordInput(event)}
-                                    onKeyDown={(event) => this.handleEnterKeyPressed(event)}
-                                />
-                                <span
-                                    onClick={(event) => {
-                                        this.handleShowAndHidePassword();
-                                    }}
-                                >
-                                    <i className={this.state.passwordShown ? "far fa-eye" : "far fa-eye-slash"}></i>
-                                </span>
-                            </div>
+                            <label>
+                                <FormattedMessage id="login.password" />
+                            </label>
+                            <FormattedMessage id="login.password-placeholder">
+                                {(text) => (
+                                    <div className="password-input-and-eye">
+                                        <input
+                                            type={this.state.passwordShown ? "text" : "password"}
+                                            className="form-control input-place"
+                                            placeholder={text}
+                                            value={this.state.password}
+                                            onChange={(event) => this.handleOnChangePasswordInput(event)}
+                                            onKeyDown={(event) => this.handleEnterKeyPressed(event)}
+                                        />
+                                        <span
+                                            onClick={(event) => {
+                                                this.handleShowAndHidePassword();
+                                            }}
+                                        >
+                                            <i className={this.state.passwordShown ? "far fa-eye" : "far fa-eye-slash"}></i>
+                                        </span>
+                                    </div>
+                                )}
+                            </FormattedMessage>
                         </div>
                         <div className="col-12 error-message-while-login">{this.state.errMessage}</div>
                         <div className="col-6">
@@ -147,21 +157,27 @@ class Login extends Component {
                                         this.handleLoginButtonClicked();
                                     }}
                                 >
-                                    <span>Login</span>
+                                    <span>
+                                        <FormattedMessage id="login.login-btn" />
+                                    </span>
                                 </a>
                             </div>
                         </div>
 
                         <div className="col-12">
                             <div className="account-operation">
-                                <span className="forgot-password">For got your password?</span>
+                                <span className="forgot-password">
+                                    <FormattedMessage id="login.forgot-password" />
+                                </span>
                                 <span className="register-link" onClick={() => this.handleRegisterClicked()}>
-                                    No account? Register here
+                                    <FormattedMessage id="login.register" />
                                 </span>
                             </div>
                         </div>
                         <div className="or-login-with-options">
-                            <span>Or login with:</span>
+                            <span>
+                                <FormattedMessage id="login.another-opt" />
+                            </span>
                         </div>
                         <div className="more-login-options">
                             <GoogleOAuthProvider clientId="954224611627-dp26tne3s0g03jb0hti8qgfdtj3uet6i.apps.googleusercontent.com">

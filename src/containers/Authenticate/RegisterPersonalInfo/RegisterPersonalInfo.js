@@ -134,7 +134,9 @@ class RegisterPersonalInfo extends Component {
         return (
             <div className="register-personal-info-background">
                 <div className="register-personal-info-container">
-                    <div className="text-center register-personal-info-text">Give us more information</div>
+                    <div className="text-center register-personal-info-text">
+                        <FormattedMessage id="register.personal-info-page.page-title" />
+                    </div>
                     <div className="input-field-container">
                         <div className="user-avatar-container">
                             <div
@@ -159,15 +161,25 @@ class RegisterPersonalInfo extends Component {
                         </div>
                         <div className="register-personal-info-contents row">
                             <div className="col-4 form-group register-input">
-                                <label>First name</label>
-                                <input type="text" className="form-control input-place" placeholder="Piscean" name="firstName" value={this.state.firstName} onChange={(event) => this.onChangeInput(event, "firstName")} />
+                                <label>
+                                    <FormattedMessage id="register.personal-info-page.first-name" />
+                                </label>
+                                <FormattedMessage id="register.personal-info-page.first-name-placeholder">
+                                    {(text) => <input type="text" className="form-control input-place" placeholder={text} name="firstName" value={this.state.firstName} onChange={(event) => this.onChangeInput(event, "firstName")} />}
+                                </FormattedMessage>
                             </div>
                             <div className="col-4 form-group register-input">
-                                <label>Last name</label>
-                                <input type="text" className="form-control input-place" placeholder="Phan" name="lastName" value={this.state.lastName} onChange={(event) => this.onChangeInput(event, "lastName")} />
+                                <label>
+                                    <FormattedMessage id="register.personal-info-page.last-name" />
+                                </label>
+                                <FormattedMessage id="register.personal-info-page.last-name-placeholder">
+                                    {(text) => <input type="text" className="form-control input-place" placeholder={text} name="lastName" value={this.state.lastName} onChange={(event) => this.onChangeInput(event, "lastName")} />}
+                                </FormattedMessage>
                             </div>
                             <div className="col-4 form-group register-input">
-                                <label>Gender</label>
+                                <label>
+                                    <FormattedMessage id="register.personal-info-page.gender" />
+                                </label>
                                 <Input
                                     id="addUserGenderSelection"
                                     name="select"
@@ -192,12 +204,20 @@ class RegisterPersonalInfo extends Component {
                             </div>
 
                             <div className="col-12 form-group register-input">
-                                <label>Phone number</label>
-                                <input type="text" className="form-control input-place" placeholder="Your phone number" name="phoneNumber" value={this.state.phoneNumber} onChange={(event) => this.onChangeInput(event, "phoneNumber")} />
+                                <label>
+                                    <FormattedMessage id="register.personal-info-page.phonenumber" />
+                                </label>
+                                <FormattedMessage id="register.personal-info-page.phonenumber-placeholder">
+                                    {(text) => <input type="text" className="form-control input-place" placeholder={text} name="phoneNumber" value={this.state.phoneNumber} onChange={(event) => this.onChangeInput(event, "phoneNumber")} />}
+                                </FormattedMessage>
                             </div>
                             <div className="col-12 form-group register-input">
-                                <label>Address</label>
-                                <input type="text" className="form-control input-place" placeholder="Khu 2 Hoàng Cương Thanh Ba Phú Thọ" name="address" value={this.state.address} onChange={(event) => this.onChangeInput(event, "address")} />
+                                <label>
+                                    <FormattedMessage id="register.personal-info-page.address" />
+                                </label>
+                                <FormattedMessage id="register.personal-info-page.address-placeholder">
+                                    {(text) => <input type="text" className="form-control input-place" placeholder={text} name="address" value={this.state.address} onChange={(event) => this.onChangeInput(event, "address")} />}
+                                </FormattedMessage>
                             </div>
                             <div className="operation-button-container">
                                 <div className="back-to-login-button-wrapper">
@@ -206,7 +226,9 @@ class RegisterPersonalInfo extends Component {
                                             this.handleBackToLoginButtonClicked();
                                         }}
                                     >
-                                        <span>Back</span>
+                                        <span>
+                                            <FormattedMessage id="register.personal-info-page.back-btn" />
+                                        </span>
                                     </a>
                                 </div>
                                 <div className="register-button-wrapper">
@@ -215,7 +237,9 @@ class RegisterPersonalInfo extends Component {
                                             this.handleRegisterButtonClicked();
                                         }}
                                     >
-                                        <span>Register</span>
+                                        <span>
+                                            <FormattedMessage id="register.personal-info-page.register-btn" />
+                                        </span>
                                     </a>
                                 </div>
                             </div>
