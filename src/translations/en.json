@@ -252,7 +252,8 @@
     "doctor-detail-page-for-patient": {
         "schedule-section": {
             "available-timeframe-section-title": "Arrange your time:",
-            "sorry-text": "Sorry, the doctor is currently busy today! Please choose another day!"
+            "sorry-text": "Sorry, the doctor is currently busy today! Please choose another day!",
+            "sorry-text-2": "Doctor is busy at this time."
         },
         "extra-infor-section": {
             "exam-address": "Examination address",
@@ -264,6 +265,11 @@
             "payment-method-3": "The clinic accepts payment via cash",
             "more-button": "More",
             "less-button": "Less"
+        },
+        "rate-and-review": {
+            "title": "Reviews and ratings for doctors and services",
+            "not-have-yet": "There are no reviews or ratings yet",
+            "examed-day": "Examined on"
         }
     },
     "doctor-manage-page-for-admin": {

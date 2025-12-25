@@ -252,7 +252,8 @@
     "doctor-detail-page-for-patient": {
         "schedule-section": {
             "available-timeframe-section-title": "Thời gian khám:",
-            "sorry-text": "Xin lỗi quý khách, bác sĩ hiện không còn trống lịch hôm nay! Vui lòng chọn một hôm khác."
+            "sorry-text": "Xin lỗi quý khách, bác sĩ hiện không còn trống lịch hôm nay! Vui lòng chọn một hôm khác.",
+            "sorry-text-2": "Bác sĩ đã bận vào khung giờ này"
         },
         "extra-infor-section": {
             "exam-address": "Địa chỉ khám",
@@ -264,6 +265,11 @@
             "payment-method-3": "Phòng khám chỉ nhận thanh toán bằng hình thức tiền mặt",
             "more-button": "Xem thêm",
             "less-button": "Thu gọn"
+        },
+        "rate-and-review": {
+            "title": "Nhận xét và đánh giá về bác sĩ và dịch vụ",
+            "not-have-yet": "Hiện tại chưa có đánh giá và nhận xét nào",
+            "examed-day": "Đã khám ngày"
         }
     },
     "doctor-manage-page-for-admin": {

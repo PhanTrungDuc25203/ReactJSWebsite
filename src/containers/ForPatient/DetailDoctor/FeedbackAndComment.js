@@ -8,6 +8,7 @@ import "./FeedbackAndComment.scss";
 import defaultAvatar from "../../../assets/images/default-avatar-circle.png";
 import Lightbox from "react-image-lightbox";
 import moment from "moment";
+import { FormattedMessage } from "react-intl";
 
 class FeedbackAndComment extends Component {
     constructor(props) {
@@ -136,7 +137,7 @@ class FeedbackAndComment extends Component {
         return (
             <div className="feedback-and-comments-container">
                 <div className="section-title">
-                    Nhận xét và đánh giá về bác sĩ và dịch vụ <span> </span>
+                    <FormattedMessage id="doctor-detail-page-for-patient.rate-and-review.title" /> <span> </span>
                     {averageRating !== null && (
                         <span className="avg-score">
                             <span className="avg-emoji">{this.getEmojiForAverage(averageRating)}</span>
@@ -146,7 +147,9 @@ class FeedbackAndComment extends Component {
                 </div>
 
                 {feedbackAndComments.length === 0 ? (
-                    <div>No feedback yet.</div>
+                    <div>
+                        <FormattedMessage id="doctor-detail-page-for-patient.rate-and-review.not-have-yet" />
+                    </div>
                 ) : (
                     feedbackAndComments.map((item, index) => {
                         const avatarSrc = this.getPatientAvatar(item.patientData);
@@ -165,7 +168,7 @@ class FeedbackAndComment extends Component {
                                             <span className="appointment-date">
                                                 <FontAwesomeIcon icon={faCircleCheck} />
                                                 <span> </span>
-                                                Đã khám ngày {moment(item.appointmentData.date).format("DD/MM/YYYY")}
+                                                <FormattedMessage id="doctor-detail-page-for-patient.rate-and-review.examed-day" /> {moment(item.appointmentData.date).format("DD/MM/YYYY")}
                                             </span>
                                         </div>
                                         {item.patientData?.email && <div className="patient-email">{item.patientData.email}</div>}

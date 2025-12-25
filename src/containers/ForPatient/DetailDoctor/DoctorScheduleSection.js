@@ -119,7 +119,11 @@ class DoctorScheduleSection extends Component {
                                 return (
                                     <button key={index} className={`timeframe-button ${isBooked ? "booked has-tooltip" : ""}`} disabled={isBooked} onClick={() => !isBooked && this.handleChoosingATimeframeForAppointment(item)}>
                                         {timeframe}
-                                        {isBooked && <span className="tooltip-text">Bác sĩ đã bận vào khung giờ này</span>}
+                                        {isBooked && (
+                                            <span className="tooltip-text">
+                                                <FormattedMessage id="doctor-detail-page-for-patient.schedule-section.sorry-text-2" />
+                                            </span>
+                                        )}
                                     </button>
                                 );
                             })
