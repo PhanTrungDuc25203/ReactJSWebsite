@@ -6,7 +6,9 @@ import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import { getPatientAppointmentsOverviewStatisticsService, getPatientAppointmentsNearestService, getPatientAppointmentsMonthlyVisitsService, getPatientFrequentVisitsMedicalFacilitiesAndDoctorsService } from "../../services/userService";
 import * as actions from "../../store/actions";
+import { LANGUAGES } from "../../utils";
 import { switchLanguageOfWebsite } from "../../store/actions";
+import { FormattedMessage, injectIntl } from "react-intl";
 
 class DashboardForPatient extends Component {
     constructor(props) {
@@ -91,6 +93,7 @@ class DashboardForPatient extends Component {
     // ------------------------------
     calculateBMI = () => {
         const { weight, height } = this.state;
+        const { language } = this.props;
         if (!weight || !height) return;
 
         const heightInMeters = parseFloat(height) / 100;
@@ -101,24 +104,24 @@ class DashboardForPatient extends Component {
         let color = "";
 
         if (bmi < 18.5) {
-            category = "Thiếu cân";
-            advice = "Bạn nên tăng cường dinh dưỡng và tập luyện để đạt cân nặng lý tưởng.";
+            category = language === LANGUAGES.VI ? "Thiếu cân" : "Underweight";
+            advice = language === LANGUAGES.VI ? "Bạn nên tăng cường dinh dưỡng và tập luyện để đạt cân nặng lý tưởng." : "You should improve your nutrition and exercise regularly.";
             color = "#3b82f6";
         } else if (bmi >= 18.5 && bmi < 23) {
-            category = "Bình thường";
-            advice = "Cân nặng lý tưởng. Hãy duy trì chế độ ăn uống lành mạnh.";
+            category = language === LANGUAGES.VI ? "Bình thường" : "Normal";
+            advice = language === LANGUAGES.VI ? "Cân nặng lý tưởng. Hãy duy trì chế độ ăn uống lành mạnh." : "Your weight is ideal. Maintain a healthy lifestyle.";
             color = "#10b981";
         } else if (bmi >= 23 && bmi < 25) {
-            category = "Thừa cân";
-            advice = "Nên điều chỉnh chế độ ăn và tăng cường vận động.";
+            category = language === LANGUAGES.VI ? "Thừa cân" : "Overweight";
+            advice = language === LANGUAGES.VI ? "Nên điều chỉnh chế độ ăn và tăng cường vận động." : "Adjust your diet and increase physical activity.";
             color = "#f59e0b";
         } else if (bmi >= 25 && bmi < 30) {
-            category = "Béo phì độ I";
-            advice = "Cần lập kế hoạch giảm cân an toàn.";
+            category = language === LANGUAGES.VI ? "Béo phì độ I" : "Obesity Class I";
+            advice = language === LANGUAGES.VI ? "Cần lập kế hoạch giảm cân an toàn." : "You should plan a safe weight loss program.";
             color = "#f97316";
         } else {
-            category = "Béo phì độ II";
-            advice = "Cần gặp bác sĩ chuyên khoa để được tư vấn.";
+            category = language === LANGUAGES.VI ? "Béo phì độ II" : "Obesity Class II";
+            advice = language === LANGUAGES.VI ? "Cần gặp bác sĩ chuyên khoa để được tư vấn." : "Consult a specialist doctor for proper guidance.";
             color = "#ef4444";
         }
 
@@ -132,6 +135,8 @@ class DashboardForPatient extends Component {
     // ------------------------------
     calculateWHR = () => {
         const { waist, hip, gender } = this.state;
+        const { language } = this.props;
+
         if (!waist || !hip) return;
 
         const whr = (parseFloat(waist) / parseFloat(hip)).toFixed(2);
@@ -142,30 +147,30 @@ class DashboardForPatient extends Component {
 
         if (gender === "male") {
             if (whr < 0.9) {
-                risk = "Thấp";
-                advice = "Chỉ số tốt, hãy duy trì.";
+                risk = language === LANGUAGES.VI ? "Thấp" : "Low";
+                advice = language === LANGUAGES.VI ? "Chỉ số tốt, hãy duy trì." : "Good indicator, keep maintaining your current lifestyle.";
                 color = "#10b981";
             } else if (whr < 1.0) {
-                risk = "Trung bình";
-                advice = "Nên tập luyện và điều chỉnh dinh dưỡng.";
+                risk = language === LANGUAGES.VI ? "Trung bình" : "Moderate";
+                advice = language === LANGUAGES.VI ? "Nên tập luyện và điều chỉnh dinh dưỡng." : "You should exercise more and adjust your diet.";
                 color = "#f59e0b";
             } else {
-                risk = "Cao";
-                advice = "Nguy cơ cao, nên gặp bác sĩ.";
+                risk = language === LANGUAGES.VI ? "Cao" : "High";
+                advice = language === LANGUAGES.VI ? "Nguy cơ cao, nên gặp bác sĩ." : "High risk, you should consult a doctor.";
                 color = "#ef4444";
             }
         } else {
             if (whr < 0.8) {
-                risk = "Thấp";
-                advice = "Chỉ số tốt, tiếp tục duy trì.";
+                risk = language === LANGUAGES.VI ? "Thấp" : "Low";
+                advice = language === LANGUAGES.VI ? "Chỉ số tốt, tiếp tục duy trì." : "Good indicator, keep maintaining it.";
                 color = "#10b981";
             } else if (whr < 0.85) {
-                risk = "Trung bình";
-                advice = "Cần điều chỉnh chế độ ăn và tập luyện.";
+                risk = language === LANGUAGES.VI ? "Trung bình" : "Moderate";
+                advice = language === LANGUAGES.VI ? "Cần điều chỉnh chế độ ăn và tập luyện." : "You should adjust your diet and exercise regularly.";
                 color = "#f59e0b";
             } else {
-                risk = "Cao";
-                advice = "Nguy cơ cao, nên tham vấn bác sĩ.";
+                risk = language === LANGUAGES.VI ? "Cao" : "High";
+                advice = language === LANGUAGES.VI ? "Nguy cơ cao, nên tham vấn bác sĩ." : "High risk, consider consulting a doctor.";
                 color = "#ef4444";
             }
         }
@@ -190,8 +195,12 @@ class DashboardForPatient extends Component {
                 {/* Header */}
                 <div className="dashboard-header">
                     <div className="header-left">
-                        <h1>Xin chào, chúc bạn một ngày tốt lành</h1>
-                        <p>Quản lý lịch khám và theo dõi sức khỏe của bạn!</p>
+                        <h1>
+                            <FormattedMessage id="dashboard.header.patient-greeting" />
+                        </h1>
+                        <p>
+                            <FormattedMessage id="dashboard.header.patient-sub-title" />
+                        </p>
                     </div>
                     <div className="header-right">
                         <button className="notification-btn">
@@ -204,7 +213,9 @@ class DashboardForPatient extends Component {
                                 <h3>
                                     {this.props?.userInfo?.firstName} {this.props?.userInfo?.lastName}
                                 </h3>
-                                <p>Bệnh nhân</p>
+                                <p>
+                                    <FormattedMessage id="dashboard.header.patient-role" />
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -214,7 +225,9 @@ class DashboardForPatient extends Component {
                 <div className="stats-grid">
                     <div className="stat-card">
                         <div className="left-content">
-                            <h4>Tổng lịch hẹn</h4>
+                            <h4>
+                                <FormattedMessage id="dashboard.stat.total" />
+                            </h4>
                             <div className="value">{stats?.totalAppointments}</div>
                         </div>
                         <div className="right-content">
@@ -223,7 +236,9 @@ class DashboardForPatient extends Component {
                     </div>
                     <div className="stat-card">
                         <div className="left-content">
-                            <h4>Chờ khám</h4>
+                            <h4>
+                                <FormattedMessage id="dashboard.stat.pending" />
+                            </h4>
                             <div className="value">{stats?.upcomingAppointments}</div>
                         </div>
                         <div className="right-content">
@@ -232,7 +247,9 @@ class DashboardForPatient extends Component {
                     </div>
                     <div className="stat-card">
                         <div className="left-content">
-                            <h4>Đã hoàn thành</h4>
+                            <h4>
+                                <FormattedMessage id="dashboard.stat.done" />
+                            </h4>
                             <div className="value">{stats?.completedAppointments}</div>
                         </div>
                         <div className="right-content">
@@ -241,7 +258,9 @@ class DashboardForPatient extends Component {
                     </div>
                     <div className="stat-card">
                         <div className="left-content">
-                            <h4>Đã hủy</h4>
+                            <h4>
+                                <FormattedMessage id="dashboard.stat.cancel" />
+                            </h4>
                             <div className="value">{stats?.cancelledAppointments}</div>
                         </div>
                         <div className="right-content">
@@ -256,14 +275,18 @@ class DashboardForPatient extends Component {
                     <div className="appointments-section">
                         <div className="section-header">
                             <Calendar className="section-icon" size={24} />
-                            <h2>Lịch hẹn gần nhất của bạn</h2>
+                            <h2>
+                                <FormattedMessage id="dashboard.nearest-appointments" />
+                            </h2>
                         </div>
 
                         <div className="appointments-list">
                             {nearestUpcomingAppointments.map((appointment) => (
                                 <div key={appointment.id} className="appointment-card">
                                     <div className="appointment-header">
-                                        <div className="doctor-avatar">BS</div>
+                                        <div className="doctor-avatar">
+                                            <FormattedMessage id="dashboard.doctor" />
+                                        </div>
                                         <div className="appointment-info">
                                             <h3>
                                                 {appointment?.doctorHasAppointmentWithPatients?.lastName} {appointment?.doctorHasAppointmentWithPatients?.firstName}
@@ -294,15 +317,17 @@ class DashboardForPatient extends Component {
                     <div className="health-calculator">
                         <div className="section-header">
                             <Activity className="section-icon" size={24} />
-                            <h2>Đánh giá sức khỏe</h2>
+                            <h2>
+                                <FormattedMessage id="dashboard.evaluate-health" />
+                            </h2>
                         </div>
 
                         <div className="health-tabs">
                             <button className={`tab-btn ${activeHealthTab === "bmi" ? "active" : ""}`} onClick={() => this.setState({ activeHealthTab: "bmi" })}>
-                                BMI
+                                <FormattedMessage id="dashboard.bmi" />
                             </button>
                             <button className={`tab-btn ${activeHealthTab === "whr" ? "active" : ""}`} onClick={() => this.setState({ activeHealthTab: "whr" })}>
-                                Eo/Hông
+                                <FormattedMessage id="dashboard.waist/hip" />
                             </button>
                         </div>
 
@@ -310,23 +335,27 @@ class DashboardForPatient extends Component {
                         {activeHealthTab === "bmi" && (
                             <div className="calculator-content">
                                 <div className="form-group">
-                                    <label>Cân nặng</label>
+                                    <label>
+                                        <FormattedMessage id="dashboard.form.weight" />
+                                    </label>
                                     <div className="input-suffix">
-                                        <input type="number" placeholder="Nhập cân nặng" value={weight} onChange={(e) => this.setState({ weight: e.target.value })} />
+                                        <FormattedMessage id="dashboard.form.weight-placeholder">{(text) => <input type="number" placeholder={text} value={weight} onChange={(e) => this.setState({ weight: e.target.value })} />}</FormattedMessage>
                                         <span className="suffix">kg</span>
                                     </div>
                                 </div>
 
                                 <div className="form-group">
-                                    <label>Chiều cao</label>
+                                    <label>
+                                        <FormattedMessage id="dashboard.form.height" />
+                                    </label>
                                     <div className="input-suffix">
-                                        <input type="number" placeholder="Nhập chiều cao" value={height} onChange={(e) => this.setState({ height: e.target.value })} />
+                                        <FormattedMessage id="dashboard.form.height-placeholder">{(text) => <input type="number" placeholder={text} value={height} onChange={(e) => this.setState({ height: e.target.value })} />}</FormattedMessage>
                                         <span className="suffix">cm</span>
                                     </div>
                                 </div>
 
                                 <button className="calculate-btn" disabled={!weight || !height} onClick={this.calculateBMI}>
-                                    Tính BMI
+                                    <FormattedMessage id="dashboard.form.bmi-result-btn" />
                                 </button>
 
                                 {bmiResult && (
@@ -338,7 +367,9 @@ class DashboardForPatient extends Component {
                                                 </div>
                                             </div>
                                             <div className="result-category">
-                                                <h4>Phân loại</h4>
+                                                <h4>
+                                                    <FormattedMessage id="dashboard.form.classify" />
+                                                </h4>
                                                 <div className="category" style={{ color: bmiResult.color }}>
                                                     {bmiResult.category}
                                                 </div>
@@ -358,25 +389,32 @@ class DashboardForPatient extends Component {
                         {activeHealthTab === "whr" && (
                             <div className="calculator-content">
                                 <div className="form-group">
-                                    <label>Giới tính</label>
+                                    <label>
+                                        <FormattedMessage id="dashboard.form.gender" />
+                                    </label>
                                     <select value={gender} onChange={(e) => this.setState({ gender: e.target.value })}>
-                                        <option value="male">Nam</option>
-                                        <option value="female">Nữ</option>
+                                        <FormattedMessage id="dashboard.form.male">{(text) => <option value="male">{text}</option>}</FormattedMessage>
+                                        <FormattedMessage id="dashboard.form.female">{(text) => <option value="female">{text}</option>}</FormattedMessage>
                                     </select>
                                 </div>
 
                                 <div className="form-group">
-                                    <label>Vòng eo</label>
+                                    <label>
+                                        <FormattedMessage id="dashboard.form.waist-circumference" />
+                                    </label>
                                     <div className="input-suffix">
-                                        <input type="number" placeholder="Nhập vòng eo" value={waist} onChange={(e) => this.setState({ waist: e.target.value })} />
+                                        <FormattedMessage id="dashboard.form.waist-circumference-placeholder">{(text) => <input type="number" placeholder={text} value={waist} onChange={(e) => this.setState({ waist: e.target.value })} />}</FormattedMessage>
+
                                         <span className="suffix">cm</span>
                                     </div>
                                 </div>
 
                                 <div className="form-group">
-                                    <label>Vòng hông</label>
+                                    <label>
+                                        <FormattedMessage id="dashboard.form.hip-circumference" />
+                                    </label>
                                     <div className="input-suffix">
-                                        <input type="number" placeholder="Nhập vòng hông" value={hip} onChange={(e) => this.setState({ hip: e.target.value })} />
+                                        <FormattedMessage id="dashboard.form.hip-circumference-placeholder">{(text) => <input type="number" placeholder={text} value={hip} onChange={(e) => this.setState({ hip: e.target.value })} />}</FormattedMessage>
                                         <span className="suffix">cm</span>
                                     </div>
                                 </div>
@@ -394,7 +432,9 @@ class DashboardForPatient extends Component {
                                                 </div>
                                             </div>
                                             <div className="result-category">
-                                                <h4>Mức rủi ro</h4>
+                                                <h4>
+                                                    <FormattedMessage id="dashboard.form.risk" />
+                                                </h4>
                                                 <div className="category" style={{ color: whrResult.color }}>
                                                     {whrResult.risk}
                                                 </div>
@@ -416,13 +456,17 @@ class DashboardForPatient extends Component {
                 <div className="statistics-section">
                     <div className="section-header">
                         <TrendingUp className="section-icon" size={24} />
-                        <h2>Thống kê chi tiết</h2>
+                        <h2>
+                            <FormattedMessage id="dashboard.statistic.title" />
+                        </h2>
                     </div>
 
                     <div className="stats-content">
                         {/* Monthly stats */}
                         <div>
-                            <h3 className="section-title">Lượt khám hàng tháng</h3>
+                            <h3 className="section-title">
+                                <FormattedMessage id="dashboard.statistic.appointments-every-month" />
+                            </h3>
                             <div className="monthly-chart">
                                 {monthlyStats.map((stat, index) => (
                                     <div key={index} className="chart-bar-wrapper">
@@ -442,7 +486,9 @@ class DashboardForPatient extends Component {
 
                         {/* Doctor ranking */}
                         <div>
-                            <h3 className="section-title">Bác sĩ thường gặp</h3>
+                            <h3 className="section-title">
+                                <FormattedMessage id="dashboard.statistic.frequent-doctor" />
+                            </h3>
                             <div className="ranking-list">
                                 {frequentlyVisitDoctorStats?.map((doctor, index) => {
                                     const rankColors = ["#50b8db", "#3b9bb8", "#6366f1", "#8b5cf6"];
@@ -461,7 +507,11 @@ class DashboardForPatient extends Component {
                                                 <p>{doctor?.specialty?.name}</p>
                                             </div>
 
-                                            <div className="ranking-badge">{doctor?.visits} lượt</div>
+                                            <div className="ranking-badge">
+                                                {doctor?.visits}
+                                                {` `}
+                                                <FormattedMessage id="dashboard.statistic.turn" />
+                                            </div>
                                         </div>
                                     );
                                 })}
@@ -470,7 +520,9 @@ class DashboardForPatient extends Component {
 
                         {/* Facility ranking */}
                         <div>
-                            <h3 className="section-title">Cơ sở y tế thường đến</h3>
+                            <h3 className="section-title">
+                                <FormattedMessage id="dashboard.statistic.frequent-medical-facility" />
+                            </h3>
                             <div className="ranking-list">
                                 {frequentlyVisitFacilityStats?.map((facility, index) => {
                                     const rankColors = ["#50b8db", "#3b9bb8", "#6366f1", "#8b5cf6"];
@@ -487,7 +539,11 @@ class DashboardForPatient extends Component {
                                                 <p>{facility?.facilityInfo?.address}</p>
                                             </div>
 
-                                            <div className="ranking-badge">{facility?.visits} lượt</div>
+                                            <div className="ranking-badge">
+                                                {facility?.visits}
+                                                {` `}
+                                                <FormattedMessage id="dashboard.statistic.turn" />
+                                            </div>
                                         </div>
                                     );
                                 })}
@@ -516,4 +572,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DashboardForPatient));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(injectIntl(DashboardForPatient)));

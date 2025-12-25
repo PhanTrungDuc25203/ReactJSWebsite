@@ -362,5 +362,68 @@
         "forgot-password": "Quên mật khẩu?",
         "register": "Chưa có tài khoản? Đăng ký ngay",
         "another-opt": "Hoặc đăng nhập bằng:"
+    },
+    "dashboard": {
+        "header": {
+            "patient-greeting": "Xin chào, chúc bạn một ngày tốt lành",
+            "patient-sub-title": "Quản lý lịch khám và theo dõi sức khỏe của bạn!",
+            "patient-role": "Bệnh nhân",
+            "doctor-sub-title": "Quản lý lịch khám và bệnh nhân"
+        },
+        "stat": {
+            "total": "Tổng lịch hẹn",
+            "pending": "Chờ khám",
+            "done": "Đã hoàn thành",
+            "cancel": "Đã hủy",
+            "total-patients": "Tổng bệnh nhân",
+            "today-appointments": "Lịch hẹn hôm nay",
+            "today-done-appointments": "Đã khám hôm nay",
+            "pending-appoitments": "Chờ xử lý"
+        },
+        "revenue": {
+            "title": "Tổng quan doanh thu",
+            "6-months-revenue": "Tổng quan doanh thu (6 tháng)",
+            "avarage": "Trung bình: ",
+            "/month": "/tháng",
+            "this-month-revenue": "Doanh thu tháng này",
+            "compared-to-last-month": "% so với tháng trước",
+            "revenue-per-patient": "TB doanh thu/bệnh nhân",
+            "month": "Tháng ",
+            "6-months-revenue-diagram": "Biểu đồ doanh thu 6 tháng"
+        },
+        "nearest-appointments": "Lịch hẹn gần nhất của bạn",
+        "doctor": "BS",
+        "evaluate-health": "Đánh giá sức khỏe của bạn",
+        "bmi": "Chỉ số BMI",
+        "waist/hip": "Tỉ lệ Eo/hông",
+        "form": {
+            "weight": "Cân nặng",
+            "weight-placeholder": "Nhập cân nặng",
+            "height": "Chiều cao",
+            "height-placeholder": "Nhập chiều cao",
+            "bmi-result-btn": "Tính BMI",
+            "classify": "Phân loại",
+            "male": "Nam",
+            "female": "Nữ",
+            "gender": "Giới tính",
+            "waist-circumference": "Vòng eo",
+            "waist-circumference-placeholder": "Nhập số đo vòng eo của bạn",
+            "hip-circumference": "Vòng hông",
+            "hip-circumference-placeholder": "Nhập số đo vòng hông của bạn",
+            "calculate-whr": "Tính WHR",
+            "risk": "Mức rủi ro"
+        },
+        "statistic": {
+            "title": "Thống kê chi tiết",
+            "appointments-every-month": "Lượt khám hàng tháng",
+            "frequent-doctor": "Bác sĩ thường gặp",
+            "frequent-medical-facility": "Cơ sở y tế thường đến",
+            "turn": "lượt",
+            "patients-per-month": "Bệnh nhân theo tháng",
+            "frequent-patients": "Bệnh nhân thường xuyên",
+            "common-reason": "Lý do khám phổ biến",
+            "years-old": "tuổi",
+            "nearest-exam": "Khám gần nhất: "
+        }
     }
 }

@@ -6,7 +6,9 @@ import { connect } from "react-redux";
 import ScheduleTable from "../../components/ScheduleTable/ScheduleTable";
 import { getAllRelativeBookingsOfCurrentSystemUserService, getDoctorStatisticMonthlyPatientsService, getDoctorAppointmentsTodayOverviewStatisticsService } from "../../services/userService";
 import { switchLanguageOfWebsite } from "../../store/actions";
+import { LANGUAGES } from "../../utils";
 import * as actions from "../../store/actions";
+import { FormattedMessage, injectIntl } from "react-intl";
 /* global Temporal */
 
 class DashboardForDoctor extends Component {
@@ -363,13 +365,19 @@ class DashboardForDoctor extends Component {
         const lastMonthRevenue = monthlyRevenue[monthlyRevenue?.length - 2]?.revenue;
         const revenueGrowth = (((currentMonthRevenue - lastMonthRevenue) / lastMonthRevenue) * 100).toFixed(1);
 
+        console.log("check: ", monthlyRevenue);
+
         return (
             <div className="doctor-dashboard">
                 {/* Header */}
                 <div className="dashboard-header">
                     <div className="header-left">
-                        <h1>Xin chào, chúc bạn một ngày tốt lành</h1>
-                        <p>Quản lý lịch khám và bệnh nhân</p>
+                        <h1>
+                            <FormattedMessage id="dashboard.header.patient-greeting" />
+                        </h1>
+                        <p>
+                            <FormattedMessage id="dashboard.header.doctor-sub-title" />
+                        </p>
                     </div>
                     <div className="header-right">
                         <button className="notification-btn">
@@ -377,10 +385,14 @@ class DashboardForDoctor extends Component {
                             <span className="notification-badge">3</span>
                         </button>
                         <div className="doctor-info">
-                            <div className="doctor-avatar">BS</div>
+                            <div className="doctor-avatar">
+                                <FormattedMessage id="dashboard.doctor" />
+                            </div>
                             <div className="doctor-details">
                                 <h3>
-                                    BS. {this.props?.userInfo?.lastName} {this.props?.userInfo?.firstName}
+                                    <FormattedMessage id="dashboard.doctor" />
+                                    {`. `}
+                                    {this.props?.userInfo?.lastName} {this.props?.userInfo?.firstName}
                                 </h3>
                                 <p>
                                     {doctorSpecialtyAndWorkplace?.Specialty?.name}. {doctorSpecialtyAndWorkplace?.medicalFacilityDoctorAndSpecialty?.name}{" "}
@@ -393,19 +405,27 @@ class DashboardForDoctor extends Component {
                 {/* Stats */}
                 <div className="stats-grid">
                     <div className="stat-card">
-                        <h4>Tổng bệnh nhân</h4>
+                        <h4>
+                            <FormattedMessage id="dashboard.stat.total-patients" />
+                        </h4>
                         <div className="value">{stats.totalPatients}</div>
                     </div>
                     <div className="stat-card">
-                        <h4>Lịch hẹn hôm nay</h4>
+                        <h4>
+                            <FormattedMessage id="dashboard.stat.today-appointments" />
+                        </h4>
                         <div className="value">{stats.todayAppointments}</div>
                     </div>
                     <div className="stat-card">
-                        <h4>Đã khám hôm nay</h4>
+                        <h4>
+                            <FormattedMessage id="dashboard.stat.today-done-appointments" />
+                        </h4>
                         <div className="value">{stats.completedToday}</div>
                     </div>
                     <div className="stat-card">
-                        <h4>Chờ xử lý</h4>
+                        <h4>
+                            <FormattedMessage id="dashboard.stat.pending-appoitments" />
+                        </h4>
                         <div className="value">{stats.pendingAppointments}</div>
                     </div>
                 </div>
@@ -414,7 +434,10 @@ class DashboardForDoctor extends Component {
                     <div className="section-header">
                         <div className="section-title">
                             <TrendingUp className="section-icon" size={24} />
-                            <h2>Tổng quan doanh thu</h2>
+                            <h2>
+                                {" "}
+                                <FormattedMessage id="dashboard.revenue.title" />
+                            </h2>
                         </div>
                     </div>
 
@@ -431,9 +454,15 @@ class DashboardForDoctor extends Component {
                                     boxShadow: "0 4px 12px rgba(80, 184, 219, 0.3)",
                                 }}
                             >
-                                <div style={{ fontSize: "0.9rem", opacity: 0.9, marginBottom: "0.5rem" }}>Tổng doanh thu (6 tháng)</div>
+                                <div style={{ fontSize: "0.9rem", opacity: 0.9, marginBottom: "0.5rem" }}>
+                                    <FormattedMessage id="dashboard.revenue.6-months-revenue" />
+                                </div>
                                 <div style={{ fontSize: "1.75rem", fontWeight: "700", marginBottom: "0.5rem" }}>{this.formatCurrency(totalRevenue)}</div>
-                                <div style={{ fontSize: "0.85rem", opacity: 0.8 }}>Trung bình: {this.formatCurrency(totalRevenue / 6)}/tháng</div>
+                                <div style={{ fontSize: "0.85rem", opacity: 0.8 }}>
+                                    <FormattedMessage id="dashboard.revenue.avarage" />
+                                    {this.formatCurrency(totalRevenue / 6)}
+                                    <FormattedMessage id="dashboard.revenue./month" />
+                                </div>
                             </div>
 
                             {/* Current Month Revenue */}
@@ -446,7 +475,9 @@ class DashboardForDoctor extends Component {
                                     boxShadow: "0 2px 8px rgba(0, 0, 0, 0.06)",
                                 }}
                             >
-                                <div style={{ fontSize: "0.9rem", color: "#64748b", marginBottom: "0.5rem" }}>Doanh thu tháng này</div>
+                                <div style={{ fontSize: "0.9rem", color: "#64748b", marginBottom: "0.5rem" }}>
+                                    <FormattedMessage id="dashboard.revenue.this-month-revenue" />
+                                </div>
                                 <div style={{ fontSize: "1.75rem", fontWeight: "700", color: "#1e293b", marginBottom: "0.5rem" }}>{this.formatCurrency(currentMonthRevenue)}</div>
                                 <div
                                     style={{
@@ -455,7 +486,8 @@ class DashboardForDoctor extends Component {
                                         fontWeight: "600",
                                     }}
                                 >
-                                    {revenueGrowth >= 0 ? "↑" : "↓"} {Math.abs(revenueGrowth)}% so với tháng trước
+                                    {revenueGrowth >= 0 ? "↑" : "↓"} {Math.abs(revenueGrowth)}
+                                    <FormattedMessage id="dashboard.revenue.compared-to-last-month" />
                                 </div>
                             </div>
 
@@ -469,9 +501,14 @@ class DashboardForDoctor extends Component {
                                     boxShadow: "0 2px 8px rgba(0, 0, 0, 0.06)",
                                 }}
                             >
-                                <div style={{ fontSize: "0.9rem", color: "#64748b", marginBottom: "0.5rem" }}>TB doanh thu/bệnh nhân</div>
+                                <div style={{ fontSize: "0.9rem", color: "#64748b", marginBottom: "0.5rem" }}>
+                                    <FormattedMessage id="dashboard.revenue.revenue-per-patient" />
+                                </div>
                                 <div style={{ fontSize: "1.75rem", fontWeight: "700", color: "#1e293b", marginBottom: "0.5rem" }}>{this.formatCurrency(currentMonthRevenue / monthlyRevenue[monthlyRevenue?.length - 1]?.patients)}</div>
-                                <div style={{ fontSize: "0.85rem", color: "#64748b" }}>Tháng {monthlyRevenue[monthlyRevenue?.length - 1]?.month}</div>
+                                <div style={{ fontSize: "0.85rem", color: "#64748b" }}>
+                                    <FormattedMessage id="dashboard.revenue.month" />
+                                    {monthlyRevenue[monthlyRevenue?.length - 1]?.month}
+                                </div>
                             </div>
                         </div>
 
@@ -485,7 +522,9 @@ class DashboardForDoctor extends Component {
                                 boxShadow: "0 2px 8px rgba(0, 0, 0, 0.06)",
                             }}
                         >
-                            <h3 style={{ fontSize: "1.1rem", color: "#1e293b", fontWeight: 600, marginBottom: "1.5rem" }}>Biểu đồ doanh thu 6 tháng</h3>
+                            <h3 style={{ fontSize: "1.1rem", color: "#1e293b", fontWeight: 600, marginBottom: "1.5rem" }}>
+                                <FormattedMessage id="dashboard.revenue.6-months-revenue-diagram" />
+                            </h3>
                             <div className="monthly-chart" style={{ height: "280px" }}>
                                 {monthlyRevenue?.map((stat, index) => (
                                     <div key={index} className="chart-bar-wrapper">
@@ -494,7 +533,10 @@ class DashboardForDoctor extends Component {
                                                 {(stat.revenue / 1000000).toFixed(0)}tr
                                             </span>
                                         </div>
-                                        <span className="chart-label">{stat.month.replace("Tháng ", "T")}</span>
+                                        <span className="chart-label">
+                                            <FormattedMessage id="dashboard.revenue.month" />
+                                            {stat.month.replace("Tháng ", "T")}
+                                        </span>
                                     </div>
                                 ))}
                             </div>
@@ -655,14 +697,18 @@ class DashboardForDoctor extends Component {
                     <div className="section-header">
                         <div className="section-title">
                             <TrendingUp className="section-icon" size={24} />
-                            <h2>Thống kê chi tiết</h2>
+                            <h2>
+                                <FormattedMessage id="dashboard.statistic.title" />
+                            </h2>
                         </div>
                     </div>
 
                     <div className="stats-content">
                         {/* Monthly Patients */}
                         <div>
-                            <h3 className="stat-subtitle">Bệnh nhân theo tháng</h3>
+                            <h3 className="stat-subtitle">
+                                <FormattedMessage id="dashboard.statistic.patients-per-month" />
+                            </h3>
                             <div className="monthly-chart">
                                 {monthlyPatients.map((stat, index) => {
                                     const max = Math.max(...monthlyPatients.map((s) => s.patients));
@@ -682,7 +728,9 @@ class DashboardForDoctor extends Component {
 
                         {/* Frequent Patients */}
                         <div>
-                            <h3 className="stat-subtitle">Bệnh nhân thường xuyên</h3>
+                            <h3 className="stat-subtitle">
+                                <FormattedMessage id="dashboard.statistic.frequent-patients" />
+                            </h3>
                             <div className="ranking-list">
                                 {rankedFrequentPatients.map((patient, index) => (
                                     <div key={index} className="ranking-item" style={{ borderLeftColor: patient.color }}>
@@ -693,11 +741,13 @@ class DashboardForDoctor extends Component {
                                         <div className="ranking-info">
                                             <h4>{patient.name}</h4>
                                             <p>
-                                                {patient.age} tuổi • Khám gần nhất: {patient.lastVisit}
+                                                {patient.age} <FormattedMessage id="dashboard.statistic.years-old" /> • <FormattedMessage id="dashboard.statistic.nearest-exam" /> {patient.lastVisit}
                                             </p>
                                         </div>
 
-                                        <div className="ranking-badge">{patient.visits} lượt</div>
+                                        <div className="ranking-badge">
+                                            {patient.visits} <FormattedMessage id="dashboard.statistic.turn" />
+                                        </div>
                                     </div>
                                 ))}
                             </div>
@@ -705,7 +755,9 @@ class DashboardForDoctor extends Component {
 
                         {/* Common Reasons */}
                         <div>
-                            <h3 className="stat-subtitle">Lý do khám phổ biến</h3>
+                            <h3 className="stat-subtitle">
+                                <FormattedMessage id="dashboard.statistic.common-reason" />
+                            </h3>
                             <div className="ranking-list">
                                 {commonReasons.map((item, index) => (
                                     <div key={index} className="ranking-item" style={{ borderLeftColor: item.color }}>

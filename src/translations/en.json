@@ -362,5 +362,68 @@
         "forgot-password": "Forgot your password?",
         "register": "No account? Register here",
         "another-opt": "Or login with:"
+    },
+    "dashboard": {
+        "header": {
+            "patient-greeting": "Hello, have a great day",
+            "patient-sub-title": "Manage your medical appointments and track your health!",
+            "patient-role": "Patient",
+            "doctor-sub-title": "Manage your appointments and patients"
+        },
+        "stat": {
+            "total": "Total appointments",
+            "pending": "Pending appointments",
+            "done": "Completed",
+            "cancel": "Cancelled",
+            "total-patients": "Total patients",
+            "today-appointments": "Today's appointments",
+            "today-done-appointments": "Completed today",
+            "pending-appoitments": "Pending appointments"
+        },
+        "revenue": {
+            "title": "Revenue overview",
+            "6-months-revenue": "Revenue overview (6 months)",
+            "avarage": "Average: ",
+            "/month": "/month",
+            "this-month-revenue": "This month's revenue",
+            "compared-to-last-month": "% compared to last month",
+            "revenue-per-patient": "Average revenue per patient",
+            "month": "Month ",
+            "6-months-revenue-diagram": "Revenue chart during 6-months"
+        },
+        "nearest-appointments": "Your upcoming medical appointments",
+        "doctor": "Dr",
+        "evaluate-health": "Evaluate your health",
+        "bmi": "BMI",
+        "waist/hip": "Waist/hip rate",
+        "form": {
+            "weight": "Weight",
+            "weight-placeholder": "Enter weight",
+            "height": "Height",
+            "height-placeholder": "Enter height",
+            "bmi-result-btn": "Calculate BMI",
+            "classify": "Classify",
+            "male": "Male",
+            "female": "Female",
+            "gender": "Gender",
+            "waist-circumference": "Waist circumference",
+            "waist-circumference-placeholder": "Enter your waist circumference",
+            "hip-circumference": "Hip circumference",
+            "hip-circumference-placeholder": "Enter your hip circumference",
+            "calculate-whr": "Calculate WHR",
+            "risk": "Risk"
+        },
+        "statistic": {
+            "title": "Detailed statistics",
+            "appointments-every-month": "Monthly appointments",
+            "frequent-doctor": "Most visited doctor",
+            "frequent-medical-facility": "Most visited medical facility",
+            "turn": "turn",
+            "patients-per-month": "Patients per month",
+            "frequent-patients": "Frequent patients",
+            "common-reason": "Common exam reasons",
+            "years-old": "years old",
+            "nearest-exam": "Nearest exam: "
+        }
     }
 }
