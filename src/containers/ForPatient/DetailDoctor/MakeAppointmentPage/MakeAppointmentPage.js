@@ -446,7 +446,9 @@ class MakeAppointmentPage extends Component {
                                     ></textarea>
                                 </div>
                                 <div className="payment-method-section">
-                                    <label>Chọn hình thức thanh toán</label>
+                                    <label>
+                                        <FormattedMessage id="make-appointment-page.right-content.payment-method" />
+                                    </label>
 
                                     {language === LANGUAGES.VI &&
                                         this.getAllowedPaymentMethods().map((paymentMethod) => (
@@ -467,12 +469,20 @@ class MakeAppointmentPage extends Component {
                                 <div className="attention"></div>
                                 <div className="confirm-and-send">
                                     <div className="term">
-                                        <span>Bằng việc xác nhận đặt khám, bạn hoàn toàn đống ý với </span>
-                                        <a href="#">Điều khoản sử dụng</a>
-                                        <span> của chúng tôi</span>
+                                        <span>
+                                            <FormattedMessage id="make-appointment-page.right-content.term-text-1" />
+                                        </span>
+                                        <a href="#">
+                                            <FormattedMessage id="make-appointment-page.right-content.term-text-2" />
+                                        </a>
+                                        <span>
+                                            <FormattedMessage id="make-appointment-page.right-content.term-text-3" />
+                                        </span>
                                     </div>
                                     <div className="button">
-                                        <button onClick={() => this.handleBeforeSubmit()}>Xác nhận đặt khám</button>
+                                        <button onClick={() => this.handleBeforeSubmit()}>
+                                            <FormattedMessage id="make-appointment-page.right-content.confirm-booking-btn" />
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -480,24 +490,39 @@ class MakeAppointmentPage extends Component {
                         {this.state.showConfirmModal && (
                             <div className="custom-modal">
                                 <div className="custom-modal-content">
-                                    <h5>Xác nhận thông tin</h5>
-                                    <p>Thông tin cá nhân của bạn chưa đầy đủ!</p>
+                                    <h5>
+                                        <FormattedMessage id="make-appointment-page.modal.title" />
+                                    </h5>
+                                    <p>
+                                        <FormattedMessage id="make-appointment-page.modal.notice" />
+                                    </p>
                                     <div>
-                                        <p>Bạn có muốn cập nhật các trường sau trong thông tin cá nhân của bạn không?</p>
+                                        <p>
+                                            <FormattedMessage id="make-appointment-page.modal.ask-to-do" />
+                                        </p>
                                         <div className="missing-item-section">
                                             {this.state.missingInfoFields.includes("Địa chỉ") && (
                                                 <div className="missing-item">
-                                                    <b>Địa chỉ:</b> {this.state.address || "(chưa điền)"}
+                                                    <b>
+                                                        <FormattedMessage id="make-appointment-page.modal.address" />
+                                                    </b>{" "}
+                                                    {this.state.address || "(chưa điền)"}
                                                 </div>
                                             )}
                                             {this.state.missingInfoFields.includes("Số điện thoại") && (
                                                 <div className="missing-item">
-                                                    <b>Số điện thoại:</b> {this.state.phoneNumber || "(chưa điền)"}
+                                                    <b>
+                                                        <FormattedMessage id="make-appointment-page.modal.phonenumber" />
+                                                    </b>{" "}
+                                                    {this.state.phoneNumber || "(chưa điền)"}
                                                 </div>
                                             )}
                                             {this.state.missingInfoFields.includes("Giới tính") && (
                                                 <div className="missing-item">
-                                                    <b>Giới tính:</b> {this.state.selectedGender || "(chưa chọn)"}
+                                                    <b>
+                                                        <FormattedMessage id="make-appointment-page.modal.gender" />
+                                                    </b>{" "}
+                                                    {this.state.selectedGender || "(chưa chọn)"}
                                                 </div>
                                             )}
                                         </div>
@@ -510,7 +535,7 @@ class MakeAppointmentPage extends Component {
                                                 });
                                             }}
                                         >
-                                            Không cần và đặt lịch
+                                            <FormattedMessage id="make-appointment-page.modal.no-need" />
                                         </button>
                                         <button
                                             onClick={async () => {
@@ -519,7 +544,7 @@ class MakeAppointmentPage extends Component {
                                                 });
                                             }}
                                         >
-                                            Đồng ý và đặt lịch
+                                            <FormattedMessage id="make-appointment-page.modal.need" />
                                         </button>
                                     </div>
                                 </div>

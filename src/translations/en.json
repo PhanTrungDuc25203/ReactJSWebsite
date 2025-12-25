@@ -292,15 +292,30 @@
                 "email": "abc@gmail.com",
                 "booking-for": "Phan Piscean or relative",
                 "reason": "I have a suddenly headache"
-            }
+            },
+            "payment-method": "Choose payment method",
+            "term-text-1": "By confirming the appointment, you agree to our ",
+            "term-text-2": "Terms of Use",
+            "term-text-3": ".",
+            "confirm-booking-btn": "Confirm and booking"
         },
         "left-content": {
             "page-title": "Booking Appointment",
             "specialty": "Obstetrics and Gynecology Doctor",
-            "exam-price": "Obstetrics and Gynecology Examination Price",
+            "exam-price": "Examination Price for ",
             "exam-package-price": "Examination Price of the Package ",
             "payment-method": "Pay Later at the Medical Facility",
             "receipt": "Total Payment (Free Booking Fee):"
+        },
+        "modal": {
+            "title": "Confirm information",
+            "notice": "Your personal information is incomplete!",
+            "ask-to-do": "Would you like to update the following fields in your personal information?",
+            "address": "Address:",
+            "phonenumber": "Phone number:",
+            "gender": "Gender:",
+            "no-need": "Proceed without updating",
+            "need": "Update and book appointment"
         }
     },
     "search-page": {
@@ -425,5 +440,10 @@
             "years-old": "years old",
             "nearest-exam": "Nearest exam: "
         }
+    },
+    "awaiting-confirmation-page": {
+        "almost-done": "Almost done!",
+        "remind-content": "Please confirm your appointment booking via your email inbox.",
+        "remind-notice": "If you do not see the email, please check your Spam folder."
     }
 }

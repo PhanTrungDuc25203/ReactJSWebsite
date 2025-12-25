@@ -292,7 +292,12 @@
                 "email": "abc@gmail.com",
                 "booking-for": "Phan Piscean or relative",
                 "reason": "I have a suddenly headache"
-            }
+            },
+            "payment-method": "Chọn phương thức thanh toán",
+            "term-text-1": "Bằng việc xác nhận đặt khám, bạn hoàn toàn đống ý với ",
+            "term-text-2": "Điều khoản sử dụng",
+            "term-text-3": " của chúng tôi",
+            "confirm-booking-btn": "Xác nhận đặt khám"
         },
         "left-content": {
             "page-title": "Đặt lịch hẹn",
@@ -301,6 +306,16 @@
             "exam-package-price": "Giá khám của Gói khám ",
             "payment-method": "Thanh toán sau tại cơ sở y tế",
             "receipt": "Tổng thanh toán (phí đặt lịch miễn phí): "
+        },
+        "modal": {
+            "title": "Xác nhận thông tin",
+            "notice": "Thông tin cá nhân của bạn chưa đầy đủ!",
+            "ask-to-do": "Bạn có muốn cập nhật các trường sau trong thông tin cá nhân của bạn không?",
+            "address": "Địa chỉ:",
+            "phonenumber": "Số điện thoại:",
+            "gender": "Giới tính:",
+            "no-need": "Không cần và đặt lịch",
+            "need": "Đồng ý và đặt lịch"
         }
     },
     "search-page": {
@@ -425,5 +440,10 @@
             "years-old": "tuổi",
             "nearest-exam": "Khám gần nhất: "
         }
+    },
+    "awaiting-confirmation-page": {
+        "almost-done": "Gần xong rồi!",
+        "remind-content": "Bạn hãy xác nhận đặt lịch khám tại hòm thư của bạn",
+        "remind-notice": "Nếu không thấy email, hãy kiểm tra thư mục Spam trong hòm thư."
     }
 }
