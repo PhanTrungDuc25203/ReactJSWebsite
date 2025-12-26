@@ -453,5 +453,29 @@
         "almost-done": "Gần xong rồi!",
         "remind-content": "Bạn hãy xác nhận đặt lịch khám tại hòm thư của bạn",
         "remind-notice": "Nếu không thấy email, hãy kiểm tra thư mục Spam trong hòm thư."
+    },
+    "medical-facility": {
+        "all": {
+            "previous-btn": "Trang trước",
+            "next-btn": "Trang sau",
+            "title": "Cơ sở y tế & Bệnh viện"
+        },
+        "detail": {
+            "navbar": {
+                "booking": "Đặt lịch khám",
+                "intro": "Giới thiệu chung",
+                "equipment": "Trang thiết bị",
+                "specialty": "Chuyên ngành",
+                "position": "Vị trí & Bản đồ",
+                "exam-process": "Quy trình khám"
+            },
+            "doctors": "Các bác sĩ tại cơ sở y tế",
+            "packages": "Các gói khám tại cơ sở y tế",
+            "intro": "Giới thiệu cơ sở y tế",
+            "equipment": "Trang thiết bị của cơ sở y tế",
+            "specialty": "Thế mạnh chuyên môn",
+            "no-specialty": "Không có thông tin về thế mạnh chuyên môn",
+            "position": "Vị trí & Bản đồ"
+        }
     }
 }

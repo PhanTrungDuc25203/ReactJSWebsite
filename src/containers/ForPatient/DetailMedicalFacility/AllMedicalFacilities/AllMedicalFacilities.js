@@ -5,6 +5,7 @@ import "./AllMedicalFacilities.scss";
 import HomeFooter from "../../../HomePage/HomeFooter/HomeFooter";
 import { getInfoOfMedicalFacility } from "../../../../services/userService";
 import CustomScrollbars from "../../../../components/CustomScrollbars";
+import { FormattedMessage } from "react-intl";
 
 class AllMedicalFacilities extends Component {
     constructor(props) {
@@ -41,7 +42,7 @@ class AllMedicalFacilities extends Component {
         return (
             <div className="pagination-container">
                 <button onClick={() => this.handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="pagination-button">
-                    Trang trước
+                    <FormattedMessage id="medical-facility.all.previous-btn" />
                 </button>
                 {Array.from({ length: totalPages }, (_, index) => (
                     <button key={index} onClick={() => this.handlePageChange(index + 1)} className={`pagination-button ${currentPage === index + 1 ? "active" : ""}`}>
@@ -49,7 +50,7 @@ class AllMedicalFacilities extends Component {
                     </button>
                 ))}
                 <button onClick={() => this.handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className="pagination-button">
-                    Trang sau
+                    <FormattedMessage id="medical-facility.all.next-btn" />
                 </button>
             </div>
         );
@@ -68,7 +69,9 @@ class AllMedicalFacilities extends Component {
                 <CustomScrollbars style={{ height: "100vh", width: "100%" }}>
                     <HomePageHeader isShowBanner={false} />
                     <div className="all-medical-facilities-container">
-                        <div className="all-medical-facilities-container-title">Bệnh viện & Cơ sở y tế</div>
+                        <div className="all-medical-facilities-container-title">
+                            <FormattedMessage id="medical-facility.all.title" />
+                        </div>
                         {currentData &&
                             currentData.length > 0 &&
                             currentData.map((item, index) => {

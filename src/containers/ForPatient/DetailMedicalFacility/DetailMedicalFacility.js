@@ -8,6 +8,7 @@ import { faMapLocationDot, faRoute } from "@fortawesome/free-solid-svg-icons";
 import { getInfoOfMedicalFacility } from "../../../services/userService";
 import { LANGUAGES } from "../../../utils";
 import CustomScrollbars from "../../../components/CustomScrollbars";
+import { FormattedMessage } from "react-intl";
 import _ from "lodash";
 import { MoonLoader } from "react-spinners";
 import defaultMedicalFacility from "../../../assets/images/default-medical-facility-avatar-lite-1.jpg";
@@ -236,29 +237,33 @@ class DetailMedicalFacility extends Component {
                             <header className="scrollspy-menu-header">
                                 <nav className="facility-scrollspy-menu-navigation">
                                     <a onClick={() => this.scrollToSection("booking-appointment")} className={activeSection === "booking-appointment" ? "active" : ""}>
-                                        Đặt lịch khám
+                                        <FormattedMessage id="medical-facility.detail.navbar.booking" />
                                     </a>
                                     <a onClick={() => this.scrollToSection("general-introduction")} className={activeSection === "general-introduction" ? "active" : ""}>
-                                        Giới thiệu chung
+                                        <FormattedMessage id="medical-facility.detail.navbar.intro" />
                                     </a>
                                     <a onClick={() => this.scrollToSection("equipments")} className={activeSection === "equipments" ? "active" : ""}>
-                                        Trang thiết bị
+                                        <FormattedMessage id="medical-facility.detail.navbar.equipment" />
                                     </a>
                                     <a onClick={() => this.scrollToSection("specialty-area")} className={activeSection === "specialty-area" ? "active" : ""}>
-                                        Chuyên ngành
+                                        <FormattedMessage id="medical-facility.detail.navbar.specialty" />
                                     </a>
                                     <a onClick={() => this.scrollToSection("location")} className={activeSection === "location" ? "active" : ""}>
-                                        Vị trí & Bản đồ
+                                        <FormattedMessage id="medical-facility.detail.navbar.position" />
                                     </a>
                                     <a onClick={() => this.scrollToSection("exam-process")} className={activeSection === "exam-process" ? "active" : ""}>
-                                        Quy trình khám
+                                        <FormattedMessage id="medical-facility.detail.navbar.exam-process" />
                                     </a>
                                 </nav>
                             </header>
                         </div>
 
                         <div id="booking-appointment" className="medical-facility-booking-with-doctor-section">
-                            {medicalFacility.medicalFacilityDoctorAndSpecialty && medicalFacility.medicalFacilityDoctorAndSpecialty.length > 0 && <label className="section-label">Các bác sĩ tại Cơ sở y tế</label>}
+                            {medicalFacility.medicalFacilityDoctorAndSpecialty && medicalFacility.medicalFacilityDoctorAndSpecialty.length > 0 && (
+                                <label className="section-label">
+                                    <FormattedMessage id="medical-facility.detail.doctors" />
+                                </label>
+                            )}
                             {medicalFacility.medicalFacilityDoctorAndSpecialty &&
                                 medicalFacility.medicalFacilityDoctorAndSpecialty.length > 0 &&
                                 medicalFacility.medicalFacilityDoctorAndSpecialty.map((item, index) => {
@@ -270,7 +275,11 @@ class DetailMedicalFacility extends Component {
                                 })}
                         </div>
                         <div className="medical-facility-booking-with-package-section">
-                            {medicalFacility.medicalFacilityPackage && medicalFacility.medicalFacilityPackage.length > 0 && <label className="section-label">Các Gói khám tại Cơ sở y tế</label>}
+                            {medicalFacility.medicalFacilityPackage && medicalFacility.medicalFacilityPackage.length > 0 && (
+                                <label className="section-label">
+                                    <FormattedMessage id="medical-facility.detail.packages" />
+                                </label>
+                            )}
                             {medicalFacility.medicalFacilityPackage &&
                                 medicalFacility.medicalFacilityPackage.length > 0 &&
                                 medicalFacility.medicalFacilityPackage.map((item, index) => {
@@ -281,10 +290,11 @@ class DetailMedicalFacility extends Component {
                                     );
                                 })}
                         </div>
-                        <div className="medical-facility-booking-exam-package-section">{medicalFacility.medicalFacilityExamPackage && medicalFacility.medicalFacilityExamPackage.length > 0 && <label className="section-label">Các gói khám của Cơ sở y tế</label>}</div>
 
                         <div id="general-introduction" className="medical-facility-introduction-section">
-                            <label className="section-label">Giới thiệu Cơ sở y tế</label>
+                            <label className="section-label">
+                                <FormattedMessage id="medical-facility.detail.intro" />
+                            </label>
                             {medicalFacility?.htmlDescription && (
                                 <div
                                     dangerouslySetInnerHTML={{
@@ -295,7 +305,9 @@ class DetailMedicalFacility extends Component {
                             )}
                         </div>
                         <div id="equipments" className="medical-facility-equipments-section">
-                            <label className="section-label">Trang thiết bị của Cơ sở y tế</label>
+                            <label className="section-label">
+                                <FormattedMessage id="medical-facility.detail.equipment" />
+                            </label>
                             {medicalFacility?.htmlEquipment && (
                                 <div
                                     dangerouslySetInnerHTML={{
@@ -306,7 +318,9 @@ class DetailMedicalFacility extends Component {
                             )}
                         </div>
                         <div id="specialty-area" className="medical-facility-specialty-area-section">
-                            <label className="section-label">Thế mạnh chuyên môn</label>
+                            <label className="section-label">
+                                <FormattedMessage id="medical-facility.detail.specialty" />
+                            </label>
                             {medicalFacility.medicalFacilitySpecialtyData && medicalFacility.medicalFacilitySpecialtyData.length > 0 ? (
                                 <ul>
                                     {medicalFacility.medicalFacilitySpecialtyData.map((item, index) => (
@@ -316,11 +330,15 @@ class DetailMedicalFacility extends Component {
                                     ))}
                                 </ul>
                             ) : (
-                                <p>Không có thông tin thế mạnh chuyên môn.</p>
+                                <p>
+                                    <FormattedMessage id="medical-facility.detail.no-specialty" />
+                                </p>
                             )}
                         </div>
                         <div id="location" className="medical-facility-map-section">
-                            <label className="section-label">Bản đồ & Vị trí</label>
+                            <label className="section-label">
+                                <FormattedMessage id="medical-facility.detail.position" />
+                            </label>
                             <div className="map-frame">
                                 <div id="map-container" style={{ height: "400px", width: "100%" }}></div>
                             </div>

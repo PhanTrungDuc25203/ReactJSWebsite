@@ -453,5 +453,29 @@
         "almost-done": "Almost done!",
         "remind-content": "Please confirm your appointment booking via your email inbox.",
         "remind-notice": "If you do not see the email, please check your Spam folder."
+    },
+    "medical-facility": {
+        "all": {
+            "previous-btn": "Previous",
+            "next-btn": "Next",
+            "title": "Medical facilities & Hospitals"
+        },
+        "detail": {
+            "navbar": {
+                "booking": "Booking",
+                "intro": "Introduction",
+                "equipment": "Equipment",
+                "specialty": "Specialty",
+                "position": "Position & Map",
+                "exam-process": "Exam process"
+            },
+            "doctors": "Doctors at the medical facility",
+            "packages": "Medical examination packages at the facility",
+            "intro": "About the medical facility",
+            "equipment": "Medical equipment of the facility",
+            "specialty": "Areas of expertise",
+            "no-specialty": "No information available about areas of expertise",
+            "position": "Location & Map"
+        }
     }
 }

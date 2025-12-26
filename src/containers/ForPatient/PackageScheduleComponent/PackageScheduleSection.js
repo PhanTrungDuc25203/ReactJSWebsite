@@ -133,7 +133,7 @@ class PackageScheduleSection extends Component {
                 <div className="available-timeframe">
                     <div className="section-title">
                         <FontAwesomeIcon icon={faCalendarDays} className="calendar-icon" />
-                        Thời gian khám định kỳ:
+                        <FormattedMessage id="doctor-detail-page-for-patient.schedule-section.available-timeframe-section-title" />
                     </div>
                     <div className="timeframe-selection">
                         {allAvailableTimeframe && allAvailableTimeframe.length > 0 ? (
