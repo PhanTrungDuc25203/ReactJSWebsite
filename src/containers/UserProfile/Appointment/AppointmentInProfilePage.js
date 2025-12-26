@@ -5,6 +5,8 @@ import { withRouter } from "react-router";
 import * as actions from "../../../store/actions";
 import moment from "moment";
 import queryString from "query-string";
+import { FormattedMessage, injectIntl } from "react-intl";
+import { LANGUAGES } from "../../../utils";
 
 const AppointmentItemForPatientInfterface = lazy(() => import("./AppointmentItemForPatientInfterface"));
 const AppointmentItemForDoctorInfterface = lazy(() => import("./AppointmentItemForDoctorInfterface"));
@@ -151,22 +153,56 @@ class AppointmentInProfilePage extends PureComponent {
 
     render() {
         const { historyOrHandling } = this.state;
-        const { combinedAppointments, userRole } = this.props;
+        const { combinedAppointments, userRole, language } = this.props;
+        const isVI = language === LANGUAGES.VI;
+
+        const TEXT = {
+            all: isVI ? "Tất cả" : "All",
+            history: isVI ? "Lịch sử" : "History",
+            noDoctorAppointment: isVI ? "Bạn chưa có lịch hẹn nào với bác sĩ" : "You do not have any appointments with doctors",
+            noPatientAppointment: isVI ? "Bạn chưa có lịch hẹn nào với bệnh nhân" : "You do not have any appointments with patients",
+            adminEmpty: isVI ? "Bạn là admin nên không có gì trong này đâu :))" : "You are an admin, so there is nothing here",
+        };
 
         return (
             <div className="appointment-in-profile-page">
                 <div className="appointment-in-profile-page-header">
                     <div className="left-section">
-                        <div className="appointment-in-profile-page-title">Danh sách lịch hẹn</div>
+                        <div className="appointment-in-profile-page-title">
+                            <FormattedMessage id="user-profile.appointment-page.appointment-list" />
+                        </div>
                         <div className="appointment-filter">
                             <select className="form-select" value={this.state.filterOption} onChange={(e) => this.setState({ filterOption: e.target.value })}>
-                                <option value="">-- Lọc / Sắp xếp lịch hẹn --</option>
-                                <option value="date_asc">Ngày khám (sớm → muộn)</option>
-                                <option value="date_desc">Ngày khám (muộn → sớm)</option>
-                                <option value="pending">Chưa khám</option>
-                                <option value="completed">Đã khám</option>
-                                {}
-                                <option value="">-- Clear -- </option>
+                                <option value="">
+                                    {this.props.intl.formatMessage({
+                                        id: "user-profile.appointment-page.filter",
+                                    })}
+                                </option>
+                                <option value="date_asc">
+                                    {this.props.intl.formatMessage({
+                                        id: "user-profile.appointment-page.date-asc",
+                                    })}
+                                </option>
+                                <option value="date_desc">
+                                    {this.props.intl.formatMessage({
+                                        id: "user-profile.appointment-page.date-desc",
+                                    })}
+                                </option>
+                                <option value="pending">
+                                    {this.props.intl.formatMessage({
+                                        id: "user-profile.appointment-page.pending",
+                                    })}
+                                </option>
+                                <option value="completed">
+                                    {this.props.intl.formatMessage({
+                                        id: "user-profile.appointment-page.completed",
+                                    })}
+                                </option>
+                                <option value="">
+                                    {this.props.intl.formatMessage({
+                                        id: "user-profile.appointment-page.clear",
+                                    })}
+                                </option>
                             </select>
                             <div className="date-range">
                                 <input type="date" value={this.state.fromDate} onChange={(e) => this.setState({ fromDate: e.target.value })} />
@@ -177,14 +213,14 @@ class AppointmentInProfilePage extends PureComponent {
                             </div>
                         </div>
                     </div>
-                    <a className={historyOrHandling === "history" ? "btn-flip-backward" : "btn-flip"} data-back={historyOrHandling === "history" ? "Tất cả" : "Lịch sử"} data-front={historyOrHandling === "history" ? "Lịch sử" : "Tất cả"} onClick={this.handleHistoryOrHandlingButtonClicked} />
+                    <a className={historyOrHandling === "history" ? "btn-flip-backward" : "btn-flip"} data-back={historyOrHandling === "history" ? TEXT.all : TEXT.history} data-front={historyOrHandling === "history" ? TEXT.history : TEXT.all} onClick={this.handleHistoryOrHandlingButtonClicked} />
                 </div>
                 <div className="appointment-container">
-                    {combinedAppointments.patientAppointments && combinedAppointments.patientAppointments.length > 0 ? this.renderAppointmentItems(this.getFilteredAppointments(combinedAppointments.patientAppointments), false) : userRole === "R3" && "Bạn chưa có lịch hẹn nào với bác sĩ"}
+                    {combinedAppointments.patientAppointments && combinedAppointments.patientAppointments.length > 0 ? this.renderAppointmentItems(this.getFilteredAppointments(combinedAppointments.patientAppointments), false) : userRole === "R3" && TEXT.noDoctorAppointment}
 
-                    {combinedAppointments.doctorAppointments && combinedAppointments.doctorAppointments.length > 0 ? this.renderAppointmentItems(this.getFilteredAppointments(combinedAppointments.doctorAppointments), true) : userRole === "R2" && "Bạn chưa có lịch hẹn nào với bệnh nhân"}
+                    {combinedAppointments.doctorAppointments && combinedAppointments.doctorAppointments.length > 0 ? this.renderAppointmentItems(this.getFilteredAppointments(combinedAppointments.doctorAppointments), true) : userRole === "R2" && TEXT.noPatientAppointment}
 
-                    {userRole === "R1" && "Bạn là admin nên không có gì trong này đâu:))"}
+                    {userRole === "R1" && TEXT.adminEmpty}
                 </div>
             </div>
         );
@@ -199,4 +235,4 @@ const mapDispatchToProps = (dispatch) => ({
     processLogout: () => dispatch(actions.processLogout()),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppointmentInProfilePage));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(injectIntl(AppointmentInProfilePage)));

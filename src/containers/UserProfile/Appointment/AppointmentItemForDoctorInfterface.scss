@@ -92,7 +92,7 @@
                     margin-right: 5px;
                 }
                 &:after {
-                    content: "Chưa thanh toán";
+                    content: attr(data-unpaid);
                 }
 
                 &.onclic {
@@ -129,7 +129,7 @@
                         margin-right: 5px;
                     }
                     &:after {
-                        content: "Đã thanh toán";
+                        content: attr(data-paid);
                     }
                 }
             }
@@ -169,7 +169,7 @@
                     margin-right: 5px;
                 }
                 &:after {
-                    content: "Chờ khám";
+                    content: attr(data-waiting);
                 }
 
                 &.onclic {
@@ -208,7 +208,7 @@
                     }
 
                     &:after {
-                        content: "Đã khám";
+                        content: attr(data-done);
                     }
                 }
             }

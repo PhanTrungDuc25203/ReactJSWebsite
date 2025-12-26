@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { saveRateAndReviewAboutDoctorOrPackageService, getRateAndReviewAboutDoctorService } from "../../../../services/userService";
+import { FormattedMessage } from "react-intl";
 
 class RateAndReviewModal extends Component {
     constructor(props) {
@@ -221,13 +222,17 @@ class RateAndReviewModal extends Component {
 
                         {/* Nội dung */}
                         <div className="form-group review-content">
-                            <label>Nhận xét của bạn về dịch vụ thăm khám</label>
+                            <label>
+                                <FormattedMessage id="user-profile.appointment-page.rate-and-review.title" />
+                            </label>
                             <textarea rows="4" value={this.state.content} onChange={(e) => this.handleInputChange(e, "content")} />
                         </div>
 
                         {/* Upload ảnh */}
                         <div className="form-group image-upload">
-                            <label>Hình ảnh (tùy chọn, tối đa 4 ảnh)</label>
+                            <label>
+                                <FormattedMessage id="user-profile.appointment-page.rate-and-review.image" />
+                            </label>
                             <div className="image-preview-container">
                                 {this.state.images.map((img, index) => (
                                     <div key={index} className="image-preview">
@@ -249,10 +254,10 @@ class RateAndReviewModal extends Component {
 
                     <div className="custom-modal-footer">
                         <button className="submit-btn" onClick={this.handleSubmit}>
-                            Gửi nhận xét
+                            <FormattedMessage id="user-profile.appointment-page.rate-and-review.send" />
                         </button>
                         <button className="cancel-btn" onClick={this.props.toggleUserModal}>
-                            Hủy
+                            <FormattedMessage id="user-profile.appointment-page.rate-and-review.cancel" />
                         </button>
                     </div>
                 </div>

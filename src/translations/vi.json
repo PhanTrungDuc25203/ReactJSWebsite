@@ -484,5 +484,34 @@
             "sorry-1": "Xin lỗi quý khách! Hiện tại chưa có bác sĩ nào thuộc chuyên khoa này.",
             "sorry-2": "Xin lỗi quý khách! Hiện tại chưa có bác sĩ nào thuộc tỉnh thành này."
         }
+    },
+    "user-profile": {
+        "appointment-page": {
+            "appointment-list": "Danh sách lịch hẹn",
+            "filter": "-- Lọc / Sắp xếp lịch hẹn --",
+            "date-asc": "Ngày khám (sớm → muộn)",
+            "date-desc": "Ngày khám (muộn → sớm)",
+            "pending": "Chưa khám",
+            "completed": "Đã khám",
+            "clear": "-- Xóa ---",
+            "rate-and-review": {
+                "title": "Nhận xét của bạn về dịch vụ thăm khám",
+                "image": "Hình ảnh (tùy chọn, tối đa 4 ảnh)",
+                "send": "Gửi nhận xét",
+                "cancel": "Hủy"
+            },
+            "patient": {},
+            "doctor": {
+                "appointment-time": "Thời gian hẹn: ",
+                "appointment-id": "Mã số cuộc hẹn: ",
+                "patient": "Bệnh nhân: ",
+                "phonenumber": "Số điện thoại: ",
+                "email": "Địa chỉ email: ",
+                "dob": "Ngày sinh: ",
+                "address": "Địa chỉ: ",
+                "medical-report": "Bệnh án: ",
+                "edit-report": "Chỉnh sửa bệnh án"
+            }
+        }
     }
 }

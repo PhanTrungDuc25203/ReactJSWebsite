@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 import { saveAppointmentHistory, saveClinicalReportContentToDatabase } from "../../../services/userService";
 import defaultAvatar from "../../../assets/images/default-avatar-circle.png";
 import Swal from "sweetalert2";
+import { FormattedMessage } from "react-intl";
 
 class AppointmentItemForDoctorInfterface extends Component {
     constructor(props) {
@@ -408,7 +409,9 @@ class AppointmentItemForDoctorInfterface extends Component {
 
     render() {
         let { scheduleStatus, appointmentId, meetPatientId, patientInfor, appointmentDate, appointmentTimeFrame, patientBirthday, patientAddress, paymentStatus, statusId } = this.state;
+        const { language } = this.props;
         let patientImageByBase64 = "";
+        const isVI = language === LANGUAGES.VI;
         if (patientInfor && patientInfor.image) {
             patientImageByBase64 = Buffer.from(patientInfor.image, "base64").toString("binary");
         }
@@ -422,7 +425,9 @@ class AppointmentItemForDoctorInfterface extends Component {
                             backgroundImage: `url(${patientImageByBase64 ? patientImageByBase64 : defaultAvatar})`,
                         }}
                     ></div>
-                    <label className="appointment-time-label">Thời gian hẹn: </label>
+                    <label className="appointment-time-label">
+                        <FormattedMessage id="user-profile.appointment-page.doctor.appointment-time" />
+                    </label>
                     <div className="patient-date">
                         <FontAwesomeIcon icon={faCalendarDays} className="appointment-time-icon" />
                         <span className="appointment-item-for-doctor-content">{appointmentDate && appointmentDate}</span>
@@ -434,11 +439,15 @@ class AppointmentItemForDoctorInfterface extends Component {
                 </div>
                 <div className="appointment-item-for-doctor-info">
                     <div className="appointment-id">
-                        <label className="appointment-item-for-doctor-label">Mã số cuộc hẹn:</label>
+                        <label className="appointment-item-for-doctor-label">
+                            <FormattedMessage id="user-profile.appointment-page.doctor.appointment-id" />
+                        </label>
                         <span className="appointment-item-for-doctor-content">{appointmentId && appointmentId}</span>
                     </div>
                     <div className="patient-name">
-                        <label className="appointment-item-for-doctor-label">Bệnh nhân: </label>
+                        <label className="appointment-item-for-doctor-label">
+                            <FormattedMessage id="user-profile.appointment-page.doctor.patient" />
+                        </label>
                         <span className="appointment-item-for-doctor-content">
                             {patientInfor && patientInfor.lastName ? patientInfor.lastName : ""}
                             {patientInfor && patientInfor.firstName ? " " + patientInfor.firstName : ""}
@@ -447,24 +456,34 @@ class AppointmentItemForDoctorInfterface extends Component {
                         <label>ID:</label> {meetPatientId && meetPatientId}
                     </div>
                     <div className="patient-phone-number">
-                        <label className="appointment-item-for-doctor-label">Số điện thoại: </label>
+                        <label className="appointment-item-for-doctor-label">
+                            <FormattedMessage id="user-profile.appointment-page.doctor.phonenumber" />
+                        </label>
                         <span className="appointment-item-for-doctor-content">{patientInfor && patientInfor.phoneNumber && patientInfor.phoneNumber}</span>
                     </div>
                     <div className="patient-email">
-                        <label className="appointment-item-for-doctor-label">Địa chỉ email: </label>
+                        <label className="appointment-item-for-doctor-label">
+                            <FormattedMessage id="user-profile.appointment-page.doctor.email" />
+                        </label>
                         <span className="appointment-item-for-doctor-content">{patientInfor && patientInfor.email && patientInfor.email}</span>
                     </div>
                     <div className="patient-birthday">
-                        <label className="appointment-item-for-doctor-label">Ngày sinh: </label>
+                        <label className="appointment-item-for-doctor-label">
+                            <FormattedMessage id="user-profile.appointment-page.doctor.dob" />
+                        </label>
                         <span className="appointment-item-for-doctor-content">{patientBirthday && patientBirthday}</span>
                     </div>
                     <div className="patient-address">
-                        <label className="appointment-item-for-doctor-label">Địa chỉ: </label>
+                        <label className="appointment-item-for-doctor-label">
+                            <FormattedMessage id="user-profile.appointment-page.doctor.address" />
+                        </label>
                         <span className="appointment-item-for-doctor-content">{patientAddress && patientAddress}</span>
                     </div>
                     <div className="file-icon" onClick={this.generatePatientReport}>
-                        <label className="appointment-item-for-doctor-label">Bệnh án: </label>
-                        <i className="fas fa-file-alt"></i> Chỉnh sửa bệnh án
+                        <label className="appointment-item-for-doctor-label">
+                            <FormattedMessage id="user-profile.appointment-page.doctor.medical-report" />
+                        </label>
+                        <i className="fas fa-file-alt"></i> <FormattedMessage id="user-profile.appointment-page.doctor.edit-report" />
                     </div>
 
                     <div className="done-button-container-for-doctor">
@@ -472,15 +491,13 @@ class AppointmentItemForDoctorInfterface extends Component {
                             <button
                                 className={`done-button ${this.state.isAppointmentDoneButtonState}`}
                                 onClick={this.handleIsAppointmentDoneButtonClick}
-                                disabled={this.state.isAppointmentDoneButtonState === "validate"} // ⬅ THÊM DÒNG NÀY
-                            >
-                                {/* <FontAwesomeIcon icon={faClipboardList} /> */}
-                            </button>
+                                disabled={this.state.isAppointmentDoneButtonState === "validate"}
+                                data-waiting={isVI ? "Chờ khám" : "Waiting"}
+                                data-done={isVI ? "Đã khám" : "Completed"}
+                            />
                         </div>
                         <div className="button-wrapper-2">
-                            <button className={`paid-button ${this.state.isPaymentDoneButtonState}`} onClick={this.handleIsPaymentDoneButtonClick} disabled={this.state.paymentMethod !== "PM3"}>
-                                {/* <FontAwesomeIcon icon={faCircleExclamation} /> */}
-                            </button>
+                            <button className={`paid-button ${this.state.isPaymentDoneButtonState}`} onClick={this.handleIsPaymentDoneButtonClick} disabled={this.state.paymentMethod !== "PM3"} data-unpaid={isVI ? "Chưa thanh toán" : "Unpaid"} data-paid={isVI ? "Đã thanh toán" : "Paid"} />
                         </div>
                     </div>
                 </div>

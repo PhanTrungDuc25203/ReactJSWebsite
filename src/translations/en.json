@@ -484,5 +484,34 @@
             "sorry-1": "We're sorry! Currently, there are no doctors in this specialty.",
             "sorry-2": "We're sorry! Currently, there are no doctors in this province/city."
         }
+    },
+    "user-profile": {
+        "appointment-page": {
+            "appointment-list": "Appointment list",
+            "filter": "-- Filter / Sort appointments --",
+            "date-asc": "Appointment date (earliest → latest)",
+            "date-desc": "Appointment date (latest → earliest)",
+            "pending": "Not yet examined",
+            "completed": "Completed",
+            "clear": "-- Clear --",
+            "rate-and-review": {
+                "title": "Your review of the medical examination service",
+                "image": "Images (optional, up to 4)",
+                "send": "Submit review",
+                "cancel": "Cancel"
+            },
+            "patient": {},
+            "doctor": {
+                "appointment-time": "Appointment time: ",
+                "appointment-id": "Appointment ID: ",
+                "patient": "Patient: ",
+                "phonenumber": "Phone number: ",
+                "email": "Email address: ",
+                "dob": "Date of birth: ",
+                "address": "Address: ",
+                "medical-report": "Medical record: ",
+                "edit-report": "Edit medical record"
+            }
+        }
     }
 }
