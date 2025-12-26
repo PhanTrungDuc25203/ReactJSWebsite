@@ -527,6 +527,24 @@
                     "save-btn": "Lưu",
                     "save-and-download-btn": "Lưu và tải về"
                 }
+            },
+            "exam-package": {
+                "medical-facility": "Cơ sở y tế",
+                "specialty": "Chuyên khoa",
+                "date": "Ngày khám",
+                "timeframe": "Khung giờ",
+                "see-result": "Xem kết quả",
+                "pending-result": "Kết quả đang được xử lý",
+                "no-result": "Không có dữ liệu kết quả",
+                "column-1": "Chỉ số",
+                "column-2": "Kết quả",
+                "column-3": "Đơn vị",
+                "column-4": "Giá trị bình thường",
+                "my-examination": "Lịch khám của tôi",
+                "data-fetching": "Đang tải dữ liệu...",
+                "no-examination": "Chưa có lịch khám nào",
+                "no-examination-sub-word": "Bạn chưa đặt lịch khám hoặc mua gói khám nào",
+                "result": "Kết quả khám bệnh"
             }
         },
         "history-page": {
@@ -541,6 +559,26 @@
             "medical-report": "Bệnh án: ",
             "see-medical-report": "Xem kết quả bệnh án tại đây",
             "no-history": "Bạn chưa có lịch sử khám bệnh nào!"
+        }
+    },
+    "personal-info-page": {
+        "phonenumber": "Số điện thoại",
+        "gender": "Giới tính",
+        "address": "Địa chỉ",
+        "role": "Vai trò",
+        "level": "Trình độ",
+        "specialty": "Chuyên ngành",
+        "clinic-name": "Tên phòng khám",
+        "clinic-address": "Địa chỉ phòng khám",
+        "not-updated": "Chưa cập nhật",
+        "edit-personal-info": "Chỉnh sửa thông tin của bạn",
+        "navbar": {
+            "item-1": "Trang cá nhân",
+            "item-2": "Lịch hẹn bác sĩ",
+            "item-3": "Lịch khám Gói khám",
+            "item-4": "Nhận xét về bác sĩ",
+            "item-5": "Trang chủ",
+            "logout": "Đăng xuất"
         }
     }
 }

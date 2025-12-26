@@ -527,6 +527,24 @@
                     "save-btn": "Save",
                     "save-and-download-btn": "Save and download"
                 }
+            },
+            "exam-package": {
+                "medical-facility": "Medical facility",
+                "specialty": "Specialty",
+                "date": "Examination date",
+                "timeframe": "Time slot",
+                "see-result": "View result",
+                "pending-result": "Result is being processed",
+                "no-result": "No result data available",
+                "column-1": "Indicator",
+                "column-2": "Result",
+                "column-3": "Unit",
+                "column-4": "Normal range",
+                "my-examination": "My examinations",
+                "data-fetching": "Loading data...",
+                "no-examination": "No examinations found",
+                "no-examination-sub-word": "You have not booked any examination or purchased any examination package",
+                "result": "Medical examination result"
             }
         },
         "history-page": {
@@ -541,6 +559,26 @@
             "medical-report": "Medical report: ",
             "see-medical-report": "See medical report's result here",
             "no-history": "You do not have any medical examination history yet."
+        }
+    },
+    "personal-info-page": {
+        "phonenumber": "Phone number",
+        "gender": "Gender",
+        "address": "Address",
+        "role": "Role",
+        "level": "Qualification",
+        "specialty": "Specialty",
+        "clinic-name": "Clinic name",
+        "clinic-address": "Clinic address",
+        "not-updated": "Not updated",
+        "edit-personal-info": "Edit your personal informations",
+        "navbar": {
+            "item-1": "Profile",
+            "item-2": "Doctor Appointments",
+            "item-3": "Examination Packages",
+            "item-4": "Doctor Reviews",
+            "item-5": "Home",
+            "logout": "Log out"
         }
     }
 }

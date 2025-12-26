@@ -9,6 +9,7 @@ import _ from "lodash";
 import { withRouter } from "react-router";
 import * as actions from "../../store/actions";
 import { MoonLoader } from "react-spinners";
+import { FormattedMessage } from "react-intl";
 import UserBackgroundContainer from "./UserBackgroundContainer/UserBackgroundContainer";
 import { getAllRelativeInforsOfCurrentSystemUserService, getAllRelativeBookingsOfCurrentSystemUserService } from "../../services/userService";
 import queryString from "query-string";
@@ -171,21 +172,21 @@ class UserProfile extends Component {
                     <div className="content-container">
                         <div className="nav-bar">
                             <a onClick={() => this.handleTabChange("personal")} className={activeTab === "personal" ? "active" : ""}>
-                                Trang cá nhân
+                                <FormattedMessage id="personal-info-page.navbar.item-1" />
                             </a>
                             <a onClick={() => this.handleTabChange("appointment")} className={activeTab === "appointment" ? "active" : ""}>
-                                Lịch hẹn bác sĩ
+                                <FormattedMessage id="personal-info-page.navbar.item-2" />
                             </a>
                             {currentUser && currentUser.roleId === "R3" && (
                                 <a onClick={() => this.handleTabChange("exampackage-time")} className={activeTab === "exampackage-time" ? "active" : ""}>
-                                    Lịch khám Gói khám
+                                    <FormattedMessage id="personal-info-page.navbar.item-3" />
                                 </a>
                             )}
                             <a onClick={() => this.handleTabChange("comment")} className={activeTab === "comment" ? "active" : ""}>
-                                Nhận xét về bác sĩ
+                                <FormattedMessage id="personal-info-page.navbar.item-4" />
                             </a>
                             <a onClick={() => this.props.history.push(`/home`)} className={activeTab === "return" ? "active" : ""}>
-                                <FontAwesomeIcon icon={faCaretLeft} /> Trang chủ
+                                <FontAwesomeIcon icon={faCaretLeft} /> <FormattedMessage id="personal-info-page.navbar.item-5" />
                             </a>
                         </div>
 
@@ -196,7 +197,7 @@ class UserProfile extends Component {
 
                         <div className="logout-button-container">
                             <button onClick={this.handleLoginForUser} className="log-out-button-of-profile-page">
-                                Log out <FontAwesomeIcon icon={faRightFromBracket} />
+                                <FormattedMessage id="personal-info-page.navbar.logout" /> <FontAwesomeIcon icon={faRightFromBracket} />
                             </button>
                         </div>
                     </div>

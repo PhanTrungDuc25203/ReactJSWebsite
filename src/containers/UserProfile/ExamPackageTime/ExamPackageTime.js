@@ -4,6 +4,8 @@ import "./ExamPackageTime.scss";
 import { withRouter } from "react-router";
 import * as actions from "../../../store/actions";
 import moment from "moment";
+import { LANGUAGES, CommonUtils } from "../../../utils";
+import { FormattedMessage } from "react-intl";
 import queryString from "query-string";
 import { getPatientExamPackageTimeService } from "../../../services/userService";
 import { Calendar, Hospital, Clock, MapPin, Phone, Mail, Stethoscope, FileText, CreditCard, User, BookMarked } from "lucide-react";
@@ -151,7 +153,19 @@ class ExamPackageTime extends Component {
         const canViewResult = isExamDone && resultStatus === "DONE";
         const isResultPending = isExamDone && resultStatus !== "DONE";
 
-        const statusText = statusId === "S1" ? "Chưa xác nhận" : statusId === "S2" ? "Chờ khám" : "Đã khám";
+        const STATUS_TEXT = {
+            [LANGUAGES.VI]: {
+                S1: "Chưa xác nhận",
+                S2: "Chờ khám",
+                S3: "Đã khám",
+            },
+            [LANGUAGES.EN]: {
+                S1: "Unconfirmed",
+                S2: "Waiting for examination",
+                S3: "Examined",
+            },
+        };
+        const statusText = STATUS_TEXT[this.props.language]?.[statusId] || "";
 
         const statusClass = isExamDone ? "completed" : "pending";
 
@@ -177,7 +191,9 @@ class ExamPackageTime extends Component {
                         <Hospital size={24} className="imported-lucide-icons" />
                         {/* <i className="fas fa-hospital"></i> */}
                         <div className="info-text">
-                            <strong>Cơ sở y tế</strong>
+                            <strong>
+                                <FormattedMessage id="user-profile.appointment-page.exam-package.medical-facility" />
+                            </strong>
                             <span>{schedule?.examPackage?.medicalFacilityPackage?.name}</span>
                             <span className="address">
                                 <MapPin size={16} />
@@ -186,7 +202,9 @@ class ExamPackageTime extends Component {
                         </div>
                         <Stethoscope size={24} className="imported-lucide-icons" />
                         <div className="info-text">
-                            <strong>Chuyên khoa</strong>
+                            <strong>
+                                <FormattedMessage id="user-profile.appointment-page.exam-package.specialty" />
+                            </strong>
                             <span>{schedule?.examPackage?.examPackageHaveSpecialty?.name}</span>
                         </div>
                     </div>
@@ -194,7 +212,9 @@ class ExamPackageTime extends Component {
                     <div className="info-row">
                         <Calendar size={24} className="imported-lucide-icons" />
                         <div className="info-text">
-                            <strong>Ngày khám</strong>
+                            <strong>
+                                <FormattedMessage id="user-profile.appointment-page.exam-package.date" />
+                            </strong>
                             <span className={moment(schedule?.date).isSame(moment(), "day") ? "highlight-today" : ""}>{this.formatDate(schedule?.date)}</span>
                         </div>
                     </div>
@@ -202,7 +222,9 @@ class ExamPackageTime extends Component {
                     <div className="info-row">
                         <Clock size={24} className="imported-lucide-icons" />
                         <div className="info-text">
-                            <strong>Khung giờ</strong>
+                            <strong>
+                                <FormattedMessage id="user-profile.appointment-page.exam-package.timeframe" />
+                            </strong>
                             <span>{schedule?.examPackageTimeTypeData?.value_Vie}</span>
                         </div>
                     </div>
@@ -212,14 +234,14 @@ class ExamPackageTime extends Component {
                     {canViewResult && (
                         <button className="btn btn-result" onClick={() => this.handleViewResult(schedule)}>
                             <FileText size={16} />
-                            Xem kết quả
+                            <FormattedMessage id="user-profile.appointment-page.exam-package.see-result" />
                         </button>
                     )}
 
                     {isResultPending && (
                         <div className="result-pending">
                             <i className="fas fa-hourglass-half"></i>
-                            Kết quả đang được xử lý
+                            <FormattedMessage id="user-profile.appointment-page.exam-package.pending-result" />
                         </div>
                     )}
                 </div>
@@ -231,7 +253,11 @@ class ExamPackageTime extends Component {
         const sections = this.buildExamResultData(schedule?.examPackageResult);
 
         if (!sections.length) {
-            return <div>Không có dữ liệu kết quả</div>;
+            return (
+                <div>
+                    <FormattedMessage id="user-profile.appointment-page.exam-package.no-result" />
+                </div>
+            );
         }
 
         return (
@@ -243,10 +269,18 @@ class ExamPackageTime extends Component {
                         <table className="result-table">
                             <thead>
                                 <tr>
-                                    <th>Chỉ số</th>
-                                    <th>Kết quả</th>
-                                    <th>Đơn vị</th>
-                                    <th>Giá trị bình thường</th>
+                                    <th>
+                                        <FormattedMessage id="user-profile.appointment-page.exam-package.column-1" />
+                                    </th>
+                                    <th>
+                                        <FormattedMessage id="user-profile.appointment-page.exam-package.column-2" />
+                                    </th>
+                                    <th>
+                                        <FormattedMessage id="user-profile.appointment-page.exam-package.column-3" />
+                                    </th>
+                                    <th>
+                                        <FormattedMessage id="user-profile.appointment-page.exam-package.column-4" />
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -277,19 +311,27 @@ class ExamPackageTime extends Component {
         return (
             <div className="exam-package-time-container">
                 <div className="schedule-header-section">
-                    <div className="exam-package-time-title">Lịch khám của tôi</div>
+                    <div className="exam-package-time-title">
+                        <FormattedMessage id="user-profile.appointment-page.exam-package.my-examination" />
+                    </div>
                 </div>
 
                 {isLoading ? (
                     <div className="loading-container">
                         <i className="fas fa-spinner fa-spin"></i>
-                        <span>Đang tải dữ liệu...</span>
+                        <span>
+                            <FormattedMessage id="user-profile.appointment-page.exam-package.data-fetching" />
+                        </span>
                     </div>
                 ) : examSchedules.length === 0 ? (
                     <div className="empty-state">
                         <i className="fas fa-calendar-times"></i>
-                        <h3>Chưa có lịch khám nào</h3>
-                        <p>Bạn chưa đặt lịch khám hoặc mua gói khám nào</p>
+                        <h3>
+                            <FormattedMessage id="user-profile.appointment-page.exam-package.no-examination" />
+                        </h3>
+                        <p>
+                            <FormattedMessage id="user-profile.appointment-page.exam-package.no-examination-sub-word" />
+                        </p>
                     </div>
                 ) : (
                     <div className="schedules-list">{examSchedules.map((schedule) => this.renderScheduleItem(schedule))}</div>
@@ -298,7 +340,9 @@ class ExamPackageTime extends Component {
                     <div className="exam-result-modal-overlay">
                         <div className="exam-result-modal">
                             <div className="modal-header">
-                                <h3>Kết quả khám bệnh</h3>
+                                <h3>
+                                    <FormattedMessage id="user-profile.appointment-page.exam-package.result" />
+                                </h3>
                                 <button onClick={this.closeModal}>×</button>
                             </div>
                             <div className="modal-body">{this.renderExamResult(this.state.selectedSchedule)}</div>
