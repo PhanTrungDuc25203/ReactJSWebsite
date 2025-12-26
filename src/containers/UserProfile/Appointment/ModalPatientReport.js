@@ -71,7 +71,7 @@ class ModalPatientReport extends Component {
                     // toggle={() => { this.toggle() }}
                     className="modal-header-customize"
                 >
-                    Chỉnh sửa báo cáo khám bệnh
+                    <FormattedMessage id="user-profile.appointment-page.doctor.modal.open-modal-btn" />
                 </ModalHeader>
                 <ModalBody>
                     <div className="report-modal-contents-container">
@@ -79,7 +79,9 @@ class ModalPatientReport extends Component {
                             <Row>
                                 <Col md={12}>
                                     <FormGroup>
-                                        <Label className="report-content-label">Nội dung báo cáo</Label>
+                                        <Label className="report-content-label">
+                                            <FormattedMessage id="user-profile.appointment-page.doctor.modal.title" />
+                                        </Label>
                                         <textarea className="modal-textarea" value={this.props.fileContent} onChange={this.handleFileContentChange} rows="10" style={{ width: "100%" }} />
                                     </FormGroup>
                                 </Col>
@@ -97,7 +99,7 @@ class ModalPatientReport extends Component {
                                                     this.props.saveFileButNotDownload();
                                                 }}
                                             >
-                                                Lưu
+                                                <FormattedMessage id="user-profile.appointment-page.doctor.modal.save-btn" />
                                             </button>
                                             <button
                                                 className="save-and-download-new-appointment-history"
@@ -107,7 +109,7 @@ class ModalPatientReport extends Component {
                                                     this.props.saveFile();
                                                 }}
                                             >
-                                                Lưu và tải về
+                                                <FormattedMessage id="user-profile.appointment-page.doctor.modal.save-and-download-btn" />
                                                 <FontAwesomeIcon className="download-icon-in-modal" icon={faDownload} />
                                             </button>
                                         </div>

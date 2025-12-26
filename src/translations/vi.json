@@ -500,7 +500,17 @@
                 "send": "Gửi nhận xét",
                 "cancel": "Hủy"
             },
-            "patient": {},
+            "patient": {
+                "appointment-id": "Mã số: ",
+                "phonenumber": "SĐT: ",
+                "email": "Email: ",
+                "exam-address": "Địa chỉ khám: ",
+                "exam-result": "Kết quả khám",
+                "see-result": "Xem kết quả khám bệnh tại đây",
+                "no-result-yet": "Chưa có kết quả",
+                "result": "Kết quả khám bệnh",
+                "close-btn": "Đóng"
+            },
             "doctor": {
                 "appointment-time": "Thời gian hẹn: ",
                 "appointment-id": "Mã số cuộc hẹn: ",
@@ -510,8 +520,27 @@
                 "dob": "Ngày sinh: ",
                 "address": "Địa chỉ: ",
                 "medical-report": "Bệnh án: ",
-                "edit-report": "Chỉnh sửa bệnh án"
+                "edit-report": "Chỉnh sửa bệnh án",
+                "modal": {
+                    "open-modal-btn": "Chỉnh sửa báo cáo khám bệnh",
+                    "title": "Nội dung báo cáo",
+                    "save-btn": "Lưu",
+                    "save-and-download-btn": "Lưu và tải về"
+                }
             }
+        },
+        "history-page": {
+            "appointment-id": "Mã cuộc hẹn: ",
+            "doctor-email": "Email bác sĩ: ",
+            "patient-email": "Email bệnh nhân: ",
+            "date": "Ngày hẹn: ",
+            "timeframe": "Khung giờ: ",
+            "exam-result": "Kết quả khám bệnh: ",
+            "see-result": "Xem kết quả khám bệnh tại đây",
+            "review-service": "Nhận xét về dịch vụ",
+            "medical-report": "Bệnh án: ",
+            "see-medical-report": "Xem kết quả bệnh án tại đây",
+            "no-history": "Bạn chưa có lịch sử khám bệnh nào!"
         }
     }
 }

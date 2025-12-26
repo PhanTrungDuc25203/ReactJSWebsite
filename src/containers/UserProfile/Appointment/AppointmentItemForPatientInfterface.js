@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import { FormattedMessage } from "react-intl";
 import "./AppointmentItemForPatientInfterface.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays, faClock } from "@fortawesome/free-solid-svg-icons";
@@ -111,6 +112,9 @@ class AppointmentItemForPatientInfterface extends Component {
 
     render() {
         let { scheduleStatus, appointmentId, doctorInfor, appointmentDate, appointmentTimeFrame } = this.state;
+        let { language } = this.props;
+        const isVI = language === LANGUAGES.VI;
+
         return (
             <div className="appointment-item-for-patient-interface">
                 <div className="doctor-profile-lite-container">
@@ -122,7 +126,8 @@ class AppointmentItemForPatientInfterface extends Component {
                     ></div>
                     <div className="doctor-info-lite">
                         <div className="doctor-name">
-                            {doctorInfor && doctorInfor.positionData && doctorInfor.positionData.value_Vie}. {doctorInfor && doctorInfor.lastName && doctorInfor.lastName} {doctorInfor && doctorInfor.firstName && doctorInfor.firstName}
+                            {doctorInfor && doctorInfor.positionData && (language === LANGUAGES.VI ? doctorInfor.positionData.value_Vie : doctorInfor.positionData.value_Eng)}. {doctorInfor && doctorInfor.lastName && doctorInfor.lastName}{" "}
+                            {doctorInfor && doctorInfor.firstName && doctorInfor.firstName}
                         </div>
 
                         <div className="doctor-specialty">
@@ -135,28 +140,28 @@ class AppointmentItemForPatientInfterface extends Component {
                     <div className="appointment-id">
                         <label className="appointment-item-for-patient-label">
                             <BookMarked size={18} />
-                            Mã số:
+                            <FormattedMessage id="user-profile.appointment-page.patient.appointment-id" />
                         </label>
                         <span className="appointment-item-for-patient-content">{appointmentId && appointmentId}</span>
                     </div>
                     <div className="doctor-phone-number">
                         <label className="appointment-item-for-patient-label">
                             <Phone size={18} />
-                            SĐT:
+                            <FormattedMessage id="user-profile.appointment-page.patient.phonenumber" />
                         </label>
                         <span className="appointment-item-for-patient-content">{doctorInfor && doctorInfor.phoneNumber && doctorInfor.phoneNumber}</span>
                     </div>
                     <div className="doctor-email">
                         <label className="appointment-item-for-patient-label">
                             <Mail size={18} />
-                            Email:
+                            <FormattedMessage id="user-profile.appointment-page.patient.email" />
                         </label>
                         <span className="appointment-item-for-patient-content">{doctorInfor && doctorInfor.email && doctorInfor.email}</span>
                     </div>
                     <div className="doctor-location">
                         <label className="appointment-item-for-patient-label">
                             <MapPin size={18} />
-                            Địa chỉ khám:
+                            <FormattedMessage id="user-profile.appointment-page.patient.exam-address" />
                         </label>
                         <div className="location">{doctorInfor?.Doctor_specialty_medicalFacility?.medicalFacilityDoctorAndSpecialty?.name}</div>
                     </div>
@@ -166,15 +171,17 @@ class AppointmentItemForPatientInfterface extends Component {
                     <div className="medical-report">
                         <label className="appointment-item-for-patient-label">
                             <FileText size={18} />
-                            Kết quả khám:{" "}
+                            <FormattedMessage id="user-profile.appointment-page.patient.exam-result" />
                         </label>
                         {scheduleStatus === "S3" ? (
                             <span className="medical-report-available" onClick={this.openReportModal}>
-                                Xem kết quả khám bệnh tại đây
+                                <FormattedMessage id="user-profile.appointment-page.patient.see-result" />
                             </span>
                         ) : (
                             <span className="medical-report-unavailable">
-                                <i>Chưa có kết quả</i>
+                                <i>
+                                    <FormattedMessage id="user-profile.appointment-page.patient.no-result-yet" />
+                                </i>
                             </span>
                         )}
                     </div>
@@ -185,11 +192,15 @@ class AppointmentItemForPatientInfterface extends Component {
                                 width: scheduleStatus === "S2" || scheduleStatus === "S3" ? "120px" : "215px",
                             }}
                         >
-                            <button className={scheduleStatus === "S2" ? "done-button validate" : scheduleStatus === "S3" ? "done-button finish" : "done-button"}></button>
+                            <button
+                                className={scheduleStatus === "S2" ? "done-button validate" : scheduleStatus === "S3" ? "done-button finish" : "done-button"}
+                                data-unconfirmed={isVI ? "Chưa xác nhận đặt lịch" : "Appointment not confirmed"}
+                                data-waiting={isVI ? "Chờ khám" : "Waiting"}
+                                data-done={isVI ? "Đã khám" : "Completed"}
+                            />
                         </div>
-
                         <div className="button-wrapper-2">
-                            <button className={this.state.paymentStatus === "PT3" ? "paid-button validate" : "paid-button"} disabled={this.state.paymentMethod !== "PM3"}></button>
+                            <button className={this.state.paymentStatus === "PT3" ? "paid-button validate" : "paid-button"} disabled={this.state.paymentMethod !== "PM3"} data-unpaid={isVI ? "Chưa thanh toán" : "Unpaid"} data-paid={isVI ? "Đã thanh toán" : "Paid"} />
                         </div>
                     </div>
                 </div>
@@ -208,7 +219,9 @@ class AppointmentItemForPatientInfterface extends Component {
                         <div className="modal-overlay" onClick={this.closeReportModal}>
                             <div className="modal-container" onClick={(e) => e.stopPropagation()}>
                                 <div className="modal-header">
-                                    <h3>Kết quả khám bệnh</h3>
+                                    <h3>
+                                        <FormattedMessage id="user-profile.appointment-page.patient.result" />
+                                    </h3>
                                     <span className="close-btn" onClick={this.closeReportModal}>
                                         ×
                                     </span>
@@ -220,7 +233,7 @@ class AppointmentItemForPatientInfterface extends Component {
 
                                 <div className="modal-footer">
                                     <button className="close-button" onClick={this.closeReportModal}>
-                                        Đóng
+                                        <FormattedMessage id="user-profile.appointment-page.patient.close-btn" />
                                     </button>
                                 </div>
                             </div>

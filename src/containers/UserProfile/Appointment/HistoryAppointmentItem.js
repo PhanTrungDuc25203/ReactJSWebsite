@@ -3,6 +3,8 @@ import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentDots } from "@fortawesome/free-solid-svg-icons";
 import RateAndReviewModal from "./RateAndReview/RateAndReviewForm";
+import { FormattedMessage } from "react-intl";
+import { LANGUAGES, CommonUtils } from "../../../utils";
 
 class HistoryAppointmentItem extends Component {
     constructor(props) {
@@ -72,29 +74,39 @@ class HistoryAppointmentItem extends Component {
                 {/* Zone thông tin */}
                 <div className="patient-appointment-history-item">
                     <div>
-                        <label className="patient-appointment-history-item-label">Mã cuộc hẹn:</label>
+                        <label className="patient-appointment-history-item-label">
+                            <FormattedMessage id="user-profile.history-page.appointment-id" />
+                        </label>
                         <span>{appointment.id}</span>
                     </div>
 
                     <div>
-                        <label className="patient-appointment-history-item-label">Email bác sĩ:</label>
+                        <label className="patient-appointment-history-item-label">
+                            <FormattedMessage id="user-profile.history-page.doctor-email" />
+                        </label>
                         <span>{appointment.doctorHasAppointmentWithPatients?.email}</span>
                     </div>
 
                     <div>
-                        <label className="patient-appointment-history-item-label">Ngày hẹn:</label>
+                        <label className="patient-appointment-history-item-label">
+                            <FormattedMessage id="user-profile.history-page.date" />
+                        </label>
                         <span>{moment(appointment.date).format("DD-MM-YYYY")}</span>
                     </div>
 
                     <div>
-                        <label className="patient-appointment-history-item-label">Khung giờ:</label>
+                        <label className="patient-appointment-history-item-label">
+                            <FormattedMessage id="user-profile.history-page.timeframe" />
+                        </label>
                         <span>{appointment.appointmentTimeTypeData?.value_Vie}</span>
                     </div>
                     <div className="medical-report" onClick={this.openReportModal}>
-                        <label className="patient-appointment-history-item-label">Kết quả khám bệnh:</label>
+                        <label className="patient-appointment-history-item-label">
+                            <FormattedMessage id="user-profile.history-page.exam-result" />
+                        </label>
                         <span>
                             <i className="fas fa-file-alt file-icon"></i>
-                            Xem kết quả khám bệnh tại đây
+                            <FormattedMessage id="user-profile.history-page.see-result" />
                         </span>
                     </div>
                 </div>
@@ -103,7 +115,8 @@ class HistoryAppointmentItem extends Component {
                 <div className="review-and-rate">
                     {!isOpenReview && (
                         <button className="review-and-comment-button" onClick={this.toggleReview}>
-                            <FontAwesomeIcon icon={faCommentDots} /> Nhận xét về dịch vụ
+                            <FontAwesomeIcon icon={faCommentDots} />
+                            <FormattedMessage id="user-profile.history-page.review-service" />
                         </button>
                     )}
                 </div>
@@ -114,7 +127,9 @@ class HistoryAppointmentItem extends Component {
                     <div className="modal-overlay">
                         <div className="modal-container">
                             <div className="modal-header">
-                                <h3>Kết quả khám bệnh</h3>
+                                <h3>
+                                    <FormattedMessage id="user-profile.appointment-page.patient.result" />
+                                </h3>
                                 <span className="close-btn" onClick={this.closeReportModal}>
                                     ×
                                 </span>
@@ -126,7 +141,7 @@ class HistoryAppointmentItem extends Component {
 
                             <div className="modal-footer">
                                 <button className="close-button" onClick={this.closeReportModal}>
-                                    Đóng
+                                    <FormattedMessage id="user-profile.appointment-page.patient.close-btn" />
                                 </button>
                             </div>
                         </div>

@@ -500,7 +500,17 @@
                 "send": "Submit review",
                 "cancel": "Cancel"
             },
-            "patient": {},
+            "patient": {
+                "appointment-id": "ID: ",
+                "phonenumber": "Phone: ",
+                "email": "Email: ",
+                "exam-address": "Examination address: ",
+                "exam-result": "Examination result",
+                "see-result": "View examination results here",
+                "no-result-yet": "No results available yet",
+                "result": "Examination results",
+                "close-btn": "Close"
+            },
             "doctor": {
                 "appointment-time": "Appointment time: ",
                 "appointment-id": "Appointment ID: ",
@@ -510,8 +520,27 @@
                 "dob": "Date of birth: ",
                 "address": "Address: ",
                 "medical-report": "Medical record: ",
-                "edit-report": "Edit medical record"
+                "edit-report": "Edit medical record",
+                "modal": {
+                    "open-modal-btn": "Edit medical report",
+                    "title": "Report content",
+                    "save-btn": "Save",
+                    "save-and-download-btn": "Save and download"
+                }
             }
+        },
+        "history-page": {
+            "appointment-id": "Appointment ID: ",
+            "doctor-email": "Doctor's email: ",
+            "patient-email": "Patient's email: ",
+            "date": "Appointment date: ",
+            "timeframe": "Time slot: ",
+            "exam-result": "Examination result: ",
+            "see-result": "View examination results here",
+            "review-service": "Review the service",
+            "medical-report": "Medical report: ",
+            "see-medical-report": "See medical report's result here",
+            "no-history": "You do not have any medical examination history yet."
         }
     }
 }

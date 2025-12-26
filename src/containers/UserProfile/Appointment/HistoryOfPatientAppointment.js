@@ -5,6 +5,7 @@ import moment from "moment";
 import { getAppointmentHistoriesByPatientEmail } from "../../../services/userService";
 import * as actions from "../../../store/actions";
 import HistoryAppointmentItem from "./HistoryAppointmentItem";
+import { FormattedMessage } from "react-intl";
 
 class HistoryOfPatientAppointment extends Component {
     constructor(props) {
@@ -80,7 +81,17 @@ class HistoryOfPatientAppointment extends Component {
     render() {
         const filtered = this.applyFilter();
 
-        return <div className="patient-appointment-history-container">{filtered.length > 0 ? filtered.map((appointment, index) => <HistoryAppointmentItem key={index} appointment={appointment} userEmail={this.props.userEmail} />) : <p>Bạn không có lịch sử khám bệnh nào.</p>}</div>;
+        return (
+            <div className="patient-appointment-history-container">
+                {filtered.length > 0 ? (
+                    filtered.map((appointment, index) => <HistoryAppointmentItem key={index} appointment={appointment} userEmail={this.props.userEmail} />)
+                ) : (
+                    <p>
+                        <FormattedMessage id="user-profile.history-page.no-history" />
+                    </p>
+                )}
+            </div>
+        );
     }
 }
 

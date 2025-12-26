@@ -174,7 +174,7 @@
                         margin-right: 5px;
                     }
                     &:after {
-                        content: "Chưa thanh toán";
+                        content: attr(data-unpaid);
                     }
 
                     &.onclic {
@@ -211,7 +211,7 @@
                             margin-right: 5px;
                         }
                         &:after {
-                            content: "Đã thanh toán";
+                            content: attr(data-paid);
                         }
                     }
                 }
@@ -251,7 +251,7 @@
                         margin-right: 5px;
                     }
                     &:after {
-                        content: "Chưa xác nhận đặt lịch";
+                        content: attr(data-unconfirmed);
                     }
 
                     &.onclic {
@@ -290,7 +290,7 @@
                         }
 
                         &:after {
-                            content: "Chờ khám";
+                            content: attr(data-waiting);
                         }
                     }
                     &.finish {
@@ -309,7 +309,7 @@
                         }
 
                         &:after {
-                            content: "Đã khám";
+                            content: attr(data-done);
                         }
                     }
                 }
