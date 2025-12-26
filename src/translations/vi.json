@@ -477,5 +477,12 @@
             "no-specialty": "Không có thông tin về thế mạnh chuyên môn",
             "position": "Vị trí & Bản đồ"
         }
+    },
+    "specialty": {
+        "detail": {
+            "doctors": "Các bác sĩ ưu tú tại chuyên khoa",
+            "sorry-1": "Xin lỗi quý khách! Hiện tại chưa có bác sĩ nào thuộc chuyên khoa này.",
+            "sorry-2": "Xin lỗi quý khách! Hiện tại chưa có bác sĩ nào thuộc tỉnh thành này."
+        }
     }
 }

@@ -477,5 +477,12 @@
             "no-specialty": "No information available about areas of expertise",
             "position": "Location & Map"
         }
+    },
+    "specialty": {
+        "detail": {
+            "doctors": "Outstanding doctors in this specialty",
+            "sorry-1": "We're sorry! Currently, there are no doctors in this specialty.",
+            "sorry-2": "We're sorry! Currently, there are no doctors in this province/city."
+        }
     }
 }

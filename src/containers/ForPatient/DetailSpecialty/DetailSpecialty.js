@@ -9,6 +9,7 @@ import { getInforAndArticleForADoctor, getAllSpecialtyDetailsById, getAllCodesSe
 import { LANGUAGES } from "../../../utils";
 import * as actions from "../../../store/actions";
 import CustomScrollbars from "../../../components/CustomScrollbars";
+import { FormattedMessage } from "react-intl";
 import DoctorScheduleComponent from "../DoctorScheduleComponent/DoctorScheduleComponent";
 import _ from "lodash";
 import { MoonLoader } from "react-spinners";
@@ -211,7 +212,7 @@ class DetailSpecialty extends Component {
                             </div>
                         </div>
                         <div className="doctors-of-this-specialty-title">
-                            Các bác sĩ ưu tú của chuyên khoa {specialtyDetailData.name}
+                            <FormattedMessage id="specialty.detail.doctors" /> {specialtyDetailData.name}
                             <div className="select-province-where-doctor-live">
                                 <select onChange={(event) => this.handleOnChangeSelect(event)}>
                                     {provinceList &&
@@ -243,7 +244,7 @@ class DetailSpecialty extends Component {
                             ) : (
                                 <div className="apologize">
                                     <div className="apologize-image"></div>
-                                    {selectedProvince === "All" ? "Xin lỗi quý khách! Hiện tại chưa có bác sĩ nào thuộc chuyên khoa này." : "Xin lỗi quý khách! Hiện tại chưa có bác sĩ nào thuộc tỉnh thành này."}
+                                    {selectedProvince === "All" ? <FormattedMessage id="specialty.detail.sorry-1" /> : <FormattedMessage id="specialty.detail.sorry-2" />}
                                 </div>
                             )}
                         </div>
