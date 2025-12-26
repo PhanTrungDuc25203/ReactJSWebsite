@@ -264,6 +264,8 @@
             "payment-method-2": "The clinic only accepts payment via bank card",
             "payment-method-3": "The clinic accepts payment via cash",
             "more-button": "More",
+            "insurance": "Available insurance:",
+            "package-price": "Package price:",
             "less-button": "Less"
         },
         "rate-and-review": {

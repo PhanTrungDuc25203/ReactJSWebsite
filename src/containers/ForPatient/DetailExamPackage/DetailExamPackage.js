@@ -120,7 +120,7 @@ class DetailExamPackage extends Component {
                                     <div className={isShowPriceDetail === false ? "examination-price-sct2 css-for-less-content" : "examination-price-sct2"}>
                                         <div className="sct2-title">
                                             <FontAwesomeIcon icon={faMoneyCheckDollar} className="money-check-icon" />
-                                            Giá gói:
+                                            <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.package-price" />
                                         </div>
                                         {isShowPriceDetail === false ? (
                                             <React.Fragment>
@@ -156,7 +156,7 @@ class DetailExamPackage extends Component {
                                     <div className={isShowInsurenceDetail === false ? "insurance-sct3 css-for-less-content" : "insurance-sct3"}>
                                         <div className="sct3-title">
                                             <FontAwesomeIcon icon={faUserShield} className="insurance-icon" />
-                                            Bảo hiểm áp dụng:
+                                            <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.insurance" />
                                         </div>
                                         {isShowInsurenceDetail === false ? (
                                             <React.Fragment>

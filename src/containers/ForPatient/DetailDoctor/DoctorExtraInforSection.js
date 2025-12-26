@@ -109,7 +109,7 @@ class DoctorExtraInforSection extends Component {
                 <div className={isShowInsurenceDetail === false ? "insurance-sct3 css-for-less-content" : "insurance-sct3"}>
                     <div className="sct3-title">
                         <FontAwesomeIcon icon={faUserShield} className="insurance-icon" />
-                        Bảo hiểm áp dụng:
+                        <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.insurance" />
                     </div>
                     {isShowInsurenceDetail === false ? (
                         <React.Fragment>
