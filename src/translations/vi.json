@@ -580,5 +580,9 @@
             "item-5": "Trang chủ",
             "logout": "Đăng xuất"
         }
+    },
+    "schedule-page": {
+        "title": "Danh sách lịch hẹn",
+        "no-appointment": "Không có lịch hẹn nào"
     }
 }

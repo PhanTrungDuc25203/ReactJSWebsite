@@ -6,6 +6,8 @@ import "./SchedulePage.scss";
 import HomePageHeader from "../HomePage/HomePageHeader/HomePageHeader";
 import CustomScrollbars from "../../components/CustomScrollbars";
 import HomeFooter from "../../containers/HomePage/HomeFooter/HomeFooter";
+import { FormattedMessage } from "react-intl";
+import { LANGUAGES } from "../../utils";
 import { getAllRelativeBookingsOfCurrentSystemUserService, getPatientExamPackageTimeService } from "../../services/userService";
 /* global Temporal */
 
@@ -175,6 +177,22 @@ class SchedulePage extends Component {
 
     render() {
         const { events } = this.state;
+        const CALENDAR_PRIORITY = {
+            soon: 1,
+            future: 2,
+            past: 3,
+        };
+        const sortedEvents = [...events].sort((a, b) => {
+            // 1. So sánh theo mức độ ưu tiên calendarId
+            const priorityDiff = (CALENDAR_PRIORITY[a.calendarId] || 99) - (CALENDAR_PRIORITY[b.calendarId] || 99);
+
+            if (priorityDiff !== 0) return priorityDiff;
+
+            // 2. Nếu cùng calendarId → so sánh theo thời gian bắt đầu
+            return a.start.epochMilliseconds - b.start.epochMilliseconds;
+        });
+
+        console.log("check all events: ", events);
 
         return (
             <CustomScrollbars style={{ height: "100vh", width: "100%" }}>
@@ -186,10 +204,17 @@ class SchedulePage extends Component {
                         </div>
 
                         <div className="appointment-list">
-                            <h3>Danh sách lịch hẹn</h3>
+                            <h3>
+                                <FormattedMessage id="schedule-page.title" />
+                            </h3>
                             <div className="appointment-items">
-                                {events.length === 0 && <p>Không có lịch hẹn</p>}
-                                {events.map((event) => (
+                                {sortedEvents.length === 0 && (
+                                    <p>
+                                        <FormattedMessage id="schedule-page.no-appointment" />
+                                    </p>
+                                )}
+
+                                {sortedEvents.map((event) => (
                                     <div key={event.id} className={`appointment-item ${event.calendarId}`} onClick={() => this.handleGoToEvent(event)}>
                                         <p>
                                             <strong>{event.title}</strong>

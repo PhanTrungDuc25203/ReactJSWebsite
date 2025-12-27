@@ -580,5 +580,9 @@
             "item-5": "Home",
             "logout": "Log out"
         }
+    },
+    "schedule-page": {
+        "title": "Appointment list",
+        "no-appointment": "There are no appointments"
     }
 }
