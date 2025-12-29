@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter as Router } from "connected-react-router";
 import { history } from "../redux";
 import { ToastContainer } from "react-toastify";
-import { userIsAuthenticated, userIsNotAuthenticated, userIsNotPatient, userIsNotPatientAndDoctor } from "../hoc/authentication";
+import { userIsAuthenticated, patientIsAuthenticated, userIsNotAuthenticated, userIsNotPatient, userIsNotPatientAndDoctor } from "../hoc/authentication";
 import { path } from "../utils";
 import Home from "../routes/Home";
 // import Login from '../routes/Login';
@@ -79,7 +79,7 @@ class App extends Component {
                                 <Route path={path.HOMEPAGE} component={HomePage} />
                                 <Route path={path.DETAIL_DOCTOR_ARTICLE} component={DetailArticleForADoctor} />
                                 {/* trang dăng kí khám bệnh theo khung giờ của từng bác sĩ cho bệnh nhân */}
-                                <Route path={path.MAKE_APPOINTMENT_WITH_DOCTOR} component={MakeAppointmentPage} />
+                                <Route path={path.MAKE_APPOINTMENT_WITH_DOCTOR} component={patientIsAuthenticated(MakeAppointmentPage)} />
                                 {/* trang dăng kí Gói khám cho bệnh nhân */}
                                 <Route path={path.BOOKING_A_EXAM_PACKAGE} component={BookingAExamPackagePage} />
                                 {/* route nhắc nhở người dùng vào hòm thư của mình để xác nhận đặt lịch */}

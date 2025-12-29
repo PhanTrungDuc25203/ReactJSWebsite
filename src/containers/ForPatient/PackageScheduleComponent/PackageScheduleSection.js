@@ -98,17 +98,20 @@ class PackageScheduleSection extends Component {
     };
 
     handleChoosingATimeframeForPeriodicExam = (pack) => {
-        console.log("Check this package: ", pack);
-        let formattedDate;
-        if (this.props.language === LANGUAGES.VI) {
-            formattedDate = this.capitalizeFirstLetter(moment(pack.date).format("dddd, DD-MM-YYYY"));
-        }
-        if (this.props.language === LANGUAGES.EN) {
-            formattedDate = moment(pack.date).locale("en").format("ddd, DD-MM-YYYY");
-        }
+        if (!this.props.userInfo || !this.props.userInfo.email) {
+            this.props.history.push(`/login`);
+        } else {
+            let formattedDate;
+            if (this.props.language === LANGUAGES.VI) {
+                formattedDate = this.capitalizeFirstLetter(moment(pack.date).format("dddd, DD-MM-YYYY"));
+            }
+            if (this.props.language === LANGUAGES.EN) {
+                formattedDate = moment(pack.date).locale("en").format("ddd, DD-MM-YYYY");
+            }
 
-        // Sau đó truyền formattedDate thay vì package.date
-        this.props.history.push(`/booking-a-exam-package/${pack.examPackageId}/${formattedDate}/${pack.timeType}`);
+            // Sau đó truyền formattedDate thay vì package.date
+            this.props.history.push(`/booking-a-exam-package/${pack.examPackageId}/${formattedDate}/${pack.timeType}`);
+        }
     };
 
     render() {
@@ -161,6 +164,7 @@ const mapStateToProps = (state) => {
         // systemMenuPath: state.app.systemMenuPath,
         // isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
+        userInfo: state.user.userInfo,
     };
 };
 

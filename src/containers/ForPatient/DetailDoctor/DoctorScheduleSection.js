@@ -82,9 +82,13 @@ class DoctorScheduleSection extends Component {
     };
 
     handleChoosingATimeframeForAppointment = (doctor) => {
-        let formattedDate = this.props.language === LANGUAGES.VI ? moment(doctor.date).format("dddd, DD-MM-YYYY") : moment(doctor.date).locale("en").format("ddd, DD-MM-YYYY");
+        if (!this.props.userInfo || !this.props.userInfo.email) {
+            this.props.history.push(`/login`);
+        } else {
+            let formattedDate = this.props.language === LANGUAGES.VI ? moment(doctor.date).format("dddd, DD-MM-YYYY") : moment(doctor.date).locale("en").format("ddd, DD-MM-YYYY");
 
-        this.props.history.push(`/make-appointment/${doctor.doctorId}/${formattedDate}/${doctor.timeType}`);
+            this.props.history.push(`/make-appointment/${doctor.doctorId}/${formattedDate}/${doctor.timeType}`);
+        }
     };
 
     render() {
@@ -186,6 +190,7 @@ class DoctorScheduleSection extends Component {
 
 const mapStateToProps = (state) => ({
     language: state.app.language,
+    userInfo: state.user.userInfo,
 });
 
 export default withRouter(connect(mapStateToProps)(DoctorScheduleSection));
