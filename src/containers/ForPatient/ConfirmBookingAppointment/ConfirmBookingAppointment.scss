@@ -1,0 +1,133 @@
+.confirm-booking-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+
+    .success {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+
+        .payment-status-title {
+            font-size: 60px;
+        }
+
+        .message {
+            font-size: 30px;
+            color: #969696;
+        }
+
+        .return-to-homepage-btn {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #49bce2;
+            padding: 10px 20px;
+            border: 2px solid #49bce2;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            .website-logo {
+                margin-left: 5px;
+                color: #ffc312;
+                font-weight: 700;
+            }
+        }
+
+        .return-to-homepage-btn:hover {
+            color: white;
+            background-color: #49bce2;
+        }
+    }
+
+    .error {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+
+        .payment-status-title {
+            font-size: 60px;
+            color: #767676;
+        }
+
+        .message {
+            font-size: 30px;
+            color: #969696;
+        }
+
+        .return-to-homepage-btn {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #49bce2;
+            padding: 10px 20px;
+            border: 2px solid #49bce2;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            .website-logo {
+                margin-left: 5px;
+                color: #ffc312;
+                font-weight: 700;
+            }
+        }
+
+        .return-to-homepage-btn:hover {
+            color: white;
+            background-color: #49bce2;
+        }
+    }
+
+    .fail {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+
+        .payment-status-title {
+            font-size: 60px;
+            color: #767676;
+        }
+
+        .message {
+            font-size: 30px;
+            color: #969696;
+        }
+
+        .return-to-homepage-btn {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #49bce2;
+            padding: 10px 20px;
+            border: 2px solid #49bce2;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            .website-logo {
+                margin-left: 5px;
+                color: #ffc312;
+                font-weight: 700;
+            }
+        }
+
+        .return-to-homepage-btn:hover {
+            color: white;
+            background-color: #49bce2;
+        }
+    }
+}

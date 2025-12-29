@@ -3,13 +3,17 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "./ConfirmBookingAppointment.scss";
 import { confirmBookingAppointmentService, createPaymentUrlService } from "../../../services/userService";
+import Lottie from "lottie-react";
+import cardPaymentFail from "../../../assets/Card Payment Unsuccessful.json";
+import errorCone from "../../../assets/Error cone.json";
+import confirmSuccess from "../../../assets/Success animation.json";
 
 class BookingPayment extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            step: "init", // init | waitingPayment | confirming | done
-            message: "Đang chuẩn bị thanh toán...",
+            step: "init", // init | waitingPayment | confirming | success | error
+            message: "",
         };
     }
 
@@ -20,7 +24,7 @@ class BookingPayment extends Component {
         const vnp_ResponseCode = params.get("vnp_ResponseCode");
         const vnp_Amount = params.get("vnp_Amount");
 
-        // 👉 Trường hợp 1: chưa thanh toán
+        // 👉 Chưa thanh toán
         if (!vnp_ResponseCode) {
             try {
                 this.setState({
@@ -28,39 +32,29 @@ class BookingPayment extends Component {
                     message: "Đang chuyển tới cổng thanh toán VNPay...",
                 });
 
-                const res = await createPaymentUrlService({
-                    token,
-                    doctorId,
-                });
-
-                // console.log("Full response:", res);
-
-                // ✅ chính xác theo dữ liệu bạn gửi
+                const res = await createPaymentUrlService({ token, doctorId });
                 const paymentUrl = res?.url;
 
                 if (paymentUrl) {
-                    // console.log("Redirecting to:", paymentUrl);
-
-                    // Dùng timeout nhỏ để tránh React đang setState mà redirect liền
                     setTimeout(() => {
                         window.location.href = paymentUrl;
                     }, 2000);
                 } else {
                     this.setState({
-                        step: "done",
+                        step: "error",
                         message: "Không tạo được liên kết thanh toán.",
                     });
                 }
             } catch (e) {
                 console.error(e);
                 this.setState({
-                    step: "done",
+                    step: "error",
                     message: "Lỗi tạo liên kết thanh toán.",
                 });
             }
         }
 
-        // 👉 Trường hợp 2: quay lại từ VNPay
+        // 👉 Quay lại từ VNPay
         else {
             if (vnp_ResponseCode === "00") {
                 this.setState({
@@ -71,33 +65,102 @@ class BookingPayment extends Component {
                 const body = {
                     token,
                     doctorId,
-                    ...(vnp_Amount && { paidAmount: vnp_Amount }), // nếu tồn tại thì mới cho vào body
+                    ...(vnp_Amount && { paidAmount: vnp_Amount }),
                 };
 
                 const res = await confirmBookingAppointmentService(body);
                 if (res && res.errCode === 0) {
-                    this.setState({ step: "done", message: "✅ Đặt lịch thành công!" });
+                    this.setState({
+                        step: "success",
+                        message: "Đặt lịch thành công!",
+                    });
                 } else {
                     this.setState({
-                        step: "done",
-                        message: "❌ Xác nhận thất bại hoặc lịch đã tồn tại.",
+                        step: "fail",
+                        message: "Xác nhận thất bại hoặc lịch đã tồn tại.",
                     });
                 }
             } else {
                 this.setState({
-                    step: "done",
-                    message: "❌ Thanh toán thất bại hoặc bị hủy.",
+                    step: "error",
+                    message: "Thanh toán thất bại hoặc bị hủy.",
                 });
             }
         }
     }
 
+    handleReturnHomePageClicked = () => {
+        this.props.history.push(`/home`);
+    };
+
+    /* ================= UI theo trạng thái ================= */
+
+    renderContent = () => {
+        const { step, message } = this.state;
+
+        switch (step) {
+            case "waitingPayment":
+                return (
+                    <div className="payment-status waiting">
+                        <div className="spinner" />
+                        <h3>Đang chuyển hướng</h3>
+                        <p>{message}</p>
+                    </div>
+                );
+
+            case "confirming":
+                return (
+                    <div className="payment-status confirming">
+                        <div className="spinner" />
+                        <h3>Đang xác nhận</h3>
+                        <p>{message}</p>
+                    </div>
+                );
+
+            case "success":
+                return (
+                    <div className="payment-status success">
+                        <Lottie animationData={confirmSuccess} loop={true} style={{ width: 200, height: 200 }} />
+                        <span className="message">{message}</span>
+                        <span className="return-to-homepage-btn" onClick={() => this.handleReturnHomePageClicked()}>
+                            Quay trở về <span className="website-logo">MedicalCare</span>
+                        </span>
+                    </div>
+                );
+
+            case "error":
+                return (
+                    <div className="payment-status error">
+                        <Lottie animationData={cardPaymentFail} loop={true} style={{ width: 200, height: 200 }} />
+                        <span className="message">{message}</span>
+                        <span className="return-to-homepage-btn" onClick={() => this.handleReturnHomePageClicked()}>
+                            Quay trở về <span className="website-logo">MedicalCare</span>
+                        </span>
+                    </div>
+                );
+
+            case "fail":
+                return (
+                    <div className="payment-status error">
+                        <Lottie animationData={errorCone} loop={true} style={{ width: 200, height: 200 }} />
+                        <span className="message">{message}</span>
+                        <span className="return-to-homepage-btn" onClick={() => this.handleReturnHomePageClicked()}>
+                            Quay trở về <span className="website-logo">MedicalCare</span>
+                        </span>
+                    </div>
+                );
+
+            default:
+                return (
+                    <div className="payment-status init">
+                        <p>Đang khởi tạo...</p>
+                    </div>
+                );
+        }
+    };
+
     render() {
-        return (
-            <div className="confirm-booking-container">
-                <div className="confirm-booking-message">{this.state.message}</div>
-            </div>
-        );
+        return <div className="confirm-booking-container">{this.renderContent()}</div>;
     }
 }
 
