@@ -172,9 +172,17 @@ class BookingAExamPackagePage extends Component {
         });
 
         if (res && res.errCode === 0) {
-            toast.success(`Record has been sent, wait for doctor's verification!`);
+            toast.success(`Đặt lịch thành công!`);
+            window.open("/make-appointment/awaiting-confirmation", "_blank");
+            setTimeout(() => {
+                this.props.history.push(`/home`);
+            }, 2000);
+        } else if (res && res.errCode === 3) {
+            toast.error("Bạn đã đặt lịch gói khám này trong ngày đã chọn!");
+        } else if (res && res.errCode === 4) {
+            toast.error("Gói khám không tồn tại!");
         } else {
-            toast.error(`Send record fail!`);
+            toast.error("Gửi yêu cầu thất bại!");
         }
     };
 

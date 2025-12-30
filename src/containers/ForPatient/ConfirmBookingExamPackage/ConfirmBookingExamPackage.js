@@ -1,70 +1,138 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import HomePageHeader from "../../HomePage/HomePageHeader/HomePageHeader";
-import HomeFooter from "../../HomePage/HomeFooter/HomeFooter";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {} from "@fortawesome/free-solid-svg-icons";
-import defaultAvatar from "../../../assets/images/default-avatar-circle.png";
-import { LANGUAGES } from "../../../utils";
+import "./ConfirmBookingExamPackage.scss";
 import { confirmBookingExamPackageService } from "../../../services/userService";
+import Lottie from "lottie-react";
+import confirmSuccess from "../../../assets/Success animation.json";
+import errorCone from "../../../assets/Error cone.json";
+import decayBlock from "../../../assets/Decaying Squares Load.json";
 
 class ConfirmBookingExamPackage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            confirmStatus: false,
-            confirmFail: 0,
+            loading: true,
+            errCode: null,
+            message: "",
         };
     }
 
     async componentDidMount() {
-        if (this.props.location && this.props.location.search) {
-            let urlParams = new URLSearchParams(this.props.location.search);
-            let token = urlParams.get("token");
-            let packageId = urlParams.get("packageId");
-            // console.log("check param: ", token, doctorId);
-            //cal api
-            let res = await confirmBookingExamPackageService({
-                token: token,
-                packageId: packageId,
+        // ===== 1. Validate query string =====
+        if (!this.props.location || !this.props.location.search) {
+            this.setState({
+                loading: false,
+                errCode: -1,
+                message: "Link xác nhận không hợp lệ.",
+            });
+            return;
+        }
+
+        const urlParams = new URLSearchParams(this.props.location.search);
+        const token = urlParams.get("token");
+        const packageId = urlParams.get("packageId");
+
+        if (!token || !packageId) {
+            this.setState({
+                loading: false,
+                errCode: 1,
+                message: "Thiếu thông tin xác nhận gói khám.",
+            });
+            return;
+        }
+
+        // ===== 2. Call API =====
+        try {
+            const res = await confirmBookingExamPackageService({
+                token,
+                packageId,
             });
 
-            if (res && res.errCode === 0) {
-                this.setState({
-                    confirmStatus: true,
-                    confirmFail: res.errCode,
-                });
-            } else {
-                this.setState({
-                    confirmStatus: true,
-                    confirmFail: res && res.errCode ? res.errCode : -1,
-                });
-            }
+            this.setState({
+                loading: false,
+                errCode: res?.errCode ?? -1,
+                message: res?.message || "Có lỗi xảy ra trong quá trình xác nhận.",
+            });
+        } catch (error) {
+            console.error("Confirm booking exam package error:", error);
+            this.setState({
+                loading: false,
+                errCode: -1,
+                message: "Không thể kết nối đến hệ thống.",
+            });
         }
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {}
+    handleReturnHomePageClicked = () => {
+        this.props.history.push("/home");
+    };
+
+    // ===== Render theo trạng thái =====
+    renderResult = () => {
+        const { errCode, message } = this.state;
+
+        if (errCode === 0) {
+            return (
+                <div className="confirm-success">
+                    <Lottie animationData={confirmSuccess} loop={false} style={{ width: 200, height: 200 }} />
+                    <span className="message">{message}</span>
+                    <span className="return-to-homepage-btn" onClick={this.handleReturnHomePageClicked}>
+                        Quay trở về <span className="website-logo">MedicalCare</span>
+                    </span>
+                </div>
+            );
+        }
+
+        if (errCode === 4) {
+            return (
+                <div className="confirm-expired">
+                    <Lottie animationData={decayBlock} loop={false} style={{ width: 200, height: 200 }} />
+                    <span className="message">{message}</span>
+                    <span className="return-to-homepage-btn" onClick={this.handleReturnHomePageClicked}>
+                        Quay trở về <span className="website-logo">MedicalCare</span>
+                    </span>
+                </div>
+            );
+        }
+
+        if (errCode === 2 || errCode === 3) {
+            return (
+                <div className="confirm-fail">
+                    <Lottie animationData={errorCone} loop={false} style={{ width: 200, height: 200 }} />
+                    <span className="message">{message}</span>
+                    <span className="return-to-homepage-btn" onClick={this.handleReturnHomePageClicked}>
+                        Quay trở về <span className="website-logo">MedicalCare</span>
+                    </span>
+                </div>
+            );
+        }
+
+        return (
+            <div className="confirm-error">
+                <Lottie animationData={errorCone} loop={false} style={{ width: 200, height: 200 }} />
+                <span className="message">{message}</span>
+                <span className="return-to-homepage-btn" onClick={this.handleReturnHomePageClicked}>
+                    Quay trở về <span className="website-logo">MedicalCare</span>
+                </span>
+            </div>
+        );
+    };
 
     render() {
-        let { confirmStatus, confirmFail } = this.state;
+        const { loading } = this.state;
+
         return (
-            <React.Fragment>
-                <div>{confirmStatus === false ? <div>Loading data...</div> : <div>{confirmFail === 0 ? <div>Xác nhận thành công</div> : <div>Gói khám này đã được đặt, bạn chỉ có thể đặt một gói khám trong một ngày</div>}</div>}</div>
-            </React.Fragment>
+            <Fragment>
+                <div className="confirm-booking-exam-package-container">{loading ? <div className="confirm-loading">Đang xử lý xác nhận gói khám...</div> : this.renderResult()}</div>
+            </Fragment>
         );
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        // systemMenuPath: state.app.systemMenuPath,
-        // isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ConfirmBookingExamPackage);
+export default connect(mapStateToProps)(ConfirmBookingExamPackage);

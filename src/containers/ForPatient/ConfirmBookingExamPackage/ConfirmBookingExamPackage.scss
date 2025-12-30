@@ -1,0 +1,156 @@
+.confirm-booking-exam-package-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+
+    .confirm-success {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+
+        .message {
+            font-size: 30px;
+            color: #969696;
+        }
+
+        .return-to-homepage-btn {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #49bce2;
+            padding: 10px 20px;
+            border: 2px solid #49bce2;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            .website-logo {
+                margin-left: 5px;
+                color: #ffc312;
+                font-weight: 700;
+            }
+        }
+
+        .return-to-homepage-btn:hover {
+            color: white;
+            background-color: #49bce2;
+        }
+    }
+
+    .confirm-expired {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+
+        .message {
+            font-size: 30px;
+            color: #969696;
+        }
+
+        .return-to-homepage-btn {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #49bce2;
+            padding: 10px 20px;
+            border: 2px solid #49bce2;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            .website-logo {
+                margin-left: 5px;
+                color: #ffc312;
+                font-weight: 700;
+            }
+        }
+
+        .return-to-homepage-btn:hover {
+            color: white;
+            background-color: #49bce2;
+        }
+    }
+
+    .confirm-fail {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+
+        .message {
+            font-size: 30px;
+            color: #969696;
+        }
+
+        .return-to-homepage-btn {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #49bce2;
+            padding: 10px 20px;
+            border: 2px solid #49bce2;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            .website-logo {
+                margin-left: 5px;
+                color: #ffc312;
+                font-weight: 700;
+            }
+        }
+
+        .return-to-homepage-btn:hover {
+            color: white;
+            background-color: #49bce2;
+        }
+    }
+
+    .confirm-error {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+
+        .message {
+            font-size: 30px;
+            color: #969696;
+        }
+
+        .return-to-homepage-btn {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #49bce2;
+            padding: 10px 20px;
+            border: 2px solid #49bce2;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            .website-logo {
+                margin-left: 5px;
+                color: #ffc312;
+                font-weight: 700;
+            }
+        }
+
+        .return-to-homepage-btn:hover {
+            color: white;
+            background-color: #49bce2;
+        }
+    }
+}
