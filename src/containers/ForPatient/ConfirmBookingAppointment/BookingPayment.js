@@ -7,6 +7,7 @@ import Lottie from "lottie-react";
 import cardPaymentFail from "../../../assets/Card Payment Unsuccessful.json";
 import errorCone from "../../../assets/Error cone.json";
 import confirmSuccess from "../../../assets/Success animation.json";
+import decayBlock from "../../../assets/Decaying Squares Load.json";
 
 class BookingPayment extends Component {
     constructor(props) {
@@ -34,6 +35,14 @@ class BookingPayment extends Component {
 
                 const res = await createPaymentUrlService({ token, doctorId });
                 const paymentUrl = res?.url;
+
+                if (res?.errCode === 4) {
+                    this.setState({
+                        step: "expired",
+                        message: "Liên kết thanh toán đã hết hạn.",
+                    });
+                    return;
+                }
 
                 if (paymentUrl) {
                     setTimeout(() => {
@@ -145,6 +154,16 @@ class BookingPayment extends Component {
                         <Lottie animationData={errorCone} loop={true} style={{ width: 200, height: 200 }} />
                         <span className="message">{message}</span>
                         <span className="return-to-homepage-btn" onClick={() => this.handleReturnHomePageClicked()}>
+                            Quay trở về <span className="website-logo">MedicalCare</span>
+                        </span>
+                    </div>
+                );
+            case "expired":
+                return (
+                    <div className="payment-status expired">
+                        <Lottie animationData={decayBlock} loop={true} style={{ width: 200, height: 200 }} />
+                        <span className="message">{message}</span>
+                        <span className="return-to-homepage-btn" onClick={this.handleReturnHomePageClicked}>
                             Quay trở về <span className="website-logo">MedicalCare</span>
                         </span>
                     </div>

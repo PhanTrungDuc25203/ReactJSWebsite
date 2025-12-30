@@ -5,6 +5,7 @@ import { confirmBookingAppointmentService } from "../../../services/userService"
 import Lottie from "lottie-react";
 import confirmSuccess from "../../../assets/Success animation.json";
 import errorCone from "../../../assets/Error cone.json";
+import decayBlock from "../../../assets/Decaying Squares Load.json";
 
 class ConfirmBookingAppointment extends Component {
     constructor(props) {
@@ -46,6 +47,14 @@ class ConfirmBookingAppointment extends Component {
                 token,
                 doctorId,
             });
+
+            if (res && res.errCode === 4) {
+                this.setState({
+                    step: "expired",
+                    message: "Liên kết xác nhận đã hết hạn.",
+                });
+                return;
+            }
 
             if (res && res.errCode === 0) {
                 this.setState({
@@ -111,6 +120,17 @@ class ConfirmBookingAppointment extends Component {
             case "error":
                 return (
                     <div className="payment-status error">
+                        <span className="message">{message}</span>
+                        <span className="return-to-homepage-btn" onClick={this.handleReturnHomePageClicked}>
+                            Quay trở về <span className="website-logo">MedicalCare</span>
+                        </span>
+                    </div>
+                );
+
+            case "expired":
+                return (
+                    <div className="payment-status expired">
+                        <Lottie animationData={decayBlock} loop={true} style={{ width: 200, height: 200 }} />
                         <span className="message">{message}</span>
                         <span className="return-to-homepage-btn" onClick={this.handleReturnHomePageClicked}>
                             Quay trở về <span className="website-logo">MedicalCare</span>
