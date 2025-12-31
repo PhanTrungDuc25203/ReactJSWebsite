@@ -3,6 +3,10 @@ import { connectedRouterRedirect } from "redux-auth-wrapper/history4/redirect";
 
 const locationHelper = locationHelperBuilder({});
 
+const isLoggedIn = (state) => state.user.isLoggedIn;
+const role = (state) => state.user.userInfo?.roleId;
+const position = (state) => state.user.userInfo?.positionId;
+
 export const userIsAuthenticated = connectedRouterRedirect({
     authenticatedSelector: (state) => state.user.isLoggedIn && state.user.userInfo.roleId !== "R3",
     wrapperDisplayName: "UserIsAuthenticated",
@@ -34,4 +38,29 @@ export const userIsNotAuthenticated = connectedRouterRedirect({
     wrapperDisplayName: "UserIsNotAuthenticated",
     redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps) || "/",
     allowRedirectBack: false,
+});
+
+export const loginRequired = connectedRouterRedirect({
+    authenticatedSelector: (state) => isLoggedIn(state),
+    wrapperDisplayName: "LoginRequired",
+    redirectPath: "/login",
+    allowRedirectBack: true,
+});
+
+export const adminOnly = connectedRouterRedirect({
+    authenticatedSelector: (state) => isLoggedIn(state) && role(state) === "R1",
+    wrapperDisplayName: "AdminOnly",
+    redirectPath: "/home",
+});
+
+export const staffAndAdminOnly = connectedRouterRedirect({
+    authenticatedSelector: (state) => isLoggedIn(state) && (role(state) === "R1" || (role(state) === "R2" && position(state) === "P5")),
+    wrapperDisplayName: "StaffAndAdminOnly",
+    redirectPath: "/home",
+});
+
+export const doctorAndAdminOnly = connectedRouterRedirect({
+    authenticatedSelector: (state) => isLoggedIn(state) && (role(state) === "R1" || (role(state) === "R2" && position(state) !== "P5")),
+    wrapperDisplayName: "DoctorAndAdminOnly",
+    redirectPath: "/home",
 });

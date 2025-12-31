@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter as Router } from "connected-react-router";
 import { history } from "../redux";
 import { ToastContainer } from "react-toastify";
-import { userIsAuthenticated, patientIsAuthenticated, userIsNotAuthenticated, userIsNotPatient, userIsNotPatientAndDoctor } from "../hoc/authentication";
+import { loginRequired, adminOnly, staffAndAdminOnly, doctorAndAdminOnly, userIsAuthenticated, patientIsAuthenticated, userIsNotAuthenticated, userIsNotPatient, userIsNotPatientAndDoctor } from "../hoc/authentication";
 import { path } from "../utils";
 import Home from "../routes/Home";
 // import Login from '../routes/Login';
@@ -74,14 +74,14 @@ class App extends Component {
                                 <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                 <Route path={path.REGISTER} component={userIsNotAuthenticated(DefaultRegister)} />
                                 {/* dành cho admin  */}
-                                <Route path={path.SYSTEM} component={userIsNotPatientAndDoctor(userIsNotPatient(userIsAuthenticated(System)))} />
+                                <Route path={path.SYSTEM} component={loginRequired(adminOnly(System))} />
                                 {/* medical care cho bác sĩ và bệnh nhân*/}
                                 <Route path={path.HOMEPAGE} component={HomePage} />
                                 <Route path={path.DETAIL_DOCTOR_ARTICLE} component={DetailArticleForADoctor} />
                                 {/* trang dăng kí khám bệnh theo khung giờ của từng bác sĩ cho bệnh nhân */}
-                                <Route path={path.MAKE_APPOINTMENT_WITH_DOCTOR} component={patientIsAuthenticated(MakeAppointmentPage)} />
+                                <Route path={path.MAKE_APPOINTMENT_WITH_DOCTOR} component={loginRequired(MakeAppointmentPage)} />
                                 {/* trang dăng kí Gói khám cho bệnh nhân */}
-                                <Route path={path.BOOKING_A_EXAM_PACKAGE} component={BookingAExamPackagePage} />
+                                <Route path={path.BOOKING_A_EXAM_PACKAGE} component={loginRequired(BookingAExamPackagePage)} />
                                 {/* route nhắc nhở người dùng vào hòm thư của mình để xác nhận đặt lịch */}
                                 <Route path={path.AWAITING_CONFIRMATION} component={AwaitingConfirmation} />
                                 {/* route xác nhận đặt hẹn với bác sĩ */}
@@ -112,9 +112,9 @@ class App extends Component {
                                 <Route path={path.HEALTH_CHECK_PAGE} component={HealthCheck} />
                                 <Route path={path.GENERAL_EXAM_PAGE} component={GeneralExam} />
                                 {/* path for doctor*/}
-                                <Route path={"/doctor"} component={userIsNotPatient(userIsAuthenticated(Doctor))} />
+                                <Route path={"/doctor"} component={loginRequired(doctorAndAdminOnly(Doctor))} />
                                 {/* path for doctor, staff position */}
-                                <Route path={"/staff"} component={userIsNotPatient(userIsAuthenticated(Staff))} />
+                                <Route path={"/staff"} component={loginRequired(staffAndAdminOnly(Staff))} />
                             </Switch>
                             {/* </CustomScrollbars> */}
                             <Chatbot />

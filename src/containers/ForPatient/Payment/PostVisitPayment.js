@@ -8,7 +8,7 @@ class PostVisitPayment extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            step: "init", // init | waitingPayment | confirming | done
+            step: "init",
             message: "Đang chuẩn bị thanh toán...",
         };
     }
@@ -20,7 +20,7 @@ class PostVisitPayment extends Component {
         const vnp_ResponseCode = params.get("vnp_ResponseCode");
         const vnp_Amount = params.get("vnp_Amount");
 
-        // 👉 Trường hợp 1: chưa thanh toán
+        // ===== CHƯA THANH TOÁN =====
         if (!vnp_ResponseCode) {
             try {
                 this.setState({
@@ -33,36 +33,31 @@ class PostVisitPayment extends Component {
                     doctorId,
                 });
 
-                // console.log("Full response:", res);
-
-                // ✅ chính xác theo dữ liệu bạn gửi
                 const paymentUrl = res?.url;
 
                 if (paymentUrl) {
-                    // console.log("Redirecting to:", paymentUrl);
-
-                    // Dùng timeout nhỏ để tránh React đang setState mà redirect liền
                     setTimeout(() => {
                         window.location.href = paymentUrl;
-                    }, 2000);
+                    }, 1500);
                 } else {
                     this.setState({
-                        step: "done",
+                        step: "failure",
                         message: "Không tạo được liên kết thanh toán.",
                     });
                 }
-            } catch (e) {
-                console.error(e);
+            } catch (error) {
+                console.error(error);
                 this.setState({
-                    step: "done",
-                    message: "Lỗi tạo liên kết thanh toán.",
+                    step: "failure",
+                    message: "Lỗi khi tạo liên kết thanh toán.",
                 });
             }
+            return;
         }
 
-        // 👉 Trường hợp 2: quay lại từ VNPay
-        else {
-            if (vnp_ResponseCode === "00") {
+        // ===== QUAY LẠI TỪ VNPAY =====
+        if (vnp_ResponseCode === "00") {
+            try {
                 this.setState({
                     step: "confirming",
                     message: "Thanh toán thành công. Đang xác nhận đặt lịch...",
@@ -71,31 +66,77 @@ class PostVisitPayment extends Component {
                 const body = {
                     token,
                     doctorId,
-                    ...(vnp_Amount && { paidAmount: vnp_Amount }), // nếu tồn tại thì mới cho vào body
+                    ...(vnp_Amount && { paidAmount: vnp_Amount }),
                 };
 
                 const res = await postVisitPaymentService(body);
+
                 if (res && res.errCode === 0) {
-                    this.setState({ step: "done", message: "✅ Thanh toán thành công!" });
+                    this.setState({
+                        step: "success",
+                        message: "Thanh toán và đặt lịch thành công!",
+                    });
                 } else {
                     this.setState({
-                        step: "done",
-                        message: "❌ Thanh toán thất bại hoặc bị hủy.",
+                        step: "failure",
+                        message: "Xác nhận đặt lịch thất bại.",
                     });
                 }
-            } else {
+            } catch (error) {
+                console.error(error);
                 this.setState({
-                    step: "done",
-                    message: "❌ Thanh toán thất bại hoặc bị hủy.",
+                    step: "failure",
+                    message: "Có lỗi xảy ra khi xác nhận thanh toán.",
                 });
             }
+        } else {
+            this.setState({
+                step: "failure",
+                message: "Thanh toán thất bại hoặc đã bị hủy.",
+            });
         }
     }
 
     render() {
+        const { step, message } = this.state;
+
         return (
-            <div className="confirm-booking-container">
-                <div className="confirm-booking-message">{this.state.message}</div>
+            <div className="post-visit-payment-container">
+                {step === "init" && (
+                    <div className="payment-step payment-init">
+                        <div className="payment-title">Khởi tạo</div>
+                        <div className="payment-message">{message}</div>
+                    </div>
+                )}
+
+                {step === "waitingPayment" && (
+                    <div className="payment-step payment-waiting">
+                        <div className="payment-title">Đang chuyển hướng</div>
+                        <div className="payment-message">{message}</div>
+                        <div className="payment-loading">Loading...</div>
+                    </div>
+                )}
+
+                {step === "confirming" && (
+                    <div className="payment-step payment-confirming">
+                        <div className="payment-title">Xác nhận thanh toán</div>
+                        <div className="payment-message">{message}</div>
+                    </div>
+                )}
+
+                {step === "success" && (
+                    <div className="payment-step payment-success">
+                        <div className="payment-title">Thành công</div>
+                        <div className="payment-message">{message}</div>
+                    </div>
+                )}
+
+                {step === "failure" && (
+                    <div className="payment-step payment-failure">
+                        <div className="payment-title">Thất bại</div>
+                        <div className="payment-message">{message}</div>
+                    </div>
+                )}
             </div>
         );
     }
