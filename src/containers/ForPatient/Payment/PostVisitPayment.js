@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "./PostVisitPayment.scss";
 import { postVisitPaymentService, createPaymentUrlService } from "../../../services/userService";
+import paymentSuccess from "../../../assets/Payment Success.json";
+import errorCone from "../../../assets/Error cone.json";
+import Lottie from "lottie-react";
 
 class PostVisitPayment extends Component {
     constructor(props) {
@@ -97,6 +100,10 @@ class PostVisitPayment extends Component {
         }
     }
 
+    handleReturnHomePageClicked = () => {
+        this.props.history.push("/home");
+    };
+
     render() {
         const { step, message } = this.state;
 
@@ -126,15 +133,21 @@ class PostVisitPayment extends Component {
 
                 {step === "success" && (
                     <div className="payment-step payment-success">
-                        <div className="payment-title">Thành công</div>
+                        <Lottie animationData={paymentSuccess} loop={false} style={{ width: 200, height: 200 }} />
                         <div className="payment-message">{message}</div>
+                        <span className="return-to-homepage-btn" onClick={this.handleReturnHomePageClicked}>
+                            Quay trở về <span className="website-logo">MedicalCare</span>
+                        </span>
                     </div>
                 )}
 
                 {step === "failure" && (
                     <div className="payment-step payment-failure">
-                        <div className="payment-title">Thất bại</div>
+                        <Lottie animationData={errorCone} loop={false} style={{ width: 200, height: 200 }} />
                         <div className="payment-message">{message}</div>
+                        <span className="return-to-homepage-btn" onClick={this.handleReturnHomePageClicked}>
+                            Quay trở về <span className="website-logo">MedicalCare</span>
+                        </span>
                     </div>
                 )}
             </div>
