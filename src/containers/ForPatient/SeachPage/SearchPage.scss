@@ -88,7 +88,7 @@
                         }
                         &:open::picker(select) {
                             opacity: 1;
-                            height: calc-size(auto, size);
+                            height: 220px;
                             overflow-y: auto;
                             scrollbar-width: none;
                             &::-webkit-scrollbar {
