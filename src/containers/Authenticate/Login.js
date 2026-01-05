@@ -9,6 +9,7 @@ import { handleLoginAPI, handleGoogleLoginService } from "../../services/userSer
 import CustomScrollbars from "../../components/CustomScrollbars";
 import { withRouter } from "react-router";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { toast } from "react-toastify";
 
 class Login extends Component {
     constructor(props) {
@@ -59,6 +60,13 @@ class Login extends Component {
                 this.setState({
                     errMessage: data.message,
                 });
+                if (data.errCode === 1) {
+                    toast.error("Email không tồn tại");
+                } else if (data.errCode === 2) {
+                    toast.error("Mật khẩu của bạn không chính xác");
+                } else {
+                    toast.error("Lỗi không thể đăng nhập");
+                }
             }
             if (data && data.errCode === 0) {
                 //đăng nhập thành công thì cần làm gì đó ở đây
@@ -66,6 +74,7 @@ class Login extends Component {
                 //cần sử dụng tới redux
                 this.props.userLoginSuccess(data.user);
                 this.props.currentSystemUserInfo(data.user.email);
+                toast.success("Đăng nhập thành công");
             }
         } catch (e) {
             if (e.response) {
