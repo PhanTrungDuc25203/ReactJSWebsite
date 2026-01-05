@@ -123,10 +123,14 @@ class ExamPackageTime extends Component {
         let result = {};
 
         try {
-            template = JSON.parse(examPackageResult.template);
-            result = examPackageResult.result ? JSON.parse(examPackageResult.result) : {};
+            template = typeof examPackageResult.template === "string" ? JSON.parse(examPackageResult.template) : examPackageResult.template;
+
+            result = examPackageResult.result ? (typeof examPackageResult.result === "string" ? JSON.parse(examPackageResult.result) : examPackageResult.result) : {};
         } catch (e) {
-            console.error("Invalid template/result JSON", e);
+            console.error("Invalid template/result JSON", {
+                template: examPackageResult.template,
+                result: examPackageResult.result,
+            });
             return [];
         }
 
@@ -134,7 +138,6 @@ class ExamPackageTime extends Component {
             title: section.title,
             fields: section.fields.map((field, fieldIndex) => {
                 const key = `${sectionIndex}-${fieldIndex}`;
-
                 return {
                     ...field,
                     value: result[key] ?? null,
