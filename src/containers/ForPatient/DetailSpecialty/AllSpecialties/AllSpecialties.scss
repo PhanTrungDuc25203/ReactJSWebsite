@@ -1,15 +1,46 @@
-.all-specialty-container {
+.all-specialties-container {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap; // Cho phép các item xuống dòng nếu không đủ chỗ
-    gap: 24px; // Khoảng cách giữa các item
-    margin: 60px;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 60px 4.5% 20px 4.5%;
+
+    .all-specialties-container-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+
+        .all-specialties-search {
+            display: flex;
+            align-items: center;
+            height: 30px;
+            width: 100px;
+            max-width: 50%;
+            background: #f1faff;
+            border: 1px solid #9cd7ff;
+            border-radius: 30px;
+            overflow: hidden;
+            flex: 1;
+
+            input {
+                flex: 1;
+                padding: 5px 20px;
+                border: none;
+                outline: none;
+                font-size: 14px;
+                background: transparent;
+                color: #0e9fff;
+            }
+        }
+    }
 
     &-title {
-        width: 100%; // Đảm bảo tiêu đề chiếm toàn bộ chiều ngang
+        width: auto;
         font-size: 2rem;
         font-weight: bold;
         color: #49bce2;
-        margin-bottom: 20px;
         text-align: center;
     }
 

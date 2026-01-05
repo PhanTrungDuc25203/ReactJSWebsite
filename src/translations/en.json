@@ -384,7 +384,8 @@
         "login-btn": "Login",
         "forgot-password": "Forgot your password?",
         "register": "No account? Register here",
-        "another-opt": "Or login with:"
+        "another-opt": "Or login with:",
+        "login-with-facebook": "Login with Facebook"
     },
     "dashboard": {
         "header": {
@@ -458,7 +459,8 @@
         "all": {
             "previous-btn": "Previous",
             "next-btn": "Next",
-            "title": "Medical facilities & Hospitals"
+            "title": "Medical facilities & Hospitals",
+            "search-placeholder": "Search medical faciliti & hospital..."
         },
         "detail": {
             "navbar": {
@@ -479,6 +481,11 @@
         }
     },
     "specialty": {
+        "all-specialty-page": {
+            "title": "Specialties",
+            "search-placeholder": "Search for specialty ...",
+            "no-result-found": "Appropriate results not found"
+        },
         "detail": {
             "doctors": "Outstanding doctors in this specialty",
             "sorry-1": "We're sorry! Currently, there are no doctors in this specialty.",

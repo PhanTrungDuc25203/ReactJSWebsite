@@ -12,20 +12,86 @@ class AllMedicalFacilities extends Component {
         super(props);
         this.state = {
             allMedicalFacilityData: [],
+            filteredMedicalFacilityData: [],
             currentPage: 1, // Trang hiện tại
             itemsPerPage: 8, // Số item tối đa trên mỗi trang
+            searchKeyword: "",
         };
+
+        this.searchTimeout = null;
     }
 
     async componentDidMount() {
         let res = await getInfoOfMedicalFacility("ALLANDIMAGEBUTSHORT");
         if (res.errCode === 0) {
-            const expandedData = res.infor.concat(res.infor, res.infor, res.infor, res.infor); // Nhân rộng dữ liệu
+            const expandedData = res.infor.concat(res.infor, res.infor, res.infor, res.infor);
             this.setState({
                 allMedicalFacilityData: expandedData,
+                filteredMedicalFacilityData: expandedData,
             });
         }
     }
+
+    componentWillUnmount() {
+        if (this.searchTimeout) {
+            clearTimeout(this.searchTimeout);
+        }
+    }
+
+    removeVietnameseTones = (str) => {
+        if (!str) return "";
+
+        return str
+            .normalize("NFD") // tách chữ + dấu
+            .replace(/[\u0300-\u036f]/g, "") // xóa dấu
+            .replace(/đ/g, "d")
+            .replace(/Đ/g, "D");
+    };
+
+    handleSearchChange = (event) => {
+        const keyword = event.target.value;
+
+        this.setState({
+            searchKeyword: keyword,
+        });
+
+        // Clear debounce cũ
+        if (this.searchTimeout) {
+            clearTimeout(this.searchTimeout);
+        }
+
+        // Debounce 2 giây
+        this.searchTimeout = setTimeout(() => {
+            this.performSearch(keyword);
+        }, 500);
+    };
+
+    performSearch = (keyword) => {
+        const { allMedicalFacilityData } = this.state;
+
+        if (!keyword || keyword.trim() === "") {
+            this.setState({
+                filteredMedicalFacilityData: allMedicalFacilityData,
+                currentPage: 1,
+            });
+            return;
+        }
+
+        const normalizedKeyword = this.removeVietnameseTones(keyword.trim().toLowerCase());
+
+        const filteredData = allMedicalFacilityData.filter((item) => {
+            if (!item.name) return false;
+
+            const normalizedName = this.removeVietnameseTones(item.name.toLowerCase());
+
+            return normalizedName.includes(normalizedKeyword);
+        });
+
+        this.setState({
+            filteredMedicalFacilityData: filteredData,
+            currentPage: 1,
+        });
+    };
 
     handleViewDetailArticleOfAFacility = (facility) => {
         this.props.history.push(`/detail-medical-facility/${facility}`);
@@ -36,8 +102,8 @@ class AllMedicalFacilities extends Component {
     };
 
     renderPagination = () => {
-        const { allMedicalFacilityData, itemsPerPage, currentPage } = this.state;
-        const totalPages = Math.ceil(allMedicalFacilityData.length / itemsPerPage);
+        const { filteredMedicalFacilityData, itemsPerPage, currentPage } = this.state;
+        const totalPages = Math.ceil(filteredMedicalFacilityData.length / itemsPerPage);
 
         return (
             <div className="pagination-container">
@@ -57,20 +123,24 @@ class AllMedicalFacilities extends Component {
     };
 
     render() {
-        const { allMedicalFacilityData, currentPage, itemsPerPage } = this.state;
+        const { filteredMedicalFacilityData, currentPage, itemsPerPage } = this.state;
 
-        // Tính toán dữ liệu cho trang hiện tại
         const indexOfLastItem = currentPage * itemsPerPage;
         const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-        const currentData = allMedicalFacilityData.slice(indexOfFirstItem, indexOfLastItem);
+        const currentData = filteredMedicalFacilityData.slice(indexOfFirstItem, indexOfLastItem);
 
         return (
             <React.Fragment>
                 <CustomScrollbars style={{ height: "100vh", width: "100%" }}>
                     <HomePageHeader isShowBanner={false} />
                     <div className="all-medical-facilities-container">
-                        <div className="all-medical-facilities-container-title">
-                            <FormattedMessage id="medical-facility.all.title" />
+                        <div className="all-medical-facilities-container-header">
+                            <div className="all-medical-facilities-container-title">
+                                <FormattedMessage id="medical-facility.all.title" />
+                            </div>
+                            <div className="all-medical-facilities-search">
+                                <FormattedMessage id="medical-facility.all.search-placeholder">{(item) => <input type="text" placeholder={item} value={this.state.searchKeyword} onChange={this.handleSearchChange} className="search-input" />}</FormattedMessage>
+                            </div>
                         </div>
                         {currentData &&
                             currentData.length > 0 &&

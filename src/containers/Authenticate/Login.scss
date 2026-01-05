@@ -178,7 +178,9 @@
                 margin-top: 15px;
                 display: flex;
                 justify-content: center;
+                flex-direction: column;
                 align-items: center;
+                gap: 10px;
 
                 .icon-container {
                     display: inline-flex;
@@ -210,6 +212,30 @@
                     font-size: 30px;
                     color: #60067b;
                     /* Đặt kích thước cho biểu tượng bên trong */
+                }
+
+                .login-with-facebook-btn {
+                    height: 40px;
+                    border: 1px solid #0088ff70;
+                    background-color: white;
+                    border-radius: 3px;
+                    color: #007eff;
+                    width: 230px;
+                    transition: all 0.25s;
+                    display: flex;
+                    align-items: center;
+                    text-align: center;
+                    justify-content: center;
+                    gap: 10px;
+                }
+
+                .login-with-facebook-btn:hover {
+                    background-color: #007eff;
+                    color: white;
+                }
+
+                .facebook-icon {
+                    font-size: 20px;
                 }
             }
 

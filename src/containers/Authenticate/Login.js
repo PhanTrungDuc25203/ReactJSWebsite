@@ -4,11 +4,14 @@ import { push } from "connected-react-router";
 // import * as actions from "../store/actions";
 import * as actions from "../../store/actions";
 import "./Login.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { FormattedMessage } from "react-intl";
-import { handleLoginAPI, handleGoogleLoginService } from "../../services/userService";
+import { handleLoginAPI, handleGoogleLoginService, handleFacebookLoginService } from "../../services/userService";
 import CustomScrollbars from "../../components/CustomScrollbars";
 import { withRouter } from "react-router";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import FacebookLogin from "@greatsumini/react-facebook-login";
 import { toast } from "react-toastify";
 
 class Login extends Component {
@@ -214,12 +217,34 @@ class Login extends Component {
                                 />
                             </GoogleOAuthProvider>
 
-                            {/* <div className="icon-container">
-                                <i className="fab fa-facebook-f"></i>
-                            </div>
-                            <div className="icon-container">
-                                <i className="fab fa-apple"></i>
-                            </div> */}
+                            <FacebookLogin
+                                authType="rerequest"
+                                appId="1268016711817621"
+                                scope="email"
+                                fields="name,email"
+                                onSuccess={async (response) => {
+                                    if (!response?.accessToken) {
+                                        console.log("Facebook login cancelled by user");
+                                        return;
+                                    }
+
+                                    const res = await handleFacebookLoginService(response.accessToken);
+                                    if (res?.errCode === 0) {
+                                        localStorage.setItem("accessToken", res.accessToken);
+                                        this.props.userLoginSuccess(res.user);
+                                        this.props.currentSystemUserInfo(res.user.email);
+                                    }
+                                }}
+                                onFail={() => {
+                                    console.log("Facebook login failed or cancelled");
+                                }}
+                                render={({ onClick }) => (
+                                    <button onClick={onClick} className="login-with-facebook-btn">
+                                        <FormattedMessage id="login.login-with-facebook" />
+                                        <FontAwesomeIcon icon={faFacebook} className="facebook-icon" />
+                                    </button>
+                                )}
+                            />
                         </div>
                     </div>
                 </div>

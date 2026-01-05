@@ -384,7 +384,8 @@
         "login-btn": "Đăng nhập",
         "forgot-password": "Quên mật khẩu?",
         "register": "Chưa có tài khoản? Đăng ký ngay",
-        "another-opt": "Hoặc đăng nhập bằng:"
+        "another-opt": "Hoặc đăng nhập bằng:",
+        "login-with-facebook": "Đăng nhập bằng Facebook"
     },
     "dashboard": {
         "header": {
@@ -458,7 +459,8 @@
         "all": {
             "previous-btn": "Trang trước",
             "next-btn": "Trang sau",
-            "title": "Cơ sở y tế & Bệnh viện"
+            "title": "Cơ sở y tế & Bệnh viện",
+            "search-placeholder": "Tìm kiếm cơ sở y tế & bệnh viện..."
         },
         "detail": {
             "navbar": {
@@ -479,6 +481,11 @@
         }
     },
     "specialty": {
+        "all-specialty-page": {
+            "title": "Chuyên khoa",
+            "search-placeholder": "Tìm kiếm chuyên khoa ...",
+            "no-result-found": "Không tìm thấy chuyên khoa phù hợp"
+        },
         "detail": {
             "doctors": "Các bác sĩ ưu tú tại chuyên khoa",
             "sorry-1": "Xin lỗi quý khách! Hiện tại chưa có bác sĩ nào thuộc chuyên khoa này.",

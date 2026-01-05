@@ -273,6 +273,10 @@ const confirmExamBookingDoneService = (bookingId) => {
     return axios.patch(`/api/exam-package/booking-done?bookingId=${bookingId}`);
 };
 
+const handleFacebookLoginService = (accessToken) => {
+    return axios.post("/api/auth/facebook/verify", { accessToken });
+};
+
 export {
     handleLoginAPI,
     handleGoogleLoginService,
@@ -332,4 +336,5 @@ export {
     getInforAndArticleForAStaff,
     getPatientExamPackageTimeService,
     confirmExamBookingDoneService,
+    handleFacebookLoginService,
 };
