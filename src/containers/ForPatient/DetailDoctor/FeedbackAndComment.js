@@ -128,7 +128,7 @@ class FeedbackAndComment extends Component {
         if (avg >= 4.0) return "😊";
         if (avg >= 3.0) return "😐";
         if (avg >= 2.0) return "☹️";
-        return "😡";
+        return "😊";
     };
 
     render() {

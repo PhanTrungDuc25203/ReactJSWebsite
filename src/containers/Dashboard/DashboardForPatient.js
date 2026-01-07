@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Calendar, Clock, MapPin, Bell, CalendarArrowDown, CalendarX, User, Activity, TrendingUp, AlertCircle, CheckCircle, CalendarCheck } from "lucide-react";
+import { UserCheck, CircleCheckBig, Calendar, Clock, MapPin, Star, Bell, Mail, Phone, CalendarArrowDown, CalendarX, User, Activity, TrendingUp, AlertCircle, CheckCircle, CalendarCheck } from "lucide-react";
 import "./Dashboard.scss";
 import moment from "moment";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-import { getPatientAppointmentsOverviewStatisticsService, getPatientAppointmentsNearestService, getPatientAppointmentsMonthlyVisitsService, getPatientFrequentVisitsMedicalFacilitiesAndDoctorsService } from "../../services/userService";
+import { getPatientAppointmentsOverviewStatisticsService, getPatientAppointmentsNearestService, getPatientAppointmentsMonthlyVisitsService, getPatientFrequentVisitsMedicalFacilitiesAndDoctorsService, recommendDoctorsForPatientService } from "../../services/userService";
 import * as actions from "../../store/actions";
 import { LANGUAGES } from "../../utils";
 import { switchLanguageOfWebsite } from "../../store/actions";
@@ -28,7 +28,6 @@ class DashboardForPatient extends Component {
             gender: "male",
             whrResult: null,
 
-            // Data mock
             nearestUpcomingAppointments: [],
 
             stats: {
@@ -39,6 +38,8 @@ class DashboardForPatient extends Component {
             },
 
             monthlyStats: [],
+
+            recommendedDoctors: [],
 
             frequentlyVisitDoctorStats: [],
 
@@ -53,6 +54,7 @@ class DashboardForPatient extends Component {
                 let nearestApointmentsResponse = await getPatientAppointmentsNearestService(this.props.userInfo.id);
                 let monthlyVisitsResponse = await getPatientAppointmentsMonthlyVisitsService(this.props.userInfo.id);
                 let frequentlyVisitsResponse = await getPatientFrequentVisitsMedicalFacilitiesAndDoctorsService(this.props.userInfo.id);
+                let recommendedDoctorsResponse = await recommendDoctorsForPatientService(this.props.userInfo.id);
                 if (overviewStatisticResponse && overviewStatisticResponse.errCode === 0) {
                     this.setState({
                         stats: {
@@ -80,6 +82,12 @@ class DashboardForPatient extends Component {
                     this.setState({
                         frequentlyVisitDoctorStats: frequentlyVisitsResponse.topDoctors,
                         frequentlyVisitFacilityStats: frequentlyVisitsResponse.topMedicalFacilities,
+                    });
+                }
+
+                if (recommendedDoctorsResponse && recommendedDoctorsResponse.errCode === 0) {
+                    this.setState({
+                        recommendedDoctors: recommendedDoctorsResponse.data,
                     });
                 }
             } catch (error) {
@@ -187,9 +195,17 @@ class DashboardForPatient extends Component {
         return first + last;
     };
 
-    render() {
-        const { activeHealthTab, weight, height, bmiResult, waist, hip, gender, whrResult, nearestUpcomingAppointments, stats, monthlyStats, frequentlyVisitDoctorStats, frequentlyVisitFacilityStats } = this.state;
+    getEmojiForAverage = (avg) => {
+        if (avg >= 4.5) return "😁";
+        if (avg >= 4.0) return "😊";
+        if (avg >= 3.0) return "😐";
+        if (avg >= 2.0) return "☹️";
+        return "😊";
+    };
 
+    render() {
+        const { activeHealthTab, weight, height, bmiResult, waist, hip, gender, whrResult, nearestUpcomingAppointments, stats, monthlyStats, frequentlyVisitDoctorStats, frequentlyVisitFacilityStats, recommendedDoctors } = this.state;
+        console.log("check recommended doctors: ", recommendedDoctors);
         return (
             <div className="dashboard-container">
                 {/* Header */}
@@ -449,6 +465,130 @@ class DashboardForPatient extends Component {
                                 )}
                             </div>
                         )}
+                    </div>
+                </div>
+
+                {/* recommendation */}
+                <div className="recommendation-section">
+                    <div className="section-header">
+                        <Star className="section-icon" size={24} />
+                        <h2>Dành cho bạn</h2>
+                    </div>
+
+                    <div className="recommendation-content">
+                        <div className="doctor-recommendation">
+                            <h3 className="section-title">Bác sĩ dành cho bạn</h3>
+                            <div className="recommended-doctor-details">
+                                <div className="top-1 top-recommended-doctor">
+                                    <span className="claim">
+                                        <CircleCheckBig size={16} className="claim-icon" />
+                                        Phù hợp nhất với bạn
+                                    </span>
+                                    <div className="appointment-header">
+                                        <div className="doctor-avatar">
+                                            <FormattedMessage id="dashboard.doctor" />
+                                        </div>
+                                        <div className="appointment-info">
+                                            <h3>
+                                                {recommendedDoctors[0]?.lastName} {recommendedDoctors[0]?.firstName}
+                                            </h3>
+                                            <div className="specialty">{recommendedDoctors[0]?.Doctor_infor?.belongToSpecialty?.name}</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="appointment-details">
+                                        <div className="doctor-rate-and-visits">
+                                            <div className="doctor-rate">
+                                                <span className="average-point">
+                                                    {this.getEmojiForAverage(recommendedDoctors[0]?.avgRating)} {recommendedDoctors[0]?.avgRating}
+                                                </span>
+                                                /5.0
+                                            </div>
+                                            <div className="visits">
+                                                <UserCheck size={18} className="user-exam-done-icon" />
+                                                {recommendedDoctors[0]?.visitedCount} lượt khám
+                                            </div>
+                                        </div>
+                                        <div className="detail-row">
+                                            <Mail size={16} className="detail-icon" />
+                                            <span>{recommendedDoctors[0]?.email}</span>
+
+                                            <Phone size={16} className="detail-icon" style={{ marginLeft: "1rem" }} />
+                                            <span>{recommendedDoctors[0]?.phoneNumber}</span>
+                                        </div>
+
+                                        <div className="detail-row">
+                                            <MapPin size={16} className="detail-icon" />
+                                            <span>{recommendedDoctors[0]?.address}</span>
+                                        </div>
+                                        <div className="work-place-section">
+                                            <div className="label">Đang công tác tại</div>
+                                            <div className="work-place">
+                                                {recommendedDoctors[0]?.Doctor_specialty_medicalFacility?.medicalFacilityDoctorAndSpecialty?.name} - {recommendedDoctors[0]?.Doctor_specialty_medicalFacility?.medicalFacilityDoctorAndSpecialty?.name}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="top-2 second-recommended-doctor">
+                                    <div className="appointment-header">
+                                        <div className="doctor-avatar">
+                                            <FormattedMessage id="dashboard.doctor" />
+                                        </div>
+                                        <div className="appointment-info">
+                                            <h3>
+                                                {recommendedDoctors[1]?.lastName} {recommendedDoctors[1]?.firstName}
+                                            </h3>
+                                            <div className="specialty">{recommendedDoctors[1]?.Doctor_infor?.belongToSpecialty?.name}</div>
+                                        </div>
+                                    </div>
+                                    <div className="appointment-details">
+                                        <div className="detail-row">
+                                            <Mail size={16} className="detail-icon" />
+                                            <span>{recommendedDoctors[1]?.email}</span>
+
+                                            <Phone size={16} className="detail-icon" style={{ marginLeft: "1rem" }} />
+                                            <span>{recommendedDoctors[1]?.phoneNumber}</span>
+                                        </div>
+
+                                        <div className="detail-row">
+                                            <MapPin size={16} className="detail-icon" />
+                                            <span>{recommendedDoctors[1]?.address}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="top-3 second-recommended-doctor">
+                                    <div className="appointment-header">
+                                        <div className="doctor-avatar">
+                                            <FormattedMessage id="dashboard.doctor" />
+                                        </div>
+                                        <div className="appointment-info">
+                                            <h3>
+                                                {recommendedDoctors[2]?.lastName} {recommendedDoctors[2]?.firstName}
+                                            </h3>
+                                            <div className="specialty">{recommendedDoctors[2]?.Doctor_infor?.belongToSpecialty?.name}</div>
+                                        </div>
+                                    </div>
+                                    <div className="appointment-details">
+                                        <div className="detail-row">
+                                            <Mail size={16} className="detail-icon" />
+                                            <span>{recommendedDoctors[2]?.email}</span>
+
+                                            <Phone size={16} className="detail-icon" style={{ marginLeft: "1rem" }} />
+                                            <span>{recommendedDoctors[2]?.phoneNumber}</span>
+                                        </div>
+
+                                        <div className="detail-row">
+                                            <MapPin size={16} className="detail-icon" />
+                                            <span>{recommendedDoctors[2]?.address}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="exam-package-recommendation">
+                            <h3 className="section-title">Gói khám dành cho bạn</h3>
+                            <div className="recommended-exam-package-details"></div>
+                        </div>
                     </div>
                 </div>
 

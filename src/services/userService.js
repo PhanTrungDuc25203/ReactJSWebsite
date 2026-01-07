@@ -277,6 +277,10 @@ const handleFacebookLoginService = (accessToken) => {
     return axios.post("/api/auth/facebook/verify", { accessToken });
 };
 
+const recommendDoctorsForPatientService = (patientId) => {
+    return axios.get(`/api/recommend/doctors?patientId=${patientId}`);
+};
+
 export {
     handleLoginAPI,
     handleGoogleLoginService,
@@ -337,4 +341,5 @@ export {
     getPatientExamPackageTimeService,
     confirmExamBookingDoneService,
     handleFacebookLoginService,
+    recommendDoctorsForPatientService,
 };
