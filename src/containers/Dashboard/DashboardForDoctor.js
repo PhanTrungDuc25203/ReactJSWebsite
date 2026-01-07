@@ -360,12 +360,30 @@ class DashboardForDoctor extends Component {
             ...p,
             color: colors[i] || "#ccc", // fallback nếu quá 4 người
         }));
-        const totalRevenue = monthlyRevenue?.reduce((sum, item) => sum + item.revenue, 0);
-        const currentMonthRevenue = monthlyRevenue[monthlyRevenue?.length - 1]?.revenue;
-        const lastMonthRevenue = monthlyRevenue[monthlyRevenue?.length - 2]?.revenue;
-        const revenueGrowth = (((currentMonthRevenue - lastMonthRevenue) / lastMonthRevenue) * 100).toFixed(1);
+        console.log("check monthly revenue: ", monthlyRevenue);
+        const now = new Date();
 
-        console.log("check: ", monthlyRevenue);
+        const currentMonth = now.getMonth() + 1; // 1–12
+        const lastMonth = currentMonth === 1 ? 12 : currentMonth - 1;
+        // Ép month về number để so sánh an toàn
+        const normalizeMonth = (m) => Number(m);
+
+        const currentMonthData = monthlyRevenue.find((item) => normalizeMonth(item.month) === currentMonth);
+
+        const lastMonthData = monthlyRevenue.find((item) => normalizeMonth(item.month) === lastMonth);
+
+        const currentMonthRevenue = currentMonthData?.revenue ?? 0;
+        const lastMonthRevenue = lastMonthData?.revenue ?? 0;
+
+        // Tổng doanh thu
+        const totalRevenue = monthlyRevenue.reduce((sum, item) => sum + item.revenue, 0);
+
+        // Tăng trưởng doanh thu
+        let revenueGrowth = 0;
+
+        if (lastMonthRevenue > 0) {
+            revenueGrowth = (((currentMonthRevenue - lastMonthRevenue) / lastMonthRevenue) * 100).toFixed(1);
+        }
 
         return (
             <div className="doctor-dashboard">
