@@ -381,6 +381,42 @@
                     animation: pulse 2s infinite;
                 }
             }
+
+            .review-and-comment-button {
+                $primary: #0d6efd;
+                margin-left: 10px;
+                display: inline-flex;
+                align-items: center;
+                width: 100px;
+                gap: 6px;
+                padding: 0.375rem 0.75rem;
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 1.5;
+                color: #fff;
+                text-align: center;
+                text-decoration: none;
+                cursor: pointer;
+                background-color: $primary;
+                border: 1px solid $primary;
+                border-radius: 8px;
+                transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+
+                &:hover {
+                    background-color: darken($primary, 7%);
+                    border-color: darken($primary, 10%);
+                }
+
+                &:active {
+                    background-color: darken($primary, 10%);
+                    border-color: darken($primary, 12%);
+                }
+
+                &:focus {
+                    outline: 0;
+                    box-shadow: 0 0 0 0.25rem rgba($primary, 0.5);
+                }
+            }
         }
     }
 

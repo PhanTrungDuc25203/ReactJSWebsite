@@ -184,6 +184,10 @@ const saveRateAndReviewAboutDoctorOrPackageService = (rateAndReviewData) => {
     return axios.post(`/api/save-rate-and-review-about-doctor`, rateAndReviewData);
 };
 
+const saveRateAndReviewAboutPackageService = (data) => {
+    return axios.post(`/api/save-rate-and-review-about-package`, data);
+};
+
 const getRateAndReviewAboutDoctorService = ({ appointmentId, doctorId }) => {
     const query = new URLSearchParams();
 
@@ -322,6 +326,7 @@ export {
     createPaymentUrlService,
     postVisitPaymentService,
     saveClinicalReportContentToDatabase,
+    saveRateAndReviewAboutPackageService,
     sendEmailOTPAPI,
     verifyEmailOTPAPI,
     sendPhoneOTP,

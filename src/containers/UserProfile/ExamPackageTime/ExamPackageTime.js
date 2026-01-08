@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./ExamPackageTime.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCommentDots, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { withRouter } from "react-router";
 import * as actions from "../../../store/actions";
 import moment from "moment";
+import RateAndReviewModal from "./RateAndReview/RateAndReviewExamPackageForm";
 import { LANGUAGES, CommonUtils } from "../../../utils";
 import { FormattedMessage } from "react-intl";
 import queryString from "query-string";
@@ -16,10 +19,13 @@ class ExamPackageTime extends Component {
         this.state = {
             examSchedules: [],
             isLoading: true,
-            historyOrHandling: "handling",
+            filterMode: "all",
             currentUser: "",
             showResultModal: false,
             selectedSchedule: null,
+            isOpenReview: false,
+            hasReview: false,
+            reviewRating: null,
         };
     }
 
@@ -79,6 +85,23 @@ class ExamPackageTime extends Component {
 
     formatDate = (dateString) => {
         return moment(dateString).format("DD/MM/YYYY");
+    };
+
+    handleFilterButtonClicked = () => {
+        this.setState((prev) => ({
+            filterMode: prev.filterMode === "history" ? "all" : "history",
+        }));
+    };
+
+    getFilteredExamSchedules = () => {
+        const { examSchedules, filterMode } = this.state;
+
+        if (filterMode === "history") {
+            return examSchedules.filter((item) => item.statusId === "S3" && item.examPackageResult && item.examPackageResult.status === "DONE");
+        }
+
+        // "Tất cả" → KHÔNG lọc gì
+        return examSchedules;
     };
 
     evaluateResultStatus = (value, normalRange) => {
@@ -146,12 +169,26 @@ class ExamPackageTime extends Component {
         }));
     };
 
+    openReview = (schedule) => {
+        this.setState({
+            isOpenReview: true,
+            selectedSchedule: schedule,
+        });
+    };
+
+    closeReview = () => {
+        this.setState({
+            isOpenReview: false,
+            selectedSchedule: null,
+        });
+    };
+
     renderScheduleItem = (schedule) => {
         const id = schedule?.id;
 
         const statusId = schedule?.statusId;
         const resultStatus = schedule?.examPackageResult?.status;
-
+        const filterMode = this.state.filterMode;
         const isExamDone = statusId === "S3";
         const canViewResult = isExamDone && resultStatus === "DONE";
         const isResultPending = isExamDone && resultStatus !== "DONE";
@@ -172,7 +209,7 @@ class ExamPackageTime extends Component {
 
         const statusClass = isExamDone ? "completed" : "pending";
 
-        const examPackageImageByBase64 = Buffer.from(schedule?.examPackage?.image, "base64").toString("binary");
+        const examPackageImageByBase64 = schedule?.examPackage?.image ? Buffer.from(schedule.examPackage.image, "base64").toString("binary") : "";
 
         return (
             <div
@@ -238,6 +275,13 @@ class ExamPackageTime extends Component {
                         <button className="btn btn-result" onClick={() => this.handleViewResult(schedule)}>
                             <FileText size={16} />
                             <FormattedMessage id="user-profile.appointment-page.exam-package.see-result" />
+                        </button>
+                    )}
+
+                    {filterMode === "history" && (
+                        <button className="review-and-comment-button" onClick={() => this.openReview(schedule)}>
+                            <FontAwesomeIcon icon={faCommentDots} />
+                            Đánh giá
                         </button>
                     )}
 
@@ -308,8 +352,12 @@ class ExamPackageTime extends Component {
     };
 
     render() {
-        const { examSchedules, isLoading } = this.state;
-        const { historyOrHandling } = this.state;
+        const { examSchedules, isLoading, filterMode, isOpenReview } = this.state;
+        const isVI = this.props.language === LANGUAGES.VI;
+        const TEXT = {
+            all: isVI ? "Tất cả" : "All",
+            history: isVI ? "Lịch sử" : "History",
+        };
 
         return (
             <div className="exam-package-time-container">
@@ -317,6 +365,8 @@ class ExamPackageTime extends Component {
                     <div className="exam-package-time-title">
                         <FormattedMessage id="user-profile.appointment-page.exam-package.my-examination" />
                     </div>
+
+                    <a className={filterMode === "history" ? "btn-flip-backward" : "btn-flip"} data-front={filterMode === "history" ? TEXT.history : TEXT.all} data-back={filterMode === "history" ? TEXT.all : TEXT.history} onClick={this.handleFilterButtonClicked} />
                 </div>
 
                 {isLoading ? (
@@ -337,7 +387,7 @@ class ExamPackageTime extends Component {
                         </p>
                     </div>
                 ) : (
-                    <div className="schedules-list">{examSchedules.map((schedule) => this.renderScheduleItem(schedule))}</div>
+                    <div className="schedules-list">{this.getFilteredExamSchedules().map((schedule) => this.renderScheduleItem(schedule))}</div>
                 )}
                 {this.state.showResultModal && (
                     <div className="exam-result-modal-overlay">
@@ -351,6 +401,25 @@ class ExamPackageTime extends Component {
                             <div className="modal-body">{this.renderExamResult(this.state.selectedSchedule)}</div>
                         </div>
                     </div>
+                )}
+                {this.state.isOpenReview && this.state.selectedSchedule && (
+                    <RateAndReviewModal
+                        isOpen={this.state.isOpenReview}
+                        toggleUserModal={this.closeReview}
+                        schedule={this.state.selectedSchedule}
+                        userEmail={this.state.currentUser?.email}
+                        packageId={this.state.selectedSchedule?.examPackage?.id}
+                        packageName={this.state.selectedSchedule?.examPackage?.name}
+                        paidPackageId={this.state.selectedSchedule?.id}
+                        onReviewSaved={(rating) => {
+                            this.setState({
+                                hasReview: true,
+                                reviewRating: rating,
+                                isOpenReview: false,
+                                selectedSchedule: null,
+                            });
+                        }}
+                    />
                 )}
             </div>
         );

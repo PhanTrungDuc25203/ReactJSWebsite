@@ -238,7 +238,7 @@
                 cursor: pointer;
                 background-color: $primary;
                 border: 1px solid $primary;
-                border-radius: 0.375rem;
+                border-radius: 8px;
                 transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 
                 &:hover {
@@ -258,9 +258,32 @@
             }
         }
         .custom-modal-overlay {
-            width: 50%;
+            position: fixed;
+            inset: 0; // top:0; right:0; bottom:0; left:0
+            width: 100%;
+            height: 100vh;
+
+            background: rgba(0, 0, 0, 0.5); // overlay mờ
+            // backdrop-filter: blur(2px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            z-index: 1000;
+
             .custom-modal {
+                width: 50%;
+                max-width: 700px;
+                min-width: 320px;
+
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+
+                animation: modalFadeIn 0.25s ease-out;
                 .custom-modal-body {
+                    padding: 25px;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
@@ -766,6 +789,8 @@
                     padding: 1rem;
                     border-top: 1px solid #dee2e6;
                     background-color: #f8f9fa;
+                    border-bottom-left-radius: 15px;
+                    border-bottom-right-radius: 15px;
 
                     .submit-btn,
                     .cancel-btn {
@@ -800,6 +825,17 @@
                             background-color: red;
                             color: white;
                         }
+                    }
+                }
+
+                @keyframes modalFadeIn {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px) scale(0.95);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0) scale(1);
                     }
                 }
             }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentDots, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import RateAndReviewModal from "./RateAndReview/RateAndReviewForm";
+import RateAndReviewModal from "./RateAndReview/RateAndReviewDoctorForm";
 import { FormattedMessage } from "react-intl";
 import { LANGUAGES, CommonUtils } from "../../../utils";
 import { getRateAndReviewAboutDoctorService } from "../../../services/userService";
