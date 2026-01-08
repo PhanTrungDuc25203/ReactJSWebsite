@@ -114,6 +114,18 @@ class AppointmentItemForPatientInfterface extends Component {
         let { scheduleStatus, appointmentId, doctorInfor, appointmentDate, appointmentTimeFrame } = this.state;
         let { language } = this.props;
         const isVI = language === LANGUAGES.VI;
+        const statusClass = (() => {
+            switch (scheduleStatus) {
+                case "S2":
+                    return "done-button validate"; // chờ khám
+                case "S3":
+                    return "done-button finish"; // đã khám
+                case "S4":
+                    return "done-button canceled"; // đã hủy
+                default:
+                    return "done-button"; // S1
+            }
+        })();
 
         return (
             <div className="appointment-item-for-patient-interface">
@@ -168,23 +180,27 @@ class AppointmentItemForPatientInfterface extends Component {
                     <span className="sublocation">
                         {" ~ "} {doctorInfor?.Doctor_specialty_medicalFacility?.medicalFacilityDoctorAndSpecialty?.address}
                     </span>
-                    <div className="medical-report">
-                        <label className="appointment-item-for-patient-label">
-                            <FileText size={18} />
-                            <FormattedMessage id="user-profile.appointment-page.patient.exam-result" />
-                        </label>
-                        {scheduleStatus === "S3" ? (
-                            <span className="medical-report-available" onClick={this.openReportModal}>
-                                <FormattedMessage id="user-profile.appointment-page.patient.see-result" />
-                            </span>
-                        ) : (
-                            <span className="medical-report-unavailable">
-                                <i>
-                                    <FormattedMessage id="user-profile.appointment-page.patient.no-result-yet" />
-                                </i>
-                            </span>
-                        )}
-                    </div>
+                    {scheduleStatus !== "S4" && (
+                        <div className="medical-report">
+                            <label className="appointment-item-for-patient-label">
+                                <FileText size={18} />
+                                <FormattedMessage id="user-profile.appointment-page.patient.exam-result" />
+                            </label>
+
+                            {scheduleStatus === "S3" ? (
+                                <span className="medical-report-available" onClick={this.openReportModal}>
+                                    <FormattedMessage id="user-profile.appointment-page.patient.see-result" />
+                                </span>
+                            ) : (
+                                <span className="medical-report-unavailable">
+                                    <i>
+                                        <FormattedMessage id="user-profile.appointment-page.patient.no-result-yet" />
+                                    </i>
+                                </span>
+                            )}
+                        </div>
+                    )}
+
                     <div className="done-button-container-for-doctor">
                         <div
                             className="button-wrapper-1"
@@ -192,16 +208,13 @@ class AppointmentItemForPatientInfterface extends Component {
                                 width: scheduleStatus === "S2" || scheduleStatus === "S3" ? "120px" : "215px",
                             }}
                         >
-                            <button
-                                className={scheduleStatus === "S2" ? "done-button validate" : scheduleStatus === "S3" ? "done-button finish" : "done-button"}
-                                data-unconfirmed={isVI ? "Chưa xác nhận đặt lịch" : "Appointment not confirmed"}
-                                data-waiting={isVI ? "Chờ khám" : "Waiting"}
-                                data-done={isVI ? "Đã khám" : "Completed"}
-                            />
+                            <button className={statusClass} data-unconfirmed={isVI ? "Chưa xác nhận đặt lịch" : "Appointment not confirmed"} data-waiting={isVI ? "Chờ khám" : "Waiting"} data-done={isVI ? "Đã khám" : "Completed"} data-canceled={isVI ? "Đã hủy" : "Canceled"} />
                         </div>
-                        <div className="button-wrapper-2">
-                            <button className={this.state.paymentStatus === "PT3" ? "paid-button validate" : "paid-button"} disabled={this.state.paymentMethod !== "PM3"} data-unpaid={isVI ? "Chưa thanh toán" : "Unpaid"} data-paid={isVI ? "Đã thanh toán" : "Paid"} />
-                        </div>
+                        {scheduleStatus !== "S4" && (
+                            <div className="button-wrapper-2">
+                                <button className={this.state.paymentStatus === "PT3" ? "paid-button validate" : "paid-button"} disabled={this.state.paymentMethod !== "PM3"} data-unpaid={isVI ? "Chưa thanh toán" : "Unpaid"} data-paid={isVI ? "Đã thanh toán" : "Paid"} />
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div className="appointment-time">

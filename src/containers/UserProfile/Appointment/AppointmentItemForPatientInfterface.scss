@@ -312,6 +312,32 @@
                             content: attr(data-done);
                         }
                     }
+                    &.canceled {
+                        border-radius: 30px;
+                        border-color: $red;
+                        background: $red;
+                        color: white;
+                        font-size: 13px;
+                        cursor: not-allowed;
+                        opacity: 0.9;
+
+                        &::before {
+                            font-family: "Font Awesome 5 Free";
+                            content: "\f057"; // times-circle
+                            font-weight: 900;
+                            font-size: 13px;
+                            margin-right: 5px;
+                        }
+
+                        &:after {
+                            content: attr(data-canceled);
+                        }
+
+                        &:hover {
+                            background: $red;
+                            color: white;
+                        }
+                    }
                 }
             }
 
