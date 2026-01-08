@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { saveRateAndReviewAboutPackageService, getRateAndReviewAboutDoctorService } from "../../../../services/userService";
+import { saveRateAndReviewAboutPackageService, getRateAndReviewAboutExamPackageService } from "../../../../services/userService";
 import { FormattedMessage } from "react-intl";
 import "./RateAndReviewExamPackageForm.scss";
 
@@ -13,46 +13,45 @@ class RateAndReviewModal extends Component {
         };
     }
 
-    // async componentDidMount() {
-    //     const appointmentId = this.props.appointmentData?.id;
-    //     if (!appointmentId) return;
+    async componentDidMount() {
+        const { paidPackageId } = this.props;
+        if (!paidPackageId) return;
 
-    //     try {
-    //         const res = await getRateAndReviewAboutDoctorService({ appointmentId });
+        try {
+            const res = await getRateAndReviewAboutExamPackageService({ examPackageBookingId: paidPackageId });
 
-    //         if (res?.errCode === 0 && res.data) {
-    //             let { userEmail, doctorEmail, appointmentId, rating, content, images } = res.data;
+            if (res?.errCode === 0 && res.data) {
+                const { userEmail, packageId, packageName, rating, content, images } = res.data;
 
-    //             let parsedImages = [];
-    //             try {
-    //                 if (typeof images === "string") {
-    //                     parsedImages = JSON.parse(images);
-    //                 } else if (Array.isArray(images)) {
-    //                     parsedImages = images;
-    //                 }
-    //             } catch (e) {
-    //                 console.error("Error parsing images:", e);
-    //                 parsedImages = [];
-    //             }
+                let parsedImages = [];
 
-    //             this.setState({
-    //                 userEmail: userEmail || "",
-    //                 doctorEmail: doctorEmail || "",
-    //                 appointmentId: appointmentId || "",
-    //                 rating: rating || 5,
-    //                 content: content || "",
-    //                 images: parsedImages.map((img) => ({
-    //                     previewUrl: img.image,
-    //                     file: null,
-    //                     name: img.name || "",
-    //                     mimeType: img.mimeType || "image/png",
-    //                 })),
-    //             });
-    //         }
-    //     } catch (error) {
-    //         console.error("Error in componentDidMount:", error);
-    //     }
-    // }
+                try {
+                    if (typeof images === "string") {
+                        parsedImages = JSON.parse(images);
+                    } else if (Array.isArray(images)) {
+                        parsedImages = images;
+                    }
+                } catch (e) {
+                    console.error("Error parsing images:", e);
+                    parsedImages = [];
+                }
+
+                this.setState({
+                    // chỉ set những gì modal CẦN HIỂN THỊ / EDIT
+                    rating: rating || 5,
+                    content: content || "",
+                    images: parsedImages.map((img) => ({
+                        previewUrl: img.image,
+                        file: null,
+                        name: img.name || "",
+                        mimeType: img.mimeType || "image/png",
+                    })),
+                });
+            }
+        } catch (error) {
+            console.error("Error loading package review:", error);
+        }
+    }
 
     handleInputChange = (event, field) => {
         this.setState({ [field]: event.target.value });

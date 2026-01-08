@@ -197,6 +197,15 @@ const getRateAndReviewAboutDoctorService = ({ appointmentId, doctorId }) => {
     return axios.get(`/api/get-rate-and-review-about-doctor?${query.toString()}`);
 };
 
+const getRateAndReviewAboutExamPackageService = ({ examPackageBookingId, examPackageId }) => {
+    const query = new URLSearchParams();
+
+    if (examPackageBookingId) query.append("examPackageBookingId", examPackageBookingId);
+    if (examPackageId) query.append("examPackageId", examPackageId);
+
+    return axios.get(`/api/get-rate-and-review-about-exam-package?${query.toString()}`);
+};
+
 const createPaymentUrlService = (data) => {
     return axios.post("/api/create_payment_url", data);
 };
@@ -344,6 +353,7 @@ export {
     getExamPackageResultDetailService,
     getInforAndArticleForAStaff,
     getPatientExamPackageTimeService,
+    getRateAndReviewAboutExamPackageService,
     confirmExamBookingDoneService,
     handleFacebookLoginService,
     recommendDoctorsForPatientService,
