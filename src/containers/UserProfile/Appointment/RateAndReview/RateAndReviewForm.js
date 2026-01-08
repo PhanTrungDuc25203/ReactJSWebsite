@@ -127,10 +127,16 @@ class RateAndReviewModal extends Component {
         };
 
         try {
-            let response = await saveRateAndReviewAboutDoctorOrPackageService(rateAndReviewData);
-        } catch (error) {}
+            await saveRateAndReviewAboutDoctorOrPackageService(rateAndReviewData);
 
-        this.props.toggleUserModal();
+            // 🔥 báo cho component cha
+            if (this.props.onReviewSaved) {
+                this.props.onReviewSaved(this.state.rating);
+            }
+            // this.props.toggleUserModal();
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     render() {

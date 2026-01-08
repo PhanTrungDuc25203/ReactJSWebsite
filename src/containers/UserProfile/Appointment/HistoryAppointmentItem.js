@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCommentDots } from "@fortawesome/free-solid-svg-icons";
+import { faCommentDots, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import RateAndReviewModal from "./RateAndReview/RateAndReviewForm";
 import { FormattedMessage } from "react-intl";
 import { LANGUAGES, CommonUtils } from "../../../utils";
+import { getRateAndReviewAboutDoctorService } from "../../../services/userService";
 
 class HistoryAppointmentItem extends Component {
     constructor(props) {
@@ -15,15 +16,30 @@ class HistoryAppointmentItem extends Component {
             userEmail: "",
             appointment: "",
             reportText: "",
+
+            // 🔥 NEW
+            hasReview: false,
+            reviewRating: null,
         };
     }
 
-    componentDidMount() {
-        if (this.props && this.props.appointment && this.props.userEmail) {
-            this.setState({
-                appointment: this.props.appointment,
-                userEmail: this.props.userEmail,
+    async componentDidMount() {
+        const { appointment, userEmail } = this.props;
+        if (!appointment?.id) return;
+        this.setState({ appointment, userEmail });
+        try {
+            const res = await getRateAndReviewAboutDoctorService({
+                appointmentId: appointment.id,
             });
+
+            if (res?.errCode === 0 && res.data) {
+                this.setState({
+                    hasReview: true,
+                    reviewRating: res.data.rating,
+                });
+            }
+        } catch (e) {
+            console.error(e);
         }
     }
 
@@ -64,6 +80,23 @@ class HistoryAppointmentItem extends Component {
 
     closeReportModal = () => {
         this.setState({ showReportModal: false });
+    };
+
+    getEmojiForRating = (rating) => {
+        switch (rating) {
+            case 1:
+                return "😡";
+            case 2:
+                return "☹️";
+            case 3:
+                return "😐";
+            case 4:
+                return "😊";
+            case 5:
+                return "😁";
+            default:
+                return "⭐";
+        }
     };
 
     render() {
@@ -113,7 +146,22 @@ class HistoryAppointmentItem extends Component {
 
                 {/* Nút mở review */}
                 <div className="review-and-rate">
-                    {!isOpenReview && (
+                    {/* ĐÃ ĐÁNH GIÁ */}
+                    {this.state.hasReview && !isOpenReview && (
+                        <div className="review-summary">
+                            <span className="rating-text">
+                                {this.getEmojiForRating(this.state.reviewRating)} {this.state.reviewRating}
+                            </span>
+                            {` `}/ 5.0
+                            <button className="review-and-comment-button" onClick={this.toggleReview}>
+                                <FontAwesomeIcon icon={faPenToSquare} />
+                                <FormattedMessage id="user-profile.history-page.update-review" />
+                            </button>
+                        </div>
+                    )}
+
+                    {/* CHƯA ĐÁNH GIÁ */}
+                    {!this.state.hasReview && !isOpenReview && (
                         <button className="review-and-comment-button" onClick={this.toggleReview}>
                             <FontAwesomeIcon icon={faCommentDots} />
                             <FormattedMessage id="user-profile.history-page.review-service" />
@@ -122,7 +170,24 @@ class HistoryAppointmentItem extends Component {
                 </div>
 
                 {/* Form review */}
-                {isOpenReview && <RateAndReviewModal isOpen={isOpenReview} toggleUserModal={this.toggleReview} appointmentData={appointment} userEmail={userEmail} doctorEmail={appointment.doctorHasAppointmentWithPatients?.email} />}
+                {isOpenReview && (
+                    <RateAndReviewModal
+                        isOpen={isOpenReview}
+                        toggleUserModal={this.toggleReview}
+                        appointmentData={appointment}
+                        userEmail={userEmail}
+                        doctorEmail={appointment.doctorHasAppointmentWithPatients?.email}
+                        // 🔥 NEW
+                        onReviewSaved={(rating) => {
+                            this.setState({
+                                hasReview: true,
+                                reviewRating: rating,
+                                isOpenReview: false,
+                            });
+                        }}
+                    />
+                )}
+
                 {this.state.showReportModal && (
                     <div className="modal-overlay">
                         <div className="modal-container">

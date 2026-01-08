@@ -562,7 +562,8 @@
             "timeframe": "Time slot: ",
             "exam-result": "Examination result: ",
             "see-result": "View examination results here",
-            "review-service": "Review the service",
+            "review-service": "Review",
+            "update-review": "Update",
             "medical-report": "Medical report: ",
             "see-medical-report": "See medical report's result here",
             "no-history": "You do not have any medical examination history yet."

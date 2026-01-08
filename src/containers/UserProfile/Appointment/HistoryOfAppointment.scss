@@ -213,9 +213,20 @@
             align-items: center;
             justify-content: flex-end;
 
+            .review-summary {
+                font-size: 12px;
+                color: #9aa3b1;
+                .rating-text {
+                    color: #ffad60;
+                    font-size: 18px;
+                }
+            }
+
             .review-and-comment-button {
+                margin-left: 20px;
                 display: inline-flex;
                 align-items: center;
+                width: 100px;
                 gap: 6px;
                 padding: 0.375rem 0.75rem;
                 font-size: 1rem;
