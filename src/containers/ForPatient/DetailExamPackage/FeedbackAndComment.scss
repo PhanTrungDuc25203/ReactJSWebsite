@@ -1,0 +1,91 @@
+.feedback-and-comments-container {
+    height: 100%;
+
+    .section-title {
+        display: flex;
+        justify-content: space-between;
+        font-size: 20px;
+        font-weight: 700;
+        color: #0fbcf6;
+        margin: 0 0 20px 0;
+        .avg-score {
+            letter-spacing: 1px;
+            color: orange;
+        }
+    }
+    .feedback-and-comment-item {
+        font-size: 16px;
+        padding: 0 20px 0 20px;
+        .patient-comment {
+            font-size: 16px;
+            margin-left: 80px;
+        }
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+
+            .patient-avatar {
+                height: 50px;
+                aspect-ratio: 1 / 1;
+                border: 5px solid white;
+                border-radius: 50%;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+
+            .patient-info {
+                display: flex;
+                flex-direction: column;
+                .patient-name {
+                    font-weight: bold;
+                    .appointment-date {
+                        font-weight: 500;
+                        color: #44c5d4f7;
+                    }
+                }
+                .patient-email {
+                    font-size: 15px;
+                    color: #656565;
+                }
+            }
+
+            .rating-box {
+                margin-left: auto;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                font-size: 16px;
+                .rating-emoji {
+                    font-size: 20px;
+                }
+                .rating-score {
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .patient-uploaded-img {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            margin-left: 80px;
+            .clickable-img {
+                width: 110px;
+                height: 110px;
+                object-fit: cover;
+                border-radius: 6px;
+                border: 1px solid #ccc;
+                cursor: pointer;
+            }
+        }
+
+        .feedback-separator {
+            margin-top: 12px;
+            border: none;
+            border-bottom: 2px solid #b6e5ff;
+        }
+    }
+}

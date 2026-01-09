@@ -271,7 +271,8 @@
         "rate-and-review": {
             "title": "Reviews and ratings for doctors and services",
             "not-have-yet": "There are no reviews or ratings yet",
-            "examed-day": "Examined on"
+            "examed-day": "Examined on",
+            "title-2": "Reviews and ratings for packages and services"
         }
     },
     "doctor-manage-page-for-admin": {

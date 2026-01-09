@@ -1,10 +1,18 @@
 import React, { Component } from "react";
-import { UserCheck, CircleCheckBig, Calendar, Clock, MapPin, Star, Bell, Mail, Phone, CalendarArrowDown, CalendarX, User, Activity, TrendingUp, AlertCircle, CheckCircle, CalendarCheck } from "lucide-react";
+import { Sparkles, Award, UserCheck, CircleCheckBig, Calendar, Clock, MapPin, Star, Bell, Mail, Phone, CalendarArrowDown, CalendarX, User, Activity, TrendingUp, AlertCircle, CheckCircle, CalendarCheck } from "lucide-react";
 import "./Dashboard.scss";
 import moment from "moment";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-import { getPatientAppointmentsOverviewStatisticsService, getPatientAppointmentsNearestService, getPatientAppointmentsMonthlyVisitsService, getPatientFrequentVisitsMedicalFacilitiesAndDoctorsService, recommendDoctorsForPatientService } from "../../services/userService";
+import {
+    getPatientAppointmentsOverviewStatisticsService,
+    getPatientAppointmentsNearestService,
+    getPatientAppointmentsMonthlyVisitsService,
+    getPatientFrequentVisitsMedicalFacilitiesAndDoctorsService,
+    recommendDoctorsForPatientService,
+    recommendPackagesForPatientService,
+} from "../../services/userService";
+import { path } from "../../utils";
 import * as actions from "../../store/actions";
 import { LANGUAGES } from "../../utils";
 import { switchLanguageOfWebsite } from "../../store/actions";
@@ -41,6 +49,8 @@ class DashboardForPatient extends Component {
 
             recommendedDoctors: [],
 
+            recommendedPackages: [],
+
             frequentlyVisitDoctorStats: [],
 
             frequentlyVisitFacilityStats: [],
@@ -55,6 +65,7 @@ class DashboardForPatient extends Component {
                 let monthlyVisitsResponse = await getPatientAppointmentsMonthlyVisitsService(this.props.userInfo.id);
                 let frequentlyVisitsResponse = await getPatientFrequentVisitsMedicalFacilitiesAndDoctorsService(this.props.userInfo.id);
                 let recommendedDoctorsResponse = await recommendDoctorsForPatientService(this.props.userInfo.id);
+                let recommendedPackagesResponse = await recommendPackagesForPatientService(this.props.userInfo.id);
                 if (overviewStatisticResponse && overviewStatisticResponse.errCode === 0) {
                     this.setState({
                         stats: {
@@ -88,6 +99,12 @@ class DashboardForPatient extends Component {
                 if (recommendedDoctorsResponse && recommendedDoctorsResponse.errCode === 0) {
                     this.setState({
                         recommendedDoctors: recommendedDoctorsResponse.data,
+                    });
+                }
+
+                if (recommendedPackagesResponse && recommendedPackagesResponse.errCode === 0) {
+                    this.setState({
+                        recommendedPackages: recommendedPackagesResponse.data,
                     });
                 }
             } catch (error) {
@@ -203,9 +220,31 @@ class DashboardForPatient extends Component {
         return "😊";
     };
 
+    toBgImage = (image) => {
+        if (!image) return "";
+
+        // Case Buffer từ backend
+        if (image?.data) {
+            let base64 = Buffer.from(image, "base64").toString("binary");
+            return base64;
+        }
+
+        return "";
+    };
+
+    handleViewDetailDoctor = (doctorId) => {
+        const detailPath = path.DETAIL_DOCTOR_ARTICLE.replace(":id", doctorId);
+        this.props.history.push(detailPath);
+    };
+
+    handleViewDetailExamPackage = (packageId) => {
+        const detailPath = path.DETAIL_EXAM_PACKAGE_ARTICLE.replace(":id", packageId);
+        this.props.history.push(detailPath);
+    };
+
     render() {
-        const { activeHealthTab, weight, height, bmiResult, waist, hip, gender, whrResult, nearestUpcomingAppointments, stats, monthlyStats, frequentlyVisitDoctorStats, frequentlyVisitFacilityStats, recommendedDoctors } = this.state;
-        console.log("check recommended doctors: ", recommendedDoctors);
+        let { activeHealthTab, weight, height, bmiResult, waist, hip, gender, whrResult, nearestUpcomingAppointments, stats, monthlyStats, frequentlyVisitDoctorStats, frequentlyVisitFacilityStats, recommendedDoctors, recommendedPackages } = this.state;
+        console.log("check recommended packages: ", recommendedPackages);
         return (
             <div className="dashboard-container">
                 {/* Header */}
@@ -479,7 +518,7 @@ class DashboardForPatient extends Component {
                         <div className="doctor-recommendation">
                             <h3 className="section-title">Bác sĩ dành cho bạn</h3>
                             <div className="recommended-doctor-details">
-                                <div className="top-1 top-recommended-doctor">
+                                <div className="top-1 top-recommended-doctor" onClick={() => this.handleViewDetailDoctor(recommendedDoctors[0]?.id)}>
                                     <span className="claim">
                                         <CircleCheckBig size={16} className="claim-icon" />
                                         Phù hợp nhất với bạn
@@ -512,8 +551,9 @@ class DashboardForPatient extends Component {
                                         <div className="detail-row">
                                             <Mail size={16} className="detail-icon" />
                                             <span>{recommendedDoctors[0]?.email}</span>
-
-                                            <Phone size={16} className="detail-icon" style={{ marginLeft: "1rem" }} />
+                                        </div>
+                                        <div className="detail-row">
+                                            <Phone size={16} className="detail-icon" />
                                             <span>{recommendedDoctors[0]?.phoneNumber}</span>
                                         </div>
 
@@ -524,12 +564,16 @@ class DashboardForPatient extends Component {
                                         <div className="work-place-section">
                                             <div className="label">Đang công tác tại</div>
                                             <div className="work-place">
-                                                {recommendedDoctors[0]?.Doctor_specialty_medicalFacility?.medicalFacilityDoctorAndSpecialty?.name} - {recommendedDoctors[0]?.Doctor_specialty_medicalFacility?.medicalFacilityDoctorAndSpecialty?.name}
+                                                {recommendedDoctors[0]?.Doctor_specialty_medicalFacility?.medicalFacilityDoctorAndSpecialty?.name} - {recommendedDoctors[0]?.Doctor_specialty_medicalFacility?.medicalFacilityDoctorAndSpecialty?.address}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="top-2 second-recommended-doctor">
+                                <div className="top-2 second-recommended-doctor" onClick={() => this.handleViewDetailDoctor(recommendedDoctors[1]?.id)}>
+                                    <span className="consider">
+                                        <Sparkles size={16} />
+                                        Bạn có thể cân nhắc
+                                    </span>
                                     <div className="appointment-header">
                                         <div className="doctor-avatar">
                                             <FormattedMessage id="dashboard.doctor" />
@@ -545,8 +589,9 @@ class DashboardForPatient extends Component {
                                         <div className="detail-row">
                                             <Mail size={16} className="detail-icon" />
                                             <span>{recommendedDoctors[1]?.email}</span>
-
-                                            <Phone size={16} className="detail-icon" style={{ marginLeft: "1rem" }} />
+                                        </div>
+                                        <div className="detail-row">
+                                            <Phone size={16} className="detail-icon" />
                                             <span>{recommendedDoctors[1]?.phoneNumber}</span>
                                         </div>
 
@@ -556,7 +601,11 @@ class DashboardForPatient extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="top-3 second-recommended-doctor">
+                                <div className="top-3 second-recommended-doctor" onClick={() => this.handleViewDetailDoctor(recommendedDoctors[2]?.id)}>
+                                    <span className="consider">
+                                        <Sparkles size={16} />
+                                        Bạn có thể cân nhắc
+                                    </span>
                                     <div className="appointment-header">
                                         <div className="doctor-avatar">
                                             <FormattedMessage id="dashboard.doctor" />
@@ -572,8 +621,9 @@ class DashboardForPatient extends Component {
                                         <div className="detail-row">
                                             <Mail size={16} className="detail-icon" />
                                             <span>{recommendedDoctors[2]?.email}</span>
-
-                                            <Phone size={16} className="detail-icon" style={{ marginLeft: "1rem" }} />
+                                        </div>
+                                        <div className="detail-row">
+                                            <Phone size={16} className="detail-icon" />
                                             <span>{recommendedDoctors[2]?.phoneNumber}</span>
                                         </div>
 
@@ -587,7 +637,82 @@ class DashboardForPatient extends Component {
                         </div>
                         <div className="exam-package-recommendation">
                             <h3 className="section-title">Gói khám dành cho bạn</h3>
-                            <div className="recommended-exam-package-details"></div>
+                            <div className="recommended-exam-package-details">
+                                <div className="top-1 top-recommend-package" onClick={() => this.handleViewDetailExamPackage(recommendedPackages[0]?.id)}>
+                                    <span className="claim">
+                                        <CircleCheckBig size={16} className="claim-icon" />
+                                        Phù hợp nhất với bạn
+                                    </span>
+                                    <div className="package-image" style={{ backgroundImage: `url(${this.toBgImage(recommendedPackages[0]?.image)})` }}></div>
+                                    <div className="package-content">
+                                        <div className="name-and-specialty">
+                                            <div className="specialty">
+                                                <Award size={12} className="award-icon" />
+                                                {recommendedPackages[0]?.examPackageHaveSpecialty?.name}
+                                            </div>
+                                            <div className="name">{recommendedPackages[0]?.name}</div>
+                                        </div>
+                                        <div className="belong-to-hospital">
+                                            <MapPin size={16} className="detail-icon" />
+                                            <div className="hospital-info">
+                                                <div className="hospital-label">Địa chỉ khám</div>
+                                                <div className="hospital-name">
+                                                    {recommendedPackages[0]?.medicalFacilityPackage?.name} - {recommendedPackages[0]?.medicalFacilityPackage?.address}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="package-stats">
+                                            <div className="rating">
+                                                <span className="rating-value">
+                                                    {this.getEmojiForAverage(recommendedPackages[0]?.avgRating)} {recommendedPackages[0]?.avgRating}
+                                                </span>
+                                                /5.0
+                                            </div>
+                                            <div className="visit-count">
+                                                <UserCheck size={18} className="user-exam-done-icon" />
+                                                {recommendedPackages[0]?.visitedCount} lượt khám
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="top-2 second-recommend-package" onClick={() => this.handleViewDetailExamPackage(recommendedPackages[1]?.id)}>
+                                    <span className="consider">
+                                        <Sparkles size={16} />
+                                        Bạn có thể cân nhắc
+                                    </span>
+                                    <div className="package-image" style={{ backgroundImage: `url(${this.toBgImage(recommendedPackages[1]?.image)})` }}></div>
+                                    <div className="package-content">
+                                        <div className="name-and-specialty">
+                                            <div className="specialty">
+                                                <Award size={12} className="award-icon" />
+                                                {recommendedPackages[1]?.examPackageHaveSpecialty?.name}
+                                            </div>
+                                            <div className="name">{recommendedPackages[1]?.name}</div>
+                                        </div>
+                                        <div className="belong-to-hospital">
+                                            <MapPin size={16} className="detail-icon" />
+                                            <div className="hospital-info">
+                                                <div className="hospital-label">Địa chỉ khám</div>
+                                                <div className="hospital-name">
+                                                    {recommendedPackages[1]?.medicalFacilityPackage?.name} - {recommendedPackages[1]?.medicalFacilityPackage?.address}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="package-stats">
+                                            <div className="rating">
+                                                <span className="rating-value">
+                                                    {this.getEmojiForAverage(recommendedPackages[1]?.avgRating)} {recommendedPackages[1]?.avgRating}
+                                                </span>
+                                                /5.0
+                                            </div>
+                                            <div className="visit-count">
+                                                <UserCheck size={18} className="user-exam-done-icon" />
+                                                {recommendedPackages[1]?.visitedCount} lượt khám
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

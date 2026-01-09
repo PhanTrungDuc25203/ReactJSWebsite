@@ -1,6 +1,7 @@
 .detail-exam-package-container {
-    padding: 60px 5.5% 20px 5.5%;
+    padding-top: 60px;
     .avatar-name-and-description {
+        padding: 0 5.5% 0 5.5%;
         display: flex;
         gap: 2rem;
         margin-bottom: 30px;
@@ -43,6 +44,7 @@
     }
 
     .schedule-and-insurance {
+        padding: 0 5.5% 0 5.5%;
         .detail-informations {
             display: flex;
 
@@ -326,6 +328,7 @@
     }
 
     .exam-package-description {
+        padding: 0 5.5% 0 5.5%;
         margin: 40px 0;
         p {
             font-size: 17px;
@@ -367,7 +370,7 @@
         }
     }
     .exam-package-category {
-        margin: 40px 0;
+        margin: 40px 5.5%;
         border: 1px solid #dcdcdc;
         border-radius: 6px;
         overflow: hidden;
@@ -450,5 +453,10 @@
             padding: 0;
             margin: 0;
         }
+    }
+
+    .feedback-and-comment {
+        padding: 30px 5.5% 20px 5.5%;
+        border-top: 1px solid #c1e9ff;
     }
 }

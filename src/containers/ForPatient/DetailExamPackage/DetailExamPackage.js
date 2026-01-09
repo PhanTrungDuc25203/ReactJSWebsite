@@ -12,6 +12,7 @@ import { LANGUAGES } from "../../../utils";
 import { NumericFormat } from "react-number-format";
 import CustomScrollbars from "../../../components/CustomScrollbars";
 import PackageScheduleSection from "../PackageScheduleComponent/PackageScheduleSection";
+import FeedbackAndComment from "./FeedbackAndComment";
 
 class DetailExamPackage extends Component {
     constructor(props) {
@@ -212,6 +213,9 @@ class DetailExamPackage extends Component {
                                     className="exam-package-introduction-html"
                                 ></div>
                             )}
+                        </div>
+                        <div className="feedback-and-comment">
+                            <FeedbackAndComment packageId={packageDetails.id || -1} />
                         </div>
                     </div>
                     <HomeFooter />

@@ -271,7 +271,8 @@
         "rate-and-review": {
             "title": "Nhận xét và đánh giá về bác sĩ và dịch vụ",
             "not-have-yet": "Hiện tại chưa có đánh giá và nhận xét nào",
-            "examed-day": "Đã khám ngày"
+            "examed-day": "Đã khám ngày",
+            "title-2": "Nhận xét và đánh giá về gói khám và dịch vụ"
         }
     },
     "doctor-manage-page-for-admin": {

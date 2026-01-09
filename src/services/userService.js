@@ -294,6 +294,10 @@ const recommendDoctorsForPatientService = (patientId) => {
     return axios.get(`/api/recommend/doctors?patientId=${patientId}`);
 };
 
+const recommendPackagesForPatientService = (patientId) => {
+    return axios.get(`/api/recommend/packages?patientId=${patientId}`);
+};
+
 export {
     handleLoginAPI,
     handleGoogleLoginService,
@@ -357,4 +361,5 @@ export {
     confirmExamBookingDoneService,
     handleFacebookLoginService,
     recommendDoctorsForPatientService,
+    recommendPackagesForPatientService,
 };

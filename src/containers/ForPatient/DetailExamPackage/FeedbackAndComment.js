@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import { getRateAndReviewAboutDoctorService } from "../../../services/userService";
+import { getRateAndReviewAboutExamPackageService } from "../../../services/userService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import "./FeedbackAndComment.scss";
@@ -27,17 +27,17 @@ class FeedbackAndComment extends Component {
     }
 
     async componentDidUpdate(prevProps) {
-        if (prevProps.doctorId !== this.props.doctorId) {
+        if (prevProps.packageId !== this.props.packageId) {
             await this.fetchFeedback();
         }
     }
 
     fetchFeedback = async () => {
         try {
-            let doctorId = this.props.doctorId;
-            if (!doctorId || doctorId === -1) return;
+            let packageId = this.props.packageId;
+            if (!packageId || packageId === -1) return;
 
-            let res = await getRateAndReviewAboutDoctorService({ doctorId });
+            let res = await getRateAndReviewAboutExamPackageService({ examPackageId: packageId });
 
             if (res && res.errCode === 0) {
                 const averageRating = res.averageRating || 0;
@@ -133,11 +133,12 @@ class FeedbackAndComment extends Component {
 
     render() {
         const { feedbackAndComments, averageRating } = this.state;
+        console.log("check props: ", this.props);
 
         return (
             <div className="feedback-and-comments-container">
                 <div className="section-title">
-                    <FormattedMessage id="doctor-detail-page-for-patient.rate-and-review.title" /> <span> </span>
+                    <FormattedMessage id="doctor-detail-page-for-patient.rate-and-review.title-2" /> <span> </span>
                     {averageRating !== null && (
                         <span className="avg-score">
                             <span className="avg-emoji">{this.getEmojiForAverage(averageRating)}</span>

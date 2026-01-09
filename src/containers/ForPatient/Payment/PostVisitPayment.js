@@ -77,7 +77,7 @@ class PostVisitPayment extends Component {
                 if (res && res.errCode === 0) {
                     this.setState({
                         step: "success",
-                        message: "Thanh toán và đặt lịch thành công!",
+                        message: "Thanh toán thành công!",
                     });
                 } else {
                     this.setState({
