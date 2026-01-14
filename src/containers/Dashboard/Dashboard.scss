@@ -1301,7 +1301,6 @@
                     cursor: pointer;
 
                     &:hover {
-                        border-color: #50b8db;
                         box-shadow: 0 4px 12px rgba(80, 184, 219, 0.15);
                         // transform: translateX(4px);
                     }
@@ -1449,7 +1448,7 @@
                 .second-recommend-package {
                     cursor: pointer;
                     padding: 0.5rem;
-                    border: 2px solid #10b981;
+                    border: 2px solid #e2e8f0;
                     border-radius: 10px;
                     transition: all 0.3s;
 
