@@ -518,6 +518,28 @@
                 font-size: 18px;
                 font-weight: 600;
                 color: #333;
+                .annotate {
+                    margin-top: 10px;
+                    display: flex;
+                    font-weight: 500;
+                    font-size: 14px;
+                    gap: 15px;
+                    .normal,
+                    .exceed,
+                    .low {
+                        display: flex;
+                        gap: 5px;
+                    }
+                    .normal {
+                        color: #71e2a2;
+                    }
+                    .exceed {
+                        color: #f6505f;
+                    }
+                    .low {
+                        color: #bf9f39;
+                    }
+                }
             }
 
             button {

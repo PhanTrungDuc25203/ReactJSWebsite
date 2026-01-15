@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./ExamPackageTime.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCommentDots, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { faCommentDots, faPenToSquare, faCircle } from "@fortawesome/free-solid-svg-icons";
 import { withRouter } from "react-router";
 import * as actions from "../../../store/actions";
 import moment from "moment";
@@ -395,7 +395,22 @@ class ExamPackageTime extends Component {
                             <div className="modal-header">
                                 <h3>
                                     <FormattedMessage id="user-profile.appointment-page.exam-package.result" />
+                                    <div className="annotate">
+                                        <div className="normal">
+                                            <FontAwesomeIcon icon={faCircle} />
+                                            Bình thường
+                                        </div>
+                                        <div className="exceed">
+                                            <FontAwesomeIcon icon={faCircle} />
+                                            Cao
+                                        </div>
+                                        <div className="low">
+                                            <FontAwesomeIcon icon={faCircle} />
+                                            Thấp
+                                        </div>
+                                    </div>
                                 </h3>
+
                                 <button onClick={this.closeModal}>×</button>
                             </div>
                             <div className="modal-body">{this.renderExamResult(this.state.selectedSchedule)}</div>
