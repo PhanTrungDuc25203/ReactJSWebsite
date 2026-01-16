@@ -133,17 +133,21 @@ class FeedbackAndComment extends Component {
 
     render() {
         const { feedbackAndComments, averageRating } = this.state;
+        const reviewTime = feedbackAndComments?.length;
 
         return (
             <div className="feedback-and-comments-container">
                 <div className="section-title">
-                    <FormattedMessage id="doctor-detail-page-for-patient.rate-and-review.title" /> <span> </span>
-                    {averageRating !== null && (
-                        <span className="avg-score">
-                            <span className="avg-emoji">{this.getEmojiForAverage(averageRating)}</span>
-                            {averageRating !== 0 ? <span>{averageRating.toFixed(1)}/5</span> : ""}
-                        </span>
-                    )}
+                    <FormattedMessage id="doctor-detail-page-for-patient.rate-and-review.title" />{" "}
+                    <span>
+                        {reviewTime && <span className="review-time">{reviewTime} đánh giá</span>}
+                        {averageRating !== null && (
+                            <span className="avg-score">
+                                <span className="avg-emoji">{this.getEmojiForAverage(averageRating)}</span>
+                                {averageRating !== 0 ? <span>{averageRating.toFixed(1)}/5</span> : ""}
+                            </span>
+                        )}
+                    </span>
                 </div>
 
                 {feedbackAndComments.length === 0 ? (

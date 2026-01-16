@@ -515,205 +515,209 @@ class DashboardForPatient extends Component {
                     </div>
 
                     <div className="recommendation-content">
-                        <div className="doctor-recommendation">
-                            <h3 className="section-title">Bác sĩ dành cho bạn</h3>
-                            <div className="recommended-doctor-details">
-                                <div className="top-1 top-recommended-doctor" onClick={() => this.handleViewDetailDoctor(recommendedDoctors[0]?.id)}>
-                                    <span className="claim">
-                                        <CircleCheckBig size={16} className="claim-icon" />
-                                        Phù hợp nhất với bạn
-                                    </span>
-                                    <div className="appointment-header">
-                                        <div className="doctor-avatar">
-                                            <FormattedMessage id="dashboard.doctor" />
-                                        </div>
-                                        <div className="appointment-info">
-                                            <h3>
-                                                {recommendedDoctors[0]?.lastName} {recommendedDoctors[0]?.firstName}
-                                            </h3>
-                                            <div className="specialty">{recommendedDoctors[0]?.Doctor_infor?.belongToSpecialty?.name}</div>
-                                        </div>
-                                    </div>
-
-                                    <div className="appointment-details">
-                                        <div className="doctor-rate-and-visits">
-                                            <div className="doctor-rate">
-                                                <span className="average-point">
-                                                    {this.getEmojiForAverage(recommendedDoctors[0]?.avgRating)} {recommendedDoctors[0]?.avgRating}
-                                                </span>
-                                                /5.0
+                        {recommendedDoctors && recommendedDoctors.length !== 0 && (
+                            <div className="doctor-recommendation">
+                                <h3 className="section-title">Bác sĩ dành cho bạn</h3>
+                                <div className="recommended-doctor-details">
+                                    <div className="top-1 top-recommended-doctor" onClick={() => this.handleViewDetailDoctor(recommendedDoctors[0]?.id)}>
+                                        <span className="claim">
+                                            <CircleCheckBig size={16} className="claim-icon" />
+                                            Phù hợp nhất với bạn
+                                        </span>
+                                        <div className="appointment-header">
+                                            <div className="doctor-avatar">
+                                                <FormattedMessage id="dashboard.doctor" />
                                             </div>
-                                            <div className="visits">
-                                                <UserCheck size={18} className="user-exam-done-icon" />
-                                                {recommendedDoctors[0]?.visitedCount} lượt khám
+                                            <div className="appointment-info">
+                                                <h3>
+                                                    {recommendedDoctors[0]?.lastName} {recommendedDoctors[0]?.firstName}
+                                                </h3>
+                                                <div className="specialty">{recommendedDoctors[0]?.Doctor_infor?.belongToSpecialty?.name}</div>
                                             </div>
                                         </div>
-                                        <div className="detail-row">
-                                            <Mail size={16} className="detail-icon" />
-                                            <span>{recommendedDoctors[0]?.email}</span>
-                                        </div>
-                                        <div className="detail-row">
-                                            <Phone size={16} className="detail-icon" />
-                                            <span>{recommendedDoctors[0]?.phoneNumber}</span>
-                                        </div>
 
-                                        <div className="detail-row">
-                                            <MapPin size={16} className="detail-icon" />
-                                            <span>{recommendedDoctors[0]?.address}</span>
-                                        </div>
-                                        <div className="work-place-section">
-                                            <div className="label">Đang công tác tại</div>
-                                            <div className="work-place">
-                                                {recommendedDoctors[0]?.Doctor_specialty_medicalFacility?.medicalFacilityDoctorAndSpecialty?.name} - {recommendedDoctors[0]?.Doctor_specialty_medicalFacility?.medicalFacilityDoctorAndSpecialty?.address}
+                                        <div className="appointment-details">
+                                            <div className="doctor-rate-and-visits">
+                                                <div className="doctor-rate">
+                                                    <span className="average-point">
+                                                        {this.getEmojiForAverage(recommendedDoctors[0]?.avgRating)} {recommendedDoctors[0]?.avgRating}
+                                                    </span>
+                                                    /5.0
+                                                </div>
+                                                <div className="visits">
+                                                    <UserCheck size={18} className="user-exam-done-icon" />
+                                                    {recommendedDoctors[0]?.visitedCount} lượt khám
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="top-2 second-recommended-doctor" onClick={() => this.handleViewDetailDoctor(recommendedDoctors[1]?.id)}>
-                                    <span className="consider">
-                                        <Sparkles size={16} />
-                                        Bạn có thể cân nhắc
-                                    </span>
-                                    <div className="appointment-header">
-                                        <div className="doctor-avatar">
-                                            <FormattedMessage id="dashboard.doctor" />
-                                        </div>
-                                        <div className="appointment-info">
-                                            <h3>
-                                                {recommendedDoctors[1]?.lastName} {recommendedDoctors[1]?.firstName}
-                                            </h3>
-                                            <div className="specialty">{recommendedDoctors[1]?.Doctor_infor?.belongToSpecialty?.name}</div>
-                                        </div>
-                                    </div>
-                                    <div className="appointment-details">
-                                        <div className="detail-row">
-                                            <Mail size={16} className="detail-icon" />
-                                            <span>{recommendedDoctors[1]?.email}</span>
-                                        </div>
-                                        <div className="detail-row">
-                                            <Phone size={16} className="detail-icon" />
-                                            <span>{recommendedDoctors[1]?.phoneNumber}</span>
-                                        </div>
-
-                                        <div className="detail-row">
-                                            <MapPin size={16} className="detail-icon" />
-                                            <span>{recommendedDoctors[1]?.address}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="top-3 second-recommended-doctor" onClick={() => this.handleViewDetailDoctor(recommendedDoctors[2]?.id)}>
-                                    <span className="consider">
-                                        <Sparkles size={16} />
-                                        Bạn có thể cân nhắc
-                                    </span>
-                                    <div className="appointment-header">
-                                        <div className="doctor-avatar">
-                                            <FormattedMessage id="dashboard.doctor" />
-                                        </div>
-                                        <div className="appointment-info">
-                                            <h3>
-                                                {recommendedDoctors[2]?.lastName} {recommendedDoctors[2]?.firstName}
-                                            </h3>
-                                            <div className="specialty">{recommendedDoctors[2]?.Doctor_infor?.belongToSpecialty?.name}</div>
-                                        </div>
-                                    </div>
-                                    <div className="appointment-details">
-                                        <div className="detail-row">
-                                            <Mail size={16} className="detail-icon" />
-                                            <span>{recommendedDoctors[2]?.email}</span>
-                                        </div>
-                                        <div className="detail-row">
-                                            <Phone size={16} className="detail-icon" />
-                                            <span>{recommendedDoctors[2]?.phoneNumber}</span>
-                                        </div>
-
-                                        <div className="detail-row">
-                                            <MapPin size={16} className="detail-icon" />
-                                            <span>{recommendedDoctors[2]?.address}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="exam-package-recommendation">
-                            <h3 className="section-title">Gói khám dành cho bạn</h3>
-                            <div className="recommended-exam-package-details">
-                                <div className="top-1 top-recommend-package" onClick={() => this.handleViewDetailExamPackage(recommendedPackages[0]?.id)}>
-                                    <span className="claim">
-                                        <CircleCheckBig size={16} className="claim-icon" />
-                                        Phù hợp nhất với bạn
-                                    </span>
-                                    <div className="package-image" style={{ backgroundImage: `url(${this.toBgImage(recommendedPackages[0]?.image)})` }}></div>
-                                    <div className="package-content">
-                                        <div className="name-and-specialty">
-                                            <div className="specialty">
-                                                <Award size={12} className="award-icon" />
-                                                {recommendedPackages[0]?.examPackageHaveSpecialty?.name}
+                                            <div className="detail-row">
+                                                <Mail size={16} className="detail-icon" />
+                                                <span>{recommendedDoctors[0]?.email}</span>
                                             </div>
-                                            <div className="name">{recommendedPackages[0]?.name}</div>
-                                        </div>
-                                        <div className="belong-to-hospital">
-                                            <MapPin size={16} className="detail-icon" />
-                                            <div className="hospital-info">
-                                                <div className="hospital-label">Địa chỉ khám</div>
-                                                <div className="hospital-name">
-                                                    {recommendedPackages[0]?.medicalFacilityPackage?.name} - {recommendedPackages[0]?.medicalFacilityPackage?.address}
+                                            <div className="detail-row">
+                                                <Phone size={16} className="detail-icon" />
+                                                <span>{recommendedDoctors[0]?.phoneNumber}</span>
+                                            </div>
+
+                                            <div className="detail-row">
+                                                <MapPin size={16} className="detail-icon" />
+                                                <span>{recommendedDoctors[0]?.address}</span>
+                                            </div>
+                                            <div className="work-place-section">
+                                                <div className="label">Đang công tác tại</div>
+                                                <div className="work-place">
+                                                    {recommendedDoctors[0]?.Doctor_specialty_medicalFacility?.medicalFacilityDoctorAndSpecialty?.name} - {recommendedDoctors[0]?.Doctor_specialty_medicalFacility?.medicalFacilityDoctorAndSpecialty?.address}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="package-stats">
-                                            <div className="rating">
-                                                <span className="rating-value">
-                                                    {this.getEmojiForAverage(recommendedPackages[0]?.avgRating)} {recommendedPackages[0]?.avgRating}
-                                                </span>
-                                                /5.0
+                                    </div>
+                                    <div className="top-2 second-recommended-doctor" onClick={() => this.handleViewDetailDoctor(recommendedDoctors[1]?.id)}>
+                                        <span className="consider">
+                                            <Sparkles size={16} />
+                                            Bạn có thể cân nhắc
+                                        </span>
+                                        <div className="appointment-header">
+                                            <div className="doctor-avatar">
+                                                <FormattedMessage id="dashboard.doctor" />
                                             </div>
-                                            <div className="visit-count">
-                                                <UserCheck size={18} className="user-exam-done-icon" />
-                                                {recommendedPackages[0]?.visitedCount} lượt khám
+                                            <div className="appointment-info">
+                                                <h3>
+                                                    {recommendedDoctors[1]?.lastName} {recommendedDoctors[1]?.firstName}
+                                                </h3>
+                                                <div className="specialty">{recommendedDoctors[1]?.Doctor_infor?.belongToSpecialty?.name}</div>
+                                            </div>
+                                        </div>
+                                        <div className="appointment-details">
+                                            <div className="detail-row">
+                                                <Mail size={16} className="detail-icon" />
+                                                <span>{recommendedDoctors[1]?.email}</span>
+                                            </div>
+                                            <div className="detail-row">
+                                                <Phone size={16} className="detail-icon" />
+                                                <span>{recommendedDoctors[1]?.phoneNumber}</span>
+                                            </div>
+
+                                            <div className="detail-row">
+                                                <MapPin size={16} className="detail-icon" />
+                                                <span>{recommendedDoctors[1]?.address}</span>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="top-2 second-recommend-package" onClick={() => this.handleViewDetailExamPackage(recommendedPackages[1]?.id)}>
-                                    <span className="consider">
-                                        <Sparkles size={16} />
-                                        Bạn có thể cân nhắc
-                                    </span>
-                                    <div className="package-image" style={{ backgroundImage: `url(${this.toBgImage(recommendedPackages[1]?.image)})` }}></div>
-                                    <div className="package-content">
-                                        <div className="name-and-specialty">
-                                            <div className="specialty">
-                                                <Award size={12} className="award-icon" />
-                                                {recommendedPackages[1]?.examPackageHaveSpecialty?.name}
+                                    <div className="top-3 second-recommended-doctor" onClick={() => this.handleViewDetailDoctor(recommendedDoctors[2]?.id)}>
+                                        <span className="consider">
+                                            <Sparkles size={16} />
+                                            Bạn có thể cân nhắc
+                                        </span>
+                                        <div className="appointment-header">
+                                            <div className="doctor-avatar">
+                                                <FormattedMessage id="dashboard.doctor" />
                                             </div>
-                                            <div className="name">{recommendedPackages[1]?.name}</div>
-                                        </div>
-                                        <div className="belong-to-hospital">
-                                            <MapPin size={16} className="detail-icon" />
-                                            <div className="hospital-info">
-                                                <div className="hospital-label">Địa chỉ khám</div>
-                                                <div className="hospital-name">
-                                                    {recommendedPackages[1]?.medicalFacilityPackage?.name} - {recommendedPackages[1]?.medicalFacilityPackage?.address}
-                                                </div>
+                                            <div className="appointment-info">
+                                                <h3>
+                                                    {recommendedDoctors[2]?.lastName} {recommendedDoctors[2]?.firstName}
+                                                </h3>
+                                                <div className="specialty">{recommendedDoctors[2]?.Doctor_infor?.belongToSpecialty?.name}</div>
                                             </div>
                                         </div>
-                                        <div className="package-stats">
-                                            <div className="rating">
-                                                <span className="rating-value">
-                                                    {this.getEmojiForAverage(recommendedPackages[1]?.avgRating)} {recommendedPackages[1]?.avgRating}
-                                                </span>
-                                                /5.0
+                                        <div className="appointment-details">
+                                            <div className="detail-row">
+                                                <Mail size={16} className="detail-icon" />
+                                                <span>{recommendedDoctors[2]?.email}</span>
                                             </div>
-                                            <div className="visit-count">
-                                                <UserCheck size={18} className="user-exam-done-icon" />
-                                                {recommendedPackages[1]?.visitedCount} lượt khám
+                                            <div className="detail-row">
+                                                <Phone size={16} className="detail-icon" />
+                                                <span>{recommendedDoctors[2]?.phoneNumber}</span>
+                                            </div>
+
+                                            <div className="detail-row">
+                                                <MapPin size={16} className="detail-icon" />
+                                                <span>{recommendedDoctors[2]?.address}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        )}
+                        {recommendedPackages && recommendedPackages.length !== 0 && (
+                            <div className="exam-package-recommendation">
+                                <h3 className="section-title">Gói khám dành cho bạn</h3>
+                                <div className="recommended-exam-package-details">
+                                    <div className="top-1 top-recommend-package" onClick={() => this.handleViewDetailExamPackage(recommendedPackages[0]?.id)}>
+                                        <span className="claim">
+                                            <CircleCheckBig size={16} className="claim-icon" />
+                                            Phù hợp nhất với bạn
+                                        </span>
+                                        <div className="package-image" style={{ backgroundImage: `url(${this.toBgImage(recommendedPackages[0]?.image)})` }}></div>
+                                        <div className="package-content">
+                                            <div className="name-and-specialty">
+                                                <div className="specialty">
+                                                    <Award size={12} className="award-icon" />
+                                                    {recommendedPackages[0]?.examPackageHaveSpecialty?.name}
+                                                </div>
+                                                <div className="name">{recommendedPackages[0]?.name}</div>
+                                            </div>
+                                            <div className="belong-to-hospital">
+                                                <MapPin size={16} className="detail-icon" />
+                                                <div className="hospital-info">
+                                                    <div className="hospital-label">Địa chỉ khám</div>
+                                                    <div className="hospital-name">
+                                                        {recommendedPackages[0]?.medicalFacilityPackage?.name} - {recommendedPackages[0]?.medicalFacilityPackage?.address}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="package-stats">
+                                                <div className="rating">
+                                                    <span className="rating-value">
+                                                        {this.getEmojiForAverage(recommendedPackages[0]?.avgRating)} {recommendedPackages[0]?.avgRating}
+                                                    </span>
+                                                    /5.0
+                                                </div>
+                                                <div className="visit-count">
+                                                    <UserCheck size={18} className="user-exam-done-icon" />
+                                                    {recommendedPackages[0]?.visitedCount} lượt khám
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="top-2 second-recommend-package" onClick={() => this.handleViewDetailExamPackage(recommendedPackages[1]?.id)}>
+                                        <span className="consider">
+                                            <Sparkles size={16} />
+                                            Bạn có thể cân nhắc
+                                        </span>
+                                        <div className="package-image" style={{ backgroundImage: `url(${this.toBgImage(recommendedPackages[1]?.image)})` }}></div>
+                                        <div className="package-content">
+                                            <div className="name-and-specialty">
+                                                <div className="specialty">
+                                                    <Award size={12} className="award-icon" />
+                                                    {recommendedPackages[1]?.examPackageHaveSpecialty?.name}
+                                                </div>
+                                                <div className="name">{recommendedPackages[1]?.name}</div>
+                                            </div>
+                                            <div className="belong-to-hospital">
+                                                <MapPin size={16} className="detail-icon" />
+                                                <div className="hospital-info">
+                                                    <div className="hospital-label">Địa chỉ khám</div>
+                                                    <div className="hospital-name">
+                                                        {recommendedPackages[1]?.medicalFacilityPackage?.name} - {recommendedPackages[1]?.medicalFacilityPackage?.address}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="package-stats">
+                                                <div className="rating">
+                                                    <span className="rating-value">
+                                                        {this.getEmojiForAverage(recommendedPackages[1]?.avgRating)} {recommendedPackages[1]?.avgRating}
+                                                    </span>
+                                                    /5.0
+                                                </div>
+                                                <div className="visit-count">
+                                                    <UserCheck size={18} className="user-exam-done-icon" />
+                                                    {recommendedPackages[1]?.visitedCount} lượt khám
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
 
