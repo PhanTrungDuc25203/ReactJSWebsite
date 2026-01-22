@@ -98,7 +98,7 @@ class App extends Component {
                                 <Route path={path.MEDICAL_FACILITY_ARTICLE} component={DetailMedicalFacility} />
                                 <Route path={path.DETAIL_EXAM_PACKAGE_ARTICLE} component={DetailExamPackage} />
                                 {/* trang hồ sơ người dùng */}
-                                <Route path={path.USER_PROFILE} component={UserProfile} />
+                                <Route path={path.USER_PROFILE} component={loginRequired(UserProfile)} />
                                 {/* trang xem chi tiết tất cả các chuyên khoa */}
                                 <Route path={path.ALL_SPECIALTIES} component={AllSpecialties} />
                                 {/* trang tim kiem */}
