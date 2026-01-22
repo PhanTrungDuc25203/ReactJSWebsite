@@ -177,9 +177,13 @@ class BookingAExamPackagePage extends Component {
             setTimeout(() => {
                 this.props.history.push(`/home`);
             }, 2000);
-        } else if (res && res.errCode === 3) {
+        } else if (res && res.errCode === 2) {
             toast.error("Bạn đã đặt lịch gói khám này trong ngày đã chọn!");
+        } else if (res && res.errCode === 3) {
+            toast.error("Bạn đã có lịch hẹn với bác sĩ tại thời điểm này rồi!");
         } else if (res && res.errCode === 4) {
+            toast.error("Bạn đã có lịch khám với gói khám khác tại thời điểm này rồi!");
+        } else if (res && res.errCode === 6) {
             toast.error("Gói khám không tồn tại!");
         } else {
             toast.error("Gửi yêu cầu thất bại!");
