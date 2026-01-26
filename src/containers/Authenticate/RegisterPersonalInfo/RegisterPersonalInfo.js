@@ -14,6 +14,7 @@ import { withRouter } from "react-router";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import defaultAvatar from "../../../assets/images/default-avatar-circle.png";
+import { showOTPPopup } from "../../../components/OTPPopupHelper/OTPPopupHelper";
 
 class RegisterPersonalInfo extends Component {
     constructor(props) {
@@ -81,20 +82,11 @@ class RegisterPersonalInfo extends Component {
     handleRegisterButtonClicked = async () => {
         const phoneNumber = this.formatPhoneNumberVN(this.state.phoneNumber);
 
-        try {
-            await sendPhoneOTP(phoneNumber);
+        await sendPhoneOTP(phoneNumber);
 
-            Swal.fire({
-                title: "Nhập mã OTP vừa được gửi tới số điện thoại của bạn",
-                input: "text",
-                inputPlaceholder: "Nhập OTP",
-                showCancelButton: true,
-                confirmButtonText: "Xác nhận",
-            }).then(async (result) => {
-                if (!result.value) return;
-
-                const otp = result.value;
-
+        showOTPPopup({
+            title: "Nhập OTP gửi qua SMS",
+            onVerify: async (otp) => {
                 const verifyRes = await verifyPhoneOTP(phoneNumber, otp);
 
                 if (verifyRes.res.status === "approved") {
@@ -112,15 +104,16 @@ class RegisterPersonalInfo extends Component {
                     });
 
                     toast.success("Register successfully!");
-                    this.props.history.push(`/login`);
+                    this.props.history.push("/login");
                 } else {
-                    toast.error("OTP incorrect, please try again!");
+                    throw new Error("OTP không đúng hoặc đã hết hạn");
                 }
-            });
-        } catch (error) {
-            console.log(error);
-            toast.error("Failed to send OTP. Please try again.");
-        }
+            },
+            onResend: async () => {
+                await sendPhoneOTP(phoneNumber);
+                toast.success("Đã gửi lại OTP");
+            },
+        });
     };
 
     handleBackToLoginButtonClicked = () => {

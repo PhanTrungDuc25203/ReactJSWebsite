@@ -13,6 +13,7 @@ import RegisterPersonalInfo from "./RegisterPersonalInfo/RegisterPersonalInfo";
 import { checkUserEmailIsAlreadyExist } from "../../services/userService";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import { showOTPPopup } from "../../components/OTPPopupHelper/OTPPopupHelper";
 
 class Register extends Component {
     constructor(props) {
@@ -46,7 +47,7 @@ class Register extends Component {
             {
                 password: event.target.value,
             },
-            this.checkPasswordMatch
+            this.checkPasswordMatch,
         );
     };
 
@@ -55,7 +56,7 @@ class Register extends Component {
             {
                 verifyPassword: event.target.value,
             },
-            this.checkPasswordMatch
+            this.checkPasswordMatch,
         );
     };
 
@@ -109,37 +110,36 @@ class Register extends Component {
 
     nextStepToCreateAccount = async () => {
         const { email, password, isPasswordMatch, isEmailValid } = this.state;
-
         if (!isPasswordMatch || !isEmailValid) return;
 
-        let isAlreadyExist = await checkUserEmailIsAlreadyExist(email);
-        if (isAlreadyExist) {
-            toast.error("User is already exist, try another email!");
+        const isExist = await checkUserEmailIsAlreadyExist(email);
+        if (isExist) {
+            toast.error("User already exists");
             return;
         }
 
         const res = await sendEmailOTPAPI(email);
+        if (res.errCode !== 0) return;
 
-        if (res.errCode === 0) {
-            Swal.fire({
-                title: "Verify your Email",
-                input: "text",
-                inputPlaceholder: "Enter OTP",
-                showCancelButton: true,
-                confirmButtonText: "Verify",
-            }).then(async (result) => {
-                if (!result.value) return;
-
-                let verify = await verifyEmailOTPAPI(email, result.value);
+        showOTPPopup({
+            title: "Xác thực Email",
+            onVerify: async (otp) => {
+                const verify = await verifyEmailOTPAPI(email, otp);
 
                 if (verify.errCode === 0) {
                     this.props.saveUserEmailAndPasswordTemporarily(email, password);
-                    this.props.history.push(`/register/personal-info`);
+                    this.props.history.push("/register/personal-info");
+                } else if (verify.errCode === 3) {
+                    throw new Error("OTP đã hết hạn");
                 } else {
-                    toast.error("OTP incorrect!");
+                    throw new Error("OTP không đúng");
                 }
-            });
-        }
+            },
+            onResend: async () => {
+                await sendEmailOTPAPI(email);
+                toast.success("Đã gửi lại OTP");
+            },
+        });
     };
 
     render() {

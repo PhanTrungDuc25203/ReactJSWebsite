@@ -22,7 +22,7 @@ const Chatbot = () => {
     };
 
     useEffect(() => {
-        setIframeUrl(`https://www.askyourdatabase.com/chatbot/f7fbd201a6d6a7fcbcf843c18a6646bb`);
+        setIframeUrl(`https://www.askyourdatabase.com/chatbot/89e44fc6622d9fe6e9073ccf71f9ddf1`);
         const handleMessage = (event) => {
             if (event.data.type === "LOGIN_SUCCESS") {
                 setIframeUrl(event.data.url);
