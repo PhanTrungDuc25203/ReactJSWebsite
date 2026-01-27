@@ -211,11 +211,11 @@ class MakeAppointmentPage extends Component {
                 this.props.history.push(`/home`);
             }, 2000);
         } else if (res && res.errCode === 2) {
-            toast.error("Bạn đã có lịch với bác sĩ này trong ngày này!");
+            toast.error(res.errMessage);
         } else if (res && res.errCode === 3) {
-            toast.error("Bạn đã có lịch hẹn với bác sĩ khác tại thời điểm này rồi!");
+            toast.error(res.errMessage);
         } else if (res && res.errCode === 4) {
-            toast.error("Bạn đã có lịch khám với gói khám tại thời điểm này rồi!");
+            toast.error(res.errMessage);
         } else {
             toast.error("Gửi yêu cầu thất bại!");
         }
