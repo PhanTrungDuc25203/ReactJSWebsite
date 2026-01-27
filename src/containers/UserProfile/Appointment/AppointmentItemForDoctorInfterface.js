@@ -20,6 +20,7 @@ import { saveAppointmentHistory, saveClinicalReportContentToDatabase } from "../
 import defaultAvatar from "../../../assets/images/default-avatar-circle.png";
 import Swal from "sweetalert2";
 import { FormattedMessage } from "react-intl";
+import { BASE_CLINICAL_REPORT, CLINICAL_RESULT_BY_SPECIALTY } from "../../../utils/clinicalReportTemplates";
 
 class AppointmentItemForDoctorInfterface extends Component {
     constructor(props) {
@@ -351,9 +352,9 @@ class AppointmentItemForDoctorInfterface extends Component {
     };
 
     generatePatientReport = (actionFrom) => {
-        const { fileContent, appointmentId, patientAddress, meetPatientId, patientInfor, appointmentDate, appointmentTimeFrame, patientBirthday, examReason } = this.state;
-        console.log("check: ", this.state);
-        // Nếu fileContent đã có (props.files), dùng luôn
+        const { fileContent, patientInfor, patientBirthday, patientAddress, appointmentDate, appointmentTimeFrame, appointmentId, examReason } = this.state;
+
+        // Nếu đã có sẵn thì dùng lại
         if (fileContent) {
             if (actionFrom !== "anotherFunction") {
                 this.setState({ isModalOpen: true });
@@ -361,49 +362,32 @@ class AppointmentItemForDoctorInfterface extends Component {
             return;
         }
 
-        // Nếu chưa có fileContent, tạo hardcode
-        let reportContent = `
-                                        CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
-                                            Độc lập - Tự do - Hạnh phúc
+        // 🔑 Xác định chuyên khoa bác sĩ
+        const doctorSpecialty = this.props?.currentUser?.Doctor_infor?.specialtyId || "GENERAL";
 
-                                            BẢN TÓM TẮT HỒ SƠ BỆNH ÁN
+        // Base (I → IV)
+        const baseContent = BASE_CLINICAL_REPORT({
+            patientInfor,
+            patientBirthday,
+            patientAddress,
+            appointmentDate,
+            appointmentTimeFrame,
+            appointmentId,
+            examReason,
+        });
 
-            I. HÀNH CHÍNH
-                Họ và tên (in hoa): ${patientInfor ? patientInfor.lastName.toUpperCase() + " " + patientInfor.firstName.toUpperCase() : "............................................."}       Ngày sinh: ${patientBirthday || "__/__/____"}      
-                Tuổi: .....
-                Giới tính: [${patientInfor?.gender === "M" ? "x" : " "}] Nam   [${patientInfor?.gender === "F" ? "x" : " "}] Nữ              Dân tộc: .....
-                Địa chỉ cư trú: ${patientAddress ? patientAddress : "Số nhà .....    Thôn, phố .....            Xã.....          , phường .....    Huyện (Q, Tx) .....         Tỉnh, thành phố ....."}
-                Số thẻ BHYT: .....
-                Số Căn cước/Hộ chiếu/Mã định danh cá nhân: .....
-                Khám bệnh ngày: ${appointmentDate ? appointmentDate : "...../...../20...."}  
+        // Phần V theo chuyên khoa
+        const specialtyResult = CLINICAL_RESULT_BY_SPECIALTY[doctorSpecialty]?.() || CLINICAL_RESULT_BY_SPECIALTY.GENERAL();
 
-            II. CHẨN ĐOÁN (Tên bệnh và mã ICD đính kèm)
-                Chẩn đoán vào viện: ${examReason || ".................................................."}
-
-                Chẩn đoán ra viện: .....
-
-            III. TÓM TẮT QUÁ TRÌNH ĐIỀU TRỊ
-                Lý do vào viện: ${examReason || ".................................................."}
-                Tóm tắt quá trình bệnh lý và diễn biến lâm sàng:
-                ..........................................................................................................................
-                ..........................................................................................................................
-                ..........................................................................................................................
-
-            IV. THÔNG TIN CUỘC HẸN
-                Mã số cuộc hẹn: ${appointmentId || ".................................................."}
-                Khung giờ hẹn: ${appointmentTimeFrame || ".................................................."}
-                Ngày hẹn: ${appointmentDate || ".................................................."}
-
-            V. KẾT QUẢ KHÁM BỆNH (ĐÃ KHÁM)
-                Chuẩn đoán: ............
-
-                Điều trị: ..............
-        `;
+        const finalReport = baseContent + specialtyResult;
 
         if (actionFrom === "anotherFunction") {
-            this.setState({ fileContent: reportContent });
+            this.setState({ fileContent: finalReport });
         } else {
-            this.setState({ fileContent: reportContent, isModalOpen: true });
+            this.setState({
+                fileContent: finalReport,
+                isModalOpen: true,
+            });
         }
     };
 

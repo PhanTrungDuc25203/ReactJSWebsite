@@ -384,6 +384,9 @@ class DashboardForDoctor extends Component {
         if (lastMonthRevenue > 0) {
             revenueGrowth = (((currentMonthRevenue - lastMonthRevenue) / lastMonthRevenue) * 100).toFixed(1);
         }
+        const currentMonthPatients = currentMonthData?.patients ?? 0;
+
+        const averageRevenuePerPatient = currentMonthPatients > 0 ? currentMonthRevenue / currentMonthPatients : 0;
 
         return (
             <div className="doctor-dashboard">
@@ -522,10 +525,11 @@ class DashboardForDoctor extends Component {
                                 <div style={{ fontSize: "0.9rem", color: "#64748b", marginBottom: "0.5rem" }}>
                                     <FormattedMessage id="dashboard.revenue.revenue-per-patient" />
                                 </div>
-                                <div style={{ fontSize: "1.75rem", fontWeight: "700", color: "#1e293b", marginBottom: "0.5rem" }}>{this.formatCurrency(currentMonthRevenue / monthlyRevenue[monthlyRevenue?.length - 1]?.patients)}</div>
+                                <div style={{ fontSize: "1.75rem", fontWeight: "700", color: "#1e293b", marginBottom: "0.5rem" }}>{this.formatCurrency(averageRevenuePerPatient)}</div>
+
                                 <div style={{ fontSize: "0.85rem", color: "#64748b" }}>
                                     <FormattedMessage id="dashboard.revenue.month" />
-                                    {monthlyRevenue[monthlyRevenue?.length - 1]?.month}
+                                    {currentMonthData?.month ?? currentMonth}
                                 </div>
                             </div>
                         </div>

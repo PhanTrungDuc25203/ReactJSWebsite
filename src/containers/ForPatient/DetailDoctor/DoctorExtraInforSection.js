@@ -61,8 +61,17 @@ class DoctorExtraInforSection extends Component {
                         <FormattedMessage id="doctor-detail-page-for-patient.extra-infor-section.exam-address" />
                     </div>
                     <div className="clinic-name-and-address">
-                        <div>{extraInfor && extraInfor.clinicName ? extraInfor.clinicName : "Phòng khám của bác sĩ chưa được cập nhật"}</div>
-                        <div>{extraInfor && extraInfor.clinicAddress ? extraInfor.clinicAddress : ""}</div>
+                        {extraInfor?.workPlace ? (
+                            <>
+                                <div>{extraInfor.workPlace.hospitalName}</div>
+                                <div>{extraInfor.workPlace.hospitalAddress}</div>
+                            </>
+                        ) : (
+                            <>
+                                <div>{extraInfor?.clinicName ? extraInfor.clinicName : "Phòng khám của bác sĩ chưa được cập nhật"}</div>
+                                <div>{extraInfor?.clinicAddress || ""}</div>
+                            </>
+                        )}
                     </div>
                 </div>
                 <div className={isShowPriceDetail === false ? "examination-price-sct2 css-for-less-content" : "examination-price-sct2"}>

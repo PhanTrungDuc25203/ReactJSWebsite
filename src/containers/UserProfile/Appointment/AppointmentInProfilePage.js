@@ -99,6 +99,7 @@ class AppointmentInProfilePage extends PureComponent {
     renderAppointmentItems = (appointments, isDoctor) => {
         const { historyOrHandling } = this.state;
         const { currentUserEmail } = this.props;
+        const { currentUser } = this.props;
 
         return (
             <div className="appointment-container">
@@ -109,6 +110,7 @@ class AppointmentInProfilePage extends PureComponent {
                                 {isDoctor ? (
                                     item.statusId !== "S1" && (
                                         <AppointmentItemForDoctorInfterface
+                                            currentUser={currentUser}
                                             scheduleStatus={item.statusId}
                                             appointmentId={item.id}
                                             meetPatientId={item.patientId}
