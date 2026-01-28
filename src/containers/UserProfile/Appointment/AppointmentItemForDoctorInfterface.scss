@@ -6,7 +6,9 @@
     margin: 10px 0 15px 0;
     display: flex;
     background-color: white;
-    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+    transition:
+        transform 0.25s ease-out,
+        box-shadow 0.25s ease-out;
     padding: 20px;
 
     &:hover {
@@ -559,5 +561,117 @@
         /* Firefox     : làm thanh cuộn mỏng */
         scrollbar-color: rgba(0, 123, 255, 0.3) rgba(0, 0, 0, 0.1);
         /* Màu cho Firefox */
+    }
+}
+
+// Thêm vào cuối file AppointmentItemForDoctorInfterface.scss
+
+// ========================================
+// NÚT HỦY LỊCH HẸN
+// ========================================
+.appointment-item-for-doctor-interface {
+    position: relative; // Để nút cancel có thể absolute position
+
+    // Nút hủy ở góc phải trên
+    .cancel-appointment-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.2s ease;
+        z-index: 10;
+
+        &:hover {
+            background: #c82333;
+        }
+
+        &:active {
+            background: #bd2130;
+        }
+    }
+
+    // Badge "Đã hủy"
+    .cancelled-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: #dc3545;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        z-index: 10;
+
+        i {
+            font-size: 14px;
+        }
+    }
+
+    // Style khi lịch hẹn đã bị hủy
+    &.cancelled-appointment {
+        opacity: 0.65;
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(220, 53, 69, 0.03);
+            pointer-events: none;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            border-radius: 4px;
+        }
+
+        // Disable các nút khi đã hủy
+        .done-button,
+        .paid-button {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .file-icon {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+    }
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+@media screen and (max-width: 768px) {
+    .appointment-item-for-doctor-interface {
+        .cancel-appointment-button {
+            width: 32px;
+            height: 32px;
+            font-size: 14px;
+        }
+
+        .cancelled-badge {
+            padding: 5px 10px;
+            font-size: 12px;
+
+            i {
+                font-size: 12px;
+            }
+        }
     }
 }

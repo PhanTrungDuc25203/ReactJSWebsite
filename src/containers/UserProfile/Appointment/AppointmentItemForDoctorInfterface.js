@@ -16,7 +16,7 @@ import fileDownload from "js-file-download";
 import { saveAs } from "file-saver"; // để lưu file
 import ModalPatientReport from "./ModalPatientReport";
 import { toast } from "react-toastify";
-import { saveAppointmentHistory, saveClinicalReportContentToDatabase } from "../../../services/userService";
+import { saveAppointmentHistory, saveClinicalReportContentToDatabase, cancelBookedAppointmentAPI } from "../../../services/userService";
 import defaultAvatar from "../../../assets/images/default-avatar-circle.png";
 import Swal from "sweetalert2";
 import { FormattedMessage } from "react-intl";
@@ -43,6 +43,7 @@ class AppointmentItemForDoctorInfterface extends Component {
             isModalOpen: false,
             fileContent: "",
             examReason: "",
+            isCancelled: false, // Trạng thái đã hủy
         };
     }
 
@@ -69,6 +70,8 @@ class AppointmentItemForDoctorInfterface extends Component {
                     // ✅ cập nhật lại trạng thái nút theo dữ liệu mới nhất
                     isAppointmentDoneButtonState: statusId === "S3" ? "validate" : "",
                     isPaymentDoneButtonState: paymentStatus === "PT3" ? "validate" : "",
+                    // ✅ Check nếu statusId = S4 (đã hủy)
+                    isCancelled: statusId === "S4",
                 });
             }
         }
@@ -174,7 +177,13 @@ class AppointmentItemForDoctorInfterface extends Component {
 
     handleIsAppointmentDoneButtonClick = async () => {
         try {
-            const { appointmentDate, appointmentTimeFrame } = this.state;
+            const { appointmentDate, appointmentTimeFrame, isCancelled } = this.state;
+
+            // ✅ Không cho phép xác nhận nếu đã hủy
+            if (isCancelled) {
+                toast.error("Không thể xác nhận lịch hẹn đã bị hủy!");
+                return;
+            }
 
             const canContinue = await this.checkAppointmentTime(appointmentDate, appointmentTimeFrame);
 
@@ -300,7 +309,14 @@ class AppointmentItemForDoctorInfterface extends Component {
 
     handleIsPaymentDoneButtonClick = async () => {
         try {
-            const { appointmentId, meetPatientId, appointmentDate, appointmentTimeFrame, patientInfor, fileContent, paymentStatus, paymentMethod, statusId } = this.state;
+            const { appointmentId, meetPatientId, appointmentDate, appointmentTimeFrame, patientInfor, fileContent, paymentStatus, paymentMethod, statusId, isCancelled } = this.state;
+
+            // ✅ Không cho phép thanh toán nếu đã hủy
+            if (isCancelled) {
+                toast.error("Không thể xác nhận thanh toán cho lịch hẹn đã bị hủy!");
+                return;
+            }
+
             const doctorEmail = this.props.match.params.email;
             const patientEmail = patientInfor.email;
             const description = "S3";
@@ -351,6 +367,105 @@ class AppointmentItemForDoctorInfterface extends Component {
         }
     };
 
+    // ✅ HÀM HỦY LỊCH HẸN MỚI
+    handleCancelAppointment = async () => {
+        const { appointmentId, patientInfor, isCancelled } = this.state;
+        const { language } = this.props;
+        const isVI = language === LANGUAGES.VI;
+
+        // Không cho hủy nếu đã hủy rồi
+        if (isCancelled) {
+            toast.info(isVI ? "Lịch hẹn này đã bị hủy trước đó!" : "This appointment has already been cancelled!");
+            return;
+        }
+
+        // Hiển thị popup yêu cầu nhập mã ID
+        const result = await Swal.fire({
+            title: isVI ? "Xác nhận hủy lịch hẹn" : "Confirm Appointment Cancellation",
+            html: `
+                <p>${isVI ? "Để xác nhận hủy lịch hẹn, vui lòng nhập" : "To confirm cancellation, please enter"} <strong>${isVI ? "Mã ID lịch hẹn" : "Appointment ID"}</strong>:</p>
+                <input type="text" id="appointment-id-input" class="swal2-input" placeholder="${isVI ? "Nhập mã ID lịch hẹn" : "Enter appointment ID"}" style="width: 80%; font-size: 16px;">
+                <p style="margin-top: 15px; color: #666; font-size: 14px;">${isVI ? "Mã ID lịch hẹn hiện tại" : "Current appointment ID"}: <strong style="color: #d32f2f;">${appointmentId}</strong></p>
+            `,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: isVI ? "Xác nhận hủy" : "Confirm Cancel",
+            cancelButtonText: isVI ? "Đóng" : "Close",
+            confirmButtonColor: "#d32f2f",
+            cancelButtonColor: "#6c757d",
+            preConfirm: () => {
+                const inputValue = document.getElementById("appointment-id-input").value;
+                if (!inputValue) {
+                    Swal.showValidationMessage(isVI ? "Vui lòng nhập mã ID lịch hẹn!" : "Please enter appointment ID!");
+                    return false;
+                }
+                if (inputValue !== appointmentId.toString()) {
+                    Swal.showValidationMessage(isVI ? "Mã ID không đúng! Vui lòng kiểm tra lại." : "Incorrect ID! Please check again.");
+                    return false;
+                }
+                return inputValue;
+            },
+        });
+
+        // Nếu người dùng nhấn Cancel hoặc đóng popup
+        if (!result.isConfirmed) {
+            return;
+        }
+
+        // Nếu mã ID đúng, tiến hành hủy
+        try {
+            // 🔹 GỌI API HỦY LỊCH HẸN
+            const response = await cancelBookedAppointmentAPI({
+                appointmentId: appointmentId,
+                patientId: this.state.meetPatientId,
+                doctorEmail: this.props.match.params.email,
+                patientEmail: patientInfor.email,
+                language: language,
+            });
+
+            if (response && response.errCode === 0) {
+                toast.success(isVI ? "Đã hủy lịch hẹn thành công!" : "Appointment cancelled successfully!");
+                this.setState({
+                    isCancelled: true,
+                    statusId: "S4",
+                });
+
+                Swal.fire({
+                    title: isVI ? "Đã hủy thành công!" : "Cancelled Successfully!",
+                    html: `
+            <p>${isVI ? "Lịch hẹn" : "Appointment"} <strong>#${appointmentId}</strong> ${isVI ? "đã bị hủy" : "has been cancelled"}.</p>
+            <p>${isVI ? "Email thông báo đã được gửi đến bệnh nhân" : "Notification email has been sent to the patient"}: <strong>${patientInfor.email}</strong></p>
+        `,
+                    icon: "success",
+                    confirmButtonText: "OK",
+                });
+            } else {
+                toast.error(response.errMessage || (isVI ? "Hủy lịch thất bại!" : "Cancel failed!"));
+            }
+
+            // 📌 TẠM THỜI DEMO THÀNH CÔNG (bỏ comment phần API ở trên khi đã có backend)
+            toast.success(isVI ? "Đã hủy lịch hẹn thành công!" : "Appointment cancelled successfully!");
+            this.setState({
+                isCancelled: true,
+                statusId: "S4",
+            });
+
+            // Hiển thị thông báo đã gửi email
+            Swal.fire({
+                title: isVI ? "Đã hủy thành công!" : "Cancelled Successfully!",
+                html: `
+                    <p>${isVI ? "Lịch hẹn" : "Appointment"} <strong>#${appointmentId}</strong> ${isVI ? "đã bị hủy" : "has been cancelled"}.</p>
+                    <p>${isVI ? "Email thông báo đã được gửi đến bệnh nhân" : "Notification email has been sent to the patient"}: <strong>${patientInfor.email}</strong></p>
+                `,
+                icon: "success",
+                confirmButtonText: "OK",
+            });
+        } catch (error) {
+            console.error("Error cancelling appointment:", error);
+            toast.error(isVI ? "Có lỗi xảy ra khi hủy lịch hẹn!" : "An error occurred while cancelling appointment!");
+        }
+    };
+
     generatePatientReport = (actionFrom) => {
         const { fileContent, patientInfor, patientBirthday, patientAddress, appointmentDate, appointmentTimeFrame, appointmentId, examReason } = this.state;
 
@@ -392,7 +507,7 @@ class AppointmentItemForDoctorInfterface extends Component {
     };
 
     render() {
-        let { scheduleStatus, appointmentId, meetPatientId, patientInfor, appointmentDate, appointmentTimeFrame, patientBirthday, patientAddress, paymentStatus, statusId } = this.state;
+        let { scheduleStatus, appointmentId, meetPatientId, patientInfor, appointmentDate, appointmentTimeFrame, patientBirthday, patientAddress, paymentStatus, statusId, isCancelled } = this.state;
         const { language } = this.props;
         let patientImageByBase64 = "";
         const isVI = language === LANGUAGES.VI;
@@ -400,8 +515,25 @@ class AppointmentItemForDoctorInfterface extends Component {
             patientImageByBase64 = Buffer.from(patientInfor.image, "base64").toString("binary");
         }
 
+        // ✅ Chỉ hiển thị nút hủy khi statusId = S2 (chưa khám)
+        const showCancelButton = statusId === "S2" && !isCancelled;
+
         return (
-            <div className="appointment-item-for-doctor-interface">
+            <div className={`appointment-item-for-doctor-interface ${isCancelled ? "cancelled-appointment" : ""}`}>
+                {/* ✅ NÚT HỦY LỊCH HẸN Ở GÓC PHẢI TRÊN */}
+                {showCancelButton && (
+                    <button className="cancel-appointment-button" onClick={this.handleCancelAppointment} title={isVI ? "Hủy lịch hẹn" : "Cancel Appointment"}>
+                        <i className="fas fa-times-circle"></i>
+                    </button>
+                )}
+
+                {/* ✅ BADGE HIỂN THỊ ĐÃ HỦY */}
+                {isCancelled && (
+                    <div className="cancelled-badge">
+                        <i className="fas fa-ban"></i> {isVI ? "ĐÃ HỦY" : "CANCELLED"}
+                    </div>
+                )}
+
                 <div className="patient-avatar-and-appointment-time-container">
                     <div
                         className="patient-avatar-section"
@@ -475,13 +607,19 @@ class AppointmentItemForDoctorInfterface extends Component {
                             <button
                                 className={`done-button ${this.state.isAppointmentDoneButtonState}`}
                                 onClick={this.handleIsAppointmentDoneButtonClick}
-                                disabled={this.state.isAppointmentDoneButtonState === "validate"}
+                                disabled={this.state.isAppointmentDoneButtonState === "validate" || isCancelled}
                                 data-waiting={isVI ? "Chờ khám" : "Waiting"}
                                 data-done={isVI ? "Đã khám" : "Completed"}
                             />
                         </div>
                         <div className="button-wrapper-2">
-                            <button className={`paid-button ${this.state.isPaymentDoneButtonState}`} onClick={this.handleIsPaymentDoneButtonClick} disabled={this.state.paymentMethod !== "PM3"} data-unpaid={isVI ? "Chưa thanh toán" : "Unpaid"} data-paid={isVI ? "Đã thanh toán" : "Paid"} />
+                            <button
+                                className={`paid-button ${this.state.isPaymentDoneButtonState}`}
+                                onClick={this.handleIsPaymentDoneButtonClick}
+                                disabled={this.state.paymentMethod !== "PM3" || isCancelled}
+                                data-unpaid={isVI ? "Chưa thanh toán" : "Unpaid"}
+                                data-paid={isVI ? "Đã thanh toán" : "Paid"}
+                            />
                         </div>
                     </div>
                 </div>

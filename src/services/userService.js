@@ -298,6 +298,10 @@ const recommendPackagesForPatientService = (patientId) => {
     return axios.get(`/api/recommend/packages?patientId=${patientId}`);
 };
 
+const cancelBookedAppointmentAPI = (data) => {
+    return axios.post("/api/cancel-booked-appointment", data);
+};
+
 export {
     handleLoginAPI,
     handleGoogleLoginService,
@@ -362,4 +366,5 @@ export {
     handleFacebookLoginService,
     recommendDoctorsForPatientService,
     recommendPackagesForPatientService,
+    cancelBookedAppointmentAPI,
 };
